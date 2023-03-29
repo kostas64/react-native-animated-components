@@ -1,16 +1,32 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
+import {StyleSheet} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import HomeScreen from './src/screens/HomeScreen';
+import ParallaxScreen from './src/screens/ParallaxScreen';
+import ListWithIndiScreen from './src/screens/ListWithIndiScreen';
+
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView contentInsetAdjustmentBehavior="automatic"></ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Parallax" component={ParallaxScreen} />
+        <Stack.Screen name="ListWithIndi" component={ListWithIndiScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+});
 
 export default App;
