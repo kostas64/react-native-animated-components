@@ -18,6 +18,10 @@ const HomeScreen = ({navigation}) => {
         label={'List With Indicator'}
         onPress={() => navigation.navigate('ListWithIndi')}
       />
+      <HomeButton
+        label={'Double List'}
+        onPress={() => navigation.navigate('DoubleList')}
+      />
     </View>
   );
 };

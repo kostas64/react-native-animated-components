@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import ParallaxScreen from './src/screens/ParallaxScreen';
 import ListWithIndiScreen from './src/screens/ListWithIndiScreen';
+import DoubleListScreen from './src/screens/DoubleListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Parallax" component={ParallaxScreen} />
         <Stack.Screen name="ListWithIndi" component={ListWithIndiScreen} />
+        <Stack.Screen name="DoubleList" component={DoubleListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
