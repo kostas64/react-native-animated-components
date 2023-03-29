@@ -7,6 +7,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import ParallaxScreen from './src/screens/ParallaxScreen';
 import ListWithIndiScreen from './src/screens/ListWithIndiScreen';
 import DoubleListScreen from './src/screens/DoubleListScreen';
+import Carousel3DScreen from './src/screens/Carousel3DScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ function App() {
         <Stack.Screen name="Parallax" component={ParallaxScreen} />
         <Stack.Screen name="ListWithIndi" component={ListWithIndiScreen} />
         <Stack.Screen name="DoubleList" component={DoubleListScreen} />
+        <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

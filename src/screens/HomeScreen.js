@@ -22,6 +22,10 @@ const HomeScreen = ({navigation}) => {
         label={'Double List'}
         onPress={() => navigation.navigate('DoubleList')}
       />
+      <HomeButton
+        label={'3D Carousel'}
+        onPress={() => navigation.navigate('Carousel3D')}
+      />
     </View>
   );
 };
