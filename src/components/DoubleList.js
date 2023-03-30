@@ -125,7 +125,6 @@ const DoubleList = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar hidden />
       <ConnectWithText />
       <List
         color={colors.yellow}

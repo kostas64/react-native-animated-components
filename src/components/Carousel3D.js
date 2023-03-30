@@ -4,7 +4,6 @@ import {
   Image,
   Animated,
   Platform,
-  StatusBar,
   Dimensions,
   StyleSheet,
   SafeAreaView,
@@ -97,7 +96,6 @@ const Carousel3D = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar hidden />
       <SafeAreaView style={styles.safeAreaContainer}>
         <View style={styles.listContainer}>
           <Animated.FlatList

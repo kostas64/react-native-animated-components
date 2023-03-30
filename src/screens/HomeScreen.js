@@ -1,33 +1,26 @@
 import React from 'react';
-import {View} from 'react-native';
-import HomeButton from '../components/HomeButton';
+import {StyleSheet, View} from 'react-native';
+import HomeBody from '../components/HomeBody';
+import HomeHeader from '../components/HomeHeader';
+import StatusBarManager from '../components/StatusBarManager';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <HomeButton
-        label={'Parallax List'}
-        onPress={() => navigation.navigate('Parallax')}
-      />
-      <HomeButton
-        label={'List With Indicator'}
-        onPress={() => navigation.navigate('ListWithIndi')}
-      />
-      <HomeButton
-        label={'Double List'}
-        onPress={() => navigation.navigate('DoubleList')}
-      />
-      <HomeButton
-        label={'3D Carousel'}
-        onPress={() => navigation.navigate('Carousel3D')}
-      />
-    </View>
+    <>
+      <StatusBarManager barStyle="dark" />
+      <View style={styles.container}>
+        <HomeHeader />
+        <HomeBody />
+      </View>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#b2cfec',
+  },
+});
 
 export default HomeScreen;
