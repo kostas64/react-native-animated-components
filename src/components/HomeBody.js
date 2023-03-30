@@ -7,7 +7,10 @@ import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 const HomeBody = () => {
   const navigation = useNavigation();
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      bounces={false}
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}>
       <View style={styles.sectionContainer}>
         <Ionicons name="ios-list-circle" color={'#3f546a'} size={40} />
         <Text style={styles.listLabel}>Lists</Text>
@@ -43,6 +46,19 @@ const HomeBody = () => {
         backgroundColor={'#ad77df'}
         onPress={() => navigation.navigate('ListWithIndi')}
       />
+      <View style={[styles.sectionContainer, {paddingTop: 16}]}>
+        <Image
+          source={require('../assets/img/loader.png')}
+          style={styles.icon}
+        />
+        <Text style={styles.navbarLabel}>Loader</Text>
+      </View>
+      <View style={styles.separator} />
+      <HomeButton
+        label={'Progress Loader'}
+        backgroundColor={'#eaa884'}
+        onPress={() => navigation.navigate('Progress')}
+      />
     </ScrollView>
   );
 };
@@ -55,6 +71,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 48,
     paddingTop: 32,
     paddingHorizontal: 16,
+    paddingBottom: 32,
   },
   sectionContainer: {
     flexDirection: 'row',
