@@ -9,6 +9,7 @@ import ListWithIndiScreen from './src/screens/ListWithIndiScreen';
 import DoubleListScreen from './src/screens/DoubleListScreen';
 import Carousel3DScreen from './src/screens/Carousel3DScreen';
 import ProgressLoaderScreen from './src/screens/ProgressLoaderScreen';
+import DotLoaderScreen from './src/screens/DotLoaderScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ function App() {
         <Stack.Screen name="DoubleList" component={DoubleListScreen} />
         <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
         <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
+        <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

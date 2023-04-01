@@ -59,6 +59,12 @@ const HomeBody = () => {
         backgroundColor={'#eaa884'}
         onPress={() => navigation.navigate('Progress')}
       />
+      <View style={styles.separator} />
+      <HomeButton
+        label={'Dot Loader'}
+        backgroundColor={'#c57f5d'}
+        onPress={() => navigation.navigate('DotLoader')}
+      />
     </ScrollView>
   );
 };
