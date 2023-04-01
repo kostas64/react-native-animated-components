@@ -73,7 +73,7 @@ const HomeBody = () => {
       </View>
       <View style={styles.separator} />
       <HomeButton
-        label={'iOS Toggler'}
+        label={'Togglers'}
         backgroundColor={'#f298bc'}
         onPress={() => navigation.navigate('TogglerIOS')}
       />
