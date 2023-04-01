@@ -10,6 +10,7 @@ import DoubleListScreen from './src/screens/DoubleListScreen';
 import Carousel3DScreen from './src/screens/Carousel3DScreen';
 import ProgressLoaderScreen from './src/screens/ProgressLoaderScreen';
 import DotLoaderScreen from './src/screens/DotLoaderScreen';
+import TogglerIOSScreen from './src/screens/TogglerIOSScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ function App() {
         <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
         <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
         <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
+        <Stack.Screen name="TogglerIOS" component={TogglerIOSScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

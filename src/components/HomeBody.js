@@ -2,6 +2,7 @@ import React from 'react';
 import HomeButton from './HomeButton';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 
 const HomeBody = () => {
@@ -64,6 +65,17 @@ const HomeBody = () => {
         label={'Dot Loader'}
         backgroundColor={'#c57f5d'}
         onPress={() => navigation.navigate('DotLoader')}
+      />
+      <View style={styles.separator} />
+      <View style={styles.sectionContainer}>
+        <FontAwesome name="toggle-on" color={'#3f546a'} size={32} />
+        <Text style={[styles.listLabel, {marginLeft: 4}]}>Toggler</Text>
+      </View>
+      <View style={styles.separator} />
+      <HomeButton
+        label={'iOS Toggler'}
+        backgroundColor={'#f298bc'}
+        onPress={() => navigation.navigate('TogglerIOS')}
       />
     </ScrollView>
   );

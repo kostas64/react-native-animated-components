@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 16,
+    color: 'black',
   },
   textInput: {
     fontSize: 18,
