@@ -75,7 +75,7 @@ const HomeBody = () => {
       <HomeButton
         label={'Togglers'}
         backgroundColor={'#f298bc'}
-        onPress={() => navigation.navigate('TogglerIOS')}
+        onPress={() => navigation.navigate('Togglers')}
       />
     </ScrollView>
   );

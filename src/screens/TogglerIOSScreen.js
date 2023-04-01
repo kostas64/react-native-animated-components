@@ -2,7 +2,7 @@ import React from 'react';
 import TogglerIOS from '../components/TogglerIOS';
 import StatusBarManager from '../components/StatusBarManager';
 
-const TogglerIOSScreen = () => {
+const TogglersScreen = () => {
   return (
     <>
       <StatusBarManager barStyle="dark" />
@@ -11,4 +11,4 @@ const TogglerIOSScreen = () => {
   );
 };
 
-export default TogglerIOSScreen;
+export default TogglersScreen;

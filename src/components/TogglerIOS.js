@@ -10,7 +10,7 @@ import React from 'react';
 
 const SIZE = 90;
 
-const TogglerIOS = () => {
+const Togglers = () => {
   const animIOSRef = React.useRef(new Animated.Value(0)).current;
   const animRef = React.useRef(new Animated.Value(0)).current;
   const animSymbolRef = React.useRef(new Animated.Value(0)).current;
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TogglerIOS;
+export default Togglers;
