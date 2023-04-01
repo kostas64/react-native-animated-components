@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -11,6 +10,7 @@ import Carousel3DScreen from './src/screens/Carousel3DScreen';
 import ProgressLoaderScreen from './src/screens/ProgressLoaderScreen';
 import DotLoaderScreen from './src/screens/DotLoaderScreen';
 import TogglersScreen from './src/screens/TogglerIOSScreen';
+import ScrollItemListScreen from './src/screens/ScrollItemListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,16 +27,10 @@ function App() {
         <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
         <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
         <Stack.Screen name="Togglers" component={TogglersScreen} />
+        <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: 'rgba(0,0,0,0.1)',
-  },
-});
 
 export default App;

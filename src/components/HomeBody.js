@@ -34,6 +34,12 @@ const HomeBody = () => {
         backgroundColor={'#a3b8f1'}
         onPress={() => navigation.navigate('Carousel3D')}
       />
+      <View style={styles.separator} />
+      <HomeButton
+        label={'Fade Item Out'}
+        backgroundColor={'#ad77df'}
+        onPress={() => navigation.navigate('ScrollItem')}
+      />
       <View style={[styles.sectionContainer, {paddingTop: 16}]}>
         <Image
           source={require('../assets/img/menu-bar.png')}
@@ -44,7 +50,7 @@ const HomeBody = () => {
       <View style={styles.separator} />
       <HomeButton
         label={'Navbar with Indicator'}
-        backgroundColor={'#ad77df'}
+        backgroundColor={'#eaa884'}
         onPress={() => navigation.navigate('ListWithIndi')}
       />
       <View style={[styles.sectionContainer, {paddingTop: 16}]}>
@@ -57,13 +63,13 @@ const HomeBody = () => {
       <View style={styles.separator} />
       <HomeButton
         label={'Progress Loader'}
-        backgroundColor={'#eaa884'}
+        backgroundColor={'#c57f5d'}
         onPress={() => navigation.navigate('Progress')}
       />
       <View style={styles.separator} />
       <HomeButton
         label={'Dot Loader'}
-        backgroundColor={'#c57f5d'}
+        backgroundColor={'#f298bc'}
         onPress={() => navigation.navigate('DotLoader')}
       />
       <View style={styles.separator} />
@@ -74,7 +80,7 @@ const HomeBody = () => {
       <View style={styles.separator} />
       <HomeButton
         label={'Togglers'}
-        backgroundColor={'#f298bc'}
+        backgroundColor={'#7bc8d2'}
         onPress={() => navigation.navigate('Togglers')}
       />
     </ScrollView>
