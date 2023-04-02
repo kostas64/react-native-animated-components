@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, Animated, StyleSheet, Text, TextInput} from 'react-native';
 
 const DotLoader = () => {
@@ -135,8 +136,26 @@ const DotLoader = () => {
     ).start();
   }, []);
 
+  const ImplementedWith = () => {
+    const insets = useSafeAreaInsets();
+
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: insets.top + 16,
+          left: 20,
+          zIndex: 100,
+        }}>
+        <Text style={styles.implemented}>Implemented with:</Text>
+        <Text style={styles.implementedLabel}>Animated API</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <Text style={styles.label}>Set dot size - Min: 1</Text>
       <TextInput
         keyboardType="numeric"
@@ -233,6 +252,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'black',
+  },
+  implementedLabel: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black',
   },
   label: {
     fontSize: 18,

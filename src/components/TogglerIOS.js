@@ -2,11 +2,12 @@ import {
   View,
   Text,
   Easing,
-  Pressable,
   Animated,
+  Pressable,
   StyleSheet,
 } from 'react-native';
 import React from 'react';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const SIZE = 90;
 
@@ -64,8 +65,26 @@ const Togglers = () => {
     }).start();
   }, [togglerSymbolActive]);
 
+  const ImplementedWith = () => {
+    const insets = useSafeAreaInsets();
+
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: insets.top + 16,
+          left: 20,
+          zIndex: 100,
+        }}>
+        <Text style={styles.implemented}>Implemented with:</Text>
+        <Text style={styles.label}>Animated API</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <Pressable onPress={animateIOS}>
         <View
           style={{
@@ -179,6 +198,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'black',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black',
   },
 });
 

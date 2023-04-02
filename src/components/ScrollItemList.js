@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {faker} from '@faker-js/faker';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width} = Dimensions.get('window');
 const BG_IMG =
@@ -31,11 +32,30 @@ const DATA = [...Array(500).keys()].map((_, i) => {
   };
 });
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        top: insets.top + 16,
+        left: 20,
+        zIndex: 100,
+      }}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
+    </View>
+  );
+};
+
 const ScrollItem = () => {
+  const insets = useSafeAreaInsets();
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <Image
         source={{uri: BG_IMG}}
         style={StyleSheet.absoluteFillObject}
@@ -48,7 +68,12 @@ const ScrollItem = () => {
           {useNativeDriver: true},
         )}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.flatlistContainer}
+        contentContainerStyle={[
+          styles.flatlistContainer,
+          {
+            paddingTop: StatusBar.currentHeight + insets.top + 100,
+          },
+        ]}
         keyExtractor={item => item.key}
         renderItem={({item, index}) => {
           const inputRange = [
@@ -106,9 +131,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'black',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black',
+  },
   flatlistContainer: {
     paddingHorizontal: SPACING,
-    paddingTop: StatusBar.currentHeight || 42,
   },
   parentViewItem: {
     height: 118,

@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Animated} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Progress = ({step, steps, height}) => {
   const [width, setWidth] = React.useState(0);
@@ -46,6 +47,23 @@ const Progress = ({step, steps, height}) => {
   );
 };
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        top: insets.top + 16,
+        left: 20,
+        zIndex: 100,
+      }}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
+    </View>
+  );
+};
+
 const ProgressLoader = () => {
   const [index, setIndex] = React.useState(0);
 
@@ -61,6 +79,7 @@ const ProgressLoader = () => {
 
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <Progress step={index} steps={10} height={25} />
     </View>
   );
@@ -91,5 +110,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'black',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black',
   },
 });

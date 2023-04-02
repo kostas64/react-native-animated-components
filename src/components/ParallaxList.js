@@ -1,6 +1,14 @@
+import {
+  View,
+  Text,
+  Image,
+  Animated,
+  Dimensions,
+  StyleSheet,
+} from 'react-native';
 import React from 'react';
 import images from '../assets/parallaxList';
-import {Animated, Image, View, Dimensions, StyleSheet} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const data = images.map((image, index) => ({
   key: String(index),
@@ -14,11 +22,23 @@ const {width} = Dimensions.get('screen');
 const ITEM_WIDTH = width * 0.76;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{position: 'absolute', top: insets.top + 16, left: 20}}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
+    </View>
+  );
+};
+
 const ParallaxList = () => {
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <Animated.FlatList
         data={data}
         horizontal
@@ -108,6 +128,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'black',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black',
   },
 });
 

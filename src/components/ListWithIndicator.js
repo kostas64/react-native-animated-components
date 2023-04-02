@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import images from '../assets/indiList';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -112,6 +113,23 @@ const Tabs = ({data, scrollX, onItemPress}) => {
   );
 };
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        bottom: insets.bottom + 16,
+        left: 20,
+        zIndex: 100,
+      }}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
+    </View>
+  );
+};
+
 const ListWithIndicator = () => {
   const flatRef = React.useRef();
   const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -123,6 +141,7 @@ const ListWithIndicator = () => {
 
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <Animated.FlatList
         ref={flatRef}
         data={data}
@@ -171,6 +190,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'white',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'white',
   },
 });
 

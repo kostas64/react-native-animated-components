@@ -13,6 +13,7 @@ import React from 'react';
 import {faker} from '@faker-js/faker';
 import images from '../assets/carousel3d';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width} = Dimensions.get('window');
 const IMAGE_WIDTH = width * 0.65;
@@ -74,6 +75,17 @@ const renderListItem = (item, index, scrollX) => {
   );
 };
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{position: 'absolute', top: insets.top + 16, left: 20}}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
+    </View>
+  );
+};
+
 const Carousel3D = () => {
   const [index, setIndex] = React.useState(0);
   const listRef = React.useRef();
@@ -97,6 +109,7 @@ const Carousel3D = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>
+        <ImplementedWith />
         <View style={styles.listContainer}>
           <Animated.FlatList
             ref={listRef}
@@ -208,6 +221,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: 'black',
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: 'black',
   },
   listContainer: {
     height: IMAGE_HEIGHT * 2.1,

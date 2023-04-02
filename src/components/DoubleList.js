@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import data from '../assets/doubleList';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const ICON_SIZE = 42;
@@ -90,6 +91,17 @@ const List = React.forwardRef(
   ),
 );
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{position: 'absolute', top: insets.top + 16, left: 20}}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
+    </View>
+  );
+};
+
 const DoubleList = () => {
   const [index, setIndex] = React.useState(0);
   const onConnectPress = React.useCallback(() => {
@@ -125,6 +137,7 @@ const DoubleList = () => {
 
   return (
     <View style={styles.container}>
+      <ImplementedWith />
       <ConnectWithText />
       <List
         color={colors.yellow}
@@ -157,6 +170,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
     backgroundColor: colors.dark,
+  },
+  implemented: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: colors.yellow,
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: colors.yellow,
   },
   paragraph: {
     margin: 24,
