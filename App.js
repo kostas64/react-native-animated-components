@@ -11,6 +11,7 @@ import ProgressLoaderScreen from './src/screens/ProgressLoaderScreen';
 import DotLoaderScreen from './src/screens/DotLoaderScreen';
 import TogglersScreen from './src/screens/TogglerIOSScreen';
 import ScrollItemListScreen from './src/screens/ScrollItemListScreen';
+import CustomDrawerScreen from './src/screens/CustomDrawerScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ function App() {
         <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
         <Stack.Screen name="Togglers" component={TogglersScreen} />
         <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
+        <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
