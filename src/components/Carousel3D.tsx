@@ -4,6 +4,7 @@ import {
   Image,
   Animated,
   Platform,
+  FlatList,
   Dimensions,
   StyleSheet,
   SafeAreaView,
@@ -11,7 +12,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {faker} from '@faker-js/faker';
-import images from '../assets/carousel3d';
+import images from '@assets/carousel3d';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -22,17 +23,27 @@ const SPACING = 20;
 
 faker.seed(10);
 
-const DATA = [...Array(images.length).keys()].map((_, i) => {
-  return {
-    key: faker.datatype.uuid(),
-    image: images[i],
-    title: faker.commerce.productName(),
-    subtitle: faker.company.bs(),
-    price: faker.finance.amount(80, 200, 0),
-  };
-});
+type ICarouselDataType = {
+  key: string;
+  image: string;
+  title: string;
+  subtitle: string;
+  price: string;
+};
 
-const Content = ({item}) => {
+const DATA: ICarouselDataType[] = [...Array(images.length).keys()].map(
+  (_, i) => {
+    return {
+      key: faker.datatype.uuid(),
+      image: images[i],
+      title: faker.commerce.productName(),
+      subtitle: faker.company.bs(),
+      price: faker.finance.amount(80, 200, 0),
+    };
+  },
+);
+
+const Content = (item: ICarouselDataType) => {
   return (
     <>
       <Text style={styles.itemTitle} numberOfLines={1} adjustsFontSizeToFit>
@@ -47,7 +58,11 @@ const Content = ({item}) => {
   );
 };
 
-const renderListItem = (item, index, scrollX) => {
+const renderListItem = (
+  item: ICarouselDataType,
+  index: number,
+  scrollX: Animated.AnimatedValue,
+) => {
   const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
   const opacity = scrollX.interpolate({
     inputRange,
@@ -88,8 +103,10 @@ const ImplementedWith = () => {
 
 const Carousel3D = () => {
   const [index, setIndex] = React.useState(0);
-  const listRef = React.useRef();
-  const scrollX = React.useRef(new Animated.Value(0)).current;
+  const listRef = React.useRef<FlatList>(null);
+  const scrollX = React.useRef<Animated.AnimatedValue>(
+    new Animated.Value(0),
+  ).current;
   const progress = Animated.modulo(Animated.divide(scrollX, width), width);
   const onScroll = Animated.event(
     [
@@ -151,7 +168,7 @@ const Carousel3D = () => {
                     backfaceVisibility: 'visible',
                     transform: [{perspective: IMAGE_WIDTH * 4}, {rotateY}],
                   }}>
-                  <Content item={item} />
+                  <Content {...item} />
                 </Animated.View>
               );
             })}
@@ -251,7 +268,6 @@ const styles = StyleSheet.create({
     width: IMAGE_WIDTH + SPACING * 2,
     position: 'absolute',
     backgroundColor: 'white',
-    backfaceVisibility: true,
     zIndex: -1,
     top: SPACING * 2,
     left: (width - (IMAGE_WIDTH + SPACING * 2)) / 2,
