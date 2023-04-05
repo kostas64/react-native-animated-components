@@ -6,29 +6,62 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  GestureResponderEvent,
 } from 'react-native';
 import React from 'react';
-import images from '../assets/indiList';
+import images from '@assets/indiList';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const {width, height} = Dimensions.get('screen');
 
+type TData = {
+  image: any;
+  key: string;
+  ref: any;
+  title: string;
+};
+
+type TMeasure = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+type TIndicator = {
+  measures: TMeasure[];
+  scrollX: any;
+};
+
+type TTab = {
+  item: TData;
+  onItemPress: (event: GestureResponderEvent) => void;
+};
+
+type TTabs = {
+  data: TData[];
+  scrollX: Animated.AnimatedValue;
+  onItemPress: Function;
+};
+
+console.log('Object.keys(images) ', images['man']);
+
 const data = Object.keys(images).map(i => ({
   key: i,
   title: i,
-  image: images[i],
+  image: images[i as keyof typeof images],
   ref: React.createRef(),
 }));
 
-const Indicator = ({measures, scrollX}) => {
+const Indicator = ({measures, scrollX}: TIndicator) => {
   const inputRange = data.map((_, i) => i * width);
   const indicatorWidth = scrollX.interpolate({
     inputRange,
-    outputRange: measures.map(measure => measure.width),
+    outputRange: measures.map((measure: TMeasure) => measure.width),
   });
   const indicatorLeft = scrollX.interpolate({
     inputRange,
-    outputRange: measures.map(measure => measure.x),
+    outputRange: measures.map((measure: TMeasure) => measure.x),
   });
 
   return (
@@ -45,7 +78,7 @@ const Indicator = ({measures, scrollX}) => {
   );
 };
 
-const Tab = React.forwardRef(({item, onItemPress}, ref) => {
+const Tab = React.forwardRef(({item, onItemPress}: TTab, ref: any) => {
   return (
     <TouchableOpacity onPress={onItemPress}>
       <View ref={ref}>
@@ -63,16 +96,16 @@ const Tab = React.forwardRef(({item, onItemPress}, ref) => {
   );
 });
 
-const Tabs = ({data, scrollX, onItemPress}) => {
-  const [measures, setMeasures] = React.useState([]);
-  const containerRef = React.useRef();
+const Tabs = ({data, scrollX, onItemPress}: TTabs) => {
+  const [measures, setMeasures] = React.useState<TMeasure[]>([]);
+  const containerRef = React.useRef<any>();
 
   React.useEffect(() => {
-    const m = [];
+    const m: TMeasure[] = [];
     data.forEach(item => {
       item.ref.current.measureLayout(
         containerRef.current,
-        (x, y, width, height) => {
+        (x: number, y: number, width: number, height: number) => {
           m.push({
             x,
             y,
@@ -131,13 +164,14 @@ const ImplementedWith = () => {
 };
 
 const ListWithIndicator = () => {
-  const flatRef = React.useRef();
+  const flatRef = React.useRef<any>();
   const scrollX = React.useRef(new Animated.Value(0)).current;
-  const onItemPress = React.useCallback(itemIndex => {
-    flatRef.current.scrollToOffset({
-      offset: itemIndex * width,
-    });
-  });
+  const onItemPress = React.useCallback((itemIndex: number) => {
+    !!flatRef.current &&
+      flatRef.current.scrollToOffset({
+        offset: itemIndex * width,
+      });
+  }, []);
 
   return (
     <View style={styles.container}>

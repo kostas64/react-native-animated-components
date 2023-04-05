@@ -2,7 +2,13 @@ import React from 'react';
 import {StyleSheet, View, Text, Animated} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-const Progress = ({step, steps, height}) => {
+type TProgressProps = {
+  step: number;
+  steps: number;
+  height: number;
+};
+
+const Progress = ({step, steps, height}: TProgressProps) => {
   const [width, setWidth] = React.useState(0);
   const animValue = React.useRef(new Animated.Value(-1000)).current;
   const reactive = React.useRef(new Animated.Value(-1000)).current;

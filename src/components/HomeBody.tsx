@@ -1,12 +1,13 @@
 import React from 'react';
-import HomeButton from './HomeButton';
+import HomeButton from '@components/HomeButton';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {THomeNavigationProps} from 'src/App';
 
 const HomeBody = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<THomeNavigationProps>();
   return (
     <ScrollView
       bounces={false}

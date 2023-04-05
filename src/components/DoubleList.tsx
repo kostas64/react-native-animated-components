@@ -3,13 +3,15 @@ import {
   Text,
   Alert,
   Animated,
+  FlatList,
+  ViewStyle,
   StatusBar,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
-import data from '../assets/doubleList';
+import data from '@assets/doubleList';
+import React, {Dispatch, SetStateAction} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
@@ -22,11 +24,33 @@ const colors = {
   dark: '#2D2D2D',
 };
 
-const Icon = React.memo(({icon, color}) => {
+interface IIconProps {
+  icon: string;
+  color: string;
+}
+
+interface IItemProps extends IIconProps {
+  name: string;
+  showText: boolean;
+}
+
+type TConnectButtonProps = {
+  onPress: () => void;
+};
+
+type TListProps = {
+  color: string;
+  showText?: boolean;
+  style: ViewStyle;
+  onScroll?: (...args: any[]) => void;
+  onItemIndexChanged?: Dispatch<SetStateAction<number>>;
+};
+
+const Icon = React.memo(({icon, color}: IIconProps) => {
   return <SimpleLineIcons name={icon} color={color} size={ICON_SIZE} />;
 });
 
-const Item = React.memo(({icon, color, name, showText}) => {
+const Item = React.memo(({icon, color, name, showText}: IItemProps | any) => {
   return (
     <View style={styles.itemWrapper}>
       {showText ? (
@@ -47,7 +71,7 @@ const ConnectWithText = React.memo(() => {
   );
 });
 
-const ConnectButton = React.memo(({onPress}) => {
+const ConnectButton = React.memo(({onPress}: TConnectButtonProps) => {
   return (
     <View style={styles.connectButtonPosition}>
       <View style={styles.line} />
@@ -62,7 +86,10 @@ const ConnectButton = React.memo(({onPress}) => {
 });
 
 const List = React.forwardRef(
-  ({color, showText, style, onScroll, onItemIndexChanged}, ref) => (
+  (
+    {color, showText, style, onScroll, onItemIndexChanged}: TListProps,
+    ref: any,
+  ) => (
     <Animated.FlatList
       ref={ref}
       data={data}
@@ -107,8 +134,8 @@ const DoubleList = () => {
   const onConnectPress = React.useCallback(() => {
     Alert.alert('Connect with:', data[index].name.toUpperCase());
   }, [index]);
-  const yellowRef = React.createRef();
-  const darkRef = React.createRef();
+  const yellowRef = React.useRef();
+  const darkRef = React.useRef<FlatList>();
   const scrollY = React.useRef(new Animated.Value(0)).current;
   const onScroll = Animated.event(
     [
@@ -147,7 +174,7 @@ const DoubleList = () => {
         style={StyleSheet.absoluteFillObject}
       />
       <List
-        showText
+        showText={true}
         color={colors.dark}
         ref={darkRef}
         style={{

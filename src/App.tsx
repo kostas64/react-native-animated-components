@@ -1,19 +1,42 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationProp,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 
+import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
-import ListWithIndiScreen from './screens/ListWithIndiScreen';
-import DoubleListScreen from './screens/DoubleListScreen';
-import Carousel3DScreen from './screens/Carousel3DScreen';
-import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
 import TogglersScreen from './screens/TogglerIOSScreen';
-import ScrollItemListScreen from './screens/ScrollItemListScreen';
+import DoubleListScreen from './screens/DoubleListScreen';
+import Carousel3DScreen from './screens/Carousel3DScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import ListWithIndiScreen from './screens/ListWithIndiScreen';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
+import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
+import ScrollItemListScreen from './screens/ScrollItemListScreen';
 
-const Stack = createNativeStackNavigator();
+type TStackList = {
+  Home: undefined;
+  Parallax: undefined;
+  ListWithIndi: undefined;
+  DoubleList: undefined;
+  Carousel3D: undefined;
+  Progress: undefined;
+  DotLoader: undefined;
+  Togglers: undefined;
+  ScrollItem: undefined;
+  CustomDrawer: undefined;
+};
+
+export type THomeNavigationProps = NativeStackNavigationProp<
+  TStackList,
+  'Home'
+>;
+export type THomeScreenProps = NativeStackScreenProps<TStackList, 'Home'>;
+
+const Stack = createNativeStackNavigator<TStackList>();
 
 function App() {
   return (

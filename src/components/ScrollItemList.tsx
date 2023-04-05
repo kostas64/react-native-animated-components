@@ -71,7 +71,7 @@ const ScrollItem = () => {
         contentContainerStyle={[
           styles.flatlistContainer,
           {
-            paddingTop: StatusBar.currentHeight + insets.top + 100,
+            paddingTop: (StatusBar.currentHeight || 0) + insets.top + 100,
           },
         ]}
         keyExtractor={item => item.key}

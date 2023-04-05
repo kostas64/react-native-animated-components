@@ -1,7 +1,17 @@
 import React from 'react';
 import {Text, Pressable, StyleSheet} from 'react-native';
 
-const HomeButton = ({label, onPress, backgroundColor = 'rgba(0,0,0,0.2)'}) => {
+type THomeButtonProps = {
+  label: string;
+  onPress: (props: any) => void;
+  backgroundColor: string;
+};
+
+const HomeButton = ({
+  label,
+  onPress,
+  backgroundColor = 'rgba(0,0,0,0.2)',
+}: THomeButtonProps) => {
   return (
     <Pressable style={[styles.container, {backgroundColor}]} onPress={onPress}>
       <Text style={styles.buttonLabel}>{label}</Text>

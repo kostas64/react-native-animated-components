@@ -3,15 +3,18 @@ import {
   Text,
   Animated,
   StatusBar,
+  TextStyle,
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  GestureResponderEvent,
+  StyleProp,
 } from 'react-native';
 import React from 'react';
 import Svg, {Polygon} from 'react-native-svg';
-import StatusBarManager from './StatusBarManager';
+import StatusBarManager from '@components/StatusBarManager';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {routes, colors, links} from '../assets/customDrawer';
+import {routes, colors, links} from '@assets/customDrawer';
 import MaskedView from '@react-native-masked-view/masked-view';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -19,8 +22,25 @@ const AnimatedPolygon = Animated.createAnimatedComponent(Polygon);
 const AnimatedAntDesign = Animated.createAnimatedComponent(AntDesign);
 
 const {width, height} = Dimensions.get('window');
+const fromCoords = {x: 0, y: height};
+const toCoords = {x: width, y: 0};
 
-const Button = ({title, onPress, style}) => {
+type ButtonProps = {
+  title: string;
+  onPress: (e: GestureResponderEvent) => void;
+  style: StyleProp<TextStyle>;
+};
+
+type DrawerProps = {
+  animatedValue: Animated.AnimatedValueXY;
+  onPress: () => void;
+};
+
+type ImplementedWith = {
+  opacity: Animated.AnimatedInterpolation<number>;
+};
+
+const Button = ({title, onPress, style}: ButtonProps) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
       <Text style={style}>{title}</Text>
@@ -28,11 +48,8 @@ const Button = ({title, onPress, style}) => {
   );
 };
 
-const fromCoords = {x: 0, y: height};
-const toCoords = {x: width, y: 0};
-
-const Drawer = ({animatedValue, onPress}) => {
-  const polygonRef = React.useRef();
+const Drawer = ({animatedValue, onPress}: DrawerProps) => {
+  const polygonRef = React.useRef<Polygon>();
   const insets = useSafeAreaInsets();
   const [selectedRoute, setSelectedRoute] = React.useState(routes[0]);
 
@@ -135,7 +152,7 @@ const Drawer = ({animatedValue, onPress}) => {
   );
 };
 
-const ImplementedWith = ({opacity}) => {
+const ImplementedWith = ({opacity}: ImplementedWith) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -163,7 +180,7 @@ const CustomDrawer = () => {
     outputRange: [1, 0],
   });
 
-  const animate = toValue => {
+  const animate = (toValue: number) => {
     return Animated.timing(animatedValue, {
       toValue: toValue === 1 ? toCoords : fromCoords,
       duration: 400,

@@ -30,7 +30,7 @@ const DotLoader = () => {
               useNativeDriver: true,
             }),
             Animated.timing(translateYRef1, {
-              toValue: -(size / 1.5),
+              toValue: -(+size / 1.5),
               duration: 300,
               useNativeDriver: true,
             }),
@@ -57,7 +57,7 @@ const DotLoader = () => {
               useNativeDriver: true,
             }),
             Animated.timing(translateYRef2, {
-              toValue: -(size / 1.5),
+              toValue: -(+size / 1.5),
               duration: 300,
               delay: 200,
               useNativeDriver: true,
@@ -85,7 +85,7 @@ const DotLoader = () => {
               useNativeDriver: true,
             }),
             Animated.timing(translateYRef3, {
-              toValue: -(size / 1.5),
+              toValue: -(+size / 1.5),
               duration: 300,
               delay: 400,
               useNativeDriver: true,
@@ -113,7 +113,7 @@ const DotLoader = () => {
               useNativeDriver: true,
             }),
             Animated.timing(translateYRef4, {
-              toValue: -(size / 1.5),
+              toValue: -(+size / 1.5),
               duration: 300,
               delay: 600,
               useNativeDriver: true,
@@ -160,7 +160,7 @@ const DotLoader = () => {
       <TextInput
         keyboardType="numeric"
         value={`${!!size ? size : 1}`}
-        onChangeText={val => setSize(val)}
+        onChangeText={val => setSize(parseInt(val))}
         style={styles.textInput}
       />
       <View style={{flexDirection: 'row'}}>
@@ -168,9 +168,9 @@ const DotLoader = () => {
           style={[
             styles.dot,
             {
-              width: parseInt(size || 1),
-              height: parseInt(size || 1),
-              borderRadius: parseInt(size || 1) / 2,
+              width: size || 1,
+              height: size || 1,
+              borderRadius: (+size || 1) / 2,
               opacity: opacityRef1,
               transform: [
                 {
@@ -187,9 +187,9 @@ const DotLoader = () => {
           style={[
             styles.dot,
             {
-              width: parseInt(size || 1),
-              height: parseInt(size || 1),
-              borderRadius: parseInt(size || 1) / 2,
+              width: size || 1,
+              height: size || 1,
+              borderRadius: (+size || 1) / 2,
               opacity: opacityRef2,
               transform: [
                 {
@@ -206,9 +206,9 @@ const DotLoader = () => {
           style={[
             styles.dot,
             {
-              width: parseInt(size || 1),
-              height: parseInt(size || 1),
-              borderRadius: parseInt(size || 1) / 2,
+              width: size || 1,
+              height: size || 1,
+              borderRadius: (+size || 1) / 2,
               opacity: opacityRef3,
               transform: [
                 {
@@ -225,9 +225,9 @@ const DotLoader = () => {
           style={[
             styles.dot,
             {
-              width: parseInt(size || 1),
-              height: parseInt(size || 1),
-              borderRadius: parseInt(size || 1) / 2,
+              width: size || 1,
+              height: size || 1,
+              borderRadius: (+size || 1) / 2,
               marginRight: 0,
               opacity: opacityRef4,
               transform: [
