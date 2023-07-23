@@ -1,16 +1,18 @@
+import React from 'react';
 import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
-import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
 import TogglersScreen from './screens/TogglerIOSScreen';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
+import ProductListScreen from './screens/ProductListScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import ListWithIndiScreen from './screens/ListWithIndiScreen';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
@@ -28,6 +30,7 @@ type TStackList = {
   Togglers: undefined;
   ScrollItem: undefined;
   CustomDrawer: undefined;
+  ProductList: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -40,21 +43,24 @@ const Stack = createNativeStackNavigator<TStackList>();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Parallax" component={ParallaxScreen} />
-        <Stack.Screen name="ListWithIndi" component={ListWithIndiScreen} />
-        <Stack.Screen name="DoubleList" component={DoubleListScreen} />
-        <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
-        <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
-        <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
-        <Stack.Screen name="Togglers" component={TogglersScreen} />
-        <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
-        <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Parallax" component={ParallaxScreen} />
+          <Stack.Screen name="ListWithIndi" component={ListWithIndiScreen} />
+          <Stack.Screen name="DoubleList" component={DoubleListScreen} />
+          <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
+          <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
+          <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
+          <Stack.Screen name="Togglers" component={TogglersScreen} />
+          <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
+          <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
+          <Stack.Screen name="ProductList" component={ProductListScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 

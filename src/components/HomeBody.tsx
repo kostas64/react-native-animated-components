@@ -41,6 +41,12 @@ const HomeBody = () => {
         backgroundColor={'#ad77df'}
         onPress={() => navigation.navigate('ScrollItem')}
       />
+      <View style={styles.separator} />
+      <HomeButton
+        label={'Product List'}
+        backgroundColor={'#eeba0b'}
+        onPress={() => navigation.navigate('ProductList')}
+      />
       <View style={[styles.sectionContainer, {paddingTop: 16}]}>
         <Image
           source={require('../assets/img/menu-bar.png')}
