@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
+  Image,
 } from 'react-native';
 import React from 'react';
 import {
@@ -244,6 +245,32 @@ const ProductList = () => {
                   }}>
                   {items[index]?.power}
                 </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                position: 'absolute',
+                bottom: insets.bottom + 24,
+                marginHorizontal: 24,
+                backgroundColor: items[index].halfFontColor,
+                paddingHorizontal: 8,
+                paddingVertical: 12,
+                borderRadius: 8,
+              }}>
+              <View
+                style={{
+                  width: width - 64,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  opacity: 0.75,
+                }}>
+                <Image
+                  source={require('../assets/img/apple.png')}
+                  style={{width: 32, height: 32}}
+                />
+                <Text style={{fontSize: 20, color: 'white'}}>Add to bag</Text>
+                <Text style={{fontSize: 20, color: 'white'}}>$299.99</Text>
               </View>
             </View>
           </View>
