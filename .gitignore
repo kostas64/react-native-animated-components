@@ -64,3 +64,6 @@ yarn-error.log
 
 settings.json
 IDEWorkspaceChecks.plist
+
+# testing
+/coverage
