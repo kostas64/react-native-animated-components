@@ -247,6 +247,17 @@ const ProductList = () => {
                 </Text>
               </View>
             </View>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '500',
+                position: 'absolute',
+                left: 24,
+                bottom: insets.bottom + 92,
+                color: items[index].halfFontColor,
+              }}>
+              {`Implemented with:\nAnimated API + RN Gesture Handler`}
+            </Text>
             <View
               style={{
                 position: 'absolute',

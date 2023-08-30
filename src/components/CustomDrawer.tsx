@@ -159,6 +159,7 @@ const ImplementedWith = ({opacity}: ImplementedWith) => {
     <Animated.View
       style={{position: 'absolute', top: insets.top + 16, left: 20, opacity}}>
       <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
       <Text style={styles.label}>react-native-svg</Text>
       <Text style={styles.label}>@react-native-masked-view</Text>
     </Animated.View>
@@ -231,6 +232,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   implemented: {
+    paddingBottom: 8,
     fontSize: 22,
     fontWeight: '900',
     color: 'black',

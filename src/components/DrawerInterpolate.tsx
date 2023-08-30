@@ -55,6 +55,9 @@ const CustomDrawerContent = ({
         <CustomDrawerItem label="Favourite" icon="hearto" />
         <View style={styles.hr} />
         <Text style={styles.implementedWith}>Implemented with:</Text>
+        <Text style={[styles.implementedWith, {paddingTop: 0}]}>
+          Reanimated
+        </Text>
       </View>
     </DrawerContentScrollView>
   );
