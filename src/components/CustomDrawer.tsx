@@ -157,7 +157,12 @@ const ImplementedWith = ({opacity}: ImplementedWith) => {
 
   return (
     <Animated.View
-      style={{position: 'absolute', top: insets.top + 16, left: 20, opacity}}>
+      style={{
+        position: 'absolute',
+        bottom: insets.bottom + 16,
+        left: 20,
+        opacity,
+      }}>
       <Text style={styles.implemented}>Implemented with:</Text>
       <Text style={styles.label}>Animated API</Text>
       <Text style={styles.label}>react-native-svg</Text>
