@@ -44,8 +44,6 @@ type TTabs = {
   onItemPress: Function;
 };
 
-console.log('Object.keys(images) ', images['man']);
-
 const data = Object.keys(images).map(i => ({
   key: i,
   title: i,

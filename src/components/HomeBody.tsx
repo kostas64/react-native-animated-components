@@ -66,6 +66,12 @@ const HomeBody = () => {
         backgroundColor={'#c57f5d'}
         onPress={() => navigation.navigate('CustomDrawer')}
       />
+      <View style={styles.separator} />
+      <HomeButton
+        label={'Drawer Interpolate'}
+        backgroundColor={'#f298bc'}
+        onPress={() => navigation.navigate('DrawerInterpolate')}
+      />
       <View style={[styles.sectionContainer, {paddingTop: 16}]}>
         <Image
           source={require('../assets/img/loader.png')}
@@ -76,13 +82,13 @@ const HomeBody = () => {
       <View style={styles.separator} />
       <HomeButton
         label={'Progress Loader'}
-        backgroundColor={'#f298bc'}
+        backgroundColor={'#7bc8d2'}
         onPress={() => navigation.navigate('Progress')}
       />
       <View style={styles.separator} />
       <HomeButton
         label={'Dot Loader'}
-        backgroundColor={'#7bc8d2'}
+        backgroundColor={'#a3b8f1'}
         onPress={() => navigation.navigate('DotLoader')}
       />
       <View style={styles.separator} />
@@ -93,7 +99,7 @@ const HomeBody = () => {
       <View style={styles.separator} />
       <HomeButton
         label={'Togglers'}
-        backgroundColor={'#a3b8f1'}
+        backgroundColor={'#ad77df'}
         onPress={() => navigation.navigate('Togglers')}
       />
     </ScrollView>

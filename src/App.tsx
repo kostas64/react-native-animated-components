@@ -16,6 +16,7 @@ import ProductListScreen from './screens/ProductListScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import ListWithIndiScreen from './screens/ListWithIndiScreen';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
+import DrawerInterpolate from '@components/DrawerInterpolate';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import ScrollItemListScreen from './screens/ScrollItemListScreen';
 
@@ -31,6 +32,7 @@ type TStackList = {
   ScrollItem: undefined;
   CustomDrawer: undefined;
   ProductList: undefined;
+  DrawerInterpolate: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -57,6 +59,10 @@ function App() {
           <Stack.Screen name="Togglers" component={TogglersScreen} />
           <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
           <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
+          <Stack.Screen
+            name="DrawerInterpolate"
+            component={DrawerInterpolate}
+          />
           <Stack.Screen name="ProductList" component={ProductListScreen} />
         </Stack.Navigator>
       </NavigationContainer>
