@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
+import PinCode from './screens/PinCode';
 import HomeScreen from './screens/HomeScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
@@ -33,6 +34,7 @@ type TStackList = {
   CustomDrawer: undefined;
   ProductList: undefined;
   DrawerInterpolate: undefined;
+  PinCode: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -64,6 +66,7 @@ function App() {
             component={DrawerInterpolate}
           />
           <Stack.Screen name="ProductList" component={ProductListScreen} />
+          <Stack.Screen name="PinCode" component={PinCode} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

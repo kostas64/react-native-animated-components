@@ -102,6 +102,17 @@ const HomeBody = () => {
         backgroundColor={'#ad77df'}
         onPress={() => navigation.navigate('Togglers')}
       />
+      <View style={styles.separator} />
+      <View style={styles.sectionContainer}>
+        <FontAwesome name="code" color={'#3f546a'} size={32} />
+        <Text style={[styles.listLabel, {marginLeft: 4}]}>Validator</Text>
+      </View>
+      <View style={styles.separator} />
+      <HomeButton
+        label={'Pin Code'}
+        backgroundColor={'#eeba0b'}
+        onPress={() => navigation.navigate('PinCode')}
+      />
     </ScrollView>
   );
 };
