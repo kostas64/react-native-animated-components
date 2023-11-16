@@ -199,7 +199,7 @@ const PinCode = () => {
 
         {loading && (
           <View style={{position: 'absolute', top: '12%'}}>
-            <ActivityIndicator size={'small'} />
+            <ActivityIndicator size={'small'} color={'white'} />
           </View>
         )}
 
@@ -258,8 +258,9 @@ const styles = StyleSheet.create({
     fontWeight: '100',
   },
   empty: {
-    width: 100,
-    height: 100,
+    margin: 8,
+    width: 90,
+    height: 90,
   },
 });
 
