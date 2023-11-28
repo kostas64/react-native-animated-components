@@ -29,26 +29,21 @@ const {width} = Dimensions.get('screen');
 const FAKE_ARRAY = new Array(16).fill(0);
 const image = require('@assets/img/arrow.png');
 
-const AnimInput = Animated.createAnimatedComponent(TextInput);
 const AnimPress = Animated.createAnimatedComponent(Pressable);
 
 const FloatingElement = () => {
   const insets = useSafeAreaInsets();
   const [showBack, setShowBack] = React.useState(true);
   const [promoCode, setPromoCode] = React.useState('');
-  const buttonHitslop = {top: 12, left: 12, right: 12, bottom: 12};
+  const buttonHitslop = {top: 8, left: 8, right: 8, bottom: 8};
 
   //Animated values
   const isOpen = useSharedValue(0);
   const keyboard = useAnimatedKeyboard();
+  const contentOpacity = useSharedValue(0);
   const heightFloating = useSharedValue(60);
   const widthFloating = useSharedValue(60);
-  const checkoutOpacity = useSharedValue(0);
-  const titleWidth = useSharedValue(0);
-  const titleOpacity = useSharedValue(0);
-  const inputOpacity = useSharedValue(0);
   const backOpacity = useSharedValue(0);
-  const paragraphOpacity = useSharedValue(0);
   const imageRotate = useSharedValue(1);
   const translateCircle = useSharedValue(
     (width - 30 - (width - (width - 4 * SPACING)) / 2) / 2,
@@ -72,14 +67,10 @@ const FloatingElement = () => {
 
   const closeAnimation = () => {
     keyboard.height.value > 0 && Keyboard.dismiss();
+    contentOpacity.value = withTiming(0, {duration: 50});
     backOpacity.value = withTiming(0);
     widthFloating.value = withTiming(60);
     heightFloating.value = withTiming(60);
-    checkoutOpacity.value = 0;
-    inputOpacity.value = withTiming(0, {duration: 100});
-    titleWidth.value = withTiming(0, {duration: 300});
-    titleOpacity.value = withTiming(0, {duration: 200});
-    paragraphOpacity.value = withTiming(0, {duration: 150});
     imageRotate.value = withTiming(1);
     translateCircle.value = withTiming(
       (width - 30 - (width - (width - 4 * SPACING)) / 2) / 2,
@@ -94,14 +85,10 @@ const FloatingElement = () => {
 
   const openAnimation = () => {
     if (isOpen.value === 0) {
+      contentOpacity.value = withDelay(150, withTiming(1, {duration: 150}));
       backOpacity.value = withTiming(0.5);
       widthFloating.value = withTiming(width - 4 * SPACING);
       heightFloating.value = withTiming(310);
-      checkoutOpacity.value = withDelay(150, withTiming(1, {duration: 250}));
-      inputOpacity.value = withDelay(100, withTiming(1, {duration: 250}));
-      titleWidth.value = withTiming(120);
-      titleOpacity.value = withTiming(1, {duration: 400});
-      paragraphOpacity.value = withDelay(100, withTiming(1, {duration: 250}));
       imageRotate.value = withTiming(0);
       translateCircle.value = withTiming(
         (width - (width - 4 * SPACING)) / 2,
@@ -134,24 +121,11 @@ const FloatingElement = () => {
     opacity: backOpacity.value,
   }));
 
-  const checkoutStyle = useAnimatedStyle(() => ({
-    opacity: checkoutOpacity.value,
+  const contentAnimStyle = useAnimatedStyle(() => ({
+    opacity: contentOpacity.value,
   }));
 
-  const inputStyle = useAnimatedStyle(() => ({
-    opacity: inputOpacity.value,
-  }));
-
-  const titleStyle = useAnimatedStyle(() => ({
-    width: titleWidth.value,
-    opacity: titleOpacity.value,
-  }));
-
-  const paragraphStyle = useAnimatedStyle(() => ({
-    opacity: paragraphOpacity.value,
-  }));
-
-  const imageStyle = useAnimatedStyle(() => ({
+  const closeStyle = useAnimatedStyle(() => ({
     transform: [
       {rotate: `${interpolate(imageRotate.value, [0, 1], [0, 45])}deg`},
     ],
@@ -166,7 +140,7 @@ const FloatingElement = () => {
           style={[backStyle, styles.background]}
         />
       )}
-
+      {/* Container */}
       <AnimPress
         onPress={openAnimation}
         style={[
@@ -174,39 +148,35 @@ const FloatingElement = () => {
           styles.container,
           {bottom: insets.bottom + 24},
         ]}>
-        {/* Title row */}
-        <View style={styles.titleContainer}>
-          <Animated.Text style={[titleStyle, styles.title]}>
-            Black Friday
-          </Animated.Text>
+        {/* Content */}
+        <Animated.View style={contentAnimStyle}>
+          <Text style={styles.title}>Black Friday</Text>
 
-          <Pressable
-            hitSlop={buttonHitslop}
-            onPress={showBack ? closeAnimation : openAnimation}>
-            <Animated.Image source={image} style={[imageStyle, styles.image]} />
-          </Pressable>
-        </View>
+          <Text
+            style={[
+              styles.paragraph,
+            ]}>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Text>
 
-        {/* Paragraph */}
-        <Animated.Text
-          style={[
-            paragraphStyle,
-            styles.paragraph,
-          ]}>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Animated.Text>
+          <TextInput
+            value={promoCode}
+            onChangeText={setPromoCode}
+            placeholder="Paste promo to save over 50%"
+            placeholderTextColor={'#625d60'}
+            style={styles.promoInput}
+          />
 
-        {/* TextInput */}
-        <AnimInput
-          value={promoCode}
-          onChangeText={setPromoCode}
-          placeholder="Paste promo to save over 50%"
-          placeholderTextColor={'#625d60'}
-          style={[inputStyle, styles.promoInput]}
-        />
-
-        {/* Checkout button */}
-        <Animated.View style={[checkoutStyle, styles.checkoutButton]}>
-          <Text style={styles.checkoutLabel}>Checkout</Text>
+          <View style={styles.checkoutButton}>
+            <Text style={styles.checkoutLabel}>Checkout</Text>
+          </View>
         </Animated.View>
+
+        {/* Close / Cross Button */}
+        <Pressable
+          style={styles.imageContainer}
+          hitSlop={buttonHitslop}
+          onPress={showBack ? closeAnimation : openAnimation}>
+          <Animated.Image source={image} style={[closeStyle, styles.image]} />
+        </Pressable>
       </AnimPress>
     </>
   );
@@ -266,11 +236,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(30,30,30)',
     padding: 24,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
   title: {
     color: 'white',
     fontWeight: '500',
@@ -289,10 +254,12 @@ const styles = StyleSheet.create({
     height: (width - SPACING * 3) / 2,
     marginBottom: SPACING,
   },
-  image: {
-    top: -17,
-    right: -6,
+  imageContainer: {
+    top: 17,
+    right: 18,
     position: 'absolute',
+  },
+  image: {
     tintColor: 'white',
     height: 24,
     width: 24,
@@ -303,7 +270,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingVertical: SPACING,
     backgroundColor: '#322d30',
-    borderRadius: SPACING * 1.2,
+    borderRadius: SPACING,
     marginBottom: SPACING,
   },
   checkoutButton: {
@@ -312,7 +279,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fedc00',
-    borderRadius: SPACING * 1.2,
+    borderRadius: SPACING,
   },
   checkoutLabel: {
     color: 'black',
