@@ -14,6 +14,7 @@ import TogglersScreen from './screens/TogglerIOSScreen';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
 import ProductListScreen from './screens/ProductListScreen';
+import FloatingButton from './screens/FloatingButtonScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import ListWithIndiScreen from './screens/ListWithIndiScreen';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
@@ -35,6 +36,7 @@ type TStackList = {
   ProductList: undefined;
   DrawerInterpolate: undefined;
   PinCode: undefined;
+  Floating: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -67,6 +69,7 @@ function App() {
           />
           <Stack.Screen name="ProductList" component={ProductListScreen} />
           <Stack.Screen name="PinCode" component={PinCode} />
+          <Stack.Screen name="Floating" component={FloatingButton} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

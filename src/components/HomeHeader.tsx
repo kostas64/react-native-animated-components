@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     color: '#819cb8',
   },
   imgContainer: {
-    paddingTop: 16,
     alignItems: 'center',
   },
   image: {

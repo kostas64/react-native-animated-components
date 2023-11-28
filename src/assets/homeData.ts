@@ -1,3 +1,5 @@
+import {ColorValue} from 'react-native';
+
 type TDATA = {
   iconName?: string;
   iconComp: string;
@@ -18,7 +20,8 @@ type TDATA = {
       | 'Progress'
       | 'DotLoader'
       | 'Togglers'
-      | 'PinCode';
+      | 'PinCode'
+      | 'Floating';
   }[];
 }[];
 
@@ -92,30 +95,26 @@ export const DATA: TDATA = [
     ],
   },
   {
-    iconName: 'toggle-on',
-    iconComp: 'FontAwesome',
-    iconColor: '#3f546a',
-    iconSize: 32,
-    iconText: 'Toggler',
-    items: [
-      {
-        label: 'Togglers',
-        backgroundColor: '#ad77df',
-        screen: 'Togglers',
-      },
-    ],
-  },
-  {
     iconName: 'code',
     iconComp: 'FontAwesome',
     iconColor: '#3f546a',
     iconSize: 32,
-    iconText: 'Validator',
+    iconText: 'Common',
     items: [
       {
         label: 'Pin Code',
         backgroundColor: '#eeba0b',
         screen: 'PinCode',
+      },
+      {
+        label: 'Togglers',
+        backgroundColor: '#ad77df',
+        screen: 'Togglers',
+      },
+      {
+        label: 'Floating Button',
+        backgroundColor: '#eaa884',
+        screen: 'Floating',
       },
     ],
   },

@@ -65,11 +65,9 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: '#f2f7fd',
-    borderTopLeftRadius: 48,
-    borderTopRightRadius: 48,
-    paddingTop: 32,
+    paddingTop: 16,
     paddingHorizontal: 16,
-    paddingBottom: 32,
+    paddingBottom: 44,
   },
   sectionContainer: {
     flexDirection: 'row',
