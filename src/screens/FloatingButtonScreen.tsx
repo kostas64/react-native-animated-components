@@ -7,6 +7,8 @@ import {
   Pressable,
   Dimensions,
   StyleSheet,
+  ViewStyle,
+  ColorValue,
   TouchableOpacity,
 } from 'react-native';
 import Animated, {
@@ -20,7 +22,7 @@ import Animated, {
   useAnimatedKeyboard,
   useAnimatedReaction,
 } from 'react-native-reanimated';
-import React from 'react';
+import React, {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const SPACING = 16;
@@ -31,10 +33,85 @@ const image = require('@assets/img/arrow.png');
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
 
-const FloatingElement = () => {
-  const insets = useSafeAreaInsets();
-  const [showBack, setShowBack] = React.useState(true);
+type TFloatingElement = {
+  /** Is the final animated height */
+  snapHeight: number;
+
+  /** Is the content when modal is open*/
+  content: React.ReactNode;
+
+  /** Is the final animated width
+   * @default screenWidth - 64
+   */
+  snapWidth?: number;
+
+  /** Is the style of the FAB (Floating Action Button) container */
+  containerStyle?: ViewStyle | ViewStyle[];
+
+  /** Is the color behind the FAB when its extended
+   * @default rgb(0,0,0)
+   */
+  backdropColor?: ColorValue;
+
+  /** Is the opacity to animate backdrop color when FAB opens. Value should be between 0 and 1
+   * @default 0.5
+   */
+  backdropOpacity?: number;
+
+  /** Is the time that animation needs to fade in (ms)
+   * @default 150ms
+   */
+  fadeInDuration?: number;
+
+  /** Is the time that animation needs to fade in (ms)
+   * @default 10ms
+   */
+  fadeOutDuration?: number;
+
+  /** Hide or show close button
+   *  @default true
+   */
+  showClose?: boolean;
+};
+
+const FloatingContent = () => {
   const [promoCode, setPromoCode] = React.useState('');
+
+  return (
+    <>
+      <Text style={styles.title}>Black Friday</Text>
+      <Text
+        style={[
+          styles.paragraph,
+        ]}>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Text>
+      <TextInput
+        value={promoCode}
+        onChangeText={setPromoCode}
+        placeholder="Paste promo to save over 50%"
+        placeholderTextColor={'#625d60'}
+        style={styles.promoInput}
+      />
+      <View style={styles.checkoutButton}>
+        <Text style={styles.checkoutLabel}>Checkout</Text>
+      </View>
+    </>
+  );
+};
+
+const FloatingElement = ({
+  content,
+  snapHeight,
+  snapWidth,
+  containerStyle,
+  backdropColor,
+  backdropOpacity,
+  fadeInDuration,
+  fadeOutDuration,
+  showClose = true,
+}: TFloatingElement) => {
+  const [showBack, setShowBack] = React.useState(true);
+
+  let dismissKeybTimeout = useRef<ReturnType<typeof setInterval> | null>(null);
   const buttonHitslop = {top: 8, left: 8, right: 8, bottom: 8};
 
   //Animated values
@@ -48,6 +125,9 @@ const FloatingElement = () => {
   const translateCircle = useSharedValue(
     (width - 30 - (width - (width - 4 * SPACING)) / 2) / 2,
   );
+
+  //Checks
+  const hasCloseButton = showClose || (!showClose && !showBack);
 
   // Update state to show/hide background
   // Triggered when background opacity change
@@ -65,15 +145,17 @@ const FloatingElement = () => {
     },
   );
 
-  const closeAnimation = () => {
-    keyboard.height.value > 0 && Keyboard.dismiss();
-    contentOpacity.value = withTiming(0, {duration: 50});
+  const closeAnimation = React.useCallback(() => {
+    const contDur = fadeOutDuration || 10;
+    const finalWidth = snapWidth || width - 4 * SPACING;
+
+    contentOpacity.value = withTiming(0, {duration: contDur});
     backOpacity.value = withTiming(0);
     widthFloating.value = withTiming(60);
     heightFloating.value = withTiming(60);
     imageRotate.value = withTiming(1);
     translateCircle.value = withTiming(
-      (width - 30 - (width - (width - 4 * SPACING)) / 2) / 2,
+      (width - 30 - (width - finalWidth) / 2) / 2,
       {},
       finished => {
         if (finished) {
@@ -81,17 +163,27 @@ const FloatingElement = () => {
         }
       },
     );
-  };
 
-  const openAnimation = () => {
+    if (keyboard.height.value > 0) {
+      dismissKeybTimeout.current = setTimeout(() => {
+        Keyboard.dismiss();
+      }, 100);
+    }
+  }, []);
+
+  const openAnimation = React.useCallback(() => {
+    const contDur = fadeInDuration || 150;
+    const backDropOpacity = backdropOpacity || 0.5;
+    const finalWidth = snapWidth || width - 4 * SPACING;
+
     if (isOpen.value === 0) {
-      contentOpacity.value = withDelay(150, withTiming(1, {duration: 150}));
-      backOpacity.value = withTiming(0.5);
-      widthFloating.value = withTiming(width - 4 * SPACING);
-      heightFloating.value = withTiming(310);
+      contentOpacity.value = withDelay(150, withTiming(1, {duration: contDur}));
+      backOpacity.value = withTiming(backDropOpacity);
+      widthFloating.value = withTiming(finalWidth);
+      heightFloating.value = withTiming(snapHeight);
       imageRotate.value = withTiming(0);
       translateCircle.value = withTiming(
-        (width - (width - 4 * SPACING)) / 2,
+        (width - finalWidth) / 2,
         {},
         finished => {
           if (finished) {
@@ -100,7 +192,7 @@ const FloatingElement = () => {
         },
       );
     }
-  };
+  }, []);
 
   const translateStyle = useAnimatedStyle(() => {
     return {
@@ -131,52 +223,42 @@ const FloatingElement = () => {
     ],
   }));
 
+  //Clean timer set in case keyboard opened
+  React.useEffect(() => {
+    return () => {
+      !!dismissKeybTimeout.current && clearTimeout(dismissKeybTimeout.current);
+    };
+  }, []);
+
   return (
     <>
       {/* Background */}
       {showBack && (
         <AnimPress
           onPress={closeAnimation}
-          style={[backStyle, styles.background]}
+          style={[
+            backStyle,
+            styles.background,
+            !!backdropColor && {backgroundColor: backdropColor},
+          ]}
         />
       )}
       {/* Container */}
       <AnimPress
         onPress={openAnimation}
-        style={[
-          translateStyle,
-          styles.container,
-          {bottom: insets.bottom + 24},
-        ]}>
+        style={[translateStyle, containerStyle]}>
         {/* Content */}
-        <Animated.View style={contentAnimStyle}>
-          <Text style={styles.title}>Black Friday</Text>
-
-          <Text
-            style={[
-              styles.paragraph,
-            ]}>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Text>
-
-          <TextInput
-            value={promoCode}
-            onChangeText={setPromoCode}
-            placeholder="Paste promo to save over 50%"
-            placeholderTextColor={'#625d60'}
-            style={styles.promoInput}
-          />
-
-          <View style={styles.checkoutButton}>
-            <Text style={styles.checkoutLabel}>Checkout</Text>
-          </View>
-        </Animated.View>
+        <Animated.View style={contentAnimStyle}>{content}</Animated.View>
 
         {/* Close / Cross Button */}
-        <Pressable
-          style={styles.imageContainer}
-          hitSlop={buttonHitslop}
-          onPress={showBack ? closeAnimation : openAnimation}>
-          <Animated.Image source={image} style={[closeStyle, styles.image]} />
-        </Pressable>
+        {hasCloseButton && (
+          <Pressable
+            style={styles.imageContainer}
+            hitSlop={buttonHitslop}
+            onPress={showBack ? closeAnimation : openAnimation}>
+            <Animated.Image source={image} style={[closeStyle, styles.image]} />
+          </Pressable>
+        )}
       </AnimPress>
     </>
   );
@@ -198,7 +280,7 @@ const FakeItem = ({index}: {index: number}) => {
 const FloatingButton = () => {
   const insets = useSafeAreaInsets();
 
-  const renderItem = ({item, index}: {item: number; index: number}) => (
+  const renderItem = ({index}: {index: number}) => (
     <FakeItem key={index} index={index} />
   );
 
@@ -211,7 +293,11 @@ const FloatingButton = () => {
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
         />
-        <FloatingElement />
+        <FloatingElement
+          snapHeight={310}
+          content={<FloatingContent />}
+          containerStyle={[styles.container, {bottom: insets.bottom + 24}]}
+        />
       </View>
     </>
   );
