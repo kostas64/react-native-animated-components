@@ -72,6 +72,34 @@ type TFloatingElement = {
    *  @default true
    */
   showClose?: boolean;
+
+  /** Is the icon's tint color
+   * @default
+   * #000000
+   */
+  iconTintColor?: ColorValue;
+
+  /** Is the FAB's button clickable area when FAB is a extended (open state)
+   * @default
+   * top: 8 left: 8 right: 8 bottom: 8
+   */
+  hitSlopWithFabOpen?: {
+    top: number;
+    left: number;
+    bottom: number;
+    right: number;
+  };
+
+  /** Is the FAB's button clickable area when FAB is a button (closed state)
+   * @default
+   * top: 16 left: 16 right: 16 bottom: 16
+   */
+  hitSlopWithFabClosed?: {
+    top: number;
+    left: number;
+    bottom: number;
+    right: number;
+  };
 };
 
 const FloatingContent = () => {
@@ -102,17 +130,19 @@ const FloatingElement = ({
   content,
   snapHeight,
   snapWidth,
-  containerStyle,
+  containerStyle = {},
   backdropColor,
+  iconTintColor,
   backdropOpacity,
   fadeInDuration,
   fadeOutDuration,
   showClose = true,
+  hitSlopWithFabOpen,
+  hitSlopWithFabClosed,
 }: TFloatingElement) => {
   const [showBack, setShowBack] = React.useState(true);
 
   let dismissKeybTimeout = useRef<ReturnType<typeof setInterval> | null>(null);
-  const buttonHitslop = {top: 8, left: 8, right: 8, bottom: 8};
 
   //Animated values
   const isOpen = useSharedValue(0);
@@ -128,6 +158,16 @@ const FloatingElement = ({
 
   //Checks
   const hasCloseButton = showClose || (!showClose && !showBack);
+  const hasCustomOpenHitslop = !!hitSlopWithFabOpen && isOpen.value === 1;
+  const hasCustomClosedHitslop = !!hitSlopWithFabClosed && !isOpen.value;
+
+  const buttonHitslop = hasCustomOpenHitslop
+    ? hitSlopWithFabOpen
+    : hasCustomClosedHitslop
+    ? hitSlopWithFabClosed
+    : !showBack
+    ? {top: 16, left: 16, right: 16, bottom: 16}
+    : {top: 8, left: 8, right: 8, bottom: 8};
 
   // Update state to show/hide background
   // Triggered when background opacity change
@@ -256,7 +296,10 @@ const FloatingElement = ({
             style={styles.imageContainer}
             hitSlop={buttonHitslop}
             onPress={showBack ? closeAnimation : openAnimation}>
-            <Animated.Image source={image} style={[closeStyle, styles.image]} />
+            <Animated.Image
+              source={image}
+              style={[closeStyle, styles.image, {tintColor: iconTintColor}]}
+            />
           </Pressable>
         )}
       </AnimPress>
@@ -346,7 +389,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   image: {
-    tintColor: 'white',
     height: 24,
     width: 24,
   },
