@@ -338,6 +338,7 @@ const FloatingButton = () => {
         />
         <FloatingElement
           snapHeight={310}
+          iconTintColor={'#FFF'}
           content={<FloatingContent />}
           containerStyle={[styles.container, {bottom: insets.bottom + 24}]}
         />
