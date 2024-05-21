@@ -26,6 +26,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //My Libs
 import {DATA} from '@assets/homeData';
@@ -202,6 +203,8 @@ const HomeBody = ({
             ? Image
             : mainItem.iconComp === 'FontAwesome'
             ? FontAwesome
+            : mainItem.iconComp === 'MaterialCommunityIcons'
+            ? MaterialCommunityIcons
             : Ionicons;
 
         return (
