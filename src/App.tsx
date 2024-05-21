@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
+import Airbnb from './screens/Airbnb';
 import PinCode from './screens/PinCode';
 import HomeScreen from './screens/HomeScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
@@ -37,6 +38,7 @@ type TStackList = {
   DrawerInterpolate: undefined;
   PinCode: undefined;
   Floating: undefined;
+  Airbnb: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -70,6 +72,7 @@ function App() {
           <Stack.Screen name="ProductList" component={ProductListScreen} />
           <Stack.Screen name="PinCode" component={PinCode} />
           <Stack.Screen name="Floating" component={FloatingButton} />
+          <Stack.Screen name="Airbnb" component={Airbnb} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
