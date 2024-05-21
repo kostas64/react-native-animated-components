@@ -21,36 +21,51 @@ type TDATA = {
       | 'DotLoader'
       | 'Togglers'
       | 'PinCode'
-      | 'Floating';
+      | 'Floating'
+      | 'Airbnb';
   }[];
 }[];
 
 export const DATA: TDATA = [
   {
-    iconName: 'ios-list-circle',
-    iconComp: 'Ionicons',
+    iconName: 'animation',
+    iconComp: 'MaterialCommunityIcons',
+    iconColor: '#3f546a',
+    iconSize: 40,
+    iconText: 'Replicated animations',
+    items: [
+      {
+        label: "Airbnb 'Where to'",
+        backgroundColor: '#f298bc',
+        screen: 'Airbnb',
+      },
+    ],
+  },
+  {
+    iconName: 'clipboard-list',
+    iconComp: 'MaterialCommunityIcons',
     iconColor: '#3f546a',
     iconSize: 40,
     iconText: 'List',
     items: [
       {
         label: 'Parallax List',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#7bc8d2',
         screen: 'Parallax',
       },
       {
         label: 'Double List',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#a3b8f1',
         screen: 'DoubleList',
       },
       {
         label: '3D Carousel',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#ad77df',
         screen: 'Carousel3D',
       },
       {
         label: 'Fade Item Out',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#eaa884',
         screen: 'ScrollItem',
       },
     ],
@@ -62,17 +77,17 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Navbar with Indicator',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#c57f5d',
         screen: 'ListWithIndi',
       },
       {
         label: 'Custom Drawer',
-        backgroundColor: '#c57f5d',
+        backgroundColor: '#f298bc',
         screen: 'CustomDrawer',
       },
       {
         label: 'Drawer Interpolate',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#7bc8d2',
         screen: 'DrawerInterpolate',
       },
     ],
@@ -84,12 +99,12 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Progress Loader',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#a3b8f1',
         screen: 'Progress',
       },
       {
         label: 'Dot Loader',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#ad77df',
         screen: 'DotLoader',
       },
     ],
@@ -103,17 +118,17 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Pin Code',
-        backgroundColor: '#eeba0b',
+        backgroundColor: '#eaa884',
         screen: 'PinCode',
       },
       {
         label: 'Togglers',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#c57f5d',
         screen: 'Togglers',
       },
       {
         label: 'Floating Button',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#f298bc',
         screen: 'Floating',
       },
     ],
