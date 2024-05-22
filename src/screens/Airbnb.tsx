@@ -21,7 +21,9 @@ import Animated, {
   interpolateColor,
 } from 'react-native-reanimated';
 import React from 'react';
+import {MONTHS} from '@assets/months';
 import {COUNTRIES} from '@assets/countries';
+import {CalendarList} from 'react-native-calendars';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {FlatList} from 'react-native-gesture-handler';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -72,8 +74,8 @@ const Airbnb = () => {
   const insets = useSafeAreaInsets();
 
   const progress = useSharedValue(0);
-  const progressWhereTo = useSharedValue(0);
   const progresWhen = useSharedValue(0);
+  const progressWhereTo = useSharedValue(0);
   const closeWhen = useSharedValue(0);
   const translatePicker = useSharedValue(0);
 
@@ -487,17 +489,17 @@ const Airbnb = () => {
     }
   }, [showModal]);
 
-  const animateWhereToInput = React.useCallback(() => {
+  const animateWhereToInput = () => {
     inputRef.current?.focus();
     setInputFocused(true);
     progressWhereTo.value = withTiming(1);
-  }, [inputFocused]);
+  };
 
-  const animateWhereToInputClose = React.useCallback(() => {
+  const animateWhereToInputClose = () => {
     inputRef.current?.blur();
     setInputFocused(false);
     progressWhereTo.value = withTiming(0);
-  }, [inputFocused]);
+  };
 
   const animateWhen = React.useCallback(() => {
     const toValue = progresWhen.value === 1 ? 0 : 1;
@@ -512,7 +514,10 @@ const Airbnb = () => {
         <TouchableOpacity
           activeOpacity={0.75}
           key={`country-${index}`}
-          onPress={() => setCountry(item.label)}
+          onPress={() => {
+            setCountry(item.label);
+            animateWhen();
+          }}
           style={[
             styles.mapImgContainer,
             {
@@ -520,6 +525,7 @@ const Airbnb = () => {
               paddingLeft: index === 0 ? 24 : 0,
             },
           ]}>
+          {/* @ts-ignore */}
           <Image
             borderRadius={8}
             source={item.img}
@@ -548,6 +554,37 @@ const Airbnb = () => {
     ),
     [],
   );
+
+  const generateMonthObjectUpToToday = () => {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth();
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate(); // Adjust month + 1
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() is zero-based
+    const currentDay = currentDate.getDate();
+
+    const monthObject = {};
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      //@ts-ignore
+      const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(
+        day, //@ts-ignore
+      ).padStart(2, '0')}`; // Adjust month + 1
+
+      if (
+        year < currentYear ||
+        (year === currentYear && month + 1 < currentMonth) ||
+        (year === currentYear && month + 1 === currentMonth && day < currentDay)
+      ) {
+        //@ts-ignore
+        monthObject[dateKey] = {disabled: true};
+      }
+    }
+
+    return monthObject;
+  };
 
   React.useEffect(() => {
     if (showModal) {
@@ -696,14 +733,21 @@ const Airbnb = () => {
                 </Animated.View>
               </AnimPressable>
             </View>
-            <AnimPressable
-              onPress={animateWhen}
+            <Animated.View
               style={[styles.otherBox, opacityWhenToStyle, transformCloseWhen]}>
-              <Animated.View
-                style={[styles.row, styles.justifyBtn, opacityWhen]}>
+              <AnimPressable
+                onPress={animateWhen}
+                style={[
+                  styles.row,
+                  styles.justifyBtn,
+                  opacityWhen,
+                  styles.absolute,
+                  styles.alignCenter,
+                  styles.whenAnyWeek,
+                ]}>
                 <Text style={[styles.fontW500, styles.color100]}>When</Text>
                 <Text style={styles.fontW500}>Any week</Text>
-              </Animated.View>
+              </AnimPressable>
               <Animated.View
                 style={[
                   styles.absolute,
@@ -744,6 +788,39 @@ const Airbnb = () => {
                     <Text style={styles.fontW500}>Flexible</Text>
                   </Pressable>
                 </View>
+                <View
+                  style={[styles.row, styles.justifyBtn, styles.daysContainer]}>
+                  {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item, key) => (
+                    <Text
+                      key={`day-${key}`}
+                      style={{color: 'rgb(125,125,125)'}}>
+                      {item}
+                    </Text>
+                  ))}
+                </View>
+
+                <CalendarList
+                  firstDay={1}
+                  hideDayNames
+                  pastScrollRange={0}
+                  futureScrollRange={3}
+                  calendarWidth={width - 48}
+                  calendarHeight={280}
+                  markedDates={generateMonthObjectUpToToday()}
+                  //@ts-ignore
+                  theme={styles.calendarTheme}
+                  renderHeader={date => (
+                    <View style={styles.headerCalendar}>
+                      <Text style={[styles.fontW500, styles.font16]}>{`${
+                        MONTHS[date.getMonth()]
+                      } ${date.getFullYear()}`}</Text>
+                    </View>
+                  )}
+                  style={[
+                    styles.marLeft10,
+                    {height: height - top - insets.bottom - 380},
+                  ]}
+                />
               </Animated.View>
               <Animated.View
                 style={[
@@ -760,7 +837,7 @@ const Airbnb = () => {
                   </Text>
                 </View>
               </Animated.View>
-            </AnimPressable>
+            </Animated.View>
             <AnimPressable
               style={[
                 styles.otherBox,
@@ -944,6 +1021,9 @@ const styles = StyleSheet.create({
   marLeft6: {
     marginLeft: 6,
   },
+  marLeft10: {
+    marginLeft: 10,
+  },
   marTop12: {
     marginTop: 12,
   },
@@ -1038,6 +1118,12 @@ const styles = StyleSheet.create({
   top1: {
     top: 1,
   },
+  whenAnyWeek: {
+    width: '100%',
+    alignSelf: 'center',
+    height: 64,
+    zIndex: 1000,
+  },
   widthPadTop12: {
     width: width - 56,
     paddingTop: 12,
@@ -1073,5 +1159,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
     borderRadius: 20,
+  },
+  daysContainer: {
+    marginLeft: 40,
+    marginRight: 16,
+    marginVertical: 16,
+  },
+  calendarTheme: {
+    //@ts-ignore
+    todayTextColor: 'black',
+    dayTextColor: 'black',
+    textDayFontWeight: '500',
+  },
+  headerCalendar: {
+    flex: 1,
+    alignItems: 'flex-start',
+    left: -12,
+    marginBottom: 12,
   },
 });
