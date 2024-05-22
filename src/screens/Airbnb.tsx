@@ -3,13 +3,13 @@ import {
   View,
   Image,
   Platform,
+  Keyboard,
   TextInput,
   Pressable,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
   ImageSourcePropType,
-  Keyboard,
 } from 'react-native';
 import Animated, {
   runOnJS,
@@ -34,15 +34,23 @@ const isIOS = Platform.OS === 'ios';
 const {width, height} = Dimensions.get('window');
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
-const SearchItem = ({
-  place,
-  date,
-  guests,
-}: {
+type TSearchItem = {
   place: string;
   date: string;
   guests: number;
-}) => (
+};
+
+type TRenderCountryItem = {
+  item: {img: ImageSourcePropType; label: string};
+  index: number;
+};
+
+type TRenderSearchItem = {
+  item: {place: string; guests: number; date: string};
+  index: number;
+};
+
+const SearchItem = ({place, date, guests}: TSearchItem) => (
   <View style={[styles.row, styles.alignCenter, styles.marBot24]}>
     <View style={styles.searchClockContainer}>
       <AntDesign name="clockcircleo" size={25} color={'black'} />
@@ -65,6 +73,9 @@ const Airbnb = () => {
 
   const progress = useSharedValue(0);
   const progressWhereTo = useSharedValue(0);
+  const progresWhen = useSharedValue(0);
+  const closeWhen = useSharedValue(0);
+  const translatePicker = useSharedValue(0);
 
   const inputRef = React.createRef<TextInput>();
   const [showModal, setShowModal] = React.useState(false);
@@ -92,24 +103,65 @@ const Airbnb = () => {
     [],
   );
 
-  const opacityWhereToBold = useAnimatedStyle(
-    () => ({
+  const opacityWhereToBold = useAnimatedStyle(() => {
+    if (progresWhen.value > 0) {
+      return {
+        opacity: interpolate(
+          progresWhen.value,
+          [0, 0.5],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
+
+    return {
       opacity: interpolate(
         progressWhereTo.value,
         [0, 0.5],
         [1, 0],
         Extrapolate.CLAMP,
       ),
-    }),
-    [],
-  );
+    };
+  }, []);
 
   const opacityWhenToStyle = useAnimatedStyle(
     () => ({
       opacity: interpolate(progress.value, [0, 0.75, 1], [0, 0, 1]),
+      height: interpolate(
+        progresWhen.value,
+        [0, 1],
+        [67, height - insets.bottom - 186],
+      ),
+      marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
     }),
     [],
   );
+
+  const opacityWhenClose = useAnimatedStyle(() => {
+    if (closeWhen.value > 0) {
+      return {
+        opacity: interpolate(closeWhen.value, [0, 0.5, 1], [1, 0, 0]),
+      };
+    }
+
+    return {};
+  });
+
+  const opacityClose = useAnimatedStyle(() => {
+    if (closeWhen.value > 0) {
+      return {
+        opacity: interpolate(
+          closeWhen.value,
+          [0, 0.15],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+      };
+    } else {
+      return {};
+    }
+  }, []);
 
   const opacityWhoToStyle = useAnimatedStyle(
     () => ({
@@ -117,6 +169,32 @@ const Airbnb = () => {
     }),
     [],
   );
+
+  const opacityWhen = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(progresWhen.value, [0, 1], [1, 0]),
+    }),
+    [],
+  );
+
+  const opacityWhenRevStyle = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(progresWhen.value, [0, 1], [0, 1]),
+    }),
+    [],
+  );
+
+  const opacityCloseWhenInput = useAnimatedStyle(() => {
+    if (closeWhen.value > 0) {
+      return {
+        opacity: interpolate(closeWhen.value, [0, 1], [0, 1]),
+      };
+    }
+
+    return {
+      opacity: 0,
+    };
+  });
 
   const translateClose = useAnimatedStyle(
     () => ({
@@ -134,8 +212,60 @@ const Airbnb = () => {
     [],
   );
 
-  const listOpacityTranslate = useAnimatedStyle(() => {
-    return {
+  const translateCloseWhen = useAnimatedStyle(() => {
+    if (closeWhen.value > 0) {
+      return {
+        opacity: interpolate(
+          closeWhen.value,
+          [0, 1],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+        transform: [
+          {translateY: interpolate(closeWhen.value, [0, 1], [24, 0])},
+        ],
+      };
+    } else {
+      return {};
+    }
+  });
+
+  const translateCloseWhere = useAnimatedStyle(() => {
+    if (closeWhen.value > 0) {
+      return {
+        transform: [
+          {translateX: interpolate(closeWhen.value, [0.15, 0.16], [0, -width])},
+        ],
+      };
+    } else {
+      return {};
+    }
+  }, []);
+
+  const transformCloseWhen = useAnimatedStyle(() => {
+    if (closeWhen.value > 0) {
+      return {
+        opacity: 1,
+        height: interpolate(
+          closeWhen.value,
+          [0, 1],
+          [height - insets.bottom - 186, 60],
+        ),
+        borderRadius: interpolate(closeWhen.value, [0, 1], [16, 32]),
+        width: interpolate(closeWhen.value, [0, 1], [width - 24, width - 100]),
+        marginTop: interpolate(closeWhen.value, [0, 1], [60, 0]),
+        top: interpolate(closeWhen.value, [0, 1], [0, -67]),
+        transform: [
+          {translateX: interpolate(closeWhen.value, [0, 1], [0, 10])},
+        ],
+      };
+    } else {
+      return {};
+    }
+  }, []);
+
+  const listOpacityTranslate = useAnimatedStyle(
+    () => ({
       opacity: interpolate(
         progressWhereTo.value,
         [0, 0.25],
@@ -152,30 +282,68 @@ const Airbnb = () => {
           ),
         },
       ],
-    };
-  }, []);
+    }),
+    [],
+  );
 
-  const listSearchStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      progressWhereTo.value,
-      [0, 0.25],
-      [0, 1],
-      Extrapolate.CLAMP,
-    ),
-    transform: [
-      {
-        translateX: interpolate(
-          progressWhereTo.value,
-          [0, 0.01],
-          [-width, 0],
+  const listSearchStyle = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(
+        progressWhereTo.value,
+        [0, 0.25],
+        [0, 1],
+        Extrapolate.CLAMP,
+      ),
+      transform: [
+        {
+          translateX: interpolate(
+            progressWhereTo.value,
+            [0, 0.01],
+            [-width, 0],
+            Extrapolate.CLAMP,
+          ),
+        },
+      ],
+    }),
+    [],
+  );
+
+  const inputStyle = useAnimatedStyle(() => {
+    if (progresWhen.value > 0) {
+      return {
+        height: interpolate(
+          progresWhen.value,
+          [0, 0.8],
+          [330, 67],
           Extrapolate.CLAMP,
         ),
-      },
-    ],
-  }));
+        width: interpolate(
+          progresWhen.value,
+          [0, 0.8],
+          [width - 24, width - 30],
+          Extrapolate.CLAMP,
+        ),
+        borderRadius: interpolate(
+          progresWhen.value,
+          [0, 0.8],
+          [32, 16],
+          Extrapolate.CLAMP,
+        ),
+        transform: [
+          {
+            translateX: interpolate(
+              progresWhen.value,
+              [0, 0.8],
+              [-12, -10],
+              Extrapolate.CLAMP,
+            ),
+          },
+          {translateY: 48},
+        ],
+      };
+    }
 
-  const inputStyle = useAnimatedStyle(
-    () => ({
+    return {
       height: interpolate(
         progress.value,
         [0, 0.8],
@@ -206,9 +374,8 @@ const Airbnb = () => {
           ),
         },
       ],
-    }),
-    [],
-  );
+    };
+  }, []);
 
   const inputWhereToFocused = useAnimatedStyle(() => {
     if (progress.value !== 1) {
@@ -260,6 +427,12 @@ const Airbnb = () => {
   const bottomStyleWhereFocused = useAnimatedStyle(() => {
     const bottomHeight = height > 800 ? 100 : 48 + (insets.bottom || 24);
 
+    if (progresWhen.value > 0) {
+      return {
+        bottom: interpolate(progresWhen.value, [0, 1], [0, -bottomHeight - 10]),
+      };
+    }
+
     return {
       bottom: interpolate(
         progressWhereTo.value,
@@ -269,16 +442,49 @@ const Airbnb = () => {
     };
   }, []);
 
+  const translatePickerStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateX: interpolate(
+            translatePicker.value,
+            [0, 1, 2],
+            [0, (width - 90) / 3, 2 * ((width - 90) / 3)],
+          ),
+        },
+      ],
+    }),
+    [],
+  );
+
   const animateOpen = React.useCallback(() => {
     progress.value = withTiming(1, {duration: 450});
   }, [showModal]);
 
   const animateClose = React.useCallback(() => {
-    progress.value = withTiming(0, {duration: 450}, finished => {
-      if (finished) {
-        runOnJS(setShowModal)(false);
-      }
-    });
+    if (progresWhen.value && progress.value) {
+      closeWhen.value = withTiming(1, {duration: 450}, finished => {
+        if (finished) {
+          runOnJS(setShowModal)(false);
+        }
+      });
+    } else {
+      progress.value = withTiming(0, {duration: 450}, finished => {
+        if (finished) {
+          runOnJS(setShowModal)(false);
+        }
+      });
+    }
+  }, [showModal]);
+
+  React.useEffect(() => {
+    if (!showModal) {
+      progress.value = 0;
+      progresWhen.value = 0;
+      progressWhereTo.value = 0;
+      closeWhen.value = 0;
+      translatePicker.value = 0;
+    }
   }, [showModal]);
 
   const animateWhereToInput = React.useCallback(() => {
@@ -293,14 +499,13 @@ const Airbnb = () => {
     progressWhereTo.value = withTiming(0);
   }, [inputFocused]);
 
+  const animateWhen = React.useCallback(() => {
+    const toValue = progresWhen.value === 1 ? 0 : 1;
+    progresWhen.value = withTiming(toValue);
+  }, [progresWhen]);
+
   const renderItem = React.useCallback(
-    ({
-      item,
-      index,
-    }: {
-      item: {img: ImageSourcePropType; label: string};
-      index: number;
-    }) => {
+    ({item, index}: TRenderCountryItem) => {
       const isSelected = item.label === country;
 
       return (
@@ -332,19 +537,16 @@ const Airbnb = () => {
     [country],
   );
 
-  const renderSearchItem = ({
-    item,
-    index,
-  }: {
-    item: {place: string; guests: number; date: string};
-    index: number;
-  }) => (
-    <SearchItem
-      key={`searchItem-${index}`}
-      date={item.date}
-      guests={item.guests}
-      place={item.place}
-    />
+  const renderSearchItem = React.useCallback(
+    ({item, index}: TRenderSearchItem) => (
+      <SearchItem
+        key={`searchItem-${index}`}
+        date={item.date}
+        guests={item.guests}
+        place={item.place}
+      />
+    ),
+    [],
   );
 
   React.useEffect(() => {
@@ -384,12 +586,19 @@ const Airbnb = () => {
         <>
           <View style={[styles.padHor24, styles.flex, {paddingTop: top}]}>
             <View style={styles.container}>
-              <Animated.View
+              <AnimPressable
+                onPress={() => {
+                  animateOpen();
+                  progresWhen.value = withTiming(0);
+                  progressWhereTo.value = withTiming(0);
+                }}
                 style={[
                   styles.leftInput,
                   styles.overflow,
                   inputStyle,
+                  opacityClose,
                   inputWhereToFocused,
+                  translateCloseWhere,
                 ]}>
                 <Animated.View
                   style={[
@@ -410,6 +619,7 @@ const Airbnb = () => {
                     </Text>
                   </View>
                 </Animated.View>
+
                 <Animated.View style={[opacityWhereToStyle, styles.padTop16]}>
                   <Animated.Text
                     style={[
@@ -419,6 +629,24 @@ const Airbnb = () => {
                     ]}>
                     Where to?
                   </Animated.Text>
+                  <Animated.View
+                    style={[
+                      styles.absolute,
+                      styles.row,
+                      styles.justifyBtn,
+                      styles.widthPadTop12,
+                      opacityWhenRevStyle,
+                    ]}>
+                    <Text
+                      style={[
+                        styles.fontW500,
+                        styles.color100,
+                        styles.padLeft24,
+                      ]}>
+                      Where
+                    </Text>
+                    <Text style={styles.fontW500}>{country}</Text>
+                  </Animated.View>
                   <AnimPressable
                     onPress={animateWhereToInput}
                     style={[
@@ -466,23 +694,85 @@ const Airbnb = () => {
                     />
                   </Animated.View>
                 </Animated.View>
-              </Animated.View>
+              </AnimPressable>
             </View>
-            <Animated.View
-              style={[styles.row, styles.otherBox, opacityWhenToStyle]}>
-              <Text style={[styles.fontW500, styles.color100]}>When</Text>
-              <Text style={styles.fontW500}>Any week</Text>
-            </Animated.View>
-            <Animated.View
+            <AnimPressable
+              onPress={animateWhen}
+              style={[styles.otherBox, opacityWhenToStyle, transformCloseWhen]}>
+              <Animated.View
+                style={[styles.row, styles.justifyBtn, opacityWhen]}>
+                <Text style={[styles.fontW500, styles.color100]}>When</Text>
+                <Text style={styles.fontW500}>Any week</Text>
+              </Animated.View>
+              <Animated.View
+                style={[
+                  styles.absolute,
+                  styles.padTop24,
+                  opacityWhenRevStyle,
+                  opacityWhenClose,
+                ]}>
+                <Text style={[styles.boldWhere, styles.padLeft24]}>
+                  When's your trip?
+                </Text>
+                <View style={styles.pickerContainer}>
+                  <Animated.View
+                    style={[
+                      styles.absolute,
+                      translatePickerStyle,
+                      styles.pickerPose,
+                    ]}
+                  />
+                  <Pressable
+                    onPress={() => {
+                      translatePicker.value = withTiming(0);
+                    }}
+                    style={[styles.pickerItem, styles.marLeft6]}>
+                    <Text style={styles.fontW500}>Dates</Text>
+                  </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      translatePicker.value = withTiming(1);
+                    }}
+                    style={styles.pickerItem}>
+                    <Text style={styles.fontW500}>Months</Text>
+                  </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      translatePicker.value = withTiming(2);
+                    }}
+                    style={styles.pickerItem}>
+                    <Text style={styles.fontW500}>Flexible</Text>
+                  </Pressable>
+                </View>
+              </Animated.View>
+              <Animated.View
+                style={[
+                  styles.row,
+                  styles.absolute,
+                  styles.padTop12Left16,
+                  opacityCloseWhenInput,
+                ]}>
+                <Entypo size={24} style={styles.lens} name="magnifying-glass" />
+                <View>
+                  <Text style={styles.whereTo}>Where to?</Text>
+                  <Text style={styles.subtitle}>
+                    Anywhere • Any week • Add guests
+                  </Text>
+                </View>
+              </Animated.View>
+            </AnimPressable>
+            <AnimPressable
               style={[
-                styles.row,
                 styles.otherBox,
                 styles.marTop12,
                 opacityWhoToStyle,
+                opacityClose,
               ]}>
-              <Text style={[styles.fontW500, styles.color100]}>Who</Text>
-              <Text style={styles.fontW500}>Add guests</Text>
-            </Animated.View>
+              <View style={[styles.row, styles.justifyBtn]}>
+                <Text style={[styles.fontW500, styles.color100]}>Who</Text>
+                <Text style={styles.fontW500}>Add guests</Text>
+              </View>
+            </AnimPressable>
             <Animated.View
               style={[
                 styles.absolute,
@@ -523,6 +813,7 @@ const Airbnb = () => {
                 styles.closeContainer,
                 opacityStyle,
                 translateClose,
+                translateCloseWhen,
                 styles.marLeft24,
               ]}
               onPress={inputFocused ? animateWhereToInputClose : animateClose}>
@@ -572,14 +863,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#e9e9e9',
-    elevation: 7,
-    shadowColor: 'black',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
     paddingVertical: 12,
     borderRadius: 32,
   },
@@ -645,6 +928,9 @@ const styles = StyleSheet.create({
   padTop16: {
     paddingTop: 16,
   },
+  padTop24: {
+    paddingTop: 24,
+  },
   padLeft24: {
     paddingLeft: 24,
   },
@@ -654,6 +940,9 @@ const styles = StyleSheet.create({
   },
   marLeft24: {
     marginLeft: 24,
+  },
+  marLeft6: {
+    marginLeft: 6,
   },
   marTop12: {
     marginTop: 12,
@@ -702,8 +991,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderColor: '#e9e9e9',
     backgroundColor: 'white',
-    justifyContent: 'space-between',
-    marginTop: 64,
+    marginTop: 60,
     width: width - 30,
     left: -10,
   },
@@ -749,5 +1037,41 @@ const styles = StyleSheet.create({
   },
   top1: {
     top: 1,
+  },
+  widthPadTop12: {
+    width: width - 56,
+    paddingTop: 12,
+  },
+  pickerContainer: {
+    height: 45,
+    width: width - 78,
+    marginTop: 16,
+    marginLeft: 24,
+    backgroundColor: 'rgb(225,225,225)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 32,
+  },
+  pickerPose: {
+    top: 6,
+    left: 6,
+    height: 33,
+    borderRadius: 20,
+    width: (width - 90) / 3,
+    backgroundColor: 'white',
+    shadowColor: 'black',
+    shadowOffset: {
+      height: 0,
+      width: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  pickerItem: {
+    width: (width - 89) / 3,
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderRadius: 20,
   },
 });
