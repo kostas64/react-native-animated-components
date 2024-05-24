@@ -6,8 +6,10 @@ import {
   Keyboard,
   TextInput,
   Pressable,
+  ViewStyle,
   Dimensions,
   StyleSheet,
+  ImageStyle,
   TouchableOpacity,
   ImageSourcePropType,
 } from 'react-native';
@@ -20,15 +22,17 @@ import Animated, {
   useAnimatedStyle,
   interpolateColor,
 } from 'react-native-reanimated';
-import React from 'react';
+import React, {SetStateAction} from 'react';
 import {MONTHS} from '@assets/months';
 import {COUNTRIES} from '@assets/countries';
 import {CalendarList} from 'react-native-calendars';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {FlatList} from 'react-native-gesture-handler';
+import {CALENDAR_PER} from '@assets/approximatePeriods';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {SEARCH_COUNTRIES} from '@assets/searchedCountries';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {MarkedDates} from 'react-native-calendars/src/types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -36,10 +40,41 @@ const isIOS = Platform.OS === 'ios';
 const {width, height} = Dimensions.get('window');
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+const now = new Date();
+const MIN_DATE = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+
 type TSearchItem = {
   place: string;
   date: string;
   guests: number;
+};
+
+type TPickerItem = {
+  label: string;
+  onPress: () => void;
+  style?: ViewStyle;
+};
+
+type TCounterBtn = {
+  isPlus?: boolean;
+  onPress: () => void;
+  disabled?: boolean;
+};
+
+type TItemCounter = {
+  label: string;
+  subLabel: string;
+  subLabelStyle?: (ViewStyle | ImageStyle)[];
+  value: number;
+  setValue: React.Dispatch<SetStateAction<number>>;
+  extraOnPress?: (val: number) => void;
+  disabledLeft?: boolean;
+};
+
+type TStartDate = {
+  dateString?: string;
+  timestamp?: string;
 };
 
 type TRenderCountryItem = {
@@ -63,9 +98,81 @@ const SearchItem = ({place, date, guests}: TSearchItem) => (
         <Text style={styles.font17}> • Stays</Text>
       </View>
       <View style={[styles.row, styles.marTop4]}>
-        <Text style={styles.searchItemSub}>{date}</Text>
-        <Text style={styles.searchItemSub}>{` • ${guests} guests`}</Text>
+        <Text style={styles.subtitle}>{date}</Text>
+        <Text style={styles.subtitle}>{` • ${guests} guests`}</Text>
       </View>
+    </View>
+  </View>
+);
+
+const PickerItem = ({label, onPress, style}: TPickerItem) => (
+  <Pressable onPress={onPress} style={[styles.pickerItem, style]}>
+    <Text style={styles.fontW500}>{label}</Text>
+  </Pressable>
+);
+
+const CounterBtn = ({isPlus, onPress, disabled}: TCounterBtn) => (
+  <TouchableOpacity
+    disabled={disabled}
+    onPress={onPress}
+    activeOpacity={0.75}
+    style={[disabled && styles.opa3, styles.counterBtnContainer]}>
+    <Entypo
+      size={18}
+      color={'rgb(150,150,150)'}
+      name={isPlus ? 'plus' : 'minus'}
+    />
+  </TouchableOpacity>
+);
+
+const ItemCounter = ({
+  label,
+  subLabel,
+  subLabelStyle,
+  value,
+  setValue,
+  extraOnPress,
+  disabledLeft,
+}: TItemCounter) => (
+  <View
+    style={[
+      styles.row,
+      styles.justifyBtn,
+      styles.alignCenter,
+      styles.itemCounterContainer,
+    ]}>
+    <View>
+      <Text style={styles.font16}>{label}</Text>
+      <Text style={[styles.subtitle, subLabelStyle, styles.marTop4]}>
+        {subLabel}
+      </Text>
+    </View>
+    <View style={[styles.row, styles.alignCenter]}>
+      <CounterBtn
+        isPlus={false}
+        disabled={value <= 0 || disabledLeft}
+        onPress={() => {
+          setValue((old: number) => old - 1);
+        }}
+      />
+      <Text
+        style={[
+          styles.fontW500,
+          styles.font16,
+          styles.textCenter,
+          {minWidth: value < 10 ? 30 : 36},
+        ]}>
+        {value}
+      </Text>
+      <CounterBtn
+        isPlus
+        onPress={() => {
+          setValue((old: number) => {
+            !!extraOnPress && extraOnPress(old + 1);
+            return old + 1;
+          });
+        }}
+      />
     </View>
   </View>
 );
@@ -77,14 +184,43 @@ const Airbnb = () => {
   const progresWhen = useSharedValue(0);
   const progressWhereTo = useSharedValue(0);
   const closeWhen = useSharedValue(0);
+  const openWho = useSharedValue(0);
   const translatePicker = useSharedValue(0);
 
   const inputRef = React.createRef<TextInput>();
-  const [showModal, setShowModal] = React.useState(false);
+  const calendarPerRef = React.createRef<FlatList>();
+  const [showModal, setShowModal] = React.useState(true);
   const [inputFocused, setInputFocused] = React.useState(false);
   const [country, setCountry] = React.useState(COUNTRIES[0].label);
+  const [period, setPeriod] = React.useState(CALENDAR_PER[0]);
+  const [anyWeek, setAnyWeek] = React.useState('');
+  const [adults, setAdults] = React.useState(0);
+  const [children, setChildren] = React.useState(0);
+  const [inflants, setInflants] = React.useState(0);
+  const [pets, setPets] = React.useState(0);
 
-  const top = insets.top > 24 ? insets.top : 40;
+  const [startDate, setStartDate] = React.useState<TStartDate>({});
+  const [endDate, setEndDate] = React.useState({});
+  const [periodo, setPeriodo] = React.useState<MarkedDates>({});
+
+  const top = insets.top > 40 ? insets.top : 30;
+  const bottom = insets.bottom > 30 ? insets.bottom : 0;
+  const bottomHeight = height > 800 ? 100 : 48 + (insets.bottom || 24);
+  const extraHeight = height <= 685 ? 10 : 0;
+  const numOfGuests = adults + children;
+  const guestsToShow = `${
+    numOfGuests === 1
+      ? `${numOfGuests} guest`
+      : numOfGuests > 1
+      ? `${numOfGuests} guests`
+      : ''
+  }${
+    inflants === 1
+      ? `, ${inflants} inflant`
+      : inflants > 1
+      ? `, ${inflants} inflants`
+      : ''
+  }${pets === 1 ? `, ${pets} pet` : pets > 1 ? `, ${pets} pets` : ''}`;
 
   const opacityStyle = useAnimatedStyle(
     () => ({opacity: interpolate(progress.value, [0, 0.8], [0, 1])}),
@@ -106,6 +242,21 @@ const Airbnb = () => {
   );
 
   const opacityWhereToBold = useAnimatedStyle(() => {
+    if (openWho.value > 0 && progress.value > 0 && progresWhen.value > 0) {
+      return {};
+    }
+
+    if (openWho.value > 0) {
+      return {
+        opacity: interpolate(
+          openWho.value,
+          [0, 0.5],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
+
     if (progresWhen.value > 0) {
       return {
         opacity: interpolate(
@@ -133,7 +284,7 @@ const Airbnb = () => {
       height: interpolate(
         progresWhen.value,
         [0, 1],
-        [67, height - insets.bottom - 186],
+        [67, height - bottom - 186],
       ),
       marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
     }),
@@ -165,23 +316,73 @@ const Airbnb = () => {
     }
   }, []);
 
-  const opacityWhoToStyle = useAnimatedStyle(
-    () => ({
+  const opacityWhoToStyle = useAnimatedStyle(() => {
+    return {
       opacity: interpolate(progress.value, [0, 0.85, 1], [0, 0, 1]),
-    }),
-    [],
-  );
+      height: interpolate(
+        openWho.value,
+        [0, 0.8],
+        [67, height + extraHeight - top - bottomHeight - 230],
+        Extrapolate.CLAMP,
+      ),
+    };
+  }, []);
 
   const opacityWhen = useAnimatedStyle(
     () => ({
-      opacity: interpolate(progresWhen.value, [0, 1], [1, 0]),
+      opacity: interpolate(
+        progresWhen.value,
+        [0, 0.25],
+        [1, 0],
+        Extrapolate.CLAMP,
+      ),
     }),
     [],
   );
 
   const opacityWhenRevStyle = useAnimatedStyle(
     () => ({
+      opacity: interpolate(
+        progresWhen.value,
+        [0.5, 1],
+        [0, 1],
+        Extrapolate.CLAMP,
+      ),
+    }),
+    [],
+  );
+
+  const opacityOpenWhoStyle = useAnimatedStyle(() => {
+    if (openWho.value > 0 && progresWhen.value > 0 && progress.value > 0) {
+      return {
+        opacity: 1,
+      };
+    }
+
+    if (openWho.value > 0) {
+      return {
+        opacity: interpolate(openWho.value, [0, 1], [0, 1]),
+      };
+    }
+
+    return {
       opacity: interpolate(progresWhen.value, [0, 1], [0, 1]),
+    };
+  }, []);
+
+  const opacityOpenWhoRevStyle = useAnimatedStyle(() => {
+    if (openWho.value > 0) {
+      return {
+        opacity: interpolate(openWho.value, [0, 1], [1, 0]),
+      };
+    }
+
+    return {};
+  }, []);
+
+  const opacityOpenWhoNormalStyle = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(openWho.value, [0.5, 1], [0, 1], Extrapolate.CLAMP),
     }),
     [],
   );
@@ -311,6 +512,49 @@ const Airbnb = () => {
   );
 
   const inputStyle = useAnimatedStyle(() => {
+    if (openWho.value > 0 && progress.value > 0 && progresWhen.value > 0) {
+      return {
+        height: 67,
+        width: width - 30,
+        borderRadius: 16,
+        transform: [{translateX: -10}, {translateY: 48}],
+      };
+    }
+
+    if (openWho.value > 0) {
+      return {
+        height: interpolate(
+          openWho.value,
+          [0, 0.8],
+          [330, 67],
+          Extrapolate.CLAMP,
+        ),
+        width: interpolate(
+          openWho.value,
+          [0, 0.8],
+          [width - 24, width - 30],
+          Extrapolate.CLAMP,
+        ),
+        borderRadius: interpolate(
+          openWho.value,
+          [0, 0.8],
+          [32, 16],
+          Extrapolate.CLAMP,
+        ),
+        transform: [
+          {
+            translateX: interpolate(
+              openWho.value,
+              [0, 0.8],
+              [-12, -10],
+              Extrapolate.CLAMP,
+            ),
+          },
+          {translateY: 48},
+        ],
+      };
+    }
+
     if (progresWhen.value > 0) {
       return {
         height: interpolate(
@@ -418,16 +662,25 @@ const Airbnb = () => {
     ],
   }));
 
-  const bottomStyle = useAnimatedStyle(() => {
-    const bottomHeight = height > 800 ? 100 : 48 + (insets.bottom || 24);
-
-    return {
+  const bottomStyle = useAnimatedStyle(
+    () => ({
       bottom: interpolate(progress.value, [0, 1], [-bottomHeight, 0]),
-    };
-  }, []);
+    }),
+    [],
+  );
 
   const bottomStyleWhereFocused = useAnimatedStyle(() => {
-    const bottomHeight = height > 800 ? 100 : 48 + (insets.bottom || 24);
+    if (openWho.value > 0 && progresWhen.value > 0 && progress.value > 0) {
+      return {
+        bottom: -bottomHeight - 10,
+      };
+    }
+
+    if (openWho.value > 0 && progress.value > 0) {
+      return {
+        bottom: 0,
+      };
+    }
 
     if (progresWhen.value > 0) {
       return {
@@ -435,13 +688,17 @@ const Airbnb = () => {
       };
     }
 
-    return {
-      bottom: interpolate(
-        progressWhereTo.value,
-        [0, 1],
-        [0, -bottomHeight - 10],
-      ),
-    };
+    if (progressWhereTo.value > 0) {
+      return {
+        bottom: interpolate(
+          progressWhereTo.value,
+          [0, 1],
+          [0, -bottomHeight - 10],
+        ),
+      };
+    }
+
+    return {};
   }, []);
 
   const translatePickerStyle = useAnimatedStyle(
@@ -479,16 +736,6 @@ const Airbnb = () => {
     }
   }, [showModal]);
 
-  React.useEffect(() => {
-    if (!showModal) {
-      progress.value = 0;
-      progresWhen.value = 0;
-      progressWhereTo.value = 0;
-      closeWhen.value = 0;
-      translatePicker.value = 0;
-    }
-  }, [showModal]);
-
   const animateWhereToInput = () => {
     inputRef.current?.focus();
     setInputFocused(true);
@@ -501,9 +748,19 @@ const Airbnb = () => {
     progressWhereTo.value = withTiming(0);
   };
 
+  const animateOpenWho = () => {
+    openWho.value = withTiming(1, {duration: 450});
+  };
+
   const animateWhen = React.useCallback(() => {
     const toValue = progresWhen.value === 1 ? 0 : 1;
-    progresWhen.value = withTiming(toValue);
+    progresWhen.value = withTiming(toValue, {duration: 450});
+
+    if (openWho.value === 1) {
+      openWho.value = withTiming(0, {duration: 450});
+    } else if (progresWhen.value === 1) {
+      openWho.value = withTiming(1, {duration: 450});
+    }
   }, [progresWhen]);
 
   const renderItem = React.useCallback(
@@ -555,40 +812,226 @@ const Airbnb = () => {
     [],
   );
 
-  const generateMonthObjectUpToToday = () => {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth();
+  const renderPeriodItem = React.useCallback(
+    ({item, index}: {item: string; index: number}) => {
+      const isSelected = period === item;
 
-    const daysInMonth = new Date(year, month + 1, 0).getDate(); // Adjust month + 1
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1; // getMonth() is zero-based
-    const currentDay = currentDate.getDate();
+      return (
+        <Pressable
+          onPress={() => {
+            setPeriod(item);
+            calendarPerRef.current?.scrollToIndex({
+              index,
+              animated: true,
+              viewOffset: 24,
+            });
+          }}
+          key={`period-${index}`}
+          style={[
+            styles.periodItemContainer,
+            isSelected
+              ? styles.selectedPeriodItem
+              : styles.unselectedPeriodItem,
+            {
+              marginLeft: index === 0 ? 20 : 0,
+              marginRight: index !== CALENDAR_PER.length - 1 ? 10 : 20,
+            },
+          ]}>
+          <Text>{item}</Text>
+        </Pressable>
+      );
+    },
+    [period],
+  );
 
-    const monthObject = {};
+  const onPressSkipReset = React.useCallback(() => {
+    if (Object.keys(periodo).length > 0) {
+      setPeriodo({});
+      setAnyWeek('');
+    } else {
+      animateWhen();
+    }
+  }, [periodo]);
 
-    for (let day = 1; day <= daysInMonth; day++) {
-      //@ts-ignore
-      const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(
-        day, //@ts-ignore
-      ).padStart(2, '0')}`; // Adjust month + 1
-
-      if (
-        year < currentYear ||
-        (year === currentYear && month + 1 < currentMonth) ||
-        (year === currentYear && month + 1 === currentMonth && day < currentDay)
-      ) {
-        //@ts-ignore
-        monthObject[dateKey] = {disabled: true};
+  const onPressNext = React.useCallback(() => {
+    if (Object.keys(periodo).length > 0) {
+      let week = '';
+      if (Object.keys(periodo).length === 1) {
+        const date = new Date(Object.keys(periodo)?.[0]);
+        const day = date.getDate();
+        const month = date.toLocaleString('default', {month: 'long'});
+        week = `${day} ${month}`;
+      } else {
+        const stDate = new Date(Object.keys(periodo)?.[0]);
+        const endDate = new Date(
+          Object.keys(periodo)?.[Object.keys(periodo)?.length - 1],
+        );
+        const stDay = stDate.getDate();
+        const stMonth = stDate.toLocaleString('default', {month: 'long'});
+        const endDay = endDate.getDate();
+        const endMonth = endDate.toLocaleString('default', {month: 'long'});
+        const monthsEqual = stMonth === endMonth;
+        week = !monthsEqual
+          ? `${stDay} ${stMonth} - ${endDay} ${endMonth}`
+          : `${stDay}-${endDay} ${stMonth}`;
       }
+
+      setAnyWeek(week);
     }
 
-    return monthObject;
+    animateWhen();
+  }, [periodo]);
+
+  const getDateString = (timestamp: string) => {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    let dateString = `${year}-`;
+
+    if (month < 10) {
+      dateString += `0${month}-`;
+    } else {
+      dateString += `${month}-`;
+    }
+
+    if (day < 10) {
+      dateString += `0${day}`;
+    } else {
+      dateString += day;
+    }
+
+    return dateString;
+  };
+
+  const getPeriod = (startTimestamp: string, endTimestamp: string) => {
+    const period: MarkedDates = {};
+
+    let currentTimestamp: string = startTimestamp;
+
+    while (currentTimestamp < endTimestamp) {
+      if (currentTimestamp === startTimestamp) {
+        const dateString = getDateString(currentTimestamp);
+        period[dateString] = {
+          color: '#222222',
+          textColor: 'white',
+          startingDay: currentTimestamp === startTimestamp,
+        };
+      } else {
+        const dateString = getDateString(currentTimestamp);
+        period[dateString] = {
+          color: 'rgb(225,225,225)',
+          startingDay: currentTimestamp === startTimestamp,
+        };
+      }
+
+      currentTimestamp += _MS_PER_DAY;
+    }
+    const dateString = getDateString(endTimestamp);
+    period[dateString] = {
+      color: '#222222',
+      textColor: 'white',
+      endingDay: true,
+    };
+
+    return period;
+  };
+
+  const setDay = (dayObj: {
+    dateString: string;
+    day: number;
+    month: number;
+    year: number;
+    timestamp: number;
+  }) => {
+    const {dateString, day, month, year} = dayObj;
+    // timestamp returned by dayObj is in 12:00AM UTC 0, want local 12:00AM
+    const timestamp = new Date(year, month - 1, day).getTime();
+    const newDayObj = {...dayObj, timestamp};
+    // if there is no start day, add start. or if there is already a end and start date, restart
+    const startIsEmpty = Object.keys(startDate).length === 0;
+    const endIsEmpty = Object.keys(endDate).length === 0;
+
+    const dayCalendarProps = {
+      color: '#222222',
+      textColor: 'white',
+      endingDay: true,
+      startingDay: true,
+    };
+
+    if (dayObj?.dateString === startDate?.dateString) {
+      if (!endDate) {
+        return;
+      }
+
+      const period: MarkedDates = {
+        [dateString]: dayCalendarProps,
+      };
+
+      //@ts-ignore
+      setStartDate(newDayObj);
+      setPeriodo(period);
+      setEndDate({});
+
+      return;
+    }
+
+    if (startIsEmpty || (!startIsEmpty && !endIsEmpty)) {
+      const period: MarkedDates = {
+        [dateString]: dayCalendarProps,
+      };
+
+      //@ts-ignore
+      setStartDate(newDayObj);
+      setPeriodo(period);
+      setEndDate({});
+    } else {
+      // if end date is older than start date switch
+      const {timestamp: savedTimestamp} = startDate;
+
+      //@ts-ignore
+      if (savedTimestamp > timestamp) {
+        const period: MarkedDates = {
+          [dateString]: dayCalendarProps,
+        };
+
+        //@ts-ignore
+        setStartDate(newDayObj);
+        setPeriodo(period);
+        // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
+        setEndDate({});
+      } else {
+        //@ts-ignore
+        const period: MarkedDates = getPeriod(savedTimestamp, timestamp);
+        setStartDate(startDate);
+        setPeriodo(period);
+        // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
+        setEndDate(newDayObj);
+      }
+    }
   };
 
   React.useEffect(() => {
-    if (showModal) {
-      animateOpen();
+    if (!showModal) {
+      progress.value = 0;
+      progresWhen.value = 0;
+      progressWhereTo.value = 0;
+      closeWhen.value = 0;
+      openWho.value = 0;
+      translatePicker.value = 0;
+
+      setTimeout(() => {
+        setCountry(COUNTRIES[0].label);
+        setPeriod(CALENDAR_PER[0]);
+        setPeriodo({});
+        setAnyWeek('');
+        setAdults(0);
+        setChildren(0);
+        setInflants(0);
+        setPets(0);
+        setShowModal(true);
+      }, 1);
     }
   }, [showModal]);
 
@@ -603,8 +1046,7 @@ const Airbnb = () => {
                 styles.row,
                 styles.initialDim,
                 styles.padHor16,
-              ]}
-              onPress={() => setShowModal(true)}>
+              ]}>
               <Entypo name="magnifying-glass" size={24} style={styles.lens} />
               <View>
                 <Text style={styles.whereTo}>Where to?</Text>
@@ -628,6 +1070,7 @@ const Airbnb = () => {
                   animateOpen();
                   progresWhen.value = withTiming(0);
                   progressWhereTo.value = withTiming(0);
+                  openWho.value = withTiming(0);
                 }}
                 style={[
                   styles.leftInput,
@@ -672,7 +1115,7 @@ const Airbnb = () => {
                       styles.row,
                       styles.justifyBtn,
                       styles.widthPadTop12,
-                      opacityWhenRevStyle,
+                      opacityOpenWhoStyle,
                     ]}>
                     <Text
                       style={[
@@ -734,19 +1177,35 @@ const Airbnb = () => {
               </AnimPressable>
             </View>
             <Animated.View
-              style={[styles.otherBox, opacityWhenToStyle, transformCloseWhen]}>
+              style={[
+                opacityInputStyle,
+                styles.filterContainer,
+                styles.absolute,
+                {right: 24, top: top + 10},
+              ]}>
+              <Octicons name="filter" size={20} style={styles.top1} />
+            </Animated.View>
+            <Animated.View
+              style={[
+                styles.otherBox,
+                styles.overflow,
+                opacityWhenToStyle,
+                transformCloseWhen,
+              ]}>
               <AnimPressable
                 onPress={animateWhen}
                 style={[
+                  opacityWhen,
                   styles.row,
                   styles.justifyBtn,
-                  opacityWhen,
                   styles.absolute,
                   styles.alignCenter,
                   styles.whenAnyWeek,
                 ]}>
                 <Text style={[styles.fontW500, styles.color100]}>When</Text>
-                <Text style={styles.fontW500}>Any week</Text>
+                <Text style={styles.fontW500}>
+                  {anyWeek ? anyWeek : 'Any week'}
+                </Text>
               </AnimPressable>
               <Animated.View
                 style={[
@@ -766,27 +1225,19 @@ const Airbnb = () => {
                       styles.pickerPose,
                     ]}
                   />
-                  <Pressable
-                    onPress={() => {
-                      translatePicker.value = withTiming(0);
-                    }}
-                    style={[styles.pickerItem, styles.marLeft6]}>
-                    <Text style={styles.fontW500}>Dates</Text>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => {
-                      translatePicker.value = withTiming(1);
-                    }}
-                    style={styles.pickerItem}>
-                    <Text style={styles.fontW500}>Months</Text>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => {
-                      translatePicker.value = withTiming(2);
-                    }}
-                    style={styles.pickerItem}>
-                    <Text style={styles.fontW500}>Flexible</Text>
-                  </Pressable>
+                  <PickerItem
+                    label={'Dates'}
+                    style={styles.marLeft6}
+                    onPress={() => (translatePicker.value = withTiming(0))}
+                  />
+                  <PickerItem
+                    label={'Months'}
+                    onPress={() => (translatePicker.value = withTiming(1))}
+                  />
+                  <PickerItem
+                    label={'Flexible'}
+                    onPress={() => (translatePicker.value = withTiming(2))}
+                  />
                 </View>
                 <View
                   style={[styles.row, styles.justifyBtn, styles.daysContainer]}>
@@ -802,11 +1253,14 @@ const Airbnb = () => {
                 <CalendarList
                   firstDay={1}
                   hideDayNames
+                  minDate={MIN_DATE}
                   pastScrollRange={0}
+                  markingType={'period'}
                   futureScrollRange={3}
                   calendarWidth={width - 48}
                   calendarHeight={280}
-                  markedDates={generateMonthObjectUpToToday()}
+                  onDayPress={setDay}
+                  markedDates={periodo}
                   //@ts-ignore
                   theme={styles.calendarTheme}
                   renderHeader={date => (
@@ -816,11 +1270,44 @@ const Airbnb = () => {
                       } ${date.getFullYear()}`}</Text>
                     </View>
                   )}
-                  style={[
-                    styles.marLeft10,
-                    {height: height - top - insets.bottom - 380},
-                  ]}
+                  style={[styles.marLeft10, {height: height - top - 464}]}
                 />
+                <View style={[styles.borderLine, styles.marBot10]} />
+                <FlatList
+                  horizontal
+                  data={CALENDAR_PER}
+                  ref={calendarPerRef}
+                  renderItem={renderPeriodItem}
+                  showsHorizontalScrollIndicator={false}
+                />
+                <View style={[styles.borderLine, styles.marTop10]} />
+
+                <View
+                  style={[
+                    styles.row,
+                    styles.justifyBtn,
+                    styles.padHor24,
+                    styles.height74,
+                  ]}>
+                  <Pressable
+                    onPress={onPressSkipReset}
+                    style={styles.skipResetBtn}>
+                    <Text
+                      style={[
+                        styles.font16,
+                        styles.fontW500,
+                        styles.underline,
+                      ]}>
+                      {Object.keys(periodo).length === 0 ? 'Skip' : 'Reset'}
+                    </Text>
+                  </Pressable>
+                  <Pressable style={styles.nextBtn} onPress={onPressNext}>
+                    <Text
+                      style={[styles.font16, styles.fontW500, styles.white]}>
+                      Next
+                    </Text>
+                  </Pressable>
+                </View>
               </Animated.View>
               <Animated.View
                 style={[
@@ -838,18 +1325,97 @@ const Airbnb = () => {
                 </View>
               </Animated.View>
             </Animated.View>
-            <AnimPressable
+            <Animated.View
               style={[
+                styles.overflow,
                 styles.otherBox,
                 styles.marTop12,
                 opacityWhoToStyle,
                 opacityClose,
               ]}>
-              <View style={[styles.row, styles.justifyBtn]}>
+              <AnimPressable
+                onPress={animateOpenWho}
+                style={[
+                  styles.row,
+                  styles.justifyBtn,
+                  styles.absolute,
+                  styles.alignCenter,
+                  styles.whenAnyWeek,
+                  opacityOpenWhoRevStyle,
+                ]}>
                 <Text style={[styles.fontW500, styles.color100]}>Who</Text>
-                <Text style={styles.fontW500}>Add guests</Text>
-              </View>
-            </AnimPressable>
+                <Text style={styles.fontW500}>
+                  {guestsToShow ? guestsToShow : 'Add guests'}
+                </Text>
+              </AnimPressable>
+              <Animated.View
+                style={[
+                  styles.absolute,
+                  styles.padTop24,
+                  opacityOpenWhoNormalStyle,
+                ]}>
+                <Text
+                  style={[
+                    styles.boldWhere,
+                    height > 685 && height < 750
+                      ? styles.marBot24
+                      : height > 750
+                      ? styles.marBot36
+                      : styles.marBot16,
+                    styles.padLeft24,
+                  ]}>
+                  Who's coming?
+                </Text>
+
+                <ItemCounter
+                  disabledLeft={
+                    adults === 1 && (pets > 0 || inflants > 0 || children > 0)
+                  }
+                  label={'Adults'}
+                  subLabel={'Ages 13 or above'}
+                  value={adults}
+                  setValue={setAdults}
+                />
+                <View style={styles.divider} />
+                <ItemCounter
+                  value={children}
+                  setValue={setChildren}
+                  label={'Children'}
+                  subLabel={'Ages 2-12'}
+                  extraOnPress={(child: number) => {
+                    if (child === 1 && adults === 0) {
+                      setAdults(1);
+                    }
+                  }}
+                />
+                <View style={styles.divider} />
+                <ItemCounter
+                  value={inflants}
+                  setValue={setInflants}
+                  label={'Inflants'}
+                  subLabel={'Under 2'}
+                  extraOnPress={(infl: number) => {
+                    if (infl === 1 && adults === 0) {
+                      setAdults(1);
+                    }
+                  }}
+                />
+                <View style={styles.divider} />
+                <ItemCounter
+                  value={pets}
+                  setValue={setPets}
+                  extraOnPress={(petsValue: number) => {
+                    if (petsValue === 1 && adults === 0) {
+                      setAdults(1);
+                    }
+                  }}
+                  label={'Pets'}
+                  subLabel={'Bringing a service animal?'}
+                  subLabelStyle={[styles.fontW600, styles.underline]}
+                />
+              </Animated.View>
+            </Animated.View>
+
             <Animated.View
               style={[
                 styles.absolute,
@@ -961,7 +1527,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   subtitle: {
-    color: '#a1a1a1',
+    color: 'rgb(75,75,75)',
     fontSize: 12,
   },
   filterContainer: {
@@ -996,6 +1562,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: width - 72,
   },
+  padHor12: {
+    paddingHorizontal: 12,
+  },
   padHor16: {
     paddingHorizontal: 16,
   },
@@ -1015,6 +1584,13 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingLeft: 16,
   },
+  divider: {
+    height: 1,
+    marginVertical: 16,
+    width: width - 80,
+    alignSelf: 'center',
+    backgroundColor: 'rgb(200,200,200)',
+  },
   marLeft24: {
     marginLeft: 24,
   },
@@ -1024,23 +1600,38 @@ const styles = StyleSheet.create({
   marLeft10: {
     marginLeft: 10,
   },
-  marTop12: {
-    marginTop: 12,
-  },
-  marTop16: {
-    marginTop: 16,
-  },
-  marBot24: {
-    marginBottom: 24,
-  },
   marTop4: {
     marginTop: 4,
   },
   marTop8: {
     marginTop: 8,
   },
+  marTop10: {
+    marginTop: 10,
+  },
+  marTop12: {
+    marginTop: 12,
+  },
+  marTop16: {
+    marginTop: 16,
+  },
+  marBot10: {
+    marginBottom: 10,
+  },
+  marBot16: {
+    marginBottom: 16,
+  },
+  marBot24: {
+    marginBottom: 24,
+  },
+  marBot36: {
+    marginBottom: 36,
+  },
   fontW500: {
     fontWeight: '500',
+  },
+  fontW600: {
+    fontWeight: '600',
   },
   font16: {
     fontSize: 16,
@@ -1106,10 +1697,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 16,
   },
-  searchItemSub: {
-    fontSize: 12,
-    color: 'rgb(125,125,125)',
-  },
   bottomContainer: {
     backgroundColor: 'white',
     borderTopWidth: 1,
@@ -1169,12 +1756,66 @@ const styles = StyleSheet.create({
     //@ts-ignore
     todayTextColor: 'black',
     dayTextColor: 'black',
-    textDayFontWeight: '500',
+    textDayFontFamily: isIOS ? null : 'sans-serif-medium',
+    textDayFontWeight: isIOS ? '500' : null,
   },
   headerCalendar: {
     flex: 1,
     alignItems: 'flex-start',
     left: -12,
     marginBottom: 12,
+  },
+  periodItemContainer: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 50,
+  },
+  selectedPeriodItem: {
+    backgroundColor: 'rgb(248, 248,248)',
+    borderWidth: 2,
+    borderColor: 'black',
+  },
+  unselectedPeriodItem: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'rgb(225,225,225)',
+  },
+  borderLine: {
+    height: 1,
+    backgroundColor: 'rgb(210,210,210)',
+    width: width - 32,
+  },
+  height74: {
+    height: 74,
+  },
+  skipResetBtn: {
+    alignSelf: 'center',
+    padding: 10,
+  },
+  underline: {
+    textDecorationLine: 'underline',
+  },
+  nextBtn: {
+    backgroundColor: '#222222',
+    alignSelf: 'center',
+    paddingHorizontal: 46,
+    paddingVertical: 14,
+    borderRadius: 8,
+  },
+  textCenter: {
+    textAlign: 'center',
+  },
+  itemCounterContainer: {
+    width: width - 80,
+    marginHorizontal: 24,
+  },
+  counterBtnContainer: {
+    padding: 6,
+    borderWidth: 1,
+    borderColor: 'rgb(150,150,150)',
+    borderRadius: 50,
+  },
+  opa3: {
+    opacity: 0.3,
   },
 });
