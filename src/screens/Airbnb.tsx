@@ -228,12 +228,38 @@ const Airbnb = () => {
     [],
   );
 
-  const opacityInputStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(progress.value, [0, 0.1, 0.5, 0.8], [1, 1, 0, 0]),
-    }),
-    [],
-  );
+  const opacityInputStyle = useAnimatedStyle(() => {
+    if (openCloseWho.value > 0) {
+      return {
+        opacity: interpolate(
+          openCloseWho.value,
+          [0.75, 1],
+          [0, 1],
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
+
+    if (closeWhen.value > 0) {
+      return {
+        opacity: interpolate(
+          closeWhen.value,
+          [0.75, 1],
+          [0, 1],
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
+
+    return {
+      opacity: interpolate(
+        progress.value,
+        [0, 0.1, 0.5, 0.8],
+        [1, 1, 0, 0],
+        Extrapolate.CLAMP,
+      ),
+    };
+  }, []);
 
   const opacityWhereToStyle = useAnimatedStyle(
     () => ({
@@ -287,8 +313,12 @@ const Airbnb = () => {
         [0, 1],
         [67, height - bottom - 186],
       ),
+      width: interpolate(progresWhen.value, [0, 1], [width - 30, width - 20]),
       borderRadius: interpolate(progresWhen.value, [0, 1], [16, 32]),
       marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
+      transform: [
+        {translateX: interpolate(progresWhen.value, [0, 1], [0, -4])},
+      ],
     }),
     [],
   );
@@ -327,6 +357,22 @@ const Airbnb = () => {
         [67, height + extraHeight - top - bottomHeight - 230],
         Extrapolate.CLAMP,
       ),
+      width: interpolate(
+        openWho.value,
+        [0, 0.8],
+        [width - 30, width - 20],
+        Extrapolate.CLAMP,
+      ),
+      transform: [
+        {
+          translateX: interpolate(
+            openWho.value,
+            [0, 0.8],
+            [0, -4],
+            Extrapolate.CLAMP,
+          ),
+        },
+      ],
       borderRadius: interpolate(
         openWho.value,
         [0, 0.8],
@@ -525,12 +571,12 @@ const Airbnb = () => {
           [0, 1],
           [height - insets.bottom - 186, 60],
         ),
-        borderRadius: interpolate(closeWhen.value, [0, 1], [16, 32]),
-        width: interpolate(closeWhen.value, [0, 1], [width - 24, width - 100]),
+        borderRadius: 32,
+        width: interpolate(closeWhen.value, [0, 1], [width - 20, width - 100]),
         marginTop: interpolate(closeWhen.value, [0, 1], [60, 0]),
         top: interpolate(closeWhen.value, [0, 1], [0, -67]),
         transform: [
-          {translateX: interpolate(closeWhen.value, [0, 1], [0, 10])},
+          {translateX: interpolate(closeWhen.value, [0, 1], [-4, 10])},
         ],
       };
     } else {
@@ -552,18 +598,13 @@ const Airbnb = () => {
         [width - 24, width - 100],
         Extrapolate.CLAMP,
       ),
-      borderRadius: interpolate(
-        openCloseWho.value,
-        [0, 0.8],
-        [16, 32],
-        Extrapolate.CLAMP,
-      ),
+      borderRadius: 32,
       transform: [
         {
           translateX: interpolate(
             openCloseWho.value,
             [0, 0.8],
-            [0, 10],
+            [-4, 10],
             Extrapolate.CLAMP,
           ),
         },
@@ -645,7 +686,7 @@ const Airbnb = () => {
         width: interpolate(
           openWho.value,
           [0, 0.8],
-          [width - 24, width - 30],
+          [width - 20, width - 30],
           Extrapolate.CLAMP,
         ),
         borderRadius: interpolate(
@@ -659,7 +700,7 @@ const Airbnb = () => {
             translateX: interpolate(
               openWho.value,
               [0, 0.8],
-              [-12, -10],
+              [-14, -10],
               Extrapolate.CLAMP,
             ),
           },
@@ -679,7 +720,7 @@ const Airbnb = () => {
         width: interpolate(
           progresWhen.value,
           [0, 0.8],
-          [width - 24, width - 30],
+          [width - 20, width - 30],
           Extrapolate.CLAMP,
         ),
         borderRadius: interpolate(
@@ -693,7 +734,7 @@ const Airbnb = () => {
             translateX: interpolate(
               progresWhen.value,
               [0, 0.8],
-              [-12, -10],
+              [-14, -10],
               Extrapolate.CLAMP,
             ),
           },
@@ -712,7 +753,7 @@ const Airbnb = () => {
       width: interpolate(
         progress.value,
         [0, 0.8],
-        [width - 100, width - 24],
+        [width - 100, width - 20],
         Extrapolate.CLAMP,
       ),
       transform: [
@@ -720,7 +761,7 @@ const Airbnb = () => {
           translateX: interpolate(
             progress.value,
             [0, 0.8],
-            [0, -12],
+            [0, -14],
             Extrapolate.CLAMP,
           ),
         },
@@ -743,9 +784,9 @@ const Airbnb = () => {
 
     return {
       height: interpolate(progressWhereTo.value, [0, 1], [330, height]),
-      width: interpolate(progressWhereTo.value, [0, 1], [width - 24, width]),
+      width: interpolate(progressWhereTo.value, [0, 1], [width - 20, width]),
       transform: [
-        {translateX: interpolate(progressWhereTo.value, [0, 1], [-12, -24])},
+        {translateX: interpolate(progressWhereTo.value, [0, 1], [-14, -24])},
         {
           translateY: interpolate(
             progress.value,
