@@ -22,8 +22,8 @@ import Animated, {
   useAnimatedStyle,
   interpolateColor,
 } from 'react-native-reanimated';
-import React, {SetStateAction} from 'react';
 import {MONTHS} from '@assets/months';
+import React, {SetStateAction} from 'react';
 import {COUNTRIES} from '@assets/countries';
 import {CalendarList} from 'react-native-calendars';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -193,7 +193,7 @@ const Airbnb = () => {
   const [inputFocused, setInputFocused] = React.useState(false);
   const [country, setCountry] = React.useState(COUNTRIES[0].label);
   const [period, setPeriod] = React.useState(CALENDAR_PER[0]);
-  const [anyWeek, setAnyWeek] = React.useState('');
+  const [anyWeek, setAnyWeek] = React.useState('Any week');
   const [adults, setAdults] = React.useState(0);
   const [children, setChildren] = React.useState(0);
   const [inflants, setInflants] = React.useState(0);
@@ -748,9 +748,9 @@ const Airbnb = () => {
     progressWhereTo.value = withTiming(0);
   };
 
-  const animateOpenWho = () => {
+  const animateOpenWho = React.useCallback(() => {
     openWho.value = withTiming(1, {duration: 450});
-  };
+  }, []);
 
   const animateWhen = React.useCallback(() => {
     const toValue = progresWhen.value === 1 ? 0 : 1;
@@ -762,6 +762,25 @@ const Airbnb = () => {
       openWho.value = withTiming(1, {duration: 450});
     }
   }, [progresWhen]);
+
+  const onPressWhereTo = React.useCallback(() => {
+    animateOpen();
+    progresWhen.value = withTiming(0);
+    progressWhereTo.value = withTiming(0);
+    openWho.value = withTiming(0);
+  }, []);
+
+  const onPressClear = React.useCallback(() => {
+    onPressWhereTo();
+    country !== "I'm flexible" && setCountry("I'm flexible");
+    anyWeek !== 'Any week' && setAnyWeek('Any week');
+    period !== CALENDAR_PER[0] && setPeriod(CALENDAR_PER[0]);
+    setPeriodo({});
+    adults !== 0 && setAdults(0);
+    children !== 0 && setChildren(0);
+    inflants !== 0 && setInflants(0);
+    pets !== 0 && setPets(0);
+  }, [country, anyWeek, adults, children, inflants, pets, period]);
 
   const renderItem = React.useCallback(
     ({item, index}: TRenderCountryItem) => {
@@ -847,7 +866,7 @@ const Airbnb = () => {
   const onPressSkipReset = React.useCallback(() => {
     if (Object.keys(periodo).length > 0) {
       setPeriodo({});
-      setAnyWeek('');
+      setAnyWeek('Any week');
     } else {
       animateWhen();
     }
@@ -882,7 +901,7 @@ const Airbnb = () => {
     animateWhen();
   }, [periodo]);
 
-  const getDateString = (timestamp: string) => {
+  const getDateString = React.useCallback((timestamp: string) => {
     const date = new Date(timestamp);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -903,95 +922,72 @@ const Airbnb = () => {
     }
 
     return dateString;
-  };
+  }, []);
 
-  const getPeriod = (startTimestamp: string, endTimestamp: string) => {
-    const period: MarkedDates = {};
+  const getPeriod = React.useCallback(
+    (startTimestamp: string, endTimestamp: string) => {
+      const period: MarkedDates = {};
 
-    let currentTimestamp: string = startTimestamp;
+      let currentTimestamp: string = startTimestamp;
 
-    while (currentTimestamp < endTimestamp) {
-      if (currentTimestamp === startTimestamp) {
-        const dateString = getDateString(currentTimestamp);
-        period[dateString] = {
-          color: '#222222',
-          textColor: 'white',
-          startingDay: currentTimestamp === startTimestamp,
-        };
-      } else {
-        const dateString = getDateString(currentTimestamp);
-        period[dateString] = {
-          color: 'rgb(225,225,225)',
-          startingDay: currentTimestamp === startTimestamp,
-        };
+      while (currentTimestamp < endTimestamp) {
+        if (currentTimestamp === startTimestamp) {
+          const dateString = getDateString(currentTimestamp);
+          period[dateString] = {
+            color: '#222222',
+            textColor: 'white',
+            startingDay: currentTimestamp === startTimestamp,
+          };
+        } else {
+          const dateString = getDateString(currentTimestamp);
+          period[dateString] = {
+            color: 'rgb(225,225,225)',
+            startingDay: currentTimestamp === startTimestamp,
+          };
+        }
+
+        currentTimestamp += _MS_PER_DAY;
       }
-
-      currentTimestamp += _MS_PER_DAY;
-    }
-    const dateString = getDateString(endTimestamp);
-    period[dateString] = {
-      color: '#222222',
-      textColor: 'white',
-      endingDay: true,
-    };
-
-    return period;
-  };
-
-  const setDay = (dayObj: {
-    dateString: string;
-    day: number;
-    month: number;
-    year: number;
-    timestamp: number;
-  }) => {
-    const {dateString, day, month, year} = dayObj;
-    // timestamp returned by dayObj is in 12:00AM UTC 0, want local 12:00AM
-    const timestamp = new Date(year, month - 1, day).getTime();
-    const newDayObj = {...dayObj, timestamp};
-    // if there is no start day, add start. or if there is already a end and start date, restart
-    const startIsEmpty = Object.keys(startDate).length === 0;
-    const endIsEmpty = Object.keys(endDate).length === 0;
-
-    const dayCalendarProps = {
-      color: '#222222',
-      textColor: 'white',
-      endingDay: true,
-      startingDay: true,
-    };
-
-    if (dayObj?.dateString === startDate?.dateString) {
-      if (!endDate) {
-        return;
-      }
-
-      const period: MarkedDates = {
-        [dateString]: dayCalendarProps,
+      const dateString = getDateString(endTimestamp);
+      period[dateString] = {
+        color: '#222222',
+        textColor: 'white',
+        endingDay: true,
       };
 
-      //@ts-ignore
-      setStartDate(newDayObj);
-      setPeriodo(period);
-      setEndDate({});
+      return period;
+    },
+    [],
+  );
 
-      return;
-    }
+  const setDay = React.useCallback(
+    (dayObj: {
+      dateString: string;
+      day: number;
+      month: number;
+      year: number;
+      timestamp: number;
+    }) => {
+      const {dateString, day, month, year} = dayObj;
+      // timestamp returned by dayObj is in 12:00AM UTC 0, want local 12:00AM
+      const timestamp = new Date(year, month - 1, day).getTime();
+      const newDayObj = {...dayObj, timestamp};
+      // if there is no start day, add start. or if there is already a end and start date, restart
+      const startIsEmpty = Object.keys(startDate).length === 0;
+      const endIsEmpty = Object.keys(endDate).length === 0;
 
-    if (startIsEmpty || (!startIsEmpty && !endIsEmpty)) {
-      const period: MarkedDates = {
-        [dateString]: dayCalendarProps,
+      const dayCalendarProps = {
+        color: '#222222',
+        textColor: 'white',
+        endingDay: true,
+        startingDay: true,
       };
 
-      //@ts-ignore
-      setStartDate(newDayObj);
-      setPeriodo(period);
-      setEndDate({});
-    } else {
-      // if end date is older than start date switch
-      const {timestamp: savedTimestamp} = startDate;
+      if (dayObj?.dateString === startDate?.dateString) {
+        if (!endDate) {
+          return;
+        }
 
-      //@ts-ignore
-      if (savedTimestamp > timestamp) {
         const period: MarkedDates = {
           [dateString]: dayCalendarProps,
         };
@@ -999,18 +995,47 @@ const Airbnb = () => {
         //@ts-ignore
         setStartDate(newDayObj);
         setPeriodo(period);
-        // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
+        setEndDate({});
+
+        return;
+      }
+
+      if (startIsEmpty || (!startIsEmpty && !endIsEmpty)) {
+        const period: MarkedDates = {
+          [dateString]: dayCalendarProps,
+        };
+
+        //@ts-ignore
+        setStartDate(newDayObj);
+        setPeriodo(period);
         setEndDate({});
       } else {
+        // if end date is older than start date switch
+        const {timestamp: savedTimestamp} = startDate;
+
         //@ts-ignore
-        const period: MarkedDates = getPeriod(savedTimestamp, timestamp);
-        setStartDate(startDate);
-        setPeriodo(period);
-        // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
-        setEndDate(newDayObj);
+        if (savedTimestamp > timestamp) {
+          const period: MarkedDates = {
+            [dateString]: dayCalendarProps,
+          };
+
+          //@ts-ignore
+          setStartDate(newDayObj);
+          setPeriodo(period);
+          // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
+          setEndDate({});
+        } else {
+          //@ts-ignore
+          const period: MarkedDates = getPeriod(savedTimestamp, timestamp);
+          setStartDate(startDate);
+          setPeriodo(period);
+          // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
+          setEndDate(newDayObj);
+        }
       }
-    }
-  };
+    },
+    [startDate, endDate],
+  );
 
   React.useEffect(() => {
     if (!showModal) {
@@ -1025,11 +1050,11 @@ const Airbnb = () => {
         setCountry(COUNTRIES[0].label);
         setPeriod(CALENDAR_PER[0]);
         setPeriodo({});
-        setAnyWeek('');
-        setAdults(0);
-        setChildren(0);
-        setInflants(0);
-        setPets(0);
+        setAnyWeek('Any week');
+        adults !== 0 && setAdults(0);
+        children !== 0 && setChildren(0);
+        inflants !== 0 && setInflants(0);
+        pets !== 0 && setPets(0);
         setShowModal(true);
       }, 1);
     }
@@ -1066,12 +1091,7 @@ const Airbnb = () => {
           <View style={[styles.padHor24, styles.flex, {paddingTop: top}]}>
             <View style={styles.container}>
               <AnimPressable
-                onPress={() => {
-                  animateOpen();
-                  progresWhen.value = withTiming(0);
-                  progressWhereTo.value = withTiming(0);
-                  openWho.value = withTiming(0);
-                }}
+                onPress={onPressWhereTo}
                 style={[
                   styles.leftInput,
                   styles.overflow,
@@ -1203,9 +1223,7 @@ const Airbnb = () => {
                   styles.whenAnyWeek,
                 ]}>
                 <Text style={[styles.fontW500, styles.color100]}>When</Text>
-                <Text style={styles.fontW500}>
-                  {anyWeek ? anyWeek : 'Any week'}
-                </Text>
+                <Text style={styles.fontW500}>{anyWeek}</Text>
               </AnimPressable>
               <Animated.View
                 style={[
@@ -1435,9 +1453,11 @@ const Airbnb = () => {
                     height: height > 800 ? 100 : 48 + (insets.bottom || 24),
                   },
                 ]}>
-                <Text style={[styles.fontW500, styles.clearAll]}>
-                  Clear all
-                </Text>
+                <Pressable style={styles.padding8} onPress={onPressClear}>
+                  <Text style={[styles.fontW500, styles.clearAll]}>
+                    Clear all
+                  </Text>
+                </Pressable>
                 <View
                   style={[styles.row, styles.searchBtn, styles.alignCenter]}>
                   <Entypo
@@ -1561,6 +1581,9 @@ const styles = StyleSheet.create({
     paddingVertical: isIOS ? 20 : 6,
     paddingHorizontal: 20,
     width: width - 72,
+  },
+  padding8: {
+    padding: 8,
   },
   padHor12: {
     paddingHorizontal: 12,
