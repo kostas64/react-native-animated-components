@@ -186,6 +186,7 @@ const Airbnb = () => {
   const closeWhen = useSharedValue(0);
   const openWho = useSharedValue(0);
   const translatePicker = useSharedValue(0);
+  const openCloseWho = useSharedValue(0);
 
   const inputRef = React.createRef<TextInput>();
   const calendarPerRef = React.createRef<FlatList>();
@@ -286,6 +287,7 @@ const Airbnb = () => {
         [0, 1],
         [67, height - bottom - 186],
       ),
+      borderRadius: interpolate(progresWhen.value, [0, 1], [16, 32]),
       marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
     }),
     [],
@@ -316,8 +318,8 @@ const Airbnb = () => {
     }
   }, []);
 
-  const opacityWhoToStyle = useAnimatedStyle(() => {
-    return {
+  const opacityWhoToStyle = useAnimatedStyle(
+    () => ({
       opacity: interpolate(progress.value, [0, 0.85, 1], [0, 0, 1]),
       height: interpolate(
         openWho.value,
@@ -325,8 +327,15 @@ const Airbnb = () => {
         [67, height + extraHeight - top - bottomHeight - 230],
         Extrapolate.CLAMP,
       ),
-    };
-  }, []);
+      borderRadius: interpolate(
+        openWho.value,
+        [0, 0.8],
+        [16, 32],
+        Extrapolate.CLAMP,
+      ),
+    }),
+    [],
+  );
 
   const opacityWhen = useAnimatedStyle(
     () => ({
@@ -380,12 +389,22 @@ const Airbnb = () => {
     return {};
   }, []);
 
-  const opacityOpenWhoNormalStyle = useAnimatedStyle(
-    () => ({
+  const opacityOpenWhoNormalStyle = useAnimatedStyle(() => {
+    if (openCloseWho.value > 0) {
+      return {
+        opacity: interpolate(
+          openCloseWho.value,
+          [0, 0.25],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
+
+    return {
       opacity: interpolate(openWho.value, [0.5, 1], [0, 1], Extrapolate.CLAMP),
-    }),
-    [],
-  );
+    };
+  }, []);
 
   const opacityCloseWhenInput = useAnimatedStyle(() => {
     if (closeWhen.value > 0) {
@@ -398,6 +417,30 @@ const Airbnb = () => {
       opacity: 0,
     };
   });
+
+  const opacityOpenWhoClose = useAnimatedStyle(() => ({
+    opacity: interpolate(
+      openCloseWho.value,
+      [0, 0.25],
+      [0, 1],
+      Extrapolate.CLAMP,
+    ),
+  }));
+
+  const opacityOpenWhoCloseRev = useAnimatedStyle(() => {
+    if (openCloseWho.value > 0) {
+      return {
+        opacity: interpolate(
+          openCloseWho.value,
+          [0, 0.15],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+      };
+    }
+
+    return {};
+  }, []);
 
   const translateClose = useAnimatedStyle(
     () => ({
@@ -416,6 +459,20 @@ const Airbnb = () => {
   );
 
   const translateCloseWhen = useAnimatedStyle(() => {
+    if (openCloseWho.value > 0) {
+      return {
+        opacity: interpolate(
+          openCloseWho.value,
+          [0, 0.8],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+        transform: [
+          {translateY: interpolate(openCloseWho.value, [0, 0.8], [24, 0])},
+        ],
+      };
+    }
+
     if (closeWhen.value > 0) {
       return {
         opacity: interpolate(
@@ -428,12 +485,26 @@ const Airbnb = () => {
           {translateY: interpolate(closeWhen.value, [0, 1], [24, 0])},
         ],
       };
-    } else {
-      return {};
     }
+
+    return {};
   });
 
   const translateCloseWhere = useAnimatedStyle(() => {
+    if (openCloseWho.value > 0) {
+      return {
+        transform: [
+          {
+            translateX: interpolate(
+              openCloseWho.value,
+              [0.15, 0.16],
+              [0, -width],
+            ),
+          },
+        ],
+      };
+    }
+
     if (closeWhen.value > 0) {
       return {
         transform: [
@@ -466,6 +537,48 @@ const Airbnb = () => {
       return {};
     }
   }, []);
+
+  const transformOpenWhoClose = useAnimatedStyle(
+    () => ({
+      height: interpolate(
+        openCloseWho.value,
+        [0, 0.8],
+        [height + extraHeight - top - bottomHeight - 230, 60],
+        Extrapolate.CLAMP,
+      ),
+      width: interpolate(
+        openCloseWho.value,
+        [0, 0.8],
+        [width - 24, width - 100],
+        Extrapolate.CLAMP,
+      ),
+      borderRadius: interpolate(
+        openCloseWho.value,
+        [0, 0.8],
+        [16, 32],
+        Extrapolate.CLAMP,
+      ),
+      transform: [
+        {
+          translateX: interpolate(
+            openCloseWho.value,
+            [0, 0.8],
+            [0, 10],
+            Extrapolate.CLAMP,
+          ),
+        },
+        {
+          translateY: interpolate(
+            openCloseWho.value,
+            [0, 0.8],
+            [0, -206],
+            Extrapolate.CLAMP,
+          ),
+        },
+      ],
+    }),
+    [],
+  );
 
   const listOpacityTranslate = useAnimatedStyle(
     () => ({
@@ -670,6 +783,16 @@ const Airbnb = () => {
   );
 
   const bottomStyleWhereFocused = useAnimatedStyle(() => {
+    if (openCloseWho.value > 0) {
+      return {
+        bottom: interpolate(
+          openCloseWho.value,
+          [0, 1],
+          [0, -bottomHeight - 10],
+        ),
+      };
+    }
+
     if (openWho.value > 0 && progresWhen.value > 0 && progress.value > 0) {
       return {
         bottom: -bottomHeight - 10,
@@ -721,7 +844,13 @@ const Airbnb = () => {
   }, [showModal]);
 
   const animateClose = React.useCallback(() => {
-    if (progresWhen.value && progress.value) {
+    if (progress.value && openWho.value) {
+      openCloseWho.value = withTiming(1, {duration: 450}, finished => {
+        if (finished) {
+          runOnJS(setShowModal)(false);
+        }
+      });
+    } else if (progress.value && progresWhen.value) {
       closeWhen.value = withTiming(1, {duration: 450}, finished => {
         if (finished) {
           runOnJS(setShowModal)(false);
@@ -1044,6 +1173,7 @@ const Airbnb = () => {
       progressWhereTo.value = 0;
       closeWhen.value = 0;
       openWho.value = 0;
+      openCloseWho.value = 0;
       translatePicker.value = 0;
 
       setTimeout(() => {
@@ -1097,6 +1227,7 @@ const Airbnb = () => {
                   styles.overflow,
                   inputStyle,
                   opacityClose,
+                  opacityOpenWhoCloseRev,
                   inputWhereToFocused,
                   translateCloseWhere,
                 ]}>
@@ -1210,6 +1341,7 @@ const Airbnb = () => {
                 styles.otherBox,
                 styles.overflow,
                 opacityWhenToStyle,
+                opacityOpenWhoCloseRev,
                 transformCloseWhen,
               ]}>
               <AnimPressable
@@ -1350,6 +1482,7 @@ const Airbnb = () => {
                 styles.marTop12,
                 opacityWhoToStyle,
                 opacityClose,
+                transformOpenWhoClose,
               ]}>
               <AnimPressable
                 onPress={animateOpenWho}
@@ -1368,6 +1501,21 @@ const Airbnb = () => {
               </AnimPressable>
               <Animated.View
                 style={[
+                  styles.row,
+                  styles.absolute,
+                  styles.padTop12Left16,
+                  opacityOpenWhoClose,
+                ]}>
+                <Entypo size={24} style={styles.lens} name="magnifying-glass" />
+                <View>
+                  <Text style={styles.whereTo}>Where to?</Text>
+                  <Text style={styles.subtitle}>
+                    Anywhere • Any week • Add guests
+                  </Text>
+                </View>
+              </Animated.View>
+              <Animated.View
+                style={[
                   styles.absolute,
                   styles.padTop24,
                   opacityOpenWhoNormalStyle,
@@ -1384,7 +1532,6 @@ const Airbnb = () => {
                   ]}>
                   Who's coming?
                 </Text>
-
                 <ItemCounter
                   disabledLeft={
                     adults === 1 && (pets > 0 || inflants > 0 || children > 0)
