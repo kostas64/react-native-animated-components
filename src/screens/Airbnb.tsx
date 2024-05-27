@@ -942,6 +942,10 @@ const Airbnb = () => {
 
   const onPressClear = React.useCallback(() => {
     onPressWhereTo();
+    resetValues();
+  }, [country, anyWeek, adults, children, inflants, pets, period]);
+
+  const resetValues = () => {
     country !== "I'm flexible" && setCountry("I'm flexible");
     anyWeek !== 'Any week' && setAnyWeek('Any week');
     period !== CALENDAR_PER[0] && setPeriod(CALENDAR_PER[0]);
@@ -950,7 +954,7 @@ const Airbnb = () => {
     children !== 0 && setChildren(0);
     inflants !== 0 && setInflants(0);
     pets !== 0 && setPets(0);
-  }, [country, anyWeek, adults, children, inflants, pets, period]);
+  };
 
   const renderItem = React.useCallback(
     ({item, index}: TRenderCountryItem) => {
@@ -1218,14 +1222,7 @@ const Airbnb = () => {
       translatePicker.value = 0;
 
       setTimeout(() => {
-        setCountry(COUNTRIES[0].label);
-        setPeriod(CALENDAR_PER[0]);
-        setPeriodo({});
-        setAnyWeek('Any week');
-        adults !== 0 && setAdults(0);
-        children !== 0 && setChildren(0);
-        inflants !== 0 && setInflants(0);
-        pets !== 0 && setPets(0);
+        resetValues();
         setShowModal(true);
       }, 1);
     }
@@ -1646,7 +1643,8 @@ const Airbnb = () => {
                     Clear all
                   </Text>
                 </Pressable>
-                <View
+                <Pressable
+                  onPress={animateClose}
                   style={[styles.row, styles.searchBtn, styles.alignCenter]}>
                   <Entypo
                     size={20}
@@ -1654,7 +1652,7 @@ const Airbnb = () => {
                     name="magnifying-glass"
                   />
                   <Text style={[styles.white, styles.fontW500]}>Search</Text>
-                </View>
+                </Pressable>
               </View>
             </Animated.View>
           </View>
