@@ -88,7 +88,9 @@ type TRenderSearchItem = {
 };
 
 const SearchItem = ({place, date, guests}: TSearchItem) => (
-  <View style={[styles.row, styles.alignCenter, styles.marBot24]}>
+  <TouchableOpacity
+    activeOpacity={0.65}
+    style={[styles.row, styles.alignCenter, styles.marBot24]}>
     <View style={styles.searchClockContainer}>
       <AntDesign name="clockcircleo" size={25} color={'black'} />
     </View>
@@ -102,7 +104,7 @@ const SearchItem = ({place, date, guests}: TSearchItem) => (
         <Text style={styles.subtitle}>{` • ${guests} guests`}</Text>
       </View>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 const PickerItem = ({label, onPress, style}: TPickerItem) => (
@@ -191,7 +193,6 @@ const Airbnb = () => {
   const inputRef = React.createRef<TextInput>();
   const calendarPerRef = React.createRef<FlatList>();
   const [showModal, setShowModal] = React.useState(true);
-  const [inputFocused, setInputFocused] = React.useState(false);
   const [country, setCountry] = React.useState(COUNTRIES[0].label);
   const [period, setPeriod] = React.useState(CALENDAR_PER[0]);
   const [anyWeek, setAnyWeek] = React.useState('Any week');
@@ -323,6 +324,36 @@ const Airbnb = () => {
     [],
   );
 
+  const arrowAnimStyle = useAnimatedStyle(
+    () => ({
+      opacity: interpolate(
+        progressWhereTo.value,
+        [0.1, 0.25],
+        [0, 1],
+        Extrapolate.CLAMP,
+      ),
+      transform: [
+        {
+          translateX: interpolate(
+            progressWhereTo.value,
+            [0, 0.1],
+            [-100, 0],
+            Extrapolate.CLAMP,
+          ),
+        },
+        {
+          translateY: interpolate(
+            progressWhereTo.value,
+            [0, 0.1],
+            [0, 24],
+            Extrapolate.CLAMP,
+          ),
+        },
+      ],
+    }),
+    [],
+  );
+
   const opacityWhenClose = useAnimatedStyle(() => {
     if (closeWhen.value > 0) {
       return {
@@ -331,7 +362,7 @@ const Airbnb = () => {
     }
 
     return {};
-  });
+  }, []);
 
   const opacityClose = useAnimatedStyle(() => {
     if (closeWhen.value > 0) {
@@ -505,6 +536,35 @@ const Airbnb = () => {
   );
 
   const translateCloseWhen = useAnimatedStyle(() => {
+    if (progressWhereTo.value > 0) {
+      return {
+        opacity: interpolate(
+          progressWhereTo.value,
+          [0, 0.3],
+          [1, 0],
+          Extrapolate.CLAMP,
+        ),
+        transform: [
+          {
+            translateX: interpolate(
+              progressWhereTo.value,
+              [0.31, 0.32],
+              [0, -100],
+              Extrapolate.CLAMP,
+            ),
+          },
+          {
+            translateY: interpolate(
+              progressWhereTo.value,
+              [0.32, 0.33],
+              [24, 0],
+              Extrapolate.CLAMP,
+            ),
+          },
+        ],
+      };
+    }
+
     if (openCloseWho.value > 0) {
       return {
         opacity: interpolate(
@@ -534,7 +594,7 @@ const Airbnb = () => {
     }
 
     return {};
-  });
+  }, []);
 
   const translateCloseWhere = useAnimatedStyle(() => {
     if (openCloseWho.value > 0) {
@@ -908,13 +968,11 @@ const Airbnb = () => {
 
   const animateWhereToInput = () => {
     inputRef.current?.focus();
-    setInputFocused(true);
     progressWhereTo.value = withTiming(1);
   };
 
   const animateWhereToInputClose = () => {
     inputRef.current?.blur();
-    setInputFocused(false);
     progressWhereTo.value = withTiming(0);
   };
 
@@ -1656,22 +1714,33 @@ const Airbnb = () => {
               </View>
             </Animated.View>
           </View>
-          <View style={[styles.absolute, {top: top - 24}]}>
-            <AnimPressable
-              style={[
-                styles.closeContainer,
-                opacityStyle,
-                translateClose,
-                translateCloseWhen,
-                styles.marLeft24,
-              ]}
-              onPress={inputFocused ? animateWhereToInputClose : animateClose}>
-              <MaterialCommunityIcons
-                name={inputFocused ? 'arrow-left' : 'close'}
-                size={16}
-              />
-            </AnimPressable>
-          </View>
+          {/* Arrow left button */}
+          <AnimPressable
+            style={[
+              styles.absolute,
+              {top: top - 24},
+              styles.closeContainer,
+              arrowAnimStyle,
+              translateClose,
+              styles.marLeft24,
+            ]}
+            onPress={animateWhereToInputClose}>
+            <MaterialCommunityIcons name={'arrow-left'} size={16} />
+          </AnimPressable>
+          {/* Close button */}
+          <AnimPressable
+            style={[
+              styles.absolute,
+              {top: top - 24},
+              styles.closeContainer,
+              opacityStyle,
+              translateClose,
+              translateCloseWhen,
+              styles.marLeft24,
+            ]}
+            onPress={animateClose}>
+            <MaterialCommunityIcons name={'close'} size={16} />
+          </AnimPressable>
         </>
       )}
     </>
