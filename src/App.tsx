@@ -9,6 +9,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Airbnb from './screens/Airbnb';
 import PinCode from './screens/PinCode';
 import HomeScreen from './screens/HomeScreen';
+import ShutdownIOS from './screens/ShutdownIOS';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
 import TogglersScreen from './screens/TogglerIOSScreen';
@@ -39,6 +40,7 @@ type TStackList = {
   PinCode: undefined;
   Floating: undefined;
   Airbnb: undefined;
+  ShutdownIOS: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -73,6 +75,7 @@ function App() {
           <Stack.Screen name="PinCode" component={PinCode} />
           <Stack.Screen name="Floating" component={FloatingButton} />
           <Stack.Screen name="Airbnb" component={Airbnb} />
+          <Stack.Screen name="ShutdownIOS" component={ShutdownIOS} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
