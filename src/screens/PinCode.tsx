@@ -14,8 +14,9 @@ import Animated, {
   useAnimatedStyle,
   interpolateColor,
 } from 'react-native-reanimated';
-import React, {Dispatch, MutableRefObject, SetStateAction} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import StatusBarManager from '@components/StatusBarManager';
+import React, {Dispatch, MutableRefObject, SetStateAction} from 'react';
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
 
@@ -187,6 +188,7 @@ const PinCode = () => {
 
   return (
     <>
+      <StatusBarManager barStyle="light" />
       <View style={styles.container}>
         {/* Placeholder  */}
         <Animated.View style={[animStyle, styles.placeholderContainer]}>
