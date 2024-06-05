@@ -23,7 +23,8 @@ type TDATA = {
       | 'PinCode'
       | 'Floating'
       | 'Airbnb'
-      | 'ShutdownIOS';
+      | 'ShutdownIOS'
+      | 'NFCReader';
   }[];
 }[];
 
@@ -45,6 +46,11 @@ export const DATA: TDATA = [
         backgroundColor: '#7bc8d2',
         screen: 'ShutdownIOS',
       },
+      {
+        label: 'NFC Reader',
+        backgroundColor: '#a3b8f1',
+        screen: 'NFCReader',
+      },
     ],
   },
   {
@@ -56,22 +62,22 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Parallax List',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#ad77df',
         screen: 'Parallax',
       },
       {
         label: 'Double List',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#eaa884',
         screen: 'DoubleList',
       },
       {
         label: '3D Carousel',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#c57f5d',
         screen: 'Carousel3D',
       },
       {
         label: 'Fade Item Out',
-        backgroundColor: '#c57f5d',
+        backgroundColor: '#f298bc',
         screen: 'ScrollItem',
       },
     ],
@@ -83,17 +89,17 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Navbar with Indicator',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#7bc8d2',
         screen: 'ListWithIndi',
       },
       {
         label: 'Custom Drawer',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#a3b8f1',
         screen: 'CustomDrawer',
       },
       {
         label: 'Drawer Interpolate',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#ad77df',
         screen: 'DrawerInterpolate',
       },
     ],
@@ -105,12 +111,12 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Progress Loader',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#eaa884',
         screen: 'Progress',
       },
       {
         label: 'Dot Loader',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#c57f5d',
         screen: 'DotLoader',
       },
     ],
@@ -124,17 +130,17 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Pin Code',
-        backgroundColor: '#c57f5d',
+        backgroundColor: '#f298bc',
         screen: 'PinCode',
       },
       {
         label: 'Togglers',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#7bc8d2',
         screen: 'Togglers',
       },
       {
         label: 'Floating Button',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#a3b8f1',
         screen: 'Floating',
       },
     ],

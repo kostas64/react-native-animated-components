@@ -8,6 +8,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import Airbnb from './screens/Airbnb';
 import PinCode from './screens/PinCode';
+import NFCReader from './screens/NFCReader';
 import HomeScreen from './screens/HomeScreen';
 import ShutdownIOS from './screens/ShutdownIOS';
 import ParallaxScreen from './screens/ParallaxScreen';
@@ -41,6 +42,7 @@ type TStackList = {
   Floating: undefined;
   Airbnb: undefined;
   ShutdownIOS: undefined;
+  NFCReader: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -76,6 +78,7 @@ function App() {
           <Stack.Screen name="Floating" component={FloatingButton} />
           <Stack.Screen name="Airbnb" component={Airbnb} />
           <Stack.Screen name="ShutdownIOS" component={ShutdownIOS} />
+          <Stack.Screen name="NFCReader" component={NFCReader} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
