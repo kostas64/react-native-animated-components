@@ -6,11 +6,11 @@ import {
 } from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
-import Airbnb from './screens/Airbnb';
-import PinCode from './screens/PinCode';
-import NFCReader from './screens/NFCReader';
+import Airbnb from './screens/AirbnbScreen';
+import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
-import ShutdownIOS from './screens/ShutdownIOS';
+import NFCReader from './screens/NFCReaderScreen';
+import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
 import TogglersScreen from './screens/TogglerIOSScreen';
