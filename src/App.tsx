@@ -6,10 +6,11 @@ import {
 } from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
-import Airbnb from './screens/AirbnbScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
 import NFCReader from './screens/NFCReaderScreen';
+import AirbnbScreen from './screens/AirbnbScreen';
+import TicketScreen from './screens/TicketScreen';
 import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
@@ -24,6 +25,7 @@ import CustomDrawerScreen from './screens/CustomDrawerScreen';
 import DrawerInterpolate from '@components/DrawerInterpolate';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import ScrollItemListScreen from './screens/ScrollItemListScreen';
+import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 
 type TStackList = {
   Home: undefined;
@@ -41,8 +43,10 @@ type TStackList = {
   PinCode: undefined;
   Floating: undefined;
   Airbnb: undefined;
+  Ticket: undefined;
   ShutdownIOS: undefined;
   NFCReader: undefined;
+  TranslateSearchIOS: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -76,9 +80,14 @@ function App() {
           <Stack.Screen name="ProductList" component={ProductListScreen} />
           <Stack.Screen name="PinCode" component={PinCode} />
           <Stack.Screen name="Floating" component={FloatingButton} />
-          <Stack.Screen name="Airbnb" component={Airbnb} />
+          <Stack.Screen name="Airbnb" component={AirbnbScreen} />
+          <Stack.Screen name="Ticket" component={TicketScreen} />
           <Stack.Screen name="ShutdownIOS" component={ShutdownIOS} />
           <Stack.Screen name="NFCReader" component={NFCReader} />
+          <Stack.Screen
+            name="TranslateSearchIOS"
+            component={TranslateSearchIOSScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
