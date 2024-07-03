@@ -26,6 +26,7 @@ import DrawerInterpolate from '@components/DrawerInterpolate';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import ScrollItemListScreen from './screens/ScrollItemListScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
+import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 
 type TStackList = {
   Home: undefined;
@@ -47,6 +48,7 @@ type TStackList = {
   ShutdownIOS: undefined;
   NFCReader: undefined;
   TranslateSearchIOS: undefined;
+  CircularProgressBar: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -87,6 +89,10 @@ function App() {
           <Stack.Screen
             name="TranslateSearchIOS"
             component={TranslateSearchIOSScreen}
+          />
+          <Stack.Screen
+            name="CircularProgressBar"
+            component={CircularProgressBarScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -26,7 +26,8 @@ type TDATA = {
       | 'ShutdownIOS'
       | 'NFCReader'
       | 'Ticket'
-      | 'TranslateSearchIOS';
+      | 'TranslateSearchIOS'
+      | 'CircularProgressBar';
   }[];
 }[];
 
@@ -154,6 +155,11 @@ export const DATA: TDATA = [
         label: 'Ticket',
         backgroundColor: '#eaa884',
         screen: 'Ticket',
+      },
+      {
+        label: 'Circular Progress Bar',
+        backgroundColor: '#c57f5d',
+        screen: 'CircularProgressBar',
       },
     ],
   },
