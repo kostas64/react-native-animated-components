@@ -23,6 +23,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import ListWithIndiScreen from './screens/ListWithIndiScreen';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
 import DrawerInterpolate from '@components/DrawerInterpolate';
+import ValuePickersScreen from './screens/ValuePickersScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import ScrollItemListScreen from './screens/ScrollItemListScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
@@ -49,6 +50,7 @@ type TStackList = {
   NFCReader: undefined;
   TranslateSearchIOS: undefined;
   CircularProgressBar: undefined;
+  ValuePickers: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -94,6 +96,7 @@ function App() {
             name="CircularProgressBar"
             component={CircularProgressBarScreen}
           />
+          <Stack.Screen name="ValuePickers" component={ValuePickersScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

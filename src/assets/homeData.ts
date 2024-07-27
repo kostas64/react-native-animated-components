@@ -27,7 +27,9 @@ type TDATA = {
       | 'NFCReader'
       | 'Ticket'
       | 'TranslateSearchIOS'
-      | 'CircularProgressBar';
+      | 'CircularProgressBar'
+      | 'CreditCard'
+      | 'ValuePickers';
   }[];
 }[];
 
@@ -45,18 +47,23 @@ export const DATA: TDATA = [
         screen: 'Airbnb',
       },
       {
-        label: 'iOS Shutdown confirmator',
+        label: 'Credit Card',
         backgroundColor: '#7bc8d2',
+        screen: 'CreditCard',
+      },
+      {
+        label: 'iOS Shutdown confirmator',
+        backgroundColor: '#a3b8f1',
         screen: 'ShutdownIOS',
       },
       {
         label: 'iOS NFC Reader',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#ad77df',
         screen: 'NFCReader',
       },
       {
         label: 'iOS Translating Search',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#eaa884',
         screen: 'TranslateSearchIOS',
       },
     ],
@@ -70,22 +77,22 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Parallax List',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#f298bc',
         screen: 'Parallax',
       },
       {
         label: 'Double List',
-        backgroundColor: '#c57f5d',
+        backgroundColor: '#7bc8d2',
         screen: 'DoubleList',
       },
       {
         label: '3D Carousel',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#a3b8f1',
         screen: 'Carousel3D',
       },
       {
         label: 'Fade Item Out',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#ad77df',
         screen: 'ScrollItem',
       },
     ],
@@ -97,17 +104,17 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Navbar with Indicator',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#f298bc',
         screen: 'ListWithIndi',
       },
       {
         label: 'Custom Drawer',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#7bc8d2',
         screen: 'CustomDrawer',
       },
       {
         label: 'Drawer Interpolate',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#a3b8f1',
         screen: 'DrawerInterpolate',
       },
     ],
@@ -119,12 +126,12 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Progress Loader',
-        backgroundColor: '#c57f5d',
+        backgroundColor: '#f298bc',
         screen: 'Progress',
       },
       {
         label: 'Dot Loader',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#7bc8d2',
         screen: 'DotLoader',
       },
     ],
@@ -138,29 +145,34 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Pin Code',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#f298bc',
         screen: 'PinCode',
       },
       {
         label: 'Togglers',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#7bc8d2',
         screen: 'Togglers',
       },
       {
         label: 'Floating Button',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#a3b8f1',
         screen: 'Floating',
       },
       {
-        label: 'Ticket',
-        backgroundColor: '#eaa884',
-        screen: 'Ticket',
+        label: 'Value Pickers',
+        backgroundColor: '#ad77df',
+        screen: 'ValuePickers',
       },
-      {
-        label: 'Circular Progress Bar',
-        backgroundColor: '#c57f5d',
-        screen: 'CircularProgressBar',
-      },
+      // {
+      //   label: 'Ticket',
+      //   backgroundColor: '#c57f5d',
+      //   screen: 'Ticket',
+      // },
+      // {
+      //   label: 'Circular Progress Bar',
+      //   backgroundColor: '#ad77df',
+      //   screen: 'CircularProgressBar',
+      // },
     ],
   },
 ];
