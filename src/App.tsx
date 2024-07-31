@@ -26,6 +26,7 @@ import DrawerInterpolate from '@components/DrawerInterpolate';
 import ValuePickersScreen from './screens/ValuePickersScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import ScrollItemListScreen from './screens/ScrollItemListScreen';
+import LikeInteractionScreen from './screens/LikeInteractionScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 
@@ -51,6 +52,7 @@ type TStackList = {
   TranslateSearchIOS: undefined;
   CircularProgressBar: undefined;
   ValuePickers: undefined;
+  LikeInteraction: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -97,6 +99,10 @@ function App() {
             component={CircularProgressBarScreen}
           />
           <Stack.Screen name="ValuePickers" component={ValuePickersScreen} />
+          <Stack.Screen
+            name="LikeInteraction"
+            component={LikeInteractionScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

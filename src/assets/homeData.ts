@@ -29,7 +29,8 @@ type TDATA = {
       | 'TranslateSearchIOS'
       | 'CircularProgressBar'
       | 'CreditCard'
-      | 'ValuePickers';
+      | 'ValuePickers'
+      | 'LikeInteraction';
   }[];
 }[];
 
@@ -46,25 +47,30 @@ export const DATA: TDATA = [
         backgroundColor: '#f298bc',
         screen: 'Airbnb',
       },
-      {
-        label: 'Credit Card',
-        backgroundColor: '#7bc8d2',
-        screen: 'CreditCard',
-      },
+      // {
+      //   label: 'Credit Card',
+      //   backgroundColor: '#7bc8d2',
+      //   screen: 'CreditCard',
+      // },
       {
         label: 'iOS Shutdown confirmator',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#7bc8d2',
         screen: 'ShutdownIOS',
       },
       {
         label: 'iOS NFC Reader',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#a3b8f1',
         screen: 'NFCReader',
       },
       {
         label: 'iOS Translating Search',
-        backgroundColor: '#eaa884',
+        backgroundColor: '#ad77df',
         screen: 'TranslateSearchIOS',
+      },
+      {
+        label: 'Like Interaction',
+        backgroundColor: '#c57f5d',
+        screen: 'LikeInteraction',
       },
     ],
   },
