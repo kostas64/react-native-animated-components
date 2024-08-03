@@ -30,7 +30,8 @@ type TDATA = {
       | 'CircularProgressBar'
       | 'CreditCard'
       | 'ValuePickers'
-      | 'LikeInteraction';
+      | 'LikeInteraction'
+      | 'CircularAnimatedText';
   }[];
 }[];
 
@@ -44,7 +45,7 @@ export const DATA: TDATA = [
     items: [
       {
         label: "Airbnb 'Where to'",
-        backgroundColor: '#f298bc',
+        backgroundColor: '#0ad2ff',
         screen: 'Airbnb',
       },
       // {
@@ -54,23 +55,28 @@ export const DATA: TDATA = [
       // },
       {
         label: 'iOS Shutdown confirmator',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#2962ff',
         screen: 'ShutdownIOS',
       },
       {
         label: 'iOS NFC Reader',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#9500ff',
         screen: 'NFCReader',
       },
       {
         label: 'iOS Translating Search',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#ff0059',
         screen: 'TranslateSearchIOS',
       },
       {
         label: 'Like Interaction',
-        backgroundColor: '#c57f5d',
+        backgroundColor: '#ff8c00',
         screen: 'LikeInteraction',
+      },
+      {
+        label: 'Circular Animated Text',
+        backgroundColor: '#95e214',
+        screen: 'CircularAnimatedText',
       },
     ],
   },
@@ -83,22 +89,22 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Parallax List',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#0ad2ff',
         screen: 'Parallax',
       },
       {
         label: 'Double List',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#2962ff',
         screen: 'DoubleList',
       },
       {
         label: '3D Carousel',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#9500ff',
         screen: 'Carousel3D',
       },
       {
         label: 'Fade Item Out',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#ff0059',
         screen: 'ScrollItem',
       },
     ],
@@ -110,17 +116,17 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Navbar with Indicator',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#0ad2ff',
         screen: 'ListWithIndi',
       },
       {
         label: 'Custom Drawer',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#2962ff',
         screen: 'CustomDrawer',
       },
       {
         label: 'Drawer Interpolate',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#9500ff',
         screen: 'DrawerInterpolate',
       },
     ],
@@ -132,12 +138,12 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Progress Loader',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#0ad2ff',
         screen: 'Progress',
       },
       {
         label: 'Dot Loader',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#2962ff',
         screen: 'DotLoader',
       },
     ],
@@ -151,22 +157,22 @@ export const DATA: TDATA = [
     items: [
       {
         label: 'Pin Code',
-        backgroundColor: '#f298bc',
+        backgroundColor: '#0ad2ff',
         screen: 'PinCode',
       },
       {
         label: 'Togglers',
-        backgroundColor: '#7bc8d2',
+        backgroundColor: '#2962ff',
         screen: 'Togglers',
       },
       {
         label: 'Floating Button',
-        backgroundColor: '#a3b8f1',
+        backgroundColor: '#9500ff',
         screen: 'Floating',
       },
       {
         label: 'Value Pickers',
-        backgroundColor: '#ad77df',
+        backgroundColor: '#ff0059',
         screen: 'ValuePickers',
       },
       // {

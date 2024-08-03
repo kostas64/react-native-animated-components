@@ -29,6 +29,7 @@ import ScrollItemListScreen from './screens/ScrollItemListScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
+import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
 
 type TStackList = {
   Home: undefined;
@@ -53,6 +54,7 @@ type TStackList = {
   CircularProgressBar: undefined;
   ValuePickers: undefined;
   LikeInteraction: undefined;
+  CircularAnimatedText: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -102,6 +104,10 @@ function App() {
           <Stack.Screen
             name="LikeInteraction"
             component={LikeInteractionScreen}
+          />
+          <Stack.Screen
+            name="CircularAnimatedText"
+            component={CircularAnimatedTextScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
