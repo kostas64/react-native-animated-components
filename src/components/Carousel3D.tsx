@@ -3,9 +3,7 @@ import {
   Text,
   Image,
   Animated,
-  Platform,
   FlatList,
-  Dimensions,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
@@ -13,11 +11,11 @@ import {
 import React from 'react';
 import {faker} from '@faker-js/faker';
 import images from '@assets/carousel3d';
+import {isAndroid, WIDTH} from '@utils/device';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-const {width} = Dimensions.get('window');
-const IMAGE_WIDTH = width * 0.65;
+const IMAGE_WIDTH = WIDTH * 0.65;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 0.7;
 const SPACING = 20;
 
@@ -63,7 +61,7 @@ const renderListItem = (
   index: number,
   scrollX: Animated.AnimatedValue,
 ) => {
-  const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
+  const inputRange = [(index - 1) * WIDTH, index * WIDTH, (index + 1) * WIDTH];
   const opacity = scrollX.interpolate({
     inputRange,
     outputRange: [0, 1, 0],
@@ -76,7 +74,7 @@ const renderListItem = (
   return (
     <Animated.View
       style={{
-        width,
+        width: WIDTH,
         paddingVertical: SPACING,
         opacity,
         transform: [
@@ -107,7 +105,7 @@ const Carousel3D = () => {
   const scrollX = React.useRef<Animated.AnimatedValue>(
     new Animated.Value(0),
   ).current;
-  const progress = Animated.modulo(Animated.divide(scrollX, width), width);
+  const progress = Animated.modulo(Animated.divide(scrollX, WIDTH), WIDTH);
   const onScroll = Animated.event(
     [
       {
@@ -139,7 +137,7 @@ const Carousel3D = () => {
             style={{flexGrow: 0, zIndex: 1000}}
             contentContainerStyle={styles.listContentContainer}
             onMomentumScrollEnd={e =>
-              setIndex(Math.round(e.nativeEvent.contentOffset.x / width))
+              setIndex(Math.round(e.nativeEvent.contentOffset.x / WIDTH))
             }
             showsHorizontalScrollIndicator={false}
             renderItem={({item, index}) => renderListItem(item, index, scrollX)}
@@ -147,9 +145,9 @@ const Carousel3D = () => {
           <View style={styles.contentContainer}>
             {DATA.map((item, index) => {
               const inputRange = [
-                (index - 0.2) * width,
-                index * width,
-                (index + 0.2) * width,
+                (index - 0.2) * WIDTH,
+                index * WIDTH,
+                (index + 0.2) * WIDTH,
               ];
               const opacity = scrollX.interpolate({
                 inputRange,
@@ -198,10 +196,10 @@ const Carousel3D = () => {
             style={{opacity: index === 0 ? 0.25 : 1}}
             onPress={() => {
               listRef?.current?.scrollToOffset({
-                offset: (index - 1) * width,
+                offset: (index - 1) * WIDTH,
                 animated: true,
               });
-              Platform.OS === 'android' && setIndex(curIndex => curIndex - 1);
+              isAndroid && setIndex(curIndex => curIndex - 1);
             }}>
             <View style={styles.arrowContainer}>
               <AntDesign name="swapleft" size={42} color="black" />
@@ -213,10 +211,10 @@ const Carousel3D = () => {
             style={{opacity: index === DATA.length - 1 ? 0.25 : 1}}
             onPress={() => {
               listRef?.current?.scrollToOffset({
-                offset: (index + 1) * width,
+                offset: (index + 1) * WIDTH,
                 animated: true,
               });
-              Platform.OS === 'android' && setIndex(curIndex => curIndex + 1);
+              isAndroid && setIndex(curIndex => curIndex + 1);
             }}>
             <View style={styles.arrowContainer}>
               <Text style={styles.arrowText}>NEXT</Text>
@@ -255,7 +253,7 @@ const styles = StyleSheet.create({
   },
   listContentContainer: {
     height: IMAGE_HEIGHT + SPACING * 2,
-    paddingHorizontal: (width - IMAGE_WIDTH) / 2,
+    paddingHorizontal: (WIDTH - IMAGE_WIDTH) / 2,
   },
   contentContainer: {
     width: IMAGE_WIDTH,
@@ -270,7 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     zIndex: -1,
     top: SPACING * 2,
-    left: (width - (IMAGE_WIDTH + SPACING * 2)) / 2,
+    left: (WIDTH - (IMAGE_WIDTH + SPACING * 2)) / 2,
     bottom: 0,
     shadowColor: '#000',
     shadowOpacity: 0.2,

@@ -1,21 +1,14 @@
-import {
-  View,
-  Text,
-  Animated,
-  FlatList,
-  StyleSheet,
-  Dimensions,
-  Image,
-} from 'react-native';
 import React from 'react';
 import {
   State,
   Directions,
   FlingGestureHandler,
+  HandlerStateChangeEvent,
+  FlingGestureHandlerEventPayload,
 } from 'react-native-gesture-handler';
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
-const {width, height} = Dimensions.get('screen');
+import {View, Text, Image, Animated, FlatList, StyleSheet} from 'react-native';
 
 type ListItem = {
   name: string;
@@ -69,7 +62,7 @@ const ProductList = () => {
   const animateIndex = React.useRef(new Animated.Value(0)).current;
 
   const backgroundColor = scrollX.interpolate({
-    inputRange: items?.map((_, i) => i * width),
+    inputRange: items?.map((_, i) => i * WIDTH),
     outputRange: items?.map(item => item.backgroundColor),
   });
 
@@ -96,8 +89,8 @@ const ProductList = () => {
       <>
         <View
           style={{
-            width,
-            height,
+            width: WIDTH,
+            height: HEIGHT_SCR,
             paddingTop: insets.top + 48,
             paddingLeft: 24,
           }}>
@@ -116,7 +109,7 @@ const ProductList = () => {
               position: 'absolute',
               top: insets.top,
               left: 86,
-              height: height * 0.5,
+              height: HEIGHT_SCR * 0.5,
               opacity,
             }}
           />
@@ -140,7 +133,9 @@ const ProductList = () => {
     );
   };
 
-  const onFlingLeft = e => {
+  const onFlingLeft = (
+    e: HandlerStateChangeEvent<FlingGestureHandlerEventPayload>,
+  ) => {
     if (e.nativeEvent.state === State.END) {
       if (index === items.length - 1) return;
 
@@ -149,7 +144,9 @@ const ProductList = () => {
     }
   };
 
-  const onFlingRight = ev => {
+  const onFlingRight = (
+    ev: HandlerStateChangeEvent<FlingGestureHandlerEventPayload>,
+  ) => {
     if (ev.nativeEvent.state === State.END) {
       if (index === 0) {
         return;
@@ -198,14 +195,14 @@ const ProductList = () => {
               <View style={{paddingBottom: '10%'}}>
                 <Text
                   style={{
-                    fontSize: width / 20,
+                    fontSize: WIDTH / 20,
                     color: items[index]?.halfFontColor,
                   }}>
                   Form Factor
                 </Text>
                 <Animated.Text
                   style={{
-                    fontSize: width / 15,
+                    fontSize: WIDTH / 15,
                     color: items[index]?.fontColor,
                     fontWeight: '700',
                   }}>
@@ -215,14 +212,14 @@ const ProductList = () => {
               <View style={{paddingBottom: '10%'}}>
                 <Text
                   style={{
-                    fontSize: width / 20,
+                    fontSize: WIDTH / 20,
                     color: items[index]?.halfFontColor,
                   }}>
                   Connection
                 </Text>
                 <Text
                   style={{
-                    fontSize: width / 15,
+                    fontSize: WIDTH / 15,
                     color: items[index]?.fontColor,
                     fontWeight: '700',
                   }}>
@@ -232,14 +229,14 @@ const ProductList = () => {
               <View>
                 <Text
                   style={{
-                    fontSize: width / 20,
+                    fontSize: WIDTH / 20,
                     color: items[index]?.halfFontColor,
                   }}>
                   Power source
                 </Text>
                 <Text
                   style={{
-                    fontSize: width / 15,
+                    fontSize: WIDTH / 15,
                     color: items[index]?.fontColor,
                     fontWeight: '700',
                   }}>
@@ -270,7 +267,7 @@ const ProductList = () => {
               }}>
               <View
                 style={{
-                  width: width - 64,
+                  width: WIDTH - 64,
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'space-between',

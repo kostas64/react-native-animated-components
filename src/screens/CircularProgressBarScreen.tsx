@@ -1,17 +1,15 @@
 import Animated, {
   withTiming,
   interpolate,
-  Extrapolate,
   SharedValue,
   useSharedValue,
   useDerivedValue,
   useAnimatedStyle,
+  Extrapolation,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
-
-const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
+import {StyleSheet, View} from 'react-native';
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
 
 const RADIUS = WIDTH / 2 - 32;
 
@@ -57,7 +55,7 @@ const CircularProgress = ({progress, bg, fg}: CircularProgressProps) => {
       theta.value,
       [Math.PI, 2 * Math.PI],
       [0, Math.PI],
-      Extrapolate.CLAMP,
+      Extrapolation.CLAMP,
     );
   });
 
@@ -114,7 +112,7 @@ const CircularProgressScreen = () => {
   return (
     <View
       style={{
-        top: (HEIGHT - RADIUS * 2) / 2,
+        top: (HEIGHT_SCR - RADIUS * 2) / 2,
         alignItems: 'center',
         justifyContent: 'center',
       }}>

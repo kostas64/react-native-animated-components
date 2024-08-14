@@ -4,15 +4,13 @@ import {
   Image,
   Animated,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
   GestureResponderEvent,
 } from 'react-native';
 import React from 'react';
 import images from '@assets/indiList';
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-
-const {width, height} = Dimensions.get('screen');
 
 type TData = {
   image: any;
@@ -52,7 +50,7 @@ const data = Object.keys(images).map(i => ({
 }));
 
 const Indicator = ({measures, scrollX}: TIndicator) => {
-  const inputRange = data.map((_, i) => i * width);
+  const inputRange = data.map((_, i) => i * WIDTH);
   const indicatorWidth = scrollX.interpolate({
     inputRange,
     outputRange: measures.map((measure: TMeasure) => measure.width),
@@ -120,7 +118,7 @@ const Tabs = ({data, scrollX, onItemPress}: TTabs) => {
   }, [measures]);
 
   return (
-    <View style={{position: 'absolute', top: 100, width}}>
+    <View style={{position: 'absolute', top: 100, width: WIDTH}}>
       <View
         ref={containerRef}
         style={{justifyContent: 'space-evenly', flexDirection: 'row'}}>
@@ -167,7 +165,7 @@ const ListWithIndicator = () => {
   const onItemPress = React.useCallback((itemIndex: number) => {
     !!flatRef.current &&
       flatRef.current.scrollToOffset({
-        offset: itemIndex * width,
+        offset: itemIndex * WIDTH,
       });
   }, []);
 
@@ -194,9 +192,9 @@ const ListWithIndicator = () => {
         )}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.key}
-        renderItem={({item, index}) => {
+        renderItem={({item}) => {
           return (
-            <View style={{width, height}}>
+            <View style={{width: WIDTH, height: HEIGHT_SCR}}>
               <Image
                 source={{uri: item.image}}
                 style={{flex: 1, resizeMode: 'cover'}}

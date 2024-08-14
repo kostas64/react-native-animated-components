@@ -6,18 +6,17 @@ import {
   FlatList,
   ViewStyle,
   StatusBar,
-  Dimensions,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import data from '@assets/doubleList';
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import React, {Dispatch, SetStateAction} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const ICON_SIZE = 42;
 const ITEM_HEIGHT = ICON_SIZE * 2;
-const {width, height} = Dimensions.get('window');
 
 const colors = {
   yellow: '#FFE8A3',
@@ -102,8 +101,8 @@ const List = React.forwardRef(
       decelerationRate={'normal'}
       snapToInterval={ITEM_HEIGHT}
       contentContainerStyle={{
-        paddingTop: showText ? 0 : height / 2 - ITEM_HEIGHT / 2,
-        paddingBottom: showText ? 0 : height / 2 - ITEM_HEIGHT / 2,
+        paddingTop: showText ? 0 : HEIGHT_SCR / 2 - ITEM_HEIGHT / 2,
+        paddingBottom: showText ? 0 : HEIGHT_SCR / 2 - ITEM_HEIGHT / 2,
         paddingHorizontal: 20,
       }}
       keyExtractor={item => `${item.name}-${item.icon}`}
@@ -182,9 +181,9 @@ const DoubleList = () => {
         style={{
           position: 'absolute',
           backgroundColor: colors.yellow,
-          width,
+          width: WIDTH,
           height: ITEM_HEIGHT,
-          top: height / 2 - ITEM_HEIGHT / 2,
+          top: HEIGHT_SCR / 2 - ITEM_HEIGHT / 2,
         }}
       />
       <ConnectButton onPress={onConnectPress} />
@@ -229,8 +228,8 @@ const styles = StyleSheet.create({
   },
   connectWithTextContainer: {
     position: 'absolute',
-    top: height / 2 - ITEM_HEIGHT * 2,
-    width: width * 0.7,
+    top: HEIGHT_SCR / 2 - ITEM_HEIGHT * 2,
+    width: WIDTH * 0.7,
     paddingHorizontal: 14,
   },
   connectWithText: {
@@ -241,7 +240,7 @@ const styles = StyleSheet.create({
   },
   connectButtonPosition: {
     position: 'absolute',
-    top: height / 2 + ITEM_HEIGHT / 2,
+    top: HEIGHT_SCR / 2 + ITEM_HEIGHT / 2,
     paddingHorizontal: 14,
   },
   connectButtonContainer: {

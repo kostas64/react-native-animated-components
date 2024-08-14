@@ -4,16 +4,15 @@ import {
   Text,
   Image,
   Linking,
-  Dimensions,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import Animated, {
   withTiming,
-  Extrapolate,
   SharedValue,
   interpolate,
   AnimatedRef,
+  Extrapolation,
   useAnimatedRef,
   useSharedValue,
   useAnimatedStyle,
@@ -29,13 +28,14 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //My Libs
+import {WIDTH} from '@utils/device';
 import {DATA} from '@assets/homeData';
 import {THomeNavigationProps} from 'src/App';
+import {typography} from '@utils/typography';
 import HomeButton from '@components/HomeButton';
-import StatusBarManager from '../components/StatusBarManager';
-import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/reanimated2/component/ScrollView';
+import StatusBarManager from '@components/StatusBarManager';
+import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
 
-const {width} = Dimensions.get('window');
 const URL = 'https://www.linkedin.com/in/konstantinos-efkarpidis/';
 
 const HomeHeader = ({progress}: {progress: SharedValue<number>}) => {
@@ -49,7 +49,7 @@ const HomeHeader = ({progress}: {progress: SharedValue<number>}) => {
             progress.value,
             [0, 1],
             [0, 32],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -60,15 +60,25 @@ const HomeHeader = ({progress}: {progress: SharedValue<number>}) => {
   const animImg = useAnimatedStyle(
     () => ({
       position: 'absolute',
-      width: interpolate(progress.value, [0, 1], [128, 36], Extrapolate.CLAMP),
-      height: interpolate(progress.value, [0, 1], [128, 36], Extrapolate.CLAMP),
+      width: interpolate(
+        progress.value,
+        [0, 1],
+        [128, 36],
+        Extrapolation.CLAMP,
+      ),
+      height: interpolate(
+        progress.value,
+        [0, 1],
+        [128, 36],
+        Extrapolation.CLAMP,
+      ),
       transform: [
         {
           translateX: interpolate(
             progress.value,
             [0, 1],
-            [0, -(width - 36) / 2 + 8],
-            Extrapolate.CLAMP,
+            [0, -(WIDTH - 36) / 2 + 8],
+            Extrapolation.CLAMP,
           ),
         },
         {
@@ -76,7 +86,7 @@ const HomeHeader = ({progress}: {progress: SharedValue<number>}) => {
             progress.value,
             [0, 1],
             [0, -40],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -86,7 +96,12 @@ const HomeHeader = ({progress}: {progress: SharedValue<number>}) => {
 
   const heightStyle = useAnimatedStyle(
     () => ({
-      height: interpolate(progress.value, [0, 1], [120, 0], Extrapolate.CLAMP),
+      height: interpolate(
+        progress.value,
+        [0, 1],
+        [120, 0],
+        Extrapolation.CLAMP,
+      ),
     }),
     [],
   );
@@ -277,15 +292,10 @@ const styles = StyleSheet.create({
   },
   listLabel: {
     fontSize: 22,
-    fontWeight: '500',
     color: '#3f546a',
     paddingLeft: 4,
-  },
-  navbarLabel: {
-    fontSize: 22,
-    fontWeight: '500',
-    color: '#3f546a',
-    paddingLeft: 8,
+    lineHeight: 32,
+    fontFamily: typography.semiBold,
   },
   separator: {
     paddingVertical: 8,
@@ -299,14 +309,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   name: {
-    fontWeight: '700',
     fontSize: 20,
+    lineHeight: 24,
     color: '#3f546a',
+    fontFamily: typography.bold,
   },
   profession: {
-    fontWeight: '500',
     fontSize: 18,
+    lineHeight: 22,
     color: '#819cb8',
+    fontFamily: typography.bold,
   },
   imgContainer: {
     alignItems: 'center',

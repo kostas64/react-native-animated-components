@@ -2,12 +2,10 @@ import {
   Text,
   View,
   Image,
-  Platform,
   Keyboard,
   TextInput,
   Pressable,
   ViewStyle,
-  Dimensions,
   StyleSheet,
   ImageStyle,
   TouchableOpacity,
@@ -17,11 +15,12 @@ import Animated, {
   runOnJS,
   withTiming,
   interpolate,
-  Extrapolate,
+  Extrapolation,
   useSharedValue,
   useAnimatedStyle,
   interpolateColor,
 } from 'react-native-reanimated';
+import {HEIGHT, isIOS, WIDTH} from '@utils/device';
 import {MONTHS} from '@assets/months';
 import React, {SetStateAction} from 'react';
 import {COUNTRIES} from '@assets/countries';
@@ -36,8 +35,6 @@ import {MarkedDates} from 'react-native-calendars/src/types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const isIOS = Platform.OS === 'ios';
-const {width, height} = Dimensions.get('window');
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -207,8 +204,8 @@ const Airbnb = () => {
 
   const top = insets.top > 40 ? insets.top : 30;
   const bottom = insets.bottom > 30 ? insets.bottom : 0;
-  const bottomHeight = height > 800 ? 100 : 48 + (insets.bottom || 24);
-  const extraHeight = height <= 685 ? 10 : 0;
+  const bottomHeight = HEIGHT > 800 ? 100 : 48 + (insets.bottom || 24);
+  const extraHeight = HEIGHT <= 685 ? 10 : 0;
   const numOfGuests = adults + children;
   const guestsToShow = `${
     numOfGuests === 1
@@ -236,7 +233,7 @@ const Airbnb = () => {
           openCloseWho.value,
           [0.75, 1],
           [0, 1],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     }
@@ -247,7 +244,7 @@ const Airbnb = () => {
           closeWhen.value,
           [0.75, 1],
           [0, 1],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     }
@@ -257,7 +254,7 @@ const Airbnb = () => {
         progress.value,
         [0, 0.1, 0.5, 0.8],
         [1, 1, 0, 0],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
     };
   }, []);
@@ -280,7 +277,7 @@ const Airbnb = () => {
           openWho.value,
           [0, 0.5],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     }
@@ -291,7 +288,7 @@ const Airbnb = () => {
           progresWhen.value,
           [0, 0.5],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     }
@@ -301,7 +298,7 @@ const Airbnb = () => {
         progressWhereTo.value,
         [0, 0.5],
         [1, 0],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
     };
   }, []);
@@ -312,9 +309,9 @@ const Airbnb = () => {
       height: interpolate(
         progresWhen.value,
         [0, 1],
-        [67, height - bottom - 186],
+        [67, HEIGHT - bottom - 186],
       ),
-      width: interpolate(progresWhen.value, [0, 1], [width - 30, width - 20]),
+      width: interpolate(progresWhen.value, [0, 1], [WIDTH - 30, WIDTH - 20]),
       borderRadius: interpolate(progresWhen.value, [0, 1], [16, 32]),
       marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
       transform: [
@@ -330,7 +327,7 @@ const Airbnb = () => {
         progressWhereTo.value,
         [0.1, 0.25],
         [0, 1],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
@@ -338,7 +335,7 @@ const Airbnb = () => {
             progressWhereTo.value,
             [0, 0.1],
             [-100, 0],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
         {
@@ -346,7 +343,7 @@ const Airbnb = () => {
             progressWhereTo.value,
             [0, 0.1],
             [0, 24],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -371,7 +368,7 @@ const Airbnb = () => {
           closeWhen.value,
           [0, 0.15],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     } else {
@@ -385,14 +382,14 @@ const Airbnb = () => {
       height: interpolate(
         openWho.value,
         [0, 0.8],
-        [67, height + extraHeight - top - bottomHeight - 230],
-        Extrapolate.CLAMP,
+        [67, HEIGHT + extraHeight - top - bottomHeight - 230],
+        Extrapolation.CLAMP,
       ),
       width: interpolate(
         openWho.value,
         [0, 0.8],
-        [width - 30, width - 20],
-        Extrapolate.CLAMP,
+        [WIDTH - 30, WIDTH - 20],
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
@@ -400,7 +397,7 @@ const Airbnb = () => {
             openWho.value,
             [0, 0.8],
             [0, -4],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -408,7 +405,7 @@ const Airbnb = () => {
         openWho.value,
         [0, 0.8],
         [16, 32],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
     }),
     [],
@@ -420,7 +417,7 @@ const Airbnb = () => {
         progresWhen.value,
         [0, 0.25],
         [1, 0],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
     }),
     [],
@@ -432,7 +429,7 @@ const Airbnb = () => {
         progresWhen.value,
         [0.5, 1],
         [0, 1],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
     }),
     [],
@@ -473,13 +470,18 @@ const Airbnb = () => {
           openCloseWho.value,
           [0, 0.25],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     }
 
     return {
-      opacity: interpolate(openWho.value, [0.5, 1], [0, 1], Extrapolate.CLAMP),
+      opacity: interpolate(
+        openWho.value,
+        [0.5, 1],
+        [0, 1],
+        Extrapolation.CLAMP,
+      ),
     };
   }, []);
 
@@ -500,7 +502,7 @@ const Airbnb = () => {
       openCloseWho.value,
       [0, 0.25],
       [0, 1],
-      Extrapolate.CLAMP,
+      Extrapolation.CLAMP,
     ),
   }));
 
@@ -511,7 +513,7 @@ const Airbnb = () => {
           openCloseWho.value,
           [0, 0.15],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
       };
     }
@@ -527,7 +529,7 @@ const Airbnb = () => {
             progress.value,
             [0, 0.75],
             [0, 24],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -542,7 +544,7 @@ const Airbnb = () => {
           progressWhereTo.value,
           [0, 0.3],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         transform: [
           {
@@ -550,7 +552,7 @@ const Airbnb = () => {
               progressWhereTo.value,
               [0.31, 0.32],
               [0, -100],
-              Extrapolate.CLAMP,
+              Extrapolation.CLAMP,
             ),
           },
           {
@@ -558,7 +560,7 @@ const Airbnb = () => {
               progressWhereTo.value,
               [0.32, 0.33],
               [24, 0],
-              Extrapolate.CLAMP,
+              Extrapolation.CLAMP,
             ),
           },
         ],
@@ -571,7 +573,7 @@ const Airbnb = () => {
           openCloseWho.value,
           [0, 0.8],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         transform: [
           {translateY: interpolate(openCloseWho.value, [0, 0.8], [24, 0])},
@@ -585,7 +587,7 @@ const Airbnb = () => {
           closeWhen.value,
           [0, 1],
           [1, 0],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         transform: [
           {translateY: interpolate(closeWhen.value, [0, 1], [24, 0])},
@@ -604,7 +606,7 @@ const Airbnb = () => {
             translateX: interpolate(
               openCloseWho.value,
               [0.15, 0.16],
-              [0, -width],
+              [0, -WIDTH],
             ),
           },
         ],
@@ -614,7 +616,7 @@ const Airbnb = () => {
     if (closeWhen.value > 0) {
       return {
         transform: [
-          {translateX: interpolate(closeWhen.value, [0.15, 0.16], [0, -width])},
+          {translateX: interpolate(closeWhen.value, [0.15, 0.16], [0, -WIDTH])},
         ],
       };
     } else {
@@ -629,10 +631,10 @@ const Airbnb = () => {
         height: interpolate(
           closeWhen.value,
           [0, 1],
-          [height - insets.bottom - 186, 60],
+          [HEIGHT - insets.bottom - 186, 60],
         ),
         borderRadius: 32,
-        width: interpolate(closeWhen.value, [0, 1], [width - 20, width - 100]),
+        width: interpolate(closeWhen.value, [0, 1], [WIDTH - 20, WIDTH - 100]),
         marginTop: interpolate(closeWhen.value, [0, 1], [60, 0]),
         top: interpolate(closeWhen.value, [0, 1], [0, -67]),
         transform: [
@@ -649,14 +651,14 @@ const Airbnb = () => {
       height: interpolate(
         openCloseWho.value,
         [0, 0.8],
-        [height + extraHeight - top - bottomHeight - 230, 60],
-        Extrapolate.CLAMP,
+        [HEIGHT + extraHeight - top - bottomHeight - 230, 60],
+        Extrapolation.CLAMP,
       ),
       width: interpolate(
         openCloseWho.value,
         [0, 0.8],
-        [width - 24, width - 100],
-        Extrapolate.CLAMP,
+        [WIDTH - 24, WIDTH - 100],
+        Extrapolation.CLAMP,
       ),
       borderRadius: 32,
       transform: [
@@ -665,7 +667,7 @@ const Airbnb = () => {
             openCloseWho.value,
             [0, 0.8],
             [-4, 10],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
         {
@@ -673,7 +675,7 @@ const Airbnb = () => {
             openCloseWho.value,
             [0, 0.8],
             [0, -206],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -687,15 +689,15 @@ const Airbnb = () => {
         progressWhereTo.value,
         [0, 0.25],
         [1, 0],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
           translateX: interpolate(
             progressWhereTo.value,
             [0.25, 0.251],
-            [0, -width],
-            Extrapolate.CLAMP,
+            [0, -WIDTH],
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -709,15 +711,15 @@ const Airbnb = () => {
         progressWhereTo.value,
         [0, 0.25],
         [0, 1],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
           translateX: interpolate(
             progressWhereTo.value,
             [0, 0.01],
-            [-width, 0],
-            Extrapolate.CLAMP,
+            [-WIDTH, 0],
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -729,7 +731,7 @@ const Airbnb = () => {
     if (openWho.value > 0 && progress.value > 0 && progresWhen.value > 0) {
       return {
         height: 67,
-        width: width - 30,
+        width: WIDTH - 30,
         borderRadius: 16,
         transform: [{translateX: -10}, {translateY: 48}],
       };
@@ -741,19 +743,19 @@ const Airbnb = () => {
           openWho.value,
           [0, 0.8],
           [330, 67],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         width: interpolate(
           openWho.value,
           [0, 0.8],
-          [width - 20, width - 30],
-          Extrapolate.CLAMP,
+          [WIDTH - 20, WIDTH - 30],
+          Extrapolation.CLAMP,
         ),
         borderRadius: interpolate(
           openWho.value,
           [0, 0.8],
           [32, 16],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         transform: [
           {
@@ -761,7 +763,7 @@ const Airbnb = () => {
               openWho.value,
               [0, 0.8],
               [-14, -10],
-              Extrapolate.CLAMP,
+              Extrapolation.CLAMP,
             ),
           },
           {translateY: 48},
@@ -775,19 +777,19 @@ const Airbnb = () => {
           progresWhen.value,
           [0, 0.8],
           [330, 67],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         width: interpolate(
           progresWhen.value,
           [0, 0.8],
-          [width - 20, width - 30],
-          Extrapolate.CLAMP,
+          [WIDTH - 20, WIDTH - 30],
+          Extrapolation.CLAMP,
         ),
         borderRadius: interpolate(
           progresWhen.value,
           [0, 0.8],
           [32, 16],
-          Extrapolate.CLAMP,
+          Extrapolation.CLAMP,
         ),
         transform: [
           {
@@ -795,7 +797,7 @@ const Airbnb = () => {
               progresWhen.value,
               [0, 0.8],
               [-14, -10],
-              Extrapolate.CLAMP,
+              Extrapolation.CLAMP,
             ),
           },
           {translateY: 48},
@@ -808,13 +810,13 @@ const Airbnb = () => {
         progress.value,
         [0, 0.8],
         [60, 330],
-        Extrapolate.CLAMP,
+        Extrapolation.CLAMP,
       ),
       width: interpolate(
         progress.value,
         [0, 0.8],
-        [width - 100, width - 20],
-        Extrapolate.CLAMP,
+        [WIDTH - 100, WIDTH - 20],
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
@@ -822,7 +824,7 @@ const Airbnb = () => {
             progress.value,
             [0, 0.8],
             [0, -14],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
         {
@@ -830,7 +832,7 @@ const Airbnb = () => {
             progress.value,
             [0, 0.8],
             [0, 48],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -843,8 +845,8 @@ const Airbnb = () => {
     }
 
     return {
-      height: interpolate(progressWhereTo.value, [0, 1], [330, height]),
-      width: interpolate(progressWhereTo.value, [0, 1], [width - 20, width]),
+      height: interpolate(progressWhereTo.value, [0, 1], [330, HEIGHT]),
+      width: interpolate(progressWhereTo.value, [0, 1], [WIDTH - 20, WIDTH]),
       transform: [
         {translateX: interpolate(progressWhereTo.value, [0, 1], [-14, -24])},
         {
@@ -852,7 +854,7 @@ const Airbnb = () => {
             progress.value,
             [0, 0.8],
             [0, 48],
-            Extrapolate.CLAMP,
+            Extrapolation.CLAMP,
           ),
         },
       ],
@@ -870,7 +872,7 @@ const Airbnb = () => {
       [0, 1],
       ['rgb(255,255,255)', 'rgb(247,247,247)'],
     ),
-    width: interpolate(progressWhereTo.value, [0, 1], [width - 72, width - 48]),
+    width: interpolate(progressWhereTo.value, [0, 1], [WIDTH - 72, WIDTH - 48]),
     transform: [
       {translateY: interpolate(progressWhereTo.value, [0, 1], [0, -60])},
     ],
@@ -932,7 +934,7 @@ const Airbnb = () => {
           translateX: interpolate(
             translatePicker.value,
             [0, 1, 2],
-            [0, (width - 90) / 3, 2 * ((width - 90) / 3)],
+            [0, (WIDTH - 90) / 3, 2 * ((WIDTH - 90) / 3)],
           ),
         },
       ],
@@ -1407,7 +1409,7 @@ const Airbnb = () => {
                       styles.marLeft24,
                       styles.searchListContainer,
                       listSearchStyle,
-                      {height: height - top - insets.bottom - 156},
+                      {height: HEIGHT - top - insets.bottom - 156},
                     ]}>
                     <Text
                       style={[styles.marBot24, styles.fontW500, styles.font16]}>
@@ -1503,7 +1505,7 @@ const Airbnb = () => {
                   pastScrollRange={0}
                   markingType={'period'}
                   futureScrollRange={3}
-                  calendarWidth={width - 48}
+                  calendarWidth={WIDTH - 48}
                   calendarHeight={280}
                   onDayPress={setDay}
                   markedDates={periodo}
@@ -1516,7 +1518,7 @@ const Airbnb = () => {
                       } ${date.getFullYear()}`}</Text>
                     </View>
                   )}
-                  style={[styles.marLeft10, {height: height - top - 464}]}
+                  style={[styles.marLeft10, {height: HEIGHT - top - 464}]}
                 />
                 <View style={[styles.borderLine, styles.marBot10]} />
                 <FlatList
@@ -1619,9 +1621,9 @@ const Airbnb = () => {
                 <Text
                   style={[
                     styles.boldWhere,
-                    height > 685 && height < 750
+                    HEIGHT > 685 && HEIGHT < 750
                       ? styles.marBot24
-                      : height > 750
+                      : HEIGHT > 750
                       ? styles.marBot36
                       : styles.marBot16,
                     styles.padLeft24,
@@ -1693,7 +1695,7 @@ const Airbnb = () => {
                   styles.widthCenter,
                   {
                     paddingBottom: insets.bottom,
-                    height: height > 800 ? 100 : 48 + (insets.bottom || 24),
+                    height: HEIGHT > 800 ? 100 : 48 + (insets.bottom || 24),
                   },
                 ]}>
                 <Pressable style={styles.padding8} onPress={onPressClear}>
@@ -1775,7 +1777,7 @@ const styles = StyleSheet.create({
   },
   initialDim: {
     height: 60,
-    width: width - 100,
+    width: WIDTH - 100,
   },
   leftInput: {
     backgroundColor: 'white',
@@ -1835,7 +1837,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: isIOS ? 20 : 6,
     paddingHorizontal: 20,
-    width: width - 72,
+    width: WIDTH - 72,
   },
   padding8: {
     padding: 8,
@@ -1865,7 +1867,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     marginVertical: 16,
-    width: width - 80,
+    width: WIDTH - 80,
     alignSelf: 'center',
     backgroundColor: 'rgb(200,200,200)',
   },
@@ -1941,7 +1943,7 @@ const styles = StyleSheet.create({
     borderColor: '#e9e9e9',
     backgroundColor: 'white',
     marginTop: 60,
-    width: width - 30,
+    width: WIDTH - 30,
     left: -10,
   },
   clearAll: {
@@ -1961,13 +1963,13 @@ const styles = StyleSheet.create({
     color: 'rgb(100,100,100)',
   },
   widthCenter: {
-    width,
+    width: WIDTH,
     alignItems: 'center',
   },
   searchListContainer: {
     position: 'absolute',
     top: 104,
-    width,
+    width: WIDTH,
   },
   searchClockContainer: {
     padding: 16,
@@ -1990,12 +1992,12 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   widthPadTop12: {
-    width: width - 56,
+    width: WIDTH - 56,
     paddingTop: 12,
   },
   pickerContainer: {
     height: 45,
-    width: width - 78,
+    width: WIDTH - 78,
     marginTop: 16,
     marginLeft: 24,
     backgroundColor: 'rgb(225,225,225)',
@@ -2008,7 +2010,7 @@ const styles = StyleSheet.create({
     left: 6,
     height: 33,
     borderRadius: 20,
-    width: (width - 90) / 3,
+    width: (WIDTH - 90) / 3,
     backgroundColor: 'white',
     shadowColor: 'black',
     shadowOffset: {
@@ -2020,7 +2022,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   pickerItem: {
-    width: (width - 89) / 3,
+    width: (WIDTH - 89) / 3,
     alignItems: 'center',
     paddingVertical: 8,
     borderRadius: 20,
@@ -2061,7 +2063,7 @@ const styles = StyleSheet.create({
   borderLine: {
     height: 1,
     backgroundColor: 'rgb(210,210,210)',
-    width: width - 32,
+    width: WIDTH - 32,
   },
   height74: {
     height: 74,
@@ -2084,7 +2086,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   itemCounterContainer: {
-    width: width - 80,
+    width: WIDTH - 80,
     marginHorizontal: 24,
   },
   counterBtnContainer: {

@@ -8,12 +8,12 @@ import Animated, {
   interpolateColor,
 } from 'react-native-reanimated';
 import React from 'react';
+import {WIDTH} from '@utils/device';
 import {faker} from '@faker-js/faker';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import StatusBarManager from '@components/StatusBarManager';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 
-const {width: WIDTH} = Dimensions.get('window');
 const AnimIcon = Animated.createAnimatedComponent(AntDesign);
 
 //Initiallize fake lib with seed + Data

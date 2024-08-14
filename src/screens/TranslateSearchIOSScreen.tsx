@@ -4,7 +4,6 @@ import {
   Platform,
   TextInput,
   Pressable,
-  Dimensions,
   StyleSheet,
 } from 'react-native';
 import Animated, {
@@ -14,11 +13,11 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
+import {WIDTH} from '@utils/device';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const iSiOS = Platform.OS === 'ios';
-const {width} = Dimensions.get('window');
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 const TranslateSearchIOSScreen = () => {
@@ -31,7 +30,7 @@ const TranslateSearchIOSScreen = () => {
 
   const containerStyle = useAnimatedStyle(
     () => ({
-      width: interpolate(progress.value, [0, 1], [width - 60, width - 120]),
+      width: interpolate(progress.value, [0, 1], [WIDTH - 60, WIDTH - 120]),
       transform: [{translateX: interpolate(progress.value, [0, 1], [0, -30])}],
     }),
     [],
@@ -44,7 +43,7 @@ const TranslateSearchIOSScreen = () => {
           translateX: interpolate(
             progress.value,
             [0, 1],
-            [0, -(width - 156 - innerWidth) / 2],
+            [0, -(WIDTH - 156 - innerWidth) / 2],
           ),
         },
       ],

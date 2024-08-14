@@ -8,13 +8,13 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import Feather from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
 import StatusBarManager from '@components/StatusBarManager';
+import {View, StyleSheet, ImageBackground} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import {View, Dimensions, StyleSheet, ImageBackground} from 'react-native';
 
-const {width, height} = Dimensions.get('screen');
 const AnimLinear = Animated.createAnimatedComponent(LinearGradient);
 
 const SLIDER_W = 268;
@@ -154,7 +154,7 @@ const ShutdownIOS = () => {
       <StatusBarManager barStyle="light" />
       <ImageBackground
         source={require('../assets/img/ios_wallpaper.png')}
-        style={{width, height}}>
+        style={{width: WIDTH, height: HEIGHT_SCR}}>
         <Animated.View style={[styles.filterBackground, background]} />
 
         <Animated.View style={styles.sliderContainer}>
@@ -192,14 +192,14 @@ export default ShutdownIOS;
 
 const styles = StyleSheet.create({
   filterBackground: {
-    width,
-    height,
+    width: WIDTH,
+    height: HEIGHT_SCR,
     backgroundColor: 'black',
   },
   sliderContainer: {
     position: 'absolute',
     flexDirection: 'row',
-    left: (width - SLIDER_W) / 2,
+    left: (WIDTH - SLIDER_W) / 2,
     marginTop: 150,
     height: SLIDER_H,
   },

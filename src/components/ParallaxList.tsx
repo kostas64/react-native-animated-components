@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  Image,
-  Animated,
-  Dimensions,
-  StyleSheet,
-} from 'react-native';
 import React from 'react';
+import {WIDTH} from '@utils/device';
 import images from '../assets/parallaxList';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {View, Text, Image, Animated, StyleSheet} from 'react-native';
 
 const data = images.map((image, index) => ({
   key: String(index),
@@ -18,8 +12,7 @@ const data = images.map((image, index) => ({
   )}.jpg`,
 }));
 
-const {width} = Dimensions.get('screen');
-const ITEM_WIDTH = width * 0.76;
+const ITEM_WIDTH = WIDTH * 0.76;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
 
 const ImplementedWith = () => {
@@ -59,18 +52,22 @@ const ParallaxList = () => {
         keyExtractor={item => item.key}
         renderItem={({item, index}) => {
           const inputRange = [
-            (index - 1) * width,
-            index * width,
-            (index + 1) * width,
+            (index - 1) * WIDTH,
+            index * WIDTH,
+            (index + 1) * WIDTH,
           ];
-          const outputRange = [0.7 * -width, 0, 0.7 * width];
+          const outputRange = [0.7 * -WIDTH, 0, 0.7 * WIDTH];
           const translateX = scrollX.interpolate({
             inputRange,
             outputRange,
           });
           return (
             <View
-              style={{width, justifyContent: 'center', alignItems: 'center'}}>
+              style={{
+                width: WIDTH,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
               <View
                 style={{
                   elevation: 50,

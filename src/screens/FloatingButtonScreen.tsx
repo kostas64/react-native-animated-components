@@ -5,7 +5,6 @@ import {
   Keyboard,
   TextInput,
   Pressable,
-  Dimensions,
   StyleSheet,
   ViewStyle,
   ColorValue,
@@ -23,10 +22,10 @@ import Animated, {
   useAnimatedReaction,
 } from 'react-native-reanimated';
 import React, {useRef} from 'react';
+import {WIDTH} from '@utils/device';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const SPACING = 16;
-const {width} = Dimensions.get('screen');
 
 const FAKE_ARRAY = new Array(16).fill(0);
 const image = require('@assets/img/arrow.png');
@@ -153,7 +152,7 @@ const FloatingElement = ({
   const backOpacity = useSharedValue(0);
   const imageRotate = useSharedValue(1);
   const translateCircle = useSharedValue(
-    (width - 30 - (width - (width - 4 * SPACING)) / 2) / 2,
+    (WIDTH - 30 - (WIDTH - (WIDTH - 4 * SPACING)) / 2) / 2,
   );
 
   //Checks
@@ -187,7 +186,7 @@ const FloatingElement = ({
 
   const closeAnimation = React.useCallback(() => {
     const contDur = fadeOutDuration || 10;
-    const finalWidth = snapWidth || width - 4 * SPACING;
+    const finalWidth = snapWidth || WIDTH - 4 * SPACING;
 
     contentOpacity.value = withTiming(0, {duration: contDur});
     backOpacity.value = withTiming(0);
@@ -195,7 +194,7 @@ const FloatingElement = ({
     heightFloating.value = withTiming(60);
     imageRotate.value = withTiming(1);
     translateCircle.value = withTiming(
-      (width - 30 - (width - finalWidth) / 2) / 2,
+      (WIDTH - 30 - (WIDTH - finalWidth) / 2) / 2,
       {},
       finished => {
         if (finished) {
@@ -214,7 +213,7 @@ const FloatingElement = ({
   const openAnimation = React.useCallback(() => {
     const contDur = fadeInDuration || 150;
     const backDropOpacity = backdropOpacity || 0.5;
-    const finalWidth = snapWidth || width - 4 * SPACING;
+    const finalWidth = snapWidth || WIDTH - 4 * SPACING;
 
     if (isOpen.value === 0) {
       contentOpacity.value = withDelay(150, withTiming(1, {duration: contDur}));
@@ -223,7 +222,7 @@ const FloatingElement = ({
       heightFloating.value = withTiming(snapHeight);
       imageRotate.value = withTiming(0);
       translateCircle.value = withTiming(
-        (width - finalWidth) / 2,
+        (WIDTH - finalWidth) / 2,
         {},
         finished => {
           if (finished) {
@@ -380,8 +379,8 @@ const styles = StyleSheet.create({
     height: 86,
   },
   item: {
-    width: (width - SPACING * 3) / 2,
-    height: (width - SPACING * 3) / 2,
+    width: (WIDTH - SPACING * 3) / 2,
+    height: (WIDTH - SPACING * 3) / 2,
     marginBottom: SPACING,
   },
   imageContainer: {

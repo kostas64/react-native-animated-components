@@ -4,26 +4,25 @@ import {
   Animated,
   StatusBar,
   TextStyle,
+  StyleProp,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
   GestureResponderEvent,
-  StyleProp,
 } from 'react-native';
 import React from 'react';
 import Svg, {Polygon} from 'react-native-svg';
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
+import {routes, colors, links} from '@assets/customDrawer';
 import StatusBarManager from '@components/StatusBarManager';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {routes, colors, links} from '@assets/customDrawer';
 import MaskedView from '@react-native-masked-view/masked-view';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const AnimatedPolygon = Animated.createAnimatedComponent(Polygon);
 const AnimatedAntDesign = Animated.createAnimatedComponent(AntDesign);
 
-const {width, height} = Dimensions.get('screen');
-const fromCoords = {x: 0, y: height};
-const toCoords = {x: width, y: 0};
+const fromCoords = {x: 0, y: HEIGHT_SCR};
+const toCoords = {x: WIDTH, y: 0};
 
 type ButtonProps = {
   title: string;
@@ -57,7 +56,7 @@ const Drawer = ({animatedValue, onPress}: DrawerProps) => {
     const listener = animatedValue.addListener(v => {
       if (polygonRef?.current) {
         polygonRef.current.setNativeProps({
-          points: `0,0 ${v.x}, ${v.y} ${width}, ${height} 0, ${height}`,
+          points: `0,0 ${v.x}, ${v.y} ${WIDTH}, ${HEIGHT_SCR} 0, ${HEIGHT_SCR}`,
         });
       }
     });
@@ -68,12 +67,12 @@ const Drawer = ({animatedValue, onPress}: DrawerProps) => {
   }, []);
 
   const opacity = animatedValue.x.interpolate({
-    inputRange: [0, width],
+    inputRange: [0, WIDTH],
     outputRange: [0, 1],
   });
 
   const translateX = animatedValue.x.interpolate({
-    inputRange: [0, width],
+    inputRange: [0, WIDTH],
     outputRange: [-50, 0],
   });
 
@@ -83,13 +82,13 @@ const Drawer = ({animatedValue, onPress}: DrawerProps) => {
       style={[styles.maskedContainer]}
       maskElement={
         <Svg
-          width={width}
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          width={WIDTH}
+          height={HEIGHT_SCR}
+          viewBox={`0 0 ${WIDTH} ${HEIGHT_SCR}`}
           style={{backgroundColor: 'transparent'}}>
           <AnimatedPolygon
             ref={polygonRef}
-            points={`0,0 ${fromCoords.x},${fromCoords.y} ${width}, ${height}  0, ${height}`}
+            points={`0,0 ${fromCoords.x},${fromCoords.y} ${WIDTH}, ${HEIGHT_SCR}  0, ${HEIGHT_SCR}`}
           />
         </Svg>
       }>
@@ -176,13 +175,13 @@ const CustomDrawer = () => {
   const animatedValue = React.useRef(new Animated.ValueXY(fromCoords)).current;
 
   const translateX = animatedValue.y.interpolate({
-    inputRange: [0, height * 0.25],
+    inputRange: [0, HEIGHT_SCR * 0.25],
     outputRange: [100, 0],
     extrapolate: 'clamp',
   });
 
   const opacity = animatedValue.x.interpolate({
-    inputRange: [0, width],
+    inputRange: [0, WIDTH],
     outputRange: [1, 0],
   });
 

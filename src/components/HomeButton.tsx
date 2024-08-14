@@ -1,3 +1,4 @@
+import {typography} from '@utils/typography';
 import React from 'react';
 import {Text, Pressable, StyleSheet} from 'react-native';
 
@@ -26,7 +27,9 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     fontSize: 18,
+    lineHeight: 24,
     color: 'white',
+    fontFamily: typography.regular,
   },
 });
 

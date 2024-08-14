@@ -1,17 +1,9 @@
-import {
-  Text,
-  View,
-  Image,
-  Animated,
-  StatusBar,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
 import React from 'react';
+import {WIDTH} from '@utils/device';
 import {faker} from '@faker-js/faker';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Text, View, Image, Animated, StyleSheet} from 'react-native';
 
-const {width} = Dimensions.get('window');
 const BG_IMG =
   'https://images.pexels.com/photos/1231265/pexels-photo-1231265.jpeg';
 const SPACING = 20;
@@ -166,7 +158,7 @@ const styles = StyleSheet.create({
     marginRight: SPACING / 2,
   },
   textContainer: {
-    width: width - 2 * SPACING - SPACING - AVATAR_SIZE - SPACING,
+    width: WIDTH - 2 * SPACING - SPACING - AVATAR_SIZE - SPACING,
   },
   name: {
     fontSize: 22,

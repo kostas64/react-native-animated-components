@@ -14,6 +14,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-animatedComponents-animatedComponentsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-animatedComponents-animatedComponentsTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C9EE94D6C9524ED3A8A2FFE0 /* Fontspring-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED521C7DAA344DC18E9ECCA0 /* Fontspring-Black.otf */; };
+		1219B366F92F448CAA2BA281 /* Fontspring-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E5C01341D3A549AD92C65D4E /* Fontspring-Bold.otf */; };
+		8BF9F76FFF574B2BABAECE9B /* Fontspring-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EBE46B1B22C441CB8CC5680F /* Fontspring-ExtraLight.otf */; };
+		3AFB6755A4E448738EF96041 /* Fontspring-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D69CE67F294D43BF9A4BFEB8 /* Fontspring-Light.otf */; };
+		0F704E5FD5CB40C1906C373D /* Fontspring-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5750CB617F14DF086621941 /* Fontspring-Regular.otf */; };
+		382972ED59564F41B68CE04A /* Fontspring-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4B8681E94524AB881DAFF30 /* Fontspring-SemiBold.otf */; };
+		298163F4895F4516953C988A /* Fontspring-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = CABD50B03191493FB4FFF908 /* Fontspring-Thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +67,13 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = animatedComponents/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-animatedComponents-animatedComponentsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animatedComponents-animatedComponentsTests.release.xcconfig"; path = "Target Support Files/Pods-animatedComponents-animatedComponentsTests/Pods-animatedComponents-animatedComponentsTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED521C7DAA344DC18E9ECCA0 /* Fontspring-Black.otf */ = {isa = PBXFileReference; name = "Fontspring-Black.otf"; path = "../src/assets/fonts/Fontspring-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E5C01341D3A549AD92C65D4E /* Fontspring-Bold.otf */ = {isa = PBXFileReference; name = "Fontspring-Bold.otf"; path = "../src/assets/fonts/Fontspring-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EBE46B1B22C441CB8CC5680F /* Fontspring-ExtraLight.otf */ = {isa = PBXFileReference; name = "Fontspring-ExtraLight.otf"; path = "../src/assets/fonts/Fontspring-ExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D69CE67F294D43BF9A4BFEB8 /* Fontspring-Light.otf */ = {isa = PBXFileReference; name = "Fontspring-Light.otf"; path = "../src/assets/fonts/Fontspring-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C5750CB617F14DF086621941 /* Fontspring-Regular.otf */ = {isa = PBXFileReference; name = "Fontspring-Regular.otf"; path = "../src/assets/fonts/Fontspring-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F4B8681E94524AB881DAFF30 /* Fontspring-SemiBold.otf */ = {isa = PBXFileReference; name = "Fontspring-SemiBold.otf"; path = "../src/assets/fonts/Fontspring-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CABD50B03191493FB4FFF908 /* Fontspring-Thin.otf */ = {isa = PBXFileReference; name = "Fontspring-Thin.otf"; path = "../src/assets/fonts/Fontspring-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +177,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				BDA1EB417EB941A2867135F9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -188,6 +203,21 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		BDA1EB417EB941A2867135F9 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				ED521C7DAA344DC18E9ECCA0 /* Fontspring-Black.otf */,
+				E5C01341D3A549AD92C65D4E /* Fontspring-Bold.otf */,
+				EBE46B1B22C441CB8CC5680F /* Fontspring-ExtraLight.otf */,
+				D69CE67F294D43BF9A4BFEB8 /* Fontspring-Light.otf */,
+				C5750CB617F14DF086621941 /* Fontspring-Regular.otf */,
+				F4B8681E94524AB881DAFF30 /* Fontspring-SemiBold.otf */,
+				CABD50B03191493FB4FFF908 /* Fontspring-Thin.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -285,6 +315,13 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				C9EE94D6C9524ED3A8A2FFE0 /* Fontspring-Black.otf in Resources */,
+				1219B366F92F448CAA2BA281 /* Fontspring-Bold.otf in Resources */,
+				8BF9F76FFF574B2BABAECE9B /* Fontspring-ExtraLight.otf in Resources */,
+				3AFB6755A4E448738EF96041 /* Fontspring-Light.otf in Resources */,
+				0F704E5FD5CB40C1906C373D /* Fontspring-Regular.otf in Resources */,
+				382972ED59564F41B68CE04A /* Fontspring-SemiBold.otf in Resources */,
+				298163F4895F4516953C988A /* Fontspring-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

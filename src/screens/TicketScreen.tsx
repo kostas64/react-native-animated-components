@@ -1,7 +1,6 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
-
-const {width} = Dimensions.get('window');
+import {WIDTH} from '@utils/device';
+import {StyleSheet, Text, View} from 'react-native';
 
 const TicketPart = ({
   isFirstCard = false,
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   cardContainer: {
-    width: width - 48,
+    width: WIDTH - 48,
     padding: 24,
     borderLeftWidth: 1,
     borderRightWidth: 1,
