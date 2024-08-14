@@ -1,6 +1,7 @@
 import Animated, {
   interpolate,
   SharedValue,
+  useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
 } from 'react-native-reanimated';
@@ -42,11 +43,11 @@ const ListItem = React.memo(({item, index, unit, scrollOffset}: TListItem) => {
     opacity: interpolate(
       scrollOffset.value,
       [
-        index * 110 - 40,
-        index * 110 - 20,
-        index * 110,
-        index * 110 + 20,
-        index * 110 + 40,
+        index * 112 - 40,
+        index * 112 - 20,
+        index * 112,
+        index * 112 + 20,
+        index * 112 + 40,
       ],
       [0.2, 0.5, 1, 0.5, 0.2],
     ),
@@ -65,7 +66,7 @@ const ValueArrowPicker = ({
   value = range[0],
   setValue,
 }: TValueRangePicker) => {
-  const listRef = React.useRef<FlatList>(null); //@ts-ignore
+  const listRef = useAnimatedRef<FlatList>(); //@ts-ignore
   const scrollOffset = useScrollViewOffset(listRef);
 
   const values = new Array(range[1] - range[0] + 1)
@@ -104,7 +105,7 @@ const ValueArrowPicker = ({
         disabled={value === range[0]}
         onPress={() => onPressArrow('up')}
       />
-      <View style={{height: 110}}>
+      <View style={{height: 112}}>
         <FlatList
           ref={listRef}
           data={values}
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   itemContainer: {
-    height: 110,
+    height: 112,
     justifyContent: 'center',
   },
   item: {

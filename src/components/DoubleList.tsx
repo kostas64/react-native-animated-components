@@ -112,7 +112,9 @@ const List = React.forwardRef(
       }}
       onMomentumScrollEnd={e =>
         !!onItemIndexChanged &&
-        onItemIndexChanged(e.nativeEvent.contentOffset.y / ITEM_HEIGHT)
+        onItemIndexChanged(
+          Math.round(e.nativeEvent.contentOffset.y / ITEM_HEIGHT),
+        )
       }
     />
   ),
@@ -132,7 +134,7 @@ const ImplementedWith = () => {
 const DoubleList = () => {
   const [index, setIndex] = React.useState(0);
   const onConnectPress = React.useCallback(() => {
-    Alert.alert('Connect with:', data[index].name.toUpperCase());
+    Alert.alert('Connect with:', data?.[index]?.name?.toUpperCase());
   }, [index]);
   const yellowRef = React.useRef();
   const darkRef = React.useRef<FlatList>();

@@ -14,7 +14,7 @@ import StatusBarManager from '@components/StatusBarManager';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {View, Dimensions, StyleSheet, ImageBackground} from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('screen');
 const AnimLinear = Animated.createAnimatedComponent(LinearGradient);
 
 const SLIDER_W = 268;

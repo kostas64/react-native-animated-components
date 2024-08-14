@@ -10,6 +10,7 @@ import {
 import Animated, {
   interpolate,
   SharedValue,
+  useAnimatedRef,
   useAnimatedStyle,
   useScrollViewOffset,
 } from 'react-native-reanimated';
@@ -64,7 +65,7 @@ const ListItem = ({
 };
 
 const ValueListPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
-  const scrollRef = React.useRef<FlatList>(null); //@ts-ignore
+  const scrollRef = useAnimatedRef<FlatList>(); //@ts-ignore
   const scrollOffset = useScrollViewOffset(scrollRef);
 
   //Empty items to center our first visible item

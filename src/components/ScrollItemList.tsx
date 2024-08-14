@@ -70,9 +70,7 @@ const ScrollItem = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[
           styles.flatlistContainer,
-          {
-            paddingTop: (StatusBar.currentHeight || 0) + insets.top + 100,
-          },
+          {paddingTop: insets.top + 100},
         ]}
         keyExtractor={item => item.key}
         renderItem={({item, index}) => {

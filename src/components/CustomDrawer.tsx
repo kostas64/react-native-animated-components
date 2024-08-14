@@ -21,7 +21,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 const AnimatedPolygon = Animated.createAnimatedComponent(Polygon);
 const AnimatedAntDesign = Animated.createAnimatedComponent(AntDesign);
 
-const {width, height} = Dimensions.get('window');
+const {width, height} = Dimensions.get('screen');
 const fromCoords = {x: 0, y: height};
 const toCoords = {x: width, y: 0};
 
