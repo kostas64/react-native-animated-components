@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native-stack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
+import ChatScreen from './screens/ChatScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
 import NFCReader from './screens/NFCReaderScreen';
@@ -55,6 +56,7 @@ type TStackList = {
   ValuePickers: undefined;
   LikeInteraction: undefined;
   CircularAnimatedText: undefined;
+  Chat: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -109,6 +111,7 @@ function App() {
             name="CircularAnimatedText"
             component={CircularAnimatedTextScreen}
           />
+          <Stack.Screen name="Chat" component={ChatScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

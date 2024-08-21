@@ -31,7 +31,8 @@ type TDATA = {
       | 'CreditCard'
       | 'ValuePickers'
       | 'LikeInteraction'
-      | 'CircularAnimatedText';
+      | 'CircularAnimatedText'
+      | 'Chat';
   }[];
 }[];
 
@@ -106,6 +107,11 @@ export const DATA: TDATA = [
         label: 'Fade Item Out',
         backgroundColor: '#ff0059',
         screen: 'ScrollItem',
+      },
+      {
+        label: 'Chat',
+        backgroundColor: '#ff8c00',
+        screen: 'Chat',
       },
     ],
   },
