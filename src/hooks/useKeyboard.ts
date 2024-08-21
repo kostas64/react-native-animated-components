@@ -11,39 +11,27 @@ export const useKeyboard = (considerAndroid = false) => {
       return () => {};
     }
 
-    function onKeyboardWillHide() {
+    function onKeyboardHide() {
       setKeyboardHeight(0);
     }
 
-    function onKeyboardWillShow(e: KeyboardEvent) {
+    function onKeyboardShow(e: KeyboardEvent) {
       setKeyboardHeight(e.endCoordinates.height);
     }
 
-    const showDidSubscription = Keyboard.addListener(
-      'keyboardDidShow',
-      onKeyboardWillShow,
-    );
-
-    const didHideSubscription = Keyboard.addListener(
-      'keyboardDidHide',
-      onKeyboardWillHide,
-    );
-
-    const showWillSubscription = Keyboard.addListener(
-      'keyboardWillShow',
-      onKeyboardWillShow,
+    const showSubscription = Keyboard.addListener(
+      isAndroid ? 'keyboardDidShow' : 'keyboardWillShow',
+      onKeyboardShow,
     );
 
     const hideSubscription = Keyboard.addListener(
-      'keyboardWillHide',
-      onKeyboardWillHide,
+      isAndroid ? 'keyboardDidHide' : 'keyboardWillHide',
+      onKeyboardHide,
     );
 
     return () => {
       !!hideSubscription && hideSubscription.remove();
-      !!didHideSubscription && didHideSubscription.remove();
-      !!showDidSubscription && showDidSubscription.remove();
-      !!showWillSubscription && showWillSubscription.remove();
+      !!showSubscription && showSubscription.remove();
     };
   }, [considerAndroid]);
 
