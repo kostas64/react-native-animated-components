@@ -35,10 +35,10 @@ import Animated, {
   useAnimatedKeyboard,
 } from 'react-native-reanimated';
 import Haptic from 'react-native-haptic-feedback';
-import {CaptureOptions, captureScreen} from 'react-native-view-shot';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {CaptureOptions, captureScreen} from 'react-native-view-shot';
 
 import {MESSAGES} from '@assets/messages';
 import {typography} from '@utils/typography';
@@ -398,10 +398,7 @@ const MessageItem = React.memo(
               <Animated.View
                 exiting={customExiting}
                 entering={customEntering}
-                style={[
-                  styles.smallEmojiContainer,
-                  !item?.isOwnerOfChat && styles.leftPos,
-                ]}>
+                style={styles.smallEmojiContainer}>
                 <Image source={item.emoji} style={styles.smallEmoji} />
               </Animated.View>
             )}
@@ -770,16 +767,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 14,
-    right: -12,
-    bottom: -12,
+    right: 12,
+    bottom: -14,
     position: 'absolute',
   },
   smallEmoji: {
     width: 16,
     height: 16,
-  },
-  leftPos: {
-    left: -12,
-    bottom: -12,
   },
 });
