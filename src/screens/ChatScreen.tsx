@@ -10,6 +10,7 @@ import {
   Text,
   View,
   Image,
+  LogBox,
   FlatList,
   Keyboard,
   TextInput,
@@ -45,6 +46,9 @@ import {typography} from '@utils/typography';
 import {useKeyboard} from '@hooks/useKeyboard';
 import {HAPTIC_CONFIG} from '@utils/haptics';
 import {HEIGHT_SCR, isAndroid, isIOS, WIDTH} from '@utils/device';
+
+//Ignore in case you run in simulator
+LogBox.ignoreLogs(['RNReactNativeHapticFeedback is not available']);
 
 const EMOJI = [
   require('@assets/img/emoji/happy.png'),
