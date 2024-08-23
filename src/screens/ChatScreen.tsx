@@ -585,7 +585,7 @@ const ChatScreen = () => {
 
         <Animated.View style={[translateList, {flex: 1}]}>
           <Wrapper>
-            <Animated.FlatList
+            <FlatList
               inverted
               ref={listRef}
               data={messages}
@@ -661,6 +661,7 @@ const styles = StyleSheet.create({
     width: WIDTH - 136,
     fontFamily: typography.semiBold,
     lineHeight: 20,
+    color: 'black',
   },
   sendContainer: {
     backgroundColor: '#033de6',
