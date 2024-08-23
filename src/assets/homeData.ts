@@ -32,7 +32,8 @@ type TDATA = {
       | 'ValuePickers'
       | 'LikeInteraction'
       | 'CircularAnimatedText'
-      | 'Chat';
+      | 'Chat'
+      | 'LineChart';
   }[];
 }[];
 
@@ -112,6 +113,20 @@ export const DATA: TDATA = [
         label: 'Chat',
         backgroundColor: '#ff8c00',
         screen: 'Chat',
+      },
+    ],
+  },
+  {
+    iconName: 'linechart',
+    iconComp: 'AntDesign',
+    iconText: 'Charts',
+    iconColor: '#3f546a',
+    iconSize: 32,
+    items: [
+      {
+        label: 'Line Chart',
+        backgroundColor: '#0ad2ff',
+        screen: 'LineChart',
       },
     ],
   },
