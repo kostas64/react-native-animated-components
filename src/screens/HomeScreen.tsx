@@ -220,6 +220,8 @@ const HomeBody = ({
             ? FontAwesome
             : mainItem.iconComp === 'MaterialCommunityIcons'
             ? MaterialCommunityIcons
+            : mainItem.iconComp === 'AntDesign'
+            ? AntDesign
             : Ionicons;
 
         return (
