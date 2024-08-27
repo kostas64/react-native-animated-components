@@ -477,17 +477,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#e3e5d7',
     paddingHorizontal: 8,
     paddingLeft: isIOS ? 6 : 0,
-    paddingRight: isIOS ? 7 : 0,
+    paddingRight: isIOS ? 8 : 2,
     minWidth: 46,
     paddingVertical: isIOS ? 6 : 0,
     borderRadius: 8,
   },
   lineH19: {
-    lineHeight: 19,
+    lineHeight: 17,
   },
   androidReText: {
     height: 32,
     lineHeight: 10,
-    top: 5,
+    top: 4,
   },
 });

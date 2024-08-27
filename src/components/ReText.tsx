@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, TextInput, TextStyle} from 'react-native';
 import Animated, {SharedValue, useAnimatedProps} from 'react-native-reanimated';
 
+Animated.addWhitelistedNativeProps({text: true});
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 type Props = {

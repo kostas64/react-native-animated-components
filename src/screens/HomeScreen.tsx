@@ -293,9 +293,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   listLabel: {
-    fontSize: 22,
+    fontSize: 18,
     color: '#3f546a',
-    paddingLeft: 4,
+    paddingLeft: 8,
     lineHeight: 32,
     fontFamily: typography.semiBold,
   },
@@ -303,8 +303,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   icon: {
-    width: 34,
-    height: 34,
+    width: 30,
+    height: 30,
   },
   nameProfRow: {
     flexDirection: 'row',
