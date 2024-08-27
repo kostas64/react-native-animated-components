@@ -2,32 +2,28 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/Fontspring-Black.otf",
-      "sha1": "b657ef10ccaece16edbdd37576720d9eabdeb784"
+      "path": "src/assets/fonts/Montserrat-Bold.ttf",
+      "sha1": "98c66622226025f539568865af96df5175e2979c"
     },
     {
-      "path": "src/assets/fonts/Fontspring-Bold.otf",
-      "sha1": "fb8b81fe1ffd5ba5ed32db03f06bd4c7bf930453"
+      "path": "src/assets/fonts/Montserrat-ExtraBold.ttf",
+      "sha1": "1e3298f51b4766e2810a4a2c09a2c75c323d5e7e"
     },
     {
-      "path": "src/assets/fonts/Fontspring-ExtraLight.otf",
-      "sha1": "a3022663d2763c873881b39c7b666872c93547aa"
+      "path": "src/assets/fonts/Montserrat-Light.ttf",
+      "sha1": "9dfbddad5025d8d224b4939e54c1a4ac8ac6015b"
     },
     {
-      "path": "src/assets/fonts/Fontspring-Light.otf",
-      "sha1": "4d58c59a00c4987dcbc94f34696444fc738240f2"
+      "path": "src/assets/fonts/Montserrat-Medium.ttf",
+      "sha1": "25c429296b9d6eb242cba92d1ee7fae484b019cb"
     },
     {
-      "path": "src/assets/fonts/Fontspring-Regular.otf",
-      "sha1": "c72cac46becccfd541fab3b6aa4d6f10c916fabe"
+      "path": "src/assets/fonts/Montserrat-Regular.ttf",
+      "sha1": "bb895d19b8a1fbe1c57fc89cac5da82fdc8fdef4"
     },
     {
-      "path": "src/assets/fonts/Fontspring-SemiBold.otf",
-      "sha1": "dbcc34b870680da338b97d75444ddea892c5cee8"
-    },
-    {
-      "path": "src/assets/fonts/Fontspring-Thin.otf",
-      "sha1": "b870663090133e4df1f947c5c8a5f8b094473715"
+      "path": "src/assets/fonts/Montserrat-SemiBold.ttf",
+      "sha1": "0754a3a23d8d68b0f0558df3109e0df86e968f24"
     }
   ]
 }

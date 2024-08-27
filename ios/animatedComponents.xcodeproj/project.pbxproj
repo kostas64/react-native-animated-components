@@ -9,18 +9,17 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* animatedComponentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* animatedComponentsTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-animatedComponents.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-animatedComponents.a */; };
-		0F704E5FD5CB40C1906C373D /* Fontspring-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5750CB617F14DF086621941 /* Fontspring-Regular.otf */; };
-		1219B366F92F448CAA2BA281 /* Fontspring-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E5C01341D3A549AD92C65D4E /* Fontspring-Bold.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		298163F4895F4516953C988A /* Fontspring-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = CABD50B03191493FB4FFF908 /* Fontspring-Thin.otf */; };
-		382972ED59564F41B68CE04A /* Fontspring-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4B8681E94524AB881DAFF30 /* Fontspring-SemiBold.otf */; };
-		3AFB6755A4E448738EF96041 /* Fontspring-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D69CE67F294D43BF9A4BFEB8 /* Fontspring-Light.otf */; };
+		4B9CACAE93C84D2DB3C201E7 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AF69CC257474407907DBF89 /* Montserrat-Bold.ttf */; };
+		51B5FAE7AB204A77A5D22DA2 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA0A701ECD544B81B237C33C /* Montserrat-SemiBold.ttf */; };
+		583A5CFA13264D3083952146 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6AFF744AEA541D4BAF48BA7 /* Montserrat-Light.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-animatedComponents-animatedComponentsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-animatedComponents-animatedComponentsTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		8BF9F76FFF574B2BABAECE9B /* Fontspring-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EBE46B1B22C441CB8CC5680F /* Fontspring-ExtraLight.otf */; };
-		C9EE94D6C9524ED3A8A2FFE0 /* Fontspring-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED521C7DAA344DC18E9ECCA0 /* Fontspring-Black.otf */; };
+		90DDB5A5AA654FD68296F8A1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6905AACDB9CC42668ADB9883 /* Montserrat-Regular.ttf */; };
+		B0A4EF5A80B84B009C985598 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22167C343E8F4EC1A95D22B7 /* Montserrat-Medium.ttf */; };
+		C2F13D236FC04A11BCB58FE5 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CEE43AD5DB548CF876C967E /* Montserrat-ExtraBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +43,14 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = animatedComponents/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = animatedComponents/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-animatedComponents-animatedComponentsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-animatedComponents-animatedComponentsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CEE43AD5DB548CF876C967E /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../src/assets/fonts/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		22167C343E8F4EC1A95D22B7 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		3AF69CC257474407907DBF89 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-animatedComponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animatedComponents.debug.xcconfig"; path = "Target Support Files/Pods-animatedComponents/Pods-animatedComponents.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-animatedComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animatedComponents.release.xcconfig"; path = "Target Support Files/Pods-animatedComponents/Pods-animatedComponents.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-animatedComponents-animatedComponentsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animatedComponents-animatedComponentsTests.debug.xcconfig"; path = "Target Support Files/Pods-animatedComponents-animatedComponentsTests/Pods-animatedComponents-animatedComponentsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-animatedComponents.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-animatedComponents.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6905AACDB9CC42668ADB9883 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		703F20D829D461BE00CB7826 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		703F20D929D461BE00CB7826 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		703F20DA29D461BE00CB7826 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -67,14 +70,9 @@
 		70741D892C76638C00C178FB /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = animatedComponents/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-animatedComponents-animatedComponentsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animatedComponents-animatedComponentsTests.release.xcconfig"; path = "Target Support Files/Pods-animatedComponents-animatedComponentsTests/Pods-animatedComponents-animatedComponentsTests.release.xcconfig"; sourceTree = "<group>"; };
-		C5750CB617F14DF086621941 /* Fontspring-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-Regular.otf"; path = "../src/assets/fonts/Fontspring-Regular.otf"; sourceTree = "<group>"; };
-		CABD50B03191493FB4FFF908 /* Fontspring-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-Thin.otf"; path = "../src/assets/fonts/Fontspring-Thin.otf"; sourceTree = "<group>"; };
-		D69CE67F294D43BF9A4BFEB8 /* Fontspring-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-Light.otf"; path = "../src/assets/fonts/Fontspring-Light.otf"; sourceTree = "<group>"; };
-		E5C01341D3A549AD92C65D4E /* Fontspring-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-Bold.otf"; path = "../src/assets/fonts/Fontspring-Bold.otf"; sourceTree = "<group>"; };
-		EBE46B1B22C441CB8CC5680F /* Fontspring-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-ExtraLight.otf"; path = "../src/assets/fonts/Fontspring-ExtraLight.otf"; sourceTree = "<group>"; };
+		CA0A701ECD544B81B237C33C /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		E6AFF744AEA541D4BAF48BA7 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED521C7DAA344DC18E9ECCA0 /* Fontspring-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-Black.otf"; path = "../src/assets/fonts/Fontspring-Black.otf"; sourceTree = "<group>"; };
-		F4B8681E94524AB881DAFF30 /* Fontspring-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fontspring-SemiBold.otf"; path = "../src/assets/fonts/Fontspring-SemiBold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,13 +214,12 @@
 		BDA1EB417EB941A2867135F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ED521C7DAA344DC18E9ECCA0 /* Fontspring-Black.otf */,
-				E5C01341D3A549AD92C65D4E /* Fontspring-Bold.otf */,
-				EBE46B1B22C441CB8CC5680F /* Fontspring-ExtraLight.otf */,
-				D69CE67F294D43BF9A4BFEB8 /* Fontspring-Light.otf */,
-				C5750CB617F14DF086621941 /* Fontspring-Regular.otf */,
-				F4B8681E94524AB881DAFF30 /* Fontspring-SemiBold.otf */,
-				CABD50B03191493FB4FFF908 /* Fontspring-Thin.otf */,
+				3AF69CC257474407907DBF89 /* Montserrat-Bold.ttf */,
+				1CEE43AD5DB548CF876C967E /* Montserrat-ExtraBold.ttf */,
+				E6AFF744AEA541D4BAF48BA7 /* Montserrat-Light.ttf */,
+				22167C343E8F4EC1A95D22B7 /* Montserrat-Medium.ttf */,
+				6905AACDB9CC42668ADB9883 /* Montserrat-Regular.ttf */,
+				CA0A701ECD544B81B237C33C /* Montserrat-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -329,13 +326,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				C9EE94D6C9524ED3A8A2FFE0 /* Fontspring-Black.otf in Resources */,
-				1219B366F92F448CAA2BA281 /* Fontspring-Bold.otf in Resources */,
-				8BF9F76FFF574B2BABAECE9B /* Fontspring-ExtraLight.otf in Resources */,
-				3AFB6755A4E448738EF96041 /* Fontspring-Light.otf in Resources */,
-				0F704E5FD5CB40C1906C373D /* Fontspring-Regular.otf in Resources */,
-				382972ED59564F41B68CE04A /* Fontspring-SemiBold.otf in Resources */,
-				298163F4895F4516953C988A /* Fontspring-Thin.otf in Resources */,
+				4B9CACAE93C84D2DB3C201E7 /* Montserrat-Bold.ttf in Resources */,
+				C2F13D236FC04A11BCB58FE5 /* Montserrat-ExtraBold.ttf in Resources */,
+				583A5CFA13264D3083952146 /* Montserrat-Light.ttf in Resources */,
+				B0A4EF5A80B84B009C985598 /* Montserrat-Medium.ttf in Resources */,
+				90DDB5A5AA654FD68296F8A1 /* Montserrat-Regular.ttf in Resources */,
+				51B5FAE7AB204A77A5D22DA2 /* Montserrat-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
