@@ -42,7 +42,7 @@ export const DATA: TDATA = [
     iconName: 'animation',
     iconComp: 'MaterialCommunityIcons',
     iconColor: '#3f546a',
-    iconSize: 40,
+    iconSize: 32,
     iconText: 'Replicated animations',
     items: [
       {
@@ -86,7 +86,7 @@ export const DATA: TDATA = [
     iconName: 'clipboard-list',
     iconComp: 'MaterialCommunityIcons',
     iconColor: '#3f546a',
-    iconSize: 40,
+    iconSize: 32,
     iconText: 'List',
     items: [
       {
@@ -121,7 +121,7 @@ export const DATA: TDATA = [
     iconComp: 'AntDesign',
     iconText: 'Charts',
     iconColor: '#3f546a',
-    iconSize: 32,
+    iconSize: 26,
     items: [
       {
         label: 'Line Chart',
@@ -173,7 +173,7 @@ export const DATA: TDATA = [
     iconName: 'code',
     iconComp: 'FontAwesome',
     iconColor: '#3f546a',
-    iconSize: 32,
+    iconSize: 28,
     iconText: 'Common',
     items: [
       {
