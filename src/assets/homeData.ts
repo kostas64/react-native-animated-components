@@ -33,7 +33,7 @@ type TDATA = {
       | 'LikeInteraction'
       | 'CircularAnimatedText'
       | 'Chat'
-      | 'LineChart';
+      | 'Charts';
   }[];
 }[];
 
@@ -124,9 +124,9 @@ export const DATA: TDATA = [
     iconSize: 26,
     items: [
       {
-        label: 'Line Chart',
+        label: 'Charts',
         backgroundColor: '#0ad2ff',
-        screen: 'LineChart',
+        screen: 'Charts',
       },
     ],
   },

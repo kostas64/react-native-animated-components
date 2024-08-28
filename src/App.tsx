@@ -9,12 +9,12 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChatScreen from './screens/ChatScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
+import ChartScreen from './screens/ChartsScreen';
 import NFCReader from './screens/NFCReaderScreen';
 import AirbnbScreen from './screens/AirbnbScreen';
 import TicketScreen from './screens/TicketScreen';
 import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
-import LineChartScreen from './screens/LineChartScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
 import TogglersScreen from './screens/TogglerIOSScreen';
 import DoubleListScreen from './screens/DoubleListScreen';
@@ -58,7 +58,7 @@ type TStackList = {
   LikeInteraction: undefined;
   CircularAnimatedText: undefined;
   Chat: undefined;
-  LineChart: undefined;
+  Charts: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -114,7 +114,7 @@ function App() {
             component={CircularAnimatedTextScreen}
           />
           <Stack.Screen name="Chat" component={ChatScreen} />
-          <Stack.Screen name="LineChart" component={LineChartScreen} />
+          <Stack.Screen name="Charts" component={ChartScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

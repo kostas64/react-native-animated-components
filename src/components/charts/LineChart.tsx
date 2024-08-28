@@ -1,8 +1,9 @@
-import Svg, {
-  Defs,
+import {
+  Svg,
   Path,
-  Rect,
   Stop,
+  Defs,
+  Rect,
   ClipPath,
   LinearGradient,
 } from 'react-native-svg';
@@ -15,16 +16,14 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React, {useImperativeHandle, useRef} from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import React, {useImperativeHandle} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
+import ChartHeader from './ChartHeader';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 import {isAndroid, isIOS} from '@utils/device';
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 type Props = {
   data: number[];
@@ -44,24 +43,7 @@ const data = [
 ];
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon'];
 
-const MyButton = ({title, onPress}: {title: string; onPress: () => void}) => {
-  return (
-    <Pressable onPress={onPress} style={styles.btnContainer}>
-      <Text style={styles.btnLabel}>{title}</Text>
-    </Pressable>
-  );
-};
-
-const ChartHeader = ({iconName, label}: {iconName: string; label: string}) => (
-  <View style={styles.chartHeaderContainer}>
-    <View style={styles.chartHeaderInnerContainer}>
-      <View style={styles.chartHeaderIconContainer}>
-        <AntDesign name={iconName} size={20} color={'#556d36'} />
-      </View>
-      <Text style={styles.chartHeaderLabel}>{label}</Text>
-    </View>
-  </View>
-);
+const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
   const {data, width, height} = props;
@@ -331,65 +313,29 @@ const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
   );
 });
 
-const LineChartScreen = () => {
-  const chartRef = useRef<ChartRef>(null);
-
+const LineChart = React.forwardRef<ChartRef>((_, ref) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 24,
-        backgroundColor: '#eeeee2',
-        gap: 36,
-      }}>
-      <View>
-        <View style={{top: -26}}>
-          <ChartHeader iconName="linechart" label={'Line Chart'} />
-        </View>
-        <AnimatedLineChart
-          ref={chartRef}
-          data={data}
-          width={chartWidth}
-          height={chartHeight}
-        />
+    <>
+      <View style={styles.spaceBottom}>
+        <ChartHeader iconName="linechart" label={'Line Chart'} />
       </View>
-
-      <View style={styles.btnsContainer}>
-        <MyButton title="Animate" onPress={() => chartRef.current?.animate()} />
-        <MyButton
-          title="Animate Back"
-          onPress={() => chartRef.current?.animate(false)}
-        />
-      </View>
-    </View>
+      <AnimatedLineChart
+        ref={ref}
+        data={data}
+        width={chartWidth}
+        height={chartHeight}
+      />
+    </>
   );
-};
+});
 
-export default LineChartScreen;
+export default LineChart;
 
 const styles = StyleSheet.create({
-  btnsContainer: {
-    justifyContent: 'space-around',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 52,
-  },
-  btnContainer: {
-    backgroundColor: '#556d36',
-    height: 52,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100,
-    minWidth: 140,
-  },
-  btnLabel: {
-    color: 'white',
-    lineHeight: 22,
-    fontFamily: typography.semiBold,
+  chartHeaderLabel: {
+    lineHeight: 20,
+    color: '#556d36',
+    fontFamily: typography.bold,
   },
   chartBaseContainer: {
     backgroundColor: 'transparent',
@@ -398,8 +344,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   stepValueContainer: {
+    left: -4,
     justifyContent: 'space-between',
     position: 'absolute',
+    alignItems: 'flex-end',
     top: 0,
   },
   stepValueLabel: {
@@ -422,6 +370,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 8,
   },
+  lineChartGestureArea: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+  },
   day: {
     color: '#333333',
     textAlign: 'center',
@@ -441,37 +393,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#151515',
     borderRadius: 10,
   },
-  chartHeaderContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  chartHeaderInnerContainer: {
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e3e5d7',
-    padding: 10,
-    borderRadius: 16,
-  },
-  chartHeaderIconContainer: {
-    backgroundColor: '#eeeee2',
-    marginRight: 10,
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-  },
-  chartHeaderLabel: {
-    lineHeight: 20,
-    color: '#556d36',
-    fontFamily: typography.bold,
-  },
-  lineChartGestureArea: {
-    position: 'absolute',
-    backgroundColor: 'transparent',
-  },
   retextContainer: {
-    top: -36,
+    top: isIOS ? -36 : -37,
     alignItems: 'center',
     position: 'absolute',
     backgroundColor: '#e3e5d7',
@@ -489,5 +412,8 @@ const styles = StyleSheet.create({
     height: 32,
     lineHeight: 10,
     top: 4,
+  },
+  spaceBottom: {
+    marginBottom: 28,
   },
 });
