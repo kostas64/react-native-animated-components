@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   chartHeaderInnerContainer: {
-    alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#e3e5d7',
