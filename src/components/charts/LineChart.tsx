@@ -74,8 +74,8 @@ const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
 
   const animate = (forward = true) => {
     progress.value = withTiming(forward ? 1 : 0, {
-      duration: 2000,
-      easing: Easing.out(Easing.exp),
+      duration: 1250,
+      easing: Easing.out(Easing.ease),
     });
   };
 
@@ -315,7 +315,7 @@ const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
 
 const LineChart = React.forwardRef<ChartRef>((_, ref) => {
   return (
-    <>
+    <View>
       <View style={styles.spaceBottom}>
         <ChartHeader iconName="linechart" label={'Line Chart'} />
       </View>
@@ -325,7 +325,7 @@ const LineChart = React.forwardRef<ChartRef>((_, ref) => {
         width={chartWidth}
         height={chartHeight}
       />
-    </>
+    </View>
   );
 });
 
