@@ -14,7 +14,7 @@ type TDATA = {
       | 'DoubleList'
       | 'Carousel3D'
       | 'ScrollItem'
-      | 'ListWithIndi'
+      | 'ListWithIndicator'
       | 'CustomDrawer'
       | 'DrawerInterpolate'
       | 'Progress'
@@ -123,7 +123,7 @@ export const DATA: TDATA = [
       {
         label: 'Navbar with Indicator',
         backgroundColor: '#0ad2ff',
-        screen: 'ListWithIndi',
+        screen: 'ListWithIndicator',
       },
       {
         label: 'Custom Drawer',
