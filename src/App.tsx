@@ -22,12 +22,12 @@ import ProductListScreen from './screens/ProductListScreen';
 import FloatingButton from './screens/FloatingButtonScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
-import DrawerInterpolate from '@components/DrawerInterpolate';
 import ValuePickersScreen from './screens/ValuePickersScreen';
 import FadeItemListScreen from './screens/FadeItemListScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
 import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
+import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
@@ -88,7 +88,7 @@ function App() {
           <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
           <Stack.Screen
             name="DrawerInterpolate"
-            component={DrawerInterpolate}
+            component={DrawerInterpolateScreen}
           />
           <Stack.Screen name="ProductList" component={ProductListScreen} />
           <Stack.Screen name="PinCode" component={PinCode} />
