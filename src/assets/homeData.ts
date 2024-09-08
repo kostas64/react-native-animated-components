@@ -28,11 +28,11 @@ type TDATA = {
       | 'Ticket'
       | 'TranslateSearchIOS'
       | 'CircularProgressBar'
-      | 'CreditCard'
       | 'ValuePickers'
       | 'LikeInteraction'
       | 'CircularAnimatedText'
-      | 'Chat';
+      | 'Chat'
+      | 'ProductList';
   }[];
 }[];
 
@@ -49,11 +49,6 @@ export const DATA: TDATA = [
         backgroundColor: '#0ad2ff',
         screen: 'Airbnb',
       },
-      // {
-      //   label: 'Credit Card',
-      //   backgroundColor: '#7bc8d2',
-      //   screen: 'CreditCard',
-      // },
       {
         label: 'iOS Shutdown confirmator',
         backgroundColor: '#2962ff',
@@ -112,6 +107,11 @@ export const DATA: TDATA = [
         label: 'Chat',
         backgroundColor: '#ff8c00',
         screen: 'Chat',
+      },
+      {
+        label: 'Product List',
+        backgroundColor: '#95e214',
+        screen: 'ProductList',
       },
     ],
   },
