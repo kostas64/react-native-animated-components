@@ -1,3 +1,5 @@
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
+
 export const routes = [
   'Get started',
   'Features',
@@ -26,3 +28,6 @@ export const colors = [
   '#c02942',
   '#53777a',
 ];
+
+export const fromCoords = {x: 0, y: HEIGHT_SCR};
+export const toCoords = {x: WIDTH, y: 0};
