@@ -67,13 +67,12 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>Fontspring-Black.otf</string>
-		<string>Fontspring-Bold.otf</string>
-		<string>Fontspring-ExtraLight.otf</string>
-		<string>Fontspring-Light.otf</string>
-		<string>Fontspring-Regular.otf</string>
-		<string>Fontspring-SemiBold.otf</string>
-		<string>Fontspring-Thin.otf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-Thin.ttf</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
