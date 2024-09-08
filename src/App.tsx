@@ -15,7 +15,7 @@ import TicketScreen from './screens/TicketScreen';
 import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
-import TogglersScreen from './screens/TogglerIOSScreen';
+import TogglersScreen from './screens/TogglersScreen';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
 import ProductListScreen from './screens/ProductListScreen';
