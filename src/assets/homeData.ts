@@ -13,7 +13,7 @@ type TDATA = {
       | 'Parallax'
       | 'DoubleList'
       | 'Carousel3D'
-      | 'ScrollItem'
+      | 'FadeItem'
       | 'ListWithIndicator'
       | 'CustomDrawer'
       | 'DrawerInterpolate'
@@ -106,7 +106,7 @@ export const DATA: TDATA = [
       {
         label: 'Fade Item Out',
         backgroundColor: '#ff0059',
-        screen: 'ScrollItem',
+        screen: 'FadeItem',
       },
       {
         label: 'Chat',

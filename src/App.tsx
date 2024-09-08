@@ -24,8 +24,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
 import DrawerInterpolate from '@components/DrawerInterpolate';
 import ValuePickersScreen from './screens/ValuePickersScreen';
+import FadeItemListScreen from './screens/FadeItemListScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
-import ScrollItemListScreen from './screens/ScrollItemListScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
 import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
@@ -41,7 +41,7 @@ type TStackList = {
   Progress: undefined;
   DotLoader: undefined;
   Togglers: undefined;
-  ScrollItem: undefined;
+  FadeItem: undefined;
   CustomDrawer: undefined;
   ProductList: undefined;
   DrawerInterpolate: undefined;
@@ -84,7 +84,7 @@ function App() {
           <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
           <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
           <Stack.Screen name="Togglers" component={TogglersScreen} />
-          <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
+          <Stack.Screen name="FadeItem" component={FadeItemListScreen} />
           <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
           <Stack.Screen
             name="DrawerInterpolate"
