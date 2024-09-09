@@ -1,159 +1,15 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
 import Animated, {
-  withTiming,
-  SharedValue,
-  interpolate,
   useSharedValue,
   useAnimatedStyle,
-  interpolateColor,
 } from 'react-native-reanimated';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import {View, FlatList, StyleSheet, ActivityIndicator} from 'react-native';
+
+import NumberItem from '@components/pinCode/NumberItem';
+import Placeholder from '@components/pinCode/Placeholder';
 import StatusBarManager from '@components/StatusBarManager';
-import React, {Dispatch, MutableRefObject, SetStateAction} from 'react';
-
-const AnimPress = Animated.createAnimatedComponent(Pressable);
-
-const PLACEHOLDERS = new Array(4).fill(0);
-const DATA = new Array(12).fill(0).map((_: null, i: number) => i + 1);
-
-const NumberItem = ({
-  value,
-  input,
-  disabled,
-  setInput,
-  inputsRef,
-  setLoading,
-  translateX,
-}: {
-  translateX: SharedValue<number>;
-  value: number | React.ReactNode;
-  input: string;
-  disabled: boolean;
-  setInput: Dispatch<SetStateAction<string>>;
-  inputsRef: MutableRefObject<PlaceholderFunction | undefined>[];
-  setLoading: Dispatch<SetStateAction<boolean>>;
-}) => {
-  const progress = useSharedValue(0);
-  const animStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      progress.value,
-      [0, 1],
-      ['#141416', '#fee3d6'],
-    ),
-  }));
-
-  const onPressIn = () => {
-    const indexToAnimate = input.length;
-
-    if (typeof value === 'number') {
-      setInput(old => `${old}${value}`);
-
-      inputsRef?.[indexToAnimate]?.current?.animatePlaceholder();
-
-      if (indexToAnimate === 3) {
-        setTimeout(() => {
-          setLoading(true);
-          setInput('');
-        }, 300);
-
-        setTimeout(() => {
-          setLoading(false);
-          translateX.value = withTiming(-8, {duration: 100}, () => {
-            translateX.value = withTiming(8, {duration: 50}, () => {
-              translateX.value = withTiming(-4, {duration: 50}, () => {
-                translateX.value = withTiming(0, {duration: 100});
-              });
-            });
-          });
-
-          setTimeout(() => {
-            inputsRef?.[0]?.current?.animateRemove();
-            inputsRef?.[1]?.current?.animateRemove();
-            inputsRef?.[2]?.current?.animateRemove();
-            inputsRef?.[3]?.current?.animateRemove();
-          }, 300);
-        }, 2000);
-      }
-    } else if (typeof value === 'string') {
-      setInput(old => old.slice(0, -1));
-      inputsRef?.[indexToAnimate - 1]?.current?.animateRemove();
-    }
-    progress.value = withTiming(1 - progress.value);
-  };
-
-  const onPressOut = () => {
-    progress.value = withTiming(0);
-  };
-
-  const getValue = () => {
-    if (typeof value === 'number') {
-      return <Text style={styles.number}>{value}</Text>;
-    } else {
-      return <Ionicons name="backspace-outline" size={36} color={'white'} />;
-    }
-  };
-
-  return (
-    <AnimPress
-      disabled={disabled}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      style={[animStyle, styles.numberContainer]}>
-      {getValue()}
-    </AnimPress>
-  );
-};
-
-type PlaceholderFunction = {
-  animatePlaceholder: () => void;
-  animateRemove: () => void;
-};
-
-const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
-  ({}, ref) => {
-    const progress = useSharedValue(0);
-
-    const animStyle = useAnimatedStyle(() => ({
-      transform: [
-        {translateY: interpolate(progress.value, [0, 0.45, 1], [0, 0, -16])},
-      ],
-      height: interpolate(progress.value, [0, 0.45, 1], [1, 1, 16]),
-      width: interpolate(progress.value, [0, 0.45, 1], [16, 1, 16]),
-      borderRadius: interpolate(progress.value, [0, 0.45, 1], [0, 0, 8]),
-      backgroundColor: interpolateColor(
-        progress.value,
-        [0, 0.45, 0.85, 1],
-        ['#ffecdb', '#ffecdb', '#ffecdb', '#e3a68f'],
-      ),
-    }));
-
-    React.useImperativeHandle(ref, () => ({
-      animatePlaceholder,
-      animateRemove,
-    }));
-
-    const animatePlaceholder = () => {
-      progress.value = withTiming(1, {duration: 400});
-    };
-
-    const animateRemove = () => {
-      progress.value = withTiming(0, {duration: 400});
-    };
-
-    return (
-      <View style={styles.innerContainer}>
-        <Animated.View style={[animStyle, styles.placeholder]} />
-      </View>
-    );
-  },
-);
+import {DATA, PLACEHOLDERS} from '@components/pinCode/data';
+import {PlaceholderFunction} from '@components/pinCode/types';
 
 const PinCode = () => {
   const translateX = useSharedValue(0);
@@ -233,31 +89,6 @@ const styles = StyleSheet.create({
     marginBottom: 48,
     alignItems: 'center',
     justifyContent: 'flex-end',
-  },
-  innerContainer: {
-    height: 40,
-    width: 48,
-    paddingBottom: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  placeholder: {
-    backgroundColor: '#ffecdb',
-  },
-  numberContainer: {
-    margin: 8,
-    width: 90,
-    height: 90,
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  number: {
-    color: 'white',
-    fontSize: 36,
-    fontWeight: '100',
   },
   empty: {
     margin: 8,
