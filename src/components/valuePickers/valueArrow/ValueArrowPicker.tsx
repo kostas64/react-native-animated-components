@@ -1,64 +1,10 @@
-import Animated, {
-  interpolate,
-  SharedValue,
-  useAnimatedRef,
-  useAnimatedStyle,
-  useScrollViewOffset,
-} from 'react-native-reanimated';
 import React from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {useAnimatedRef, useScrollViewOffset} from 'react-native-reanimated';
 
-import {TValueRangePicker} from 'src/screens/ValuePickersScreen';
-
-type TArrow = {
-  direction: 'up' | 'down';
-  disabled: boolean;
-  onPress: () => void;
-};
-
-type TListItem = {
-  item: number;
-  index: number;
-  unit: string | undefined;
-  scrollOffset: SharedValue<number>;
-};
-
-type TViewableItems = {
-  viewableItems: [{item: number}];
-};
-
-const Arrow = ({direction, onPress = () => {}, disabled = false}: TArrow) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.5} disabled={disabled}>
-    <Entypo
-      size={24}
-      name={`chevron-${direction}`}
-      color={disabled ? 'rgba(255,255,255, 0.20)' : 'rgba(255,255,255, 0.80)'}
-    />
-  </TouchableOpacity>
-);
-
-const ListItem = React.memo(({item, index, unit, scrollOffset}: TListItem) => {
-  const animStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      scrollOffset.value,
-      [
-        index * 112 - 40,
-        index * 112 - 20,
-        index * 112,
-        index * 112 + 20,
-        index * 112 + 40,
-      ],
-      [0.2, 0.5, 1, 0.5, 0.2],
-    ),
-  }));
-
-  return (
-    <Animated.View style={[animStyle, styles.itemContainer]}>
-      <Text style={styles.item}>{`${item}${unit}`}</Text>
-    </Animated.View>
-  );
-});
+import Arrow from './Arrow';
+import ListItem from './ListItem';
+import {TValueRangePicker, TViewableItems} from './types';
 
 const ValueArrowPicker = ({
   range,
@@ -136,14 +82,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  itemContainer: {
-    height: 112,
-    justifyContent: 'center',
-  },
-  item: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

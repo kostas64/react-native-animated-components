@@ -1,68 +1,15 @@
 import {
-  Text,
   View,
   FlatList,
   StyleSheet,
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from 'react-native';
-
-import Animated, {
-  interpolate,
-  SharedValue,
-  useAnimatedRef,
-  useAnimatedStyle,
-  useScrollViewOffset,
-} from 'react-native-reanimated';
+import {useAnimatedRef, useScrollViewOffset} from 'react-native-reanimated';
 
 import React from 'react';
-import {TValueRangePicker} from 'src/screens/ValuePickersScreen';
-
-type TScrollOffset = {
-  isLast?: boolean;
-  unit: string | undefined;
-  scrollOffset: SharedValue<number>;
-};
-
-type TListItem = {
-  item: number | string;
-  index: number;
-};
-
-const ListItem = ({
-  item,
-  index,
-  unit,
-  isLast,
-  scrollOffset,
-}: TListItem & TScrollOffset) => {
-  const animStyle = useAnimatedStyle(() => ({
-    height: 30,
-    marginTop: index === 0 ? 20 : 0,
-    marginBottom: isLast ? 30 : 0,
-    opacity: interpolate(
-      scrollOffset.value,
-      [
-        (index - 4) * 30,
-        (index - 3) * 30,
-        (index - 2) * 30,
-        (index - 1) * 30,
-        index * 30,
-        (index + 1) * 30,
-        (index + 2) * 30,
-      ],
-      [0.25, 0.5, 1, 0.5, 0.25, 0, 0],
-    ),
-  }));
-
-  return (
-    <Animated.View style={animStyle}>
-      <Text style={styles.item}>
-        {typeof item === 'number' ? `${item}${unit}` : ''}
-      </Text>
-    </Animated.View>
-  );
-};
+import ListItem from './ListItem';
+import {TListItem, TValueRangePicker} from './types';
 
 const ValueListPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
   const scrollRef = useAnimatedRef<FlatList>(); //@ts-ignore
@@ -139,11 +86,5 @@ const styles = StyleSheet.create({
   alignCenter: {
     alignItems: 'center',
     flexGrow: 1,
-  },
-  item: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    marginVertical: 6,
   },
 });

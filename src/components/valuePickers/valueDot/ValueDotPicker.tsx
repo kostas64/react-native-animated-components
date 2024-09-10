@@ -6,8 +6,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {TValueRangePicker} from 'src/screens/ValuePickersScreen';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+
+import {TValueRangePicker} from './types';
 
 const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
   const ctxY = useSharedValue(0);
