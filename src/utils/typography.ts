@@ -1,8 +1,8 @@
 export const typography = {
-  extraBold: 'Montserrat-ExtraBold',
-  bold: 'Montserrat-Bold',
+  thin: 'Montserrat-Thin',
   semiBold: 'Montserrat-SemiBold',
   regular: 'Montserrat-Regular',
   light: 'Montserrat-Light',
   medium: 'Montserrat-Medium',
+  bold: 'Montserrat-Bold',
 };

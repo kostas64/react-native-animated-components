@@ -16,19 +16,19 @@ import TicketScreen from './screens/TicketScreen';
 import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
-import TogglersScreen from './screens/TogglerIOSScreen';
+import TogglersScreen from './screens/TogglersScreen';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import FloatingButton from './screens/FloatingButtonScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import ListWithIndiScreen from './screens/ListWithIndiScreen';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
-import DrawerInterpolate from '@components/DrawerInterpolate';
 import ValuePickersScreen from './screens/ValuePickersScreen';
+import FadeItemListScreen from './screens/FadeItemListScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
-import ScrollItemListScreen from './screens/ScrollItemListScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
+import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
+import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
@@ -36,13 +36,13 @@ import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
 type TStackList = {
   Home: undefined;
   Parallax: undefined;
-  ListWithIndi: undefined;
+  ListWithIndicator: undefined;
   DoubleList: undefined;
   Carousel3D: undefined;
   Progress: undefined;
   DotLoader: undefined;
   Togglers: undefined;
-  ScrollItem: undefined;
+  FadeItem: undefined;
   CustomDrawer: undefined;
   ProductList: undefined;
   DrawerInterpolate: undefined;
@@ -77,17 +77,20 @@ function App() {
           screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Parallax" component={ParallaxScreen} />
-          <Stack.Screen name="ListWithIndi" component={ListWithIndiScreen} />
+          <Stack.Screen
+            name="ListWithIndicator"
+            component={ListWithIndicatorScreen}
+          />
           <Stack.Screen name="DoubleList" component={DoubleListScreen} />
           <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
           <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
           <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
           <Stack.Screen name="Togglers" component={TogglersScreen} />
-          <Stack.Screen name="ScrollItem" component={ScrollItemListScreen} />
+          <Stack.Screen name="FadeItem" component={FadeItemListScreen} />
           <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
           <Stack.Screen
             name="DrawerInterpolate"
-            component={DrawerInterpolate}
+            component={DrawerInterpolateScreen}
           />
           <Stack.Screen name="ProductList" component={ProductListScreen} />
           <Stack.Screen name="PinCode" component={PinCode} />
