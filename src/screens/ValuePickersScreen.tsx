@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import ValueDotPicker from '@components/ValueDotPicker';
-import ValueListPicker from '@components/ValueListPicker';
-import ValueArrowPicker from '@components/ValueArrowPicker';
+import ValueDotPicker from '@components/valuePickers/valueDot/ValueDotPicker';
+import ValueListPicker from '@components/valuePickers/valueList/ValueListPicker';
+import ValueArrowPicker from '@components/valuePickers/valueArrow/ValueArrowPicker';
 
 export type TValueRangePicker = {
   range: [number, number];

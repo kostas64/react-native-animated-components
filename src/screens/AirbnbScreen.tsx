@@ -1,180 +1,28 @@
-import {
-  Text,
-  View,
-  Image,
-  Keyboard,
-  TextInput,
-  Pressable,
-  ViewStyle,
-  StyleSheet,
-  ImageStyle,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from 'react-native';
 import Animated, {
   runOnJS,
   withTiming,
-  interpolate,
-  Extrapolation,
   useSharedValue,
-  useAnimatedStyle,
-  interpolateColor,
 } from 'react-native-reanimated';
-import {HEIGHT, isIOS, WIDTH} from '@utils/device';
-import {MONTHS} from '@assets/months';
-import React, {SetStateAction} from 'react';
-import {COUNTRIES} from '@assets/countries';
-import {CalendarList} from 'react-native-calendars';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {FlatList} from 'react-native-gesture-handler';
-import {CALENDAR_PER} from '@assets/approximatePeriods';
+import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
-import {SEARCH_COUNTRIES} from '@assets/searchedCountries';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {MarkedDates} from 'react-native-calendars/src/types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {HEIGHT, WIDTH} from '@utils/device';
+import {typography} from '@utils/typography';
+import Footer from '@components/airbnb/Footer';
+import WhereTo from '@components/airbnb/WhereTo';
+import WhenTrip from '@components/airbnb/WhenTrip';
+import WhoComing from '@components/airbnb/WhoComing';
+import InitialBox from '@components/airbnb/InitialBox';
+import InitialView from '@components/airbnb/InitialView';
+import {TStartDate, TDayObject} from '@components/airbnb/types';
+import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
+import {_MS_PER_DAY, CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
+
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
-
-const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-const now = new Date();
-const MIN_DATE = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
-
-type TSearchItem = {
-  place: string;
-  date: string;
-  guests: number;
-};
-
-type TPickerItem = {
-  label: string;
-  onPress: () => void;
-  style?: ViewStyle;
-};
-
-type TCounterBtn = {
-  isPlus?: boolean;
-  onPress: () => void;
-  disabled?: boolean;
-};
-
-type TItemCounter = {
-  label: string;
-  subLabel: string;
-  subLabelStyle?: (ViewStyle | ImageStyle)[];
-  value: number;
-  setValue: React.Dispatch<SetStateAction<number>>;
-  extraOnPress?: (val: number) => void;
-  disabledLeft?: boolean;
-};
-
-type TStartDate = {
-  dateString?: string;
-  timestamp?: string;
-};
-
-type TRenderCountryItem = {
-  item: {img: ImageSourcePropType; label: string};
-  index: number;
-};
-
-type TRenderSearchItem = {
-  item: {place: string; guests: number; date: string};
-  index: number;
-};
-
-const SearchItem = ({place, date, guests}: TSearchItem) => (
-  <TouchableOpacity
-    activeOpacity={0.65}
-    style={[styles.row, styles.alignCenter, styles.marBot24]}>
-    <View style={styles.searchClockContainer}>
-      <AntDesign name="clockcircleo" size={25} color={'black'} />
-    </View>
-    <View>
-      <View style={styles.row}>
-        <Text style={styles.font17}>{place}</Text>
-        <Text style={styles.font17}> • Stays</Text>
-      </View>
-      <View style={[styles.row, styles.marTop4]}>
-        <Text style={styles.subtitle}>{date}</Text>
-        <Text style={styles.subtitle}>{` • ${guests} guests`}</Text>
-      </View>
-    </View>
-  </TouchableOpacity>
-);
-
-const PickerItem = ({label, onPress, style}: TPickerItem) => (
-  <Pressable onPress={onPress} style={[styles.pickerItem, style]}>
-    <Text style={styles.fontW500}>{label}</Text>
-  </Pressable>
-);
-
-const CounterBtn = ({isPlus, onPress, disabled}: TCounterBtn) => (
-  <TouchableOpacity
-    disabled={disabled}
-    onPress={onPress}
-    activeOpacity={0.75}
-    style={[disabled && styles.opa3, styles.counterBtnContainer]}>
-    <Entypo
-      size={18}
-      color={'rgb(150,150,150)'}
-      name={isPlus ? 'plus' : 'minus'}
-    />
-  </TouchableOpacity>
-);
-
-const ItemCounter = ({
-  label,
-  subLabel,
-  subLabelStyle,
-  value,
-  setValue,
-  extraOnPress,
-  disabledLeft,
-}: TItemCounter) => (
-  <View
-    style={[
-      styles.row,
-      styles.justifyBtn,
-      styles.alignCenter,
-      styles.itemCounterContainer,
-    ]}>
-    <View>
-      <Text style={styles.font16}>{label}</Text>
-      <Text style={[styles.subtitle, subLabelStyle, styles.marTop4]}>
-        {subLabel}
-      </Text>
-    </View>
-    <View style={[styles.row, styles.alignCenter]}>
-      <CounterBtn
-        isPlus={false}
-        disabled={value <= 0 || disabledLeft}
-        onPress={() => {
-          setValue((old: number) => old - 1);
-        }}
-      />
-      <Text
-        style={[
-          styles.fontW500,
-          styles.font16,
-          styles.textCenter,
-          {minWidth: value < 10 ? 30 : 36},
-        ]}>
-        {value}
-      </Text>
-      <CounterBtn
-        isPlus
-        onPress={() => {
-          setValue((old: number) => {
-            !!extraOnPress && extraOnPress(old + 1);
-            return old + 1;
-          });
-        }}
-      />
-    </View>
-  </View>
-);
 
 const Airbnb = () => {
   const insets = useSafeAreaInsets();
@@ -188,13 +36,12 @@ const Airbnb = () => {
   const openCloseWho = useSharedValue(0);
 
   const inputRef = React.createRef<TextInput>();
-  const calendarPerRef = React.createRef<FlatList>();
   const [showModal, setShowModal] = React.useState(true);
   const [country, setCountry] = React.useState(COUNTRIES[0].label);
   const [period, setPeriod] = React.useState(CALENDAR_PER[0]);
   const [anyWeek, setAnyWeek] = React.useState('Any week');
   const [adults, setAdults] = React.useState(0);
-  const [children, setChildren] = React.useState(0);
+  const [childs, setChilds] = React.useState(0);
   const [inflants, setInflants] = React.useState(0);
   const [pets, setPets] = React.useState(0);
 
@@ -206,7 +53,7 @@ const Airbnb = () => {
   const bottom = insets.bottom > 30 ? insets.bottom : 0;
   const bottomHeight = HEIGHT > 800 ? 100 : 48 + (insets.bottom || 24);
   const extraHeight = HEIGHT <= 685 ? 10 : 0;
-  const numOfGuests = adults + children;
+  const numOfGuests = adults + childs;
   const guestsToShow = `${
     numOfGuests === 1
       ? `${numOfGuests} guest`
@@ -221,725 +68,50 @@ const Airbnb = () => {
       : ''
   }${pets === 1 ? `, ${pets} pet` : pets > 1 ? `, ${pets} pets` : ''}`;
 
-  const opacityStyle = useAnimatedStyle(
-    () => ({opacity: interpolate(progress.value, [0, 0.8], [0, 1])}),
-    [],
-  );
-
-  const opacityInputStyle = useAnimatedStyle(() => {
-    if (openCloseWho.value > 0) {
-      return {
-        opacity: interpolate(
-          openCloseWho.value,
-          [0.75, 1],
-          [0, 1],
-          Extrapolation.CLAMP,
-        ),
-      };
-    }
-
-    if (closeWhen.value > 0) {
-      return {
-        opacity: interpolate(
-          closeWhen.value,
-          [0.75, 1],
-          [0, 1],
-          Extrapolation.CLAMP,
-        ),
-      };
-    }
-
-    return {
-      opacity: interpolate(
-        progress.value,
-        [0, 0.1, 0.5, 0.8],
-        [1, 1, 0, 0],
-        Extrapolation.CLAMP,
-      ),
-    };
-  }, []);
-
-  const opacityWhereToStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(progress.value, [0, 0.25, 0.8], [0, 0, 1]),
-    }),
-    [],
-  );
-
-  const opacityWhereToBold = useAnimatedStyle(() => {
-    if (openWho.value > 0 && progress.value > 0 && progresWhen.value > 0) {
-      return {};
-    }
-
-    if (openWho.value > 0) {
-      return {
-        opacity: interpolate(
-          openWho.value,
-          [0, 0.5],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-      };
-    }
-
-    if (progresWhen.value > 0) {
-      return {
-        opacity: interpolate(
-          progresWhen.value,
-          [0, 0.5],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-      };
-    }
-
-    return {
-      opacity: interpolate(
-        progressWhereTo.value,
-        [0, 0.5],
-        [1, 0],
-        Extrapolation.CLAMP,
-      ),
-    };
-  }, []);
-
-  const opacityWhenToStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(progress.value, [0, 0.75, 1], [0, 0, 1]),
-      height: interpolate(
-        progresWhen.value,
-        [0, 1],
-        [67, HEIGHT - bottom - 186],
-      ),
-      width: interpolate(progresWhen.value, [0, 1], [WIDTH - 30, WIDTH - 20]),
-      borderRadius: interpolate(progresWhen.value, [0, 1], [16, 32]),
-      marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
-      transform: [
-        {translateX: interpolate(progresWhen.value, [0, 1], [0, -4])},
-      ],
-    }),
-    [],
-  );
-
-  const arrowAnimStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(
-        progressWhereTo.value,
-        [0.1, 0.25],
-        [0, 1],
-        Extrapolation.CLAMP,
-      ),
-      transform: [
-        {
-          translateX: interpolate(
-            progressWhereTo.value,
-            [0, 0.1],
-            [-100, 0],
-            Extrapolation.CLAMP,
-          ),
-        },
-        {
-          translateY: interpolate(
-            progressWhereTo.value,
-            [0, 0.1],
-            [0, 24],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    }),
-    [],
-  );
-
-  const opacityWhenClose = useAnimatedStyle(() => {
-    if (closeWhen.value > 0) {
-      return {
-        opacity: interpolate(closeWhen.value, [0, 0.5, 1], [1, 0, 0]),
-      };
-    }
-
-    return {};
-  }, []);
-
-  const opacityClose = useAnimatedStyle(() => {
-    if (closeWhen.value > 0) {
-      return {
-        opacity: interpolate(
-          closeWhen.value,
-          [0, 0.15],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-      };
-    } else {
-      return {};
-    }
-  }, []);
-
-  const opacityWhoToStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(progress.value, [0, 0.85, 1], [0, 0, 1]),
-      height: interpolate(
-        openWho.value,
-        [0, 0.8],
-        [67, HEIGHT + extraHeight - top - bottomHeight - 230],
-        Extrapolation.CLAMP,
-      ),
-      width: interpolate(
-        openWho.value,
-        [0, 0.8],
-        [WIDTH - 30, WIDTH - 20],
-        Extrapolation.CLAMP,
-      ),
-      transform: [
-        {
-          translateX: interpolate(
-            openWho.value,
-            [0, 0.8],
-            [0, -4],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-      borderRadius: interpolate(
-        openWho.value,
-        [0, 0.8],
-        [16, 32],
-        Extrapolation.CLAMP,
-      ),
-    }),
-    [],
-  );
-
-  const opacityWhen = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(
-        progresWhen.value,
-        [0, 0.25],
-        [1, 0],
-        Extrapolation.CLAMP,
-      ),
-    }),
-    [],
-  );
-
-  const opacityWhenRevStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(
-        progresWhen.value,
-        [0.5, 1],
-        [0, 1],
-        Extrapolation.CLAMP,
-      ),
-    }),
-    [],
-  );
-
-  const opacityOpenWhoStyle = useAnimatedStyle(() => {
-    if (openWho.value > 0 && progresWhen.value > 0 && progress.value > 0) {
-      return {
-        opacity: 1,
-      };
-    }
-
-    if (openWho.value > 0) {
-      return {
-        opacity: interpolate(openWho.value, [0, 1], [0, 1]),
-      };
-    }
-
-    return {
-      opacity: interpolate(progresWhen.value, [0, 1], [0, 1]),
-    };
-  }, []);
-
-  const opacityOpenWhoRevStyle = useAnimatedStyle(() => {
-    if (openWho.value > 0) {
-      return {
-        opacity: interpolate(openWho.value, [0, 1], [1, 0]),
-      };
-    }
-
-    return {};
-  }, []);
-
-  const opacityOpenWhoNormalStyle = useAnimatedStyle(() => {
-    if (openCloseWho.value > 0) {
-      return {
-        opacity: interpolate(
-          openCloseWho.value,
-          [0, 0.25],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-      };
-    }
-
-    return {
-      opacity: interpolate(
-        openWho.value,
-        [0.5, 1],
-        [0, 1],
-        Extrapolation.CLAMP,
-      ),
-    };
-  }, []);
-
-  const opacityCloseWhenInput = useAnimatedStyle(() => {
-    if (closeWhen.value > 0) {
-      return {
-        opacity: interpolate(closeWhen.value, [0, 1], [0, 1]),
-      };
-    }
-
-    return {
-      opacity: 0,
-    };
-  });
-
-  const opacityOpenWhoClose = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      openCloseWho.value,
-      [0, 0.25],
-      [0, 1],
-      Extrapolation.CLAMP,
-    ),
-  }));
-
-  const opacityOpenWhoCloseRev = useAnimatedStyle(() => {
-    if (openCloseWho.value > 0) {
-      return {
-        opacity: interpolate(
-          openCloseWho.value,
-          [0, 0.15],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-      };
-    }
-
-    return {};
-  }, []);
-
-  const translateClose = useAnimatedStyle(
-    () => ({
-      transform: [
-        {
-          translateY: interpolate(
-            progress.value,
-            [0, 0.75],
-            [0, 24],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    }),
-    [],
-  );
-
-  const translateCloseWhen = useAnimatedStyle(() => {
-    if (progressWhereTo.value > 0) {
-      return {
-        opacity: interpolate(
-          progressWhereTo.value,
-          [0, 0.3],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-        transform: [
-          {
-            translateX: interpolate(
-              progressWhereTo.value,
-              [0.31, 0.32],
-              [0, -100],
-              Extrapolation.CLAMP,
-            ),
-          },
-          {
-            translateY: interpolate(
-              progressWhereTo.value,
-              [0.32, 0.33],
-              [24, 0],
-              Extrapolation.CLAMP,
-            ),
-          },
-        ],
-      };
-    }
-
-    if (openCloseWho.value > 0) {
-      return {
-        opacity: interpolate(
-          openCloseWho.value,
-          [0, 0.8],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-        transform: [
-          {translateY: interpolate(openCloseWho.value, [0, 0.8], [24, 0])},
-        ],
-      };
-    }
-
-    if (closeWhen.value > 0) {
-      return {
-        opacity: interpolate(
-          closeWhen.value,
-          [0, 1],
-          [1, 0],
-          Extrapolation.CLAMP,
-        ),
-        transform: [
-          {translateY: interpolate(closeWhen.value, [0, 1], [24, 0])},
-        ],
-      };
-    }
-
-    return {};
-  }, []);
-
-  const translateCloseWhere = useAnimatedStyle(() => {
-    if (openCloseWho.value > 0) {
-      return {
-        transform: [
-          {
-            translateX: interpolate(
-              openCloseWho.value,
-              [0.15, 0.16],
-              [0, -WIDTH],
-            ),
-          },
-        ],
-      };
-    }
-
-    if (closeWhen.value > 0) {
-      return {
-        transform: [
-          {translateX: interpolate(closeWhen.value, [0.15, 0.16], [0, -WIDTH])},
-        ],
-      };
-    } else {
-      return {};
-    }
-  }, []);
-
-  const transformCloseWhen = useAnimatedStyle(() => {
-    if (closeWhen.value > 0) {
-      return {
-        opacity: 1,
-        height: interpolate(
-          closeWhen.value,
-          [0, 1],
-          [HEIGHT - insets.bottom - 186, 60],
-        ),
-        borderRadius: 32,
-        width: interpolate(closeWhen.value, [0, 1], [WIDTH - 20, WIDTH - 100]),
-        marginTop: interpolate(closeWhen.value, [0, 1], [60, 0]),
-        top: interpolate(closeWhen.value, [0, 1], [0, -67]),
-        transform: [
-          {translateX: interpolate(closeWhen.value, [0, 1], [-4, 10])},
-        ],
-      };
-    } else {
-      return {};
-    }
-  }, []);
-
-  const transformOpenWhoClose = useAnimatedStyle(
-    () => ({
-      height: interpolate(
-        openCloseWho.value,
-        [0, 0.8],
-        [HEIGHT + extraHeight - top - bottomHeight - 230, 60],
-        Extrapolation.CLAMP,
-      ),
-      width: interpolate(
-        openCloseWho.value,
-        [0, 0.8],
-        [WIDTH - 24, WIDTH - 100],
-        Extrapolation.CLAMP,
-      ),
-      borderRadius: 32,
-      transform: [
-        {
-          translateX: interpolate(
-            openCloseWho.value,
-            [0, 0.8],
-            [-4, 10],
-            Extrapolation.CLAMP,
-          ),
-        },
-        {
-          translateY: interpolate(
-            openCloseWho.value,
-            [0, 0.8],
-            [0, -206],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    }),
-    [],
-  );
-
-  const listOpacityTranslate = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(
-        progressWhereTo.value,
-        [0, 0.25],
-        [1, 0],
-        Extrapolation.CLAMP,
-      ),
-      transform: [
-        {
-          translateX: interpolate(
-            progressWhereTo.value,
-            [0.25, 0.251],
-            [0, -WIDTH],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    }),
-    [],
-  );
-
-  const listSearchStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(
-        progressWhereTo.value,
-        [0, 0.25],
-        [0, 1],
-        Extrapolation.CLAMP,
-      ),
-      transform: [
-        {
-          translateX: interpolate(
-            progressWhereTo.value,
-            [0, 0.01],
-            [-WIDTH, 0],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    }),
-    [],
-  );
-
-  const inputStyle = useAnimatedStyle(() => {
-    if (openWho.value > 0 && progress.value > 0 && progresWhen.value > 0) {
-      return {
-        height: 67,
-        width: WIDTH - 30,
-        borderRadius: 16,
-        transform: [{translateX: -10}, {translateY: 48}],
-      };
-    }
-
-    if (openWho.value > 0) {
-      return {
-        height: interpolate(
-          openWho.value,
-          [0, 0.8],
-          [330, 67],
-          Extrapolation.CLAMP,
-        ),
-        width: interpolate(
-          openWho.value,
-          [0, 0.8],
-          [WIDTH - 20, WIDTH - 30],
-          Extrapolation.CLAMP,
-        ),
-        borderRadius: interpolate(
-          openWho.value,
-          [0, 0.8],
-          [32, 16],
-          Extrapolation.CLAMP,
-        ),
-        transform: [
-          {
-            translateX: interpolate(
-              openWho.value,
-              [0, 0.8],
-              [-14, -10],
-              Extrapolation.CLAMP,
-            ),
-          },
-          {translateY: 48},
-        ],
-      };
-    }
-
-    if (progresWhen.value > 0) {
-      return {
-        height: interpolate(
-          progresWhen.value,
-          [0, 0.8],
-          [330, 67],
-          Extrapolation.CLAMP,
-        ),
-        width: interpolate(
-          progresWhen.value,
-          [0, 0.8],
-          [WIDTH - 20, WIDTH - 30],
-          Extrapolation.CLAMP,
-        ),
-        borderRadius: interpolate(
-          progresWhen.value,
-          [0, 0.8],
-          [32, 16],
-          Extrapolation.CLAMP,
-        ),
-        transform: [
-          {
-            translateX: interpolate(
-              progresWhen.value,
-              [0, 0.8],
-              [-14, -10],
-              Extrapolation.CLAMP,
-            ),
-          },
-          {translateY: 48},
-        ],
-      };
-    }
-
-    return {
-      height: interpolate(
-        progress.value,
-        [0, 0.8],
-        [60, 330],
-        Extrapolation.CLAMP,
-      ),
-      width: interpolate(
-        progress.value,
-        [0, 0.8],
-        [WIDTH - 100, WIDTH - 20],
-        Extrapolation.CLAMP,
-      ),
-      transform: [
-        {
-          translateX: interpolate(
-            progress.value,
-            [0, 0.8],
-            [0, -14],
-            Extrapolation.CLAMP,
-          ),
-        },
-        {
-          translateY: interpolate(
-            progress.value,
-            [0, 0.8],
-            [0, 48],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    };
-  }, []);
-
-  const inputWhereToFocused = useAnimatedStyle(() => {
-    if (progress.value !== 1) {
-      return {};
-    }
-
-    return {
-      height: interpolate(progressWhereTo.value, [0, 1], [330, HEIGHT]),
-      width: interpolate(progressWhereTo.value, [0, 1], [WIDTH - 20, WIDTH]),
-      transform: [
-        {translateX: interpolate(progressWhereTo.value, [0, 1], [-14, -24])},
-        {
-          translateY: interpolate(
-            progress.value,
-            [0, 0.8],
-            [0, 48],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-    };
-  }, []);
-
-  const innerInputWhereToFocused = useAnimatedStyle(() => ({
-    borderColor: interpolateColor(
-      progressWhereTo.value,
-      [0, 1],
-      ['rgb(161,161,161)', 'rgb(247,247,247)'],
-    ),
-    backgroundColor: interpolateColor(
-      progressWhereTo.value,
-      [0, 1],
-      ['rgb(255,255,255)', 'rgb(247,247,247)'],
-    ),
-    width: interpolate(progressWhereTo.value, [0, 1], [WIDTH - 72, WIDTH - 48]),
-    transform: [
-      {translateY: interpolate(progressWhereTo.value, [0, 1], [0, -60])},
-    ],
-  }));
-
-  const bottomStyle = useAnimatedStyle(
-    () => ({
-      bottom: interpolate(progress.value, [0, 1], [-bottomHeight, 0]),
-    }),
-    [],
-  );
-
-  const bottomStyleWhereFocused = useAnimatedStyle(() => {
-    if (openCloseWho.value > 0) {
-      return {
-        bottom: interpolate(
-          openCloseWho.value,
-          [0, 1],
-          [0, -bottomHeight - 10],
-        ),
-      };
-    }
-
-    if (openWho.value > 0 && progresWhen.value > 0 && progress.value > 0) {
-      return {
-        bottom: -bottomHeight - 10,
-      };
-    }
-
-    if (openWho.value > 0 && progress.value > 0) {
-      return {
-        bottom: 0,
-      };
-    }
-
-    if (progresWhen.value > 0) {
-      return {
-        bottom: interpolate(progresWhen.value, [0, 1], [0, -bottomHeight - 10]),
-      };
-    }
-
-    if (progressWhereTo.value > 0) {
-      return {
-        bottom: interpolate(
-          progressWhereTo.value,
-          [0, 1],
-          [0, -bottomHeight - 10],
-        ),
-      };
-    }
-
-    return {};
-  }, []);
-
-  const translatePickerStyle = useAnimatedStyle(
-    () => ({
-      transform: [
-        {
-          translateX: interpolate(
-            translatePicker.value,
-            [0, 1, 2],
-            [0, (WIDTH - 90) / 3, 2 * ((WIDTH - 90) / 3)],
-          ),
-        },
-      ],
-    }),
-    [],
+  const {
+    opacityStyle,
+    opacityInputStyle,
+    opacityWhereToStyle,
+    opacityWhereToBold,
+    opacityWhenToStyle,
+    arrowAnimStyle,
+    opacityWhenClose,
+    opacityClose,
+    opacityWhoToStyle,
+    opacityWhen,
+    opacityWhenRevStyle,
+    opacityOpenWhoStyle,
+    opacityOpenWhoRevStyle,
+    opacityOpenWhoNormalStyle,
+    opacityCloseWhenInput,
+    opacityOpenWhoClose,
+    opacityOpenWhoCloseRev,
+    translateClose,
+    translateCloseWhen,
+    translateCloseWhere,
+    transformCloseWhen,
+    transformOpenWhoClose,
+    listOpacityTranslate,
+    listSearchStyle,
+    inputStyle,
+    inputWhereToFocused,
+    innerInputWhereToFocused,
+    bottomStyle,
+    bottomStyleWhereFocused,
+    translatePickerStyle,
+  } = getAnimatedStyles(
+    progress,
+    progresWhen,
+    progressWhereTo,
+    openWho,
+    openCloseWho,
+    closeWhen,
+    translatePicker,
+    top,
+    bottom,
+    bottomHeight,
+    extraHeight,
+    insets,
   );
 
   const animateOpen = React.useCallback(() => {
@@ -1003,7 +175,7 @@ const Airbnb = () => {
   const onPressClear = React.useCallback(() => {
     onPressWhereTo();
     resetValues();
-  }, [country, anyWeek, adults, children, inflants, pets, period]);
+  }, [country, anyWeek, adults, childs, inflants, pets, period]);
 
   const resetValues = () => {
     country !== "I'm flexible" && setCountry("I'm flexible");
@@ -1011,91 +183,10 @@ const Airbnb = () => {
     period !== CALENDAR_PER[0] && setPeriod(CALENDAR_PER[0]);
     setPeriodo({});
     adults !== 0 && setAdults(0);
-    children !== 0 && setChildren(0);
+    childs !== 0 && setChilds(0);
     inflants !== 0 && setInflants(0);
     pets !== 0 && setPets(0);
   };
-
-  const renderItem = React.useCallback(
-    ({item, index}: TRenderCountryItem) => {
-      const isSelected = item.label === country;
-
-      return (
-        <TouchableOpacity
-          activeOpacity={0.75}
-          key={`country-${index}`}
-          onPress={() => {
-            setCountry(item.label);
-            animateWhen();
-          }}
-          style={[
-            styles.mapImgContainer,
-            {
-              paddingRight: index === COUNTRIES.length - 1 ? 24 : 16,
-              paddingLeft: index === 0 ? 24 : 0,
-            },
-          ]}>
-          {/* @ts-ignore */}
-          <Image
-            borderRadius={8}
-            source={item.img}
-            style={[
-              styles.mapImg,
-              isSelected ? styles.borderBlackW2 : styles.borderGreyW1,
-            ]}
-          />
-          <Text style={[styles.marTop8, isSelected && styles.fontW500]}>
-            {item.label}
-          </Text>
-        </TouchableOpacity>
-      );
-    },
-    [country],
-  );
-
-  const renderSearchItem = React.useCallback(
-    ({item, index}: TRenderSearchItem) => (
-      <SearchItem
-        key={`searchItem-${index}`}
-        date={item.date}
-        guests={item.guests}
-        place={item.place}
-      />
-    ),
-    [],
-  );
-
-  const renderPeriodItem = React.useCallback(
-    ({item, index}: {item: string; index: number}) => {
-      const isSelected = period === item;
-
-      return (
-        <Pressable
-          onPress={() => {
-            setPeriod(item);
-            calendarPerRef.current?.scrollToIndex({
-              index,
-              animated: true,
-              viewOffset: 24,
-            });
-          }}
-          key={`period-${index}`}
-          style={[
-            styles.periodItemContainer,
-            isSelected
-              ? styles.selectedPeriodItem
-              : styles.unselectedPeriodItem,
-            {
-              marginLeft: index === 0 ? 20 : 0,
-              marginRight: index !== CALENDAR_PER.length - 1 ? 10 : 20,
-            },
-          ]}>
-          <Text>{item}</Text>
-        </Pressable>
-      );
-    },
-    [period],
-  );
 
   const onPressSkipReset = React.useCallback(() => {
     if (Object.keys(periodo).length > 0) {
@@ -1195,13 +286,7 @@ const Airbnb = () => {
   );
 
   const setDay = React.useCallback(
-    (dayObj: {
-      dateString: string;
-      day: number;
-      month: number;
-      year: number;
-      timestamp: number;
-    }) => {
+    (dayObj: TDayObject) => {
       const {dateString, day, month, year} = dayObj;
       // timestamp returned by dayObj is in 12:00AM UTC 0, want local 12:00AM
       const timestamp = new Date(year, month - 1, day).getTime();
@@ -1290,30 +375,7 @@ const Airbnb = () => {
 
   return (
     <>
-      {!showModal && (
-        <View style={[styles.padHor24, {paddingTop: top}]}>
-          <View style={styles.container}>
-            <Pressable
-              style={[
-                styles.leftInput,
-                styles.row,
-                styles.initialDim,
-                styles.padHor16,
-              ]}>
-              <Entypo name="magnifying-glass" size={24} style={styles.lens} />
-              <View>
-                <Text style={styles.whereTo}>Where to?</Text>
-                <Text style={styles.subtitle}>
-                  Anywhere • Any week • Add guests
-                </Text>
-              </View>
-            </Pressable>
-            <View style={styles.filterContainer}>
-              <Octicons name="filter" size={20} style={styles.top1} />
-            </View>
-          </View>
-        </View>
-      )}
+      {!showModal && <InitialView />}
       {showModal && (
         <>
           <View style={[styles.padHor24, styles.flex, {paddingTop: top}]}>
@@ -1336,92 +398,22 @@ const Airbnb = () => {
                     styles.padTop12Left16,
                     opacityInputStyle,
                   ]}>
-                  <Entypo
-                    size={24}
-                    style={styles.lens}
-                    name="magnifying-glass"
-                  />
-                  <View>
-                    <Text style={styles.whereTo}>Where to?</Text>
-                    <Text style={styles.subtitle}>
-                      Anywhere • Any week • Add guests
-                    </Text>
-                  </View>
+                  <InitialBox />
                 </Animated.View>
 
                 <Animated.View style={[opacityWhereToStyle, styles.padTop16]}>
-                  <Animated.Text
-                    style={[
-                      styles.boldWhere,
-                      styles.padLeft24,
-                      opacityWhereToBold,
-                    ]}>
-                    Where to?
-                  </Animated.Text>
-                  <Animated.View
-                    style={[
-                      styles.absolute,
-                      styles.row,
-                      styles.justifyBtn,
-                      styles.widthPadTop12,
-                      opacityOpenWhoStyle,
-                    ]}>
-                    <Text
-                      style={[
-                        styles.fontW500,
-                        styles.color100,
-                        styles.padLeft24,
-                      ]}>
-                      Where
-                    </Text>
-                    <Text style={styles.fontW500}>{country}</Text>
-                  </Animated.View>
-                  <AnimPressable
-                    onPress={animateWhereToInput}
-                    style={[
-                      styles.row,
-                      styles.inputContainer,
-                      styles.marLeft24,
-                      innerInputWhereToFocused,
-                    ]}>
-                    <Entypo
-                      size={20}
-                      style={styles.lens2}
-                      name="magnifying-glass"
-                    />
-                    <TextInput
-                      ref={inputRef}
-                      style={[styles.fontW500]}
-                      onFocus={animateWhereToInput}
-                      placeholder="Search destinations"
-                      placeholderTextColor={'rgb(100,100,100)'}
-                    />
-                  </AnimPressable>
-                  <Animated.FlatList
-                    horizontal
-                    data={COUNTRIES}
-                    renderItem={renderItem}
-                    style={listOpacityTranslate}
-                    showsHorizontalScrollIndicator={false}
+                  <WhereTo
+                    ref={inputRef}
+                    country={country}
+                    setCountry={setCountry}
+                    animateWhen={animateWhen}
+                    animateWhereToInput={animateWhereToInput}
+                    listSearchStyle={listSearchStyle}
+                    listOpacityTranslate={listOpacityTranslate}
+                    opacityWhereToBold={opacityWhereToBold}
+                    opacityOpenWhoStyle={opacityOpenWhoStyle}
+                    innerInputWhereToFocused={innerInputWhereToFocused}
                   />
-                  <Animated.View
-                    style={[
-                      styles.marLeft24,
-                      styles.searchListContainer,
-                      listSearchStyle,
-                      {height: HEIGHT - top - insets.bottom - 156},
-                    ]}>
-                    <Text
-                      style={[styles.marBot24, styles.fontW500, styles.font16]}>
-                      Recent searches
-                    </Text>
-                    <FlatList
-                      data={SEARCH_COUNTRIES}
-                      renderItem={renderSearchItem}
-                      onScroll={() => Keyboard.dismiss()}
-                      showsVerticalScrollIndicator={false}
-                    />
-                  </Animated.View>
                 </Animated.View>
               </AnimPressable>
             </View>
@@ -1453,7 +445,7 @@ const Airbnb = () => {
                   styles.whenAnyWeek,
                 ]}>
                 <Text style={[styles.fontW500, styles.color100]}>When</Text>
-                <Text style={styles.fontW500}>{anyWeek}</Text>
+                <Text style={[styles.fontW500, styles.value]}>{anyWeek}</Text>
               </AnimPressable>
               <Animated.View
                 style={[
@@ -1462,100 +454,16 @@ const Airbnb = () => {
                   opacityWhenRevStyle,
                   opacityWhenClose,
                 ]}>
-                <Text style={[styles.boldWhere, styles.padLeft24]}>
-                  When's your trip?
-                </Text>
-                <View style={styles.pickerContainer}>
-                  <Animated.View
-                    style={[
-                      styles.absolute,
-                      translatePickerStyle,
-                      styles.pickerPose,
-                    ]}
-                  />
-                  <PickerItem
-                    label={'Dates'}
-                    style={styles.marLeft6}
-                    onPress={() => (translatePicker.value = withTiming(0))}
-                  />
-                  <PickerItem
-                    label={'Months'}
-                    onPress={() => (translatePicker.value = withTiming(1))}
-                  />
-                  <PickerItem
-                    label={'Flexible'}
-                    onPress={() => (translatePicker.value = withTiming(2))}
-                  />
-                </View>
-                <View
-                  style={[styles.row, styles.justifyBtn, styles.daysContainer]}>
-                  {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item, key) => (
-                    <Text
-                      key={`day-${key}`}
-                      style={{color: 'rgb(125,125,125)'}}>
-                      {item}
-                    </Text>
-                  ))}
-                </View>
-
-                <CalendarList
-                  firstDay={1}
-                  hideDayNames
-                  minDate={MIN_DATE}
-                  pastScrollRange={0}
-                  markingType={'period'}
-                  futureScrollRange={3}
-                  calendarWidth={WIDTH - 48}
-                  calendarHeight={280}
-                  onDayPress={setDay}
-                  markedDates={periodo}
-                  //@ts-ignore
-                  theme={styles.calendarTheme}
-                  renderHeader={date => (
-                    <View style={styles.headerCalendar}>
-                      <Text style={[styles.fontW500, styles.font16]}>{`${
-                        MONTHS[date.getMonth()]
-                      } ${date.getFullYear()}`}</Text>
-                    </View>
-                  )}
-                  style={[styles.marLeft10, {height: HEIGHT - top - 464}]}
+                <WhenTrip
+                  onPressNext={onPressNext}
+                  onPressSkipReset={onPressSkipReset}
+                  period={period}
+                  periodo={periodo}
+                  setDay={setDay}
+                  setPeriod={setPeriod}
+                  translatePicker={translatePicker}
+                  translatePickerStyle={translatePickerStyle}
                 />
-                <View style={[styles.borderLine, styles.marBot10]} />
-                <FlatList
-                  horizontal
-                  data={CALENDAR_PER}
-                  ref={calendarPerRef}
-                  renderItem={renderPeriodItem}
-                  showsHorizontalScrollIndicator={false}
-                />
-                <View style={[styles.borderLine, styles.marTop10]} />
-
-                <View
-                  style={[
-                    styles.row,
-                    styles.justifyBtn,
-                    styles.padHor24,
-                    styles.height74,
-                  ]}>
-                  <Pressable
-                    onPress={onPressSkipReset}
-                    style={styles.skipResetBtn}>
-                    <Text
-                      style={[
-                        styles.font16,
-                        styles.fontW500,
-                        styles.underline,
-                      ]}>
-                      {Object.keys(periodo).length === 0 ? 'Skip' : 'Reset'}
-                    </Text>
-                  </Pressable>
-                  <Pressable style={styles.nextBtn} onPress={onPressNext}>
-                    <Text
-                      style={[styles.font16, styles.fontW500, styles.white]}>
-                      Next
-                    </Text>
-                  </Pressable>
-                </View>
               </Animated.View>
               <Animated.View
                 style={[
@@ -1564,13 +472,7 @@ const Airbnb = () => {
                   styles.padTop12Left16,
                   opacityCloseWhenInput,
                 ]}>
-                <Entypo size={24} style={styles.lens} name="magnifying-glass" />
-                <View>
-                  <Text style={styles.whereTo}>Where to?</Text>
-                  <Text style={styles.subtitle}>
-                    Anywhere • Any week • Add guests
-                  </Text>
-                </View>
+                <InitialBox />
               </Animated.View>
             </Animated.View>
             <Animated.View
@@ -1593,7 +495,7 @@ const Airbnb = () => {
                   opacityOpenWhoRevStyle,
                 ]}>
                 <Text style={[styles.fontW500, styles.color100]}>Who</Text>
-                <Text style={styles.fontW500}>
+                <Text style={[styles.fontW500, styles.value]}>
                   {guestsToShow ? guestsToShow : 'Add guests'}
                 </Text>
               </AnimPressable>
@@ -1604,13 +506,7 @@ const Airbnb = () => {
                   styles.padTop12Left16,
                   opacityOpenWhoClose,
                 ]}>
-                <Entypo size={24} style={styles.lens} name="magnifying-glass" />
-                <View>
-                  <Text style={styles.whereTo}>Where to?</Text>
-                  <Text style={styles.subtitle}>
-                    Anywhere • Any week • Add guests
-                  </Text>
-                </View>
+                <InitialBox />
               </Animated.View>
               <Animated.View
                 style={[
@@ -1618,63 +514,15 @@ const Airbnb = () => {
                   styles.padTop24,
                   opacityOpenWhoNormalStyle,
                 ]}>
-                <Text
-                  style={[
-                    styles.boldWhere,
-                    HEIGHT > 685 && HEIGHT < 750
-                      ? styles.marBot24
-                      : HEIGHT > 750
-                      ? styles.marBot36
-                      : styles.marBot16,
-                    styles.padLeft24,
-                  ]}>
-                  Who's coming?
-                </Text>
-                <ItemCounter
-                  disabledLeft={
-                    adults === 1 && (pets > 0 || inflants > 0 || children > 0)
-                  }
-                  label={'Adults'}
-                  subLabel={'Ages 13 or above'}
-                  value={adults}
-                  setValue={setAdults}
-                />
-                <View style={styles.divider} />
-                <ItemCounter
-                  value={children}
-                  setValue={setChildren}
-                  label={'Children'}
-                  subLabel={'Ages 2-12'}
-                  extraOnPress={(child: number) => {
-                    if (child === 1 && adults === 0) {
-                      setAdults(1);
-                    }
-                  }}
-                />
-                <View style={styles.divider} />
-                <ItemCounter
-                  value={inflants}
-                  setValue={setInflants}
-                  label={'Inflants'}
-                  subLabel={'Under 2'}
-                  extraOnPress={(infl: number) => {
-                    if (infl === 1 && adults === 0) {
-                      setAdults(1);
-                    }
-                  }}
-                />
-                <View style={styles.divider} />
-                <ItemCounter
-                  value={pets}
-                  setValue={setPets}
-                  extraOnPress={(petsValue: number) => {
-                    if (petsValue === 1 && adults === 0) {
-                      setAdults(1);
-                    }
-                  }}
-                  label={'Pets'}
-                  subLabel={'Bringing a service animal?'}
-                  subLabelStyle={[styles.fontW600, styles.underline]}
+                <WhoComing
+                  pets={pets}
+                  adults={adults}
+                  childs={childs}
+                  inflants={inflants}
+                  setPets={setPets}
+                  setAdults={setAdults}
+                  setChilds={setChilds}
+                  setInflants={setInflants}
                 />
               </Animated.View>
             </Animated.View>
@@ -1686,34 +534,7 @@ const Airbnb = () => {
                 bottomStyle,
                 bottomStyleWhereFocused,
               ]}>
-              <View
-                style={[
-                  styles.row,
-                  styles.justifyBtn,
-                  styles.padHor24,
-                  styles.marTop4,
-                  styles.widthCenter,
-                  {
-                    paddingBottom: insets.bottom,
-                    height: HEIGHT > 800 ? 100 : 48 + (insets.bottom || 24),
-                  },
-                ]}>
-                <Pressable style={styles.padding8} onPress={onPressClear}>
-                  <Text style={[styles.fontW500, styles.clearAll]}>
-                    Clear all
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={animateClose}
-                  style={[styles.row, styles.searchBtn, styles.alignCenter]}>
-                  <Entypo
-                    size={20}
-                    style={styles.lens3}
-                    name="magnifying-glass"
-                  />
-                  <Text style={[styles.white, styles.fontW500]}>Search</Text>
-                </Pressable>
-              </View>
+              <Footer animateClose={animateClose} onPressClear={onPressClear} />
             </Animated.View>
           </View>
           {/* Arrow left button */}
@@ -1775,10 +596,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  initialDim: {
-    height: 60,
-    width: WIDTH - 100,
-  },
   leftInput: {
     backgroundColor: 'white',
     borderWidth: 1,
@@ -1786,26 +603,9 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 32,
   },
-  lens: {
-    paddingTop: 4,
-    paddingRight: 12,
-    color: 'black',
-  },
-  lens2: {
-    paddingRight: 20,
-    color: 'black',
-  },
-  lens3: {
-    paddingRight: 8,
-    color: 'white',
-  },
   whereTo: {
-    fontWeight: '500',
+    fontFamily: typography.medium,
     color: 'black',
-  },
-  subtitle: {
-    color: 'rgb(75,75,75)',
-    fontSize: 12,
   },
   filterContainer: {
     borderColor: '#a1a1a1',
@@ -1826,28 +626,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
   },
-  boldWhere: {
-    fontSize: 28,
-    fontWeight: '700',
-  },
-  inputContainer: {
-    marginTop: 24,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingVertical: isIOS ? 20 : 6,
-    paddingHorizontal: 20,
-    width: WIDTH - 72,
-  },
-  padding8: {
-    padding: 8,
-  },
-  padHor12: {
-    paddingHorizontal: 12,
-  },
-  padHor16: {
-    paddingHorizontal: 16,
-  },
   padHor24: {
     paddingHorizontal: 24,
   },
@@ -1857,83 +635,18 @@ const styles = StyleSheet.create({
   padTop24: {
     paddingTop: 24,
   },
-  padLeft24: {
-    paddingLeft: 24,
-  },
   padTop12Left16: {
     paddingTop: 12,
     paddingLeft: 16,
   },
-  divider: {
-    height: 1,
-    marginVertical: 16,
-    width: WIDTH - 80,
-    alignSelf: 'center',
-    backgroundColor: 'rgb(200,200,200)',
-  },
   marLeft24: {
     marginLeft: 24,
-  },
-  marLeft6: {
-    marginLeft: 6,
-  },
-  marLeft10: {
-    marginLeft: 10,
-  },
-  marTop4: {
-    marginTop: 4,
-  },
-  marTop8: {
-    marginTop: 8,
-  },
-  marTop10: {
-    marginTop: 10,
   },
   marTop12: {
     marginTop: 12,
   },
-  marTop16: {
-    marginTop: 16,
-  },
-  marBot10: {
-    marginBottom: 10,
-  },
-  marBot16: {
-    marginBottom: 16,
-  },
-  marBot24: {
-    marginBottom: 24,
-  },
-  marBot36: {
-    marginBottom: 36,
-  },
   fontW500: {
     fontWeight: '500',
-  },
-  fontW600: {
-    fontWeight: '600',
-  },
-  font16: {
-    fontSize: 16,
-  },
-  font17: {
-    fontSize: 17,
-  },
-  mapImgContainer: {
-    borderRadius: 8,
-    marginTop: 16,
-  },
-  mapImg: {
-    width: 116,
-    height: 116,
-  },
-  borderBlackW2: {
-    borderWidth: 2,
-    borderColor: 'black',
-  },
-  borderGreyW1: {
-    borderWidth: 1,
-    borderColor: '#e3e3e3',
   },
   otherBox: {
     borderWidth: 1,
@@ -1946,36 +659,12 @@ const styles = StyleSheet.create({
     width: WIDTH - 30,
     left: -10,
   },
-  clearAll: {
-    fontSize: 16,
-    textDecorationLine: 'underline',
-  },
-  searchBtn: {
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    backgroundColor: '#e51d51',
-  },
   white: {
     color: 'white',
   },
   color100: {
     color: 'rgb(100,100,100)',
-  },
-  widthCenter: {
-    width: WIDTH,
-    alignItems: 'center',
-  },
-  searchListContainer: {
-    position: 'absolute',
-    top: 104,
-    width: WIDTH,
-  },
-  searchClockContainer: {
-    padding: 16,
-    backgroundColor: 'rgb(240,240,240)',
-    borderRadius: 10,
-    marginRight: 16,
+    fontFamily: typography.medium,
   },
   bottomContainer: {
     backgroundColor: 'white',
@@ -1991,111 +680,7 @@ const styles = StyleSheet.create({
     height: 64,
     zIndex: 1000,
   },
-  widthPadTop12: {
-    width: WIDTH - 56,
-    paddingTop: 12,
-  },
-  pickerContainer: {
-    height: 45,
-    width: WIDTH - 78,
-    marginTop: 16,
-    marginLeft: 24,
-    backgroundColor: 'rgb(225,225,225)',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 32,
-  },
-  pickerPose: {
-    top: 6,
-    left: 6,
-    height: 33,
-    borderRadius: 20,
-    width: (WIDTH - 90) / 3,
-    backgroundColor: 'white',
-    shadowColor: 'black',
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  pickerItem: {
-    width: (WIDTH - 89) / 3,
-    alignItems: 'center',
-    paddingVertical: 8,
-    borderRadius: 20,
-  },
-  daysContainer: {
-    marginLeft: 40,
-    marginRight: 16,
-    marginVertical: 16,
-  },
-  calendarTheme: {
-    //@ts-ignore
-    todayTextColor: 'black',
-    dayTextColor: 'black',
-    textDayFontFamily: isIOS ? null : 'sans-serif-medium',
-    textDayFontWeight: isIOS ? '500' : null,
-  },
-  headerCalendar: {
-    flex: 1,
-    alignItems: 'flex-start',
-    left: -12,
-    marginBottom: 12,
-  },
-  periodItemContainer: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 50,
-  },
-  selectedPeriodItem: {
-    backgroundColor: 'rgb(248, 248,248)',
-    borderWidth: 2,
-    borderColor: 'black',
-  },
-  unselectedPeriodItem: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'rgb(225,225,225)',
-  },
-  borderLine: {
-    height: 1,
-    backgroundColor: 'rgb(210,210,210)',
-    width: WIDTH - 32,
-  },
-  height74: {
-    height: 74,
-  },
-  skipResetBtn: {
-    alignSelf: 'center',
-    padding: 10,
-  },
-  underline: {
-    textDecorationLine: 'underline',
-  },
-  nextBtn: {
-    backgroundColor: '#222222',
-    alignSelf: 'center',
-    paddingHorizontal: 46,
-    paddingVertical: 14,
-    borderRadius: 8,
-  },
-  textCenter: {
-    textAlign: 'center',
-  },
-  itemCounterContainer: {
-    width: WIDTH - 80,
-    marginHorizontal: 24,
-  },
-  counterBtnContainer: {
-    padding: 6,
-    borderWidth: 1,
-    borderColor: 'rgb(150,150,150)',
-    borderRadius: 50,
-  },
-  opa3: {
-    opacity: 0.3,
+  value: {
+    fontFamily: typography.semiBold,
   },
 });

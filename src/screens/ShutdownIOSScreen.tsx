@@ -2,75 +2,22 @@ import Animated, {
   withTiming,
   withRepeat,
   interpolate,
-  SharedValue,
   useSharedValue,
   interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import Feather from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
-import StatusBarManager from '@components/StatusBarManager';
 import {View, StyleSheet, ImageBackground} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
+import {HEIGHT_SCR, WIDTH} from '@utils/device';
+import StatusBarManager from '@components/StatusBarManager';
+import AnimatedText from '@components/shutdownIOS/AnimatedText';
+import {SLIDER_FINAL_W, SLIDER_H, SLIDER_W} from '@components/shutdownIOS/data';
+
 const AnimLinear = Animated.createAnimatedComponent(LinearGradient);
-
-const SLIDER_W = 268;
-const SLIDER_FINAL_W = 76;
-const SLIDER_H = 76;
-
-type TAnimatedText = {
-  index: number;
-  char: string;
-  totalCharsLength: number;
-  coloring: SharedValue<number>;
-  silderWidth: SharedValue<number>;
-};
-
-const AnimatedText = ({
-  index,
-  char,
-  coloring,
-  silderWidth,
-  totalCharsLength,
-}: TAnimatedText) => {
-  const textColor = useAnimatedStyle(() => {
-    const interval = 1 / (totalCharsLength + 8);
-
-    return {
-      opacity: interpolate(silderWidth.value, [SLIDER_W, 260], [1, 0]),
-      color: interpolateColor(
-        coloring.value,
-        [
-          0.2 + (index - 3) * interval,
-          0.2 + (index - 2) * interval,
-          0.2 + (index - 1) * interval,
-          0.2 + index * interval,
-          0.2 + (index + 1) * interval,
-          0.2 + (index + 2) * interval,
-          0.2 + (index + 3) * interval,
-        ],
-        [
-          '#a10000',
-          '#ff6161',
-          '#ffad9c',
-          '#ffffff',
-          '#ffad9c',
-          '#ff6161',
-          '#a10000',
-        ],
-      ),
-    };
-  });
-
-  return (
-    <Animated.Text key={`index-${index}`} style={[textColor, styles.text]}>
-      {char}
-    </Animated.Text>
-  );
-};
 
 const ShutdownIOS = () => {
   const silderWidth = useSharedValue(SLIDER_W);
@@ -223,10 +170,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     top: 28,
     left: 68,
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: '500',
   },
   radius200: {
     borderRadius: 200,

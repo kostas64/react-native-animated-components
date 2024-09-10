@@ -13,8 +13,8 @@ type TDATA = {
       | 'Parallax'
       | 'DoubleList'
       | 'Carousel3D'
-      | 'ScrollItem'
-      | 'ListWithIndi'
+      | 'FadeItem'
+      | 'ListWithIndicator'
       | 'CustomDrawer'
       | 'DrawerInterpolate'
       | 'Progress'
@@ -28,12 +28,12 @@ type TDATA = {
       | 'Ticket'
       | 'TranslateSearchIOS'
       | 'CircularProgressBar'
-      | 'CreditCard'
       | 'ValuePickers'
       | 'LikeInteraction'
       | 'CircularAnimatedText'
       | 'Chat'
-      | 'LineChart';
+      | 'LineChart'
+      | 'ProductList';
   }[];
 }[];
 
@@ -50,11 +50,6 @@ export const DATA: TDATA = [
         backgroundColor: '#0ad2ff',
         screen: 'Airbnb',
       },
-      // {
-      //   label: 'Credit Card',
-      //   backgroundColor: '#7bc8d2',
-      //   screen: 'CreditCard',
-      // },
       {
         label: 'iOS Shutdown confirmator',
         backgroundColor: '#2962ff',
@@ -107,12 +102,17 @@ export const DATA: TDATA = [
       {
         label: 'Fade Item Out',
         backgroundColor: '#ff0059',
-        screen: 'ScrollItem',
+        screen: 'FadeItem',
       },
       {
         label: 'Chat',
         backgroundColor: '#ff8c00',
         screen: 'Chat',
+      },
+      {
+        label: 'Product List',
+        backgroundColor: '#95e214',
+        screen: 'ProductList',
       },
     ],
   },
@@ -138,7 +138,7 @@ export const DATA: TDATA = [
       {
         label: 'Navbar with Indicator',
         backgroundColor: '#0ad2ff',
-        screen: 'ListWithIndi',
+        screen: 'ListWithIndicator',
       },
       {
         label: 'Custom Drawer',

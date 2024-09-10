@@ -1,12 +1,45 @@
+import {
+  useDrawerProgress,
+  createDrawerNavigator,
+} from '@react-navigation/drawer';
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {useDrawerProgress} from '@react-navigation/drawer';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
-const DrawerInterpolateScreen = ({
+import {typography} from '@utils/typography';
+import DrawerContent from '@components/drawerInterpolate/DrawerContent';
+import {DrawerTypes, TDrawerList} from '@components/drawerInterpolate/types';
+
+const Drawer = createDrawerNavigator<TDrawerList>();
+
+const DrawerInterpolateScreen = () => {
+  const screenOptions = {
+    headerShown: false,
+    drawerType: 'slide' as DrawerTypes,
+    overlayColor: 'transparent',
+    sceneContainerStyle: styles.sceneContainerStyle,
+    drawerStyle: styles.drawerStyle,
+  };
+
+  return (
+    <View style={styles.navigatorContainer}>
+      <Drawer.Navigator
+        screenOptions={screenOptions}
+        drawerContent={props => (
+          <DrawerContent navigation={props.navigation} />
+        )}>
+        <Drawer.Screen name="DrawerInterpolateNested">
+          {(props: any) => <DrawerInterpolate {...props} />}
+        </Drawer.Screen>
+      </Drawer.Navigator>
+    </View>
+  );
+};
+
+const DrawerInterpolate = ({
   navigation,
 }: {
   navigation: DrawerNavigationHelpers;
@@ -47,6 +80,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  navigatorContainer: {
+    flex: 1,
+    backgroundColor: 'tomato',
+  },
   menuContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -54,8 +91,17 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 18,
-    fontWeight: '600',
     paddingLeft: 8,
+    fontFamily: typography.semiBold,
+  },
+  sceneContainerStyle: {
+    backgroundColor: 'transparent',
+  },
+  drawerStyle: {
+    flex: 1,
+    width: '65%',
+    paddingRight: 20,
+    backgroundColor: 'transparent',
   },
 });
 
