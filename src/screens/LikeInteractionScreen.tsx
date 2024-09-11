@@ -35,7 +35,7 @@ const LikeInteractionScreen = () => {
         <View style={{marginHorizontal: 16, flexDirection: 'row'}}>
           <LikeCounter counter={counter} liked={liked} onPress={onPress} />
 
-          <View style={{transform: [{translateX: 86}]}}>
+          <View style={{position: 'absolute', transform: [{translateX: 172}]}}>
             {listData.reverse().map((item, index) => (
               <ListItem key={index} item={item} index={index} liked={liked} />
             ))}

@@ -19,6 +19,7 @@
 		A49056FCD0B04C59B8C9952A /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 080ED53C916E4A74B7B2AF0F /* Montserrat-Regular.ttf */; };
 		C192C1C4A20042198DBC276F /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A639E79012A4B039BBC161F /* Montserrat-Medium.ttf */; };
 		C3C5C3E14DC84BCB9573C20D /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77EFEFC615374C5895C6EBC9 /* Montserrat-SemiBold.ttf */; };
+		E241B086F10774E2724EA925 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1426F8171D7F37108A1F101C /* PrivacyInfo.xcprivacy */; };
 		EC79E654974C42D5A2C3D4B6 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 901E37ACC4E34612B24B22B6 /* Montserrat-Thin.ttf */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = animatedComponents/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = animatedComponents/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = animatedComponents/main.m; sourceTree = "<group>"; };
+		1426F8171D7F37108A1F101C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = animatedComponents/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-animatedComponents-animatedComponentsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-animatedComponents-animatedComponentsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-animatedComponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-animatedComponents.debug.xcconfig"; path = "Target Support Files/Pods-animatedComponents/Pods-animatedComponents.debug.xcconfig"; sourceTree = "<group>"; };
 		4A639E79012A4B039BBC161F /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				1426F8171D7F37108A1F101C /* PrivacyInfo.xcprivacy */,
 			);
 			name = animatedComponents;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				A49056FCD0B04C59B8C9952A /* Montserrat-Regular.ttf in Resources */,
 				C3C5C3E14DC84BCB9573C20D /* Montserrat-SemiBold.ttf in Resources */,
 				EC79E654974C42D5A2C3D4B6 /* Montserrat-Thin.ttf in Resources */,
+				E241B086F10774E2724EA925 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +630,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -689,8 +693,13 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -699,7 +708,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -754,8 +763,13 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
