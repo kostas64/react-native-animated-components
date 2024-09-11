@@ -1,14 +1,15 @@
 import Animated, {
   interpolate,
+  processColor,
   interpolateColor,
   useAnimatedProps,
   createAnimatedPropAdapter,
 } from 'react-native-reanimated';
 import React from 'react';
 import {Path} from 'react-native-svg';
-import {processColor, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-import {Slice} from './types';
+import {TSlice} from './types';
 import {gapSize, total} from './data';
 import {createRoundedPieSlicePath} from './utils';
 
@@ -23,7 +24,7 @@ const Slice = ({
   outerRadius,
   selectedValue,
   progressValue,
-}: Slice) => {
+}: TSlice) => {
   const startAngleLocal: number[] = [0];
   const gapAngle = gapSize / outerRadius;
   const sliceAngle = (item.value / total) * 2 * Math.PI;
@@ -81,7 +82,6 @@ const Slice = ({
     createAnimatedPropAdapter(
       props => {
         if (Object.keys(props).includes('stroke')) {
-          //@ts-ignore
           props.stroke = {type: 0, payload: processColor(props.stroke)};
         }
       },

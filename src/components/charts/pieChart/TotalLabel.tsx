@@ -4,7 +4,7 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {TotalLabel} from './types';
+import {TTotalLabel} from './types';
 import {StyleSheet} from 'react-native';
 
 import {height} from './data';
@@ -12,7 +12,7 @@ import {isIOS} from '@utils/device';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 
-const TotalLabel = ({animatedText, progress}: TotalLabel) => {
+const TotalLabel = ({animatedText, progress}: TTotalLabel) => {
   const formattedText = useDerivedValue(
     () => ` ${animatedText.value ? animatedText.value : ''}`,
   );

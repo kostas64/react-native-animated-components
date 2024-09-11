@@ -1,6 +1,6 @@
 import {SharedValue} from 'react-native-reanimated';
 
-export type Slice = {
+export type TSlice = {
   index: number;
   data: {value: number; color: string}[];
   item: {color: string; value: number};
@@ -11,12 +11,12 @@ export type Slice = {
   selectedValue: SharedValue<number>;
 };
 
-export type TotalLabel = {
+export type TTotalLabel = {
   animatedText: SharedValue<number>;
   progress: SharedValue<number>;
 };
 
-export type Legend = {
+export type TLegend = {
   progress: SharedValue<number>;
   selectedValue: SharedValue<number>;
 };

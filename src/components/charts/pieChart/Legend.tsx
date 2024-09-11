@@ -6,11 +6,11 @@ import Animated, {
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import {Legend} from './types';
+import {TLegend} from './types';
 import {data, total, width} from './data';
 import {typography} from '@utils/typography';
 
-const Legend = ({progress, selectedValue}: Legend) => {
+const Legend = ({progress, selectedValue}: TLegend) => {
   return (
     <Animated.View style={styles.legendContainer}>
       {data.map((item, index) => {
