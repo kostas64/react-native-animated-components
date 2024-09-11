@@ -1,21 +1,14 @@
 import React, {useRef} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {typography} from '@utils/typography';
 import PieChart from '@components/charts/PieChart';
+import MyButton from '@components/charts/MyButton';
 import LineChart from '@components/charts/LineChart';
 
 type ChartRef = {
   animate: (forward?: boolean) => void;
-};
-
-const MyButton = ({title, onPress}: {title: string; onPress: () => void}) => {
-  return (
-    <Pressable onPress={onPress} style={styles.btnContainer}>
-      <Text style={styles.btnLabel}>{title}</Text>
-    </Pressable>
-  );
 };
 
 const LineChartScreen = () => {
