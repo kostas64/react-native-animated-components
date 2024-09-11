@@ -3,9 +3,9 @@ import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {typography} from '@utils/typography';
-import PieChart from '@components/charts/PieChart';
 import MyButton from '@components/charts/MyButton';
-import LineChart from '@components/charts/LineChart';
+import PieChart from '@components/charts/pieChart/PieChart';
+import LineChart from '@components/charts/lineChart/LineChart';
 
 type ChartRef = {
   animate: (forward?: boolean) => void;

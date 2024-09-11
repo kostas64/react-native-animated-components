@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import ChartHeader from './ChartHeader';
-import {ChartRef} from './lineChart/types';
-import AnimatedLineChart from './lineChart/AnimatedLineChart';
-import {chartHeight, chartWidth, data} from './lineChart/data';
+import {ChartRef} from './types';
+import ChartHeader from '../ChartHeader';
+import AnimatedLineChart from './AnimatedLineChart';
+import {chartHeight, chartWidth, data} from './data';
 
 const LineChart = React.forwardRef<ChartRef>((_, ref) => {
   return (
