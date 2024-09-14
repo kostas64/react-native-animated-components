@@ -98,7 +98,7 @@ const ShutdownIOS = () => {
     <>
       <StatusBarManager barStyle="light" />
       <ImageBackground
-        source={require('../assets/img/ios_wallpaper.png')}
+        source={require('@assets/img/ios_wallpaper.png')}
         style={{width: WIDTH, height: HEIGHT_SCR}}>
         <Animated.View style={[styles.filterBackground, background]} />
 
