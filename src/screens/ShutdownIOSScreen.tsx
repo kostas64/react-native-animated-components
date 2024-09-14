@@ -44,7 +44,6 @@ const ShutdownIOS = () => {
   const animProps = useAnimatedProps(() => ({
     width: sliderWidth.value,
     opacity: interpolate(sliderWidth.value, [SLIDER_W, 75], [1, 0]),
-
     transform: [{translateX: SLIDER_W - sliderWidth.value}],
   }));
 
@@ -52,7 +51,7 @@ const ShutdownIOS = () => {
   const powerBtn = useAnimatedStyle(() => ({
     opacity: interpolate(finishProgress.value, [0, 1], [1, 0]),
     transform: [
-      {scale: interpolate(finishProgress.value, [0, 0.2, 1], [1, 1.2, 0])},
+      {scale: interpolate(finishProgress.value, [0, 0.2, 1], [1, 1.14, 0])},
     ],
     left: interpolate(sliderWidth.value, [SLIDER_W, SLIDER_FINAL_W], [3, 195]),
   }));
@@ -158,20 +157,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     left: (WIDTH - SLIDER_W) / 2,
     marginTop: 150,
-    height: SLIDER_H + 10,
+    height: SLIDER_H,
     overflow: 'hidden',
+    borderRadius: 60,
   },
   sliderInnerContainer: {
-    position: 'relative',
-    overflow: 'hidden',
-    top: 5,
+    width: SLIDER_W,
   },
   powerBtn: {
     position: 'absolute',
     padding: 16,
     backgroundColor: 'white',
     borderRadius: 100,
-    top: 9,
+    top: 4,
   },
   textContainer: {
     flexDirection: 'row',
