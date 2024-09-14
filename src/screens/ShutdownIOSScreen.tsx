@@ -116,9 +116,9 @@ const ShutdownIOS = () => {
                 <AnimRect
                   x="0"
                   y="0"
-                  height={SLIDER_H}
                   rx="40"
                   fill="url(#grad)"
+                  height={SLIDER_H}
                   animatedProps={animProps}
                 />
                 <View style={styles.textContainer}>
