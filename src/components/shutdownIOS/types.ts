@@ -5,5 +5,5 @@ export type TAnimatedText = {
   char: string;
   totalCharsLength: number;
   coloring: SharedValue<number>;
-  silderWidth: SharedValue<number>;
+  sliderWidth: SharedValue<number>;
 };

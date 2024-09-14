@@ -14,14 +14,14 @@ const AnimatedText = ({
   index,
   char,
   coloring,
-  silderWidth,
+  sliderWidth,
   totalCharsLength,
 }: TAnimatedText) => {
   const textColor = useAnimatedStyle(() => {
     const interval = 1 / (totalCharsLength + 8);
 
     return {
-      opacity: interpolate(silderWidth.value, [SLIDER_W, 260], [1, 0]),
+      opacity: interpolate(sliderWidth.value, [SLIDER_W, 260], [1, 0]),
       color: interpolateColor(
         coloring.value,
         [
