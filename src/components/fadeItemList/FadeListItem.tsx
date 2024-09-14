@@ -1,5 +1,11 @@
+import Animated, {
+  interpolate,
+  SharedValue,
+  Extrapolation,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import React from 'react';
-import {Animated, Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
 import {WIDTH} from '@utils/device';
 import {FadeItemProps} from './types';
@@ -11,7 +17,7 @@ const FadeListItem = ({
   index,
   scrollY,
 }: FadeItemProps & {
-  scrollY: Animated.Value;
+  scrollY: SharedValue<number>;
 }) => {
   const inputRange = [
     -1,
@@ -19,11 +25,6 @@ const FadeListItem = ({
     (ITEM_SIZE + 8) * index,
     (ITEM_SIZE + 8) * (index + 2),
   ];
-  const scale = scrollY.interpolate({
-    inputRange,
-    outputRange: [1, 1, 1, 0],
-    extrapolate: 'clamp',
-  });
 
   const opacityInputRange = [
     -1,
@@ -31,14 +32,23 @@ const FadeListItem = ({
     (ITEM_SIZE + 8) * index,
     (ITEM_SIZE + 8) * (index + 1),
   ];
-  const opacity = scrollY.interpolate({
-    inputRange: opacityInputRange,
-    outputRange: [1, 1, 1, 0],
-  });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollY.value, opacityInputRange, [1, 1, 1, 0]),
+    transform: [
+      {
+        scale: interpolate(
+          scrollY.value,
+          inputRange,
+          [1, 1, 1, 0],
+          Extrapolation.CLAMP,
+        ),
+      },
+    ],
+  }));
 
   return (
-    <Animated.View
-      style={[styles.parentViewItem, {opacity, transform: [{scale}]}]}>
+    <Animated.View style={[styles.parentViewItem, animatedStyle]}>
       <Image source={{uri: item.image}} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.name}>{item.name}</Text>
@@ -56,7 +66,6 @@ const styles = StyleSheet.create({
     height: 118,
     flexDirection: 'row',
     padding: SPACING,
-    marginBottom: SPACING,
     borderRadius: 16,
     backgroundColor: 'white',
     shadowColor: '#000',
