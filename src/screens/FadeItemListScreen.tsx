@@ -1,5 +1,7 @@
 import React from 'react';
-import {Animated, Image, StyleSheet, View} from 'react-native';
+import {FlashList} from '@shopify/flash-list';
+import {Image, StyleSheet, View} from 'react-native';
+import {useSharedValue} from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import StatusBarManager from '@components/StatusBarManager';
@@ -10,15 +12,10 @@ import {BG_IMG, DATA, SPACING} from '@components/fadeItemList/constants';
 
 const ScrollItemListScreen = () => {
   const insets = useSafeAreaInsets();
-  const scrollY = React.useRef(new Animated.Value(0)).current;
+  const scrollY = useSharedValue(0);
 
   const renderItem = ({item, index}: FadeItemProps) => (
     <FadeListItem item={item} index={index} scrollY={scrollY} />
-  );
-
-  const onScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {y: scrollY}}}],
-    {useNativeDriver: true},
   );
 
   return (
@@ -32,14 +29,19 @@ const ScrollItemListScreen = () => {
           source={{uri: BG_IMG}}
           style={StyleSheet.absoluteFillObject}
         />
-        <Animated.FlatList
+        <FlashList
           data={DATA}
-          onScroll={onScroll}
+          onScroll={e => {
+            scrollY.value = e.nativeEvent.contentOffset.y;
+          }}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[
-            styles.flatlistContainer,
-            {paddingTop: insets.top + 100},
-          ]}
+          contentContainerStyle={{
+            paddingTop: insets.top + 100,
+            paddingHorizontal: SPACING,
+            paddingBottom: 2 * SPACING,
+          }}
+          estimatedItemSize={118}
+          ItemSeparatorComponent={() => <View style={{height: SPACING}} />}
           keyExtractor={item => item.key}
           renderItem={renderItem}
         />

@@ -5,12 +5,13 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
-import {MarkedDates} from 'react-native-calendars/src/types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {HEIGHT, WIDTH} from '@utils/device';
+import {SHORT_MONTHS} from '@assets/months';
 import {typography} from '@utils/typography';
 import Footer from '@components/airbnb/Footer';
 import WhereTo from '@components/airbnb/WhereTo';
@@ -18,7 +19,6 @@ import WhenTrip from '@components/airbnb/WhenTrip';
 import WhoComing from '@components/airbnb/WhoComing';
 import InitialBox from '@components/airbnb/InitialBox';
 import InitialView from '@components/airbnb/InitialView';
-import {TStartDate, TDayObject} from '@components/airbnb/types';
 import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
 import {_MS_PER_DAY, CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
 
@@ -45,9 +45,7 @@ const Airbnb = () => {
   const [inflants, setInflants] = React.useState(0);
   const [pets, setPets] = React.useState(0);
 
-  const [startDate, setStartDate] = React.useState<TStartDate>({});
-  const [endDate, setEndDate] = React.useState({});
-  const [periodo, setPeriodo] = React.useState<MarkedDates>({});
+  const [periodo, setPeriodo] = React.useState<CalendarActiveDateRange>({});
 
   const top = insets.top > 40 ? insets.top : 30;
   const bottom = insets.bottom > 30 ? insets.bottom : 0;
@@ -188,36 +186,58 @@ const Airbnb = () => {
     pets !== 0 && setPets(0);
   };
 
-  const onPressSkipReset = React.useCallback(() => {
-    if (Object.keys(periodo).length > 0) {
-      setPeriodo({});
-      setAnyWeek('Any week');
-    } else {
-      animateWhen();
-    }
-  }, [periodo]);
+  const onPressSkipReset = React.useCallback(
+    (shouldReset = false) => {
+      if (shouldReset) {
+        setPeriodo({});
+        setAnyWeek('Any week');
+      } else {
+        animateWhen();
+      }
+    },
+    [periodo],
+  );
 
   const onPressNext = React.useCallback(() => {
-    if (Object.keys(periodo).length > 0) {
+    if (!!periodo.startId || !!periodo.endId) {
       let week = '';
-      if (Object.keys(periodo).length === 1) {
-        const date = new Date(Object.keys(periodo)?.[0]);
-        const day = date.getDate();
-        const month = date.toLocaleString('default', {month: 'long'});
-        week = `${day} ${month}`;
-      } else {
-        const stDate = new Date(Object.keys(periodo)?.[0]);
-        const endDate = new Date(
-          Object.keys(periodo)?.[Object.keys(periodo)?.length - 1],
-        );
-        const stDay = stDate.getDate();
-        const stMonth = stDate.toLocaleString('default', {month: 'long'});
-        const endDay = endDate.getDate();
-        const endMonth = endDate.toLocaleString('default', {month: 'long'});
-        const monthsEqual = stMonth === endMonth;
-        week = !monthsEqual
-          ? `${stDay} ${stMonth} - ${endDay} ${endMonth}`
-          : `${stDay}-${endDay} ${stMonth}`;
+      if (
+        !!periodo.startId &&
+        !!periodo.endId &&
+        periodo.startId !== periodo.endId
+      ) {
+        const isSameYear =
+          new Date(periodo.startId).getFullYear() ===
+          new Date(periodo.endId).getFullYear();
+
+        const isSameMonth =
+          new Date(periodo.startId).getMonth() ===
+            new Date(periodo.endId).getMonth() && isSameYear;
+
+        week =
+          isSameMonth && isSameYear
+            ? `${new Date(periodo.startId).getDate()}-${new Date(
+                periodo.endId,
+              ).getDate()} ${
+                SHORT_MONTHS[new Date(periodo.startId).getMonth()]
+              }`
+            : isSameYear
+            ? `${new Date(periodo.startId).getDate()} ${
+                SHORT_MONTHS[new Date(periodo.startId).getMonth()]
+              } - ${new Date(periodo.endId).getDate()} ${
+                SHORT_MONTHS[new Date(periodo.endId).getMonth()]
+              }`
+            : `${new Date(periodo.startId).getDate()} ${
+                SHORT_MONTHS[new Date(periodo.startId).getMonth()]
+              } ${new Date(periodo.startId).getFullYear()} - ${new Date(
+                periodo.endId,
+              ).getDate()} ${
+                SHORT_MONTHS[new Date(periodo.endId).getMonth()]
+              } ${new Date(periodo.endId).getFullYear()}`;
+      } else if (periodo.startId) {
+        week = `${new Date(periodo.startId).getDate()} ${
+          SHORT_MONTHS[new Date(periodo.startId).getMonth()]
+        }`;
       }
 
       setAnyWeek(week);
@@ -225,136 +245,6 @@ const Airbnb = () => {
 
     animateWhen();
   }, [periodo]);
-
-  const getDateString = React.useCallback((timestamp: string) => {
-    const date = new Date(timestamp);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-
-    let dateString = `${year}-`;
-
-    if (month < 10) {
-      dateString += `0${month}-`;
-    } else {
-      dateString += `${month}-`;
-    }
-
-    if (day < 10) {
-      dateString += `0${day}`;
-    } else {
-      dateString += day;
-    }
-
-    return dateString;
-  }, []);
-
-  const getPeriod = React.useCallback(
-    (startTimestamp: string, endTimestamp: string) => {
-      const period: MarkedDates = {};
-
-      let currentTimestamp: string = startTimestamp;
-
-      while (currentTimestamp < endTimestamp) {
-        if (currentTimestamp === startTimestamp) {
-          const dateString = getDateString(currentTimestamp);
-          period[dateString] = {
-            color: '#222222',
-            textColor: 'white',
-            startingDay: currentTimestamp === startTimestamp,
-          };
-        } else {
-          const dateString = getDateString(currentTimestamp);
-          period[dateString] = {
-            color: 'rgb(225,225,225)',
-            startingDay: currentTimestamp === startTimestamp,
-          };
-        }
-
-        currentTimestamp += _MS_PER_DAY;
-      }
-      const dateString = getDateString(endTimestamp);
-      period[dateString] = {
-        color: '#222222',
-        textColor: 'white',
-        endingDay: true,
-      };
-
-      return period;
-    },
-    [],
-  );
-
-  const setDay = React.useCallback(
-    (dayObj: TDayObject) => {
-      const {dateString, day, month, year} = dayObj;
-      // timestamp returned by dayObj is in 12:00AM UTC 0, want local 12:00AM
-      const timestamp = new Date(year, month - 1, day).getTime();
-      const newDayObj = {...dayObj, timestamp};
-      // if there is no start day, add start. or if there is already a end and start date, restart
-      const startIsEmpty = Object.keys(startDate).length === 0;
-      const endIsEmpty = Object.keys(endDate).length === 0;
-
-      const dayCalendarProps = {
-        color: '#222222',
-        textColor: 'white',
-        endingDay: true,
-        startingDay: true,
-      };
-
-      if (dayObj?.dateString === startDate?.dateString) {
-        if (!endDate) {
-          return;
-        }
-
-        const period: MarkedDates = {
-          [dateString]: dayCalendarProps,
-        };
-
-        //@ts-ignore
-        setStartDate(newDayObj);
-        setPeriodo(period);
-        setEndDate({});
-
-        return;
-      }
-
-      if (startIsEmpty || (!startIsEmpty && !endIsEmpty)) {
-        const period: MarkedDates = {
-          [dateString]: dayCalendarProps,
-        };
-
-        //@ts-ignore
-        setStartDate(newDayObj);
-        setPeriodo(period);
-        setEndDate({});
-      } else {
-        // if end date is older than start date switch
-        const {timestamp: savedTimestamp} = startDate;
-
-        //@ts-ignore
-        if (savedTimestamp > timestamp) {
-          const period: MarkedDates = {
-            [dateString]: dayCalendarProps,
-          };
-
-          //@ts-ignore
-          setStartDate(newDayObj);
-          setPeriodo(period);
-          // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
-          setEndDate({});
-        } else {
-          //@ts-ignore
-          const period: MarkedDates = getPeriod(savedTimestamp, timestamp);
-          setStartDate(startDate);
-          setPeriodo(period);
-          // !!setMarkedPeriod && endDate && setMarkedPeriod(period);
-          setEndDate(newDayObj);
-        }
-      }
-    },
-    [startDate, endDate],
-  );
 
   React.useEffect(() => {
     if (!showModal) {
@@ -458,8 +348,7 @@ const Airbnb = () => {
                   onPressNext={onPressNext}
                   onPressSkipReset={onPressSkipReset}
                   period={period}
-                  periodo={periodo}
-                  setDay={setDay}
+                  setPeriodo={setPeriodo}
                   setPeriod={setPeriod}
                   translatePicker={translatePicker}
                   translatePickerStyle={translatePickerStyle}
