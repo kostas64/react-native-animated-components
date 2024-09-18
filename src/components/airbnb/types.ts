@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 
 import {Dispatch, SetStateAction} from 'react';
-import {MarkedDates} from 'react-native-calendars/src/types';
 import {AnimatedStyle, SharedValue} from 'react-native-reanimated';
+import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 
 export type TSearchItem = {
   place: string;
@@ -37,11 +37,6 @@ export type TItemCounter = {
   disabledLeft?: boolean;
 };
 
-export type TStartDate = {
-  dateString?: string;
-  timestamp?: string;
-};
-
 export type TRenderCountryItem = {
   item: {img: ImageSourcePropType; label: string};
   index: number;
@@ -68,14 +63,6 @@ export type TWhoComing = {
   setInflants: Dispatch<SetStateAction<number>>;
 };
 
-export type TDayObject = {
-  dateString: string;
-  day: number;
-  month: number;
-  year: number;
-  timestamp: number;
-};
-
 export type TWhereTo = {
   country: string;
   setCountry: Dispatch<SetStateAction<string>>;
@@ -89,10 +76,9 @@ export type TWhereTo = {
 };
 
 export type TWhenTrip = {
-  setDay: (obj: TDayObject) => void;
   period: string;
-  periodo: MarkedDates;
   setPeriod: React.Dispatch<React.SetStateAction<string>>;
+  setPeriodo: React.Dispatch<React.SetStateAction<CalendarActiveDateRange>>;
   translatePicker: SharedValue<number>;
   translatePickerStyle: {
     transform: {
@@ -100,7 +86,7 @@ export type TWhenTrip = {
     }[];
   };
   onPressNext: () => void;
-  onPressSkipReset: () => void;
+  onPressSkipReset: (val: boolean) => void;
 };
 
 export type TCountryItem = {
@@ -109,4 +95,11 @@ export type TCountryItem = {
   item: {label: string; img: any};
   animateWhen: () => void;
   setCountry: Dispatch<SetStateAction<string>>;
+};
+
+export type TPeriodItem = {
+  item: string;
+  index: number;
+  onPress: () => void;
+  isSelected: boolean;
 };

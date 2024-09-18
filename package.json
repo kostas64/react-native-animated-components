@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@marceloterreiro/flash-calendar": "^1.0.0",
     "@react-native-masked-view/masked-view": "^0.2.9",
     "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.6",

@@ -1,22 +1,31 @@
-import React from 'react';
-import {CalendarList} from 'react-native-calendars';
+import {
+  Calendar,
+  toDateId,
+  useDateRange,
+} from '@marceloterreiro/flash-calendar';
+import React, {useEffect, useMemo} from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import Animated, {withTiming} from 'react-native-reanimated';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {TWhenTrip} from './types';
+import {CALENDAR_PER} from './data';
 import PickerItem from './PickerItem';
-import {MONTHS} from '@assets/months';
+import PeriodItem from './PeriodItem';
 import {HEIGHT, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
-import {CALENDAR_PER, MIN_DATE} from './data';
+
+const now = new Date();
+const today = toDateId(now);
+const maxDate = toDateId(
+  new Date(`${now.getFullYear() + 1}-${now.getMonth() + 1}-${now.getDate()}`),
+);
 
 const WhenTrip = ({
-  setDay,
   period,
-  periodo,
   setPeriod,
+  setPeriodo,
   translatePicker,
   translatePickerStyle,
   onPressNext,
@@ -24,42 +33,192 @@ const WhenTrip = ({
 }: TWhenTrip) => {
   const calendarPerRef = React.createRef<FlatList>();
   const insets = useSafeAreaInsets();
-  const top = insets.top > 40 ? insets.top : 30;
+  const top = insets.top > 52 ? insets.top : 36;
 
   const renderPeriodItem = React.useCallback(
     ({item, index}: {item: string; index: number}) => {
       const isSelected = period === item;
 
-      return (
-        <Pressable
-          onPress={() => {
-            setPeriod(item);
+      const onPress = () => {
+        setPeriod(item);
 
-            if (calendarPerRef?.current) {
-              calendarPerRef?.current.scrollToIndex({
-                index,
-                animated: true,
-                viewOffset: 24,
-              });
-            }
-          }}
+        if (calendarPerRef?.current) {
+          calendarPerRef?.current.scrollToIndex({
+            index,
+            animated: true,
+            viewOffset: 24,
+          });
+        }
+      };
+
+      return (
+        <PeriodItem
           key={`period-${index}`}
-          style={[
-            styles.periodItemContainer,
-            isSelected
-              ? styles.selectedPeriodItem
-              : styles.unselectedPeriodItem,
-            {
-              marginLeft: index === 0 ? 20 : 0,
-              marginRight: index !== CALENDAR_PER.length - 1 ? 10 : 20,
-            },
-          ]}>
-          <Text style={styles.itemLabel}>{item}</Text>
-        </Pressable>
+          index={index}
+          isSelected={isSelected}
+          item={item}
+          onPress={onPress}
+        />
       );
     },
     [period],
   );
+
+  const theme = useMemo(
+    () => ({
+      itemDayContainer: {
+        activeDayFiller: {
+          width: 36,
+          right: -18,
+          backgroundColor: 'rgb(225,225,225)',
+        },
+      },
+      rowMonth: {
+        content: {
+          color: '#000000',
+          textAlign: 'left' as
+            | 'auto'
+            | 'center'
+            | 'left'
+            | 'right'
+            | 'justify'
+            | undefined,
+          fontSize: 18,
+          fontFamily: typography.semiBold,
+        },
+      },
+      rowWeek: {
+        container: {
+          height: 0,
+          opacity: 0,
+        },
+      },
+      itemDay: {
+        base: () => ({
+          content: {
+            padding: 0,
+          },
+        }),
+        disabled: () => ({
+          container: {
+            width: 39,
+            left: 4,
+          },
+          content: {
+            textDecorationLine: 'line-through' as
+              | 'none'
+              | 'underline'
+              | 'line-through'
+              | 'underline line-through'
+              | undefined,
+            fontFamily: typography.medium,
+          },
+        }),
+        idle: () => ({
+          container: {
+            width: 39,
+            left: 4,
+            backgroundColor: 'transparent',
+          },
+          content: {
+            fontFamily: typography.medium,
+            color: '#000000',
+          },
+        }),
+        today: ({
+          isStartOfRange,
+          isEndOfRange,
+        }: {
+          isStartOfRange: boolean;
+          isEndOfRange: boolean;
+        }) => ({
+          container: {
+            width: 39,
+            left: 4,
+            borderWidth: 0,
+            backgroundColor: 'transparent',
+          },
+          content: {
+            fontFamily: typography.medium,
+            color: isStartOfRange || isEndOfRange ? '#ffffff' : '#000000',
+          },
+        }),
+        active: ({
+          isRangeValid,
+          isStartOfRange,
+          isEndOfRange,
+          isStartOfWeek,
+          isEndOfWeek,
+        }: {
+          isRangeValid: boolean;
+          isStartOfRange: boolean;
+          isEndOfRange: boolean;
+          isStartOfWeek: boolean;
+          isEndOfWeek: boolean;
+        }) => ({
+          container: {
+            width: 39,
+            left: 4,
+            zIndex: 1,
+            borderTopRightRadius:
+              isRangeValid && !isEndOfRange && !isStartOfRange && !isEndOfWeek
+                ? 0
+                : isRangeValid && !isEndOfRange && !isStartOfRange
+                ? 10
+                : 20,
+            borderBottomRightRadius:
+              isRangeValid && !isEndOfRange && !isStartOfRange && !isEndOfWeek
+                ? 0
+                : isRangeValid && !isEndOfRange && !isStartOfRange
+                ? 10
+                : 20,
+            borderTopLeftRadius:
+              isRangeValid && !isEndOfRange && !isStartOfRange && !isStartOfWeek
+                ? 0
+                : isRangeValid && !isEndOfRange && !isStartOfRange
+                ? 10
+                : 20,
+            borderBottomLeftRadius:
+              isRangeValid && !isEndOfRange && !isStartOfRange && !isStartOfWeek
+                ? 0
+                : isRangeValid && !isEndOfRange && !isStartOfRange
+                ? 10
+                : 20,
+            backgroundColor:
+              isStartOfRange || isEndOfRange ? '#222222' : 'rgb(225,225,225)',
+          },
+          content: {
+            fontFamily: typography.medium,
+            color: isStartOfRange || isEndOfRange ? '#ffffff' : '#000000',
+          },
+        }),
+      },
+    }),
+    [],
+  );
+
+  const {
+    calendarActiveDateRanges,
+    onCalendarDayPress,
+    dateRange,
+    onClearDateRange,
+  } = useDateRange();
+
+  useEffect(() => {
+    setPeriodo(dateRange);
+  }, [dateRange]);
+
+  const atLeastOneDaySelected =
+    !!calendarActiveDateRanges?.[0]?.endId ||
+    !!calendarActiveDateRanges?.[0]?.startId;
+
+  const onPressSkipOrReset = () => {
+    if (atLeastOneDaySelected) {
+      onClearDateRange();
+    }
+
+    onPressSkipReset(atLeastOneDaySelected);
+  };
 
   return (
     <>
@@ -86,34 +245,29 @@ const WhenTrip = ({
       </View>
       <View style={[styles.row, styles.justifyBtn, styles.daysContainer]}>
         {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item, key) => (
-          <Text key={`day-${key}`} style={{color: 'rgb(125,125,125)'}}>
+          <Text key={`day-${key}`} style={styles.monthDay}>
             {item}
           </Text>
         ))}
       </View>
 
-      <CalendarList
-        firstDay={1}
-        hideDayNames
-        minDate={MIN_DATE}
-        pastScrollRange={0}
-        markingType={'period'}
-        futureScrollRange={3}
-        calendarWidth={WIDTH - 48}
-        calendarHeight={280}
-        onDayPress={setDay}
-        markedDates={periodo}
-        //@ts-ignore
-        theme={styles.calendarTheme}
-        renderHeader={date => (
-          <View style={styles.headerCalendar}>
-            <Text style={[styles.fontW500, styles.font16]}>{`${
-              MONTHS[date.getMonth()]
-            } ${date.getFullYear()}`}</Text>
-          </View>
-        )}
-        style={[styles.marLeft10, {height: HEIGHT - top - 464}]}
-      />
+      <View style={[{height: HEIGHT - top - 464}, styles.calendarContainer]}>
+        <Calendar.List
+          calendarFirstDayOfWeek="monday"
+          calendarMonthHeaderHeight={36}
+          calendarSpacing={24}
+          calendarDayHeight={38}
+          calendarRowHorizontalSpacing={0}
+          calendarActiveDateRanges={calendarActiveDateRanges}
+          calendarInitialMonthId={today}
+          calendarMinDateId={today}
+          calendarMaxDateId={maxDate}
+          theme={theme}
+          decelerationRate={'fast'}
+          estimatedItemSize={1000}
+          onCalendarDayPress={onCalendarDayPress}
+        />
+      </View>
       <View style={[styles.borderLine, styles.marBot10]} />
       <FlatList
         horizontal
@@ -131,9 +285,9 @@ const WhenTrip = ({
           styles.padHor24,
           styles.height74,
         ]}>
-        <Pressable onPress={onPressSkipReset} style={styles.skipResetBtn}>
+        <Pressable onPress={onPressSkipOrReset} style={styles.skipResetBtn}>
           <Text style={[styles.font16, styles.fontW500, styles.underline]}>
-            {Object.keys(periodo).length === 0 ? 'Skip' : 'Reset'}
+            {atLeastOneDaySelected ? 'Reset' : 'Skip'}
           </Text>
         </Pressable>
         <Pressable style={styles.nextBtn} onPress={onPressNext}>
@@ -149,10 +303,22 @@ const WhenTrip = ({
 export default WhenTrip;
 
 const styles = StyleSheet.create({
+  calendarContainer: {
+    width: WIDTH - 60,
+    alignSelf: 'center',
+    left: 6,
+    flex: 1,
+  },
   daysContainer: {
-    marginLeft: 40,
-    marginRight: 16,
+    alignSelf: 'center',
     marginVertical: 16,
+    width: WIDTH - 60,
+    left: 6,
+  },
+  monthDay: {
+    textAlign: 'center',
+    color: 'rgb(125,125,125)',
+    width: (WIDTH - 60) / 7,
   },
   padLeft24: {
     paddingLeft: 24,
@@ -247,29 +413,5 @@ const styles = StyleSheet.create({
   },
   fontW500: {
     fontWeight: '500',
-  },
-  periodItemContainer: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 50,
-  },
-  selectedPeriodItem: {
-    backgroundColor: 'rgb(248, 248,248)',
-    borderWidth: 2,
-    borderColor: 'black',
-  },
-  unselectedPeriodItem: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'rgb(225,225,225)',
-  },
-  calendarTheme: {
-    //@ts-ignore
-    todayTextColor: 'black',
-    dayTextColor: 'black',
-    textDayFontFamily: typography.medium,
-  },
-  itemLabel: {
-    fontFamily: typography.medium,
   },
 });
