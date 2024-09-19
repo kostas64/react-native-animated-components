@@ -9,14 +9,15 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChatScreen from './screens/ChatScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
-import ChartScreen from './screens/ChartsScreen';
+import GroupChart from './screens/GroupChart';
 import NFCReader from './screens/NFCReaderScreen';
 import AirbnbScreen from './screens/AirbnbScreen';
 import TicketScreen from './screens/TicketScreen';
+import LinePieCharts from './screens/LinePieCharts';
 import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
-import DotLoaderScreen from './screens/DotLoaderScreen';
 import TogglersScreen from './screens/TogglersScreen';
+import DotLoaderScreen from './screens/DotLoaderScreen';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
 import ProductListScreen from './screens/ProductListScreen';
@@ -58,7 +59,8 @@ type TStackList = {
   LikeInteraction: undefined;
   CircularAnimatedText: undefined;
   Chat: undefined;
-  Charts: undefined;
+  LinePieCharts: undefined;
+  GroupChart: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -117,7 +119,8 @@ function App() {
             component={CircularAnimatedTextScreen}
           />
           <Stack.Screen name="Chat" component={ChatScreen} />
-          <Stack.Screen name="Charts" component={ChartScreen} />
+          <Stack.Screen name="LinePieCharts" component={LinePieCharts} />
+          <Stack.Screen name="GroupChart" component={GroupChart} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>

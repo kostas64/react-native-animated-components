@@ -32,8 +32,8 @@ type TDATA = {
       | 'LikeInteraction'
       | 'CircularAnimatedText'
       | 'Chat'
-      | 'Charts'
-      | 'LineChart'
+      | 'LinePieCharts'
+      | 'GroupChart'
       | 'ProductList';
   }[];
 }[];
@@ -125,9 +125,14 @@ export const DATA: TDATA = [
     iconSize: 26,
     items: [
       {
-        label: 'Charts',
+        label: 'Line & Pie Chart',
         backgroundColor: '#0ad2ff',
-        screen: 'Charts',
+        screen: 'LinePieCharts',
+      },
+      {
+        label: 'Group Chart',
+        backgroundColor: '#2962ff',
+        screen: 'GroupChart',
       },
     ],
   },
