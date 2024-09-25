@@ -33,7 +33,7 @@ type TDATA = {
       | 'CircularAnimatedText'
       | 'Chat'
       | 'LinePieCharts'
-      | 'GroupChart'
+      | 'GroupStackCharts'
       | 'ProductList';
   }[];
 }[];
@@ -130,9 +130,9 @@ export const DATA: TDATA = [
         screen: 'LinePieCharts',
       },
       {
-        label: 'Group Chart',
+        label: 'Group & Stack Chart',
         backgroundColor: '#2962ff',
-        screen: 'GroupChart',
+        screen: 'GroupStackCharts',
       },
     ],
   },

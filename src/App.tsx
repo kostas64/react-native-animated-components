@@ -9,7 +9,6 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChatScreen from './screens/ChatScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
-import GroupChart from './screens/GroupChart';
 import NFCReader from './screens/NFCReaderScreen';
 import AirbnbScreen from './screens/AirbnbScreen';
 import TicketScreen from './screens/TicketScreen';
@@ -18,6 +17,7 @@ import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import TogglersScreen from './screens/TogglersScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
+import GroupStackCharts from './screens/GroupStackCharts';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
 import ProductListScreen from './screens/ProductListScreen';
@@ -60,7 +60,7 @@ type TStackList = {
   CircularAnimatedText: undefined;
   Chat: undefined;
   LinePieCharts: undefined;
-  GroupChart: undefined;
+  GroupStackCharts: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -120,7 +120,7 @@ function App() {
           />
           <Stack.Screen name="Chat" component={ChatScreen} />
           <Stack.Screen name="LinePieCharts" component={LinePieCharts} />
-          <Stack.Screen name="GroupChart" component={GroupChart} />
+          <Stack.Screen name="GroupStackCharts" component={GroupStackCharts} />
         </Stack.Navigator>
       </NavigationContainer>
     </GestureHandlerRootView>
