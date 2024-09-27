@@ -2,7 +2,6 @@ import React, {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {typography} from '@utils/typography';
 import MyButton from '@components/charts/MyButton';
 import PieChart from '@components/charts/pieChart/PieChart';
 import LineChart from '@components/charts/lineChart/LineChart';
@@ -64,19 +63,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 52,
     marginTop: 16,
-  },
-  btnContainer: {
-    backgroundColor: '#556d36',
-    height: 52,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100,
-    minWidth: 140,
-  },
-  btnLabel: {
-    color: 'white',
-    lineHeight: 22,
-    fontFamily: typography.semiBold,
   },
 });
