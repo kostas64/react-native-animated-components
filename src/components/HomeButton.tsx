@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     color: 'white',
-    fontFamily: typography.regular,
+    fontFamily: typography.medium,
   },
 });
 
