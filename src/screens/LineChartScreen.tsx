@@ -11,17 +11,18 @@ import Animated, {
   withTiming,
   interpolate,
   useSharedValue,
+  useDerivedValue,
   useAnimatedProps,
   useAnimatedStyle,
-  useDerivedValue,
 } from 'react-native-reanimated';
 import React, {useImperativeHandle, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-
-import {isAndroid} from '@utils/device';
-import {typography} from '@utils/typography';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+
+import ReText from '@components/ReText';
+import {typography} from '@utils/typography';
+import {isAndroid, isIOS} from '@utils/device';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
@@ -51,6 +52,17 @@ const MyButton = ({title, onPress}: {title: string; onPress: () => void}) => {
   );
 };
 
+const ChartHeader = ({iconName, label}: {iconName: string; label: string}) => (
+  <View style={styles.chartHeaderContainer}>
+    <View style={styles.chartHeaderInnerContainer}>
+      <View style={styles.chartHeaderIconContainer}>
+        <AntDesign name={iconName} size={20} color={'#556d36'} />
+      </View>
+      <Text style={styles.chartHeaderLabel}>{label}</Text>
+    </View>
+  </View>
+);
+
 const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
   const {data, width, height} = props;
   const maxValue = Math.max(...data);
@@ -68,9 +80,15 @@ const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
   const iterateV = new Array(4).fill(0);
   const iterateH = new Array(7).fill(0);
 
+  const step = width / data.length;
   const formattedText = useDerivedValue(
     () => ` ${animatedText.value ? animatedText.value : ''}`,
   );
+
+  const retextStyle = [
+    styles.chartHeaderLabel,
+    isIOS ? styles.lineH19 : styles.androidReText,
+  ];
 
   const animate = (forward = true) => {
     progress.value = withTiming(forward ? 1 : 0, {
@@ -198,18 +216,32 @@ const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
   });
 
   const indicatorStyle = useAnimatedStyle(() => ({
-    opacity: indicatorPos.value === -1 ? 0 : 1,
+    opacity: indicatorPos.value === -1 || progress.value !== 1 ? 0 : 1,
     left: indicatorPos.value,
   }));
 
+  const retextPosStyle = useAnimatedStyle(() => ({
+    left: indicatorPos.value - 22,
+    opacity: indicatorPos.value === -1 || progress.value !== 1 ? 0 : 1,
+  }));
+
   const panGesture = Gesture.Pan()
+    .shouldCancelWhenOutside(true)
+    .onBegin(e => {
+      if (e.x >= 0 && e.x <= width && e.y >= 0 && e.y <= height) {
+        indicatorPos.value = e.x - 1;
+        animatedText.value = `${data[Math.floor(e.x / step)]}`;
+      }
+    })
     .onChange(e => {
       if (e.x >= 0 && e.x <= width && e.y >= 0 && e.y <= height) {
         indicatorPos.value = e.x - 1;
+        animatedText.value = `${data[Math.floor(e.x / step)]}`;
       }
     })
     .onFinalize(() => {
       indicatorPos.value = -1;
+      animatedText.value = '';
     });
 
   return (
@@ -287,6 +319,10 @@ const AnimatedLineChart = React.forwardRef<ChartRef, Props>((props, ref) => {
 
       {/* Indicator */}
       <Animated.View style={[indicatorStyle, styles.indicator, {height}]} />
+      {/* ReText */}
+      <Animated.View style={[styles.retextContainer, retextPosStyle]}>
+        <ReText text={formattedText} style={retextStyle} />
+      </Animated.View>
 
       <GestureDetector gesture={panGesture}>
         <View style={[styles.lineChartGestureArea, {width, height}]} />
@@ -309,13 +345,9 @@ const LineChartScreen = () => {
         gap: 36,
       }}>
       <View>
-        <View style={styles.lineChart}>
-          <View style={styles.lineChartIndicatorContainer}>
-            <AntDesign name={'linechart'} size={26} color={'#556d36'} />
-            <Text style={styles.lineChartLabel}>Line Chart</Text>
-          </View>
+        <View style={{top: -26}}>
+          <ChartHeader iconName="linechart" label={'Line Chart'} />
         </View>
-
         <AnimatedLineChart
           ref={chartRef}
           data={data}
@@ -323,6 +355,7 @@ const LineChartScreen = () => {
           height={chartHeight}
         />
       </View>
+
       <View style={styles.btnsContainer}>
         <MyButton title="Animate" onPress={() => chartRef.current?.animate()} />
         <MyButton
@@ -408,27 +441,53 @@ const styles = StyleSheet.create({
     backgroundColor: '#151515',
     borderRadius: 10,
   },
-  lineChart: {
+  chartHeaderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
   },
-  lineChartIndicatorContainer: {
+  chartHeaderInnerContainer: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#e3e5d7',
-    padding: 12,
+    padding: 10,
     borderRadius: 16,
   },
-  lineChartLabel: {
-    marginLeft: 16,
-    fontSize: 16,
-    lineHeight: 24,
+  chartHeaderIconContainer: {
+    backgroundColor: '#eeeee2',
+    marginRight: 10,
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 8,
+  },
+  chartHeaderLabel: {
+    lineHeight: 20,
     color: '#556d36',
     fontFamily: typography.bold,
   },
   lineChartGestureArea: {
     position: 'absolute',
     backgroundColor: 'transparent',
+  },
+  retextContainer: {
+    top: -36,
+    alignItems: 'center',
+    position: 'absolute',
+    backgroundColor: '#e3e5d7',
+    paddingHorizontal: 8,
+    paddingLeft: isIOS ? 6 : 0,
+    paddingRight: isIOS ? 7 : 0,
+    minWidth: 46,
+    paddingVertical: isIOS ? 6 : 0,
+    borderRadius: 8,
+  },
+  lineH19: {
+    lineHeight: 19,
+  },
+  androidReText: {
+    height: 32,
+    lineHeight: 10,
+    top: 5,
   },
 });
