@@ -10,6 +10,7 @@ module.exports = {
           '@utils': './src/utils',
           '@hooks': './src/hooks',
           '@screens': './src/screens',
+          '@providers': './src/providers',
         },
       },
     ],
