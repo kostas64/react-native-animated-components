@@ -34,7 +34,8 @@ type TDATA = {
       | 'Chat'
       | 'LinePieCharts'
       | 'GroupStackCharts'
-      | 'ProductList';
+      | 'ProductList'
+      | 'TaskCalendar';
   }[];
 }[];
 
@@ -73,7 +74,7 @@ export const DATA: TDATA = [
       },
       {
         label: 'Circular Animated Text',
-        backgroundColor: '#95e214',
+        backgroundColor: '#fdc921',
         screen: 'CircularAnimatedText',
       },
     ],
@@ -112,8 +113,13 @@ export const DATA: TDATA = [
       },
       {
         label: 'Product List',
-        backgroundColor: '#95e214',
+        backgroundColor: '#fdc921',
         screen: 'ProductList',
+      },
+      {
+        label: 'Task Calendar',
+        backgroundColor: '#95e214',
+        screen: 'TaskCalendar',
       },
     ],
   },

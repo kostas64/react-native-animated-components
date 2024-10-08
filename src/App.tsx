@@ -4,6 +4,7 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import ChatScreen from './screens/ChatScreen';
@@ -17,6 +18,7 @@ import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
 import TogglersScreen from './screens/TogglersScreen';
 import DotLoaderScreen from './screens/DotLoaderScreen';
+import {ModalProvider} from './providers/ModalProvider';
 import GroupStackCharts from './screens/GroupStackCharts';
 import DoubleListScreen from './screens/DoubleListScreen';
 import Carousel3DScreen from './screens/Carousel3DScreen';
@@ -26,6 +28,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import CustomDrawerScreen from './screens/CustomDrawerScreen';
 import ValuePickersScreen from './screens/ValuePickersScreen';
 import FadeItemListScreen from './screens/FadeItemListScreen';
+import TaskCalendarScreen from './screens/TaskCalendarScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
 import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
@@ -34,7 +37,7 @@ import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
 
-type TStackList = {
+export type TStackList = {
   Home: undefined;
   Parallax: undefined;
   ListWithIndicator: undefined;
@@ -61,6 +64,7 @@ type TStackList = {
   Chat: undefined;
   LinePieCharts: undefined;
   GroupStackCharts: undefined;
+  TaskCalendar: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -73,57 +77,77 @@ const Stack = createNativeStackNavigator<TStackList>();
 
 function App() {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Parallax" component={ParallaxScreen} />
-          <Stack.Screen
-            name="ListWithIndicator"
-            component={ListWithIndicatorScreen}
-          />
-          <Stack.Screen name="DoubleList" component={DoubleListScreen} />
-          <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
-          <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
-          <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
-          <Stack.Screen name="Togglers" component={TogglersScreen} />
-          <Stack.Screen name="FadeItem" component={FadeItemListScreen} />
-          <Stack.Screen name="CustomDrawer" component={CustomDrawerScreen} />
-          <Stack.Screen
-            name="DrawerInterpolate"
-            component={DrawerInterpolateScreen}
-          />
-          <Stack.Screen name="ProductList" component={ProductListScreen} />
-          <Stack.Screen name="PinCode" component={PinCode} />
-          <Stack.Screen name="Floating" component={FloatingButton} />
-          <Stack.Screen name="Airbnb" component={AirbnbScreen} />
-          <Stack.Screen name="Ticket" component={TicketScreen} />
-          <Stack.Screen name="ShutdownIOS" component={ShutdownIOS} />
-          <Stack.Screen name="NFCReader" component={NFCReader} />
-          <Stack.Screen
-            name="TranslateSearchIOS"
-            component={TranslateSearchIOSScreen}
-          />
-          <Stack.Screen
-            name="CircularProgressBar"
-            component={CircularProgressBarScreen}
-          />
-          <Stack.Screen name="ValuePickers" component={ValuePickersScreen} />
-          <Stack.Screen
-            name="LikeInteraction"
-            component={LikeInteractionScreen}
-          />
-          <Stack.Screen
-            name="CircularAnimatedText"
-            component={CircularAnimatedTextScreen}
-          />
-          <Stack.Screen name="Chat" component={ChatScreen} />
-          <Stack.Screen name="LinePieCharts" component={LinePieCharts} />
-          <Stack.Screen name="GroupStackCharts" component={GroupStackCharts} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <SafeAreaProvider style={{flex: 1}}>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <ModalProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+                animation: 'slide_from_right',
+              }}>
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Parallax" component={ParallaxScreen} />
+              <Stack.Screen
+                name="ListWithIndicator"
+                component={ListWithIndicatorScreen}
+              />
+              <Stack.Screen name="DoubleList" component={DoubleListScreen} />
+              <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
+              <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
+              <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
+              <Stack.Screen name="Togglers" component={TogglersScreen} />
+              <Stack.Screen name="FadeItem" component={FadeItemListScreen} />
+              <Stack.Screen
+                name="CustomDrawer"
+                component={CustomDrawerScreen}
+              />
+              <Stack.Screen
+                name="DrawerInterpolate"
+                component={DrawerInterpolateScreen}
+              />
+              <Stack.Screen name="ProductList" component={ProductListScreen} />
+              <Stack.Screen name="PinCode" component={PinCode} />
+              <Stack.Screen name="Floating" component={FloatingButton} />
+              <Stack.Screen name="Airbnb" component={AirbnbScreen} />
+              <Stack.Screen name="Ticket" component={TicketScreen} />
+              <Stack.Screen name="ShutdownIOS" component={ShutdownIOS} />
+              <Stack.Screen name="NFCReader" component={NFCReader} />
+              <Stack.Screen
+                name="TranslateSearchIOS"
+                component={TranslateSearchIOSScreen}
+              />
+              <Stack.Screen
+                name="CircularProgressBar"
+                component={CircularProgressBarScreen}
+              />
+              <Stack.Screen
+                name="ValuePickers"
+                component={ValuePickersScreen}
+              />
+              <Stack.Screen
+                name="LikeInteraction"
+                component={LikeInteractionScreen}
+              />
+              <Stack.Screen
+                name="CircularAnimatedText"
+                component={CircularAnimatedTextScreen}
+              />
+              <Stack.Screen name="Chat" component={ChatScreen} />
+              <Stack.Screen name="LinePieCharts" component={LinePieCharts} />
+              <Stack.Screen
+                name="GroupStackCharts"
+                component={GroupStackCharts}
+              />
+              <Stack.Screen
+                name="TaskCalendar"
+                component={TaskCalendarScreen}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ModalProvider>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 }
 
