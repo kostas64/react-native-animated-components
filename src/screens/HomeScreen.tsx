@@ -237,7 +237,7 @@ const HomeBody = ({
                 <React.Fragment key={index}>
                   <HomeButton
                     label={item.label}
-                    backgroundColor={item.backgroundColor}
+                    backgroundColor={item.backgroundColor} //@ts-ignore
                     onPress={() => navigation.navigate(item.screen)}
                   />
                   <View style={styles.separator} />
