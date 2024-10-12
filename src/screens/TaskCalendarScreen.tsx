@@ -17,7 +17,7 @@ import {useCalendarEvents} from '@components/taskCalendar/hooks/useCalendarEvent
 
 export const today = new Date();
 
-const iniialState = {
+const initialState = {
   loading: true,
   month: MONTHS[new Date().getMonth()],
   transitionEnd: false,
@@ -25,7 +25,7 @@ const iniialState = {
 };
 
 const TaskCalendarScreen = ({navigation}: TNavigation) => {
-  const [state, setState] = React.useState<TCalendarState>(iniialState);
+  const [state, setState] = React.useState<TCalendarState>(initialState);
 
   const filteredEvents = useCalendarEvents(state);
 
