@@ -59,3 +59,21 @@ export const generateEventsForDays = (numDays: number) => {
 
   return events;
 };
+
+export const isSameDay = (date1: Date, date2: Date) => {
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+};
+
+export const isToday = (date: Date) => {
+  const today = new Date();
+  return isSameDay(today, date);
+};
+
+export const formatDate = (date: Date) => {
+  const options = {weekday: 'short' as 'short' | 'long' | 'narrow'};
+  return date.toLocaleDateString('en-US', options);
+};

@@ -6,7 +6,6 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React, {useEffect} from 'react';
-import {format, isSameDay, isToday} from 'date-fns';
 import {Pressable, StyleSheet, View} from 'react-native';
 
 import {WIDTH} from '@utils/device';
@@ -14,6 +13,7 @@ import {_spacing} from './constants';
 import {TWeekDayListItem} from './types';
 import {setDayEmitter} from './Calendar';
 import {typography} from '@utils/typography';
+import {formatDate, isSameDay, isToday} from './utils';
 
 const WeekDayListItem = ({
   day,
@@ -25,7 +25,7 @@ const WeekDayListItem = ({
   );
 
   const date = new Date(day.date);
-  const dayName = format(date, 'EEE');
+  const dayName = formatDate(date);
   const showDot = isToday(day.date);
 
   const hasLeftSpace =
