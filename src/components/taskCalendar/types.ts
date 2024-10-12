@@ -53,6 +53,7 @@ export type TEvent = {
 export type TLoading = {
   loading: boolean;
   selectedDate?: Date;
+  stopLoading?: () => void;
 };
 
 export type TMonthPicker = {

@@ -40,7 +40,7 @@ import SendMessageInput from '@components/chat/SendMessageInput';
 //Ignore in case you run in simulator
 LogBox.ignoreLogs(['RNReactNativeHapticFeedback is not available']);
 
-const triggerLongPressHaptik = () => {
+export const triggerLongPressHaptik = () => {
   if (isAndroid) {
     Haptic.trigger('longPress', HAPTIC_CONFIG);
   } else {

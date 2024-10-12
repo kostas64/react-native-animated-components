@@ -1,13 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 
 import {TLoading} from './types';
 import {typography} from '@utils/typography';
 
-const Loading = ({loading}: TLoading) => {
+const Loading = ({loading, stopLoading}: TLoading) => {
   if (!loading) {
     return null;
   }
+
+  let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
+
+  useEffect(() => {
+    timeout = setTimeout(() => {
+      !!stopLoading && stopLoading();
+    }, 600);
+
+    return () => {
+      !!timeout && clearTimeout(timeout);
+    };
+  }, []);
 
   return (
     <View style={{...styles.container, zIndex: 1}}>

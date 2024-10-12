@@ -18,7 +18,7 @@ const MonthListItem = ({item, index, scrollOffset}: TMonthListItem) => {
           (index + 1) * 46,
           (index + 2) * 46,
         ],
-        [0.2, 0.5, 1, 0.5, 0.2],
+        [0.1, 0.3, 1, 0.3, 0.1],
       ),
     };
   });
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   label: {
     color: 'white',
     fontSize: 22,
+    lineHeight: 26,
     fontFamily: typography.semiBold,
   },
 });

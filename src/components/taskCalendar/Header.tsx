@@ -18,11 +18,11 @@ import {useModalContext} from '@providers/ModalProvider';
 
 const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
   const insets = useSafeAreaInsets();
-  const {closeModal, setModalInfo} = useModalContext();
+  const {setModalInfo} = useModalContext();
 
   const fadeFinished = useSharedValue(false);
 
-  const paddingTop = insets.top > 0 ? insets.top : 24;
+  const paddingTop = insets.top > 32 ? insets.top : 32;
 
   const entering = FadeInDown.delay(isIOS ? 50 : 100)
     .duration(ANIMATION_DUR)
@@ -40,7 +40,6 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
             month={month}
             setMonth={month => {
               onSelecteMonth(month);
-              closeModal();
             }}
           />
         </View>
@@ -59,9 +58,8 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
     <Animated.View
       layout={LinearTransition}
       style={[styles.container, {paddingTop}]}>
-      <MenuIcon />
-
       <Animated.View entering={entering}>
+        <MenuIcon />
         <MonthPicker month={month} onPress={onPressMonthPicker} />
         <Calendar
           month={month}
@@ -78,7 +76,7 @@ export default memo(Header);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#5f0f40',
+    backgroundColor: '#121212',
     paddingBottom: 16,
     borderRadius: 32,
     overflow: 'hidden',
@@ -98,10 +96,22 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: '#5f0f40',
+    backgroundColor: '#121212',
+    borderRadius: 0,
+    elevation: 10,
   },
   modalInnerContainer: {
-    backgroundColor: '#5f0f40',
+    borderRadius: 0,
+    backgroundColor: '#121212',
+    borderWidth: isIOS ? 0 : 2,
+    borderTopColor: 'white',
+    shadowColor: 'white',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
   },
   linStyle: {
     marginTop: 16,

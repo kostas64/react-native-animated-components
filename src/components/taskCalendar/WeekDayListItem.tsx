@@ -14,6 +14,7 @@ import {TWeekDayListItem} from './types';
 import {setDayEmitter} from './Calendar';
 import {typography} from '@utils/typography';
 import {formatDate, isSameDay, isToday} from './utils';
+import {triggerLongPressHaptik} from '@screens/ChatScreen';
 
 const WeekDayListItem = ({
   day,
@@ -65,6 +66,7 @@ const WeekDayListItem = ({
       if (isSameDate && !isSelected) {
         setIsSelected(true);
         globalSelectedDate.current = new Date(selectedDay.date);
+        triggerLongPressHaptik();
       } else if (!isSameDate && isSelected) {
         setIsSelected(false);
       }

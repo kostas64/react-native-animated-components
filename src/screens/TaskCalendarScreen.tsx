@@ -50,6 +50,10 @@ const TaskCalendarScreen = ({navigation}: TNavigation) => {
     setState(prev => ({...prev, selectedDate: date, loading: true}));
   }, []);
 
+  const stopLoading = useCallback(() => {
+    setState(prev => ({...prev, loading: false}));
+  }, []);
+
   useEffect(() => {
     const listener = navigation.addListener('transitionEnd', () => {
       setState(prev => ({...prev, transitionEnd: true}));
@@ -58,22 +62,10 @@ const TaskCalendarScreen = ({navigation}: TNavigation) => {
     return listener;
   }, []);
 
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
-
-    timeout = setTimeout(() => {
-      setState(prev => ({...prev, loading: false}));
-    }, 600);
-
-    return () => {
-      !!timeout && clearTimeout(timeout);
-    };
-  }, [state.selectedDate, state.month]);
-
   return (
     <View style={styles.container}>
       <StatusBarManager barStyle={'light'} />
-      <Loading loading={state.loading} />
+      <Loading loading={state.loading} stopLoading={stopLoading} />
       {state.transitionEnd && (
         <Animated.FlatList
           style={styles.container}
