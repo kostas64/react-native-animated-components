@@ -10,6 +10,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {THeader} from './types';
 import Calendar from './Calendar';
 import MenuIcon from './MenuIcon';
+import {isIOS} from '@utils/device';
 import MonthPicker from './MonthPicker';
 import {ANIMATION_DUR} from './constants';
 import MonthListModal from './MonthListModal';
@@ -23,11 +24,13 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
 
   const paddingTop = insets.top > 0 ? insets.top : 24;
 
-  const entering = FadeInDown.duration(ANIMATION_DUR).withCallback(finished => {
-    if (finished) {
-      fadeFinished.value = true;
-    }
-  });
+  const entering = FadeInDown.delay(isIOS ? 50 : 100)
+    .duration(ANIMATION_DUR)
+    .withCallback(finished => {
+      if (finished) {
+        fadeFinished.value = true;
+      }
+    });
 
   const onPressMonthPicker = useCallback(() => {
     setModalInfo({

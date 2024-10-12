@@ -64,8 +64,8 @@ const Calendar = memo(
         initialNumToRender={7}
         maxToRenderPerBatch={7}
         renderItem={renderItem}
-        updateCellsBatchingPeriod={100}
         showsHorizontalScrollIndicator={false}
+        updateCellsBatchingPeriod={ANIMATION_DUR / 3}
       />
     );
   },
