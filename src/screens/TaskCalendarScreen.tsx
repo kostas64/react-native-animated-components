@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React, {useCallback, useEffect} from 'react';
 import Animated, {LinearTransition} from 'react-native-reanimated';
 
@@ -63,34 +63,33 @@ const TaskCalendarScreen = ({navigation}: TNavigation) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container]}>
       <StatusBarManager barStyle={'light'} />
       <Loading loading={state.loading} stopLoading={stopLoading} />
       {state.transitionEnd && (
-        <Animated.FlatList
-          style={styles.container}
-          layout={LinearTransition}
-          data={events}
-          bounces={false}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentStyle}
-          ListEmptyComponent={
-            <ListEmpty
-              loading={state.loading}
-              selectedDate={state.selectedDate}
-            />
-          }
-          ListHeaderComponent={
-            <Header
-              month={state.month}
-              selectedDate={selectDate}
-              onSelecteMonth={onSelecteMonth}
-            />
-          }
-        />
+        <>
+          <Header
+            month={state.month}
+            selectedDate={selectDate}
+            onSelecteMonth={onSelecteMonth}
+          />
+          <Animated.FlatList
+            style={styles.container}
+            layout={LinearTransition}
+            data={events}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentStyle}
+            ListEmptyComponent={
+              <ListEmpty
+                loading={state.loading}
+                selectedDate={state.selectedDate}
+              />
+            }
+          />
+        </>
       )}
-    </View>
+    </Animated.View>
   );
 };
 
