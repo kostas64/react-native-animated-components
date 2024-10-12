@@ -77,4 +77,5 @@ export type TMonthListItem = {
   item: string;
   index: number;
   scrollOffset?: SharedValue<number>;
+  scrollToMonth?: (month: string) => void;
 };

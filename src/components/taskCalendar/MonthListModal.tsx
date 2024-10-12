@@ -55,7 +55,12 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
 
   const renderItem = useCallback(
     ({item, index}: TMonthListItem) => (
-      <MonthListItem item={item} index={index} scrollOffset={scrollOffset} />
+      <MonthListItem
+        item={item}
+        index={index}
+        scrollOffset={scrollOffset}
+        scrollToMonth={scrollToMonth}
+      />
     ),
     [],
   );
@@ -63,6 +68,13 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
   const onScroll = useAnimatedScrollHandler(event => {
     scrollY.value = event.contentOffset.y;
   });
+
+  const scrollToMonth = useCallback((month: string) => {
+    scrollRef.current?.scrollToOffset({
+      animated: true,
+      offset: MONTHS.findIndex(m => m === month) * 46,
+    });
+  }, []);
 
   useDerivedValue(() => {
     if (Number.isInteger(scrollY.value / 46)) {

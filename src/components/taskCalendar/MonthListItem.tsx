@@ -5,7 +5,12 @@ import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 import {TMonthListItem} from './types';
 import {typography} from '@utils/typography';
 
-const MonthListItem = ({item, index, scrollOffset}: TMonthListItem) => {
+const MonthListItem = ({
+  item,
+  index,
+  scrollOffset,
+  scrollToMonth,
+}: TMonthListItem) => {
   const animStyle = useAnimatedStyle(() => {
     return {
       height: 46,
@@ -24,7 +29,9 @@ const MonthListItem = ({item, index, scrollOffset}: TMonthListItem) => {
   });
 
   return (
-    <Animated.View style={animStyle}>
+    <Animated.View
+      style={animStyle}
+      onTouchStart={() => !!scrollToMonth && scrollToMonth(item)}>
       <Text style={styles.label}>{item}</Text>
     </Animated.View>
   );
