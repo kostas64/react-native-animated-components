@@ -28,22 +28,20 @@ const FloatingButton = () => {
   );
 
   return (
-    <>
-      <View style={[styles.positionItems, {paddingTop: insets.top}]}>
-        <FlatList
-          numColumns={2}
-          data={FAKE_ARRAY}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-        />
-        <FloatingElement
-          snapHeight={310}
-          iconTintColor={'#FFF'}
-          content={<FloatingContent />}
-          containerStyle={[styles.container, {bottom: insets.bottom + 24}]}
-        />
-      </View>
-    </>
+    <View style={[styles.positionItems, {paddingTop: insets.top}]}>
+      <FlatList
+        numColumns={2}
+        data={FAKE_ARRAY}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+      />
+      <FloatingElement
+        snapHeight={310}
+        iconTintColor={'#FFF'}
+        content={<FloatingContent />}
+        containerStyle={[styles.container, {bottom: insets.bottom + 24}]}
+      />
+    </View>
   );
 };
 
