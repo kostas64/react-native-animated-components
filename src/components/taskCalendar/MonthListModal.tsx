@@ -18,11 +18,13 @@ import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {MONTHS} from './constants';
-import {isIOS} from '@utils/device';
+import {isIOS, isAndroid} from '@utils/device';
+import {TMonthListModal} from './types';
 import MonthListItem from './MonthListItem';
 import {HAPTIC_CONFIG} from '@utils/haptics';
-import {TMonthListItem, TMonthListModal} from './types';
 import MonthListPickerLines from './MonthListPickerLines';
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 export const triggerHaptik = () => {
   Haptic.trigger('impactLight', HAPTIC_CONFIG);
@@ -54,10 +56,10 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
   );
 
   const renderItem = useCallback(
-    ({item, index}: TMonthListItem) => (
+    ({item, index}: {item: unknown; index: number}) => (
       <MonthListItem
-        item={item}
         index={index}
+        item={item as string}
         scrollOffset={scrollOffset}
         scrollToMonth={scrollToMonth}
       />
@@ -74,6 +76,16 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
       animated: true,
       offset: MONTHS.findIndex(m => m === month) * 46,
     });
+
+    isAndroid &&
+      setTimeout(() => {
+        onMomentumScrollEnd({
+          //@ts-ignore
+          nativeEvent: {
+            contentOffset: {x: 0, y: MONTHS.findIndex(m => m === month) * 46},
+          },
+        });
+      }, 50);
   }, []);
 
   useDerivedValue(() => {
@@ -85,7 +97,7 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
   return (
     <View style={styles.list}>
       <MonthListPickerLines />
-      <Animated.FlatList
+      <AnimatedFlatList
         data={MONTHS}
         ref={scrollRef}
         renderItem={renderItem}
@@ -103,7 +115,7 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
           styles.alignCenter,
           {
             paddingTop: 64,
-            paddingBottom: isIOS ? insets.bottom + 56 : 94,
+            paddingBottom: isIOS ? insets.bottom + 56 : 90,
           },
         ]}
       />

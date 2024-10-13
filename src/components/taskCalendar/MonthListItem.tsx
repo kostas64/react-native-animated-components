@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
+import {isIOS} from '@utils/device';
 import {TMonthListItem} from './types';
 import {typography} from '@utils/typography';
 
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   label: {
     color: 'white',
     fontSize: 22,
-    lineHeight: 26,
+    lineHeight: isIOS ? 26 : 29,
     fontFamily: typography.semiBold,
   },
 });
