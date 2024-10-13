@@ -85,7 +85,7 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
             contentOffset: {x: 0, y: MONTHS.findIndex(m => m === month) * 46},
           },
         });
-      }, 50);
+      }, 15);
   }, []);
 
   useDerivedValue(() => {
