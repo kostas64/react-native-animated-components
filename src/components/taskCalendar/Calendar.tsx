@@ -1,8 +1,8 @@
 import mitt from 'mitt';
 import {FlatList} from 'react-native';
 import React, {memo, useCallback, useRef} from 'react';
-import {runOnJS, useDerivedValue} from 'react-native-reanimated';
 import {CalendarDayMetadata} from '@marceloterreiro/flash-calendar';
+import {runOnJS, useAnimatedReaction} from 'react-native-reanimated';
 
 import {WIDTH} from '@utils/device';
 import WeekDayListItem from './WeekDayListItem';
@@ -49,11 +49,16 @@ const Calendar = memo(
       }, ANIMATION_DUR);
     };
 
-    useDerivedValue(() => {
-      if (fadeFinished.value) {
-        runOnJS(executeChild)(scrollToDay);
-      }
-    }, [fadeFinished.value]);
+    useAnimatedReaction(
+      () => {
+        return fadeFinished.value;
+      },
+      (cur, prev) => {
+        if (!prev && cur) {
+          runOnJS(executeChild)(scrollToDay);
+        }
+      },
+    );
 
     return (
       <FlatList
