@@ -7,7 +7,7 @@ import {typography} from '@utils/typography';
 const Button = ({style, label, onPress}: ButtonProps) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPressIn={onPress}
       activeOpacity={0.5}
       style={[styles.container, style]}>
       <Text style={styles.label}>{label}</Text>

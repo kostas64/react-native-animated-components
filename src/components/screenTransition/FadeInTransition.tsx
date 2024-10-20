@@ -31,6 +31,17 @@ const FadeInTransition = ({
   }, [animate]);
 
   const style = useAnimatedStyle(() => {
+    //Direction top scale
+    if (direction === 'top-scale') {
+      return {
+        opacity: progress.value,
+        transform: [
+          {translateY: interpolate(progress.value, [0, 1], [75, 0])},
+          {scale: interpolate(progress.value, [0, 1], [1.25, 1])},
+        ],
+      };
+    }
+
     //Direction top left
     if (direction === 'top-left') {
       return {
@@ -64,11 +75,18 @@ const FadeInTransition = ({
     }
 
     //Direction left
+    if (direction === 'left') {
+      return {
+        opacity: progress.value,
+        transform: [
+          {translateX: interpolate(progress.value, [0, 1], [WIDTH / 3.5, 0])},
+        ],
+      };
+    }
+
+    //Just fade
     return {
       opacity: progress.value,
-      transform: [
-        {translateX: interpolate(progress.value, [0, 1], [WIDTH / 3.5, 0])},
-      ],
     };
   });
 

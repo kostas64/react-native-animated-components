@@ -51,7 +51,7 @@ export type FadeInTransitionProps = {
   index?: number;
   children: React.ReactNode;
   animate: boolean;
-  direction: 'left' | 'top' | 'top-right' | 'top-left';
+  direction?: 'left' | 'top' | 'top-right' | 'top-left' | 'top-scale';
   containerStyle?: StyleProp<ViewStyle>;
 };
 
@@ -60,4 +60,13 @@ export type HomeEventProps = {
   eventTitle: string;
   eventDate: string;
   containerStyle?: StyleProp<ViewStyle>;
+};
+
+export type ScheduleCalendarProps = {
+  index: number;
+};
+
+export type ScheduleTimeEventsProps = {
+  containerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
