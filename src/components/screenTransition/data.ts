@@ -2,6 +2,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import {isIOS} from '@utils/device';
+
 export const EVENTS = [
   {
     eventTitle: 'Comedy show',
@@ -123,5 +125,6 @@ export const shadow = {
     width: 0,
     height: 0,
   },
-  elevation: 3,
+  borderWidth: isIOS ? 0 : 1,
+  borderColor: '#e7e7e7',
 };

@@ -14,14 +14,14 @@ const NotificationsHeader = () => {
   };
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.6}
-      onPress={onPress}
-      style={[styles.container, styles.rowCenter]}>
+    <View style={[styles.container, styles.rowCenter]}>
       <View style={[styles.rowCenter, {gap: 12}]}>
-        <View style={styles.chevronContainer}>
+        <TouchableOpacity
+          onPress={onPress}
+          activeOpacity={0.6}
+          style={styles.chevronContainer}>
           <Entypo name="chevron-left" size={18} />
-        </View>
+        </TouchableOpacity>
         <View style={[styles.rowCenter, {gap: 8}]}>
           <Text style={styles.label}>Notifications</Text>
           <View style={styles.numberContainer}>
@@ -30,7 +30,7 @@ const NotificationsHeader = () => {
         </View>
       </View>
       <Ionicons name="checkmark-done-sharp" size={26} />
-    </TouchableOpacity>
+    </View>
   );
 };
 

@@ -14,10 +14,7 @@ const HomeHeader = () => {
   };
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.6}
-      onPress={onPress}
-      style={[styles.container, styles.rowCenter]}>
+    <View style={[styles.container, styles.rowCenter]}>
       <View style={styles.rowCenter}>
         <Image
           source={{uri: 'https://randomuser.me/api/portraits/women/2.jpg'}}
@@ -28,10 +25,13 @@ const HomeHeader = () => {
           <Text style={styles.grade}>6th grade</Text>
         </View>
       </View>
-      <View style={styles.bellContainer}>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={onPress}
+        style={styles.bellContainer}>
         <MaterialCommunityIcons name="bell" size={20} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

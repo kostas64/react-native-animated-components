@@ -7,6 +7,7 @@ import {
   NOTIFICATION_EVENTS_TODAY,
   NOTIFICATION_EVENTS_YESTERDAY,
 } from '@components/screenTransition/data';
+import {isIOS} from '@utils/device';
 import {typography} from '@utils/typography';
 import TextBetween from '@components/screenTransition/TextBetween';
 import FadeInTransition from '@components/screenTransition/FadeInTransition';
@@ -17,7 +18,8 @@ const ScreenTransitionNotifications = () => {
   const isFocused = useIsFocused();
   const insets = useSafeAreaInsets();
 
-  const paddingTop = insets.top > 24 ? insets.top : 24;
+  const paddingTop =
+    insets.top > 24 ? (isIOS ? insets.top : insets.top + 12) : 32;
   const paddingBottom = insets.top <= 52 ? 30 : insets.bottom + 8;
 
   return (

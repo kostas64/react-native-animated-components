@@ -3,6 +3,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {isIOS} from '@utils/device';
 import {EVENTS} from '@components/screenTransition/data';
 import SearchBar from '@components/screenTransition/SearchBar';
 import HomeClass from '@components/screenTransition/HomeClass';
@@ -15,7 +16,8 @@ const ScreenTransitionHome = () => {
   const isFocused = useIsFocused();
   const insets = useSafeAreaInsets();
 
-  const paddingTop = insets.top > 24 ? insets.top : 24;
+  const paddingTop =
+    insets.top > 24 ? (isIOS ? insets.top : insets.top + 12) : 32;
   const bottom = insets.top <= 52 ? 30 : insets.bottom + 8;
   const paddingBottom = 96 + bottom;
 
