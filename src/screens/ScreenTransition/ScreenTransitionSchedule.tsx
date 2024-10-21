@@ -15,7 +15,8 @@ const ScreenTransitionSchedule = () => {
 
   const paddingTop =
     insets.top > 24 ? (isIOS ? insets.top : insets.top + 12) : 32;
-  const bottom = insets.bottom + 312;
+  const bottom = insets.top <= 52 ? 30 : insets.bottom + 8;
+  const paddingBottom = 312 + bottom;
 
   return (
     <View style={[styles.container, {paddingTop}]}>
@@ -37,7 +38,7 @@ const ScreenTransitionSchedule = () => {
         index={2}
         animate={isFocused}
         containerStyle={[styles.spaceTop, styles.spaceHor]}>
-        <ScheduleTimeEvents contentContainerStyle={{paddingBottom: bottom}} />
+        <ScheduleTimeEvents contentContainerStyle={{paddingBottom}} />
       </FadeInTransition>
     </View>
   );

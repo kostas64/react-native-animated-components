@@ -22,6 +22,7 @@ const ScheduleTimeEvents = ({
   return (
     <ScrollView
       style={containerStyle}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={contentContainerStyle}>
       {TIMES.map((time, index) => {
         const event = events.find(event => event.time.startsWith(time));
