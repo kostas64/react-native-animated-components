@@ -1,6 +1,13 @@
+import Animated, {
+  runOnJS,
+  withTiming,
+  interpolate,
+  useSharedValue,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import React from 'react';
-import {useIsFocused} from '@react-navigation/native';
-import {Text, View, ScrollView, StyleSheet} from 'react-native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {Text, View, ScrollView, StyleSheet, Pressable} from 'react-native';
 
 import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
@@ -8,6 +15,57 @@ import {findScheduleForTimes} from './utils';
 import {SCHEDULE_EVENTS, TIMES} from './data';
 import {ScheduleTimeEventsProps} from './types';
 import FadeInTransition from './FadeInTransition';
+import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
+
+const AnimTouch = Animated.createAnimatedComponent(Pressable);
+
+type EventProps = {
+  event: {
+    event: string;
+    time: string;
+    backgroundColor: string;
+  };
+  eventIndex: number;
+};
+
+const Event = ({event, eventIndex}: EventProps) => {
+  const navigation = useNavigation<TWelcomeNavigationProps>();
+  const progress = useSharedValue(0);
+
+  const style = useAnimatedStyle(() => ({
+    opacity: interpolate(progress.value, [0, 0.5], [1, 0.6]),
+    transform: [{scale: interpolate(progress.value, [0, 0.5], [1, 0.93])}],
+  }));
+
+  const onPressIn = () => {
+    progress.value = withTiming(0.5, {duration: 75}, () =>
+      //@ts-ignore
+      runOnJS(navigation.navigate)('Lesson'),
+    );
+  };
+
+  const onPressOut = () => {
+    progress.value = withTiming(0, {duration: 150});
+  };
+
+  return (
+    <AnimTouch
+      unstable_pressDelay={100}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      style={[
+        style,
+        styles.eventInnerContainer,
+        {
+          left: eventIndex % 2 === 0 ? 120 : 86,
+          backgroundColor: event.backgroundColor,
+        },
+      ]}>
+      <Text style={styles.eventName}>{event.event}</Text>
+      <Text style={styles.eventTime}>{event.time}</Text>
+    </AnimTouch>
+  );
+};
 
 const ScheduleTimeEvents = ({
   containerStyle,
@@ -39,15 +97,8 @@ const ScheduleTimeEvents = ({
                 index={index}
                 direction="left"
                 animate={isFocused}
-                containerStyle={[
-                  styles.eventAbsolute,
-                  {
-                    left: eventIndex % 2 === 0 ? 120 : 86,
-                    backgroundColor: event.backgroundColor,
-                  },
-                ]}>
-                <Text style={styles.eventName}>{event.event}</Text>
-                <Text style={styles.eventTime}>{event.time}</Text>
+                containerStyle={styles.eventAbsolute}>
+                <Event event={event} eventIndex={eventIndex} />
               </FadeInTransition>
             )}
           </View>
@@ -79,9 +130,6 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0, 0.2)',
   },
   eventAbsolute: {
-    gap: 2,
-    padding: 18,
-    borderRadius: 20,
     position: 'absolute',
   },
   eventName: {
@@ -91,5 +139,10 @@ const styles = StyleSheet.create({
   eventTime: {
     color: '#a3a3b2',
     fontFamily: typography.medium,
+  },
+  eventInnerContainer: {
+    gap: 2,
+    padding: 18,
+    borderRadius: 20,
   },
 });

@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
+import ScreenTransitionLesson from './ScreenTransitionLesson';
 import ScreenTransitionWelcome from './ScreenTransitionWelcome';
 import ScreenTransitionBottomStack from './ScreenTransitionBottomStack';
 import ScreenTransitionNotifications from './ScreenTransitionNotifications';
@@ -15,6 +16,7 @@ export type TStackList = {
   Welcome: undefined;
   Notifications: undefined;
   BottomStack: undefined;
+  Lesson: undefined;
 };
 
 export type TWelcomeNavigationProps = NativeStackNavigationProp<
@@ -38,6 +40,7 @@ const ScreenTransitionStack = () => {
         name="Notifications"
         component={ScreenTransitionNotifications}
       />
+      <Stack.Screen name="Lesson" component={ScreenTransitionLesson} />
       <Stack.Screen
         name="BottomStack"
         component={ScreenTransitionBottomStack}
