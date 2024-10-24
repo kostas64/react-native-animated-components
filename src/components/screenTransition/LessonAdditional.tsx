@@ -1,27 +1,17 @@
-import {
-  Text,
-  View,
-  Image,
-  StyleProp,
-  ViewStyle,
-  StyleSheet,
-} from 'react-native';
 import React from 'react';
-import {useIsFocused} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Text, View, Image, StyleSheet} from 'react-native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 import Button from './Button';
 import {typography} from '@utils/typography';
+import {LessonAdditionalProps} from './types';
 import FadeInTransition from './FadeInTransition';
 
-const LessonAdditional = ({
-  index,
-  containerStyle,
-}: {
-  index: number;
-  containerStyle: StyleProp<ViewStyle>;
-}) => {
+const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
   const isFocused = useIsFocused();
+  const navigation = useNavigation();
+
   return (
     <View style={[containerStyle, {gap: 42}]}>
       <View style={{gap: 14}}>
@@ -75,7 +65,7 @@ const LessonAdditional = ({
             <Ionicons name="checkmark-circle-sharp" size={24} />
           </View>
         </View>
-        <Button label="Join class" onPress={() => {}} />
+        <Button label="Join class" onPress={() => navigation.goBack()} />
       </FadeInTransition>
     </View>
   );

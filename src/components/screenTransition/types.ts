@@ -70,3 +70,8 @@ export type ScheduleTimeEventsProps = {
   containerStyle?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
 };
+
+export type LessonAdditionalProps = {
+  index: number;
+  containerStyle: StyleProp<ViewStyle>;
+};

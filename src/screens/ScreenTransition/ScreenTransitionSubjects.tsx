@@ -1,10 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+
+import {typography} from '@utils/typography';
 
 const ScreenTransitionSubjects = () => {
   return (
     <View style={styles.container}>
-      <Text>ScreenTransitionSubjects - Coming soon</Text>
+      <Text style={styles.label}>
+        {"Ok, this is enough.\nDon't you think?"}
+      </Text>
     </View>
   );
 };
@@ -17,5 +21,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+  },
+  label: {
+    fontSize: 22,
+    textAlign: 'center',
+    fontFamily: typography.semiBold,
   },
 });
