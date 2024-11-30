@@ -1,3 +1,5 @@
+import {StyleProp, ViewStyle} from 'react-native';
+
 export type TChartHeader = {
   iconName: string;
   label: string;
@@ -5,5 +7,6 @@ export type TChartHeader = {
 
 export type TChartButton = {
   title: string;
+  style?: StyleProp<ViewStyle>;
   onPress: () => void;
 };
