@@ -4,11 +4,8 @@ import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
 import {typography} from '@utils/typography';
 import {ListRefProps, TChooseOption} from './types';
+import {WHEEL_OPTIONS} from '@screens/LotteryScreen';
 import ChooseOptionListItem from './ChooseOptionListItem';
-
-const SORTED_WHEEL_OPTIONS = [
-  10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200,
-];
 
 const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
   ({style, selectedO, progress, selectOption}, ref) => {
@@ -52,7 +49,7 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
         <FlatList
           ref={listRef}
           horizontal
-          data={SORTED_WHEEL_OPTIONS}
+          data={WHEEL_OPTIONS}
           renderItem={renderItem}
           getItemLayout={getItemLayout}
           showsHorizontalScrollIndicator={false}

@@ -26,7 +26,9 @@ import ChooseOption from '@components/lottery/ChooseOption';
 
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
-const WHEEL_OPTIONS = [10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50];
+export const WHEEL_OPTIONS = [
+  10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,
+];
 
 const LotteryScreen = () => {
   const listRef = useRef<ListRefProps>(null);
