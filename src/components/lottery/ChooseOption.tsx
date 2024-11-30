@@ -1,0 +1,119 @@
+import {FlatList, StyleSheet, Text} from 'react-native';
+import React, {forwardRef, useImperativeHandle, useRef} from 'react';
+import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
+
+import {typography} from '@utils/typography';
+import {ListRefProps, TChooseOption} from './types';
+import ChooseOptionListItem from './ChooseOptionListItem';
+
+const SORTED_WHEEL_OPTIONS = [
+  10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200,
+];
+
+const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
+  ({style, selectedO, progress, selectOption}, ref) => {
+    const listRef = useRef<FlatList>(null);
+
+    const renderItem = ({item, index}: {item: number; index: number}) => (
+      <ChooseOptionListItem
+        item={item}
+        index={index}
+        progress={progress}
+        selectedO={selectedO}
+        selectOption={selectOption}
+      />
+    );
+
+    const disabled = useAnimatedStyle(() => ({
+      opacity:
+        progress.value > 0 && progress.value < 2
+          ? withTiming(0.6, {duration: 250})
+          : withTiming(1, {duration: 125}),
+    }));
+
+    useImperativeHandle(ref, () => ({
+      animateList: (index: number) => {
+        listRef?.current?.scrollToIndex({
+          index,
+          animated: true,
+        });
+      },
+    }));
+
+    const getItemLayout = (_: any, index: number) => ({
+      index,
+      length: 86,
+      offset: 86 * index,
+    });
+
+    return (
+      <Animated.View style={[styles.container, disabled, style]}>
+        <Text style={styles.title}>Do you feel lucky?</Text>
+        <FlatList
+          ref={listRef}
+          horizontal
+          data={SORTED_WHEEL_OPTIONS}
+          renderItem={renderItem}
+          getItemLayout={getItemLayout}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(_, index) => String(index)}
+          contentContainerStyle={styles.containerStyle}
+        />
+      </Animated.View>
+    );
+  },
+);
+
+export default ChooseOption;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 12,
+    paddingBottom: 10,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+  title: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: typography.semiBold,
+  },
+  containerStyle: {
+    gap: 16,
+    marginTop: 16,
+    paddingHorizontal: 24,
+    paddingBottom: 8,
+  },
+  optionContainer: {
+    width: 86,
+    alignItems: 'center',
+    backgroundColor: '#7a54cd',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  label: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: typography.semiBold,
+  },
+  pressed: {
+    opacity: 0.6,
+  },
+  selectedBorder: {
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  unselectedBorder: {
+    borderWidth: 2,
+    borderColor: '#7a54cd',
+  },
+});

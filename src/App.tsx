@@ -1,9 +1,9 @@
-import React from 'react';
 import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
@@ -13,6 +13,7 @@ import HomeScreen from './screens/HomeScreen';
 import NFCReader from './screens/NFCReaderScreen';
 import AirbnbScreen from './screens/AirbnbScreen';
 import TicketScreen from './screens/TicketScreen';
+import LotteryScreen from '@screens/LotteryScreen';
 import LinePieCharts from './screens/LinePieCharts';
 import ShutdownIOS from './screens/ShutdownIOSScreen';
 import ParallaxScreen from './screens/ParallaxScreen';
@@ -67,6 +68,7 @@ export type TStackList = {
   GroupStackCharts: undefined;
   TaskCalendar: undefined;
   ScreenTransition: undefined;
+  Lottery: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -149,6 +151,7 @@ function App() {
                 name="ScreenTransition"
                 component={ScreenTransitionStack}
               />
+              <Stack.Screen name="Lottery" component={LotteryScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </ModalProvider>
