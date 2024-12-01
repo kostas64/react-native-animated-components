@@ -55,8 +55,8 @@ const Slice = ({
       {/* Slice Value */}
       <Text
         x={x + 16}
-        y={y + 3}
-        fontSize={42}
+        y={y + 4}
+        fontSize={38}
         fill="#FFFFFF"
         fontWeight={'700'}
         textAnchor="middle"
