@@ -11,6 +11,7 @@ const Slice = ({
   index,
   isSelected,
   total,
+  progress,
   selectOption,
 }: TSlice & TListItem) => {
   const startAngle = total === 1 ? 0 : (360 / total) * index;
@@ -30,6 +31,14 @@ const Slice = ({
 
   const {x, y, angle} = calculateTextPosition(startAngle, endAngle, RADIUS);
 
+  const onPress = () => {
+    if (progress.value > 0 && progress.value < 2) {
+      return;
+    }
+
+    selectOption(index);
+  };
+
   return (
     <React.Fragment>
       {/* Slice */}
@@ -39,21 +48,21 @@ const Slice = ({
         x={OUTER_BORDER_W / 2}
         y={OUTER_BORDER_W / 2}
         stroke="#fff"
-        onPressIn={() => selectOption(index)}
+        onPressIn={onPress}
         strokeWidth={BORDER_WIDTH}
       />
 
       {/* Slice Value */}
       <Text
-        x={x}
+        x={x + 16}
         y={y + 2}
-        fontSize={32}
+        fontSize={42}
         fill="#FFFFFF"
         fontWeight={'700'}
         textAnchor="middle"
         alignmentBaseline="middle"
         fontFamily={typography.bold}
-        onPress={() => selectOption(index)}
+        onPress={onPress}
         transform={`rotate(${angle}, ${x}, ${y})`}>
         {item}
       </Text>

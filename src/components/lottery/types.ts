@@ -8,6 +8,7 @@ export type TListItem = {
 
 export type TSlice = {
   total: number;
+  progress: SharedValue<number>;
   isSelected: boolean;
   selectOption: (index: number) => void;
 };

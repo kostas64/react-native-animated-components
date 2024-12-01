@@ -1,11 +1,15 @@
 import Animated, {
   Easing,
+  runOnJS,
+  withRepeat,
   withTiming,
   interpolate,
   useSharedValue,
+  cancelAnimation,
   useAnimatedStyle,
+  useAnimatedProps,
 } from 'react-native-reanimated';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
@@ -19,12 +23,15 @@ import {
   CENTER_O_W,
   OUTER_BORDER_W,
 } from '@components/lottery/constants';
+import {isIOS} from '@utils/device';
 import Slice from '@components/lottery/Slice';
 import {ListRefProps} from '@components/lottery/types';
 import StatusBarManager from '@components/StatusBarManager';
 import ChooseOption from '@components/lottery/ChooseOption';
 
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
+const AnimatedPath = Animated.createAnimatedComponent(Path);
+const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 export const WHEEL_OPTIONS = [
   10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,
@@ -34,6 +41,7 @@ const LotteryScreen = () => {
   const listRef = useRef<ListRefProps>(null);
   const randD = useSharedValue(0);
   const progress = useSharedValue(0);
+  const pulse = useSharedValue(0);
   const insets = useSafeAreaInsets();
   const [selectedO, setSelectedO] = useState(0);
 
@@ -53,19 +61,68 @@ const LotteryScreen = () => {
     ],
   }));
 
-  const spinIt = () => {
-    randD.value = 360 * Math.random();
-    progress.value = 0;
+  const pulseScale = useAnimatedStyle(() => ({
+    transform: [{scale: interpolate(pulse.value, [0, 0.5, 1], [1, 1.15, 1])}],
+  }));
 
-    progress.value = withTiming(2, {
-      duration: 5000,
-      easing: Easing.linear,
+  const animPropsInnerCircle = useAnimatedProps(() => ({
+    transform: [
+      {scale: interpolate(pulse.value, [0, 0.5, 1], [1, 1.1, 1])},
+      {translateX: interpolate(pulse.value, [0, 0.5, 1], [0, -3, 0])},
+      {translateY: interpolate(pulse.value, [0, 0.5, 1], [0, -3, 0])},
+    ],
+  }));
+
+  const animPropsOuterCircle = useAnimatedProps(() => ({
+    transform: [
+      {scale: interpolate(pulse.value, [0, 0.5, 1], [1, 1.1, 1])},
+      {translateX: interpolate(pulse.value, [0, 0.5, 1], [0, -4, 0])},
+      {translateY: interpolate(pulse.value, [0, 0.5, 1], [0, -4, 0])},
+    ],
+  }));
+
+  const spinIt = () => {
+    if (progress.value > 0 && progress.value < 2) {
+      return;
+    }
+
+    cancelAnimation(pulse);
+    pulse.value = withTiming(0, {duration: 150}, finished => {
+      if (finished) {
+        randD.value = 360 * Math.random();
+        progress.value = 0;
+
+        progress.value = withTiming(
+          2,
+          {
+            duration: 5000,
+            easing: Easing.linear,
+          },
+          finished => {
+            if (finished) {
+              runOnJS(pulseIt)();
+            }
+          },
+        );
+      }
     });
+  };
+
+  const pulseIt = () => {
+    pulse.value = withRepeat(
+      withTiming(1, {duration: 1000, easing: Easing.linear}),
+      -1,
+      true,
+    );
   };
 
   const selectOption = (index: number) => {
     setSelectedO(index);
   };
+
+  useEffect(() => {
+    pulseIt();
+  }, []);
 
   return (
     <>
@@ -119,6 +176,7 @@ const LotteryScreen = () => {
               item={item}
               index={index}
               total={total}
+              progress={progress}
               selectOption={index => {
                 selectOption(index);
                 listRef.current?.animateList(index);
@@ -128,7 +186,7 @@ const LotteryScreen = () => {
           ))}
 
           {/* Center Outer circle */}
-          <Path
+          <AnimatedPath
             d={`M ${CENTER_O_W},${0} 
                   A ${CENTER_O_W},${CENTER_O_W} 0 1,1 ${CENTER_O_W},${
               CENTER_O_W * 2
@@ -138,12 +196,14 @@ const LotteryScreen = () => {
             fill="url(#centerCircle)"
             stroke="white"
             strokeWidth={2}
+            onPress={spinIt}
             x={-8 + (SVG_W - 2 * CENTER_O_W) / 2}
             y={-8 + (SVG_W - 2 * CENTER_O_W) / 2}
+            animatedProps={animPropsOuterCircle}
           />
 
           {/* Center Inner circle */}
-          <Path
+          <AnimatedPath
             d={`
                   M ${CENTER_I_W},${0} 
                   A ${CENTER_I_W},${CENTER_I_W} 0 1,1 ${CENTER_I_W},${
@@ -154,8 +214,10 @@ const LotteryScreen = () => {
             fill="url(#centerCircle)"
             stroke="white"
             strokeWidth={3}
+            onPress={spinIt}
             x={-8 + (SVG_W - 2 * CENTER_I_W) / 2}
             y={-18 + (SVG_W - 2 * CENTER_I_W + 20) / 2}
+            animatedProps={animPropsInnerCircle}
           />
         </AnimatedSVG>
 
@@ -178,9 +240,11 @@ const LotteryScreen = () => {
         </Svg>
 
         {/* Spinner Icon */}
-        <Pressable style={styles.btnContainer} onPress={spinIt}>
-          <Fontisto name="spinner-refresh" size={CENTER_I_W} color={'white'} />
-        </Pressable>
+        <AnimPressable
+          onPress={spinIt}
+          style={[pulseScale, styles.btnContainer]}>
+          <Fontisto name="spinner-refresh" size={26} color={'white'} />
+        </AnimPressable>
       </View>
     </>
   );
@@ -211,7 +275,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     position: 'absolute',
     alignSelf: 'center',
-    bottom: RADIUS / 2,
+    bottom: RADIUS / 2 + (isIOS ? 4 : 3),
     zIndex: 100000000,
   },
 });

@@ -26,6 +26,7 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
         progress.value > 0 && progress.value < 2
           ? withTiming(0.6, {duration: 250})
           : withTiming(1, {duration: 125}),
+      pointerEvents: progress.value > 0 && progress.value < 2 ? 'none' : 'auto',
     }));
 
     useImperativeHandle(ref, () => ({
@@ -33,6 +34,7 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
         listRef?.current?.scrollToIndex({
           index,
           animated: true,
+          viewOffset: -index * 16 + 12,
         });
       },
     }));
