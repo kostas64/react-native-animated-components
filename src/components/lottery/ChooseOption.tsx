@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 12,
     paddingBottom: 10,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.33)',
   },
   title: {
     color: 'white',

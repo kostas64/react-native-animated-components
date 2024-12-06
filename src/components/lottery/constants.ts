@@ -7,3 +7,4 @@ export const SVG_W = (RADIUS + OUTER_BORDER_W / 2) * 2;
 export const SVG_H = (RADIUS + OUTER_BORDER_W / 2) * 2;
 export const CENTER_O_W = 46;
 export const CENTER_I_W = 32;
+export const FULL_CIRCLE = 360;

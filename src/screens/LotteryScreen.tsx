@@ -12,7 +12,7 @@ import Animated, {
 import React, {useEffect, useRef, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Image, Pressable, StyleSheet, View} from 'react-native';
+import {Alert, Image, Pressable, StyleSheet, View} from 'react-native';
 import {Svg, Defs, Path, Stop, Polygon, LinearGradient} from 'react-native-svg';
 
 import {
@@ -21,6 +21,7 @@ import {
   RADIUS,
   CENTER_I_W,
   CENTER_O_W,
+  FULL_CIRCLE,
   OUTER_BORDER_W,
 } from '@components/lottery/constants';
 import {isIOS} from '@utils/device';
@@ -35,6 +36,11 @@ const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 export const WHEEL_OPTIONS = [
   10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,
+];
+
+const RANGES = [
+  -15, 15, 15, 45, 45, 75, 75, 105, 105, 135, 135, 165, 165, 195, 195, 225, 225,
+  255, 255, 285, 285, 315, 315, 345,
 ];
 
 const LotteryScreen = () => {
@@ -101,6 +107,7 @@ const LotteryScreen = () => {
           finished => {
             if (finished) {
               runOnJS(pulseIt)();
+              runOnJS(calculateWinner)();
             }
           },
         );
@@ -114,6 +121,26 @@ const LotteryScreen = () => {
       -1,
       true,
     );
+  };
+
+  const calculateIndex = (angle: number) => {
+    if ((angle >= 0 && angle < 15) || (angle >= 345 && angle <= 360)) {
+      return 0;
+    } else {
+      return Math.floor((angle + 15) / 30);
+    }
+  };
+
+  const calculateWinner = () => {
+    const quotient = Math.floor((800 + randD.value) / FULL_CIRCLE);
+    const largestMultiple = quotient * FULL_CIRCLE;
+    const remainder = 800 + randD.value - largestMultiple;
+    const winner = calculateIndex(remainder);
+    if (winner === selectedO) {
+      Alert.alert(`Winner - ${winner} - ${WHEEL_OPTIONS[winner]}`);
+    } else {
+      Alert.alert(`Next time - ${winner} - ${WHEEL_OPTIONS[winner]}`);
+    }
   };
 
   const selectOption = (index: number) => {
@@ -234,7 +261,7 @@ const LotteryScreen = () => {
             stroke={'white'}
             strokeWidth={4}
             translateY={5}
-            points="18,38 34,-3 2,-3"
+            points="19,38 35,-3 3,-3"
             fill={'url(#centerCircle)'}
           />
         </Svg>
