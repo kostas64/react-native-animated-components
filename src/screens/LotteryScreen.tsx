@@ -124,11 +124,8 @@ const LotteryScreen = () => {
   };
 
   const calculateIndex = (angle: number) => {
-    if ((angle >= 0 && angle < 15) || (angle >= 345 && angle <= 360)) {
-      return 0;
-    } else {
-      return Math.floor((angle + 15) / 30);
-    }
+    const adjustedAngle = (angle + 15) % 360;
+    return Math.floor(adjustedAngle / 30) % WHEEL_OPTIONS.length;
   };
 
   const calculateWinner = () => {
