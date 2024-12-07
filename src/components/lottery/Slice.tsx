@@ -11,7 +11,7 @@ const Slice = ({
   index,
   isSelected,
   total,
-  progress,
+  spinning,
   selectOption,
 }: TSlice & TListItem) => {
   const startAngle = total === 1 ? 0 : (360 / total) * index;
@@ -32,7 +32,7 @@ const Slice = ({
   const {x, y, angle} = calculateTextPosition(startAngle, endAngle, RADIUS);
 
   const onPress = () => {
-    if (progress.value > 0 && progress.value < 2) {
+    if (spinning.value) {
       return;
     }
 

@@ -10,12 +10,12 @@ const AnimPressable = Animated.createAnimatedComponent(TouchableOpacity);
 const ChooseOptionListItem = ({
   item,
   index,
-  progress,
+  spinning,
   selectedO,
   selectOption,
 }: TChooseOption & TListItem) => {
   const animStyle = useAnimatedStyle(() => ({
-    elevation: progress.value > 0 && progress.value < 2 ? 0 : 5,
+    elevation: spinning.value ? 0 : 5,
   }));
 
   return (

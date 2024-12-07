@@ -8,25 +8,24 @@ import {WHEEL_OPTIONS} from '@screens/LotteryScreen';
 import ChooseOptionListItem from './ChooseOptionListItem';
 
 const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
-  ({style, selectedO, progress, selectOption}, ref) => {
+  ({style, selectedO, spinning, selectOption}, ref) => {
     const listRef = useRef<FlatList>(null);
 
     const renderItem = ({item, index}: {item: number; index: number}) => (
       <ChooseOptionListItem
         item={item}
         index={index}
-        progress={progress}
+        spinning={spinning}
         selectedO={selectedO}
         selectOption={selectOption}
       />
     );
 
-    const disabled = useAnimatedStyle(() => ({
-      opacity:
-        progress.value > 0 && progress.value < 2
-          ? withTiming(0.6, {duration: 250})
-          : withTiming(1, {duration: 125}),
-      pointerEvents: progress.value > 0 && progress.value < 2 ? 'none' : 'auto',
+    const disabledStyle = useAnimatedStyle(() => ({
+      opacity: spinning.value
+        ? withTiming(0.6, {duration: 250})
+        : withTiming(1, {duration: 125}),
+      pointerEvents: spinning.value ? 'none' : 'auto',
     }));
 
     useImperativeHandle(ref, () => ({
@@ -46,7 +45,7 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
     });
 
     return (
-      <Animated.View style={[styles.container, disabled, style]}>
+      <Animated.View style={[styles.container, disabledStyle, style]}>
         <Text style={styles.title}>Do you feel lucky?</Text>
         <FlatList
           ref={listRef}

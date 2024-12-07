@@ -38,33 +38,21 @@ export const WHEEL_OPTIONS = [
   10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,
 ];
 
-const RANGES = [
-  -15, 15, 15, 45, 45, 75, 75, 105, 105, 135, 135, 165, 165, 195, 195, 225, 225,
-  255, 255, 285, 285, 315, 315, 345,
-];
-
 const LotteryScreen = () => {
   const listRef = useRef<ListRefProps>(null);
   const randD = useSharedValue(0);
   const progress = useSharedValue(0);
   const pulse = useSharedValue(0);
+  const spinning = useSharedValue(false);
   const insets = useSafeAreaInsets();
-  const [selectedO, setSelectedO] = useState(0);
+  const [selectedO, setSelectedO] = useState(2);
 
   const options = WHEEL_OPTIONS;
   const total = options?.length || 0;
   const marginTop = insets.top > 0 ? insets.top + 16 : 32;
 
   const rotate = useAnimatedStyle(() => ({
-    transform: [
-      {
-        rotate: `${interpolate(
-          progress.value,
-          [0, 0.2, 0.8, 0.98, 1, 2],
-          [-75, 72, 684, 720, 725, 725 + randD.value],
-        )}deg`,
-      },
-    ],
+    transform: [{rotate: `${progress.value}deg`}],
   }));
 
   const pulseScale = useAnimatedStyle(() => ({
@@ -88,21 +76,21 @@ const LotteryScreen = () => {
   }));
 
   const spinIt = () => {
-    if (progress.value > 0 && progress.value < 2) {
+    if (spinning.value) {
       return;
     }
 
+    spinning.value = true;
     cancelAnimation(pulse);
     pulse.value = withTiming(0, {duration: 150}, finished => {
       if (finished) {
         randD.value = 360 * Math.random();
-        progress.value = 0;
 
         progress.value = withTiming(
-          2,
+          progress.value + 720 + randD.value,
           {
             duration: 5000,
-            easing: Easing.linear,
+            easing: Easing.bezier(0.15, 0.85, 0.5, 1),
           },
           finished => {
             if (finished) {
@@ -124,18 +112,21 @@ const LotteryScreen = () => {
   };
 
   const calculateIndex = (angle: number) => {
-    const adjustedAngle = (angle + 15) % 360;
+    const adjustedAngle = (angle + 90) % 360;
     return Math.floor(adjustedAngle / 30) % WHEEL_OPTIONS.length;
   };
 
   const calculateWinner = () => {
-    const quotient = Math.floor((800 + randD.value) / FULL_CIRCLE);
+    const quotient = Math.floor(progress.value / FULL_CIRCLE);
     const largestMultiple = quotient * FULL_CIRCLE;
-    const remainder = 800 + randD.value - largestMultiple;
+    const remainder = progress.value - largestMultiple;
+
     const winner = calculateIndex(remainder);
     if (winner === selectedO) {
+      spinning.value = false;
       Alert.alert(`Winner - ${winner} - ${WHEEL_OPTIONS[winner]}`);
     } else {
+      spinning.value = false;
       Alert.alert(`Next time - ${winner} - ${WHEEL_OPTIONS[winner]}`);
     }
   };
@@ -161,7 +152,7 @@ const LotteryScreen = () => {
           ref={listRef}
           style={{marginTop}}
           selectedO={selectedO}
-          progress={progress}
+          spinning={spinning}
           selectOption={selectOption}
         />
 
@@ -200,7 +191,7 @@ const LotteryScreen = () => {
               item={item}
               index={index}
               total={total}
-              progress={progress}
+              spinning={spinning}
               selectOption={index => {
                 selectOption(index);
                 listRef.current?.animateList(index);

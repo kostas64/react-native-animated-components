@@ -8,7 +8,7 @@ export type TListItem = {
 
 export type TSlice = {
   total: number;
-  progress: SharedValue<number>;
+  spinning: SharedValue<boolean>;
   isSelected: boolean;
   selectOption: (index: number) => void;
 };
@@ -16,7 +16,7 @@ export type TSlice = {
 export type TChooseOption = {
   style?: StyleProp<ViewStyle>;
   selectedO: number;
-  progress: SharedValue<number>;
+  spinning: SharedValue<boolean>;
   selectOption: (index: number) => void;
 };
 
