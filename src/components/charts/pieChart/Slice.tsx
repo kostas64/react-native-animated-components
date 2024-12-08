@@ -85,7 +85,7 @@ const Slice = ({
           props.stroke = {type: 0, payload: processColor(props.stroke)};
         }
       },
-      ['stroke'],
+      ['fill', 'stroke'],
     ),
   );
 

@@ -64,7 +64,7 @@ const AnimCircle = ({_, activeColor, index}: TAnimCircle) => {
           props.fill = {type: 0, payload: processColor(props.fill)};
         }
       },
-      ['fill'],
+      ['fill', 'stroke'],
     ),
   );
 
