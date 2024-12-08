@@ -35,7 +35,8 @@ type TDATA = {
       | 'LinePieCharts'
       | 'GroupStackCharts'
       | 'ProductList'
-      | 'TaskCalendar';
+      | 'TaskCalendar'
+      | 'ScreenTransition';
   }[];
 }[];
 
@@ -76,6 +77,11 @@ export const DATA: TDATA = [
         label: 'Circular Animated Text',
         backgroundColor: '#fdc921',
         screen: 'CircularAnimatedText',
+      },
+      {
+        label: 'Screen Transitions',
+        backgroundColor: '#95e214',
+        screen: 'ScreenTransition',
       },
     ],
   },

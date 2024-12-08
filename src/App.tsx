@@ -36,6 +36,7 @@ import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
+import ScreenTransitionStack from '@screens/ScreenTransition/ScreenTransitionStack';
 
 export type TStackList = {
   Home: undefined;
@@ -65,6 +66,7 @@ export type TStackList = {
   LinePieCharts: undefined;
   GroupStackCharts: undefined;
   TaskCalendar: undefined;
+  ScreenTransition: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -142,6 +144,10 @@ function App() {
               <Stack.Screen
                 name="TaskCalendar"
                 component={TaskCalendarScreen}
+              />
+              <Stack.Screen
+                name="ScreenTransition"
+                component={ScreenTransitionStack}
               />
             </Stack.Navigator>
           </NavigationContainer>
