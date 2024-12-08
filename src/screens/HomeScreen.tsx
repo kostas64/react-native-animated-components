@@ -21,11 +21,14 @@ import Animated, {
 
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
 
 //My Libs
 import {WIDTH} from '@utils/device';
@@ -34,7 +37,6 @@ import {THomeNavigationProps} from 'src/App';
 import {typography} from '@utils/typography';
 import HomeButton from '@components/HomeButton';
 import StatusBarManager from '@components/StatusBarManager';
-import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
 
 const URL = 'https://www.linkedin.com/in/konstantinos-efkarpidis/';
 
@@ -211,6 +213,11 @@ const HomeBody = ({
                 size: mainItem.iconSize,
                 color: mainItem.iconColor,
                 name: mainItem.iconName,
+                padding: mainItem.padding,
+                style: {borderRadius: mainItem.borderRadius},
+                borderRadius: mainItem.borderRadius,
+                overflow: 'hidden',
+                backgroundColor: mainItem.backgroundColor,
               };
 
         const IconComp =
@@ -222,6 +229,10 @@ const HomeBody = ({
             ? MaterialCommunityIcons
             : mainItem.iconComp === 'AntDesign'
             ? AntDesign
+            : mainItem.iconComp === 'MaterialIcons'
+            ? MaterialIcons
+            : mainItem.iconComp === 'Feather'
+            ? Feather
             : Ionicons;
 
         return (

@@ -6,6 +6,9 @@ type TDATA = {
   iconColor?: ColorValue;
   iconSize?: number;
   iconText: string;
+  padding?: number;
+  borderRadius?: number;
+  backgroundColor?: ColorValue;
   items: {
     label: string;
     backgroundColor: string;
@@ -44,8 +47,11 @@ export const DATA: TDATA = [
   {
     iconName: 'animation',
     iconComp: 'MaterialCommunityIcons',
-    iconColor: '#3f546a',
-    iconSize: 32,
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#3f546a',
+    iconSize: 18,
     iconText: 'Replicated animations',
     items: [
       {
@@ -88,8 +94,11 @@ export const DATA: TDATA = [
   {
     iconName: 'clipboard-list',
     iconComp: 'MaterialCommunityIcons',
-    iconColor: '#3f546a',
-    iconSize: 32,
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#3f546a',
+    iconSize: 18,
     iconText: 'List',
     items: [
       {
@@ -130,11 +139,14 @@ export const DATA: TDATA = [
     ],
   },
   {
-    iconName: 'linechart',
+    iconName: 'areachart',
     iconComp: 'AntDesign',
     iconText: 'Charts',
-    iconColor: '#3f546a',
-    iconSize: 26,
+    iconColor: 'white',
+    padding: 7,
+    borderRadius: 15,
+    backgroundColor: '#3f546a',
+    iconSize: 16,
     items: [
       {
         label: 'Line & Pie Chart',
@@ -171,9 +183,14 @@ export const DATA: TDATA = [
     ],
   },
   {
-    iconName: require('../assets/img/loader.png'),
-    iconComp: 'image',
+    iconName: 'loader',
+    iconComp: 'Feather',
     iconText: 'Loader',
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#3f546a',
+    iconSize: 18,
     items: [
       {
         label: 'Progress Loader',
@@ -188,10 +205,13 @@ export const DATA: TDATA = [
     ],
   },
   {
-    iconName: 'code',
-    iconComp: 'FontAwesome',
-    iconColor: '#3f546a',
-    iconSize: 28,
+    iconName: 'code-brackets',
+    iconComp: 'MaterialCommunityIcons',
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#3f546a',
+    iconSize: 18,
     iconText: 'Common',
     items: [
       {
