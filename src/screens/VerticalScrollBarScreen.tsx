@@ -139,6 +139,7 @@ const VerticalScrollBarScreen = () => {
         <Animated.FlatList
           onScroll={e => (scrollOffset.value = e.nativeEvent.contentOffset.y)}
           data={DATA}
+          scrollEventThrottle={16}
           onScrollBeginDrag={showIndicator}
           onScrollEndDrag={hideIndicator}
           onMomentumScrollBegin={showIndicator}
