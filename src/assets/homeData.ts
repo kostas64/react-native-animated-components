@@ -40,7 +40,8 @@ type TDATA = {
       | 'ProductList'
       | 'TaskCalendar'
       | 'ScreenTransition'
-      | 'Lottery';
+      | 'Lottery'
+      | 'VerticalScrollBar';
   }[];
 }[];
 
@@ -251,6 +252,11 @@ export const DATA: TDATA = [
         label: 'Value Pickers',
         backgroundColor: '#ff0059',
         screen: 'ValuePickers',
+      },
+      {
+        label: 'Vertical Scroll Bar',
+        backgroundColor: '#ff8c00',
+        screen: 'VerticalScrollBar',
       },
       // {
       //   label: 'Ticket',
