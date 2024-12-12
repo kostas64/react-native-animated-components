@@ -11,10 +11,13 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {isIOS} from '../utils/device';
+import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 import {data} from '@components/verticalScrollBar/data';
 import StatusBarManager from '@components/StatusBarManager';
-import {ListItem} from '@components/verticalScrollBar/types';
+import ListItem from '@components/verticalScrollBar/ListItem';
+import {TListItem} from '@components/verticalScrollBar/types';
 import {preprocessNames} from '@components/verticalScrollBar/utils';
 
 const VerticalScrollBarScreen = () => {
@@ -23,7 +26,11 @@ const VerticalScrollBarScreen = () => {
   const scrollOffset = useSharedValue(0);
   const initialLayoutH = useSharedValue(0);
   const contentH = useSharedValue(0);
+  const firstLetterH = useSharedValue(0);
+  const lastLetterH = useSharedValue(0);
+  const restLetterH = useSharedValue(0);
   const indicatorOpacity = useSharedValue(0);
+  const translateY = useSharedValue(0);
 
   const DATA = preprocessNames(data);
   const marginTop = insets.top > 0 ? insets.top : 32;
@@ -37,49 +44,17 @@ const VerticalScrollBarScreen = () => {
     indicatorOpacity.value = withDelay(1000, withTiming(0, {duration: 200}));
   };
 
-  const renderItem = ({item}: {item: ListItem}) => {
-    return (
-      <View
-        style={{
-          marginBottom: item.isLastOfLetter ? 36 : 0,
-          borderColor: '#495057',
-          borderBottomWidth: StyleSheet.hairlineWidth,
-        }}>
-        {item.isFirstOfLetter && (
-          <View
-            style={{
-              paddingBottom: 12,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              borderColor: '#495057',
-            }}>
-            <Text
-              style={{
-                lineHeight: 18,
-                fontFamily: typography.bold,
-                color: '#6c757d',
-              }}>
-              {item.letter}
-            </Text>
-          </View>
-        )}
-        <View style={{paddingVertical: 12}}>
-          <Text
-            style={{
-              color: 'white',
-              fontFamily: typography.medium,
-              lineHeight: 18,
-            }}>
-            {item.name}
-          </Text>
-        </View>
-      </View>
-    );
-  };
+  const renderItem = ({item}: {item: TListItem}) => (
+    <ListItem
+      item={item}
+      firstLetterH={firstLetterH}
+      restLetterH={restLetterH}
+      lastLetterH={lastLetterH}
+    />
+  );
 
-  const indicator = useAnimatedStyle(() => ({
-    top: marginTop,
-    opacity: indicatorOpacity.value,
-    height: interpolate(
+  const indicator = useAnimatedStyle(() => {
+    translateY.value = interpolate(
       scrollOffset.value,
       [
         -250,
@@ -87,50 +62,74 @@ const VerticalScrollBarScreen = () => {
         contentH.value - initialLayoutH.value,
         contentH.value - initialLayoutH.value + 250,
       ],
-      [23, 46, 46, 23],
-      Extrapolation.CLAMP,
-    ),
-    transform: [
-      {
-        translateY: interpolate(
-          scrollOffset.value,
-          [
-            -250,
-            0,
-            contentH.value - initialLayoutH.value,
-            contentH.value - initialLayoutH.value + 250,
-          ],
-          [
-            0,
-            0,
-            initialLayoutH.value - marginTop - marginBottom - 46,
-            initialLayoutH.value - marginTop - marginBottom - 46 + 23,
-          ],
-        ),
-      },
-    ],
-  }));
-
-  const text = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      scrollOffset.value,
       [
-        -30,
         0,
-        contentH.value - initialLayoutH.value,
-        contentH.value - initialLayoutH.value + 30,
+        0,
+        initialLayoutH.value - marginTop - marginBottom - (isIOS ? 72 : 84),
+        initialLayoutH.value -
+          marginTop -
+          marginBottom -
+          (isIOS ? 72 : 84) +
+          23,
       ],
-      [0, 1, 1, 0],
-      Extrapolation.CLAMP,
-    ),
-  }));
+    );
+
+    return {
+      top: 72,
+      opacity: indicatorOpacity.value,
+      height: interpolate(
+        scrollOffset.value,
+        [
+          -250,
+          0,
+          contentH.value - initialLayoutH.value,
+          contentH.value - initialLayoutH.value + 250,
+        ],
+        [21, 42, 42, 21],
+        Extrapolation.CLAMP,
+      ),
+      transform: [{translateY: translateY.value}],
+    };
+  });
 
   const formattedText = useDerivedValue(() => {
+    const listItems = DATA;
+
     if (
       scrollOffset.value >= 0 &&
       scrollOffset.value <= contentH.value - initialLayoutH.value
     ) {
+      const scrollPosition = scrollOffset.value;
+
+      let cumulativeOffset = -30;
+
+      for (let i = 0; i < listItems.length; i++) {
+        const item = listItems[i];
+        const itemHeight =
+          item.isFirstOfLetter && item.isLastOfLetter
+            ? firstLetterH.value + 36
+            : item.isFirstOfLetter
+            ? firstLetterH.value
+            : item.isLastOfLetter
+            ? lastLetterH.value
+            : restLetterH.value;
+
+        cumulativeOffset += itemHeight;
+
+        if (scrollPosition + translateY.value < cumulativeOffset) {
+          return item.letter;
+        }
+      }
+    } else if (
+      scrollOffset.value >= 0 &&
+      scrollOffset.value > contentH.value - initialLayoutH.value
+    ) {
+      return listItems[listItems.length - 1].letter;
+    } else if (scrollOffset.value < 0) {
+      return listItems[0].letter;
     }
+
+    return '';
   });
 
   return (
@@ -138,15 +137,15 @@ const VerticalScrollBarScreen = () => {
       <StatusBarManager barStyle="light" />
       <View style={styles.container}>
         <Animated.FlatList
-          data={DATA}
-          renderItem={renderItem}
           onScroll={e => (scrollOffset.value = e.nativeEvent.contentOffset.y)}
+          data={DATA}
           onScrollBeginDrag={showIndicator}
           onScrollEndDrag={hideIndicator}
           onMomentumScrollBegin={showIndicator}
           onMomentumScrollEnd={hideIndicator}
           onLayout={e => (initialLayoutH.value = e.nativeEvent.layout.height)}
           onContentSizeChange={(_, height) => (contentH.value = height)}
+          renderItem={renderItem}
           keyExtractor={(_, index) => index.toString()}
           contentContainerStyle={styles.padding}
           style={[styles.bg, {marginTop, marginBottom}]}
@@ -156,8 +155,14 @@ const VerticalScrollBarScreen = () => {
           showsVerticalScrollIndicator={false}
         />
 
-        <Animated.View style={[indicator, {marginTop}, styles.indicator]}>
-          <Animated.Text style={[text, styles.indicatorText]}>A</Animated.Text>
+        <Animated.View
+          pointerEvents={'none'}
+          style={[
+            indicator,
+            {marginTop: marginTop},
+            styles.indicatorContainer,
+          ]}>
+          <ReText text={formattedText} style={styles.indicatorLabel} />
         </Animated.View>
       </View>
     </>
@@ -184,7 +189,7 @@ const styles = StyleSheet.create({
   padding: {
     padding: 16,
   },
-  indicator: {
+  indicatorContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
@@ -193,10 +198,10 @@ const styles = StyleSheet.create({
     borderRadius: 23,
     backgroundColor: '#01e395',
   },
-  indicatorText: {
-    right: 6,
+  indicatorLabel: {
     fontSize: 16,
     color: '#121212',
+    right: isIOS ? 6 : 5,
     fontFamily: typography.bold,
   },
 });

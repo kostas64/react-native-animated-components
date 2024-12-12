@@ -1,7 +1,7 @@
-import {ListItem} from './types';
+import {TListItem} from './types';
 
-export const preprocessNames = (names: string[]): ListItem[] => {
-  const processedNames: ListItem[] = [];
+export const preprocessNames = (names: string[]): TListItem[] => {
+  const processedNames: TListItem[] = [];
   const letterGroups: Record<string, string[]> = {};
 
   names.forEach(name => {
