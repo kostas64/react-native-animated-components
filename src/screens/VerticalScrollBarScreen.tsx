@@ -19,6 +19,7 @@ import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/verticalScrollBar/ListItem';
 import {TListItem} from '@components/verticalScrollBar/types';
 import {preprocessNames} from '@components/verticalScrollBar/utils';
+import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
 
 const VerticalScrollBarScreen = () => {
   const insets = useSafeAreaInsets();
@@ -31,6 +32,7 @@ const VerticalScrollBarScreen = () => {
   const restLetterH = useSharedValue(0);
   const indicatorOpacity = useSharedValue(0);
   const translateY = useSharedValue(0);
+  const currentLetter = useSharedValue('A');
 
   const DATA = preprocessNames(data);
   const marginTop = insets.top > 0 ? insets.top : 32;
@@ -116,7 +118,12 @@ const VerticalScrollBarScreen = () => {
 
         cumulativeOffset += itemHeight;
 
-        if (scrollPosition + translateY.value < cumulativeOffset) {
+        if (scrollPosition + translateY.value - 12 < cumulativeOffset) {
+          if (currentLetter.value !== item.letter) {
+            currentLetter.value = item.letter;
+            runOnJS(triggerHaptik)();
+          }
+
           return item.letter;
         }
       }
@@ -137,13 +144,13 @@ const VerticalScrollBarScreen = () => {
       <StatusBarManager barStyle="light" />
       <View style={styles.container}>
         <Animated.FlatList
-          onScroll={e => (scrollOffset.value = e.nativeEvent.contentOffset.y)}
           data={DATA}
           scrollEventThrottle={16}
           onScrollBeginDrag={showIndicator}
           onScrollEndDrag={hideIndicator}
           onMomentumScrollBegin={showIndicator}
           onMomentumScrollEnd={hideIndicator}
+          onScroll={e => (scrollOffset.value = e.nativeEvent.contentOffset.y)}
           onLayout={e => (initialLayoutH.value = e.nativeEvent.layout.height)}
           onContentSizeChange={(_, height) => (contentH.value = height)}
           renderItem={renderItem}
