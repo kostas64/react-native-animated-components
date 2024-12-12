@@ -1,110 +1,21 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useRef} from 'react';
-import {typography} from '@utils/typography';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import StatusBarManager from '@components/StatusBarManager';
 import Animated, {
-  Extrapolation,
+  withDelay,
+  withTiming,
   interpolate,
-  useAnimatedRef,
-  useAnimatedStyle,
-  useDerivedValue,
+  Extrapolation,
   useSharedValue,
+  useDerivedValue,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-const data: string[] = [
-  'Alice',
-  'Andrew',
-  'Amelia',
-  'Adam',
-  'Bella',
-  'Benjamin',
-  'Blake',
-  'Brianna',
-  'Charlotte',
-  'Daniel',
-  'Ethan',
-  'Emily',
-  'Evan',
-  'Eleanor',
-  'Faith',
-  'Felix',
-  'Fiona',
-  'Frederick',
-  'Gabriel',
-  'Gavin',
-  'Georgia',
-  'Harper',
-  'Hudson',
-  'Isaac',
-  'Isla',
-  'Ivy',
-  'Ian',
-  'James',
-  'Julia',
-  'Katherine',
-  'Kyle',
-  'Kayla',
-  'Kevin',
-  'Liam',
-  'Lily',
-  'Lucas',
-  'Mason',
-  'Noah',
-  'Natalie',
-  'Penelope',
-  'Ryan',
-  'Rachel',
-  'Riley',
-  'Rebecca',
-  'Samuel',
-  'Thomas',
-  'Tessa',
-  'Ulysses',
-  'Victoria',
-  'Vincent',
-  'William',
-  'Xena',
-  'Yvonne',
-  'Yosef',
-  'Yasmin',
-  'Zoe',
-];
-
-type ListItem = {
-  name: string;
-  isFirstOfLetter: boolean;
-  isLastOfLetter: boolean;
-  letter: string;
-};
-
-const preprocessNames = (names: string[]): ListItem[] => {
-  const processedNames: ListItem[] = [];
-  const letterGroups: Record<string, string[]> = {};
-
-  // Group names by their starting letter
-  names.forEach(name => {
-    const firstLetter = name[0].toUpperCase();
-    if (!letterGroups[firstLetter]) {
-      letterGroups[firstLetter] = [];
-    }
-    letterGroups[firstLetter].push(name);
-  });
-
-  // Flatten the grouped names and mark first/last
-  Object.entries(letterGroups).forEach(([letter, group]) => {
-    group.forEach((name, index) => {
-      processedNames.push({
-        name,
-        letter,
-        isFirstOfLetter: index === 0,
-        isLastOfLetter: index === group.length - 1,
-      });
-    });
-  });
-
-  return processedNames;
-};
+import {typography} from '@utils/typography';
+import {data} from '@components/verticalScrollBar/data';
+import StatusBarManager from '@components/StatusBarManager';
+import {ListItem} from '@components/verticalScrollBar/types';
+import {preprocessNames} from '@components/verticalScrollBar/utils';
 
 const VerticalScrollBarScreen = () => {
   const insets = useSafeAreaInsets();
@@ -112,11 +23,19 @@ const VerticalScrollBarScreen = () => {
   const scrollOffset = useSharedValue(0);
   const initialLayoutH = useSharedValue(0);
   const contentH = useSharedValue(0);
-  const parentRef = useRef<View>(null);
-  const listRef = useAnimatedRef<FlatList>();
+  const indicatorOpacity = useSharedValue(0);
 
+  const DATA = preprocessNames(data);
   const marginTop = insets.top > 0 ? insets.top : 32;
   const marginBottom = insets.bottom > 0 ? insets.bottom : 32;
+
+  const showIndicator = () => {
+    indicatorOpacity.value = withTiming(1, {duration: 150});
+  };
+
+  const hideIndicator = () => {
+    indicatorOpacity.value = withDelay(1000, withTiming(0, {duration: 200}));
+  };
 
   const renderItem = ({item}: {item: ListItem}) => {
     return (
@@ -159,6 +78,7 @@ const VerticalScrollBarScreen = () => {
 
   const indicator = useAnimatedStyle(() => ({
     top: marginTop,
+    opacity: indicatorOpacity.value,
     height: interpolate(
       scrollOffset.value,
       [
@@ -216,14 +136,17 @@ const VerticalScrollBarScreen = () => {
   return (
     <>
       <StatusBarManager barStyle="light" />
-      <View ref={parentRef} style={styles.container}>
+      <View style={styles.container}>
         <Animated.FlatList
-          ref={listRef}
+          data={DATA}
+          renderItem={renderItem}
           onScroll={e => (scrollOffset.value = e.nativeEvent.contentOffset.y)}
-          data={preprocessNames(data)}
+          onScrollBeginDrag={showIndicator}
+          onScrollEndDrag={hideIndicator}
+          onMomentumScrollBegin={showIndicator}
+          onMomentumScrollEnd={hideIndicator}
           onLayout={e => (initialLayoutH.value = e.nativeEvent.layout.height)}
           onContentSizeChange={(_, height) => (contentH.value = height)}
-          renderItem={renderItem}
           keyExtractor={(_, index) => index.toString()}
           contentContainerStyle={styles.padding}
           style={[styles.bg, {marginTop, marginBottom}]}
@@ -233,32 +156,8 @@ const VerticalScrollBarScreen = () => {
           showsVerticalScrollIndicator={false}
         />
 
-        <Animated.View
-          style={[
-            indicator,
-            {marginTop},
-            {
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'absolute',
-              width: 46,
-              right: -16,
-              borderRadius: 23,
-              backgroundColor: '#01e395',
-            },
-          ]}>
-          <Animated.Text
-            style={[
-              text,
-              {
-                right: 4,
-                fontSize: 16,
-                color: '#121212',
-                fontFamily: typography.bold,
-              },
-            ]}>
-            A
-          </Animated.Text>
+        <Animated.View style={[indicator, {marginTop}, styles.indicator]}>
+          <Animated.Text style={[text, styles.indicatorText]}>A</Animated.Text>
         </Animated.View>
       </View>
     </>
@@ -284,5 +183,20 @@ const styles = StyleSheet.create({
   },
   padding: {
     padding: 16,
+  },
+  indicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: 46,
+    right: -16,
+    borderRadius: 23,
+    backgroundColor: '#01e395',
+  },
+  indicatorText: {
+    right: 6,
+    fontSize: 16,
+    color: '#121212',
+    fontFamily: typography.bold,
   },
 });
