@@ -1,3 +1,12 @@
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  PanResponder,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
 import Animated, {
   runOnJS,
   withDelay,
@@ -6,11 +15,11 @@ import Animated, {
   Extrapolation,
   useSharedValue,
   useDerivedValue,
+  cancelAnimation,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React, {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {FlatList, PanResponder, StyleSheet, Text, View} from 'react-native';
 
 import {isIOS} from '../utils/device';
 import ReText from '@components/ReText';
@@ -36,6 +45,7 @@ const VerticalScrollBarScreen = () => {
   const currentLetter = useSharedValue('A');
 
   const listRef = useRef<FlatList>(null);
+  let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
 
   const DATA = preprocessNames(data);
   const marginTop = insets.top > 0 ? insets.top : 32;
@@ -43,8 +53,8 @@ const VerticalScrollBarScreen = () => {
 
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onPanResponderMove(e, gestureState) {
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove(_, gestureState) {
         const MAX_THRESHOLD =
           ((gestureState.moveY - marginTop - 80) /
             (initialLayoutH.value -
@@ -174,10 +184,25 @@ const VerticalScrollBarScreen = () => {
     return '';
   });
 
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    scrollOffset.value = e.nativeEvent.contentOffset.y;
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      cancelAnimation(indicatorOpacity);
+      hideIndicator();
+    }, 150);
+  };
+
+  const ouTouchIndicator = () => {
+    cancelAnimation(indicatorOpacity);
+    showIndicator();
+  };
+
   const scrollTo = (e: number) => {
     listRef.current?.scrollToOffset({
-      offset: e, //+ translateY.value,
-      animated: true,
+      offset: e,
+      animated: false,
     });
   };
 
@@ -189,14 +214,12 @@ const VerticalScrollBarScreen = () => {
           ref={listRef}
           data={DATA}
           scrollEventThrottle={16}
+          onScroll={onScroll}
           onScrollBeginDrag={showIndicator}
-          onScrollEndDrag={hideIndicator}
           onMomentumScrollBegin={showIndicator}
-          onMomentumScrollEnd={hideIndicator}
-          onScroll={e => (scrollOffset.value = e.nativeEvent.contentOffset.y)}
+          renderItem={renderItem}
           onLayout={e => (initialLayoutH.value = e.nativeEvent.layout.height)}
           onContentSizeChange={(_, height) => (contentH.value = height)}
-          renderItem={renderItem}
           keyExtractor={(_, index) => index.toString()}
           contentContainerStyle={styles.padding}
           style={[styles.bg, {marginTop, marginBottom}]}
@@ -207,6 +230,7 @@ const VerticalScrollBarScreen = () => {
         />
 
         <Animated.View
+          onTouchStart={ouTouchIndicator}
           {...panResponder.panHandlers}
           style={[
             indicator,
