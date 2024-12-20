@@ -8,9 +8,9 @@ import Animated, {
   useDerivedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {FlatList, PanResponder, StyleSheet, Text, View} from 'react-native';
 
 import {isIOS} from '../utils/device';
 import ReText from '@components/ReText';
@@ -35,9 +35,43 @@ const VerticalScrollBarScreen = () => {
   const translateY = useSharedValue(0);
   const currentLetter = useSharedValue('A');
 
+  const listRef = useRef<FlatList>(null);
+
   const DATA = preprocessNames(data);
   const marginTop = insets.top > 0 ? insets.top : 32;
   const marginBottom = insets.bottom > 0 ? insets.bottom : 32;
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onPanResponderMove(e, gestureState) {
+        const MAX_THRESHOLD =
+          ((gestureState.moveY - marginTop - 80) /
+            (initialLayoutH.value -
+              marginTop -
+              marginBottom -
+              (isIOS ? 72 : 84))) *
+          (contentH.value - initialLayoutH.value);
+
+        if (MAX_THRESHOLD > contentH.value - initialLayoutH.value) {
+          scrollTo(contentH.value - initialLayoutH.value);
+          return;
+        } else if (MAX_THRESHOLD < 0) {
+          scrollTo(0);
+          return;
+        }
+
+        scrollTo(
+          ((gestureState.moveY - marginTop - 80) /
+            (initialLayoutH.value -
+              marginTop -
+              marginBottom -
+              (isIOS ? 72 : 84))) *
+            (contentH.value - initialLayoutH.value),
+        );
+      },
+    }),
+  ).current;
 
   const showIndicator = () => {
     indicatorOpacity.value = withTiming(1, {duration: 150});
@@ -140,11 +174,19 @@ const VerticalScrollBarScreen = () => {
     return '';
   });
 
+  const scrollTo = (e: number) => {
+    listRef.current?.scrollToOffset({
+      offset: e, //+ translateY.value,
+      animated: true,
+    });
+  };
+
   return (
     <>
       <StatusBarManager barStyle="light" />
       <View style={styles.container}>
         <Animated.FlatList
+          ref={listRef}
           data={DATA}
           scrollEventThrottle={16}
           onScrollBeginDrag={showIndicator}
@@ -165,13 +207,17 @@ const VerticalScrollBarScreen = () => {
         />
 
         <Animated.View
-          pointerEvents={'none'}
+          {...panResponder.panHandlers}
           style={[
             indicator,
             {marginTop: marginTop},
             styles.indicatorContainer,
           ]}>
-          <ReText text={formattedText} style={styles.indicatorLabel} />
+          <ReText
+            text={formattedText}
+            pointerEvents="none"
+            style={styles.indicatorLabel}
+          />
         </Animated.View>
       </View>
     </>

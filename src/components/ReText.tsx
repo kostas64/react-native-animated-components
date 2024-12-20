@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TextInput, TextStyle} from 'react-native';
+import {StyleSheet, TextInput, TextInputProps, TextStyle} from 'react-native';
 import Animated, {SharedValue, useAnimatedProps} from 'react-native-reanimated';
 
 Animated.addWhitelistedNativeProps({text: true});
@@ -10,7 +10,7 @@ type Props = {
   style?: TextStyle | TextStyle[];
 };
 
-const ReText = (props: Props) => {
+const ReText = (props: Props & TextInputProps) => {
   const {text, style} = props;
   const animatedProps = useAnimatedProps(() => ({
     text: text.value,
@@ -19,6 +19,7 @@ const ReText = (props: Props) => {
   return (
     //@ts-ignore
     <AnimatedTextInput
+      pointerEvents={props.pointerEvents}
       underlineColorAndroid="transparent"
       editable={false}
       style={[styles.baseStyle, style]}
