@@ -164,7 +164,7 @@ const VerticalScrollBarScreen = () => {
         cumulativeOffset += itemHeight;
 
         if (scrollPosition + translateY.value - 12 < cumulativeOffset) {
-          if (currentLetter.value !== item.letter) {
+          if (currentLetter.value !== item.letter && scrollOffset.value !== 0) {
             currentLetter.value = item.letter;
             runOnJS(triggerHaptik)();
           }
