@@ -1,6 +1,7 @@
 import Animated, {
   Easing,
   runOnJS,
+  withDelay,
   withRepeat,
   withTiming,
   interpolate,
@@ -11,8 +12,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import React, {useEffect, useRef, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Alert, Image, Pressable, StyleSheet, View} from 'react-native';
 import {Svg, Defs, Path, Stop, Polygon, LinearGradient} from 'react-native-svg';
 
 import {
@@ -24,8 +25,8 @@ import {
   FULL_CIRCLE,
   OUTER_BORDER_W,
 } from '@components/lottery/constants';
-import {isIOS} from '@utils/device';
 import Slice from '@components/lottery/Slice';
+import {HEIGHT_SCR, isIOS, WIDTH} from '@utils/device';
 import {ListRefProps} from '@components/lottery/types';
 import StatusBarManager from '@components/StatusBarManager';
 import ChooseOption from '@components/lottery/ChooseOption';
@@ -42,6 +43,7 @@ const LotteryScreen = () => {
   const listRef = useRef<ListRefProps>(null);
   const randD = useSharedValue(0);
   const progress = useSharedValue(0);
+  const progressBingo = useSharedValue(0);
   const pulse = useSharedValue(0);
   const spinning = useSharedValue(false);
   const insets = useSafeAreaInsets();
@@ -72,6 +74,20 @@ const LotteryScreen = () => {
       {scale: interpolate(pulse.value, [0, 0.5, 1], [1, 1.1, 1])},
       {translateX: interpolate(pulse.value, [0, 0.5, 1], [0, -4, 0])},
       {translateY: interpolate(pulse.value, [0, 0.5, 1], [0, -4, 0])},
+    ],
+  }));
+
+  const animBingo = useAnimatedStyle(() => ({
+    zIndex: progressBingo.value > 0 ? 100000000000000 : 0,
+    opacity: interpolate(progressBingo.value, [0, 0.1], [0, 1]),
+    transform: [
+      {
+        scale: interpolate(
+          progressBingo.value,
+          [0, 0.25, 0.35, 0.6, 0.7, 1],
+          [1, 1.25, 1, 1.25, 1, 1.4],
+        ),
+      },
     ],
   }));
 
@@ -124,11 +140,18 @@ const LotteryScreen = () => {
     const winner = calculateIndex(remainder);
     if (winner === selectedO) {
       spinning.value = false;
-      Alert.alert(`Winner - ${winner} - ${WHEEL_OPTIONS[winner]}`);
+      animateBingo();
     } else {
       spinning.value = false;
-      Alert.alert(`Next time - ${winner} - ${WHEEL_OPTIONS[winner]}`);
     }
+  };
+
+  const animateBingo = () => {
+    progressBingo.value = withTiming(1, {duration: 3000}, finished => {
+      if (finished) {
+        progressBingo.value = withDelay(1000, withTiming(0, {duration: 1}));
+      }
+    });
   };
 
   const selectOption = (index: number) => {
@@ -145,6 +168,11 @@ const LotteryScreen = () => {
       <Image
         style={styles.background}
         source={require('../assets/img/lottery-bg.png')}
+      />
+
+      <Animated.Image
+        style={[styles.bingo, animBingo]}
+        source={require('../assets/img/bingo.png')}
       />
 
       <View style={styles.container}>
@@ -292,5 +320,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: RADIUS / 2 + (isIOS ? 4 : 3),
     zIndex: 100000000,
+  },
+  bingo: {
+    ...StyleSheet.absoluteFillObject,
+    width: WIDTH / 1.5,
+    height: WIDTH / 1.5,
+    left: (WIDTH - WIDTH / 1.5) / 2,
+    top: (HEIGHT_SCR - WIDTH / 1.5) / 2,
   },
 });
