@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import {ListItemProps} from './types';
 import {typography} from '@utils/typography';
@@ -9,7 +10,12 @@ const ListItem = ({
   firstLetterH,
   lastLetterH,
   restLetterH,
+  formattedText,
 }: ListItemProps) => {
+  const firstLetterStyle = useAnimatedStyle(() => ({
+    color: item.letter === formattedText.value ? '#01e395' : '#6c757d',
+  }));
+
   return (
     <View
       onLayout={e => {
@@ -24,7 +30,9 @@ const ListItem = ({
       style={[styles.container, item.isLastOfLetter && {marginBottom: 36}]}>
       {item.isFirstOfLetter && (
         <View style={styles.letterContainer}>
-          <Text style={styles.letter}>{item.letter}</Text>
+          <Animated.Text style={[styles.letter, firstLetterStyle]}>
+            {item.letter}
+          </Animated.Text>
         </View>
       )}
       <View style={{paddingVertical: 12}}>

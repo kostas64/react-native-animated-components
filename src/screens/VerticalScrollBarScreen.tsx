@@ -11,6 +11,7 @@ import Animated, {
   runOnJS,
   withDelay,
   withTiming,
+  withSpring,
   interpolate,
   Extrapolation,
   useSharedValue,
@@ -43,6 +44,7 @@ const VerticalScrollBarScreen = () => {
   const indicatorOpacity = useSharedValue(0);
   const translateY = useSharedValue(0);
   const currentLetter = useSharedValue('A');
+  const progressIndicator = useSharedValue(0);
 
   const listRef = useRef<FlatList>(null);
   let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
@@ -94,6 +96,7 @@ const VerticalScrollBarScreen = () => {
   const renderItem = ({item}: {item: TListItem}) => (
     <ListItem
       item={item}
+      formattedText={formattedText}
       firstLetterH={firstLetterH}
       restLetterH={restLetterH}
       lastLetterH={lastLetterH}
@@ -121,6 +124,13 @@ const VerticalScrollBarScreen = () => {
       ],
     );
 
+    const translateX = interpolate(
+      progressIndicator.value,
+      [0, 1],
+      [0, -56],
+      Extrapolation.CLAMP,
+    );
+
     return {
       top: 72,
       opacity: indicatorOpacity.value,
@@ -135,7 +145,7 @@ const VerticalScrollBarScreen = () => {
         [21, 42, 42, 21],
         Extrapolation.CLAMP,
       ),
-      transform: [{translateY: translateY.value}],
+      transform: [{translateY: translateY.value}, {translateX}],
     };
   });
 
@@ -197,6 +207,11 @@ const VerticalScrollBarScreen = () => {
   const ouTouchIndicator = () => {
     cancelAnimation(indicatorOpacity);
     showIndicator();
+    progressIndicator.value = withSpring(1);
+  };
+
+  const onReleaseIndicator = () => {
+    progressIndicator.value = withSpring(0);
   };
 
   const scrollTo = (e: number) => {
@@ -231,6 +246,7 @@ const VerticalScrollBarScreen = () => {
 
         <Animated.View
           onTouchStart={ouTouchIndicator}
+          onTouchEnd={onReleaseIndicator}
           {...panResponder.panHandlers}
           style={[
             indicator,
@@ -272,15 +288,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    width: 46,
-    right: -16,
+    width: 112,
+    right: -76,
     borderRadius: 23,
     backgroundColor: '#01e395',
   },
   indicatorLabel: {
     fontSize: 16,
     color: '#121212',
-    right: isIOS ? 6 : 5,
+    right: isIOS ? 36 : 35,
     fontFamily: typography.bold,
   },
 });

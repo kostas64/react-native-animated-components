@@ -1,4 +1,4 @@
-import {SharedValue} from 'react-native-reanimated';
+import {AnimatedStyle, SharedValue} from 'react-native-reanimated';
 
 export type TListItem = {
   name: string;
@@ -12,4 +12,5 @@ export type ListItemProps = {
   firstLetterH: SharedValue<number>;
   lastLetterH: SharedValue<number>;
   restLetterH: SharedValue<number>;
+  formattedText: SharedValue<string>;
 };
