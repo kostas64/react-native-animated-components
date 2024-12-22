@@ -65,10 +65,13 @@ const VerticalScrollBarScreen = () => {
               (isIOS ? 72 : 84))) *
           (contentH.value - initialLayoutH.value);
 
+        // Case when scrollOfsset is off upper limit
         if (MAX_THRESHOLD > contentH.value - initialLayoutH.value) {
           scrollTo(contentH.value - initialLayoutH.value);
           return;
-        } else if (MAX_THRESHOLD < 0) {
+        }
+        // Case when scrollOfsset is off upper limit
+        else if (MAX_THRESHOLD < 0) {
           scrollTo(0);
           return;
         }
@@ -152,6 +155,7 @@ const VerticalScrollBarScreen = () => {
   const formattedText = useDerivedValue(() => {
     const listItems = DATA;
 
+    // Case when scrollOfsset is inside limits
     if (
       scrollOffset.value >= 0 &&
       scrollOffset.value <= contentH.value - initialLayoutH.value
@@ -182,12 +186,16 @@ const VerticalScrollBarScreen = () => {
           return item.letter;
         }
       }
-    } else if (
+    }
+    // Case when scrollOfsset is off upper limit
+    else if (
       scrollOffset.value >= 0 &&
       scrollOffset.value > contentH.value - initialLayoutH.value
     ) {
       return listItems[listItems.length - 1].letter;
-    } else if (scrollOffset.value < 0) {
+    }
+    // Case when scrollOfsset is off lower limit
+    else if (scrollOffset.value < 0) {
       return listItems[0].letter;
     }
 
@@ -198,6 +206,7 @@ const VerticalScrollBarScreen = () => {
     scrollOffset.value = e.nativeEvent.contentOffset.y;
     clearTimeout(timeout);
 
+    // Debounce
     timeout = setTimeout(() => {
       cancelAnimation(indicatorOpacity);
       hideIndicator();
