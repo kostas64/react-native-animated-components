@@ -201,7 +201,7 @@ const VerticalScrollBarScreen = () => {
     timeout = setTimeout(() => {
       cancelAnimation(indicatorOpacity);
       hideIndicator();
-    }, 150);
+    }, 500);
   };
 
   const ouTouchIndicator = () => {
