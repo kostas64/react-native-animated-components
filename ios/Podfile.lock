@@ -1168,6 +1168,8 @@ PODS:
     - React-logger (= 0.74.5)
     - React-perflogger (= 0.74.5)
     - React-utils (= 0.74.5)
+  - RNBootSplash (6.3.2):
+    - React-Core
   - RNCMaskedView (0.2.9):
     - React-Core
   - RNFlashList (1.7.1):
@@ -1404,6 +1406,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -1530,6 +1533,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNBootSplash:
+    :path: "../node_modules/react-native-bootsplash"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
   RNFlashList:
@@ -1605,6 +1610,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: cfbe85c3510c541ec6dc815c7729b41304b67961
   React-utils: f242eb7e7889419d979ca0e1c02ccc0ea6e43b29
   ReactCommon: f7da14a8827b72704169a48c929bcde802698361
+  RNBootSplash: 3a44c2c3ebfce98254de887ceed22c4941c8c6c5
   RNCMaskedView: 949696f25ec596bfc697fc88e6f95cf0c79669b6
   RNFlashList: e9c5b8fe1b84f9c198cb550eb4cc0c45569fbf42
   RNGestureHandler: efed690b8493a00b99654043daeb1335276ac4a2
@@ -1618,4 +1624,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2e0c9d80f576cb51ec7eb50a82bd5cded975161c
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
