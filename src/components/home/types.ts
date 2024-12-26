@@ -12,3 +12,7 @@ export type HomeBodyProps = {
   lastContentOffset: SharedValue<number>;
   scrollRef: AnimatedRef<AnimatedScrollView>;
 };
+
+export type SplashProps = {
+  splashProgress: SharedValue<number>;
+};
