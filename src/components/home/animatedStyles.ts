@@ -2,7 +2,6 @@ import {
   interpolate,
   SharedValue,
   Extrapolation,
-  interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
@@ -18,15 +17,11 @@ export const getAnimatedStyles = (splashProgress: SharedValue<number>) => {
         [1, 0],
         Extrapolation.CLAMP,
       ),
-      backgroundColor: interpolateColor(
-        splashProgress.value,
-        [0, 1],
-        [`rgb(235,238,255)`, `rgb(255,255,255)`],
-      ),
+      backgroundColor: `rgb(235,238,255)`,
       width: interpolate(splashProgress.value, [0, 1], [160, HEIGHT_SCR + 80]),
       height: interpolate(splashProgress.value, [0, 1], [160, HEIGHT_SCR + 80]),
     };
-  }, []);
+  });
 
   const containerAnimStyle = useAnimatedStyle(() => ({
     borderWidth: (HEIGHT_SCR - 80) / 2,
