@@ -109,6 +109,6 @@ const styles = StyleSheet.create({
   number: {
     color: 'white',
     fontSize: 36,
-    fontFamily: typography.thin,
+    fontFamily: typography.light,
   },
 });

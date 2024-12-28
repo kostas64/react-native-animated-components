@@ -53,7 +53,7 @@ export default Placeholder;
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
+    height: 44,
     width: 48,
     paddingBottom: 16,
     alignItems: 'center',
