@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
-import Octicons from 'react-native-vector-icons/Octicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {WIDTH} from '@utils/device';
@@ -23,7 +23,7 @@ const InitialView = () => {
           <InitialBox />
         </Pressable>
         <View style={styles.filterContainer}>
-          <Octicons name="filter" size={20} style={styles.top1} />
+          <Feather name="sliders" size={18} style={styles.top1} />
         </View>
       </View>
     </View>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   },
   top1: {
     top: 1,
+    transform: [{rotate: '90deg'}],
   },
   padHor16: {
     paddingHorizontal: 16,

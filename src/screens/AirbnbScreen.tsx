@@ -4,7 +4,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import React from 'react';
-import Octicons from 'react-native-vector-icons/Octicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
@@ -19,6 +19,7 @@ import WhenTrip from '@components/airbnb/WhenTrip';
 import WhoComing from '@components/airbnb/WhoComing';
 import InitialBox from '@components/airbnb/InitialBox';
 import InitialView from '@components/airbnb/InitialView';
+import StatusBarManager from '@components/StatusBarManager';
 import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
 import {_MS_PER_DAY, CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
 
@@ -265,6 +266,7 @@ const Airbnb = () => {
 
   return (
     <>
+      <StatusBarManager />
       {!showModal && <InitialView />}
       {showModal && (
         <>
@@ -314,7 +316,7 @@ const Airbnb = () => {
                 styles.absolute,
                 {right: 24, top: top + 10},
               ]}>
-              <Octicons name="filter" size={20} style={styles.top1} />
+              <Feather name="sliders" size={18} style={styles.top1} />
             </Animated.View>
             <Animated.View
               style={[
@@ -562,6 +564,7 @@ const styles = StyleSheet.create({
   },
   top1: {
     top: 1,
+    transform: [{rotate: '90deg'}],
   },
   whenAnyWeek: {
     width: '100%',
