@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Easing, useSharedValue, withTiming} from 'react-native-reanimated';
 
 import MyButton from '@components/charts/MyButton';
+import StatusBarManager from '@components/StatusBarManager';
 import GroupChart from '@components/charts/groupChart/GroupChart';
 import StackChart from '@components/charts/stackChart/StackChart';
 
@@ -20,17 +21,20 @@ const GroupStackCharts = () => {
   };
 
   return (
-    <View style={[styles.container, {paddingTop, paddingBottom}]}>
-      <View style={styles.chartsContainer}>
-        <GroupChart animate={animate} />
-        <StackChart animate={animate} />
-      </View>
+    <>
+      <StatusBarManager />
+      <View style={[styles.container, {paddingTop, paddingBottom}]}>
+        <View style={styles.chartsContainer}>
+          <GroupChart animate={animate} />
+          <StackChart animate={animate} />
+        </View>
 
-      <View style={styles.btnsContainer}>
-        <MyButton title="Animate" onPress={animateIt} />
-        <MyButton title="Animate Back" onPress={() => animateIt(false)} />
+        <View style={styles.btnsContainer}>
+          <MyButton title="Animate" onPress={animateIt} />
+          <MyButton title="Animate Back" onPress={() => animateIt(false)} />
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 

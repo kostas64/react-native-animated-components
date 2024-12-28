@@ -35,6 +35,7 @@ import {captureOptions} from '@components/chat/data';
 import Background from '@components/chat/Background';
 import {isAndroid, isIOS, WIDTH} from '@utils/device';
 import MessageItem from '@components/chat/MessageItem';
+import StatusBarManager from '@components/StatusBarManager';
 import SendMessageInput from '@components/chat/SendMessageInput';
 
 //Ignore in case you run in simulator
@@ -194,6 +195,7 @@ const ChatScreen = () => {
 
   return (
     <>
+      <StatusBarManager />
       <Background
         opacity={opacity}
         captureUri={captureUri}

@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import MyButton from '@components/charts/MyButton';
 import PieChart from '@components/charts/pieChart/PieChart';
+import StatusBarManager from '@components/StatusBarManager';
 import LineChart from '@components/charts/lineChart/LineChart';
 
 type ChartRef = {
@@ -28,17 +29,20 @@ const LineChartScreen = () => {
   };
 
   return (
-    <View style={[styles.container, {paddingTop, paddingBottom}]}>
-      <View style={styles.chartsContainer}>
-        <LineChart ref={lineChartRef} />
-        <PieChart ref={pieChartRef} />
-      </View>
+    <>
+      <StatusBarManager />
+      <View style={[styles.container, {paddingTop, paddingBottom}]}>
+        <View style={styles.chartsContainer}>
+          <LineChart ref={lineChartRef} />
+          <PieChart ref={pieChartRef} />
+        </View>
 
-      <View style={styles.btnsContainer}>
-        <MyButton title="Animate" onPress={onAnimate} />
-        <MyButton title="Animate Back" onPress={() => onAnimate(false)} />
+        <View style={styles.btnsContainer}>
+          <MyButton title="Animate" onPress={onAnimate} />
+          <MyButton title="Animate Back" onPress={() => onAnimate(false)} />
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 

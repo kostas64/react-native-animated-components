@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import Button from '@components/screenTransition/Button';
+import StatusBarManager from '@components/StatusBarManager';
 import {TWelcomeNavigationProps} from './ScreenTransitionStack';
 
 const title = "The only study app you'll ever need";
@@ -24,17 +25,20 @@ const ScreenTransitionWelcome = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.center}>
-        <Image
-          style={[styles.img, {marginTop}]}
-          source={require('@assets/img/screenTransition/welcome.png')}
-        />
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+    <>
+      <StatusBarManager />
+      <View style={styles.container}>
+        <View style={styles.center}>
+          <Image
+            style={[styles.img, {marginTop}]}
+            source={require('@assets/img/screenTransition/welcome.png')}
+          />
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>{description}</Text>
+        </View>
+        <Button label="Let's start" style={{marginBottom}} onPress={onPress} />
       </View>
-      <Button label="Let's start" style={{marginBottom}} onPress={onPress} />
-    </View>
+    </>
   );
 };
 

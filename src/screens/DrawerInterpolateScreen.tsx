@@ -1,15 +1,23 @@
 import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  useDrawerStatus,
   useDrawerProgress,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
 import {typography} from '@utils/typography';
+import StatusBarManager from '@components/StatusBarManager';
 import DrawerContent from '@components/drawerInterpolate/DrawerContent';
 import {DrawerTypes, TDrawerList} from '@components/drawerInterpolate/types';
 
@@ -45,6 +53,7 @@ const DrawerInterpolate = ({
   navigation: DrawerNavigationHelpers;
 }) => {
   const insets = useSafeAreaInsets();
+  const drawerStatus = useDrawerStatus();
   const drawerProgress = useDrawerProgress();
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -58,20 +67,34 @@ const DrawerInterpolate = ({
     };
   });
 
+  useEffect(() => {
+    if (drawerStatus === 'open') {
+      StatusBar.setBarStyle('light-content');
+    } else if (drawerStatus === 'closed') {
+      StatusBar.setBarStyle('dark-content');
+    }
+  }, [drawerStatus]);
+
   return (
-    <Animated.View style={[styles.container, animatedStyles]}>
-      <TouchableOpacity
-        onPress={navigation.openDrawer}
-        style={[
-          styles.menuContainer,
-          {
-            paddingTop: insets.top > 0 ? insets.top + 8 : 28,
-          },
-        ]}>
-        <Entypo name="menu" size={26} />
-        <Text style={styles.label}>Menu</Text>
-      </TouchableOpacity>
-    </Animated.View>
+    <>
+      <StatusBarManager />
+      <Animated.View style={[styles.container, animatedStyles]}>
+        <TouchableOpacity
+          onPress={() => {
+            StatusBar.setBarStyle('light-content');
+            navigation.openDrawer();
+          }}
+          style={[
+            styles.menuContainer,
+            {
+              paddingTop: insets.top > 0 ? insets.top + 8 : 28,
+            },
+          ]}>
+          <Entypo name="menu" size={26} />
+          <Text style={styles.label}>Menu</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </>
   );
 };
 

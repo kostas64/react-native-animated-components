@@ -16,6 +16,7 @@ import {
   BOX_SIZE,
   NUM_LETTER_CIRCLES,
 } from '@components/circularAnimatedText/data';
+import StatusBarManager from '@components/StatusBarManager';
 import ColorBox from '@components/circularAnimatedText/ColorBox';
 import AnimCircle from '@components/circularAnimatedText/AnimCricle';
 
@@ -67,6 +68,7 @@ const CircularAnimatedTextScreen = () => {
 
   return (
     <>
+      <StatusBarManager />
       <Pressable
         onPress={onPressBrush}
         style={[styles.imgContainer, {marginTop}]}>

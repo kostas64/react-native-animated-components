@@ -1,7 +1,13 @@
+import {
+  Text,
+  View,
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
 import {typography} from '@utils/typography';
@@ -13,7 +19,10 @@ const DrawerContent = ({navigation}: {navigation: DrawerNavigationHelpers}) => {
       <View style={styles.drawerScroll}>
         <TouchableOpacity
           style={styles.marginBottom}
-          onPress={() => navigation.closeDrawer()}>
+          onPress={() => {
+            StatusBar.setBarStyle('dark-content');
+            navigation.closeDrawer();
+          }}>
           <AntDesign name="close" size={24} color={'white'} />
         </TouchableOpacity>
 

@@ -3,6 +3,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {WIDTH} from '@utils/device';
+import StatusBarManager from '@components/StatusBarManager';
 import {FAKE_ARRAY, SPACING} from '@components/floatingButton/data';
 import FloatingContent from '@components/floatingButton/FloatingContent';
 import FloatingElement from '@components/floatingButton/FloatingElement';
@@ -28,20 +29,23 @@ const FloatingButton = () => {
   );
 
   return (
-    <View style={[styles.positionItems, {paddingTop: insets.top}]}>
-      <FlatList
-        numColumns={2}
-        data={FAKE_ARRAY}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-      />
-      <FloatingElement
-        snapHeight={310}
-        iconTintColor={'#FFF'}
-        content={<FloatingContent />}
-        containerStyle={[styles.container, {bottom: insets.bottom + 24}]}
-      />
-    </View>
+    <>
+      <StatusBarManager />
+      <View style={[styles.positionItems, {paddingTop: insets.top}]}>
+        <FlatList
+          numColumns={2}
+          data={FAKE_ARRAY}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+        />
+        <FloatingElement
+          snapHeight={310}
+          iconTintColor={'#FFF'}
+          content={<FloatingContent />}
+          containerStyle={[styles.container, {bottom: insets.bottom + 24}]}
+        />
+      </View>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Svg, {Defs, LinearGradient, Stop, Rect} from 'react-native-svg';
 
+import StatusBarManager from '@components/StatusBarManager';
 import ValueDotPicker from '@components/valuePickers/valueDot/ValueDotPicker';
 import ValueListPicker from '@components/valuePickers/valueList/ValueListPicker';
 import ValueArrowPicker from '@components/valuePickers/valueArrow/ValueArrowPicker';
@@ -28,6 +29,7 @@ const ValuePickersScreen = () => {
 
   return (
     <>
+      <StatusBarManager />
       <Svg width={'100%'} height={'100%'}>
         <Defs>
           <LinearGradient id="grad" x1="0" y1="1" x2="0" y2="0">
