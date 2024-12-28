@@ -1,11 +1,7 @@
-import Animated, {
-  interpolate,
-  Extrapolation,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {TouchableOpacity, View, Text, Linking, StyleSheet} from 'react-native';
+import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import {WIDTH} from '@utils/device';
 import {HomeHeaderProps} from './types';
@@ -20,12 +16,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
     () => ({
       transform: [
         {
-          translateX: interpolate(
-            progress.value,
-            [0, 1],
-            [0, 42],
-            Extrapolation.CLAMP,
-          ),
+          translateX: interpolate(progress.value, [0, 1], [0, 42]),
         },
       ],
     }),
@@ -35,34 +26,18 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
   const animImg = useAnimatedStyle(
     () => ({
       position: 'absolute',
-      width: interpolate(
-        progress.value,
-        [0, 1],
-        [128, 36],
-        Extrapolation.CLAMP,
-      ),
-      height: interpolate(
-        progress.value,
-        [0, 1],
-        [128, 36],
-        Extrapolation.CLAMP,
-      ),
+      width: interpolate(progress.value, [0, 1], [128, 36]),
+      height: interpolate(progress.value, [0, 1], [128, 36]),
       transform: [
         {
           translateX: interpolate(
             progress.value,
             [0, 1],
             [0, -(WIDTH - 36) / 2 + 16],
-            Extrapolation.CLAMP,
           ),
         },
         {
-          translateY: interpolate(
-            progress.value,
-            [0, 1],
-            [0, -40],
-            Extrapolation.CLAMP,
-          ),
+          translateY: interpolate(progress.value, [0, 1], [0, -40]),
         },
       ],
     }),
@@ -71,12 +46,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
 
   const heightStyle = useAnimatedStyle(
     () => ({
-      height: interpolate(
-        progress.value,
-        [0, 1],
-        [120, 0],
-        Extrapolation.CLAMP,
-      ),
+      height: interpolate(progress.value, [0, 1], [120, 0]),
     }),
     [],
   );
