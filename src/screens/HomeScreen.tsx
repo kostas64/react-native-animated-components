@@ -33,7 +33,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     hideSplash().then(() => {
-      splashProgress.value = withTiming(1);
+      splashProgress.value = withTiming(1, {duration: 500});
     });
   }, []);
 

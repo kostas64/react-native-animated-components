@@ -17,17 +17,20 @@ export const getAnimatedStyles = (splashProgress: SharedValue<number>) => {
         [1, 0],
         Extrapolation.CLAMP,
       ),
+      width: 160,
+      height: 160,
       backgroundColor: `rgb(235,238,255)`,
-      width: interpolate(splashProgress.value, [0, 1], [160, HEIGHT_SCR + 80]),
-      height: interpolate(splashProgress.value, [0, 1], [160, HEIGHT_SCR + 80]),
     };
   });
 
   const containerAnimStyle = useAnimatedStyle(() => ({
-    borderWidth: (HEIGHT_SCR - 80) / 2,
-    top: interpolate(splashProgress.value, [0, 1], [-40, -(HEIGHT_SCR / 2)]),
+    top: -160,
+    borderWidth: (HEIGHT_SCR + 160) / 2,
+    transform: [
+      {scale: interpolate(splashProgress.value, [0, 0.25, 1], [1, 0.8, 8])},
+    ],
     borderColor: `white`,
-    zIndex: splashProgress.value < 1 ? 10000000000 : 0,
+    zIndex: splashProgress.value < 1 ? 1 : 0,
   }));
 
   return {imageStyle, containerAnimStyle};
