@@ -11,10 +11,10 @@ import {HEIGHT_SCR} from '@utils/device';
 export const getAnimatedStyles = (splashProgress: SharedValue<number>) => {
   const imageStyle = useAnimatedStyle(() => {
     return {
-      borderRadius: 78,
+      borderRadius: 10000,
       opacity: interpolate(
         splashProgress.value,
-        [0.5, 0.9],
+        [0, 0.1],
         [1, 0],
         Extrapolation.CLAMP,
       ),
@@ -23,55 +23,16 @@ export const getAnimatedStyles = (splashProgress: SharedValue<number>) => {
         [0, 1],
         [`rgb(235,238,255)`, `rgb(255,255,255)`],
       ),
-      width: interpolate(
-        splashProgress.value,
-        [0.9, 1],
-        [160, 0],
-        Extrapolation.CLAMP,
-      ),
-      height: interpolate(
-        splashProgress.value,
-        [0.9, 1],
-        [160, 0],
-        Extrapolation.CLAMP,
-      ),
+      width: interpolate(splashProgress.value, [0, 1], [160, HEIGHT_SCR + 80]),
+      height: interpolate(splashProgress.value, [0, 1], [160, HEIGHT_SCR + 80]),
     };
   }, []);
 
   const containerAnimStyle = useAnimatedStyle(() => ({
-    borderWidth: interpolate(
-      splashProgress.value,
-      [0, 1],
-      [(HEIGHT_SCR - 160) / 2 + 40, 0],
-    ),
-    top: interpolate(
-      splashProgress.value,
-      [0, 1],
-      [(HEIGHT_SCR - HEIGHT_SCR - 80) / 2, (HEIGHT_SCR - 160) / 2],
-    ),
-    borderColor: `rgba(255,255,255,${interpolate(
-      splashProgress.value,
-      [0.9, 1],
-      [1, 0],
-      Extrapolation.CLAMP,
-    )})`,
-    backgroundColor: 'white',
-    opacity: interpolate(
-      splashProgress.value,
-      [0.9, 1],
-      [1, 0],
-      Extrapolation.CLAMP,
-    ),
-    transform: [
-      {
-        translateY: interpolate(
-          splashProgress.value,
-          [0.9, 1],
-          [0, 80],
-          Extrapolation.CLAMP,
-        ),
-      },
-    ],
+    borderWidth: (HEIGHT_SCR - 80) / 2,
+    top: interpolate(splashProgress.value, [0, 1], [-40, -(HEIGHT_SCR / 2)]),
+    borderColor: `white`,
+    zIndex: splashProgress.value < 1 ? 10000000000 : 0,
   }));
 
   return {imageStyle, containerAnimStyle};

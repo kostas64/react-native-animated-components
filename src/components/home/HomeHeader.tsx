@@ -23,7 +23,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
           translateX: interpolate(
             progress.value,
             [0, 1],
-            [0, 32],
+            [0, 42],
             Extrapolation.CLAMP,
           ),
         },
@@ -52,7 +52,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
           translateX: interpolate(
             progress.value,
             [0, 1],
-            [0, -(WIDTH - 36) / 2 + 8],
+            [0, -(WIDTH - 36) / 2 + 16],
             Extrapolation.CLAMP,
           ),
         },
@@ -87,16 +87,23 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
         paddingTop: insets.top + 24,
         paddingHorizontal: 16,
       }}>
-      <View style={styles.nameProfRow}>
-        <Animated.View style={nameImg}>
-          <Text style={styles.name}>{`Konstantinos Efkarpidis`}</Text>
-          <Text style={styles.profession}>{`Mobile engineer`}</Text>
-        </Animated.View>
-        <TouchableOpacity
-          hitSlop={styles.hitSlop}
-          onPress={() => Linking.openURL(URL)}>
-          <AntDesign name="linkedin-square" size={24} color={'#0966c2'} />
-        </TouchableOpacity>
+      <View>
+        <View style={styles.nameProfRow}>
+          <Animated.View style={nameImg}>
+            <Text style={styles.name}>{`Konstantinos Efkarpidis`}</Text>
+          </Animated.View>
+          <TouchableOpacity
+            style={styles.linkedIn}
+            hitSlop={styles.hitSlop}
+            onPress={() => Linking.openURL(URL)}>
+            <AntDesign name="linkedin-square" size={24} color={'#0966c2'} />
+          </TouchableOpacity>
+        </View>
+        <Animated.Text
+          style={[
+            styles.profession,
+            nameImg,
+          ]}>{`Mobile engineer`}</Animated.Text>
       </View>
       <Animated.View style={[styles.imgContainer, heightStyle]}>
         <Animated.Image
@@ -116,16 +123,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   name: {
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 24,
-    color: '#3f546a',
+    color: 'white',
     fontFamily: typography.bold,
   },
   profession: {
-    fontSize: 18,
-    lineHeight: 22,
+    fontSize: 16,
+    lineHeight: 18,
     color: '#819cb8',
     fontFamily: typography.bold,
+  },
+  linkedIn: {
+    padding: 2,
+    borderRadius: 4,
+    backgroundColor: 'white',
   },
   imgContainer: {
     alignItems: 'center',

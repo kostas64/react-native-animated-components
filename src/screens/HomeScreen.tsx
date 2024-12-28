@@ -22,7 +22,7 @@ const HomeScreen = () => {
   const progress = useSharedValue(0);
   const isScrolling = useSharedValue(false);
   const isAnimating = useSharedValue(false);
-  const lastContentOffset = useSharedValue(0);
+  const lastContentOffset = useSharedValue(1);
 
   //Splash shared values
   const splashProgress = useSharedValue(0);
@@ -33,13 +33,13 @@ const HomeScreen = () => {
 
   useEffect(() => {
     hideSplash().then(() => {
-      splashProgress.value = withTiming(1, {duration: 750});
+      splashProgress.value = withTiming(1);
     });
   }, []);
 
   return (
     <>
-      <StatusBarManager barStyle="dark" />
+      <StatusBarManager barStyle="light" />
 
       <Splash splashProgress={splashProgress} />
 
@@ -60,7 +60,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#b2cfec',
+    backgroundColor: '#3f546a',
   },
 });
 

@@ -3,10 +3,11 @@ import Animated, {
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
 import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Image, StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -80,27 +81,19 @@ const HomeBody = ({
       contentContainerStyle={styles.containerBody}
       showsVerticalScrollIndicator={false}>
       {DATA?.map((mainItem, index) => {
-        const props =
-          mainItem.iconComp === 'image'
-            ? {
-                style: styles.icon,
-                source: mainItem.iconName,
-              }
-            : {
-                size: mainItem.iconSize,
-                color: mainItem.iconColor,
-                name: mainItem.iconName,
-                padding: mainItem.padding,
-                style: {borderRadius: mainItem.borderRadius},
-                borderRadius: mainItem.borderRadius,
-                overflow: 'hidden',
-                backgroundColor: mainItem.backgroundColor,
-              };
+        const props = {
+          size: mainItem.iconSize,
+          color: mainItem.iconColor,
+          name: mainItem.iconName,
+          padding: mainItem.padding,
+          style: {borderRadius: mainItem.borderRadius},
+          borderRadius: mainItem.borderRadius,
+          overflow: 'hidden',
+          backgroundColor: mainItem.backgroundColor,
+        };
 
         const IconComp =
-          mainItem.iconComp === 'image'
-            ? Image
-            : mainItem.iconComp === 'FontAwesome'
+          mainItem.iconComp === 'FontAwesome'
             ? FontAwesome
             : mainItem.iconComp === 'MaterialCommunityIcons'
             ? MaterialCommunityIcons
@@ -110,6 +103,8 @@ const HomeBody = ({
             ? MaterialIcons
             : mainItem.iconComp === 'Feather'
             ? Feather
+            : mainItem.iconComp === 'Entypo'
+            ? Entypo
             : Ionicons;
 
         return (
@@ -144,7 +139,6 @@ export default HomeBody;
 const styles = StyleSheet.create({
   containerBody: {
     flexGrow: 1,
-    backgroundColor: '#f2f7fd',
     paddingTop: 16,
     paddingHorizontal: 16,
     paddingBottom: 24,
@@ -155,7 +149,7 @@ const styles = StyleSheet.create({
   },
   listLabel: {
     fontSize: 18,
-    color: '#3f546a',
+    color: 'white',
     paddingLeft: 8,
     lineHeight: 32,
     fontFamily: typography.semiBold,

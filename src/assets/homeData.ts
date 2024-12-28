@@ -52,7 +52,7 @@ export const DATA: TDATA = [
     iconColor: 'white',
     padding: 6,
     borderRadius: 15,
-    backgroundColor: '#3f546a',
+    backgroundColor: '#819cb8',
     iconSize: 18,
     iconText: 'Replicated animations',
     items: [
@@ -99,7 +99,7 @@ export const DATA: TDATA = [
     iconColor: 'white',
     padding: 6,
     borderRadius: 15,
-    backgroundColor: '#3f546a',
+    backgroundColor: '#819cb8',
     iconSize: 18,
     iconText: 'List',
     items: [
@@ -147,7 +147,7 @@ export const DATA: TDATA = [
     iconColor: 'white',
     padding: 7,
     borderRadius: 15,
-    backgroundColor: '#3f546a',
+    backgroundColor: '#819cb8',
     iconSize: 16,
     items: [
       {
@@ -169,7 +169,7 @@ export const DATA: TDATA = [
     iconColor: 'white',
     padding: 6,
     borderRadius: 15,
-    backgroundColor: '#3f546a',
+    backgroundColor: '#819cb8',
     iconSize: 18,
     items: [
       {
@@ -180,9 +180,14 @@ export const DATA: TDATA = [
     ],
   },
   {
-    iconName: require('../assets/img/menu-bar.png'),
-    iconComp: 'image',
+    iconName: 'menu',
+    iconComp: 'Entypo',
     iconText: 'Navbar',
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#819cb8',
+    iconSize: 18,
     items: [
       {
         label: 'Navbar with Indicator',
@@ -208,7 +213,7 @@ export const DATA: TDATA = [
     iconColor: 'white',
     padding: 6,
     borderRadius: 15,
-    backgroundColor: '#3f546a',
+    backgroundColor: '#819cb8',
     iconSize: 18,
     items: [
       {
@@ -229,7 +234,7 @@ export const DATA: TDATA = [
     iconColor: 'white',
     padding: 6,
     borderRadius: 15,
-    backgroundColor: '#3f546a',
+    backgroundColor: '#819cb8',
     iconSize: 18,
     iconText: 'Common',
     items: [
