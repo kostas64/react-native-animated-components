@@ -43,6 +43,7 @@ const VerticalScrollBarScreen = () => {
   const restLetterH = useSharedValue(0);
   const indicatorOpacity = useSharedValue(0);
   const translateY = useSharedValue(0);
+  const isTouching = useSharedValue(false);
   const currentLetter = useSharedValue('A');
   const progressIndicator = useSharedValue(0);
 
@@ -206,21 +207,30 @@ const VerticalScrollBarScreen = () => {
     scrollOffset.value = e.nativeEvent.contentOffset.y;
     clearTimeout(timeout);
 
-    // Debounce
-    timeout = setTimeout(() => {
-      cancelAnimation(indicatorOpacity);
-      hideIndicator();
-    }, 500);
+    if (!isTouching.value) {
+      // Debounce
+      timeout = setTimeout(() => {
+        cancelAnimation(indicatorOpacity);
+        hideIndicator();
+      }, 500);
+    }
   };
 
   const ouTouchIndicator = () => {
+    isTouching.value = true;
     cancelAnimation(indicatorOpacity);
     showIndicator();
     progressIndicator.value = withSpring(1);
   };
 
   const onReleaseIndicator = () => {
+    isTouching.value = false;
     progressIndicator.value = withSpring(0);
+
+    timeout = setTimeout(() => {
+      cancelAnimation(indicatorOpacity);
+      hideIndicator();
+    }, 500);
   };
 
   const scrollTo = (e: number) => {
