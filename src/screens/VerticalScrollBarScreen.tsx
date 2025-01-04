@@ -224,6 +224,7 @@ const VerticalScrollBarScreen = () => {
           showsVerticalScrollIndicator={false}
         />
 
+        {/* Indicator */}
         <Animated.View
           onTouchStart={ouTouchIndicator}
           onTouchEnd={onReleaseIndicator}
