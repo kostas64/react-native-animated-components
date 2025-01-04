@@ -32,6 +32,7 @@ import FadeItemListScreen from './screens/FadeItemListScreen';
 import TaskCalendarScreen from './screens/TaskCalendarScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
+import VerticalScrollBarScreen from '@screens/VerticalScrollBarScreen';
 import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
 import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
@@ -69,6 +70,7 @@ export type TStackList = {
   TaskCalendar: undefined;
   ScreenTransition: undefined;
   Lottery: undefined;
+  VerticalScrollBar: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -152,6 +154,10 @@ function App() {
                 component={ScreenTransitionStack}
               />
               <Stack.Screen name="Lottery" component={LotteryScreen} />
+              <Stack.Screen
+                name="VerticalScrollBar"
+                component={VerticalScrollBarScreen}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </ModalProvider>
