@@ -12,12 +12,9 @@ import Animated, {
   withDelay,
   withTiming,
   withSpring,
-  interpolate,
-  Extrapolation,
   useSharedValue,
   useDerivedValue,
   cancelAnimation,
-  useAnimatedStyle,
 } from 'react-native-reanimated';
 import React, {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -31,6 +28,7 @@ import ListItem from '@components/verticalScrollBar/ListItem';
 import {TListItem} from '@components/verticalScrollBar/types';
 import {preprocessNames} from '@components/verticalScrollBar/utils';
 import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
+import getAnimatedStyles from '@components/verticalScrollBar/animatedStyles';
 
 const VerticalScrollBarScreen = () => {
   const insets = useSafeAreaInsets();
@@ -107,50 +105,13 @@ const VerticalScrollBarScreen = () => {
     />
   );
 
-  const indicator = useAnimatedStyle(() => {
-    translateY.value = interpolate(
-      scrollOffset.value,
-      [
-        -250,
-        0,
-        contentH.value - initialLayoutH.value,
-        contentH.value - initialLayoutH.value + 250,
-      ],
-      [
-        0,
-        0,
-        initialLayoutH.value - marginTop - marginBottom - (isIOS ? 72 : 84),
-        initialLayoutH.value -
-          marginTop -
-          marginBottom -
-          (isIOS ? 72 : 84) +
-          23,
-      ],
-    );
-
-    const translateX = interpolate(
-      progressIndicator.value,
-      [0, 1],
-      [0, -56],
-      Extrapolation.CLAMP,
-    );
-
-    return {
-      top: 72,
-      opacity: indicatorOpacity.value,
-      height: interpolate(
-        scrollOffset.value,
-        [
-          -250,
-          0,
-          contentH.value - initialLayoutH.value,
-          contentH.value - initialLayoutH.value + 250,
-        ],
-        [21, 42, 42, 21],
-        Extrapolation.CLAMP,
-      ),
-      transform: [{translateY: translateY.value}, {translateX}],
-    };
+  const {indicator} = getAnimatedStyles({
+    translateY,
+    scrollOffset,
+    indicatorOpacity,
+    progressIndicator,
+    contentH,
+    initialLayoutH,
   });
 
   const formattedText = useDerivedValue(() => {
@@ -263,6 +224,7 @@ const VerticalScrollBarScreen = () => {
           showsVerticalScrollIndicator={false}
         />
 
+        {/* Indicator */}
         <Animated.View
           onTouchStart={ouTouchIndicator}
           onTouchEnd={onReleaseIndicator}
