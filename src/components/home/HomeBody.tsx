@@ -10,6 +10,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -26,7 +27,10 @@ const HomeBody = ({
   isAnimating,
   lastContentOffset,
 }: HomeBodyProps) => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<THomeNavigationProps>();
+
+  const paddingBottom = insets.bottom > 0 ? insets.bottom : 32;
 
   const headerScrollHandler = () => {
     return useAnimatedScrollHandler({
@@ -78,7 +82,7 @@ const HomeBody = ({
       bounces={false}
       onScroll={scrollHandler}
       scrollEventThrottle={16}
-      contentContainerStyle={styles.containerBody}
+      contentContainerStyle={[styles.containerBody, {paddingBottom}]}
       showsVerticalScrollIndicator={false}>
       {DATA?.map((mainItem, index) => {
         const props = {
@@ -141,7 +145,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingTop: 16,
     paddingHorizontal: 16,
-    paddingBottom: 24,
   },
   sectionContainer: {
     flexDirection: 'row',
