@@ -16,6 +16,8 @@ const TogglersScreen = () => {
         <ImplementedWith />
         <NativeIOSToggle />
         <View style={styles.space} />
+        <NativeIOSToggle withTheme />
+        <View style={styles.space} />
         <ToggleWithLabel />
         <View style={styles.space} />
         <ToggleWithSymbol />
