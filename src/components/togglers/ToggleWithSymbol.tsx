@@ -96,5 +96,6 @@ const styles = StyleSheet.create({
     borderRadius: SIZE / 4,
     borderWidth: SIZE / 20,
     borderColor: 'black',
+    backgroundColor: 'black',
   },
 });
