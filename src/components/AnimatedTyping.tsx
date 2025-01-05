@@ -1,10 +1,15 @@
 import {useState, useEffect, useRef} from 'react';
 import {StyleProp, Text, TextStyle} from 'react-native';
 
+const DEFAULT_TIMEOUT = 1250;
+const CHARACTER_DURATION = 50;
+
 type AnimatedTypingProps = {
   text: string[];
   textStyle?: StyleProp<TextStyle>;
   cursorStyle?: StyleProp<TextStyle>;
+  timeoutDuration?: number;
+  characterDuration?: number;
   onComplete?: () => void;
 };
 
@@ -26,7 +31,10 @@ export default function AnimatedTyping(props: AnimatedTypingProps) {
         setDisplayedText(prev => prev + currentMessage[charIndex]);
         progress.current.charIndex += 1;
 
-        typingTimeout.current = setTimeout(startTyping, 50);
+        typingTimeout.current = setTimeout(
+          startTyping,
+          props.characterDuration || CHARACTER_DURATION,
+        );
       } else if (messageIndex + 1 < props.text.length) {
         // Add a newline and move to the next message if there's another message
         progress.current.messageIndex += 1;
@@ -56,7 +64,10 @@ export default function AnimatedTyping(props: AnimatedTypingProps) {
     }, 500);
 
     // Start typing animation
-    typingTimeout.current = setTimeout(startTyping, 500);
+    typingTimeout.current = setTimeout(
+      startTyping,
+      props.timeoutDuration || DEFAULT_TIMEOUT,
+    );
 
     return () => {
       !!typingTimeout.current && clearTimeout(typingTimeout.current);

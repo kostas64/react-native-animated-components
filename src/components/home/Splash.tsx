@@ -22,6 +22,7 @@ export default Splash;
 
 const styles = StyleSheet.create({
   bootsplashContainer: {
+    zIndex: 2,
     position: 'absolute',
     alignItems: 'center',
     alignSelf: 'center',

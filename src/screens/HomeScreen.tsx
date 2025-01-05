@@ -13,6 +13,7 @@ import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/compone
 import Splash from '@components/home/Splash';
 import HomeBody from '@components/home/HomeBody';
 import HomeHeader from '@components/home/HomeHeader';
+import Introduction from '@components/home/Introduction';
 import StatusBarManager from '@components/StatusBarManager';
 
 const HomeScreen = () => {
@@ -40,6 +41,8 @@ const HomeScreen = () => {
   return (
     <>
       <StatusBarManager barStyle="light" />
+
+      <Introduction />
 
       <Splash splashProgress={splashProgress} />
 
