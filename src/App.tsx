@@ -30,6 +30,7 @@ import CustomDrawerScreen from './screens/CustomDrawerScreen';
 import ValuePickersScreen from './screens/ValuePickersScreen';
 import FadeItemListScreen from './screens/FadeItemListScreen';
 import TaskCalendarScreen from './screens/TaskCalendarScreen';
+import GestureCounterScreen from '@screens/GestureCounterScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
 import VerticalScrollBarScreen from '@screens/VerticalScrollBarScreen';
@@ -71,6 +72,7 @@ export type TStackList = {
   ScreenTransition: undefined;
   Lottery: undefined;
   VerticalScrollBar: undefined;
+  GestureCounter: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -157,6 +159,10 @@ function App() {
               <Stack.Screen
                 name="VerticalScrollBar"
                 component={VerticalScrollBarScreen}
+              />
+              <Stack.Screen
+                name="GestureCounter"
+                component={GestureCounterScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

@@ -41,7 +41,8 @@ type TDATA = {
       | 'TaskCalendar'
       | 'ScreenTransition'
       | 'Lottery'
-      | 'VerticalScrollBar';
+      | 'VerticalScrollBar'
+      | 'GestureCounter';
   }[];
 }[];
 
@@ -262,6 +263,11 @@ export const DATA: TDATA = [
         label: 'Vertical Scroll Bar',
         backgroundColor: '#ff8c00',
         screen: 'VerticalScrollBar',
+      },
+      {
+        label: 'Gesture Counter',
+        backgroundColor: '#fdc921',
+        screen: 'GestureCounter',
       },
       // {
       //   label: 'Ticket',
