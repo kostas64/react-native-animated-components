@@ -31,12 +31,16 @@ const FloatingActionButtonScreen = () => {
     }
   };
 
+  const onTouchOut = () => {
+    if (progress.value > 0) {
+      floatingRef.current?.close();
+    }
+  };
+
   return (
     <>
       <StatusBarManager barStyle="dark" />
-      <View
-        style={styles.container}
-        onTouchStart={() => floatingRef.current?.close()}>
+      <View style={styles.container} onTouchStart={onTouchOut}>
         <View style={styles.buttonPosition}>
           <View style={styles.buttonContainer}>
             <FloatingActionButton
