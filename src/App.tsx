@@ -38,6 +38,7 @@ import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
 import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
+import FloatingActionButtonScreen from '@screens/FloatingActionButtonScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
 import ScreenTransitionStack from '@screens/ScreenTransition/ScreenTransitionStack';
 
@@ -73,6 +74,7 @@ export type TStackList = {
   Lottery: undefined;
   VerticalScrollBar: undefined;
   GestureCounter: undefined;
+  FloatingActions: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -163,6 +165,10 @@ function App() {
               <Stack.Screen
                 name="GestureCounter"
                 component={GestureCounterScreen}
+              />
+              <Stack.Screen
+                name="FloatingActions"
+                component={FloatingActionButtonScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

@@ -1,7 +1,11 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
 
-const StatusBarManager = ({barStyle = 'dark'}) => {
+type StatusBarProps = {
+  barStyle?: 'dark' | 'light';
+};
+
+const StatusBarManager = ({barStyle = 'dark'}: StatusBarProps) => {
   return (
     <StatusBar
       translucent
