@@ -17,8 +17,15 @@ const FloatingActionModalItem = ({
 
   return (
     <Pressable
+      onPress={() => {
+        if (progress.value === 0) {
+          return;
+        }
+
+        //On item press action
+      }}
       style={({pressed}) => [
-        pressed && styles.touch,
+        pressed && progress.value !== 0 && styles.touch,
         styles.itemContainer,
         style,
       ]}>
