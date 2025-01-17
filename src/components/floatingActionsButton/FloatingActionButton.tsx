@@ -60,7 +60,6 @@ export default FloatingActionButton;
 const styles = StyleSheet.create({
   container: {
     borderRadius: CIRCLE_SIZE / 2,
-    backgroundColor: 'red',
     overflow: 'hidden',
     zIndex: 1,
   },

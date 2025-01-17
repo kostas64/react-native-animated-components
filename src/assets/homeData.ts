@@ -43,7 +43,8 @@ type TDATA = {
       | 'Lottery'
       | 'VerticalScrollBar'
       | 'GestureCounter'
-      | 'FloatingActions';
+      | 'FloatingActions'
+      | 'AddButtonMove';
   }[];
 }[];
 
@@ -249,6 +250,11 @@ export const DATA: TDATA = [
         label: 'Button to Actions',
         backgroundColor: '#2962ff',
         screen: 'FloatingActions',
+      },
+      {
+        label: 'Plus Button Move Screen',
+        backgroundColor: '#9500ff',
+        screen: 'AddButtonMove',
       },
     ],
   },

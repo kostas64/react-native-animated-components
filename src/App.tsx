@@ -30,6 +30,7 @@ import CustomDrawerScreen from './screens/CustomDrawerScreen';
 import ValuePickersScreen from './screens/ValuePickersScreen';
 import FadeItemListScreen from './screens/FadeItemListScreen';
 import TaskCalendarScreen from './screens/TaskCalendarScreen';
+import AddButtonMoveScreen from '@screens/AddButtonMoveScreen';
 import GestureCounterScreen from '@screens/GestureCounterScreen';
 import ProgressLoaderScreen from './screens/ProgressLoaderScreen';
 import LikeInteractionScreen from './screens/LikeInteractionScreen';
@@ -75,6 +76,7 @@ export type TStackList = {
   VerticalScrollBar: undefined;
   GestureCounter: undefined;
   FloatingActions: undefined;
+  AddButtonMove: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -169,6 +171,10 @@ function App() {
               <Stack.Screen
                 name="FloatingActions"
                 component={FloatingActionButtonScreen}
+              />
+              <Stack.Screen
+                name="AddButtonMove"
+                component={AddButtonMoveScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>
