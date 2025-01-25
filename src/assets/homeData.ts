@@ -42,7 +42,8 @@ type TDATA = {
       | 'ScreenTransition'
       | 'Lottery'
       | 'VerticalScrollBar'
-      | 'GestureCounter';
+      | 'GestureCounter'
+      | 'FloatingActions';
   }[];
 }[];
 
@@ -226,6 +227,28 @@ export const DATA: TDATA = [
         label: 'Dot Loader',
         backgroundColor: '#2962ff',
         screen: 'DotLoader',
+      },
+    ],
+  },
+  {
+    iconName: 'resize-full-screen',
+    iconComp: 'Entypo',
+    iconText: 'Floating',
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#819cb8',
+    iconSize: 18,
+    items: [
+      {
+        label: 'Button to Modal',
+        backgroundColor: '#0ad2ff',
+        screen: 'Floating',
+      },
+      {
+        label: 'Button to Actions',
+        backgroundColor: '#2962ff',
+        screen: 'FloatingActions',
       },
     ],
   },
