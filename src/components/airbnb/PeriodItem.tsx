@@ -4,6 +4,7 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 import {CALENDAR_PER} from './data';
 import {TPeriodItem} from './types';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const PeriodItem = ({item, onPress, isSelected, index}: TPeriodItem) => {
   return (
@@ -17,7 +18,11 @@ const PeriodItem = ({item, onPress, isSelected, index}: TPeriodItem) => {
           marginRight: index !== CALENDAR_PER.length - 1 ? 10 : 20,
         },
       ]}>
-      <Text style={styles.itemLabel}>{item}</Text>
+      <Text
+        style={styles.itemLabel}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        {item}
+      </Text>
     </Pressable>
   );
 };

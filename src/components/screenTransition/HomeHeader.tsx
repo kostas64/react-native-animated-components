@@ -4,6 +4,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
 
 const HomeHeader = () => {
@@ -21,8 +22,16 @@ const HomeHeader = () => {
           style={styles.logo}
         />
         <View style={{gap: 2}}>
-          <Text style={styles.name}>Erica Hawkins</Text>
-          <Text style={styles.grade}>6th grade</Text>
+          <Text
+            style={styles.name}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            Erica Hawkins
+          </Text>
+          <Text
+            style={styles.grade}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            6th grade
+          </Text>
         </View>
       </View>
       <TouchableOpacity

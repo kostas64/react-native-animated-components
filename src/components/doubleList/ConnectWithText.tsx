@@ -15,7 +15,9 @@ const colors = {
 const ConnectWithText = React.memo(() => {
   return (
     <View style={styles.connectWithTextContainer}>
-      <Text style={styles.connectWithText}>Connect with...</Text>
+      <Text style={styles.connectWithText} allowFontScaling={false}>
+        Connect with...
+      </Text>
     </View>
   );
 });

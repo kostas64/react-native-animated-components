@@ -4,6 +4,7 @@ import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import {ListItemProps} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ListItem = ({
   item,
@@ -30,13 +31,19 @@ const ListItem = ({
       style={[styles.container, item.isLastOfLetter && {marginBottom: 36}]}>
       {item.isFirstOfLetter && (
         <View style={styles.letterContainer}>
-          <Animated.Text style={[styles.letter, firstLetterStyle]}>
+          <Animated.Text
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+            style={[styles.letter, firstLetterStyle]}>
             {item.letter}
           </Animated.Text>
         </View>
       )}
       <View style={{paddingVertical: 12}}>
-        <Text style={styles.name}>{item.name}</Text>
+        <Text
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+          style={styles.name}>
+          {item.name}
+        </Text>
       </View>
     </View>
   );

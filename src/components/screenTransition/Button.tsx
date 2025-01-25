@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import {ButtonProps} from './types';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Button = ({style, label, onPress}: ButtonProps) => {
   return (
@@ -10,7 +11,11 @@ const Button = ({style, label, onPress}: ButtonProps) => {
       onPressIn={onPress}
       activeOpacity={0.5}
       style={[styles.container, style]}>
-      <Text style={styles.label}>{label}</Text>
+      <Text
+        style={styles.label}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };

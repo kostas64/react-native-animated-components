@@ -4,12 +4,13 @@ import {Pressable, StyleSheet} from 'react-native';
 
 import {typography} from '@utils/typography';
 import {TFloatingModalItemProps} from './types';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {getAnimatedItemStyles} from './animatedStyles';
 
 const FloatingActionModalItem = ({
   item,
-  progress,
   style,
+  progress,
 }: TFloatingModalItemProps) => {
   const Icon = Animated.createAnimatedComponent(item.component);
 
@@ -30,7 +31,9 @@ const FloatingActionModalItem = ({
         style,
       ]}>
       <Icon name={item.name} color={'white'} size={24} style={animatedIcon} />
-      <Animated.Text style={[styles.label, animatedText]}>
+      <Animated.Text
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+        style={[styles.label, animatedText]}>
         {item.label}
       </Animated.Text>
     </Pressable>

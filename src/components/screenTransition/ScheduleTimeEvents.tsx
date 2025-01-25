@@ -9,12 +9,12 @@ import React from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {Text, View, ScrollView, StyleSheet, Pressable} from 'react-native';
 
-import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import {findScheduleForTimes} from './utils';
 import {SCHEDULE_EVENTS, TIMES} from './data';
 import {ScheduleTimeEventsProps} from './types';
 import FadeInTransition from './FadeInTransition';
+import {SM_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
 
 const AnimTouch = Animated.createAnimatedComponent(Pressable);
@@ -61,8 +61,16 @@ const Event = ({event, eventIndex}: EventProps) => {
           backgroundColor: event.backgroundColor,
         },
       ]}>
-      <Text style={styles.eventName}>{event.event}</Text>
-      <Text style={styles.eventTime}>{event.time}</Text>
+      <Text
+        style={styles.eventName}
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+        {event.event}
+      </Text>
+      <Text
+        style={styles.eventTime}
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+        {event.time}
+      </Text>
     </AnimTouch>
   );
 };
@@ -90,7 +98,9 @@ const ScheduleTimeEvents = ({
 
         return (
           <View key={`time-${index}`} style={styles.eventContainer}>
-            <Text style={styles.time}>{time}</Text>
+            <Text style={styles.time} allowFontScaling={false}>
+              {time}
+            </Text>
             <View style={styles.line} />
             {event && (
               <FadeInTransition

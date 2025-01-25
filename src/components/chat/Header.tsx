@@ -4,10 +4,15 @@ import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Header = React.memo(() => (
   <View style={styles.innerHeaderContainer}>
-    <Text style={styles.chatLabel}>Chat</Text>
+    <Text
+      style={styles.chatLabel}
+      maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+      Chat
+    </Text>
     <View style={styles.iconsContainer}>
       <Ionicons name={'videocam-outline'} size={24} />
       <Feather size={20} name={'phone'} />

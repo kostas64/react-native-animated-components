@@ -9,11 +9,17 @@ import Animated, {withTiming} from 'react-native-reanimated';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {
+  WIDTH,
+  HEIGHT,
+  SM_FONT_UPSCALE_FACTOR,
+  MAX_FONT_UPSCALE_FACTOR,
+  MED_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {TWhenTrip} from './types';
 import {CALENDAR_PER} from './data';
 import PickerItem from './PickerItem';
 import PeriodItem from './PeriodItem';
-import {HEIGHT, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 
 const now = new Date();
@@ -222,7 +228,9 @@ const WhenTrip = ({
 
   return (
     <>
-      <Text style={[styles.boldWhere, styles.padLeft24]}>
+      <Text
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
+        style={[styles.boldWhere, styles.padLeft24]}>
         When's your trip?
       </Text>
       <View style={styles.pickerContainer}>
@@ -245,7 +253,10 @@ const WhenTrip = ({
       </View>
       <View style={[styles.row, styles.justifyBtn, styles.daysContainer]}>
         {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item, key) => (
-          <Text key={`day-${key}`} style={styles.monthDay}>
+          <Text
+            key={`day-${key}`}
+            style={styles.monthDay}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
             {item}
           </Text>
         ))}
@@ -273,6 +284,7 @@ const WhenTrip = ({
         horizontal
         data={CALENDAR_PER}
         ref={calendarPerRef}
+        contentContainerStyle={{alignItems: 'center'}}
         renderItem={renderPeriodItem}
         showsHorizontalScrollIndicator={false}
       />
@@ -286,12 +298,16 @@ const WhenTrip = ({
           styles.height74,
         ]}>
         <Pressable onPress={onPressSkipOrReset} style={styles.skipResetBtn}>
-          <Text style={[styles.font16, styles.fontW500, styles.underline]}>
+          <Text
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+            style={[styles.font16, styles.fontW500, styles.underline]}>
             {atLeastOneDaySelected ? 'Reset' : 'Skip'}
           </Text>
         </Pressable>
         <Pressable style={styles.nextBtn} onPress={onPressNext}>
-          <Text style={[styles.font16, styles.fontW500, styles.white]}>
+          <Text
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+            style={[styles.font16, styles.fontW500, styles.white]}>
             Next
           </Text>
         </Pressable>

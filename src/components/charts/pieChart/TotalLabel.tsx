@@ -8,9 +8,9 @@ import {TTotalLabel} from './types';
 import {StyleSheet} from 'react-native';
 
 import {height} from './data';
-import {isIOS} from '@utils/device';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
+import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const TotalLabel = ({animatedText, progress}: TTotalLabel) => {
   const formattedText = useDerivedValue(
@@ -22,7 +22,13 @@ const TotalLabel = ({animatedText, progress}: TTotalLabel) => {
     transform: [{translateX: interpolate(progress.value, [0, 1], [8, 0])}],
   }));
 
-  return <ReText text={formattedText} style={[styles.retext, animatedStyle]} />;
+  return (
+    <ReText
+      text={formattedText}
+      maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
+      style={[styles.retext, animatedStyle]}
+    />
+  );
 };
 export default TotalLabel;
 

@@ -9,6 +9,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {TLegend} from './types';
 import {data, total, width} from './data';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Legend = ({progress, selectedValue}: TLegend) => {
   return (
@@ -47,7 +48,9 @@ const Legend = ({progress, selectedValue}: TLegend) => {
             <View
               style={[styles.legendBullet, {backgroundColor: item.color}]}
             />
-            <Text style={styles.legendLabel}>{`${item.label} (${
+            <Text
+              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+              style={styles.legendLabel}>{`${item.label} (${
               (item.value / total) * 100
             }%)`}</Text>
           </Animated.View>

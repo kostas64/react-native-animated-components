@@ -19,13 +19,13 @@ import Animated, {
 import React, {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {isIOS} from '../utils/device';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 import {data} from '@components/verticalScrollBar/data';
 import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/verticalScrollBar/ListItem';
 import {TListItem} from '@components/verticalScrollBar/types';
+import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '../utils/device';
 import {preprocessNames} from '@components/verticalScrollBar/utils';
 import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
 import getAnimatedStyles from '@components/verticalScrollBar/animatedStyles';
@@ -219,7 +219,11 @@ const VerticalScrollBarScreen = () => {
           contentContainerStyle={styles.padding}
           style={[styles.bg, {marginTop, marginBottom}]}
           ListHeaderComponent={() => (
-            <Text style={styles.header}>Contacts</Text>
+            <Text
+              style={styles.header}
+              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+              Contacts
+            </Text>
           )}
           showsVerticalScrollIndicator={false}
         />
@@ -237,6 +241,7 @@ const VerticalScrollBarScreen = () => {
           <ReText
             text={formattedText}
             pointerEvents="none"
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
             style={styles.indicatorLabel}
           />
         </Animated.View>

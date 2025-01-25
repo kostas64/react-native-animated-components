@@ -1,5 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 
+import {
+  SM_FONT_UPSCALE_FACTOR,
+  MAX_FONT_UPSCALE_FACTOR,
+  MED_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {SPACING} from './constants';
 import {ICarouselDataType} from './types';
 import {typography} from '@utils/typography';
@@ -10,10 +15,22 @@ const Content = (item: ICarouselDataType) => {
       <Text style={styles.itemTitle} numberOfLines={1} adjustsFontSizeToFit>
         {item.title}
       </Text>
-      <Text style={styles.subtitle}>{item.subtitle}</Text>
+      <Text
+        style={styles.subtitle}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        {item.subtitle}
+      </Text>
       <View style={styles.priceContainer}>
-        <Text style={styles.price}>{item.price}</Text>
-        <Text style={styles.currency}>USD</Text>
+        <Text
+          style={styles.price}
+          maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+          {item.price}
+        </Text>
+        <Text
+          style={styles.currency}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          USD
+        </Text>
       </View>
     </>
   );

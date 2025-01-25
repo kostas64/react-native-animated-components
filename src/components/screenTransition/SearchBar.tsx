@@ -4,12 +4,17 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {SearchBarProps} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const SearchBar = ({containerStyle}: SearchBarProps) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <Feather name={'search'} size={20} style={styles.search} />
-      <Text style={styles.label}>Search</Text>
+      <Text
+        style={styles.label}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        Search
+      </Text>
     </View>
   );
 };

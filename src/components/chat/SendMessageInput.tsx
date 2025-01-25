@@ -2,9 +2,9 @@ import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Image, Pressable, StyleSheet, TextInput} from 'react-native';
 
-import {isIOS, WIDTH} from '@utils/device';
 import {TSearchMessageInput} from './types';
 import {typography} from '@utils/typography';
+import {isIOS, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const SendMessageInput = React.memo(
   ({input, setInput, inputRef, onPressSend}: TSearchMessageInput) => {
@@ -24,6 +24,7 @@ const SendMessageInput = React.memo(
           placeholder="Message"
           placeholderTextColor={'#bbbbbb'}
           style={styles.input}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
         />
         <Pressable
           style={styles.sendContainer}

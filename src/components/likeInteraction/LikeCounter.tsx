@@ -12,6 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {TLikeCounter} from './types';
 import {typography} from '@utils/typography';
+import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const AnimIcon = Animated.createAnimatedComponent(AntDesign);
 
@@ -40,7 +41,11 @@ const LikeCounter = ({counter, liked, onPress}: TLikeCounter) => {
   return (
     <View onTouchStart={onPress} style={styles.counterContainer}>
       <AnimIcon name="heart" size={20} color={'#a1a1a1'} style={style} />
-      <Text style={styles.counter}>{counter}</Text>
+      <Text
+        style={styles.counter}
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+        {counter}
+      </Text>
     </View>
   );
 };

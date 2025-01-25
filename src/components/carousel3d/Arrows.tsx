@@ -6,6 +6,7 @@ import {DATA} from './data';
 import {ArrowProps} from './types';
 import {typography} from '@utils/typography';
 import {IMAGE_WIDTH, SPACING} from './constants';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Arrows = ({
   index,
@@ -22,7 +23,11 @@ const Arrows = ({
         onPress={onPressLeft}>
         <View style={styles.arrowContainer}>
           <AntDesign name="swapleft" size={42} color="black" />
-          <Text style={styles.arrowText}>PREV</Text>
+          <Text
+            style={styles.arrowText}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            PREV
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -30,7 +35,11 @@ const Arrows = ({
         style={{opacity: index === DATA.length - 1 ? 0.25 : 1}}
         onPress={onPressRight}>
         <View style={styles.arrowContainer}>
-          <Text style={styles.arrowText}>NEXT</Text>
+          <Text
+            style={styles.arrowText}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            NEXT
+          </Text>
           <AntDesign name="swapright" size={42} color="black" />
         </View>
       </TouchableOpacity>

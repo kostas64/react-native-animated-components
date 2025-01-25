@@ -10,7 +10,6 @@ import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {HEIGHT, WIDTH} from '@utils/device';
 import {SHORT_MONTHS} from '@assets/months';
 import {typography} from '@utils/typography';
 import Footer from '@components/airbnb/Footer';
@@ -21,6 +20,7 @@ import InitialBox from '@components/airbnb/InitialBox';
 import InitialView from '@components/airbnb/InitialView';
 import StatusBarManager from '@components/StatusBarManager';
 import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
+import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import {_MS_PER_DAY, CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
 
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
@@ -336,8 +336,16 @@ const Airbnb = () => {
                   styles.alignCenter,
                   styles.whenAnyWeek,
                 ]}>
-                <Text style={[styles.fontW500, styles.color100]}>When</Text>
-                <Text style={[styles.fontW500, styles.value]}>{anyWeek}</Text>
+                <Text
+                  style={[styles.fontW500, styles.color100]}
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                  When
+                </Text>
+                <Text
+                  style={[styles.fontW500, styles.value]}
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                  {anyWeek}
+                </Text>
               </AnimPressable>
               <Animated.View
                 style={[
@@ -385,8 +393,14 @@ const Airbnb = () => {
                   styles.whenAnyWeek,
                   opacityOpenWhoRevStyle,
                 ]}>
-                <Text style={[styles.fontW500, styles.color100]}>Who</Text>
-                <Text style={[styles.fontW500, styles.value]}>
+                <Text
+                  style={[styles.fontW500, styles.color100]}
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                  Who
+                </Text>
+                <Text
+                  style={[styles.fontW500, styles.value]}
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
                   {guestsToShow ? guestsToShow : 'Add guests'}
                 </Text>
               </AnimPressable>

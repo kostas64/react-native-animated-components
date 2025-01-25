@@ -4,6 +4,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import {TSearchItem} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const SearchItem = ({place, date, guests}: TSearchItem) => (
   <TouchableOpacity
@@ -14,12 +15,29 @@ const SearchItem = ({place, date, guests}: TSearchItem) => (
     </View>
     <View>
       <View style={styles.row}>
-        <Text style={styles.font17}>{place}</Text>
-        <Text style={styles.font17}> • Stays</Text>
+        <Text
+          style={styles.font17}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {place}
+        </Text>
+        <Text
+          style={styles.font17}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {' '}
+          • Stays
+        </Text>
       </View>
       <View style={[styles.row, styles.marTop4]}>
-        <Text style={styles.subtitle}>{date}</Text>
-        <Text style={styles.subtitle}>{` • ${guests} guests`}</Text>
+        <Text
+          style={styles.subtitle}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {date}
+        </Text>
+        <Text
+          style={styles.subtitle}
+          maxFontSizeMultiplier={
+            MAX_FONT_UPSCALE_FACTOR
+          }>{` • ${guests} guests`}</Text>
       </View>
     </View>
   </TouchableOpacity>

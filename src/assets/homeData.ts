@@ -256,6 +256,11 @@ export const DATA: TDATA = [
         backgroundColor: '#9500ff',
         screen: 'AddButtonMove',
       },
+      {
+        label: 'Floating Button',
+        backgroundColor: '#ff0059',
+        screen: 'Floating',
+      },
     ],
   },
   {
@@ -278,24 +283,20 @@ export const DATA: TDATA = [
         backgroundColor: '#2962ff',
         screen: 'Togglers',
       },
-      {
-        label: 'Floating Button',
-        backgroundColor: '#9500ff',
-        screen: 'Floating',
-      },
+
       {
         label: 'Value Pickers',
-        backgroundColor: '#ff0059',
+        backgroundColor: '#9500ff',
         screen: 'ValuePickers',
       },
       {
         label: 'Vertical Scroll Bar',
-        backgroundColor: '#ff8c00',
+        backgroundColor: '#ff0059',
         screen: 'VerticalScrollBar',
       },
       {
         label: 'Gesture Counter',
-        backgroundColor: '#fdc921',
+        backgroundColor: '#ff8c00',
         screen: 'GestureCounter',
       },
       // {

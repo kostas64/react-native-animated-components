@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
-import {isIOS} from '@utils/device';
 import {TMonthListItem} from './types';
 import {typography} from '@utils/typography';
+import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const MonthListItem = ({
   item,
@@ -33,7 +33,9 @@ const MonthListItem = ({
     <Animated.View
       style={animStyle}
       onTouchStart={() => !!scrollToMonth && scrollToMonth(item)}>
-      <Text style={styles.label}>{item}</Text>
+      <Text style={styles.label} maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+        {item}
+      </Text>
     </Animated.View>
   );
 };

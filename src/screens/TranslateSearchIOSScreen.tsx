@@ -9,7 +9,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 
-import {isIOS, WIDTH} from '@utils/device';
+import {
+  isIOS,
+  WIDTH,
+  MAX_FONT_UPSCALE_FACTOR,
+  MED_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import StatusBarManager from '@components/StatusBarManager';
 
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
@@ -85,6 +90,7 @@ const TranslateSearchIOSScreen = () => {
               returnKeyType="done"
               placeholderTextColor={'#a69995'}
               style={styles.input}
+              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
             />
           </AnimPressable>
         </Animated.View>
@@ -92,7 +98,11 @@ const TranslateSearchIOSScreen = () => {
           onPress={onPress}
           hitSlop={styles.hitSlop}
           style={[cancelContainerStyle, {position: 'absolute'}]}>
-          <Text style={{fontSize: 16}}>Cancel</Text>
+          <Text
+            style={{fontSize: 16}}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            Cancel
+          </Text>
         </AnimPressable>
       </View>
     </>

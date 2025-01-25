@@ -19,6 +19,7 @@ import {HomeBodyProps} from './types';
 import {THomeNavigationProps} from 'src/App';
 import {typography} from '@utils/typography';
 import HomeButton from '@components/HomeButton';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const HomeBody = ({
   scrollRef,
@@ -116,7 +117,11 @@ const HomeBody = ({
             <View style={styles.sectionContainer}>
               {/*@ts-ignore*/}
               <IconComp {...props} />
-              <Text style={styles.listLabel}>{mainItem.iconText}</Text>
+              <Text
+                style={styles.listLabel}
+                maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                {mainItem.iconText}
+              </Text>
             </View>
             <View style={styles.separator} />
             {mainItem?.items?.map((item, index) => {

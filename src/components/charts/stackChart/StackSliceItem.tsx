@@ -5,6 +5,7 @@ import {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import StackSlice from './StackSlice';
 import {TStackSliceItem} from './types';
 import {typography} from '@utils/typography';
+import {XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {barHeight, chartWidth, colors, maxQuarter} from './constants';
 
 const StackSliceItem = ({
@@ -21,7 +22,9 @@ const StackSliceItem = ({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.quarterLabel}>{`Q${index + 1}`}</Text>
+      <Text
+        style={styles.quarterLabel}
+        maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>{`Q${index + 1}`}</Text>
       <StackSlice
         index={1}
         item={item}

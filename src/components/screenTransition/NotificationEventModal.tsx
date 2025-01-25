@@ -5,6 +5,7 @@ import Button from './Button';
 import {typography} from '@utils/typography';
 import {NotificationEventProps} from './types';
 import FadeInTransition from './FadeInTransition';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {useModalContext} from '@providers/ModalProvider';
 
 const NotificationEventModal = ({event}: {event: NotificationEventProps}) => {
@@ -17,8 +18,16 @@ const NotificationEventModal = ({event}: {event: NotificationEventProps}) => {
       </View>
       <FadeInTransition direction="top" index={0} animate>
         <View style={{gap: 4}}>
-          <Text style={styles.eventTitle}>{event.eventTitle}</Text>
-          <Text style={styles.description}>{event.description}</Text>
+          <Text
+            style={styles.eventTitle}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            {event.eventTitle}
+          </Text>
+          <Text
+            style={styles.description}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            {event.description}
+          </Text>
         </View>
       </FadeInTransition>
       <FadeInTransition direction="top" index={1} animate>

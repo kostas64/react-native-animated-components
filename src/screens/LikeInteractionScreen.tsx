@@ -1,10 +1,10 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
-import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/likeInteraction/ListItem';
+import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import LikeCounter from '@components/likeInteraction/LikeCounter';
 import {DATA, DATA_TO_ADD, FACE} from '@components/likeInteraction/data';
 
@@ -24,15 +24,21 @@ const LikeInteractionScreen = () => {
       <View style={styles.container}>
         <Image source={{uri: FACE}} style={styles.postImg} />
         <View style={styles.textContainer}>
-          <Text style={styles.caption}>Hello community 👋</Text>
-          <Text style={styles.subtitle}>
+          <Text
+            style={styles.caption}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            Hello community 👋
+          </Text>
+          <Text
+            style={styles.subtitle}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
             Do you like these micro interactions?
           </Text>
         </View>
 
         <View style={styles.line} />
 
-        <View style={{marginHorizontal: 16, flexDirection: 'row'}}>
+        <View style={styles.counterContainer}>
           <LikeCounter counter={counter} liked={liked} onPress={onPress} />
 
           <View style={{position: 'absolute', transform: [{translateX: 172}]}}>
@@ -75,5 +81,9 @@ const styles = StyleSheet.create({
     width: WIDTH - 36,
     alignSelf: 'center',
     marginVertical: 16,
+  },
+  counterContainer: {
+    marginHorizontal: 16,
+    flexDirection: 'row',
   },
 });

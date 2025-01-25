@@ -9,10 +9,10 @@ import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Animated, FlatList, StyleSheet, Text, View} from 'react-native';
 
-import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import {items} from '@components/productList/data';
 import {ProductItem} from '@components/productList/types';
+import {WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import AddToBagButton from '@components/productList/AddToBagButton';
 import ItemDescription from '@components/productList/ItemDescription';
 import ProductListItem from '@components/productList/ProductListItem';
@@ -97,6 +97,7 @@ const ProductListScreen = () => {
             />
             <ItemDescription index={index} />
             <Text
+              maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
               style={[
                 styles.implementedWith,
                 {bottom: insets.bottom + 92, color: items[index].halfFontColor},

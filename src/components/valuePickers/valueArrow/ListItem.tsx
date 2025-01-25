@@ -3,6 +3,7 @@ import {StyleSheet, Text} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import {TListItem} from './types';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ListItem = React.memo(({item, index, unit, scrollOffset}: TListItem) => {
   const animStyle = useAnimatedStyle(() => ({
@@ -21,7 +22,9 @@ const ListItem = React.memo(({item, index, unit, scrollOffset}: TListItem) => {
 
   return (
     <Animated.View style={[animStyle, styles.itemContainer]}>
-      <Text style={styles.item}>{`${item}${unit}`}</Text>
+      <Text
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+        style={styles.item}>{`${item}${unit}`}</Text>
     </Animated.View>
   );
 });

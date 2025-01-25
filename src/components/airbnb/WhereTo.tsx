@@ -5,11 +5,18 @@ import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Keyboard, Pressable, StyleSheet, Text, TextInput} from 'react-native';
 
+import {
+  isIOS,
+  WIDTH,
+  HEIGHT,
+  SM_FONT_UPSCALE_FACTOR,
+  MAX_FONT_UPSCALE_FACTOR,
+  XSM_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import SearchItem from './SearchItem';
 import CountryItem from './CountryItem';
 import {typography} from '@utils/typography';
 import {COUNTRIES, SEARCH_COUNTRIES} from './data';
-import {HEIGHT, isIOS, WIDTH} from '@utils/device';
 import {TRenderCountryItem, TRenderSearchItem, TWhereTo} from './types';
 
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
@@ -66,6 +73,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
     return (
       <>
         <Animated.Text
+          maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
           style={[styles.boldWhere, styles.padLeft24, opacityWhereToBold]}>
           Where to?
         </Animated.Text>
@@ -77,10 +85,16 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             styles.widthPadTop12,
             opacityOpenWhoStyle,
           ]}>
-          <Text style={[styles.fontW500, styles.color100, styles.padLeft24]}>
+          <Text
+            style={[styles.fontW500, styles.color100, styles.padLeft24]}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
             Where
           </Text>
-          <Text style={[styles.fontW500, styles.country]}>{country}</Text>
+          <Text
+            style={[styles.fontW500, styles.country]}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            {country}
+          </Text>
         </Animated.View>
         <AnimPressable
           onPress={animateWhereToInput}
@@ -97,6 +111,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             onFocus={animateWhereToInput}
             placeholder="Search destinations"
             placeholderTextColor={'rgb(100,100,100)'}
+            maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           />
         </AnimPressable>
         <Animated.FlatList
@@ -113,7 +128,9 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             listSearchStyle,
             {height: HEIGHT - top - bottom - 156},
           ]}>
-          <Text style={[styles.marBot24, styles.fontW500, styles.font16]}>
+          <Text
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+            style={[styles.marBot24, styles.fontW500, styles.font16]}>
             Recent searches
           </Text>
           <FlatList

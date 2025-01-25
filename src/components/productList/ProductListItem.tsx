@@ -2,9 +2,14 @@ import React from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {ProductListItemProps} from './types';
+import {
+  WIDTH,
+  HEIGHT_SCR,
+  MED_FONT_UPSCALE_FACTOR,
+  XSM_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {typography} from '@utils/typography';
-import {HEIGHT_SCR, WIDTH} from '@utils/device';
+import {ProductListItemProps} from './types';
 
 const ProductListItem = ({
   item,
@@ -21,7 +26,11 @@ const ProductListItem = ({
   return (
     <>
       <View style={[styles.nameImgContainer, {paddingTop: insets.top + 48}]}>
-        <Text style={[styles.name, {color: item.fontColor}]}>{item.name}</Text>
+        <Text
+          style={[styles.name, {color: item.fontColor}]}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          {item.name}
+        </Text>
         <Animated.Image
           resizeMode={'contain'}
           source={item.image}
@@ -29,7 +38,11 @@ const ProductListItem = ({
         />
       </View>
       <View style={[styles.labelContainer, {top: insets.top + 76}]}>
-        <Text style={[styles.label, {color: item.fontColor}]}>BEATS</Text>
+        <Text
+          style={[styles.label, {color: item.fontColor}]}
+          maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
+          BEATS
+        </Text>
       </View>
     </>
   );
