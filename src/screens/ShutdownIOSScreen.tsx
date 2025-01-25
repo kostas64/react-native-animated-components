@@ -12,9 +12,9 @@ import {View, StyleSheet, ImageBackground} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Svg, {Defs, LinearGradient, Stop, Rect} from 'react-native-svg';
 
-import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import StatusBarManager from '@components/StatusBarManager';
 import AnimatedText from '@components/shutdownIOS/AnimatedText';
+import {HEIGHT_SCR, WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {SLIDER_FINAL_W, SLIDER_H, SLIDER_W} from '@components/shutdownIOS/data';
 
 const AnimSvg = Animated.createAnimatedComponent(Svg);
@@ -128,6 +128,7 @@ const ShutdownIOS = () => {
                       index={index}
                       coloring={coloring}
                       sliderWidth={sliderWidth}
+                      maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
                       totalCharsLength={totalCharsLength}
                     />
                   ))}

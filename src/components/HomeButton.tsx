@@ -1,6 +1,8 @@
-import {typography} from '@utils/typography';
 import React from 'react';
 import {Text, Pressable, StyleSheet} from 'react-native';
+
+import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 type THomeButtonProps = {
   label: string;
@@ -15,7 +17,11 @@ const HomeButton = ({
 }: THomeButtonProps) => {
   return (
     <Pressable style={[styles.container, {backgroundColor}]} onPress={onPress}>
-      <Text style={styles.buttonLabel}>{label}</Text>
+      <Text
+        style={styles.buttonLabel}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        {label}
+      </Text>
     </Pressable>
   );
 };

@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ChartHeader = ({iconName, label}: {iconName: string; label: string}) => (
   <View style={styles.chartHeaderContainer}>
@@ -10,7 +11,11 @@ const ChartHeader = ({iconName, label}: {iconName: string; label: string}) => (
       <View style={styles.chartHeaderIconContainer}>
         <AntDesign name={iconName} size={20} color={'#556d36'} />
       </View>
-      <Text style={styles.chartHeaderLabel}>{label}</Text>
+      <Text
+        style={styles.chartHeaderLabel}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        {label}
+      </Text>
     </View>
   </View>
 );

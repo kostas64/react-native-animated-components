@@ -3,12 +3,17 @@ import {StyleSheet, Text, View} from 'react-native';
 
 import {TLegendItem} from './types';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const LegendItem = ({label, color}: TLegendItem) => {
   return (
     <View style={styles.itemContainer}>
       <View style={[styles.itemDot, {backgroundColor: color}]} />
-      <Text style={styles.itemLabel}>{label}</Text>
+      <Text
+        style={styles.itemLabel}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        {label}
+      </Text>
     </View>
   );
 };

@@ -6,6 +6,7 @@ import {COLORS} from './data';
 import GroupBar from './GroupBar';
 import {TGroupBarContainer} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const GroupBarItem = ({
   animate,
@@ -49,6 +50,7 @@ const GroupBarItem = ({
       />
       <Text
         onLayout={onLayout}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
         style={[styles.quarter, {width: groupWidth}]}>{`Q${index + 1}`}</Text>
     </TouchableOpacity>
   );

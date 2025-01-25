@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import {TChartButton} from './types';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const MyButton = ({title, style, onPress}: TChartButton) => {
   return (
@@ -10,7 +11,11 @@ const MyButton = ({title, style, onPress}: TChartButton) => {
       onPress={onPress}
       activeOpacity={0.7}
       style={[styles.btnContainer, style]}>
-      <Text style={styles.btnLabel}>{title}</Text>
+      <Text
+        style={styles.btnLabel}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

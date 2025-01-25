@@ -22,6 +22,7 @@ const ReText = (props: Props & TextInputProps) => {
       pointerEvents={props.pointerEvents}
       underlineColorAndroid="transparent"
       editable={false}
+      maxFontSizeMultiplier={props.maxFontSizeMultiplier}
       style={[styles.baseStyle, style]}
       {...{animatedProps}}
     />

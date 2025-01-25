@@ -3,14 +3,23 @@ import {StyleSheet, Text, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const InitialBox = () => {
   return (
     <>
       <Entypo name="magnifying-glass" size={24} style={styles.lens} />
       <View>
-        <Text style={styles.whereTo}>Where to?</Text>
-        <Text style={styles.subtitle}>Anywhere • Any week • Add guests</Text>
+        <Text
+          style={styles.whereTo}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          Where to?
+        </Text>
+        <Text
+          style={styles.subtitle}
+          maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
+          Anywhere • Any week • Add guests
+        </Text>
       </View>
     </>
   );

@@ -12,6 +12,7 @@ import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {darkShadow} from './styles';
 import {TBubbleProps} from './types';
 import {typography} from '@utils/typography';
+import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Bubble = ({
   value = 0,
@@ -71,7 +72,11 @@ const Bubble = ({
   return (
     <GestureDetector gesture={pan}>
       <Animated.View style={[styles.container, animatedStyle, darkShadow]}>
-        <Text style={styles.label}>{value}</Text>
+        <Text
+          style={styles.label}
+          maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+          {value}
+        </Text>
       </Animated.View>
     </GestureDetector>
   );
@@ -91,7 +96,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: typography.semiBold,
   },
 });

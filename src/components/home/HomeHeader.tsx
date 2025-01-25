@@ -3,9 +3,9 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {TouchableOpacity, View, Text, Linking, StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
-import {WIDTH} from '@utils/device';
 import {HomeHeaderProps} from './types';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const URL = 'https://www.linkedin.com/in/konstantinos-efkarpidis/';
 
@@ -60,7 +60,9 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
       <View>
         <View style={styles.nameProfRow}>
           <Animated.View style={nameImg}>
-            <Text style={styles.name}>{`Konstantinos Efkarpidis`}</Text>
+            <Text
+              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+              style={styles.name}>{`Konstantinos Efkarpidis`}</Text>
           </Animated.View>
           <TouchableOpacity
             style={styles.linkedIn}
@@ -70,6 +72,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
           </TouchableOpacity>
         </View>
         <Animated.Text
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
           style={[
             styles.profession,
             nameImg,

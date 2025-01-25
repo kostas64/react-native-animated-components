@@ -16,6 +16,7 @@ const AnimatedText = ({
   coloring,
   sliderWidth,
   totalCharsLength,
+  maxFontSizeMultiplier,
 }: TAnimatedText) => {
   const textColor = useAnimatedStyle(() => {
     const interval = 1 / (totalCharsLength + 8);
@@ -47,7 +48,10 @@ const AnimatedText = ({
   });
 
   return (
-    <Animated.Text key={`index-${index}`} style={[textColor, styles.text]}>
+    <Animated.Text
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+      key={`index-${index}`}
+      style={[textColor, styles.text]}>
       {char}
     </Animated.Text>
   );

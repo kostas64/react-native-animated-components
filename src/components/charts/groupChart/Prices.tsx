@@ -10,6 +10,7 @@ import {StyleSheet} from 'react-native';
 import {COLORS} from './data';
 import {TPrices} from './types';
 import {typography} from '@utils/typography';
+import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {FADE_IN_DUR, FADE_OUT_DUR} from './constants';
 
 const Prices = ({income, expenses}: TPrices) => {
@@ -42,10 +43,12 @@ const Prices = ({income, expenses}: TPrices) => {
   return (
     <>
       <Animated.Text
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
         style={[styles.price, {color: COLORS.income}, textStyle]}>{`${
         !!localState.income ? '$' : ''
       }${localState.income ?? ''}`}</Animated.Text>
       <Animated.Text
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
         style={[styles.price, {color: COLORS.expenses}, textStyle]}>{`${
         !!localState.expenses ? '$' : ''
       }${localState.expenses ?? ''}`}</Animated.Text>

@@ -2,11 +2,16 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ScreenTransitionHomework = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{'You think im lazy?\n😔😔😔'}</Text>
+      <Text
+        style={styles.label}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        {'You think im lazy?\n😔😔😔'}
+      </Text>
     </View>
   );
 };

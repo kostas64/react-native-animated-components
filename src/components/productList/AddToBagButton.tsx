@@ -3,8 +3,8 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {items} from './data';
-import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const AddToBagButton = ({index}: {index: number}) => {
   const insets = useSafeAreaInsets();
@@ -20,8 +20,16 @@ const AddToBagButton = ({index}: {index: number}) => {
       ]}>
       <View style={styles.innerContainer}>
         <Image source={require('@assets/img/apple.png')} style={styles.icon} />
-        <Text style={styles.label}>Add to bag</Text>
-        <Text style={styles.label}>$299.99</Text>
+        <Text
+          style={styles.label}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          Add to bag
+        </Text>
+        <Text
+          style={styles.label}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          $299.99
+        </Text>
       </View>
     </View>
   );

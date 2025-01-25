@@ -4,6 +4,7 @@ import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import {typography} from '@utils/typography';
 import {TChooseOption, TListItem} from './types';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const AnimPressable = Animated.createAnimatedComponent(TouchableOpacity);
 
@@ -27,7 +28,11 @@ const ChooseOptionListItem = ({
         selectedO === index ? styles.selectedBorder : styles.unselectedBorder,
         animStyle,
       ]}>
-      <Text style={styles.label}>{item}</Text>
+      <Text
+        style={styles.label}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        {item}
+      </Text>
     </AnimPressable>
   );
 };
@@ -36,7 +41,7 @@ export default ChooseOptionListItem;
 
 const styles = StyleSheet.create({
   optionContainer: {
-    width: 86,
+    minWidth: 92,
     alignItems: 'center',
     backgroundColor: '#7a54cd',
     paddingVertical: 12,

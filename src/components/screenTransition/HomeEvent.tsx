@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import {HomeEventProps} from './types';
 import {typography} from '@utils/typography';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const HomeEvent = ({
   source,
@@ -16,8 +17,16 @@ const HomeEvent = ({
       <View style={[styles.rowCenter, {gap: 16}]}>
         <Image source={source} style={styles.eventImg} />
         <View style={{gap: 8}}>
-          <Text style={styles.eventTitle}>{eventTitle}</Text>
-          <Text style={styles.eventDate}>{eventDate}</Text>
+          <Text
+            style={styles.eventTitle}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            {eventTitle}
+          </Text>
+          <Text
+            style={styles.eventDate}
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            {eventDate}
+          </Text>
         </View>
       </View>
       <View style={styles.iconContainer}>

@@ -3,8 +3,8 @@ import {StyleSheet, Text, View} from 'react-native';
 
 import {TWhoComing} from './types';
 import ItemCounter from './ItemCounter';
-import {HEIGHT, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
+import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const WhoComing = ({
   pets,
@@ -27,7 +27,8 @@ const WhoComing = ({
             ? styles.marBot36
             : styles.marBot16,
           styles.padLeft24,
-        ]}>
+        ]}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
         Who's coming?
       </Text>
       <ItemCounter

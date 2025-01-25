@@ -20,11 +20,16 @@ import React, {useImperativeHandle} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
+import {
+  isIOS,
+  isAndroid,
+  SM_FONT_UPSCALE_FACTOR,
+  XSM_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {days} from './data';
 import ReText from '@components/ReText';
 import {ChartRef, TProps} from './types';
 import {typography} from '@utils/typography';
-import {isAndroid, isIOS} from '@utils/device';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
@@ -215,7 +220,10 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
         {/* Y Axis Values */}
         <View style={[styles.stepValueContainer, {height}]}>
           {stepValues.map((value, index) => (
-            <Text key={index} style={styles.stepValueLabel}>
+            <Text
+              key={index}
+              style={styles.stepValueLabel}
+              maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
               {value}
             </Text>
           ))}
@@ -274,8 +282,14 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
       <View style={styles.yAxisContainer}>
         {days.map((day, index) => (
           <View key={`x-axis-${index}`}>
-            <Text style={[styles.day, {width: width / 8}]}>{day}</Text>
-            <Text style={[styles.dayNumber, {width: width / 8}]}>
+            <Text
+              style={[styles.day, {width: width / 8}]}
+              maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+              {day}
+            </Text>
+            <Text
+              style={[styles.dayNumber, {width: width / 8}]}
+              maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
               {index + 5}
             </Text>
           </View>

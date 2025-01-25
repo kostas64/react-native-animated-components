@@ -3,10 +3,10 @@ import {useNavigation} from '@react-navigation/native';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import Button from '@components/screenTransition/Button';
 import StatusBarManager from '@components/StatusBarManager';
+import {WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {TWelcomeNavigationProps} from './ScreenTransitionStack';
 
 const title = "The only study app you'll ever need";
@@ -33,8 +33,16 @@ const ScreenTransitionWelcome = () => {
             style={[styles.img, {marginTop}]}
             source={require('@assets/img/screenTransition/welcome.png')}
           />
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text
+            style={styles.title}
+            maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
+            {title}
+          </Text>
+          <Text
+            style={styles.description}
+            maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
+            {description}
+          </Text>
         </View>
         <Button label="Let's start" style={{marginBottom}} onPress={onPress} />
       </View>

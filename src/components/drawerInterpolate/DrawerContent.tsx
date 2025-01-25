@@ -12,6 +12,7 @@ import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/s
 
 import {typography} from '@utils/typography';
 import DrawerContentItem from './DrawerContentItem';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const DrawerContent = ({navigation}: {navigation: DrawerNavigationHelpers}) => {
   return (
@@ -31,7 +32,9 @@ const DrawerContent = ({navigation}: {navigation: DrawerNavigationHelpers}) => {
         <DrawerContentItem label="Notifications" icon="bells" />
         <DrawerContentItem label="Favourite" icon="hearto" />
         <View style={styles.hr} />
-        <Text style={styles.implementedWith}>
+        <Text
+          style={styles.implementedWith}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
           {'Implemented with:\nReanimated'}
         </Text>
       </View>

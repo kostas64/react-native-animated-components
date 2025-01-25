@@ -7,7 +7,11 @@ import Animated, {
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
-import {WIDTH} from '@utils/device';
+import {
+  WIDTH,
+  SM_FONT_UPSCALE_FACTOR,
+  MED_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {FadeItemProps} from './types';
 import {typography} from '@utils/typography';
 import {AVATAR_SIZE, ITEM_SIZE, SPACING} from './constants';
@@ -51,9 +55,17 @@ const FadeListItem = ({
     <Animated.View style={[styles.parentViewItem, animatedStyle]}>
       <Image source={{uri: item.image}} style={styles.image} />
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.job}>{item.jobTitle}</Text>
-        <Text style={styles.email}>{item.email}</Text>
+        <Text
+          style={styles.name}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          {item.name}
+        </Text>
+        <Text style={styles.job} maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+          {item.jobTitle}
+        </Text>
+        <Text style={styles.email} allowFontScaling={false}>
+          {item.email}
+        </Text>
       </View>
     </Animated.View>
   );

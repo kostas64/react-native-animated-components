@@ -3,13 +3,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import {SharedValue} from 'react-native-reanimated';
 
 import {TTooltip} from './types';
-import {WIDTH} from '@utils/device';
 import StackLegend from './StackLegend';
 import {generateValueLabels} from './utils';
 import {typography} from '@utils/typography';
 import StackSliceItem from './StackSliceItem';
 import StackChartGrid from './StackChartGrid';
 import StackChartTooltip from './StackChartTooltip';
+import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import {DATA, chartHeight, tooltipInitState} from './constants';
 
 const StackChart = ({animate}: {animate: SharedValue<number>}) => {
@@ -33,7 +33,11 @@ const StackChart = ({animate}: {animate: SharedValue<number>}) => {
 
   return (
     <View style={styles.widthContainer}>
-      <Text style={{fontFamily: typography.semiBold}}>Quarterly Expenses</Text>
+      <Text
+        style={{fontFamily: typography.semiBold}}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        Quarterly Expenses
+      </Text>
 
       <View style={[styles.container, {height: chartHeight}]}>
         {DATA.map((item, index) => {

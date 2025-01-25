@@ -5,6 +5,7 @@ import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 import {TStackChartGrid} from './types';
 import {typography} from '@utils/typography';
 import {chartHeight, chartWidth} from './constants';
+import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const StackChartGrid = ({valueLabels, animate}: TStackChartGrid) => {
   return (
@@ -29,6 +30,7 @@ const StackChartGrid = ({valueLabels, animate}: TStackChartGrid) => {
               />
             )}
             <Animated.Text
+              maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
               style={[
                 index === 0 && styles.moveZero,
                 animatedText,

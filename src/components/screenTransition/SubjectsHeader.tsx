@@ -8,9 +8,9 @@ import {
   TInnerStackList,
   TScheduleNavigationProps,
 } from '@screens/ScreenTransition/ScreenTransitionScheduleStack';
-import {isIOS} from '@utils/device';
 import {typography} from '@utils/typography';
 import FadeInTransition from './FadeInTransition';
+import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const TABS = [
   {
@@ -49,6 +49,7 @@ const SubjectsHeader = () => {
                 navigation.navigate(tab.screen as keyof TInnerStackList)
               }>
               <Text
+                maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
                 style={[styles.tab, stackIndex === index && {color: 'black'}]}>
                 {tab.label}
               </Text>

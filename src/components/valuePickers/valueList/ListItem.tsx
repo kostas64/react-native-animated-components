@@ -3,6 +3,7 @@ import {StyleSheet, Text} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import {TListItem, TScrollOffset} from './types';
+import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ListItem = ({
   item,
@@ -32,7 +33,7 @@ const ListItem = ({
 
   return (
     <Animated.View style={animStyle}>
-      <Text style={styles.item}>
+      <Text maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR} style={styles.item}>
         {typeof item === 'number' ? `${item}${unit}` : ''}
       </Text>
     </Animated.View>

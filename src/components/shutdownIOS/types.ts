@@ -6,4 +6,5 @@ export type TAnimatedText = {
   totalCharsLength: number;
   coloring: SharedValue<number>;
   sliderWidth: SharedValue<number>;
+  maxFontSizeMultiplier?: number;
 };

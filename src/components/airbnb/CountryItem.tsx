@@ -4,6 +4,7 @@ import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {COUNTRIES} from './data';
 import {TCountryItem} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const CountryItem = ({
   item,
@@ -36,7 +37,9 @@ const CountryItem = ({
           isSelected ? styles.borderBlackW2 : styles.borderGreyW1,
         ]}
       />
-      <Text style={[styles.marTop8, isSelected && styles.bold]}>
+      <Text
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+        style={[styles.marTop8, isSelected && styles.bold]}>
         {item.label}
       </Text>
     </TouchableOpacity>

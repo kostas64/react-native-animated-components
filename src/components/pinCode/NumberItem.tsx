@@ -10,6 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {TNumberItem} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
 
@@ -76,7 +77,13 @@ const NumberItem = ({
 
   const getValue = () => {
     if (typeof value === 'number') {
-      return <Text style={styles.number}>{value}</Text>;
+      return (
+        <Text
+          style={styles.number}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {value}
+        </Text>
+      );
     } else {
       return <Ionicons name="backspace-outline" size={36} color={'white'} />;
     }

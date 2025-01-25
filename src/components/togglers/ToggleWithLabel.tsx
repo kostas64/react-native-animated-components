@@ -10,6 +10,7 @@ import React from 'react';
 
 import {SIZE} from './constants';
 import {typography} from '@utils/typography';
+import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ToggleWithLabel = () => {
   const animRef = React.useRef(new Animated.Value(0)).current;
@@ -43,6 +44,7 @@ const ToggleWithLabel = () => {
           ]}
         />
         <Text
+          maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[
             styles.label,
             {

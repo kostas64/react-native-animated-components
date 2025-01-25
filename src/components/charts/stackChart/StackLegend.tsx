@@ -1,7 +1,6 @@
 import Animated, {
   withTiming,
   interpolate,
-  SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
@@ -10,6 +9,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {TStackLegend} from './types';
 import {typography} from '@utils/typography';
 import {colors, EXPENSES_TYPES} from './constants';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const StackLegend = ({animate, selectedIndex}: TStackLegend) => {
   return (
@@ -25,6 +25,7 @@ const StackLegend = ({animate, selectedIndex}: TStackLegend) => {
                 )
               : withTiming(selectedIndex === index ? 1 : 0.25),
           flexDirection: 'row',
+          alignItems: 'center',
         }));
 
         return (
@@ -36,7 +37,11 @@ const StackLegend = ({animate, selectedIndex}: TStackLegend) => {
                   colors?.[item?.toLowerCase() as keyof typeof colors],
               }}
             />
-            <Text style={styles.label}>{item}</Text>
+            <Text
+              style={styles.label}
+              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+              {item}
+            </Text>
           </Animated.View>
         );
       })}

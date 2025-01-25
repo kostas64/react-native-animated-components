@@ -12,6 +12,7 @@ import {typography} from '@utils/typography';
 import {TNotificationEventProps} from './types';
 import {useModalContext} from '@providers/ModalProvider';
 import NotificationEventModal from './NotificationEventModal';
+import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const AnimatedTouch = Animated.createAnimatedComponent(Pressable);
 
@@ -64,8 +65,16 @@ const NotificationEvent = ({
         <event.component name={event.iconName} size={20} />
       </View>
       <View style={{gap: 4}}>
-        <Text style={styles.eventTitle}>{event.eventTitle}</Text>
-        <Text style={styles.description}>{event.description}</Text>
+        <Text
+          style={styles.eventTitle}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {event.eventTitle}
+        </Text>
+        <Text
+          style={styles.description}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          {event.description}
+        </Text>
       </View>
     </AnimatedTouch>
   );

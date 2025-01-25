@@ -4,20 +4,33 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const HomeClass = () => {
   return (
     <View style={styles.container}>
       <View style={styles.homeworkContainer}>
-        <Text style={styles.homeworkLabel}>Homework</Text>
+        <Text
+          style={styles.homeworkLabel}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          Homework
+        </Text>
         <Ionicons name="checkmark-circle-sharp" size={24} />
       </View>
       <View style={styles.iconContainer}>
         <FontAwesome5 name="calculator" size={20} />
       </View>
       <View style={{gap: 6}}>
-        <Text style={styles.classTitle}>{'Basic mathemactics'}</Text>
-        <Text style={styles.classDate}>{'Today, 08:15 am'}</Text>
+        <Text
+          style={styles.classTitle}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {'Basic mathemactics'}
+        </Text>
+        <Text
+          style={styles.classDate}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {'Today, 08:15 am'}
+        </Text>
       </View>
 
       <View style={styles.professorContainer}>
@@ -25,7 +38,11 @@ const HomeClass = () => {
           style={styles.professorImg}
           source={{uri: 'https://randomuser.me/api/portraits/women/60.jpg'}}
         />
-        <Text style={styles.professorName}>Jane Cooper</Text>
+        <Text
+          style={styles.professorName}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          Jane Cooper
+        </Text>
       </View>
     </View>
   );

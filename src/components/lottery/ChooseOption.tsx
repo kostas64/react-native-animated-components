@@ -5,6 +5,7 @@ import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import {typography} from '@utils/typography';
 import {ListRefProps, TChooseOption} from './types';
 import {WHEEL_OPTIONS} from '@screens/LotteryScreen';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import ChooseOptionListItem from './ChooseOptionListItem';
 
 const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
@@ -46,7 +47,11 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
 
     return (
       <Animated.View style={[styles.container, disabledStyle, style]}>
-        <Text style={styles.title}>Do you feel lucky?</Text>
+        <Text
+          style={styles.title}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          Do you feel lucky?
+        </Text>
         <FlatList
           ref={listRef}
           horizontal
