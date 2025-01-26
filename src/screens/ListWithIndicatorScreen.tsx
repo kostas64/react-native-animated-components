@@ -6,7 +6,6 @@ import Tabs from '@components/listWithIndicator/Tabs';
 import {data} from '@components/listWithIndicator/data';
 import {ListItem} from '@components/listWithIndicator/types';
 import StatusBarManager from '../components/StatusBarManager';
-import ImplementedWith from '@components/listWithIndicator/ImplementedWith';
 import ListWithIndicatorItem from '@components/listWithIndicator/ListWithIndicatorItem';
 
 const ListWithIndiScreen = () => {
@@ -35,7 +34,6 @@ const ListWithIndiScreen = () => {
       <StatusBarManager barStyle="light" />
 
       <View style={styles.container}>
-        <ImplementedWith />
         <Animated.FlatList
           ref={flatRef}
           data={data}

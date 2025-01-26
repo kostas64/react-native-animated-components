@@ -21,7 +21,6 @@ import Background from '@components/carousel3d/Background';
 import Description from '@components/carousel3d/Description';
 import StatusBarManager from '../components/StatusBarManager';
 import {ICarouselDataType} from '@components/carousel3d/types';
-import ImplementedWith from '@components/carousel3d/ImplementedWith';
 import Carousel3dListItem from '../components/carousel3d/Carousel3dListItem';
 
 const Carousel3DScreen = () => {
@@ -70,7 +69,6 @@ const Carousel3DScreen = () => {
 
       <View style={styles.container}>
         <SafeAreaView style={styles.safeAreaContainer}>
-          <ImplementedWith />
           <View style={styles.listContainer}>
             <Animated.FlatList
               ref={listRef}

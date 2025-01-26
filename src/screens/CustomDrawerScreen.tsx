@@ -6,7 +6,6 @@ import Drawer from '@components/customDrawer/Drawer';
 import StatusBarManager from '@components/StatusBarManager';
 import AnimatedIcon from '@components/customDrawer/AnimatedIcon';
 import {fromCoords, toCoords} from '@components/customDrawer/data';
-import ImplementedWith from '@components/customDrawer/ImplementWith';
 
 const CustomDrawerScreen = () => {
   const animatedValue = React.useRef(new Animated.ValueXY(fromCoords)).current;
@@ -43,7 +42,6 @@ const CustomDrawerScreen = () => {
     <View style={styles.maskedContainer}>
       <StatusBarManager barStyle="dark" />
       <Drawer onPress={onCloseDrawer} animatedValue={animatedValue} />
-      <ImplementedWith opacity={opacity} />
       <AnimatedIcon
         opacity={opacity}
         translateX={translateX}

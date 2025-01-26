@@ -14,7 +14,6 @@ import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import Item from '@components/doubleList/ConnectListItem';
 import StatusBarManager from '@components/StatusBarManager';
 import ConnectButton from '@components/doubleList/ConnectButton';
-import ImplementedWith from '@components/doubleList/ImplementedWith';
 import ConnectWithText from '@components/doubleList/ConnectWithText';
 import {colors, ITEM_HEIGHT} from '@components/doubleList/constants';
 
@@ -51,7 +50,6 @@ const DoubleListScreen = () => {
       <StatusBarManager barStyle="light" />
 
       <View style={styles.container}>
-        <ImplementedWith />
         <ConnectWithText />
         <List
           color={colors.yellow}

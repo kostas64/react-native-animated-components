@@ -1,5 +1,4 @@
 import React from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, Animated, TextInput, ScrollView, StyleSheet} from 'react-native';
 
 import Text from './Text';
@@ -139,30 +138,12 @@ const DotLoader = () => {
     ).start();
   }, []);
 
-  const ImplementedWith = () => {
-    const insets = useSafeAreaInsets();
-
-    return (
-      <View
-        style={{
-          position: 'absolute',
-          top: insets.top + 16,
-          left: 20,
-          zIndex: 100,
-        }}>
-        <Text style={styles.implemented}>Implemented with:</Text>
-        <Text style={styles.implementedLabel}>Animated API</Text>
-      </View>
-    );
-  };
-
   return (
     <ScrollView
       bounces={false}
       contentContainerStyle={styles.container}
       keyboardShouldPersistTaps="handled">
-      <ImplementedWith />
-      <Text style={styles.label}>Set dot size - Min: 1</Text>
+      <Text style={styles.label}>Dot size - Min: 1</Text>
       <TextInput
         keyboardType="numeric"
         value={`${!!size ? size : 1}`}
@@ -262,16 +243,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-  },
-  implemented: {
-    fontSize: 22,
-    fontWeight: '900',
-    color: 'black',
-  },
-  implementedLabel: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: 'black',
   },
   label: {
     fontSize: 18,
