@@ -17,7 +17,13 @@ const Event = ({time, title, description, duration}: TEvent) => {
       style={styles.container}>
       <View style={styles.users}>
         {DATA.reverse().map((item, index) => (
-          <ListItem key={index} item={item} index={index} liked={false} />
+          <ListItem
+            key={index}
+            item={item}
+            index={index}
+            liked={false}
+            imageStyle={styles.listItem}
+          />
         ))}
       </View>
       <View>
@@ -72,5 +78,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 52,
     top: 16,
+  },
+  listItem: {
+    position: 'absolute',
   },
 });

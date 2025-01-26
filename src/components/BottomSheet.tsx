@@ -25,6 +25,8 @@ export type BottomSheetProps = {
   lineStyle?: ViewStyle;
   lineStyleContainer?: ViewStyle;
   contentContainerStyle?: any;
+  scrollToPosition?: number;
+  backdropOpacity?: number;
 };
 
 export type BottomSheetRef = {
@@ -38,6 +40,8 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
       modalHeight,
       onBackPress,
       lineStyle,
+      backdropOpacity = null,
+      scrollToPosition = 0,
       lineStyleContainer,
       panEnabled = true,
       withoutLine = false,
@@ -99,13 +103,12 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
 
     const onBackdropPress = React.useCallback(() => {
       // Dismiss the BottomSheet
-      !!onBackPress && onBackPress();
-      scrollTo(0);
-    }, [scrollTo, onBackPress]);
+      scrollTo(scrollToPosition);
+    }, [scrollTo, scrollToPosition]);
 
     const onBackHandlerPress = React.useCallback(() => {
-      if (isActive) {
-        scrollTo(0);
+      if (isActive && !onBackPress) {
+        scrollTo(scrollToPosition);
         return true;
       }
     }, [isActive, scrollTo]);
@@ -130,11 +133,11 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
         translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
       })
       .onEnd(() => {
-        if (Math.abs(MAX_TRANSLATE_Y) - Math.abs(translateY.value) < 50) {
+        if (Math.abs(MAX_TRANSLATE_Y) - Math.abs(translateY.value) < 100) {
           scrollTo(MAX_TRANSLATE_Y);
         } else {
-          !!onBackPress && runOnJS(onBackPress)();
-          scrollTo(0);
+          // !!onBackPress && runOnJS(onBackPress)();
+          scrollTo(scrollToPosition);
         }
       });
 
@@ -150,7 +153,14 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
         <Animated.View
           onTouchStart={onBackdropPress}
           animatedProps={rBackdropProps}
-          style={[styles.backdrop, rBackdropStyle]}
+          style={[
+            styles.backdrop,
+            rBackdropStyle,
+            typeof backdropOpacity === 'number' && {
+              opacity: backdropOpacity,
+              backgroundColor: 'transparent',
+            },
+          ]}
         />
         <GestureDetector gesture={gesture}>
           <Animated.View style={bottomSheetStyles}>

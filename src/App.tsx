@@ -38,6 +38,7 @@ import VerticalScrollBarScreen from '@screens/VerticalScrollBarScreen';
 import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
 import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
+import UncommonBottomSheetScreen from '@screens/UncommonBottomSheetScreen';
 import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 import FloatingActionButtonScreen from '@screens/FloatingActionButtonScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
@@ -77,6 +78,7 @@ export type TStackList = {
   GestureCounter: undefined;
   FloatingActions: undefined;
   AddButtonMove: undefined;
+  UncommonBottomSheet: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -175,6 +177,10 @@ function App() {
               <Stack.Screen
                 name="AddButtonMove"
                 component={AddButtonMoveScreen}
+              />
+              <Stack.Screen
+                name="UncommonBottomSheet"
+                component={UncommonBottomSheetScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

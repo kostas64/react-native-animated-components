@@ -10,7 +10,7 @@ import {StyleSheet} from 'react-native';
 
 import {TListItem} from './types';
 
-const ListItem = ({item, index, liked}: TListItem) => {
+const ListItem = ({item, index, liked, imageStyle}: TListItem) => {
   const animate = useSharedValue(0);
   const first = useSharedValue(0);
 
@@ -85,7 +85,7 @@ const ListItem = ({item, index, liked}: TListItem) => {
     <Animated.Image
       borderRadius={18}
       source={{uri: item.image}}
-      style={[style, styles.img]}
+      style={[style, styles.img, imageStyle]}
     />
   );
 };
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
     width: 36,
     aspectRatio: 1 / 1,
     borderWidth: 2,
-    position: 'absolute',
     borderColor: 'white',
   },
 });

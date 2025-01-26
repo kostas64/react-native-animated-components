@@ -44,7 +44,8 @@ type TDATA = {
       | 'VerticalScrollBar'
       | 'GestureCounter'
       | 'FloatingActions'
-      | 'AddButtonMove';
+      | 'AddButtonMove'
+      | 'UncommonBottomSheet';
   }[];
 }[];
 
@@ -93,6 +94,11 @@ export const DATA: TDATA = [
         label: 'Screen Transitions',
         backgroundColor: '#95e214',
         screen: 'ScreenTransition',
+      },
+      {
+        label: 'Uncommon Bottom Sheet',
+        backgroundColor: '#11a26a',
+        screen: 'UncommonBottomSheet',
       },
     ],
   },

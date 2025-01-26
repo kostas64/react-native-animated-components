@@ -12,6 +12,8 @@ const initialState: TInitialState = {
   lineStyle: {},
   lineStyleContainer: {},
   contentContainerStyle: {},
+  scrollToPosition: 0,
+  backdropOpacity: undefined,
 };
 
 type TInitialState = {
@@ -23,6 +25,8 @@ type TInitialState = {
   lineStyle?: ViewStyle;
   lineStyleContainer?: ViewStyle;
   contentContainerStyle?: any;
+  scrollToPosition?: number;
+  backdropOpacity?: number;
 };
 
 interface ModalContextType {
@@ -66,9 +70,11 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
       {children}
       <BottomSheet
         ref={bottomSheetRef}
+        backdropOpacity={modalInfo.backdropOpacity}
         withoutLine={modalInfo.withoutLine}
         panEnabled={modalInfo.panEnabled}
         onBackPress={modalInfo.onBackPress}
+        scrollToPosition={modalInfo.scrollToPosition}
         modalHeight={modalInfo.modalHeight || 0}
         lineStyle={modalInfo.lineStyle}
         lineStyleContainer={modalInfo.lineStyleContainer}
