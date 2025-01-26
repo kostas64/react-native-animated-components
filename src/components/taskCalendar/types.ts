@@ -45,8 +45,8 @@ export type TEmptyDay = {
 
 export type TEvent = {
   time: string;
-  title: String;
-  description: String;
+  title: string;
+  description: string;
   duration: string;
 };
 

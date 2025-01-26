@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  Animated,
-  TextInput,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
 import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {View, Animated, TextInput, ScrollView, StyleSheet} from 'react-native';
 
+import Text from './Text';
 import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const DotLoader = () => {
@@ -156,16 +150,8 @@ const DotLoader = () => {
           left: 20,
           zIndex: 100,
         }}>
-        <Text
-          style={styles.implemented}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          Implemented with:
-        </Text>
-        <Text
-          style={styles.implementedLabel}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          Animated API
-        </Text>
+        <Text style={styles.implemented}>Implemented with:</Text>
+        <Text style={styles.implementedLabel}>Animated API</Text>
       </View>
     );
   };
@@ -176,11 +162,7 @@ const DotLoader = () => {
       contentContainerStyle={styles.container}
       keyboardShouldPersistTaps="handled">
       <ImplementedWith />
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Set dot size - Min: 1
-      </Text>
+      <Text style={styles.label}>Set dot size - Min: 1</Text>
       <TextInput
         keyboardType="numeric"
         value={`${!!size ? size : 1}`}

@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 
+import Text from '@components/Text';
+import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/likeInteraction/ListItem';
-import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import LikeCounter from '@components/likeInteraction/LikeCounter';
 import {DATA, DATA_TO_ADD, FACE} from '@components/likeInteraction/data';
 
@@ -24,14 +25,8 @@ const LikeInteractionScreen = () => {
       <View style={styles.container}>
         <Image source={{uri: FACE}} style={styles.postImg} />
         <View style={styles.textContainer}>
-          <Text
-            style={styles.caption}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-            Hello community 👋
-          </Text>
-          <Text
-            style={styles.subtitle}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          <Text style={styles.caption}>Hello community 👋</Text>
+          <Text style={styles.subtitle}>
             Do you like these micro interactions?
           </Text>
         </View>

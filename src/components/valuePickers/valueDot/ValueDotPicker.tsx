@@ -5,11 +5,11 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
+import Text from '@components/Text';
 import {TValueRangePicker} from './types';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
   const ctxY = useSharedValue(0);
@@ -74,9 +74,7 @@ const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
 
   return (
     <View style={styles.container}>
-      <Text
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-        style={styles.value}>{`${dotValue}${unit}`}</Text>
+      <Text style={styles.value}>{`${dotValue}${unit}`}</Text>
       <View>
         <View style={styles.line} />
         <Animated.View style={[dotPickerStyle, styles.dot]} />

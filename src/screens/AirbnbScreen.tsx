@@ -6,10 +6,11 @@ import Animated, {
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {View, TextInput, Pressable, StyleSheet} from 'react-native';
 import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
-import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import Text from '@components/Text';
 import {SHORT_MONTHS} from '@assets/months';
 import {typography} from '@utils/typography';
 import Footer from '@components/airbnb/Footer';

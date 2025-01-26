@@ -1,10 +1,11 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
 
 const HomeHeader = () => {
@@ -22,11 +23,7 @@ const HomeHeader = () => {
           style={styles.logo}
         />
         <View style={{gap: 2}}>
-          <Text
-            style={styles.name}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-            Erica Hawkins
-          </Text>
+          <Text style={styles.name}>Erica Hawkins</Text>
           <Text
             style={styles.grade}
             maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>

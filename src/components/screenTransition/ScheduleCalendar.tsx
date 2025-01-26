@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import {DAYS} from './data';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {ScheduleCalendarProps} from './types';
 import FadeInTransition from './FadeInTransition';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ScheduleCalendar = ({index}: ScheduleCalendarProps) => {
   const isFocused = useIsFocused();
@@ -14,33 +14,20 @@ const ScheduleCalendar = ({index}: ScheduleCalendarProps) => {
   return (
     <View style={styles.container}>
       <View style={[styles.rowCenter, styles.between]}>
-        <Text
-          style={styles.thisWeek}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          This week
-        </Text>
-        <Text
-          style={styles.seeAll}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          See all
-        </Text>
+        <Text style={styles.thisWeek}>This week</Text>
+        <Text style={styles.seeAll}>See all</Text>
       </View>
       <FadeInTransition animate={isFocused} index={index} direction="top-scale">
         <View style={[styles.rowCenter, styles.between]}>
           {DAYS.map((day, index) => (
             <View key={`calendar-day-${index}`} style={styles.daysContainer}>
-              <Text
-                style={styles.day}
-                maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-                {day}
-              </Text>
+              <Text style={styles.day}>{day}</Text>
               <View
                 style={[
                   styles.dayNumberContainer,
                   index === 5 && styles.selectedDayContainer,
                 ]}>
                 <Text
-                  maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
                   style={[
                     styles.dayNumber,
                     index === 5 && {color: 'white'},

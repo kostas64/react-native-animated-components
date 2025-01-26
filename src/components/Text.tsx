@@ -6,23 +6,26 @@ import {
   Text as DefaultText,
 } from 'react-native';
 import React from 'react';
+import Animated, {AnimatedStyle} from 'react-native-reanimated';
 
 import {typography} from '@utils/typography';
 import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 interface DefaultTextProps extends TextProps {
-  textStyle?: StyleProp<TextStyle>;
-  children: string;
+  textStyle?: StyleProp<TextStyle> | AnimatedStyle;
+  children: string | number;
 }
+
+const AnimatedDefaultText = Animated.createAnimatedComponent(DefaultText);
 
 const Text = ({textStyle, children, ...restProps}: DefaultTextProps) => {
   return (
-    <DefaultText
+    <AnimatedDefaultText
       maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
       style={[styles.defaultStyle, textStyle]}
       {...restProps}>
       {children}
-    </DefaultText>
+    </AnimatedDefaultText>
   );
 };
 

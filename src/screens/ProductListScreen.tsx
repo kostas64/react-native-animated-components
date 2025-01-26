@@ -7,8 +7,9 @@ import {
 } from 'react-native-gesture-handler';
 import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Animated, FlatList, StyleSheet, Text, View} from 'react-native';
+import {Animated, FlatList, StyleSheet, View} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {items} from '@components/productList/data';
 import {ProductItem} from '@components/productList/types';

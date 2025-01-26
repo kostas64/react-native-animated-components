@@ -7,8 +7,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
-import {Text, View, ScrollView, StyleSheet, Pressable} from 'react-native';
+import {View, ScrollView, StyleSheet, Pressable} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {findScheduleForTimes} from './utils';
 import {SCHEDULE_EVENTS, TIMES} from './data';

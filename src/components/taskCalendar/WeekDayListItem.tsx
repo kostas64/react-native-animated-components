@@ -8,13 +8,14 @@ import Animated, {
 import React, {useEffect} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 
+import {WIDTH} from '@utils/device';
+import Text from '@components/Text';
 import {_spacing} from './constants';
 import {TWeekDayListItem} from './types';
 import {setDayEmitter} from './Calendar';
 import {typography} from '@utils/typography';
 import {triggerHaptik} from './MonthListModal';
 import {formatDate, isSameDay, isToday} from './utils';
-import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const WeekDayListItem = ({
   day,
@@ -88,16 +89,8 @@ const WeekDayListItem = ({
           hasRightSpace && styles.spaceRight,
           _containerStyle,
         ]}>
-        <Animated.Text
-          style={[styles.dayName, _dayStyle]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {dayName}
-        </Animated.Text>
-        <Animated.Text
-          style={[styles.dayNumber, _dayStyle]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {day.displayLabel}
-        </Animated.Text>
+        <Text style={[styles.dayName, _dayStyle]}>{dayName}</Text>
+        <Text style={[styles.dayNumber, _dayStyle]}>{day.displayLabel}</Text>
       </Animated.View>
       <View
         style={[

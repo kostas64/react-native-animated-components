@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import Animated, {useAnimatedStyle} from 'react-native-reanimated';
+import {StyleSheet, View} from 'react-native';
+import {useAnimatedStyle} from 'react-native-reanimated';
 
+import Text from '@components/Text';
 import {ListItemProps} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ListItem = ({
   item,
@@ -31,19 +31,11 @@ const ListItem = ({
       style={[styles.container, item.isLastOfLetter && {marginBottom: 36}]}>
       {item.isFirstOfLetter && (
         <View style={styles.letterContainer}>
-          <Animated.Text
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-            style={[styles.letter, firstLetterStyle]}>
-            {item.letter}
-          </Animated.Text>
+          <Text style={[styles.letter, firstLetterStyle]}>{item.letter}</Text>
         </View>
       )}
       <View style={{paddingVertical: 12}}>
-        <Text
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-          style={styles.name}>
-          {item.name}
-        </Text>
+        <Text style={styles.name}>{item.name}</Text>
       </View>
     </View>
   );

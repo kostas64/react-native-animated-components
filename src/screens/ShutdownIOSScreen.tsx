@@ -128,8 +128,8 @@ const ShutdownIOS = () => {
                       index={index}
                       coloring={coloring}
                       sliderWidth={sliderWidth}
-                      maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
                       totalCharsLength={totalCharsLength}
+                      maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
                     />
                   ))}
                 </View>

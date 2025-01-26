@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {
   WIDTH,
   SM_FONT_UPSCALE_FACTOR,
-  MAX_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
+import Text from '@components/Text';
 import {TItemCounter} from './types';
 import CounterBtn from './CounterBtn';
 import {typography} from '@utils/typography';
@@ -53,8 +53,7 @@ const ItemCounter = ({
           styles.font16,
           styles.textCenter,
           {minWidth: value < 10 ? 30 : 36},
-        ]}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        ]}>
         {value}
       </Text>
       <CounterBtn

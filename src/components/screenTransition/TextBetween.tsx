@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
+import Text from '@components/Text';
 import {TextBetweenProps} from './types';
 import {typography} from '@utils/typography';
 import FadeInTransition from './FadeInTransition';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const TextBetween = ({
   index = 0,
@@ -17,19 +17,11 @@ const TextBetween = ({
   return (
     <View style={[styles.container, containerStyle]}>
       <FadeInTransition index={index} animate={animate} direction="top-right">
-        <Text
-          style={[styles.title, titleStyle]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {title}
-        </Text>
+        <Text style={[styles.title, titleStyle]}>{title}</Text>
       </FadeInTransition>
       {label && (
         <FadeInTransition index={index} animate={animate} direction="top-left">
-          <Text
-            style={styles.label}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-            {label}
-          </Text>
+          <Text style={styles.label}>{label}</Text>
         </FadeInTransition>
       )}
     </View>

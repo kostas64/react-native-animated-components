@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {barHeight, colors} from './constants';
 import {TStackChartTooltip, TTooltip} from './types';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const StackChartTooltip = ({tooltip, selectedIndex}: TStackChartTooltip) => {
   const [layout, setLayout] = useState({width: 0, height: 0});
@@ -49,9 +49,7 @@ const StackChartTooltip = ({tooltip, selectedIndex}: TStackChartTooltip) => {
               },
             ]}
           />
-          <Text
-            style={styles.label}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          <Text style={styles.label}>
             {`$${tooltip[item.toLowerCase() as keyof TTooltip]}`}
           </Text>
         </View>

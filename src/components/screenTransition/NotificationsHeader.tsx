@@ -2,10 +2,10 @@ import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const NotificationsHeader = () => {
   const navigation = useNavigation();
@@ -24,17 +24,9 @@ const NotificationsHeader = () => {
           <Entypo name="chevron-left" size={18} />
         </TouchableOpacity>
         <View style={[styles.rowCenter, {gap: 8}]}>
-          <Text
-            style={styles.label}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-            Notifications
-          </Text>
+          <Text style={styles.label}>Notifications</Text>
           <View style={styles.numberContainer}>
-            <Text
-              style={styles.number}
-              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-              7
-            </Text>
+            <Text style={styles.number}>7</Text>
           </View>
         </View>
       </View>

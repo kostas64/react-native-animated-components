@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {TWhoComing} from './types';
+import Text from '@components/Text';
 import ItemCounter from './ItemCounter';
 import {typography} from '@utils/typography';
 import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';

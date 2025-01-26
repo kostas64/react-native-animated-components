@@ -1,5 +1,5 @@
 import React from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {
@@ -8,6 +8,7 @@ import {
   MED_FONT_UPSCALE_FACTOR,
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {ProductListItemProps} from './types';
 

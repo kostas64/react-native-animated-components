@@ -1,13 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
-import {
-  SM_FONT_UPSCALE_FACTOR,
-  MAX_FONT_UPSCALE_FACTOR,
-  MED_FONT_UPSCALE_FACTOR,
-} from '@utils/device';
 import {SPACING} from './constants';
+import Text from '@components/Text';
 import {ICarouselDataType} from './types';
 import {typography} from '@utils/typography';
+import {SM_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Content = (item: ICarouselDataType) => {
   return (
@@ -26,11 +23,7 @@ const Content = (item: ICarouselDataType) => {
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
           {item.price}
         </Text>
-        <Text
-          style={styles.currency}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          USD
-        </Text>
+        <Text style={styles.currency}>USD</Text>
       </View>
     </>
   );

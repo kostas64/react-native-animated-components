@@ -2,9 +2,9 @@ import React from 'react';
 import Animated from 'react-native-reanimated';
 import {Pressable, StyleSheet} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {TFloatingModalItemProps} from './types';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {getAnimatedItemStyles} from './animatedStyles';
 
 const FloatingActionModalItem = ({
@@ -31,11 +31,7 @@ const FloatingActionModalItem = ({
         style,
       ]}>
       <Icon name={item.name} color={'white'} size={24} style={animatedIcon} />
-      <Animated.Text
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-        style={[styles.label, animatedText]}>
-        {item.label}
-      </Animated.Text>
+      <Text style={[styles.label, animatedText]}>{item.label}</Text>
     </Pressable>
   );
 };

@@ -7,7 +7,7 @@ import Animated, {
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
+import {View, TextInput, Pressable, StyleSheet} from 'react-native';
 
 import {
   isIOS,
@@ -15,6 +15,7 @@ import {
   MAX_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
+import Text from '@components/Text';
 import StatusBarManager from '@components/StatusBarManager';
 
 const AnimPressable = Animated.createAnimatedComponent(Pressable);

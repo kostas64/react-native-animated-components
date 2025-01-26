@@ -5,19 +5,19 @@ import {
 } from '@marceloterreiro/flash-calendar';
 import React, {useEffect, useMemo} from 'react';
 import {FlatList} from 'react-native-gesture-handler';
+import {Pressable, StyleSheet, View} from 'react-native';
 import Animated, {withTiming} from 'react-native-reanimated';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {
   WIDTH,
   HEIGHT,
   SM_FONT_UPSCALE_FACTOR,
-  MAX_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {TWhenTrip} from './types';
 import {CALENDAR_PER} from './data';
+import Text from '@components/Text';
 import PickerItem from './PickerItem';
 import PeriodItem from './PeriodItem';
 import {typography} from '@utils/typography';
@@ -298,16 +298,12 @@ const WhenTrip = ({
           styles.height74,
         ]}>
         <Pressable onPress={onPressSkipOrReset} style={styles.skipResetBtn}>
-          <Text
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-            style={[styles.font16, styles.fontW500, styles.underline]}>
+          <Text style={[styles.font16, styles.fontW500, styles.underline]}>
             {atLeastOneDaySelected ? 'Reset' : 'Skip'}
           </Text>
         </Pressable>
         <Pressable style={styles.nextBtn} onPress={onPressNext}>
-          <Text
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-            style={[styles.font16, styles.fontW500, styles.white]}>
+          <Text style={[styles.font16, styles.fontW500, styles.white]}>
             Next
           </Text>
         </Pressable>

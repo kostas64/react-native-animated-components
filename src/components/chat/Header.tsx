@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {TFooter} from './types';
+import Text from '@components/Text';
+import {HEIGHT, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
-import {HEIGHT, MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const Footer = ({onPressClear, animateClose}: TFooter) => {
   const insets = useSafeAreaInsets();
@@ -24,21 +25,13 @@ const Footer = ({onPressClear, animateClose}: TFooter) => {
         },
       ]}>
       <Pressable style={styles.padding8} onPress={onPressClear}>
-        <Text
-          style={styles.clearAll}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          Clear all
-        </Text>
+        <Text style={styles.clearAll}>Clear all</Text>
       </Pressable>
       <Pressable
         onPress={animateClose}
         style={[styles.row, styles.searchBtn, styles.alignCenter]}>
         <Entypo size={20} style={styles.lens3} name="magnifying-glass" />
-        <Text
-          style={styles.search}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          Search
-        </Text>
+        <Text style={styles.search}>Search</Text>
       </Pressable>
     </View>
   );

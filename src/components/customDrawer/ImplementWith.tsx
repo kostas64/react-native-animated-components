@@ -1,9 +1,10 @@
-import {Animated, StyleSheet, Text} from 'react-native';
+import {Animated, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import Text from '@components/Text';
 import {TImplementedWith} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ImplementedWith = ({opacity}: TImplementedWith) => {
   const insets = useSafeAreaInsets();
@@ -11,11 +12,7 @@ const ImplementedWith = ({opacity}: TImplementedWith) => {
   return (
     <Animated.View
       style={[styles.container, {bottom: insets.bottom + 16, opacity}]}>
-      <Text
-        style={styles.implemented}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Implemented with:
-      </Text>
+      <Text style={styles.implemented}>Implemented with:</Text>
       <Text
         style={styles.label}
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>

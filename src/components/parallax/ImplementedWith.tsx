@@ -1,25 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ImplementedWith = () => {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.container, {top: insets.top + 16}]}>
-      <Text
-        style={styles.implemented}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Implemented with:
-      </Text>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Animated API
-      </Text>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.label}>Animated API</Text>
     </View>
   );
 };
