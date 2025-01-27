@@ -21,11 +21,19 @@ export default Rating;
 
 const styles = StyleSheet.create({
   container: {
-    gap: 6,
+    gap: 4,
     borderRadius: 12,
     backgroundColor: '#ff874c',
     paddingHorizontal: 12,
     paddingVertical: 8,
+    elevation: 10,
+    shadowColor: '#ff874c',
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
   },
   overall: {
     color: 'white',

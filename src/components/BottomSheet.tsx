@@ -1,7 +1,9 @@
 import Animated, {
   runOnJS,
   withTiming,
+  SharedValue,
   useSharedValue,
+  useDerivedValue,
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated';
@@ -27,6 +29,7 @@ export type BottomSheetProps = {
   contentContainerStyle?: any;
   scrollToPosition?: number;
   backdropOpacity?: number;
+  onModalPosChange?: (value: SharedValue<number>) => void;
 };
 
 export type BottomSheetRef = {
@@ -39,6 +42,7 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
       children,
       modalHeight,
       onBackPress,
+      onModalPosChange,
       lineStyle,
       backdropOpacity = null,
       scrollToPosition = 0,
@@ -100,6 +104,12 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
       },
       [active, resetModal, translateY],
     );
+
+    useDerivedValue(() => {
+      if (onModalPosChange) {
+        runOnJS(onModalPosChange)(translateY);
+      }
+    });
 
     const onBackdropPress = React.useCallback(() => {
       // Dismiss the BottomSheet
