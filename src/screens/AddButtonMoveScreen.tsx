@@ -61,15 +61,16 @@ const AddButtonMoveScreen = () => {
   };
 
   const pan = Gesture.Pan()
+    .activeOffsetX([0, 100])
     .onChange(e => {
-      if (e.translationX > 0 && e.translationX <= 92) {
+      if (e.translationX > 0 && e.translationX <= 92 && progress.value === 1) {
         progress.value = withSpring(1 - e.translationX / 92);
       } else if (e.translationX < 0 && e.translationX >= -92) {
         progress.value = withSpring(-e.translationX / 92);
       }
     })
     .onEnd(e => {
-      if (e.translationX > 0 && e.translationX <= 16) {
+      if (e.translationX > 0 && e.translationX <= 16 && progress.value > 0) {
         progress.value = withSpring(1);
       } else if (e.translationX > 16) {
         progress.value = withSpring(0, {damping: 80, stiffness: 200});
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    overflow: 'hidden',
     backgroundColor: '#2f1248',
   },
   scrollViewContainer: {
