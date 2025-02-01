@@ -61,6 +61,7 @@ const AddButtonMoveScreen = () => {
   };
 
   const pan = Gesture.Pan()
+    //Avoid native swipe back overlapping
     .activeOffsetX([0, 50])
     .onChange(e => {
       if (e.translationX > 0 && e.translationX <= 92 && progress.value === 1) {
