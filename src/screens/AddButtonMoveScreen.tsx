@@ -61,7 +61,7 @@ const AddButtonMoveScreen = () => {
   };
 
   const pan = Gesture.Pan()
-    .activeOffsetX([0, 100])
+    .activeOffsetX([0, 50])
     .onChange(e => {
       if (e.translationX > 0 && e.translationX <= 92 && progress.value === 1) {
         progress.value = withSpring(1 - e.translationX / 92);
