@@ -38,7 +38,6 @@ import VerticalScrollBarScreen from '@screens/VerticalScrollBarScreen';
 import ListWithIndicatorScreen from './screens/ListWithIndicatorScreen';
 import DrawerInterpolateScreen from './screens/DrawerInterpolateScreen';
 import TranslateSearchIOSScreen from './screens/TranslateSearchIOSScreen';
-import CircularProgressBarScreen from './screens/CircularProgressBarScreen';
 import FloatingActionButtonScreen from '@screens/FloatingActionButtonScreen';
 import CircularAnimatedTextScreen from './screens/CircularAnimatedTextScreen';
 import ScreenTransitionStack from '@screens/ScreenTransition/ScreenTransitionStack';
@@ -63,7 +62,6 @@ export type TStackList = {
   ShutdownIOS: undefined;
   NFCReader: undefined;
   TranslateSearchIOS: undefined;
-  CircularProgressBar: undefined;
   ValuePickers: undefined;
   LikeInteraction: undefined;
   CircularAnimatedText: undefined;
@@ -128,10 +126,6 @@ function App() {
               <Stack.Screen
                 name="TranslateSearchIOS"
                 component={TranslateSearchIOSScreen}
-              />
-              <Stack.Screen
-                name="CircularProgressBar"
-                component={CircularProgressBarScreen}
               />
               <Stack.Screen
                 name="ValuePickers"

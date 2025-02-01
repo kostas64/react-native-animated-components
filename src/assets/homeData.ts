@@ -80,19 +80,9 @@ export const DATA: TDATA = [
         screen: 'TranslateSearchIOS',
       },
       {
-        label: 'Like Interaction',
-        backgroundColor: '#ff8c00',
-        screen: 'LikeInteraction',
-      },
-      {
         label: 'Circular Animated Text',
-        backgroundColor: '#fdc921',
+        backgroundColor: '#ff8c00',
         screen: 'CircularAnimatedText',
-      },
-      {
-        label: 'Screen Transitions',
-        backgroundColor: '#95e214',
-        screen: 'ScreenTransition',
       },
     ],
   },
@@ -136,9 +126,26 @@ export const DATA: TDATA = [
         backgroundColor: '#fdc921',
         screen: 'ProductList',
       },
+    ],
+  },
+  {
+    iconName: 'layers',
+    iconComp: 'Entypo',
+    iconColor: 'white',
+    padding: 6,
+    borderRadius: 15,
+    backgroundColor: '#819cb8',
+    iconSize: 18,
+    iconText: 'Templates',
+    items: [
+      {
+        label: 'Screen Transition',
+        backgroundColor: '#0ad2ff',
+        screen: 'ScreenTransition',
+      },
       {
         label: 'Task Calendar',
-        backgroundColor: '#95e214',
+        backgroundColor: '#2962ff',
         screen: 'TaskCalendar',
       },
     ],
@@ -271,7 +278,7 @@ export const DATA: TDATA = [
     borderRadius: 15,
     backgroundColor: '#819cb8',
     iconSize: 18,
-    iconText: 'Common',
+    iconText: 'Micro interactions',
     items: [
       {
         label: 'Pin Code',
@@ -299,15 +306,15 @@ export const DATA: TDATA = [
         backgroundColor: '#ff8c00',
         screen: 'GestureCounter',
       },
+      {
+        label: 'Like Interaction',
+        backgroundColor: '#fdc921',
+        screen: 'LikeInteraction',
+      },
       // {
       //   label: 'Ticket',
-      //   backgroundColor: '#c57f5d',
+      //   backgroundColor: '#c57f5d', '#95e214'
       //   screen: 'Ticket',
-      // },
-      // {
-      //   label: 'Circular Progress Bar',
-      //   backgroundColor: '#ad77df',
-      //   screen: 'CircularProgressBar',
       // },
     ],
   },
