@@ -10,6 +10,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChatScreen from './screens/ChatScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
+import BankStack from '@screens/Bank/BankStack';
 import NFCReader from './screens/NFCReaderScreen';
 import AirbnbScreen from './screens/AirbnbScreen';
 import TicketScreen from './screens/TicketScreen';
@@ -75,6 +76,7 @@ export type TStackList = {
   GestureCounter: undefined;
   FloatingActions: undefined;
   AddButtonMove: undefined;
+  BankStack: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -170,6 +172,7 @@ function App() {
                 name="AddButtonMove"
                 component={AddButtonMoveScreen}
               />
+              <Stack.Screen name="BankStack" component={BankStack} />
             </Stack.Navigator>
           </NavigationContainer>
         </ModalProvider>

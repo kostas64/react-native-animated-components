@@ -44,7 +44,8 @@ type TDATA = {
       | 'VerticalScrollBar'
       | 'GestureCounter'
       | 'FloatingActions'
-      | 'AddButtonMove';
+      | 'AddButtonMove'
+      | 'BankStack';
   }[];
 }[];
 
@@ -147,6 +148,11 @@ export const DATA: TDATA = [
         label: 'Task Calendar',
         backgroundColor: '#2962ff',
         screen: 'TaskCalendar',
+      },
+      {
+        label: 'Bank',
+        backgroundColor: '#9500ff',
+        screen: 'BankStack',
       },
     ],
   },
