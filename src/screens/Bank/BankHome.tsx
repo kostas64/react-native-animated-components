@@ -5,6 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {isIOS} from '@utils/device';
 import HomeHeader from '@components/bank/HomeHeader';
 import HomeActions from '@components/bank/HomeActions';
+import Transactions from '@components/bank/Transactions';
 
 const BankHome = () => {
   const insets = useSafeAreaInsets();
@@ -14,6 +15,7 @@ const BankHome = () => {
     <View style={styles.container}>
       <HomeHeader style={[styles.headerContainer, {paddingTop}]} />
       <HomeActions style={styles.actionsContainer} />
+      <Transactions style={styles.transactionsContainer} />
     </View>
   );
 };
@@ -31,5 +33,9 @@ const styles = StyleSheet.create({
   actionsContainer: {
     marginTop: 86,
     marginHorizontal: 28,
+  },
+  transactionsContainer: {
+    marginTop: 24,
+    marginLeft: 24,
   },
 });

@@ -7,11 +7,12 @@ import {
   StyleSheet,
 } from 'react-native';
 import React from 'react';
-import {LinearGradient, Rect, Stop, Svg} from 'react-native-svg';
+import {Rect, Svg} from 'react-native-svg';
 
 import {ACTIONS} from './data';
 import {shadows} from './styles';
 import {typography} from '@utils/typography';
+import CommonGradient from './CommonGradient';
 
 const HomeActions = ({style}: {style?: StyleProp<ViewStyle>}) => {
   return (
@@ -27,16 +28,7 @@ const HomeActions = ({style}: {style?: StyleProp<ViewStyle>}) => {
           <Text style={styles.label}>{label}</Text>
           <View style={styles.iconContainer}>
             <Svg width={32} height={32} style={styles.absolute}>
-              <LinearGradient
-                id={'tabbarBtn'}
-                x1="100%"
-                y1="0%"
-                x2="100%"
-                y2="100%">
-                <Stop offset="0%" stopOpacity="0.8" stopColor={'#f7736b'} />
-                <Stop offset="50%" stopOpacity="1" stopColor={'#e94173'} />
-                <Stop offset="100%" stopOpacity="0.8" stopColor={'#e4489b'} />
-              </LinearGradient>
+              <CommonGradient id={'tabbarBtn'} />
               <Rect
                 width={32}
                 height={32}

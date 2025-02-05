@@ -11,6 +11,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {tabs} from './data';
 import {WIDTH} from '@utils/device';
+import CommonGradient from './CommonGradient';
 
 const TABS = [
   {
@@ -107,20 +108,7 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
                   height={ICON_CONTAINER_SIZE}
                   animatedProps={opacity}
                   style={styles.buttonSvg}>
-                  <LinearGradient
-                    id={'tabbarBtn'}
-                    x1="100%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%">
-                    <Stop offset="0%" stopOpacity="0.8" stopColor={'#f7736b'} />
-                    <Stop offset="50%" stopOpacity="1" stopColor={'#e94173'} />
-                    <Stop
-                      offset="100%"
-                      stopOpacity="0.8"
-                      stopColor={'#e4489b'}
-                    />
-                  </LinearGradient>
+                  <CommonGradient id={'tabbarBtn'} />
                   <Rect
                     width={ICON_CONTAINER_SIZE}
                     height={ICON_CONTAINER_SIZE}
