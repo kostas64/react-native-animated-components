@@ -13,12 +13,22 @@ export const shadows = StyleSheet.create({
   },
   lowShadow: {
     shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 12,
+    shadowOpacity: 0.35,
+    shadowRadius: 10,
     shadowOffset: {
       width: 0,
-      height: 20,
+      height: 16,
     },
     elevation: 25,
+  },
+  justShadow: {
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    elevation: 10,
   },
 });
