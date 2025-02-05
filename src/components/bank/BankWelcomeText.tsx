@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import {StyleProps} from './types';
+import {WelcomeStyleProps} from './types';
 import {typography} from '@utils/typography';
 
-const BankHomeText = ({style}: StyleProps) => {
+const BankWelcomeText = ({style}: WelcomeStyleProps) => {
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.title}>{'Payments\nNever Been\nEasier'}</Text>
@@ -17,7 +17,7 @@ const BankHomeText = ({style}: StyleProps) => {
   );
 };
 
-export default BankHomeText;
+export default BankWelcomeText;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,11 +1,16 @@
 import {ColorValue, StyleProp, ViewStyle} from 'react-native';
 
-export type StyleProps = {
+export type WelcomeStyleProps = {
   style?: StyleProp<ViewStyle>;
+};
+
+export type StyleProps = {
+  style?: (index: number) => StyleProp<ViewStyle>;
 };
 
 export type ButtonProps = {
   label: string;
+  onPress: () => void;
   style?: StyleProp<ViewStyle>;
 };
 

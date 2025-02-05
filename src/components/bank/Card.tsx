@@ -13,15 +13,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Svg, {LinearGradient, Rect, Stop} from 'react-native-svg';
 
+import {
+  CARD_WIDTH,
+  CARD_HEIGHT,
+  CARD_BODY_HEIGHT,
+  CARD_FOOTER_HEIGHT,
+} from './constants';
 import {CardProps} from './types';
-import {WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
-
-const CARD_WIDTH = WIDTH - 75;
-const CARD_HEIGHT = (CARD_WIDTH * 3) / 5;
-
-const CARD_BODY_HEIGHT = (CARD_HEIGHT * 4) / 6;
-const CARD_FOOTER_HEIGHT = (CARD_HEIGHT * 2) / 6;
 
 const AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
 

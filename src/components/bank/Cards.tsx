@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import Card from './Card';
-import {cards} from './data';
+import {shadows} from './styles';
+import {cards} from './constants';
 import {StyleProps} from './types';
 
 const Cards = ({style}: StyleProps) => {
@@ -11,6 +12,7 @@ const Cards = ({style}: StyleProps) => {
       key={index}
       style={[
         styles.cardContainer,
+        shadows.shadow,
         {
           transform: [
             {rotate: `-${(cards.length - index) * 10}deg`},
@@ -18,7 +20,7 @@ const Cards = ({style}: StyleProps) => {
             {translateX: (cards.length - 1 - index) * -20},
           ],
         },
-        style,
+        style?.(index),
       ]}>
       <Card delay={index * 250} key={card.cardNumber} {...card} />
     </View>
@@ -32,13 +34,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: 16,
     backgroundColor: 'white',
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 30,
-    shadowOffset: {
-      width: 0,
-      height: 20,
-    },
-    elevation: 6,
   },
 });
