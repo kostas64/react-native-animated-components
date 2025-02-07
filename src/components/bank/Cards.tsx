@@ -5,15 +5,18 @@ import Card from './Card';
 import {shadows} from './styles';
 import {cards} from './constants';
 import {StyleProps} from './types';
+import Animated from 'react-native-reanimated';
 
-const Cards = ({style}: StyleProps) => {
+const Cards = ({style, sharedElementTag}: StyleProps) => {
   return cards.map((card, index) => (
-    <View
+    <Animated.View
+      sharedTransitionTag={`${sharedElementTag}-${index}`}
       key={index}
       style={[
         styles.cardContainer,
         shadows.shadow,
         {
+          zIndex: index,
           transform: [
             {rotate: `-${(cards.length - index) * 10}deg`},
             {translateY: (cards.length - index) * -60},
@@ -23,7 +26,7 @@ const Cards = ({style}: StyleProps) => {
         style?.(index),
       ]}>
       <Card delay={index * 250} key={card.cardNumber} {...card} />
-    </View>
+    </Animated.View>
   ));
 };
 

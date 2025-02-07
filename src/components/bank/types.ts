@@ -5,6 +5,7 @@ export type WelcomeStyleProps = {
 };
 
 export type StyleProps = {
+  sharedElementTag?: string;
   style?: (index: number) => StyleProp<ViewStyle>;
 };
 

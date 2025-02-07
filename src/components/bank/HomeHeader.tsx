@@ -48,6 +48,7 @@ const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
         </View>
       </View>
       <Cards
+        sharedElementTag={isIOS ? 'cards' : undefined}
         style={index => ({
           ...shadows.lowShadow,
           top: paddingTop + 76,
