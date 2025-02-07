@@ -19,6 +19,11 @@ import {
   CARD_BODY_HEIGHT,
   CARD_FOOTER_HEIGHT,
 } from './constants';
+import {
+  SM_FONT_UPSCALE_FACTOR,
+  MED_FONT_UPSCALE_FACTOR,
+  MAX_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {CardProps} from './types';
 import {typography} from '@utils/typography';
 
@@ -78,7 +83,11 @@ const Card = ({
         </AnimatedGradient>
         <View style={styles.cardBody}>
           <FontAwesome name="bank" size={32} color={'white'} />
-          <Text style={styles.cardNumber}>{cardNumber}</Text>
+          <Text
+            style={styles.cardNumber}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            {cardNumber}
+          </Text>
         </View>
       </Svg>
       <Svg height={CARD_FOOTER_HEIGHT} width={CARD_WIDTH}>
@@ -95,10 +104,22 @@ const Card = ({
           <Stop offset="100%" stopColor="#505050" stopOpacity="1" />
         </LinearGradient>
         <View style={[styles.cardFooter, styles.rowCenter]}>
-          <Text style={styles.whiteLabel}>{cardholderName}</Text>
+          <Text
+            style={styles.whiteLabel}
+            maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+            {cardholderName}
+          </Text>
           <View style={styles.rowCenter}>
-            <Text style={styles.offWhiteLabel}>{'Exp.'}</Text>
-            <Text style={styles.whiteLabel}>{expirationDate}</Text>
+            <Text
+              style={styles.offWhiteLabel}
+              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+              {'Exp.'}
+            </Text>
+            <Text
+              style={styles.whiteLabel}
+              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+              {expirationDate}
+            </Text>
           </View>
         </View>
       </Svg>

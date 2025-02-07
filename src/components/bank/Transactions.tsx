@@ -1,43 +1,35 @@
 import {
-  Text,
   View,
-  Pressable,
+  Text,
+  Image,
+  ViewStyle,
   StyleProp,
   StyleSheet,
-  ViewStyle,
 } from 'react-native';
 import React from 'react';
-import {Svg, Text as SVGText} from 'react-native-svg';
 
-import {isIOS} from '@utils/device';
+import {USERS} from './data';
+import SectionHeader from './SectionHeader';
 import {typography} from '@utils/typography';
-import CommonGradient from './CommonGradient';
+import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const Transactions = ({style}: {style?: StyleProp<ViewStyle>}) => {
   return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.mainLabel}>{'Recent Transactions'}</Text>
-
-      <Pressable
-        style={({pressed}) => [
-          styles.viewAllContainer,
-          pressed && styles.halfOpacity,
-        ]}>
-        <Svg height={30} width={64}>
-          <CommonGradient id={'viewAll'} />
-
-          <SVGText
-            x="0"
-            y="21"
-            fontSize="16"
-            fill="url(#viewAll)"
-            fontWeight={'600'}
-            fontFamily={isIOS ? 'San Francisco' : typography.semiBold}
-            textAnchor="start">
-            View all
-          </SVGText>
-        </Svg>
-      </Pressable>
+    <View style={style}>
+      <SectionHeader label="Recent Transactions" rightLabel="View All" />
+      <View style={styles.usersContainer}>
+        {USERS.map((user, index) => (
+          <View key={index} style={styles.userContainer}>
+            <Image source={{uri: user.image}} style={styles.img} />
+            <Text
+              numberOfLines={1}
+              style={styles.name}
+              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+              {user.name}
+            </Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
@@ -65,5 +57,26 @@ const styles = StyleSheet.create({
   },
   halfOpacity: {
     opacity: 0.5,
+  },
+  usersContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: 28,
+    marginTop: 8,
+  },
+  userContainer: {
+    gap: 8,
+    alignItems: 'center',
+  },
+  img: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  name: {
+    color: '#a1a1a1',
+    maxWidth: (WIDTH - 56) / 5,
+    fontSize: 12,
+    fontFamily: typography.medium,
   },
 });

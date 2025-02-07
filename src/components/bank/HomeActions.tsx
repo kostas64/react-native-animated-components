@@ -13,6 +13,7 @@ import {ACTIONS} from './data';
 import {shadows} from './styles';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const HomeActions = ({style}: {style?: StyleProp<ViewStyle>}) => {
   return (
@@ -25,7 +26,11 @@ const HomeActions = ({style}: {style?: StyleProp<ViewStyle>}) => {
             styles.itemContainer,
             pressed && styles.halfOpacity,
           ]}>
-          <Text style={styles.label}>{label}</Text>
+          <Text
+            style={styles.label}
+            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            {label}
+          </Text>
           <View style={styles.iconContainer}>
             <Svg width={32} height={32} style={styles.absolute}>
               <CommonGradient id={'tabbarBtn'} />

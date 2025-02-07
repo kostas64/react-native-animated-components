@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {LinearGradient, Stop} from 'react-native-svg';
 
 const CommonGradient = ({id}: {id: string}) => {
@@ -13,5 +12,3 @@ const CommonGradient = ({id}: {id: string}) => {
 };
 
 export default CommonGradient;
-
-const styles = StyleSheet.create({});

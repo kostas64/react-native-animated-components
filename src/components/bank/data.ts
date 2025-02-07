@@ -46,3 +46,26 @@ export const ACTIONS = [
     size: 18,
   },
 ];
+
+export const USERS = [
+  {
+    image: 'https://randomuser.me/api/portraits/men/44.jpg',
+    name: 'Seth',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/men/50.jpg',
+    name: 'Rozella',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/women/9.jpg',
+    name: 'Demetris',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/men/43.jpg',
+    name: 'Lelia',
+  },
+  {
+    image: 'https://randomuser.me/api/portraits/women/5.jpg',
+    name: 'Ruby',
+  },
+];

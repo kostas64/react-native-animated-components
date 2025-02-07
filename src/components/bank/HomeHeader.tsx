@@ -12,8 +12,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Cards from './Cards';
 import {shadows} from './styles';
-import {isIOS, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
+import {isIOS, MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import {CARD_BODY_HEIGHT, CARD_FOOTER_HEIGHT, CARD_WIDTH} from './constants';
 
 const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
@@ -31,8 +31,16 @@ const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
             />
           </View>
           <View>
-            <Text style={styles.label}>Morning Jude</Text>
-            <Text style={styles.accountType}>Free account</Text>
+            <Text
+              style={styles.label}
+              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+              Morning Jude
+            </Text>
+            <Text
+              style={styles.accountType}
+              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+              Free account
+            </Text>
           </View>
         </View>
         <View style={styles.bellContainer}>

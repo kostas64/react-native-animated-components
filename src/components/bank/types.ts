@@ -22,3 +22,22 @@ export type CardProps = {
   cardholderName?: string;
   expirationDate?: string;
 };
+
+export type SectionHeaderProps = {
+  label: string;
+  rightLabel?: string;
+  style?: StyleProp<ViewStyle>;
+};
+
+export type CardDetailProps = {
+  cardNumber: string;
+  cardholderName: string;
+  expirationDate: string;
+  style?: StyleProp<ViewStyle>;
+};
+
+export type CardDetailRowProps = {
+  label: string;
+  value: string;
+  pressedStyle?: StyleProp<ViewStyle>;
+};

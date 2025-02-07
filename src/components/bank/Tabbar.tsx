@@ -42,7 +42,7 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
   const insets = useSafeAreaInsets();
 
   const spacing = insets.bottom > 0 ? insets.bottom + 8 : 24;
-  const tabbarContainerHeight = TABBAR_HEIGHT + 3 * spacing;
+  const tabbarContainerHeight = TABBAR_HEIGHT + 2 * spacing;
 
   const onItemPress = (index: number) => {
     navigation.navigate(tabs?.[index]?.name);
@@ -62,7 +62,7 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
           x2="0%"
           y2="100%">
           <Stop offset="0%" stopOpacity="0" stopColor={'white'} />
-          <Stop offset="50%" stopOpacity="1" stopColor={'white'} />
+          <Stop offset="45%" stopOpacity="1" stopColor={'white'} />
         </LinearGradient>
         <Rect
           width={WIDTH}
@@ -70,7 +70,7 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
           fill={'url(#tabbarBackground)'}
         />
       </Svg>
-      <View style={[styles.tabbarContainer, {top: 2 * spacing}]}>
+      <View style={[styles.tabbarContainer, {top: 1.25 * spacing}]}>
         <Svg
           width={TABBAR_WIDTH}
           height={TABBAR_HEIGHT}

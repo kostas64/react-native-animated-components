@@ -31,4 +31,14 @@ export const shadows = StyleSheet.create({
     },
     elevation: 10,
   },
+  veryJustShadow: {
+    shadowColor: 'black',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    elevation: 3,
+  },
 });
