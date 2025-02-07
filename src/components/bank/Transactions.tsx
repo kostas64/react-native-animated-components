@@ -69,9 +69,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   img: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: (WIDTH - 56 - 46) / 5,
+    height: (WIDTH - 56 - 46) / 5,
+    borderRadius: (WIDTH - 56 - 46) / 10,
   },
   name: {
     color: '#a1a1a1',
