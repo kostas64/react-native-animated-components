@@ -91,6 +91,7 @@ export default CardDetailRow;
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    paddingVertical: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
