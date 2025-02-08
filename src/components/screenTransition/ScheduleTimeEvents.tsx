@@ -1,4 +1,4 @@
-import Animated, {
+import {
   runOnJS,
   withTiming,
   interpolate,
@@ -6,8 +6,8 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
+import {Text, View, ScrollView, StyleSheet} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
-import {Text, View, ScrollView, StyleSheet, Pressable} from 'react-native';
 
 import {typography} from '@utils/typography';
 import {findScheduleForTimes} from './utils';
@@ -15,9 +15,8 @@ import {SCHEDULE_EVENTS, TIMES} from './data';
 import {ScheduleTimeEventsProps} from './types';
 import FadeInTransition from './FadeInTransition';
 import {SM_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
-
-const AnimTouch = Animated.createAnimatedComponent(Pressable);
 
 type EventProps = {
   event: {
@@ -49,7 +48,7 @@ const Event = ({event, eventIndex}: EventProps) => {
   };
 
   return (
-    <AnimTouch
+    <AnimatedPressable
       unstable_pressDelay={100}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
@@ -71,7 +70,7 @@ const Event = ({event, eventIndex}: EventProps) => {
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
         {event.time}
       </Text>
-    </AnimTouch>
+    </AnimatedPressable>
   );
 };
 

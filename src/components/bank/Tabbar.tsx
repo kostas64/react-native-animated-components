@@ -12,7 +12,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {tabs} from './data';
 import {WIDTH} from '@utils/device';
 import CommonGradient from './CommonGradient';
-import {AnimatedSvg} from '@components/AnimatedSvg';
+import {AnimatedSvg} from '@components/AnimatedComponents';
 
 const TABS = [
   {

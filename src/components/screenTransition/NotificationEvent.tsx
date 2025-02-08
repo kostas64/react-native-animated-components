@@ -1,20 +1,19 @@
-import Animated, {
+import {
   withTiming,
   interpolate,
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Text, View, Pressable, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {typography} from '@utils/typography';
 import {TNotificationEventProps} from './types';
 import {useModalContext} from '@providers/ModalProvider';
 import NotificationEventModal from './NotificationEventModal';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
-
-const AnimatedTouch = Animated.createAnimatedComponent(Pressable);
 
 const NotificationEvent = ({
   event,
@@ -50,7 +49,7 @@ const NotificationEvent = ({
   };
 
   return (
-    <AnimatedTouch
+    <AnimatedPressable
       unstable_pressDelay={100}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
@@ -76,7 +75,7 @@ const NotificationEvent = ({
           {event.description}
         </Text>
       </View>
-    </AnimatedTouch>
+    </AnimatedPressable>
   );
 };
 

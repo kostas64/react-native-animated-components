@@ -13,7 +13,7 @@ import SectionHeader from './SectionHeader';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
-const Transactions = ({style}: {style?: StyleProp<ViewStyle>}) => {
+const RecentTransactions = ({style}: {style?: StyleProp<ViewStyle>}) => {
   return (
     <View style={style}>
       <SectionHeader label="Recent Transactions" rightLabel="View All" />
@@ -34,7 +34,7 @@ const Transactions = ({style}: {style?: StyleProp<ViewStyle>}) => {
   );
 };
 
-export default Transactions;
+export default RecentTransactions;
 
 const styles = StyleSheet.create({
   container: {

@@ -62,3 +62,20 @@ export type TabsProps = {
   selected: string;
   onSelectType: (value: string) => void;
 };
+
+export type TransactionProps = {
+  amount: number;
+  label: string;
+  description: string;
+  date: string;
+  beenAdded?: boolean;
+};
+
+export type TransactionType = 'Income' | 'Stock';
+
+export type TransactionItemProps = {
+  type: TransactionType;
+  label: string;
+  amount: number;
+  date: string;
+};

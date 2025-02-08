@@ -12,10 +12,10 @@ import {Svg, Text as SVGText} from 'react-native-svg';
 import Bar from './Bar';
 import Tabs from './Tabs';
 import {BarItemProps} from './types';
-import {isAndroid} from '@utils/device';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import {EARNINGS, SELECTED_TYPE} from './data';
+import {isAndroid, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const WalletCharts = ({style}: {style?: StyleProp<ViewStyle>}) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
@@ -72,9 +72,17 @@ const WalletCharts = ({style}: {style?: StyleProp<ViewStyle>}) => {
             $
           </SVGText>
         </Svg>
-        <Text style={styles.money}>7,008.14</Text>
+        <Text
+          style={styles.money}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          7,008.14
+        </Text>
       </View>
-      <Text style={styles.earningsLabel}>{'Total Earnings'}</Text>
+      <Text
+        style={styles.earningsLabel}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        {'Total Earnings'}
+      </Text>
 
       <FlatList
         horizontal

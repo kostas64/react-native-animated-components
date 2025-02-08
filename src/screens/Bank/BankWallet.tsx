@@ -1,9 +1,10 @@
 import React from 'react';
 import {useIsFocused} from '@react-navigation/native';
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {FlatList, StatusBar, StyleSheet, View} from 'react-native';
 
 import WalletHeader from '@components/bank/WalletHeader';
 import WalletCharts from '@components/bank/WalletCharts';
+import CardTransactions from '@components/bank/CardTransactions';
 
 const BankWallet = () => {
   const isFocused = useIsFocused();
@@ -15,8 +16,15 @@ const BankWallet = () => {
   return (
     <>
       <View style={styles.container}>
-        <WalletHeader style={styles.headerContainer} />
-        <WalletCharts style={[styles.headerContainer, styles.spaceTop]} />
+        <WalletHeader style={styles.spaceBottom} />
+        <FlatList
+          data={[]}
+          renderItem={() => null}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={<WalletCharts style={styles.smSpaceTop} />}
+          ListFooterComponent={<CardTransactions style={styles.spaceTop} />}
+          ListFooterComponentStyle={styles.xlSpaceBottom}
+        />
       </View>
     </>
   );
@@ -29,10 +37,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f7f7f7',
   },
-  headerContainer: {
-    marginHorizontal: 24,
-  },
   spaceTop: {
     marginTop: 20,
+    paddingHorizontal: 24,
+  },
+  smSpaceTop: {
+    marginTop: 10,
+    marginHorizontal: 24,
+  },
+  spaceBottom: {
+    marginBottom: 10,
+    paddingHorizontal: 24,
+  },
+  xlSpaceBottom: {
+    marginBottom: 142,
   },
 });

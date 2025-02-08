@@ -17,9 +17,8 @@ import SearchItem from './SearchItem';
 import CountryItem from './CountryItem';
 import {typography} from '@utils/typography';
 import {COUNTRIES, SEARCH_COUNTRIES} from './data';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 import {TRenderCountryItem, TRenderSearchItem, TWhereTo} from './types';
-
-const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 const WhereTo = forwardRef<TextInput, TWhereTo>(
   (
@@ -96,7 +95,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             {country}
           </Text>
         </Animated.View>
-        <AnimPressable
+        <AnimatedPressable
           onPress={animateWhereToInput}
           style={[
             styles.row,
@@ -113,7 +112,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             placeholderTextColor={'rgb(100,100,100)'}
             maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           />
-        </AnimPressable>
+        </AnimatedPressable>
         <Animated.FlatList
           horizontal
           data={COUNTRIES}

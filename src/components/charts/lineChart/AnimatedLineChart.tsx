@@ -2,7 +2,6 @@ import {
   Defs,
   Svg,
   Stop,
-  Path,
   Rect,
   ClipPath,
   LinearGradient,
@@ -30,8 +29,7 @@ import {days} from './data';
 import ReText from '@components/ReText';
 import {ChartRef, TProps} from './types';
 import {typography} from '@utils/typography';
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
+import {AnimatedPath} from '@components/AnimatedComponents';
 
 const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
   const {data, width, height} = props;

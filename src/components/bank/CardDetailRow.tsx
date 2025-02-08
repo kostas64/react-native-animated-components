@@ -14,7 +14,7 @@ import {CardDetailRowProps} from './types';
 import {checkPath, copyPath} from './data';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
-import {AnimatedSvg} from '@components/AnimatedSvg';
+import {AnimatedSvg} from '@components/AnimatedComponents';
 import {SM_FONT_UPSCALE_FACTOR, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const CardDetailRow = ({label, value, pressedStyle}: CardDetailRowProps) => {

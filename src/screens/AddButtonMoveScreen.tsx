@@ -1,4 +1,4 @@
-import Animated, {
+import {
   Easing,
   withSpring,
   withTiming,
@@ -7,22 +7,17 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import {
-  Gesture,
-  ScrollView,
-  GestureDetector,
-} from 'react-native-gesture-handler';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 import Skeleton from '@components/addButtonMove/Skeleton';
 import AddButton from '@components/addButtonMove/AddButton';
 import ActionItem from '@components/addButtonMove/ActionItem';
+import {AnimatedScrollView} from '@components/AnimatedComponents';
 import {calculateSkeletonHeight} from '@components/addButtonMove/utils';
 import {ACTION_ITEMS, CIRCLE_SIZE} from '@components/addButtonMove/data';
-
-const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 const AddButtonMoveScreen = () => {
   const insets = useSafeAreaInsets();

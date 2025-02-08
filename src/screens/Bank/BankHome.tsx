@@ -8,7 +8,7 @@ import {cards} from '@components/bank/constants';
 import HomeHeader from '@components/bank/HomeHeader';
 import CardDetail from '@components/bank/CardDetail';
 import HomeActions from '@components/bank/HomeActions';
-import Transactions from '@components/bank/Transactions';
+import RecentTransactions from '@components/bank/RecentTransactions';
 
 const BankHome = () => {
   const isFocused = useIsFocused();
@@ -26,7 +26,7 @@ const BankHome = () => {
         contentContainerStyle={styles.spaceBottom}>
         <HomeHeader style={[styles.headerContainer, {paddingTop}]} />
         <HomeActions style={styles.actionsContainer} />
-        <Transactions style={styles.transactionsContainer} />
+        <RecentTransactions style={styles.transactionsContainer} />
         <CardDetail {...cards?.[0]} style={styles.transactionsContainer} />
       </ScrollView>
     </>

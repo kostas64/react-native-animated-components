@@ -15,8 +15,7 @@ import {Keyboard, Pressable, StyleSheet} from 'react-native';
 import {WIDTH} from '@utils/device';
 import {image, SPACING} from './data';
 import {TFloatingElement} from './types';
-
-const AnimPress = Animated.createAnimatedComponent(Pressable);
+import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const FloatingElement = ({
   content,
@@ -166,7 +165,7 @@ const FloatingElement = ({
     <>
       {/* Background */}
       {showBack && (
-        <AnimPress
+        <AnimatedPressable
           onPress={closeAnimation}
           style={[
             backStyle,
@@ -176,7 +175,7 @@ const FloatingElement = ({
         />
       )}
       {/* Container */}
-      <AnimPress
+      <AnimatedPressable
         onPress={openAnimation}
         style={[translateStyle, containerStyle]}>
         {/* Content */}
@@ -194,7 +193,7 @@ const FloatingElement = ({
             />
           </Pressable>
         )}
-      </AnimPress>
+      </AnimatedPressable>
     </>
   );
 };

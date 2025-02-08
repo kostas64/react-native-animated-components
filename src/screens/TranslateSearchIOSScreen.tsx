@@ -6,8 +6,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
+import {Text, View, TextInput, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 
 import {
   isIOS,
@@ -16,8 +16,7 @@ import {
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import StatusBarManager from '@components/StatusBarManager';
-
-const AnimPressable = Animated.createAnimatedComponent(Pressable);
+import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const TranslateSearchIOSScreen = () => {
   const progress = useSharedValue(0);
@@ -75,7 +74,7 @@ const TranslateSearchIOSScreen = () => {
       <StatusBarManager />
       <View style={[styles.container, {marginTop: top}]}>
         <Animated.View style={[containerStyle, styles.searchContainer]}>
-          <AnimPressable
+          <AnimatedPressable
             onPress={openInput}
             style={[innerContainerStyle, styles.innerSearchContainer]}>
             <Feather name="search" size={24} color={'#a69995'} />
@@ -92,9 +91,9 @@ const TranslateSearchIOSScreen = () => {
               style={styles.input}
               maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
             />
-          </AnimPressable>
+          </AnimatedPressable>
         </Animated.View>
-        <AnimPressable
+        <AnimatedPressable
           onPress={onPress}
           hitSlop={styles.hitSlop}
           style={[cancelContainerStyle, {position: 'absolute'}]}>
@@ -103,7 +102,7 @@ const TranslateSearchIOSScreen = () => {
             maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
             Cancel
           </Text>
-        </AnimPressable>
+        </AnimatedPressable>
       </View>
     </>
   );

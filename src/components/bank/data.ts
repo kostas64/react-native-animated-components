@@ -2,6 +2,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+import {TransactionItemProps} from './types';
 import BankHome from '@screens/Bank/BankHome';
 import BankStocks from '@screens/Bank/BankStocks';
 import BankWallet from '@screens/Bank/BankWallet';
@@ -107,3 +108,42 @@ export const SELECTED_TYPE = {
   EARNINGS: 'earnings',
   SPENDINGS: 'spendings',
 };
+
+export const CARD_TRANSACTIONS: TransactionItemProps[] = [
+  {
+    type: 'Income',
+    label: 'Monthly Salary',
+    amount: 4000.0,
+    date: '01 Sep 24',
+  },
+  {
+    type: 'Stock',
+    label: 'Stock ETF',
+    amount: 250.0,
+    date: '24 Aug 24',
+  },
+  {
+    type: 'Income',
+    label: 'Monthly Salary',
+    amount: 3600.0,
+    date: '01 Aug 24',
+  },
+  {
+    type: 'Stock',
+    label: 'Stock ETF',
+    amount: 4000.0,
+    date: '25 Jul 24',
+  },
+  {
+    type: 'Stock',
+    label: 'Stock ETF',
+    amount: 4000.0,
+    date: '04 Jul 24',
+  },
+  {
+    type: 'Income',
+    label: 'Monthly Salary',
+    amount: 3800.0,
+    date: '01 Jul 24',
+  },
+];

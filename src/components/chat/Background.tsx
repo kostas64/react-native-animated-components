@@ -7,15 +7,14 @@ import Animated, {
 } from 'react-native-reanimated';
 import React, {useCallback} from 'react';
 import Haptic from 'react-native-haptic-feedback';
-import {Image, ImageSourcePropType, Pressable, StyleSheet} from 'react-native';
+import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
 
 import MessageItem from './MessageItem';
 import {HAPTIC_CONFIG} from '@utils/haptics';
 import {isAndroid, WIDTH} from '@utils/device';
 import {BACKGROUND_BLUR_RADIUS, EMOJI} from './data';
 import {TBackgroundProps, TEmojiItemProps} from './types';
-
-const AnimPressable = Animated.createAnimatedComponent(Pressable);
+import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const triggerSelectionHaptik = () => {
   if (isAndroid) {
@@ -54,13 +53,13 @@ const Background = ({
         clonedItemToPass.emoji === item ? '#d3d3d3' : 'transparent';
 
       return (
-        <AnimPressable
+        <AnimatedPressable
           key={`emoji-${index}`}
           entering={SlideInDown.delay(index * 50)}
           onPress={() => onDismiss(clonedItemToPass.id, item, true)}
           style={[{backgroundColor}, styles.emojiSelectedContainer]}>
           <Image source={item} style={styles.emoji} />
-        </AnimPressable>
+        </AnimatedPressable>
       );
     },
     [clonedItemToPass],
@@ -82,13 +81,13 @@ const Background = ({
 
   return (
     <>
-      <AnimPressable style={styles.blurBg} onPress={() => onDismiss()}>
+      <AnimatedPressable style={styles.blurBg} onPress={() => onDismiss()}>
         <Animated.Image
           source={{uri: captureUri}}
           blurRadius={BACKGROUND_BLUR_RADIUS}
           style={[opacity, styles.capturedImg]}
         />
-      </AnimPressable>
+      </AnimatedPressable>
       <Animated.View
         style={[opacity, styles.clonedMessage, {top: clonedItem?.top}]}>
         <MessageItem item={{...clonedItemToPass, emoji: undefined}} />

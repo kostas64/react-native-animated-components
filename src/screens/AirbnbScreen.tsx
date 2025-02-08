@@ -5,9 +5,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
+import {Text, View, TextInput, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
-import {Text, View, TextInput, Pressable, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {SHORT_MONTHS} from '@assets/months';
@@ -19,11 +19,10 @@ import WhoComing from '@components/airbnb/WhoComing';
 import InitialBox from '@components/airbnb/InitialBox';
 import InitialView from '@components/airbnb/InitialView';
 import StatusBarManager from '@components/StatusBarManager';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
 import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 import {_MS_PER_DAY, CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
-
-const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 const Airbnb = () => {
   const insets = useSafeAreaInsets();
@@ -272,7 +271,7 @@ const Airbnb = () => {
         <>
           <View style={[styles.padHor24, styles.flex, {paddingTop: top}]}>
             <View style={styles.container}>
-              <AnimPressable
+              <AnimatedPressable
                 onPress={onPressWhereTo}
                 style={[
                   styles.leftInput,
@@ -307,7 +306,7 @@ const Airbnb = () => {
                     innerInputWhereToFocused={innerInputWhereToFocused}
                   />
                 </Animated.View>
-              </AnimPressable>
+              </AnimatedPressable>
             </View>
             <Animated.View
               style={[
@@ -326,7 +325,7 @@ const Airbnb = () => {
                 opacityOpenWhoCloseRev,
                 transformCloseWhen,
               ]}>
-              <AnimPressable
+              <AnimatedPressable
                 onPress={animateWhen}
                 style={[
                   opacityWhen,
@@ -346,7 +345,7 @@ const Airbnb = () => {
                   maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
                   {anyWeek}
                 </Text>
-              </AnimPressable>
+              </AnimatedPressable>
               <Animated.View
                 style={[
                   styles.absolute,
@@ -383,7 +382,7 @@ const Airbnb = () => {
                 opacityClose,
                 transformOpenWhoClose,
               ]}>
-              <AnimPressable
+              <AnimatedPressable
                 onPress={animateOpenWho}
                 style={[
                   styles.row,
@@ -403,7 +402,7 @@ const Airbnb = () => {
                   maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
                   {guestsToShow ? guestsToShow : 'Add guests'}
                 </Text>
-              </AnimPressable>
+              </AnimatedPressable>
               <Animated.View
                 style={[
                   styles.row,
@@ -443,7 +442,7 @@ const Airbnb = () => {
             </Animated.View>
           </View>
           {/* Arrow left button */}
-          <AnimPressable
+          <AnimatedPressable
             style={[
               styles.absolute,
               {top: top - 24},
@@ -454,9 +453,9 @@ const Airbnb = () => {
             ]}
             onPress={animateWhereToInputClose}>
             <MaterialCommunityIcons name={'arrow-left'} size={16} />
-          </AnimPressable>
+          </AnimatedPressable>
           {/* Close button */}
-          <AnimPressable
+          <AnimatedPressable
             style={[
               styles.absolute,
               {top: top - 24},
@@ -468,7 +467,7 @@ const Airbnb = () => {
             ]}
             onPress={animateClose}>
             <MaterialCommunityIcons name={'close'} size={16} />
-          </AnimPressable>
+          </AnimatedPressable>
         </>
       )}
     </>

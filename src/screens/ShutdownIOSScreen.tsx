@@ -8,17 +8,15 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
+import {Defs, LinearGradient, Stop} from 'react-native-svg';
 import {View, StyleSheet, ImageBackground} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import Svg, {Defs, LinearGradient, Stop, Rect} from 'react-native-svg';
 
 import StatusBarManager from '@components/StatusBarManager';
 import AnimatedText from '@components/shutdownIOS/AnimatedText';
 import {HEIGHT_SCR, WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {AnimatedRect, AnimatedSvg} from '@components/AnimatedComponents';
 import {SLIDER_FINAL_W, SLIDER_H, SLIDER_W} from '@components/shutdownIOS/data';
-
-const AnimSvg = Animated.createAnimatedComponent(Svg);
-const AnimRect = Animated.createAnimatedComponent(Rect);
 
 const ShutdownIOS = () => {
   const sliderWidth = useSharedValue(SLIDER_W);
@@ -104,7 +102,7 @@ const ShutdownIOS = () => {
         <GestureDetector gesture={gesture}>
           <Animated.View style={styles.sliderContainer}>
             <View style={styles.sliderInnerContainer}>
-              <AnimSvg width={SLIDER_W} height={SLIDER_H}>
+              <AnimatedSvg width={SLIDER_W} height={SLIDER_H}>
                 <Defs>
                   <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
                     <Stop offset="0%" stopColor="#bf3354" />
@@ -112,7 +110,7 @@ const ShutdownIOS = () => {
                     <Stop offset="100%" stopColor="#fe5334" />
                   </LinearGradient>
                 </Defs>
-                <AnimRect
+                <AnimatedRect
                   x="0"
                   y="0"
                   rx="40"
@@ -133,7 +131,7 @@ const ShutdownIOS = () => {
                     />
                   ))}
                 </View>
-              </AnimSvg>
+              </AnimatedSvg>
             </View>
             <Animated.View style={[powerBtn, styles.powerBtn]}>
               <Feather name="power" size={36} color={'#da0b13'} />

@@ -10,9 +10,9 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedProps,
 } from 'react-native-reanimated';
+import {Image, StyleSheet, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Svg, Defs, Path, Stop, Polygon, LinearGradient} from 'react-native-svg';
 
@@ -25,15 +25,16 @@ import {
   FULL_CIRCLE,
   OUTER_BORDER_W,
 } from '@components/lottery/constants';
+import {
+  AnimatedSvg,
+  AnimatedPath,
+  AnimatedPressable,
+} from '@components/AnimatedComponents';
 import Slice from '@components/lottery/Slice';
-import {AnimatedSvg} from '@components/AnimatedSvg';
 import {HEIGHT_SCR, isIOS, WIDTH} from '@utils/device';
 import {ListRefProps} from '@components/lottery/types';
 import StatusBarManager from '@components/StatusBarManager';
 import ChooseOption from '@components/lottery/ChooseOption';
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 export const WHEEL_OPTIONS = [
   10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,
@@ -283,11 +284,11 @@ const LotteryScreen = () => {
         </Svg>
 
         {/* Spinner Icon */}
-        <AnimPressable
+        <AnimatedPressable
           onPress={spinIt}
           style={[pulseScale, styles.btnContainer]}>
           <Fontisto name="spinner-refresh" size={26} color={'white'} />
-        </AnimPressable>
+        </AnimatedPressable>
       </View>
     </>
   );

@@ -2,7 +2,6 @@ import {
   Text,
   View,
   Image,
-  Pressable,
   StyleSheet,
   GestureResponderEvent,
 } from 'react-native';
@@ -21,9 +20,8 @@ import {TMessageItem} from './types';
 import {DELAY_LONG_PRESS} from './data';
 import {typography} from '@utils/typography';
 import {HAPTIC_CONFIG} from '@utils/haptics';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 import {isAndroid, isIOS, MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
-
-const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
 const triggerLongPressHaptik = () => {
   if (isAndroid) {
@@ -152,7 +150,7 @@ const MessageItem = React.memo(
               ]}
             />
           )}
-          <AnimPressable
+          <AnimatedPressable
             pointerEvents={'box-only'}
             onLongPress={onLongPress}
             delayLongPress={DELAY_LONG_PRESS}
@@ -188,7 +186,7 @@ const MessageItem = React.memo(
                 <Image source={item.emoji} style={styles.smallEmoji} />
               </Animated.View>
             )}
-          </AnimPressable>
+          </AnimatedPressable>
           {item?.isOwnerOfChat && (
             <Animated.Image
               source={item.image}

@@ -1,4 +1,4 @@
-import Animated, {
+import {
   interpolate,
   processColor,
   interpolateColor,
@@ -6,14 +6,12 @@ import Animated, {
   createAnimatedPropAdapter,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Path} from 'react-native-svg';
 import {StyleSheet} from 'react-native';
 
 import {TSlice} from './types';
 import {gapSize, total} from './data';
 import {createRoundedPieSlicePath} from './utils';
-
-const AnimatedPath = Animated.createAnimatedComponent(Path);
+import {AnimatedPath} from '@components/AnimatedComponents';
 
 const Slice = ({
   item,

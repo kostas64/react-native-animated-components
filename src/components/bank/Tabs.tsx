@@ -1,4 +1,4 @@
-import Animated, {
+import {
   withTiming,
   interpolate,
   useSharedValue,
@@ -10,10 +10,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import {G, Path, Rect, Svg} from 'react-native-svg';
 
 import {TabsProps} from './types';
-import {isIOS} from '@utils/device';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
+import {isIOS, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {chevronDown, chevronUp, SELECTED_TYPE} from './data';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const Tabs = ({selected = SELECTED_TYPE.EARNINGS, onSelectType}: TabsProps) => {
   const progress = useSharedValue(0);
@@ -56,10 +57,14 @@ const Tabs = ({selected = SELECTED_TYPE.EARNINGS, onSelectType}: TabsProps) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View
+      <AnimatedPressable
         style={[styles.tabContainer, earningsStyle]}
-        onTouchStart={() => onSelectType(SELECTED_TYPE.EARNINGS)}>
-        <Text style={styles.label}>{'Earnings'}</Text>
+        onPress={() => onSelectType(SELECTED_TYPE.EARNINGS)}>
+        <Text
+          style={styles.label}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          {'Earnings'}
+        </Text>
         <View>
           <Svg width={24} height={24}>
             <CommonGradient id={'chevronDown'} />
@@ -75,11 +80,15 @@ const Tabs = ({selected = SELECTED_TYPE.EARNINGS, onSelectType}: TabsProps) => {
             </G>
           </Svg>
         </View>
-      </Animated.View>
-      <Animated.View
+      </AnimatedPressable>
+      <AnimatedPressable
         style={[styles.tabContainer, spendingsStyle]}
-        onTouchStart={() => onSelectType(SELECTED_TYPE.SPENDINGS)}>
-        <Text style={styles.label}>{'Spendings'}</Text>
+        onPress={() => onSelectType(SELECTED_TYPE.SPENDINGS)}>
+        <Text
+          style={styles.label}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          {'Spendings'}
+        </Text>
         <View style={styles.paddingRightIcon}>
           <Svg width={20} height={20}>
             <CommonGradient id={'chevronDown'} />
@@ -95,7 +104,7 @@ const Tabs = ({selected = SELECTED_TYPE.EARNINGS, onSelectType}: TabsProps) => {
             </G>
           </Svg>
         </View>
-      </Animated.View>
+      </AnimatedPressable>
     </View>
   );
 };

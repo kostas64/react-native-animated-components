@@ -1,6 +1,5 @@
 import React from 'react';
-import Animated from 'react-native-reanimated';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 
@@ -11,6 +10,7 @@ import {
 import {typography} from '@utils/typography';
 import FadeInTransition from './FadeInTransition';
 import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const TABS = [
   {
@@ -22,8 +22,6 @@ const TABS = [
     screen: 'ScreenTransitionHomework',
   },
 ];
-
-const AnimTouch = Animated.createAnimatedComponent(Pressable);
 
 const SubjectsHeader = () => {
   const isFocused = useIsFocused();
@@ -38,11 +36,11 @@ const SubjectsHeader = () => {
     insets.top > 24 ? (isIOS ? insets.top : insets.top + 12) : 32;
 
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View style={styles.whiteBg}>
       <FadeInTransition index={0} direction="left" animate={isFocused}>
         <View style={[styles.container, {paddingTop}]}>
           {TABS.map((tab, index) => (
-            <AnimTouch
+            <AnimatedPressable
               key={`tab-${index}`}
               style={styles.tabContainer}
               onPress={() =>
@@ -53,7 +51,7 @@ const SubjectsHeader = () => {
                 style={[styles.tab, stackIndex === index && {color: 'black'}]}>
                 {tab.label}
               </Text>
-            </AnimTouch>
+            </AnimatedPressable>
           ))}
         </View>
       </FadeInTransition>
@@ -64,6 +62,9 @@ const SubjectsHeader = () => {
 export default SubjectsHeader;
 
 const styles = StyleSheet.create({
+  whiteBg: {
+    backgroundColor: 'white',
+  },
   container: {
     width: '100%',
     flexDirection: 'row',

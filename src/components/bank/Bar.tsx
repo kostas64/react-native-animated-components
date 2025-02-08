@@ -11,8 +11,8 @@ import {BarProps} from './types';
 import {shadows} from './styles';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
-import {AnimatedSvg} from '@components/AnimatedSvg';
-import {AnimatedRect} from '@components/AnimatedRect';
+import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {AnimatedRect, AnimatedSvg} from '@components/AnimatedComponents';
 
 const MAX_BAR_HEIGHT = 172;
 
@@ -74,7 +74,9 @@ const Bar = ({
           />
         </AnimatedSvg>
       </View>
-      <Text style={[styles.month, isSelected ? styles.selectedMonth : {}]}>
+      <Text
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+        style={[styles.month, isSelected ? styles.selectedMonth : {}]}>
         {month}
       </Text>
     </Pressable>
