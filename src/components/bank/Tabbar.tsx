@@ -1,9 +1,13 @@
-import {
+import Animated, {
+  withDelay,
+  withSpring,
   withTiming,
+  interpolate,
   useSharedValue,
   useAnimatedProps,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {LinearGradient, Rect, Stop, Svg} from 'react-native-svg';
@@ -39,18 +43,46 @@ const ICON_CONTAINER_SIZE = 60;
 
 const Tabbar = ({navigation}: BottomTabBarProps) => {
   const activeTab = useSharedValue(0);
+  const initialPosition = useSharedValue(0);
   const insets = useSafeAreaInsets();
 
   const spacing = insets.bottom > 0 ? insets.bottom + 8 : 24;
-  const tabbarContainerHeight = TABBAR_HEIGHT + 2 * spacing;
+  const tabbarContainerHeight = TABBAR_HEIGHT + 2.25 * spacing;
 
-  const onItemPress = (index: number) => {
+  const onItemPress = useCallback((index: number) => {
     navigation.navigate(tabs?.[index]?.name);
     activeTab.value = index;
-  };
+  }, []);
+
+  const onLayout = useCallback(() => {
+    requestAnimationFrame(() => {
+      initialPosition.value = withDelay(
+        500,
+        withSpring(1, {damping: 80, stiffness: 200}),
+      );
+    });
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(
+          initialPosition.value,
+          [0, 1],
+          [tabbarContainerHeight, 0],
+        ),
+      },
+    ],
+  }));
 
   return (
-    <View style={[styles.container, {height: tabbarContainerHeight}]}>
+    <Animated.View
+      onLayout={onLayout}
+      style={[
+        styles.container,
+        animatedStyle,
+        {height: tabbarContainerHeight},
+      ]}>
       <Svg
         width={WIDTH}
         height={tabbarContainerHeight}
@@ -61,8 +93,8 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
           y1="0%"
           x2="0%"
           y2="100%">
-          <Stop offset="0%" stopOpacity="0" stopColor={'white'} />
-          <Stop offset="45%" stopOpacity="1" stopColor={'white'} />
+          <Stop offset="0%" stopOpacity="0" stopColor={'#f7f7f7'} />
+          <Stop offset="35%" stopOpacity="1" stopColor={'#f7f7f7'} />
         </LinearGradient>
         <Rect
           width={WIDTH}
@@ -70,7 +102,7 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
           fill={'url(#tabbarBackground)'}
         />
       </Svg>
-      <View style={[styles.tabbarContainer, {top: 1.25 * spacing}]}>
+      <View style={[styles.tabbarContainer, {top: 1.5 * spacing}]}>
         <Svg
           width={TABBAR_WIDTH}
           height={TABBAR_HEIGHT}
@@ -123,7 +155,7 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
           })}
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
