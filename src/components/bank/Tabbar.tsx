@@ -1,4 +1,4 @@
-import Animated, {
+import {
   withTiming,
   useSharedValue,
   useAnimatedProps,
@@ -12,6 +12,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {tabs} from './data';
 import {WIDTH} from '@utils/device';
 import CommonGradient from './CommonGradient';
+import {AnimatedSvg} from '@components/AnimatedSvg';
 
 const TABS = [
   {
@@ -35,7 +36,6 @@ const TABS = [
 const TABBAR_HEIGHT = 72;
 const TABBAR_WIDTH = 264;
 const ICON_CONTAINER_SIZE = 60;
-const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
 const Tabbar = ({navigation}: BottomTabBarProps) => {
   const activeTab = useSharedValue(0);

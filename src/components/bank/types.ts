@@ -42,3 +42,23 @@ export type CardDetailRowProps = {
   value: string;
   pressedStyle?: StyleProp<ViewStyle>;
 };
+
+export type BarProps = {
+  maxValue: number;
+  isSelected: boolean;
+  index: number;
+  value: number;
+  month: string;
+  onSelect: (index: number) => void;
+};
+
+export type BarItemProps = {
+  month: string;
+  earnings: number;
+  spendings: number;
+};
+
+export type TabsProps = {
+  selected: string;
+  onSelectType: (value: string) => void;
+};

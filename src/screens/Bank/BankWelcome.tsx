@@ -35,7 +35,7 @@ const BankWelcome = () => {
     <View style={styles.container}>
       <BankWelcomeText style={{top}} />
       <Cards
-        sharedElementTag={isIOS ? 'cards' : undefined}
+        sharedElementTag={isIOS ? 'cards' : 'cardAndroid'}
         style={_ => [
           {top: insets.top + 210},
           changeShadow && shadows.lowShadow,

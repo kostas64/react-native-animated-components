@@ -26,12 +26,12 @@ import {
   OUTER_BORDER_W,
 } from '@components/lottery/constants';
 import Slice from '@components/lottery/Slice';
+import {AnimatedSvg} from '@components/AnimatedSvg';
 import {HEIGHT_SCR, isIOS, WIDTH} from '@utils/device';
 import {ListRefProps} from '@components/lottery/types';
 import StatusBarManager from '@components/StatusBarManager';
 import ChooseOption from '@components/lottery/ChooseOption';
 
-const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -184,7 +184,7 @@ const LotteryScreen = () => {
           selectOption={selectOption}
         />
 
-        <AnimatedSVG
+        <AnimatedSvg
           width={SVG_W + 16}
           height={SVG_H + 16}
           viewBox={`-${OUTER_BORDER_W / 2 + 8} -${OUTER_BORDER_W / 2 + 8} ${
@@ -262,7 +262,7 @@ const LotteryScreen = () => {
             y={-18 + (SVG_W - 2 * CENTER_I_W + 20) / 2}
             animatedProps={animPropsInnerCircle}
           />
-        </AnimatedSVG>
+        </AnimatedSvg>
 
         {/* Pointer Container */}
         <Svg width={38} height={48} style={styles.pointerContainer}>
