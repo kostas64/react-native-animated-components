@@ -79,3 +79,8 @@ export type TransactionItemProps = {
   amount: number;
   date: string;
 };
+
+export type StocksItemProps = {
+  name: string;
+  values: number[];
+};

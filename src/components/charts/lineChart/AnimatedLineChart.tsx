@@ -32,7 +32,15 @@ import {typography} from '@utils/typography';
 import {AnimatedPath} from '@components/AnimatedComponents';
 
 const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
-  const {data, width, height} = props;
+  const {
+    data,
+    width,
+    height,
+    noGrid,
+    strokeColor,
+    strokeBackground,
+    shouldCancelWhenOutsideGesture = true,
+  } = props;
   const maxValue = Math.max(...data);
   const minValue = Math.min(...data);
 
@@ -55,6 +63,7 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
 
   const retextStyle = [
     styles.chartHeaderLabel,
+    strokeColor ? {color: strokeColor} : {},
     isIOS ? styles.lineH19 : styles.androidReText,
   ];
 
@@ -194,7 +203,7 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
   }));
 
   const panGesture = Gesture.Pan()
-    .shouldCancelWhenOutside(true)
+    .shouldCancelWhenOutside(shouldCancelWhenOutsideGesture)
     .onBegin(e => {
       if (e.x >= 0 && e.x <= width && e.y >= 0 && e.y <= height) {
         indicatorPos.value = e.x - 1;
@@ -205,6 +214,10 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
       if (e.x >= 0 && e.x <= width && e.y >= 0 && e.y <= height) {
         indicatorPos.value = e.x - 1;
         animatedText.value = `${data[Math.floor(e.x / step)]}`;
+
+        if (Math.floor(e.x / step) === data.length) {
+          animatedText.value = `${data?.[data?.length - 1]}`;
+        }
       }
     })
     .onFinalize(() => {
@@ -214,44 +227,61 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
 
   return (
     <View>
-      <View style={[styles.chartBaseContainer, {height, width}]}>
+      <View
+        style={[
+          styles.chartBaseContainer,
+          noGrid && styles.noBorder,
+          {height, width},
+        ]}>
         {/* Y Axis Values */}
-        <View style={[styles.stepValueContainer, {height}]}>
-          {stepValues.map((value, index) => (
-            <Text
-              key={index}
-              style={styles.stepValueLabel}
-              maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
-              {value}
-            </Text>
+        {!noGrid && (
+          <View style={[styles.stepValueContainer, {height}]}>
+            {stepValues.map((value, index) => (
+              <Text
+                key={index}
+                style={styles.stepValueLabel}
+                maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
+                {value}
+              </Text>
+            ))}
+          </View>
+        )}
+        {!noGrid &&
+          iterateV.map((_, index) => (
+            <View
+              key={`vertival-${index}`}
+              style={[
+                styles.verticalL,
+                {width: width - 2, top: (height / 5 - 1) * (index + 1)},
+              ]}
+            />
           ))}
-        </View>
-        {iterateV.map((_, index) => (
-          <View
-            key={`vertival-${index}`}
-            style={[
-              styles.verticalL,
-              {width: width - 2, top: (height / 5 - 1) * (index + 1)},
-            ]}
-          />
-        ))}
-        {iterateH.map((_, index) => (
-          <View
-            key={`horizontal-${index}`}
-            style={[
-              styles.horizontalL,
-              {height: height - 2, left: (width / 8) * (index + 1)},
-            ]}
-          />
-        ))}
+        {!noGrid &&
+          iterateH.map((_, index) => (
+            <View
+              key={`horizontal-${index}`}
+              style={[
+                styles.horizontalL,
+                {height: height - 2, left: (width / 8) * (index + 1)},
+              ]}
+            />
+          ))}
       </View>
 
       <Svg width={width} height={height}>
         {/* Define the gradient */}
         <Defs>
           <LinearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <Stop offset="0%" stopColor="#3e5a1d" stopOpacity="0.5" />
-            <Stop offset="100%" stopColor="#3e5a1d" stopOpacity="0" />
+            <Stop
+              offset="0%"
+              stopOpacity="0.5"
+              stopColor={strokeColor || '#3e5a1d'}
+            />
+            <Stop
+              offset="100%"
+              stopColor={strokeColor || '#3e5a1d'}
+              stopOpacity="0"
+            />
           </LinearGradient>
           <ClipPath id="clip">
             <AnimatedPath animatedProps={animatedFillProps} />
@@ -270,34 +300,41 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
         />
         <AnimatedPath
           fill="none"
-          stroke="#3e5a1d"
+          stroke={strokeColor || '#3e5a1d'}
           strokeWidth={3}
           animatedProps={animatedProps}
         />
       </Svg>
 
       {/* X Axis Values */}
-      <View style={styles.yAxisContainer}>
-        {days.map((day, index) => (
-          <View key={`x-axis-${index}`}>
-            <Text
-              style={[styles.day, {width: width / 8}]}
-              maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
-              {day}
-            </Text>
-            <Text
-              style={[styles.dayNumber, {width: width / 8}]}
-              maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
-              {index + 5}
-            </Text>
-          </View>
-        ))}
-      </View>
+      {!noGrid && (
+        <View style={styles.yAxisContainer}>
+          {days.map((day, index) => (
+            <View key={`x-axis-${index}`}>
+              <Text
+                style={[styles.day, {width: width / 8}]}
+                maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+                {day}
+              </Text>
+              <Text
+                style={[styles.dayNumber, {width: width / 8}]}
+                maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+                {index + 5}
+              </Text>
+            </View>
+          ))}
+        </View>
+      )}
 
       {/* Indicator */}
       <Animated.View style={[indicatorStyle, styles.indicator, {height}]} />
       {/* ReText */}
-      <Animated.View style={[styles.retextContainer, retextPosStyle]}>
+      <Animated.View
+        style={[
+          styles.retextContainer,
+          strokeBackground ? {backgroundColor: strokeBackground} : {},
+          retextPosStyle,
+        ]}>
         <ReText text={formattedText} style={retextStyle} />
       </Animated.View>
 
@@ -389,5 +426,8 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     color: '#333333',
     fontFamily: typography.light,
+  },
+  noBorder: {
+    borderWidth: 0,
   },
 });

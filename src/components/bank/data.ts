@@ -2,6 +2,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+import {generateStockData} from './utils';
 import {TransactionItemProps} from './types';
 import BankHome from '@screens/Bank/BankHome';
 import BankStocks from '@screens/Bank/BankStocks';
@@ -147,3 +148,28 @@ export const CARD_TRANSACTIONS: TransactionItemProps[] = [
     date: '01 Jul 24',
   },
 ];
+
+export const STOCK_NAMES = [
+  'AAPL',
+  'GOOGL',
+  'AMZN',
+  'MSFT',
+  'TSLA',
+  'NFLX',
+  'NVDA',
+  'META',
+  'IBM',
+  'INTC',
+  'AMD',
+  'BABA',
+  'ORCL',
+  'ADBE',
+  'PYPL',
+  'CSCO',
+  'PEP',
+  'KO',
+  'DIS',
+  'V',
+];
+
+export const STOCKS_DATA = generateStockData();
