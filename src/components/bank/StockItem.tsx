@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 
+import {shadows} from './styles';
 import {StocksItemProps} from './types';
 import {typography} from '@utils/typography';
 import {ChartRef} from '@components/charts/lineChart/types';
@@ -28,7 +29,12 @@ const StockItem = ({name, values}: StocksItemProps) => {
   }, []);
 
   return (
-    <View style={[styles.container, styles.spaceHorizontal]}>
+    <View
+      style={[
+        styles.container,
+        shadows.veryJustShadow,
+        styles.spaceHorizontal,
+      ]}>
       <View style={styles.gap}>
         <Text style={styles.label}>{name}</Text>
         <Text
@@ -61,6 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
     justifyContent: 'space-between',
   },
   gap: {
