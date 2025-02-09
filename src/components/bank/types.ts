@@ -28,6 +28,7 @@ export type SectionHeaderProps = {
   label: string;
   rightLabel?: string;
   style?: StyleProp<ViewStyle>;
+  onPress?: () => void;
 };
 
 export type CardDetailProps = {
@@ -40,6 +41,7 @@ export type CardDetailProps = {
 export type CardDetailRowProps = {
   label: string;
   value: string;
+  hidden: boolean;
   pressedStyle?: StyleProp<ViewStyle>;
 };
 

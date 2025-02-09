@@ -7,34 +7,43 @@ import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import {isIOS, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
-const SectionHeader = ({label, rightLabel, style}: SectionHeaderProps) => {
+const SectionHeader = ({
+  label,
+  rightLabel,
+  style,
+  onPress,
+}: SectionHeaderProps) => {
   return (
-    <View style={[styles.container, style]}>
+    <View
+      style={[styles.container, !rightLabel && {paddingVertical: 12}, style]}>
       <Text
         style={styles.mainLabel}
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
         {label}
       </Text>
 
-      <Pressable
-        style={({pressed}) => [
-          styles.viewAllContainer,
-          pressed && styles.halfOpacity,
-        ]}>
-        <Svg height={30} width={72}>
-          <CommonGradient id={'viewAll'} />
+      {rightLabel && (
+        <Pressable
+          onPress={onPress}
+          style={({pressed}) => [
+            styles.viewAllContainer,
+            pressed && styles.halfOpacity,
+          ]}>
+          <Svg height={30} width={72}>
+            <CommonGradient id={'viewAll'} />
 
-          <SVGText
-            x="0"
-            y="21"
-            fontSize="16"
-            fill="url(#viewAll)"
-            fontWeight={'600'}
-            fontFamily={isIOS ? 'AvenirNext-Medium' : typography.semiBold}>
-            {rightLabel}
-          </SVGText>
-        </Svg>
-      </Pressable>
+            <SVGText
+              x="0"
+              y="21"
+              fontSize="16"
+              fill="url(#viewAll)"
+              fontWeight={'600'}
+              fontFamily={isIOS ? 'AvenirNext-Medium' : typography.semiBold}>
+              {rightLabel}
+            </SVGText>
+          </Svg>
+        </Pressable>
+      )}
     </View>
   );
 };

@@ -2,6 +2,7 @@ import Animated, {
   withDelay,
   withTiming,
   interpolate,
+  Extrapolation,
   useSharedValue,
   useAnimatedStyle,
   useAnimatedProps,
@@ -17,8 +18,14 @@ import CommonGradient from './CommonGradient';
 import {AnimatedSvg} from '@components/AnimatedComponents';
 import {SM_FONT_UPSCALE_FACTOR, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
-const CardDetailRow = ({label, value, pressedStyle}: CardDetailRowProps) => {
+const CardDetailRow = ({
+  label,
+  value,
+  hidden,
+  pressedStyle,
+}: CardDetailRowProps) => {
   const progress = useSharedValue(0);
+  const progressShow = useSharedValue(90);
 
   const onPressAnimate = () => {
     if (progress.value === 0) {
@@ -30,16 +37,58 @@ const CardDetailRow = ({label, value, pressedStyle}: CardDetailRowProps) => {
     }
   };
 
+  if (hidden) {
+    progressShow.value = withTiming(0);
+  } else {
+    progressShow.value = withTiming(90);
+  }
+
   const copyStyle = useAnimatedStyle(() => ({
     opacity: interpolate(progress.value, [0, 1], [1, 0]),
+    transform: [
+      {
+        translateX: interpolate(
+          progressShow.value,
+          [60, 90],
+          [32, 0],
+          Extrapolation.CLAMP,
+        ),
+      },
+    ],
   }));
 
   const checkStyle = useAnimatedProps(() => ({
     opacity: interpolate(progress.value, [0, 1], [0, 1]),
   }));
 
+  const hiddenValue = useAnimatedStyle(() => ({
+    transform: [
+      {
+        rotateX: `${interpolate(
+          progressShow.value,
+          [0, 45],
+          [0, 90],
+          Extrapolation.CLAMP,
+        )}deg`,
+      },
+      {
+        translateX: interpolate(
+          progressShow.value,
+          [60, 90],
+          [16, 0],
+          Extrapolation.CLAMP,
+        ),
+      },
+    ],
+  }));
+
+  const visibleValue = useAnimatedStyle(() => ({
+    transform: [{rotateX: `${90 - progressShow.value}deg`}],
+  }));
+
   return (
     <Pressable
+      disabled={hidden}
       onPress={onPressAnimate}
       style={({pressed}) => [
         styles.container,
@@ -51,11 +100,16 @@ const CardDetailRow = ({label, value, pressedStyle}: CardDetailRowProps) => {
         {label}
       </Text>
       <View style={styles.valueContainer}>
-        <Text
-          style={styles.value}
+        <Animated.Text
+          style={[styles.value, visibleValue]}
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
           {value}
-        </Text>
+        </Animated.Text>
+        <Animated.Text
+          style={[styles.valueHidden, hiddenValue]}
+          maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+          {value.replace(/[^/ ]/g, '✱')}
+        </Animated.Text>
         <View>
           <AnimatedSvg
             width={14}
@@ -88,6 +142,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: 'row',
     alignItems: 'center',
+    overflow: 'hidden',
     justifyContent: 'space-between',
   },
   valueContainer: {
@@ -106,5 +161,15 @@ const styles = StyleSheet.create({
   halfOpacity: {
     opacity: 0.5,
     backgroundColor: '#d9d9d9',
+  },
+  valueHidden: {
+    color: 'black',
+    fontSize: 10,
+    position: 'absolute',
+    right: 20,
+    top: 3,
+    transform: [{rotateX: '90deg'}],
+    backfaceVisibility: 'hidden',
+    fontFamily: typography.regular,
   },
 });

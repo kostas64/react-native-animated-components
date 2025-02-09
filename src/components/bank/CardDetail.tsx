@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
 import {CardDetailProps} from './types';
+import {validateBiometrics} from './utils';
 import SectionHeader from './SectionHeader';
 import CardDetailRow from './CardDetailRow';
 
@@ -12,18 +13,40 @@ const CardDetail = ({
   expirationDate,
   style,
 }: CardDetailProps) => {
+  const [showData, setShowData] = useState(false);
+
+  const onPressShowData = async () => {
+    validateBiometrics()
+      .then(resultObject => {
+        if (resultObject?.success) {
+          setShowData(true);
+        }
+      })
+      .catch(e => console.log('No biometrics ', e));
+  };
+
   return (
     <View style={style}>
-      <SectionHeader label="Card Detail" rightLabel="Show All" />
+      <SectionHeader
+        label="Card Detail"
+        rightLabel="Show All"
+        onPress={onPressShowData}
+      />
 
       <View style={[styles.boxContainer, shadows.veryJustShadow]}>
         <CardDetailRow
+          hidden={!showData}
           label={'Holder Name'}
           value={cardholderName}
           pressedStyle={styles.pressedFirst}
         />
-        <CardDetailRow label={'Card Number'} value={cardNumber} />
         <CardDetailRow
+          hidden={!showData}
+          label={'Card Number'}
+          value={cardNumber}
+        />
+        <CardDetailRow
+          hidden={!showData}
           label={'Exp. Date'}
           value={expirationDate}
           pressedStyle={styles.pressedLast}

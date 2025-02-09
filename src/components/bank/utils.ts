@@ -1,3 +1,9 @@
+import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
+
+const rnBiometrics = new ReactNativeBiometrics({
+  allowDeviceCredentials: true,
+});
+
 const STOCK_NAMES = [
   'AAPL',
   'GOOGL',
@@ -35,4 +41,22 @@ export const generateStockData = () => {
   });
 
   return stocks;
+};
+
+export const validateBiometrics = async () => {
+  const {biometryType} = await rnBiometrics?.isSensorAvailable();
+
+  if (
+    biometryType === BiometryTypes.Biometrics ||
+    biometryType === BiometryTypes.FaceID ||
+    biometryType === BiometryTypes.TouchID
+  ) {
+    return rnBiometrics
+      .simplePrompt({promptMessage: "Verify it's you"})
+      .catch(() => {
+        Promise.reject();
+      });
+  }
+
+  return Promise.reject();
 };
