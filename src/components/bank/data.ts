@@ -149,27 +149,4 @@ export const CARD_TRANSACTIONS: TransactionItemProps[] = [
   },
 ];
 
-export const STOCK_NAMES = [
-  'AAPL',
-  'GOOGL',
-  'AMZN',
-  'MSFT',
-  'TSLA',
-  'NFLX',
-  'NVDA',
-  'META',
-  'IBM',
-  'INTC',
-  'AMD',
-  'BABA',
-  'ORCL',
-  'ADBE',
-  'PYPL',
-  'CSCO',
-  'PEP',
-  'KO',
-  'DIS',
-  'V',
-];
-
 export const STOCKS_DATA = generateStockData();

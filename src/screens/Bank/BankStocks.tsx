@@ -1,22 +1,47 @@
-import React from 'react';
+import {
+  View,
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
+import React, {useCallback} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {FlatList, Image, StatusBar, StyleSheet, View} from 'react-native';
+import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
 import {typography} from '@utils/typography';
 import {STOCKS_DATA} from '@components/bank/data';
 import StockItem from '@components/bank/StockItem';
 import {StocksItemProps} from '@components/bank/types';
-import SectionHeader from '@components/bank/SectionHeader';
+import StocksHeader from '@components/bank/StocksHeader';
 
 const BankStocks = () => {
   const isFocused = useIsFocused();
+  const showBorder = useSharedValue(false);
+
   const insets = useSafeAreaInsets();
   const paddingTop = insets.top > 0 ? insets.top + 4 : 24;
 
   if (isFocused) {
     StatusBar.setBarStyle('dark-content');
   }
+
+  const onScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const contentOffset = e.nativeEvent.contentOffset;
+
+    if (contentOffset.y > 0 && !showBorder.value) {
+      showBorder.value = true;
+    } else if (contentOffset.y === 0 && showBorder.value) {
+      showBorder.value = false;
+    }
+  }, []);
+
+  const separatorStyle = useAnimatedStyle(() => ({
+    borderBottomWidth: showBorder.value ? 1 : 0,
+    borderBottomColor: '#e3e3e3',
+  }));
 
   const renderItem = ({
     item,
@@ -29,16 +54,14 @@ const BankStocks = () => {
   };
   return (
     <View style={[styles.container, {paddingTop}]}>
-      <View style={[styles.spaceHorizontal, styles.headerContainer]}>
-        <Image
-          source={require('../../assets/img/bank/stocks.png')}
-          style={styles.icon}
-        />
-        <SectionHeader label="Stocks" />
-      </View>
+      <StocksHeader style={separatorStyle} />
       <FlatList
         data={STOCKS_DATA}
         renderItem={renderItem}
+        onScroll={onScroll}
+        onScrollEndDrag={onScroll}
+        onMomentumScrollEnd={onScroll}
+        onMomentumScrollBegin={onScroll}
         contentContainerStyle={styles.contentContainer}
       />
     </View>
@@ -64,6 +87,9 @@ const styles = StyleSheet.create({
   },
   spaceHorizontal: {
     marginHorizontal: 24,
+  },
+  spacePadHorizontal: {
+    paddingHorizontal: 24,
   },
   contentContainer: {
     gap: 16,

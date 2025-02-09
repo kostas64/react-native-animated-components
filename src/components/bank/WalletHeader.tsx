@@ -1,5 +1,6 @@
 import React from 'react';
 import {G, Path, Svg} from 'react-native-svg';
+import Animated from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
 
@@ -13,7 +14,8 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
   const paddingTop = insets.top > 0 ? insets.top + 4 : 24;
 
   return (
-    <View style={[{paddingTop}, styles.rowCenter, styles.between, style]}>
+    <Animated.View
+      style={[{paddingTop}, styles.rowCenter, styles.between, style]}>
       <View style={styles.gap}>
         <Text
           style={styles.label}
@@ -43,7 +45,7 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
           </G>
         </Svg>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

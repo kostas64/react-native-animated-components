@@ -1,6 +1,14 @@
-import React from 'react';
+import {
+  View,
+  FlatList,
+  StatusBar,
+  StyleSheet,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
+import React, {useCallback} from 'react';
 import {useIsFocused} from '@react-navigation/native';
-import {FlatList, StatusBar, StyleSheet, View} from 'react-native';
+import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
 import WalletHeader from '@components/bank/WalletHeader';
 import WalletCharts from '@components/bank/WalletCharts';
@@ -8,6 +16,23 @@ import CardTransactions from '@components/bank/CardTransactions';
 
 const BankWallet = () => {
   const isFocused = useIsFocused();
+  const showBorder = useSharedValue(false);
+
+  const onScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const contentOffset = e.nativeEvent.contentOffset;
+
+    if (contentOffset.y > 0 && !showBorder.value) {
+      showBorder.value = true;
+    } else if (contentOffset.y === 0 && showBorder.value) {
+      showBorder.value = false;
+    }
+  }, []);
+
+  const separatorStyle = useAnimatedStyle(() => ({
+    borderBottomWidth: showBorder.value ? 1 : 0,
+    borderBottomColor: '#e3e3e3',
+    paddingBottom: 8,
+  }));
 
   if (isFocused) {
     StatusBar.setBarStyle('dark-content');
@@ -16,11 +41,16 @@ const BankWallet = () => {
   return (
     <>
       <View style={styles.container}>
-        <WalletHeader style={styles.spaceBottom} />
+        <WalletHeader style={[styles.spaceBottom, separatorStyle]} />
         <FlatList
           data={[]}
           renderItem={() => null}
+          onScroll={onScroll}
+          onScrollEndDrag={onScroll}
+          onMomentumScrollBegin={onScroll}
+          onMomentumScrollEnd={onScroll}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.xsmSpaceTop}
           ListHeaderComponent={<WalletCharts style={styles.smSpaceTop} />}
           ListFooterComponent={<CardTransactions style={styles.spaceTop} />}
           ListFooterComponentStyle={styles.xlSpaceBottom}
@@ -42,12 +72,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   smSpaceTop: {
-    marginTop: 10,
     marginHorizontal: 24,
   },
   spaceBottom: {
-    marginBottom: 10,
     paddingHorizontal: 24,
+  },
+  xsmSpaceTop: {
+    paddingTop: 16,
   },
   xlSpaceBottom: {
     marginBottom: 142,
