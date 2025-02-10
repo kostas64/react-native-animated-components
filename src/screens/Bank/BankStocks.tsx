@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: 'visible',
-    backgroundColor: 'f7f7f7',
+    backgroundColor: '#f7f7f7',
   },
   label: {
     fontSize: 16,
