@@ -82,7 +82,7 @@ const Card = ({
           <Stop offset="100%" stopColor={stopColors?.[2]} stopOpacity="0.8" />
         </AnimatedGradient>
         <View style={styles.cardBody}>
-          <FontAwesome name="bank" size={32} color={'white'} />
+          <FontAwesome name="bank" size={26} color={'white'} />
           <Text
             style={styles.cardNumber}
             maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
