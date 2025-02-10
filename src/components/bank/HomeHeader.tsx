@@ -22,7 +22,7 @@ const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
 
   return (
     <>
-      <View style={[styles.container, isIOS && styles.ios, style]}>
+      <View style={[styles.container, style]}>
         <View style={styles.avatarLabelContainer}>
           <View style={styles.avatarContainer}>
             <Image
@@ -108,10 +108,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#505050',
     backgroundColor: '#282626',
-  },
-  ios: {
-    marginTop: 4,
-    borderTopLeftRadius: 52,
-    borderTopRightRadius: 52,
   },
 });

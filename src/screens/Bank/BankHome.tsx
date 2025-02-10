@@ -1,9 +1,8 @@
 import React from 'react';
 import {useIsFocused} from '@react-navigation/native';
-import {ScrollView, StatusBar, StyleSheet} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {isIOS} from '@utils/device';
 import {cards} from '@components/bank/constants';
 import HomeHeader from '@components/bank/HomeHeader';
 import CardDetail from '@components/bank/CardDetail';
@@ -24,7 +23,7 @@ const BankHome = () => {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.spaceBottom}>
-        <HomeHeader style={[styles.headerContainer, {paddingTop}]} />
+        <HomeHeader style={{paddingTop}} />
         <HomeActions style={styles.actionsContainer} />
         <RecentTransactions style={styles.transactionsContainer} />
         <CardDetail {...cards?.[0]} style={styles.transactionsContainer} />
@@ -40,9 +39,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f7f7f7',
   },
-  headerContainer: {
-    marginHorizontal: isIOS ? 4 : 0,
-  },
   actionsContainer: {
     marginTop: 90,
     marginHorizontal: 28,
@@ -52,6 +48,6 @@ const styles = StyleSheet.create({
     marginLeft: 28,
   },
   spaceBottom: {
-    paddingBottom: 204,
+    paddingBottom: 146,
   },
 });

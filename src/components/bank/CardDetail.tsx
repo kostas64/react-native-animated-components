@@ -1,16 +1,11 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
-import Timer from './Timer';
 import {shadows} from './styles';
 import {CardDetailProps} from './types';
 import {validateBiometrics} from './utils';
 import SectionHeader from './SectionHeader';
 import CardDetailRow from './CardDetailRow';
-
-const MINUTES = 10;
-const SECONDS_IN_MINUTE = 60;
-const SESSION = MINUTES * SECONDS_IN_MINUTE;
 
 const CardDetail = ({
   cardNumber,
@@ -19,7 +14,6 @@ const CardDetail = ({
   style,
 }: CardDetailProps) => {
   let timer: number | null = null;
-  const [sessionLeft, setSessionLeft] = useState(SESSION);
   const [showData, setShowData] = useState(false);
 
   const onPressShowData = async () => {
@@ -35,30 +29,6 @@ const CardDetail = ({
       })
       .catch(e => console.log('No biometrics ', e));
   };
-
-  const refreshSession = useCallback(() => {
-    setSessionLeft(SESSION);
-  }, []);
-
-  useEffect(() => {
-    if (sessionLeft <= 0) {
-      !!timer && clearInterval(timer);
-      setSessionLeft(SESSION);
-      setShowData(false);
-    }
-  }, [sessionLeft]);
-
-  useEffect(() => {
-    if (showData) {
-      timer = setInterval(() => {
-        setSessionLeft(prevTime => prevTime - 1);
-      }, 1000);
-
-      return () => {
-        !!timer && clearInterval(timer);
-      };
-    }
-  }, [showData]);
 
   return (
     <>
@@ -89,13 +59,6 @@ const CardDetail = ({
           />
         </View>
       </View>
-      {showData && (
-        <Timer
-          onPress={refreshSession}
-          time={sessionLeft}
-          style={styles.timerContainer}
-        />
-      )}
     </>
   );
 };
