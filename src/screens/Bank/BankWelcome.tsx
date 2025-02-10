@@ -8,6 +8,7 @@ import Cards from '@components/bank/Cards';
 import Button from '@components/bank/Button';
 import {shadows} from '@components/bank/styles';
 import {TBankNavigationProps} from './BankStack';
+import {CARD_HEIGHT} from '@components/bank/constants';
 import BankWelcomeText from '@components/bank/BankWelcomeText';
 
 const BankWelcome = () => {
@@ -16,7 +17,7 @@ const BankWelcome = () => {
 
   const [changeShadow, setChangeShadow] = useState(false);
 
-  const top = insets.top + WIDTH - 30;
+  const top = insets.top + 210 + CARD_HEIGHT - 20;
   const bottom = insets.bottom > 0 ? insets.bottom + 8 : 24;
 
   const onPress = () => {

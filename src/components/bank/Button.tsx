@@ -2,11 +2,11 @@ import React from 'react';
 import {Rect, Svg} from 'react-native-svg';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
-import {WIDTH} from '@utils/device';
 import {ButtonProps} from './types';
 import {BUTTON_HEIGHT} from './constants';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
+import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const Button = ({label, style, onPress}: ButtonProps) => {
   return (
@@ -29,7 +29,11 @@ const Button = ({label, style, onPress}: ButtonProps) => {
           fill={'url(#gradient)'}
         />
       </Svg>
-      <Text style={styles.label}>{label}</Text>
+      <Text
+        style={styles.label}
+        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+        {label}
+      </Text>
     </Pressable>
   );
 };

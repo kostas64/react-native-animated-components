@@ -39,6 +39,7 @@ const CardDetailRow = ({
 
   if (hidden) {
     progressShow.value = withTiming(0);
+    progress.value = 0;
   } else {
     progressShow.value = withTiming(90);
   }

@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     marginLeft: 28,
   },
   spaceBottom: {
-    paddingBottom: 142,
+    paddingBottom: 204,
   },
 });

@@ -20,9 +20,9 @@ import {
   CARD_FOOTER_HEIGHT,
 } from './constants';
 import {
+  isIOS,
   SM_FONT_UPSCALE_FACTOR,
-  MED_FONT_UPSCALE_FACTOR,
-  MAX_FONT_UPSCALE_FACTOR,
+  XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {CardProps} from './types';
 import {typography} from '@utils/typography';
@@ -85,7 +85,7 @@ const Card = ({
           <FontAwesome name="bank" size={32} color={'white'} />
           <Text
             style={styles.cardNumber}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+            maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
             {cardNumber}
           </Text>
         </View>
@@ -112,12 +112,12 @@ const Card = ({
           <View style={styles.rowCenter}>
             <Text
               style={styles.offWhiteLabel}
-              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+              maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
               {'Exp.'}
             </Text>
             <Text
               style={styles.whiteLabel}
-              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+              maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
               {expirationDate}
             </Text>
           </View>
@@ -153,18 +153,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   cardFooter: {
-    padding: 20,
+    paddingHorizontal: 20,
     height: (CARD_HEIGHT * 2) / 6,
     justifyContent: 'space-between',
   },
   offWhiteLabel: {
-    fontSize: 14,
+    fontSize: isIOS ? 14 : 12,
     color: '#797979',
     marginRight: 8,
     fontFamily: typography.medium,
   },
   whiteLabel: {
-    fontSize: 14,
+    fontSize: isIOS ? 14 : 12,
     color: 'white',
     fontFamily: typography.medium,
   },

@@ -86,3 +86,9 @@ export type StocksItemProps = {
   name: string;
   values: number[];
 };
+
+export type TimerProps = {
+  onPress: () => void;
+  time: number;
+  style?: StyleProp<ViewStyle>;
+};
