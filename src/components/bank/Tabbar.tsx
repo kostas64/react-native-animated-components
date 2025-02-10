@@ -37,9 +37,9 @@ const TABS = [
   },
 ];
 
-const TABBAR_HEIGHT = 72;
-const TABBAR_WIDTH = 264;
-const ICON_CONTAINER_SIZE = 60;
+const TABBAR_HEIGHT = 68;
+const TABBAR_WIDTH = 250;
+const ICON_CONTAINER_SIZE = 56;
 
 const Tabbar = ({navigation}: BottomTabBarProps) => {
   const activeTab = useSharedValue(0);
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-    padding: 20,
+    padding: 18,
     borderRadius: 32,
     backgroundColor: '#303030',
   },
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   buttonSvg: {
     overflow: 'hidden',
-    borderRadius: 32,
+    borderRadius: ICON_CONTAINER_SIZE / 2,
     position: 'absolute',
     backgroundColor: 'white',
   },
