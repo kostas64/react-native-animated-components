@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   useDrawerStatus,
   useDrawerProgress,
@@ -16,8 +10,8 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import StatusBarManager from '@components/StatusBarManager';
 import DrawerContent from '@components/drawerInterpolate/DrawerContent';
 import {DrawerTypes, TDrawerList} from '@components/drawerInterpolate/types';
@@ -92,11 +86,7 @@ const DrawerInterpolate = ({
             },
           ]}>
           <Entypo name="menu" size={26} />
-          <Text
-            style={styles.label}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-            Menu
-          </Text>
+          <Text style={styles.label}>Menu</Text>
         </TouchableOpacity>
       </Animated.View>
     </>

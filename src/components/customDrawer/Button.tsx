@@ -1,14 +1,12 @@
-import {Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 import {ButtonProps} from './types';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
+import Text from '@components/Text';
 
 const Button = ({title, onPress, style}: ButtonProps) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <Text style={style} maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        {title}
-      </Text>
+      <Text style={style}>{title}</Text>
     </TouchableOpacity>
   );
 };

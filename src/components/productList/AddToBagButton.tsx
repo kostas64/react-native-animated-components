@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {items} from './data';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 

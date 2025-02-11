@@ -5,15 +5,16 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {TNotificationEventProps} from './types';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {useModalContext} from '@providers/ModalProvider';
 import NotificationEventModal from './NotificationEventModal';
 import {AnimatedPressable} from '@components/AnimatedComponents';
-import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const NotificationEvent = ({
   event,
@@ -64,11 +65,7 @@ const NotificationEvent = ({
         <event.component name={event.iconName} size={20} />
       </View>
       <View style={{gap: 4}}>
-        <Text
-          style={styles.eventTitle}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {event.eventTitle}
-        </Text>
+        <Text style={styles.eventTitle}>{event.eventTitle}</Text>
         <Text
           style={styles.description}
           maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>

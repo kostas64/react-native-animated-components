@@ -1,20 +1,16 @@
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
+import Text from '@components/Text';
 import {TDrawerContentItem} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const DrawerContentItem = ({label, icon}: TDrawerContentItem) => {
   return (
     <TouchableOpacity style={styles.drawerItemContainer}>
       <AntDesign name={icon} color={'white'} size={22} />
-      <Text
-        style={styles.drawerItemLabel}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        {label}
-      </Text>
+      <Text style={styles.drawerItemLabel}>{label}</Text>
     </TouchableOpacity>
   );
 };

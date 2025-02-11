@@ -1,12 +1,13 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import {COLORS} from './data';
 import GroupBar from './GroupBar';
+import Text from '@components/Text';
 import {TGroupBarContainer} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const GroupBarItem = ({
   animate,

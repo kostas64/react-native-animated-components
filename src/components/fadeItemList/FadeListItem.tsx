@@ -5,13 +5,14 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 
 import {
   WIDTH,
   SM_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
+import Text from '@components/Text';
 import {FadeItemProps} from './types';
 import {typography} from '@utils/typography';
 import {AVATAR_SIZE, ITEM_SIZE, SPACING} from './constants';

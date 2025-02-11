@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
 
@@ -7,9 +7,10 @@ import {
   TInnerStackList,
   TScheduleNavigationProps,
 } from '@screens/ScreenTransition/ScreenTransitionScheduleStack';
+import {isIOS} from '@utils/device';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import FadeInTransition from './FadeInTransition';
-import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const TABS = [
@@ -47,7 +48,6 @@ const SubjectsHeader = () => {
                 navigation.navigate(tab.screen as keyof TInnerStackList)
               }>
               <Text
-                maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
                 style={[styles.tab, stackIndex === index && {color: 'black'}]}>
                 {tab.label}
               </Text>

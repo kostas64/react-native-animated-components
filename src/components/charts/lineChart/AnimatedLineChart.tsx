@@ -15,8 +15,8 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import {StyleSheet, View} from 'react-native';
 import React, {useImperativeHandle} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 import {
@@ -26,6 +26,7 @@ import {
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {days} from './data';
+import Text from '@components/Text';
 import ReText from '@components/ReText';
 import {ChartRef, TProps} from './types';
 import {typography} from '@utils/typography';

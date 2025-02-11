@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
 
 import {TEvent} from './types';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import EventIndicator from './EventIndicator';
 import {DATA} from '@components/likeInteraction/data';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import ListItem from '@components/likeInteraction/ListItem';
 
 const Event = ({time, title, description, duration}: TEvent) => {
@@ -21,21 +21,9 @@ const Event = ({time, title, description, duration}: TEvent) => {
         ))}
       </View>
       <View>
-        <Text
-          style={styles.time}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {time}
-        </Text>
-        <Text
-          style={styles.title}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {title}
-        </Text>
-        <Text
-          style={styles.description}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {description}
-        </Text>
+        <Text style={styles.time}>{time}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
 
       <EventIndicator label={duration} />

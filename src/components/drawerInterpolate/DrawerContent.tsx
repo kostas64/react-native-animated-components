@@ -1,15 +1,10 @@
-import {
-  Text,
-  View,
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
+import {View, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import DrawerContentItem from './DrawerContentItem';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';

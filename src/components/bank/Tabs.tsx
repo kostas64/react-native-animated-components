@@ -6,10 +6,11 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {G, Path, Rect, Svg} from 'react-native-svg';
 
 import {TabsProps} from './types';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import {isIOS, MED_FONT_UPSCALE_FACTOR} from '@utils/device';

@@ -4,8 +4,9 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
+import Text from '@components/Text';
 import {TStackLegend} from './types';
 import {typography} from '@utils/typography';
 import {colors, EXPENSES_TYPES} from './constants';

@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {useAnimatedStyle} from 'react-native-reanimated';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {TChooseOption, TListItem} from './types';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {AnimatedPressable} from '@components/AnimatedComponents';
 
 const ChooseOptionListItem = ({
@@ -27,11 +27,7 @@ const ChooseOptionListItem = ({
         pressed && {opacity: 0.6},
         animStyle,
       ]}>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        {item}
-      </Text>
+      <Text style={styles.label}>{item}</Text>
     </AnimatedPressable>
   );
 };

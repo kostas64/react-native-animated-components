@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
+import Text from '@components/Text';
+import {HEIGHT_SCR} from '@utils/device';
 import {TConnectButtonProps} from './types';
 import {typography} from '@utils/typography';
 import {colors, ITEM_HEIGHT} from './constants';
-import {HEIGHT_SCR, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ConnectButton = React.memo(({onPress}: TConnectButtonProps) => {
   return (
@@ -14,11 +15,7 @@ const ConnectButton = React.memo(({onPress}: TConnectButtonProps) => {
         onPress={onPress}
         style={styles.connectButtonContainer}
         activeOpacity={0.8}>
-        <Text
-          style={styles.connectButton}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          Done!
-        </Text>
+        <Text style={styles.connectButton}>Done!</Text>
       </TouchableOpacity>
     </View>
   );

@@ -5,13 +5,13 @@ import Animated, {
   useAnimatedProps,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 
 import {BarProps} from './types';
 import {shadows} from './styles';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {AnimatedRect, AnimatedSvg} from '@components/AnimatedComponents';
 
 const MAX_BAR_HEIGHT = 172;
@@ -74,9 +74,7 @@ const Bar = ({
           />
         </AnimatedSvg>
       </View>
-      <Text
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-        style={[styles.month, isSelected ? styles.selectedMonth : {}]}>
+      <Text style={[styles.month, isSelected ? styles.selectedMonth : {}]}>
         {month}
       </Text>
     </Pressable>

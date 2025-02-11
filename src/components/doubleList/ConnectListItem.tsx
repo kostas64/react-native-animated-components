@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {IIconProps, IItemProps} from './types';
 import {ICON_SIZE, ITEM_HEIGHT} from './constants';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Icon = React.memo(({icon, color}: IIconProps) => {
   return <SimpleLineIcons name={icon} color={color} size={ICON_SIZE} />;
@@ -15,11 +15,7 @@ const Item = React.memo(({icon, color, name, showText}: IItemProps | any) => {
   return (
     <View style={styles.itemWrapper}>
       {showText ? (
-        <Text
-          style={[styles.itemText, {color}]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {name}
-        </Text>
+        <Text style={[styles.itemText, {color}]}>{name}</Text>
       ) : (
         <View />
       )}

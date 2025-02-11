@@ -9,8 +9,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import {Path} from 'react-native-svg';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 
+import Text from '@components/Text';
 import {CardDetailRowProps} from './types';
 import {checkPath, copyPath} from './data';
 import {typography} from '@utils/typography';

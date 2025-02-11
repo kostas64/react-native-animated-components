@@ -6,9 +6,10 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Text, View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {findScheduleForTimes} from './utils';
 import {SCHEDULE_EVENTS, TIMES} from './data';

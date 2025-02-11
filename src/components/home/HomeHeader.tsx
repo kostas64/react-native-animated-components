@@ -1,8 +1,9 @@
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {TouchableOpacity, View, Text, Linking, StyleSheet} from 'react-native';
+import {TouchableOpacity, View, Linking, StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
+import Text from '@components/Text';
 import {HomeHeaderProps} from './types';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';

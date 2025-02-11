@@ -1,15 +1,9 @@
-import {
-  Text,
-  View,
-  Animated,
-  StyleSheet,
-  LayoutChangeEvent,
-} from 'react-native';
 import React from 'react';
+import {View, Animated, StyleSheet, LayoutChangeEvent} from 'react-native';
 
+import Text from '@components/Text';
 import {TProgressProps} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Progress = ({step, steps, height}: TProgressProps) => {
   const [width, setWidth] = React.useState(0);
@@ -35,11 +29,7 @@ const Progress = ({step, steps, height}: TProgressProps) => {
 
   return (
     <>
-      <Text
-        style={styles.stepsLabel}
-        maxFontSizeMultiplier={
-          MAX_FONT_UPSCALE_FACTOR
-        }>{`${step}/${steps}`}</Text>
+      <Text style={styles.stepsLabel}>{`${step}/${steps}`}</Text>
       <View
         onLayout={onLayout}
         style={[styles.loaderContainer, {height, borderRadius: height}]}>

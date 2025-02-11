@@ -1,22 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
+import Text from '@components/Text';
+import {isAndroid} from '@utils/device';
 import SettingsItem from './SettingsItem';
 import {typography} from '@utils/typography';
-import {isAndroid, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {SettingsContainerProps, SettingsItemProps} from './types';
 
 const SettingsContainer = ({title, data, style}: SettingsContainerProps) => {
   return (
     <>
-      {title && (
-        <Text
-          style={[styles.title, style]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {title}
-        </Text>
-      )}
+      {title && <Text style={[styles.title, style]}>{title}</Text>}
       <View
         style={[
           !title ? style : styles.spaceTop,

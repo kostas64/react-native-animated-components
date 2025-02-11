@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {data} from './data';
 import {TTab} from './types';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 

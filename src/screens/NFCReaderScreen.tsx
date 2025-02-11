@@ -8,9 +8,9 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React from 'react';
-import {InteractionManager, StyleSheet, Text, View} from 'react-native';
+import {InteractionManager, StyleSheet, View} from 'react-native';
 
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
+import Text from '@components/Text';
 
 const NFCReader = () => {
   const progress = useSharedValue(0);
@@ -62,11 +62,7 @@ const NFCReader = () => {
           <View style={styles.notch} />
         </Animated.View>
       </View>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Hold Near Reader
-      </Text>
+      <Text style={styles.label}>Hold Near Reader</Text>
     </View>
   );
 };

@@ -1,9 +1,10 @@
 import React from 'react';
+import {View, Image, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Text, View, Image, StyleSheet} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 import Button from './Button';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {LessonAdditionalProps} from './types';
 import FadeInTransition from './FadeInTransition';

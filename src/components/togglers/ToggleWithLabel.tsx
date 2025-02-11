@@ -1,14 +1,8 @@
-import {
-  Text,
-  View,
-  Easing,
-  Animated,
-  Pressable,
-  StyleSheet,
-} from 'react-native';
+import {View, Easing, Animated, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 
 import {SIZE} from './constants';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 

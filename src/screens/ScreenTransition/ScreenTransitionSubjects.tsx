@@ -1,15 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ScreenTransitionSubjects = () => {
   return (
     <View style={styles.container}>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+      <Text style={styles.label}>
         {"Ok, this is enough.\nDon't you think?"}
       </Text>
     </View>

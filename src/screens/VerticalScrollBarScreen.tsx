@@ -1,5 +1,4 @@
 import {
-  Text,
   View,
   FlatList,
   StyleSheet,
@@ -19,6 +18,7 @@ import Animated, {
 import React, {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import Text from '@components/Text';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 import {data} from '@components/verticalScrollBar/data';
@@ -219,11 +219,7 @@ const VerticalScrollBarScreen = () => {
           contentContainerStyle={styles.padding}
           style={[styles.bg, {marginTop, marginBottom}]}
           ListHeaderComponent={() => (
-            <Text
-              style={styles.header}
-              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-              Contacts
-            </Text>
+            <Text style={styles.header}>Contacts</Text>
           )}
           showsVerticalScrollIndicator={false}
         />

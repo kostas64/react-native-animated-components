@@ -1,10 +1,10 @@
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
+import Text from '@components/Text';
 import {TMonthPicker} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const MonthPicker = ({month, onPress}: TMonthPicker) => {
   return (
@@ -12,11 +12,7 @@ const MonthPicker = ({month, onPress}: TMonthPicker) => {
       activeOpacity={0.6}
       style={styles.monthContainer}
       onPress={() => onPress(month)}>
-      <Text
-        style={styles.month}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        {month}
-      </Text>
+      <Text style={styles.month}>{month}</Text>
       <Feather
         size={26}
         color="white"

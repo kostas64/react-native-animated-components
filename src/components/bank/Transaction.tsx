@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
 import StockIcon from './StockIcon';
+import Text from '@components/Text';
 import WalletIcon from './WalletIcon';
 import {TransactionProps} from './types';
 import {typography} from '@utils/typography';

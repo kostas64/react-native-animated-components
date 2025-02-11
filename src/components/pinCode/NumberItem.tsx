@@ -5,12 +5,12 @@ import Animated, {
   interpolateColor,
 } from 'react-native-reanimated';
 import React from 'react';
-import {Pressable, StyleSheet, Text} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import Text from '@components/Text';
 import {TNumberItem} from './types';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
 
@@ -77,13 +77,7 @@ const NumberItem = ({
 
   const getValue = () => {
     if (typeof value === 'number') {
-      return (
-        <Text
-          style={styles.number}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          {value}
-        </Text>
-      );
+      return <Text style={styles.number}>{value}</Text>;
     } else {
       return <Ionicons name="backspace-outline" size={36} color={'white'} />;
     }

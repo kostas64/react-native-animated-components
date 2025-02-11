@@ -1,6 +1,8 @@
 import React from 'react';
 import {WIDTH} from '@utils/device';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+
+import Text from '@components/Text';
 
 const TicketPart = ({
   isFirstCard = false,

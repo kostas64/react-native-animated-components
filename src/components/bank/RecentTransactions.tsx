@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  Image,
-  ViewStyle,
-  StyleProp,
-  StyleSheet,
-} from 'react-native';
 import React from 'react';
+import {View, Image, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 
 import {USERS} from './data';
+import Text from '@components/Text';
 import SectionHeader from './SectionHeader';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';

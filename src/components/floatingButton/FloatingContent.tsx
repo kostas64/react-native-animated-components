@@ -1,24 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 
-import {
-  SM_FONT_UPSCALE_FACTOR,
-  MED_FONT_UPSCALE_FACTOR,
-  MAX_FONT_UPSCALE_FACTOR,
-} from '@utils/device';
 import {SPACING} from './data';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
+import {SM_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const FloatingContent = () => {
   const [promoCode, setPromoCode] = React.useState('');
 
   return (
     <>
-      <Text
-        style={styles.title}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Black Friday
-      </Text>
+      <Text style={styles.title}>Black Friday</Text>
       <Text
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
         style={[

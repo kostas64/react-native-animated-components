@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import Button from './Button';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import {NotificationEventProps} from './types';
 import FadeInTransition from './FadeInTransition';

@@ -9,7 +9,7 @@ import Animated, {
   useAnimatedProps,
 } from 'react-native-reanimated';
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Svg, {LinearGradient, Rect, Stop} from 'react-native-svg';
 
@@ -25,6 +25,7 @@ import {
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {CardProps} from './types';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 
 const AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);

@@ -1,10 +1,3 @@
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  GestureResponderEvent,
-} from 'react-native';
 import Animated, {
   withTiming,
   interpolate,
@@ -15,13 +8,15 @@ import Animated, {
 } from 'react-native-reanimated';
 import React, {useCallback} from 'react';
 import Haptic from 'react-native-haptic-feedback';
+import {View, Image, StyleSheet, GestureResponderEvent} from 'react-native';
 
+import Text from '@components/Text';
 import {TMessageItem} from './types';
 import {DELAY_LONG_PRESS} from './data';
 import {typography} from '@utils/typography';
 import {HAPTIC_CONFIG} from '@utils/haptics';
+import {isAndroid, isIOS, WIDTH} from '@utils/device';
 import {AnimatedPressable} from '@components/AnimatedComponents';
-import {isAndroid, isIOS, MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const triggerLongPressHaptik = () => {
   if (isAndroid) {
@@ -162,22 +157,10 @@ const MessageItem = React.memo(
                 : styles.messageRecipientBorder,
             ]}>
             <View style={styles.messageHeader}>
-              <Text
-                style={styles.messageName}
-                maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-                {item?.name}
-              </Text>
-              <Text
-                style={styles.messageTime}
-                maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-                {item?.time}
-              </Text>
+              <Text style={styles.messageName}>{item?.name}</Text>
+              <Text style={styles.messageTime}>{item?.time}</Text>
             </View>
-            <Text
-              style={styles.message}
-              maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-              {item?.message}
-            </Text>
+            <Text style={styles.message}>{item?.message}</Text>
             {item.emoji && (
               <Animated.View
                 exiting={customExiting}

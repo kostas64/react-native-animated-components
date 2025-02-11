@@ -1,17 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const EventIndicator = ({label}: {label: string}) => {
   return (
     <View style={styles.container}>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        {label}
-      </Text>
+      <Text style={styles.label}>{label}</Text>
     </View>
   );
 };

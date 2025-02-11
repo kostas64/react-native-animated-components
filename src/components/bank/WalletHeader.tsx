@@ -2,12 +2,12 @@ import React from 'react';
 import {G, Path, Svg} from 'react-native-svg';
 import Animated from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
+import Text from '@components/Text';
 import {morePath, personPath} from './data';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
   const insets = useSafeAreaInsets();
@@ -17,11 +17,7 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
     <Animated.View
       style={[{paddingTop}, styles.rowCenter, styles.between, style]}>
       <View style={styles.gap}>
-        <Text
-          style={styles.label}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-          Morning Jude
-        </Text>
+        <Text style={styles.label}>Morning Jude</Text>
         <View style={[styles.rowCenter, styles.gap]}>
           <Svg width={16} height={16} viewBox="0.46 0.4 63.04 63.01">
             <CommonGradient id={'person'} />
@@ -29,11 +25,7 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
               <Path d={personPath} fill={'url(#person)'} />
             </G>
           </Svg>
-          <Text
-            style={styles.accountType}
-            maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-            Personal Card
-          </Text>
+          <Text style={styles.accountType}>Personal Card</Text>
         </View>
       </View>
 

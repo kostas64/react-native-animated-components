@@ -5,11 +5,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import {Text, View, TextInput, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import Text from '@components/Text';
 import {SHORT_MONTHS} from '@assets/months';
 import {typography} from '@utils/typography';
 import Footer from '@components/airbnb/Footer';

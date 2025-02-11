@@ -5,8 +5,9 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import React, {useEffect} from 'react';
-import {StyleProp, StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 
 const DATA = [

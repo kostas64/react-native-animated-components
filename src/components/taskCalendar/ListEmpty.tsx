@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 
 import {TLoading} from './types';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const ListEmpty = ({loading, selectedDate}: TLoading) => {
   const label = !selectedDate ? 'Pick a day' : 'No events';
@@ -15,11 +15,7 @@ const ListEmpty = ({loading, selectedDate}: TLoading) => {
 
   return !loading || !selectedDate ? (
     <Animated.View entering={FadeInDown} style={styles.container}>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        {label}
-      </Text>
+      <Text style={styles.label}>{label}</Text>
     </Animated.View>
   ) : null;
 };

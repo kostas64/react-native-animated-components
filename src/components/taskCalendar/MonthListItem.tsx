@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
+import Text from '@components/Text';
 import {TMonthListItem} from './types';
 import {typography} from '@utils/typography';
 import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';

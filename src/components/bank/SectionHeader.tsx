@@ -1,7 +1,8 @@
 import React from 'react';
 import {Svg, Text as SVGText} from 'react-native-svg';
-import {Text, View, Pressable, StyleSheet} from 'react-native';
+import {View, Pressable, StyleSheet} from 'react-native';
 
+import Text from '@components/Text';
 import {SectionHeaderProps} from './types';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';

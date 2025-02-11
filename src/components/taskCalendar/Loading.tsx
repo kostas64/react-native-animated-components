@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import {TLoading} from './types';
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Loading = ({loading, stopLoading}: TLoading) => {
   if (!loading) {
@@ -26,11 +26,7 @@ const Loading = ({loading, stopLoading}: TLoading) => {
     <View style={{...styles.container, zIndex: 1}}>
       <ActivityIndicator size={'small'} color={'white'} />
 
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Retrieving tasks
-      </Text>
+      <Text style={styles.label}>Retrieving tasks</Text>
     </View>
   );
 };

@@ -1,18 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
+import Text from '@components/Text';
 
 const ScheduleHeader = () => {
   return (
     <View style={styles.container}>
-      <Text
-        style={styles.label}
-        maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
-        Schedule
-      </Text>
+      <Text style={styles.label}>Schedule</Text>
       <View style={styles.searchContainer}>
         <Feather name="search" size={20} />
       </View>

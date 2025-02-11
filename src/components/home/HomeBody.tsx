@@ -3,7 +3,7 @@ import Animated, {
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -14,10 +14,11 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import Text from '@components/Text';
 import {DATA} from '@assets/homeData';
 import {HomeBodyProps} from './types';
-import {THomeNavigationProps} from 'src/App';
 import {typography} from '@utils/typography';
+import {THomeNavigationProps} from 'src/App';
 import HomeButton from '@components/HomeButton';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 

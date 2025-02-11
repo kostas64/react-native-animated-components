@@ -1,8 +1,9 @@
 import React from 'react';
+import {Image, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Image, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import Text from '@components/Text';
 import {typography} from '@utils/typography';
 import Button from '@components/screenTransition/Button';
 import StatusBarManager from '@components/StatusBarManager';

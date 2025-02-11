@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
+import Text from '@components/Text';
 import StackSlice from './StackSlice';
 import {TStackSliceItem} from './types';
 import {typography} from '@utils/typography';
