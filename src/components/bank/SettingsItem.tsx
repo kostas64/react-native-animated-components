@@ -2,9 +2,9 @@ import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 
 import Pencil from './Pencil';
-import {WIDTH} from '@utils/device';
 import {SettingsItemProps} from './types';
 import {typography} from '@utils/typography';
+import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
 const SettingsItem = ({
   placeholder,
@@ -27,8 +27,16 @@ const SettingsItem = ({
         style,
       ]}>
       <View style={styles.gap}>
-        <Text style={styles.placeholder}>{placeholder}</Text>
-        <Text style={styles.value}>{value}</Text>
+        <Text
+          style={styles.placeholder}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {placeholder}
+        </Text>
+        <Text
+          style={styles.value}
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          {value}
+        </Text>
       </View>
       {rightItem || <Pencil />}
     </Pressable>
