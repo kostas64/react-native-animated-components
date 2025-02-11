@@ -1,5 +1,6 @@
 import {
   View,
+  Image,
   FlatList,
   StatusBar,
   StyleSheet,
@@ -15,7 +16,7 @@ import {typography} from '@utils/typography';
 import {STOCKS_DATA} from '@components/bank/data';
 import StockItem from '@components/bank/StockItem';
 import {StocksItemProps} from '@components/bank/types';
-import StocksHeader from '@components/bank/StocksHeader';
+import HeaderWithIcon from '@components/bank/HeaderWithIcon';
 
 const BankStocks = () => {
   const isFocused = useIsFocused();
@@ -54,7 +55,16 @@ const BankStocks = () => {
   };
   return (
     <View style={[styles.container, {paddingTop}]}>
-      <StocksHeader style={separatorStyle} />
+      <HeaderWithIcon
+        label="Stocks"
+        icon={
+          <Image
+            style={styles.icon}
+            source={require('../../assets/img/bank/stocks.png')}
+          />
+        }
+        style={separatorStyle}
+      />
       <FlatList
         data={STOCKS_DATA}
         renderItem={renderItem}

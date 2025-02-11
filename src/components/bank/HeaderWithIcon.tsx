@@ -1,23 +1,28 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import Animated from 'react-native-reanimated';
-import {Image, StyleProp, StyleSheet, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 
 import SectionHeader from './SectionHeader';
 
-const StocksHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
+const HeaderWithIcon = ({
+  icon,
+  style,
+  label,
+}: {
+  icon: ReactNode;
+  label: string;
+  style?: StyleProp<ViewStyle>;
+}) => {
   return (
     <Animated.View
       style={[styles.spacePadHorizontal, styles.headerContainer, style]}>
-      <Image
-        source={require('../../assets/img/bank/stocks.png')}
-        style={styles.icon}
-      />
-      <SectionHeader label="Stocks" />
+      {icon && icon}
+      <SectionHeader label={label} />
     </Animated.View>
   );
 };
 
-export default StocksHeader;
+export default HeaderWithIcon;
 
 const styles = StyleSheet.create({
   spacePadHorizontal: {
@@ -27,9 +32,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-  },
-  icon: {
-    width: 26,
-    height: 26,
   },
 });

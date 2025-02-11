@@ -1,6 +1,6 @@
 import React from 'react';
 import {useIsFocused} from '@react-navigation/native';
-import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {cards} from '@components/bank/constants';
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     marginLeft: 28,
   },
   spaceBottom: {
-    paddingBottom: 146,
+    paddingBottom: 152,
   },
 });

@@ -8,6 +8,9 @@ import BankHome from '@screens/Bank/BankHome';
 import BankStocks from '@screens/Bank/BankStocks';
 import BankWallet from '@screens/Bank/BankWallet';
 import BankSettings from '@screens/Bank/BankSettings';
+import Email from './Email';
+import Support from './Support';
+import {Linking} from 'react-native';
 
 export const tabs = [
   {
@@ -146,6 +149,40 @@ export const CARD_TRANSACTIONS: TransactionItemProps[] = [
     label: 'Monthly Salary',
     amount: 3800.0,
     date: '01 Jul 24',
+  },
+];
+
+export const PERSONAL_DETAILS = [
+  {
+    placeholder: 'Username',
+    value: 'Jude',
+  },
+  {
+    placeholder: 'Email',
+    value: 'judebank@yopmail.com',
+  },
+  {
+    placeholder: 'Mobile Phone',
+    value: '(206) 342-8631',
+  },
+  {
+    placeholder: 'Address',
+    value: '15 Brown Street, 94612, Oakland, CAude',
+  },
+];
+
+export const SUPPORT = [
+  {
+    placeholder: 'Email us at',
+    value: 'support@topbank.com',
+    rightItem: <Email />,
+    onPress: () => Linking.openURL('mailto:support@topbank.com'),
+  },
+  {
+    placeholder: 'Call us',
+    value: '(99) 342-8631-1',
+    rightItem: <Support />,
+    onPress: () => Linking.openURL('tel:(99) 342-8631-1'),
   },
 ];
 

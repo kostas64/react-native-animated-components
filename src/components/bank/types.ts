@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {ColorValue, StyleProp, ViewStyle} from 'react-native';
 
 export type WelcomeStyleProps = {
@@ -90,5 +91,21 @@ export type StocksItemProps = {
 export type TimerProps = {
   onPress: () => void;
   time: number;
+  style?: StyleProp<ViewStyle>;
+};
+
+export type SettingsItemProps = {
+  placeholder: string;
+  value: string;
+  isFirst?: boolean;
+  isLast?: boolean;
+  rightItem?: ReactNode;
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+};
+
+export type SettingsContainerProps = {
+  title?: string;
+  data: SettingsItemProps[];
   style?: StyleProp<ViewStyle>;
 };
