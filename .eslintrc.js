@@ -16,5 +16,6 @@ module.exports = {
     'react-native/no-inline-styles': 2,
     'react-native/no-single-element-style-arrays': 2,
     'react-native/split-platform-components': 2,
+    'react-native/no-raw-text': 2,
   },
 };
