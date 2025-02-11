@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'white',
     justifyContent: 'space-between',
   },
   placeholder: {

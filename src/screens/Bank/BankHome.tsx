@@ -21,6 +21,7 @@ const BankHome = () => {
   return (
     <>
       <ScrollView
+        bounces={false}
         style={styles.container}
         contentContainerStyle={styles.spaceBottom}>
         <HomeHeader style={{paddingTop}} />
