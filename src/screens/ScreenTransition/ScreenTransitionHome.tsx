@@ -102,9 +102,6 @@ const styles = StyleSheet.create({
   smSpaceTop: {
     marginTop: 16,
   },
-  vsmSpaceTop: {
-    marginTop: 8,
-  },
   xxsmSpaceTop: {
     marginTop: 4,
   },

@@ -73,12 +73,4 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 32,
   },
-  separator: {
-    position: 'absolute',
-    width: 1,
-    left: 32,
-    top: -12,
-    height: 236,
-    backgroundColor: '#d3d3d3',
-  },
 });

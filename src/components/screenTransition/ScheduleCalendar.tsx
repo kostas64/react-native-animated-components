@@ -77,9 +77,6 @@ const styles = StyleSheet.create({
     fontFamily: typography.semiBold,
     color: '#b1b1b1',
   },
-  selectedDayNumber: {
-    color: 'white',
-  },
   dayNumberContainer: {
     padding: 8,
   },

@@ -56,9 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  flatlistContainer: {
-    paddingHorizontal: SPACING,
-  },
 });
 
 export default ScrollItemListScreen;

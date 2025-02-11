@@ -85,36 +85,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 8,
   },
-  optionContainer: {
-    width: 86,
-    alignItems: 'center',
-    backgroundColor: '#7a54cd',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  label: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: typography.semiBold,
-  },
-  pressed: {
-    opacity: 0.6,
-  },
-  selectedBorder: {
-    borderWidth: 2,
-    borderColor: 'white',
-  },
-  unselectedBorder: {
-    borderWidth: 2,
-    borderColor: '#7a54cd',
-  },
 });

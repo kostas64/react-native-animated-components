@@ -100,7 +100,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
           <Entypo size={20} style={styles.lens2} name="magnifying-glass" />
           <TextInput
             ref={ref}
-            style={[styles.fontW500]}
+            style={styles.fontW500}
             onFocus={animateWhereToInput}
             placeholder="Search destinations"
             placeholderTextColor={'rgb(100,100,100)'}

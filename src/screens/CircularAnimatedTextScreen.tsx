@@ -71,7 +71,7 @@ const CircularAnimatedTextScreen = () => {
       <Pressable
         onPress={onPressBrush}
         style={[styles.imgContainer, {marginTop}]}>
-        <Image source={brush} style={[styles.img]} />
+        <Image source={brush} style={styles.img} />
       </Pressable>
 
       <View style={styles.svgContainer}>

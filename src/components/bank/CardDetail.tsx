@@ -78,8 +78,4 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
-  timerContainer: {
-    position: 'absolute',
-    bottom: 156,
-  },
 });

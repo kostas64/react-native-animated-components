@@ -166,8 +166,4 @@ const styles = StyleSheet.create({
   separator: {
     paddingVertical: 8,
   },
-  icon: {
-    width: 30,
-    height: 30,
-  },
 });

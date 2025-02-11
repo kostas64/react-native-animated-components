@@ -509,10 +509,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 32,
   },
-  whereTo: {
-    fontFamily: typography.medium,
-    color: 'black',
-  },
   filterContainer: {
     borderColor: '#a1a1a1',
     borderWidth: 1,
@@ -564,9 +560,6 @@ const styles = StyleSheet.create({
     marginTop: 60,
     width: WIDTH - 30,
     left: -10,
-  },
-  white: {
-    color: 'white',
   },
   color100: {
     color: 'rgb(100,100,100)',

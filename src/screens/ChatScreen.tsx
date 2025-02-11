@@ -25,19 +25,18 @@ import {captureScreen} from 'react-native-view-shot';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {MESSAGES} from '@assets/messages';
-import {typography} from '@utils/typography';
 import {HAPTIC_CONFIG} from '@utils/haptics';
 import Header from '@components/chat/Header';
 import Wrapper from '@components/chat/Wrapper';
 import {useKeyboard} from '@hooks/useKeyboard';
+import {isAndroid, isIOS} from '@utils/device';
 import {TMessage} from '@components/chat/types';
+import {commonStyles} from '@utils/commonStyles';
 import {captureOptions} from '@components/chat/data';
 import Background from '@components/chat/Background';
-import {isAndroid, isIOS, WIDTH} from '@utils/device';
 import MessageItem from '@components/chat/MessageItem';
 import StatusBarManager from '@components/StatusBarManager';
 import SendMessageInput from '@components/chat/SendMessageInput';
-import {commonStyles} from '@utils/commonStyles';
 
 //Ignore in case you run in simulator
 LogBox.ignoreLogs(['RNReactNativeHapticFeedback is not available']);
@@ -248,23 +247,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     zIndex: 1,
     backgroundColor: 'white',
-  },
-  input: {
-    textAlignVertical: 'top',
-    height: isIOS ? 56 : 74,
-    fontSize: 16,
-    width: WIDTH - 136,
-    fontFamily: typography.semiBold,
-    lineHeight: 20,
-    color: 'black',
-  },
-  message: {
-    fontFamily: typography.regular,
-    fontSize: 16,
-    lineHeight: 20,
-  },
-  emoji: {
-    width: 32,
-    height: 32,
   },
 });

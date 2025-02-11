@@ -69,10 +69,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
     backgroundColor: 'white',
   },
-  icon: {
-    width: 16,
-    height: 16,
-  },
   gap16: {
     gap: 16,
   },

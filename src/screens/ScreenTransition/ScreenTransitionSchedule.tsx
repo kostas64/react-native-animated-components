@@ -53,16 +53,10 @@ const styles = StyleSheet.create({
   spaceHor: {
     paddingHorizontal: 24,
   },
-  smSpaceTop: {
-    marginTop: 8,
-  },
   spaceTop: {
     marginTop: 24,
   },
   smSpaceHor: {
     marginHorizontal: 8,
-  },
-  paddingTop: {
-    paddingTop: 24,
   },
 });

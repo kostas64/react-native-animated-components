@@ -14,9 +14,9 @@ const FloatingContent = () => {
       <Text style={styles.title}>Black Friday</Text>
       <Text
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
-        style={[
-          styles.paragraph,
-        ]}>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Text>
+        style={
+          styles.paragraph
+        }>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Text>
       <TextInput
         value={promoCode}
         onChangeText={setPromoCode}

@@ -79,7 +79,7 @@ const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
         <View style={styles.line} />
         <Animated.View style={[dotPickerStyle, styles.dot]} />
         <GestureDetector gesture={composedGestures}>
-          <Animated.View style={[styles.gestureTransparentBox]} />
+          <Animated.View style={styles.gestureTransparentBox} />
         </GestureDetector>
       </View>
     </View>

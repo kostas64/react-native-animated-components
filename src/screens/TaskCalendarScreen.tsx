@@ -63,7 +63,7 @@ const TaskCalendarScreen = ({navigation}: TNavigation) => {
   }, []);
 
   return (
-    <Animated.View style={[styles.container]}>
+    <Animated.View style={styles.container}>
       <StatusBarManager barStyle={'light'} />
       <Loading loading={state.loading} stopLoading={stopLoading} />
       {state.transitionEnd && (

@@ -65,10 +65,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingRight: 24,
   },
-  viewAll: {
-    fontSize: 14,
-    fontFamily: typography.regular,
-  },
   halfOpacity: {
     opacity: 0.5,
   },

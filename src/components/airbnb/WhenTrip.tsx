@@ -364,12 +364,6 @@ const styles = StyleSheet.create({
   absolute: {
     position: 'absolute',
   },
-  headerCalendar: {
-    flex: 1,
-    alignItems: 'flex-start',
-    left: -12,
-    marginBottom: 12,
-  },
   row: {
     flexDirection: 'row',
   },
@@ -388,9 +382,6 @@ const styles = StyleSheet.create({
   },
   marBot10: {
     marginBottom: 10,
-  },
-  marLeft10: {
-    marginLeft: 10,
   },
   padHor24: {
     paddingHorizontal: 24,

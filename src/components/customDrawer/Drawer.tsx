@@ -45,7 +45,7 @@ const Drawer = ({animatedValue, onPress}: DrawerProps) => {
   return (
     <MaskedView
       androidRenderingMode="software"
-      style={[styles.maskedContainer]}
+      style={styles.maskedContainer}
       maskElement={
         <Svg
           width={WIDTH}

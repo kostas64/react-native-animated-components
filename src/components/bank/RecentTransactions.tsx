@@ -30,27 +30,6 @@ const RecentTransactions = ({style}: {style?: StyleProp<ViewStyle>}) => {
 export default RecentTransactions;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  mainLabel: {
-    fontSize: 18,
-    fontFamily: typography.semiBold,
-  },
-  viewAllContainer: {
-    paddingLeft: 16,
-    paddingVertical: 4,
-    paddingRight: 24,
-  },
-  viewAll: {
-    fontSize: 14,
-    fontFamily: typography.regular,
-  },
-  halfOpacity: {
-    opacity: 0.5,
-  },
   usersContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

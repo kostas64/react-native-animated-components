@@ -12,7 +12,6 @@ import {useIsFocused} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
-import {typography} from '@utils/typography';
 import {STOCKS_DATA} from '@components/bank/data';
 import StockItem from '@components/bank/StockItem';
 import {StocksItemProps} from '@components/bank/types';
@@ -85,21 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     overflow: 'visible',
     backgroundColor: '#f7f7f7',
-  },
-  label: {
-    fontSize: 16,
-    fontFamily: typography.semiBold,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  spaceHorizontal: {
-    marginHorizontal: 24,
-  },
-  spacePadHorizontal: {
-    paddingHorizontal: 24,
   },
   contentContainer: {
     gap: 16,

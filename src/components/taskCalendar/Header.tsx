@@ -81,19 +81,6 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     overflow: 'hidden',
   },
-  firstRowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    justifyContent: 'space-between',
-  },
-  img: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: 'white',
-  },
   modalContainer: {
     flex: 1,
     backgroundColor: '#121212',

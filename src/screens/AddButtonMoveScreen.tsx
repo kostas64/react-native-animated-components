@@ -132,9 +132,6 @@ const AddButtonMoveScreen = () => {
 export default AddButtonMoveScreen;
 
 const styles = StyleSheet.create({
-  flexGrow: {
-    flexGrow: 1,
-  },
   container: {
     flex: 1,
     overflow: 'hidden',
