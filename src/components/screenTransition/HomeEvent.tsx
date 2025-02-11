@@ -2,6 +2,7 @@ import {View, Image, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {HomeEventProps} from './types';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -47,7 +48,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 24,
     justifyContent: 'space-between',
-    backgroundColor: 'purple',
   },
   eventImg: {
     width: 80,
@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
   eventDate: {
     fontSize: 14,
     fontFamily: typography.semiBold,
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
   },
   iconContainer: {
     padding: 12,
     borderRadius: 12,
     marginRight: 16,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   gap16: {
     gap: 16,

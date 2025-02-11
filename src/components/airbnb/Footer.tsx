@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {TFooter} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {HEIGHT, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 
@@ -63,10 +64,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: '#e51d51',
+    backgroundColor: Colors.SPANISH_CRIMSON,
   },
   search: {
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.semiBold,
   },
   clearAll: {
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
   lens3: {
     paddingRight: 8,
-    color: 'white',
+    color: Colors.WHITE,
   },
   height: {
     height: 100,

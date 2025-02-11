@@ -14,6 +14,7 @@ import {
 } from '@react-navigation/drawer/lib/typescript/src/types';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import StatusBarManager from '@components/StatusBarManager';
 import DrawerContent from '@components/drawerInterpolate/DrawerContent';
@@ -99,11 +100,11 @@ const DrawerInterpolate = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   navigatorContainer: {
     flex: 1,
-    backgroundColor: 'tomato',
+    backgroundColor: Colors.TOMATO,
   },
   menuContainer: {
     flexDirection: 'row',
@@ -116,13 +117,13 @@ const styles = StyleSheet.create({
     fontFamily: typography.semiBold,
   },
   sceneContainerStyle: {
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
   drawerStyle: {
     flex: 1,
     width: '65%',
     paddingRight: 20,
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
   spaceTop: {
     paddingTop: 28,

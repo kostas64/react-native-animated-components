@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const LessonHeader = () => {
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderRadius: 16,
-    borderColor: '#e5e5e5',
+    borderColor: Colors.PLATINUM,
   },
   label: {
     fontSize: 20,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     fontFamily: typography.semiBold,
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
   },
   boldDescription: {
     fontSize: 14,

@@ -2,6 +2,8 @@ import {memo} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
+import {Colors} from '@utils/colors';
+
 const MenuIcon = memo(() => {
   return (
     <View style={styles.container}>
@@ -30,6 +32,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
   },
 });

@@ -9,6 +9,7 @@ import React, {useEffect} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 
 import {_spacing} from './constants';
+import {Colors} from '@utils/colors';
 import {TWeekDayListItem} from './types';
 import {setDayEmitter} from './Calendar';
 import {typography} from '@utils/typography';
@@ -147,9 +148,9 @@ const styles = StyleSheet.create({
     left: (WIDTH - 40 - 6 * _spacing) / 7 - 6,
   },
   white: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   transparent: {
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
 });

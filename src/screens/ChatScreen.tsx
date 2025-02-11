@@ -24,6 +24,7 @@ import Haptic from 'react-native-haptic-feedback';
 import {captureScreen} from 'react-native-view-shot';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {Colors} from '@utils/colors';
 import {MESSAGES} from '@assets/messages';
 import {HAPTIC_CONFIG} from '@utils/haptics';
 import Header from '@components/chat/Header';
@@ -241,11 +242,11 @@ export default ChatScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   headerContainer: {
     paddingHorizontal: 24,
     zIndex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
 });

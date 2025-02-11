@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
+import {Colors} from '@utils/colors';
 import {CardDetailProps} from './types';
 import {validateBiometrics} from './utils';
 import SectionHeader from './SectionHeader';
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   boxContainer: {
     marginRight: 24,
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   pressedFirst: {
     borderTopLeftRadius: 10,

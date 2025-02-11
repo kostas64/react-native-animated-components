@@ -9,6 +9,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import {BarProps} from './types';
 import {shadows} from './styles';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import {AnimatedRect, AnimatedSvg} from '@components/AnimatedComponents';
@@ -98,21 +99,21 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     height: MAX_BAR_HEIGHT + 4,
     justifyContent: 'flex-end',
-    backgroundColor: '#e3e3e3',
+    backgroundColor: Colors.PLATINUM,
   },
   inner: {
     width: 40,
     height: 86,
     borderRadius: 6,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   month: {
-    color: '#c1c1c1',
+    color: Colors.ARGENT,
     alignSelf: 'center',
     fontFamily: typography.medium,
   },
   selectedMonth: {
-    color: '#121212',
+    color: Colors.CHINESE_BLACK,
     alignSelf: 'center',
     fontFamily: typography.semiBold,
   },

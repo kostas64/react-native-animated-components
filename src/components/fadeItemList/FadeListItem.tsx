@@ -12,6 +12,7 @@ import {
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {FadeItemProps} from './types';
 import {typography} from '@utils/typography';
 import {AVATAR_SIZE, ITEM_SIZE, SPACING} from './constants';
@@ -79,8 +80,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: SPACING,
     borderRadius: 16,
-    backgroundColor: 'white',
-    shadowColor: '#000',
+    backgroundColor: Colors.WHITE,
+    shadowColor: Colors.BLACK,
     alignItems: 'center',
     shadowOpacity: 0.3,
     shadowRadius: 20,
@@ -101,18 +102,18 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 22,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.semiBold,
   },
   job: {
     fontSize: 16,
     opacity: 0.7,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.regular,
   },
   email: {
     opacity: 0.8,
-    color: '#0099cc',
+    color: Colors.RICH_ELECTRIC_BLUE,
     fontFamily: typography.regular,
   },
 });

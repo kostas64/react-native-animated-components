@@ -3,6 +3,7 @@ import {Pressable, StyleSheet} from 'react-native';
 import {CALENDAR_PER} from './data';
 import {TPeriodItem} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -36,14 +37,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   selectedPeriodItem: {
-    backgroundColor: 'rgb(248, 248,248)',
+    backgroundColor: Colors.CULTURED,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: Colors.BLACK,
   },
   unselectedPeriodItem: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderWidth: 1,
-    borderColor: 'rgb(225,225,225)',
+    borderColor: Colors.CHINESE_WHITE,
   },
   itemLabel: {
     fontFamily: typography.medium,

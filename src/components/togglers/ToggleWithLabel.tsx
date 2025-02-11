@@ -3,6 +3,7 @@ import React from 'react';
 
 import {SIZE} from './constants';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     height: SIZE / 2,
     borderRadius: SIZE / 4,
     justifyContent: 'center',
-    borderColor: 'black',
+    borderColor: Colors.BLACK,
     borderWidth: 2,
     paddingHorizontal: SIZE / 24,
   },
@@ -70,9 +71,9 @@ const styles = StyleSheet.create({
     fontSize: SIZE / 7,
   },
   white: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   black: {
-    backgroundColor: 'black',
+    backgroundColor: Colors.BLACK,
   },
 });

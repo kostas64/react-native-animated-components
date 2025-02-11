@@ -10,6 +10,7 @@ import React from 'react';
 import {StyleSheet, View, ViewStyle} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
+import {Colors} from '@utils/colors';
 import useBackAction from '@hooks/useBackAction';
 import {HEIGHT, HEIGHT_SCR, isIOS} from '@utils/device';
 import {useModalContext} from '@providers/ModalProvider';
@@ -176,12 +177,12 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Colors.HALF_BLACK,
   },
   bottomSheetContainer: {
     height: MAX_HEIGHT,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     position: 'absolute',
     top: MAX_HEIGHT,
     borderRadius: 18,
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 16,
     alignSelf: 'center',
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
   },
 });
 

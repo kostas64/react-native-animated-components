@@ -2,6 +2,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import {TCounterBtn} from './types';
+import {Colors} from '@utils/colors';
 
 const CounterBtn = ({isPlus, onPress, disabled}: TCounterBtn) => (
   <TouchableOpacity
@@ -11,7 +12,7 @@ const CounterBtn = ({isPlus, onPress, disabled}: TCounterBtn) => (
     style={[disabled && styles.opacity, styles.container]}>
     <Entypo
       size={18}
-      color={'rgb(150,150,150)'}
+      color={Colors.SPANISH_GRAY}
       name={isPlus ? 'plus' : 'minus'}
     />
   </TouchableOpacity>
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 6,
     borderWidth: 1,
-    borderColor: 'rgb(150,150,150)',
+    borderColor: Colors.SPANISH_GRAY,
     borderRadius: 50,
   },
   opacity: {

@@ -3,6 +3,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import InitialBox from './InitialBox';
 
 const InitialView = () => {
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   filterContainer: {
-    borderColor: '#a1a1a1',
+    borderColor: Colors.QUICK_SILVER,
     borderWidth: 1,
     borderRadius: 100,
     height: 40,
@@ -64,9 +65,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   leftInput: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderWidth: 1,
-    borderColor: '#e9e9e9',
+    borderColor: Colors.BRIGHT_GRAY,
     paddingVertical: 12,
     borderRadius: 32,
   },

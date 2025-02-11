@@ -4,6 +4,7 @@ import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 import Button from './Button';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {LessonAdditionalProps} from './types';
 import FadeInTransition from './FadeInTransition';
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: '#a0a0a0',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,
   },
   booksContainer: {
@@ -97,10 +98,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 100,
-    backgroundColor: '#edf0fd',
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
+    backgroundColor: Colors.ALICE_BLUE,
   },
   homeworkLabel: {
     fontSize: 14,

@@ -3,6 +3,7 @@ import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {COUNTRIES} from './data';
 import Text from '@components/Text';
 import {TCountryItem} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const CountryItem = ({
@@ -62,11 +63,11 @@ const styles = StyleSheet.create({
   },
   borderBlackW2: {
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: Colors.BLACK,
   },
   borderGreyW1: {
     borderWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: Colors.PLATINUM,
   },
   spaceRight24: {
     paddingRight: 24,

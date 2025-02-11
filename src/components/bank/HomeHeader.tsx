@@ -5,6 +5,7 @@ import {View, Image, StyleProp, ViewStyle, StyleSheet} from 'react-native';
 import Cards from './Cards';
 import {shadows} from './styles';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {isIOS, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';
 import {CARD_BODY_HEIGHT, CARD_FOOTER_HEIGHT, CARD_WIDTH} from './constants';
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#141111',
+    backgroundColor: Colors.CHINESE_BLACK,
   },
   avatarLabelContainer: {
     gap: 8,
@@ -70,20 +71,20 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 32,
     borderWidth: 1,
-    borderColor: '#505050',
-    backgroundColor: '#19181b',
+    borderColor: Colors.DARK_LIVER,
+    backgroundColor: Colors.EERIE_BLACK,
   },
   avatar: {
     width: 24,
     height: 24,
   },
   label: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 18,
     fontFamily: typography.semiBold,
   },
   accountType: {
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     fontSize: 12,
     fontFamily: typography.medium,
   },
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 32,
     borderWidth: 1,
-    borderColor: '#505050',
-    backgroundColor: '#282626',
+    borderColor: Colors.DARK_LIVER,
+    backgroundColor: Colors.RAISIN_BLACK,
   },
 });

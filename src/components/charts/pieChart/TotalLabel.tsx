@@ -7,6 +7,7 @@ import {TTotalLabel} from './types';
 import {StyleSheet} from 'react-native';
 
 import {height} from './data';
+import {Colors} from '@utils/colors';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -35,10 +36,10 @@ const styles = StyleSheet.create({
   retext: {
     right: 2,
     fontSize: 24,
-    color: '#556d36',
     alignSelf: 'center',
     alignItems: 'center',
     fontFamily: typography.bold,
+    color: Colors.DARK_OLIVE_GREEN,
     top: height / 2 - (isIOS ? 14 : 24),
   },
 });

@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const NotificationsHeader = () => {
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderRadius: 16,
-    borderColor: '#e5e5e5',
+    borderColor: Colors.PLATINUM,
   },
   label: {
     fontSize: 20,
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f4f4f4',
+    backgroundColor: Colors.CULTURED,
   },
   number: {
     fontFamily: typography.semiBold,

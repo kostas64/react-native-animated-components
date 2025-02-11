@@ -1,6 +1,7 @@
 import {Animated, Image, StyleSheet, View} from 'react-native';
 
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {ParallaxListItemProps} from './types';
 
 const ITEM_WIDTH = WIDTH * 0.76;
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     elevation: 50,
     padding: 12,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderRadius: 14,
   },
   mainImgContainer: {
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     resizeMode: 'cover',
     borderWidth: 6,
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
     position: 'absolute',
     bottom: -30,
     right: 45,

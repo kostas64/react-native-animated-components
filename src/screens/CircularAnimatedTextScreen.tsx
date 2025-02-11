@@ -15,6 +15,7 @@ import {
   BOX_SIZE,
   NUM_LETTER_CIRCLES,
 } from '@components/circularAnimatedText/data';
+import {Colors} from '@utils/colors';
 import StatusBarManager from '@components/StatusBarManager';
 import ColorBox from '@components/circularAnimatedText/ColorBox';
 import AnimCircle from '@components/circularAnimatedText/AnimCricle';
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   listContainer: {
     position: 'absolute',

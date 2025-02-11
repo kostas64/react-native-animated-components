@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -31,14 +32,14 @@ const styles = StyleSheet.create({
   lens: {
     paddingTop: 4,
     paddingRight: 12,
-    color: 'black',
+    color: Colors.BLACK,
   },
   whereTo: {
     fontFamily: typography.medium,
-    color: 'black',
+    color: Colors.BLACK,
   },
   subtitle: {
-    color: 'rgb(75,75,75)',
+    color: Colors.QUARTZ,
     fontSize: 12,
     fontFamily: typography.regular,
   },

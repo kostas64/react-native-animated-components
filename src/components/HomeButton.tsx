@@ -1,6 +1,7 @@
 import {Pressable, StyleSheet} from 'react-native';
 
 import Text from './Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   buttonLabel: {
     fontSize: 18,
     lineHeight: 24,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.medium,
   },
 });

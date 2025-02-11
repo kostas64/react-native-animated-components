@@ -2,6 +2,7 @@ import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Image, Pressable, StyleSheet, TextInput} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import {TSearchMessageInput} from './types';
 import {typography} from '@utils/typography';
 import {isIOS, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     borderRadius: 20,
     marginHorizontal: 24,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: Colors.ANTI_FLASH_WHITE,
     paddingTop: isIOS ? 8 : 2,
     paddingLeft: isIOS ? 16 : 14,
     height: 66,
@@ -61,10 +62,10 @@ const styles = StyleSheet.create({
     width: WIDTH - 136,
     fontFamily: typography.semiBold,
     lineHeight: 20,
-    color: 'black',
+    color: Colors.BLACK,
   },
   sendContainer: {
-    backgroundColor: '#033de6',
+    backgroundColor: Colors.BLUE,
     position: 'absolute',
     padding: 12,
     borderRadius: 30,

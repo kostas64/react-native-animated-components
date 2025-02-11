@@ -6,6 +6,7 @@ import {View, FlatList, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 import Bar from './Bar';
 import Tabs from './Tabs';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {BarItemProps} from './types';
 import {isAndroid} from '@utils/device';
 import {typography} from '@utils/typography';
@@ -92,8 +93,8 @@ const styles = StyleSheet.create({
     paddingTop: 24,
     borderRadius: 24,
     borderWidth: 1,
-    borderColor: '#e3e3e3',
-    backgroundColor: '#efefef',
+    borderColor: Colors.PLATINUM,
+    backgroundColor: Colors.BRIGHT_GRAY,
   },
   listContentContainer: {
     gap: 16,
@@ -106,13 +107,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   money: {
-    color: '#121212',
+    color: Colors.CHINESE_BLACK,
     fontSize: 36,
     fontFamily: typography.semiBold,
   },
   earningsLabel: {
     alignSelf: 'center',
-    color: '#505050',
+    color: Colors.DARK_LIVER,
     fontFamily: typography.medium,
     fontSize: 12,
     marginTop: 4,

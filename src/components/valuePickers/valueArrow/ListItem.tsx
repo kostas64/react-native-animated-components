@@ -4,6 +4,7 @@ import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import {TListItem} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 
 const ListItem = React.memo(({item, index, unit, scrollOffset}: TListItem) => {
   const animStyle = useAnimatedStyle(() => ({
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   item: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 16,
     fontWeight: '600',
   },

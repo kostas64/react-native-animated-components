@@ -8,6 +8,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Link from './Link';
 import Route from './Route';
 import {DrawerProps} from './types';
+import {Colors} from '@utils/colors';
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import {fromCoords, links, routes} from './data';
 
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    backgroundColor: '#222',
+    backgroundColor: Colors.RAISIN_BLACK,
     paddingTop: 80,
     paddingHorizontal: 20,
     paddingBottom: 20,
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   transparent: {
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
 });
 

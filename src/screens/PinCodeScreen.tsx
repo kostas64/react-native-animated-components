@@ -5,6 +5,7 @@ import Animated, {
 import React from 'react';
 import {View, FlatList, StyleSheet, ActivityIndicator} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import NumberItem from '@components/pinCode/NumberItem';
 import Placeholder from '@components/pinCode/Placeholder';
 import StatusBarManager from '@components/StatusBarManager';
@@ -76,7 +77,7 @@ const PinCode = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#141416',
+    backgroundColor: Colors.CHINESE_BLACK,
     alignItems: 'center',
   },
   rowBetween: {

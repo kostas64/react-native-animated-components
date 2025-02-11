@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {shadows} from './styles';
 import StockIcon from './StockIcon';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import WalletIcon from './WalletIcon';
 import {TransactionProps} from './types';
 import {typography} from '@utils/typography';
@@ -65,13 +66,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   iconContainer: {
     marginRight: 12,
     padding: 18,
     borderRadius: 12,
-    backgroundColor: '#efefef',
+    backgroundColor: Colors.BRIGHT_GRAY,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -85,13 +86,13 @@ const styles = StyleSheet.create({
     fontFamily: typography.semiBold,
   },
   description: {
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.medium,
   },
   green: {
-    color: '#3ac060',
+    color: Colors.MEDIUM_SEA_GREEN,
   },
   red: {
-    color: '#e8477e',
+    color: Colors.DARK_PINK,
   },
 });

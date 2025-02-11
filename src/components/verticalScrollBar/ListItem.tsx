@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {ListItemProps} from './types';
 import {typography} from '@utils/typography';
 import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -51,20 +52,20 @@ const styles = StyleSheet.create({
   letterContainer: {
     paddingBottom: 24,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: '#495057',
+    borderColor: Colors.DAVYS_GREY,
   },
   letter: {
     lineHeight: 18,
     fontFamily: typography.bold,
-    color: '#6c757d',
+    color: Colors.AUROMETALSAURUS,
   },
   name: {
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.medium,
     lineHeight: 18,
   },
   container: {
-    borderColor: '#495057',
+    borderColor: Colors.DAVYS_GREY,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   spaceVertical: {

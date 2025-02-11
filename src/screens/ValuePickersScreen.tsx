@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Svg, {Defs, LinearGradient, Stop, Rect} from 'react-native-svg';
 
+import {Colors} from '@utils/colors';
 import StatusBarManager from '@components/StatusBarManager';
 import ValueDotPicker from '@components/valuePickers/valueDot/ValueDotPicker';
 import ValueListPicker from '@components/valuePickers/valueList/ValueListPicker';
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 200,
     borderRadius: 20,
-    backgroundColor: '#161616',
+    backgroundColor: Colors.CHINESE_BLACK,
     zIndex: 100000,
   },
 });

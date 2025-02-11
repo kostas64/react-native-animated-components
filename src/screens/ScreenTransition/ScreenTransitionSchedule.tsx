@@ -3,6 +3,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import ScheduleHeader from '@components/screenTransition/ScheduleHeader';
 import FadeInTransition from '@components/screenTransition/FadeInTransition';
 import ScheduleCalendar from '@components/screenTransition/ScheduleCalendar';
@@ -48,7 +49,7 @@ export default ScreenTransitionSchedule;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   spaceHor: {
     paddingHorizontal: 24,

@@ -10,6 +10,7 @@ import {G, Path, Rect, Svg} from 'react-native-svg';
 
 import {TabsProps} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import {isIOS, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -114,7 +115,7 @@ export default Tabs;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#e3e3e3',
+    backgroundColor: Colors.PLATINUM,
     gap: 2,
     padding: 3,
     borderRadius: 16,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
   },
   paddingRightIcon: {
     padding: 2,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderRadius: 16,
   },
 });

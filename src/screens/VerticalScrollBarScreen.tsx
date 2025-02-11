@@ -19,6 +19,7 @@ import {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import ReText from '@components/ReText';
 import {typography} from '@utils/typography';
 import {data} from '@components/verticalScrollBar/data';
@@ -250,16 +251,16 @@ export default VerticalScrollBarScreen;
 
 const styles = StyleSheet.create({
   bg: {
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
   },
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
   },
   header: {
     fontSize: 24,
     lineHeight: 24,
-    color: 'white',
+    color: Colors.WHITE,
     marginBottom: 32,
     fontFamily: typography.bold,
   },
@@ -273,11 +274,11 @@ const styles = StyleSheet.create({
     width: 112,
     right: -76,
     borderRadius: 23,
-    backgroundColor: '#01e395',
+    backgroundColor: Colors.CARIBBEAN_GREEN,
   },
   indicatorLabel: {
     fontSize: 16,
-    color: '#121212',
+    color: Colors.CHINESE_BLACK,
     right: isIOS ? 36 : 35,
     fontFamily: typography.bold,
   },

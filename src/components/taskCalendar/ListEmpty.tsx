@@ -3,6 +3,7 @@ import Animated, {FadeInDown} from 'react-native-reanimated';
 
 import {TLoading} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const ListEmpty = ({loading, selectedDate}: TLoading) => {
@@ -29,6 +30,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     fontFamily: typography.medium,
-    color: 'white',
+    color: Colors.WHITE,
   },
 });

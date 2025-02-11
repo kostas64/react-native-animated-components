@@ -11,6 +11,7 @@ import React from 'react';
 import {InteractionManager, StyleSheet, View} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 
 const NFCReader = () => {
   const progress = useSharedValue(0);
@@ -74,10 +75,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000000',
+    backgroundColor: Colors.BLACK,
   },
   circle: {
-    borderColor: '#0e83fe',
+    borderColor: Colors.AZURE,
     borderWidth: 4,
     width: 70,
     height: 70,
@@ -91,26 +92,26 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: 70,
     width: 34,
-    backgroundColor: '#0B4589',
-    borderColor: '#0e83fe',
+    backgroundColor: Colors.DARK_CERULEAN,
+    borderColor: Colors.AZURE,
     borderWidth: 2,
     overflow: 'hidden',
   },
   phoneShadow: {
     position: 'absolute',
-    backgroundColor: '#02294f',
+    backgroundColor: Colors.PRUSSIAN_BLUE,
   },
   notch: {
     width: 8,
     height: 2,
     borderRadius: 8,
-    backgroundColor: '#0e83fe',
+    backgroundColor: Colors.AZURE,
     alignSelf: 'center',
     top: 3,
   },
   label: {
     fontSize: 20,
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     marginTop: 20,
   },
 });

@@ -12,6 +12,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
+import {Colors} from '@utils/colors';
 import {STOCKS_DATA} from '@components/bank/data';
 import StockItem from '@components/bank/StockItem';
 import {StocksItemProps} from '@components/bank/types';
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: 'visible',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.CULTURED,
   },
   contentContainer: {
     gap: 16,

@@ -3,6 +3,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import Pencil from './Pencil';
 import Text from '@components/Text';
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {SettingsItemProps} from './types';
 import {typography} from '@utils/typography';
 
@@ -45,23 +46,23 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     justifyContent: 'space-between',
   },
   placeholder: {
     fontSize: 12,
-    color: '#505050',
+    color: Colors.DARK_LIVER,
     fontFamily: typography.medium,
   },
   value: {
     fontSize: 13,
     maxWidth: WIDTH - 124,
-    color: '#121212',
+    color: Colors.CHINESE_BLACK,
     fontFamily: typography.semiBold,
   },
   halfOpacity: {
     opacity: 0.5,
-    backgroundColor: '#d9d9d9',
+    backgroundColor: Colors.LIGHT_SILVER,
   },
   topRadius: {
     borderTopLeftRadius: 12,
@@ -73,6 +74,6 @@ const styles = StyleSheet.create({
   },
   border: {
     borderBottomWidth: 1,
-    borderBottomColor: '#e3e3e3',
+    borderBottomColor: Colors.PLATINUM,
   },
 });

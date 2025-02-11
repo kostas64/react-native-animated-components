@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import Progress from '@components/progressLoader/Progress';
 import StatusBarManager from '@components/StatusBarManager';
 import ImplementedWith from '@components/progressLoader/ImplementedWith';
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.WHITE,
     justifyContent: 'center',
   },
 });

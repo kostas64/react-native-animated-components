@@ -2,6 +2,7 @@ import {Pressable, StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import {TSymbolProps} from './types';
+import {Colors} from '@utils/colors';
 
 const Symbol = ({
   plus = false,
@@ -47,17 +48,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeBackground: {
-    backgroundColor: 'rgba(255,255,255,0.25)',
+    backgroundColor: Colors.TWO_POINT_HALF_WHITE,
   },
   dash: {
     height: 1,
     width: 22,
     position: 'absolute',
-    backgroundColor: '#7a7a7a',
+    backgroundColor: Colors.SONIC_SILVER,
   },
   verticalDash: {
     height: 22,
     width: 1,
-    backgroundColor: '#7a7a7a',
+    backgroundColor: Colors.SONIC_SILVER,
   },
 });

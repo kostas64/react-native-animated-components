@@ -11,6 +11,7 @@ import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Text from '@components/Text';
 import {darkShadow} from './styles';
 import {TBubbleProps} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -92,10 +93,10 @@ const styles = StyleSheet.create({
     zIndex: 10000,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#3b3b3b',
+    backgroundColor: Colors.BLACK_OLIVE,
   },
   label: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 18,
     fontFamily: typography.semiBold,
   },

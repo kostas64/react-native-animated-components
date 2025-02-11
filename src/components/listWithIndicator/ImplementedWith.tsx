@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const ImplementedWith = () => {
@@ -23,12 +24,12 @@ const styles = StyleSheet.create({
   },
   implemented: {
     fontSize: 22,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.bold,
   },
   label: {
     fontSize: 18,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.medium,
   },
 });

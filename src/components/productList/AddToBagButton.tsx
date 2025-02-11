@@ -3,6 +3,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {items} from './data';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 18,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.medium,
   },
 });

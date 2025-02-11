@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -33,12 +34,12 @@ const styles = StyleSheet.create({
   },
   implemented: {
     fontSize: 22,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.bold,
   },
   label: {
     fontSize: 18,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.medium,
   },
 });

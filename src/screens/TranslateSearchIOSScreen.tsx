@@ -16,6 +16,7 @@ import {
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import StatusBarManager from '@components/StatusBarManager';
 import {AnimatedPressable} from '@components/AnimatedComponents';
 
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   searchContainer: {
-    backgroundColor: '#5e5351',
+    backgroundColor: Colors.WENGE,
     borderRadius: 20,
   },
   innerSearchContainer: {
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     padding: isIOS ? 16 : 4,
   },
   input: {
-    color: 'white',
+    color: Colors.WHITE,
     fontWeight: '500',
     fontSize: 20,
     marginLeft: 8,

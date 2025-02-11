@@ -12,6 +12,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useSharedValue, useAnimatedStyle} from 'react-native-reanimated';
 
+import {Colors} from '@utils/colors';
 import {MONTHS} from '@assets/months';
 import {isAndroid} from '@utils/device';
 import Frozen from '@components/bank/Frozen';
@@ -121,7 +122,7 @@ export default BankSettings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.CULTURED,
   },
   contentContainer: {
     paddingHorizontal: 24,
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   border: {
     borderWidth: 1,
     borderRadius: 12,
-    borderColor: '#e3e3e3',
+    borderColor: Colors.PLATINUM,
   },
   icon: {
     width: 22,

@@ -8,6 +8,7 @@ import {
 } from '@screens/ScreenTransition/ScreenTransitionScheduleStack';
 import {isIOS} from '@utils/device';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import FadeInTransition from './FadeInTransition';
 import {AnimatedPressable} from '@components/AnimatedComponents';
@@ -61,12 +62,12 @@ export default SubjectsHeader;
 
 const styles = StyleSheet.create({
   whiteBg: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   container: {
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   tabContainer: {
     width: '50%',
@@ -75,10 +76,10 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     textAlign: 'center',
     fontSize: 20,
-    color: '#a0a0a0',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,
   },
   black: {
-    color: 'black',
+    color: Colors.BLACK,
   },
 });

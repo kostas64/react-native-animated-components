@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {TWhoComing} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import ItemCounter from './ItemCounter';
 import {typography} from '@utils/typography';
 import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     width: WIDTH - 80,
     alignSelf: 'center',
-    backgroundColor: 'rgb(200,200,200)',
+    backgroundColor: Colors.CHINESE_SILVER,
   },
   fontW600: {
     fontWeight: '600',

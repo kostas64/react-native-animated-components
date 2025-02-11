@@ -11,6 +11,7 @@ import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {SHORT_MONTHS} from '@assets/months';
 import {typography} from '@utils/typography';
 import Footer from '@components/airbnb/Footer';
@@ -503,14 +504,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   leftInput: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderWidth: 1,
-    borderColor: '#e9e9e9',
+    borderColor: Colors.BRIGHT_GRAY,
     paddingVertical: 12,
     borderRadius: 32,
   },
   filterContainer: {
-    borderColor: '#a1a1a1',
+    borderColor: Colors.QUICK_SILVER,
     borderWidth: 1,
     borderRadius: 100,
     height: 40,
@@ -524,9 +525,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 100,
     alignItems: 'center',
-    borderColor: '#e3e3e3',
+    borderColor: Colors.PLATINUM,
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   padHor24: {
     paddingHorizontal: 24,
@@ -555,20 +556,20 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingVertical: 24,
     paddingHorizontal: 24,
-    borderColor: '#e9e9e9',
-    backgroundColor: 'white',
+    borderColor: Colors.BRIGHT_GRAY,
+    backgroundColor: Colors.WHITE,
     marginTop: 60,
     width: WIDTH - 30,
     left: -10,
   },
   color100: {
-    color: 'rgb(100,100,100)',
+    color: Colors.GRANITE_GRAY,
     fontFamily: typography.medium,
   },
   bottomContainer: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderTopWidth: 1,
-    borderTopColor: '#e3e3e3',
+    borderTopColor: Colors.PLATINUM,
   },
   top1: {
     top: 1,

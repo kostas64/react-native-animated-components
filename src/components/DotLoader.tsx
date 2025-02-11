@@ -3,6 +3,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, Animated, TextInput, ScrollView, StyleSheet} from 'react-native';
 
 import Text from './Text';
+import {Colors} from '@utils/colors';
 
 const ImplementedWith = () => {
   const insets = useSafeAreaInsets();
@@ -246,23 +247,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   implemented: {
     fontSize: 22,
     fontWeight: '900',
-    color: 'black',
+    color: Colors.BLACK,
   },
   implementedLabel: {
     fontSize: 18,
     fontWeight: '500',
-    color: 'black',
+    color: Colors.BLACK,
   },
   label: {
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 16,
-    color: 'black',
+    color: Colors.BLACK,
   },
   textInput: {
     fontSize: 18,
@@ -271,8 +272,8 @@ const styles = StyleSheet.create({
     padding: 8,
     marginBottom: 32,
     borderRadius: 8,
-    shadowColor: 'black',
-    backgroundColor: 'white',
+    shadowColor: Colors.BLACK,
+    backgroundColor: Colors.WHITE,
     shadowOpacity: 0.3,
     shadowRadius: 3,
     shadowOffset: {
@@ -283,7 +284,7 @@ const styles = StyleSheet.create({
   },
   dot: {
     marginRight: 8,
-    backgroundColor: '#a3a3a3',
+    backgroundColor: Colors.QUICK_SILVER,
   },
   spaceRight0: {
     marginRight: 0,

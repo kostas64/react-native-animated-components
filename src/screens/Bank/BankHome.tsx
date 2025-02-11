@@ -2,6 +2,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {Colors} from '@utils/colors';
 import {cards} from '@components/bank/constants';
 import HomeHeader from '@components/bank/HomeHeader';
 import CardDetail from '@components/bank/CardDetail';
@@ -37,7 +38,7 @@ export default BankHome;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.CULTURED,
   },
   actionsContainer: {
     marginTop: 90,

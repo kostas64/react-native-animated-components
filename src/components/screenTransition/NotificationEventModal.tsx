@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 
 import Button from './Button';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {NotificationEventProps} from './types';
 import FadeInTransition from './FadeInTransition';
@@ -49,14 +50,14 @@ const styles = StyleSheet.create({
     padding: 24,
     borderRadius: 24,
     alignSelf: 'flex-start',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   eventTitle: {
     fontFamily: typography.bold,
     fontSize: 20,
   },
   description: {
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,
     fontSize: 18,
   },

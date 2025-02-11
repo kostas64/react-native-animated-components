@@ -7,6 +7,7 @@ import {
 } from '@utils/device';
 import Text from '@components/Text';
 import {TItemCounter} from './types';
+import {Colors} from '@utils/colors';
 import CounterBtn from './CounterBtn';
 import {typography} from '@utils/typography';
 
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   subtitle: {
-    color: 'rgb(75,75,75)',
+    color: Colors.QUARTZ,
     fontSize: 12,
     fontFamily: typography.regular,
   },

@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Animated, StyleSheet, LayoutChangeEvent} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {TProgressProps} from './types';
 import {typography} from '@utils/typography';
 
@@ -54,16 +55,16 @@ const styles = StyleSheet.create({
   stepsLabel: {
     fontSize: 16,
     marginBottom: 4,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.bold,
   },
   loaderContainer: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: Colors.POINT_ONE_BLACK,
     overflow: 'hidden',
   },
   innerLoader: {
     width: '100%',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Colors.HALF_BLACK,
     position: 'absolute',
     top: 0,
     left: 0,

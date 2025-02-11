@@ -11,6 +11,7 @@ import {Path} from 'react-native-svg';
 import {Pressable, StyleSheet, View} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {CardDetailRowProps} from './types';
 import {checkPath, copyPath} from './data';
 import {typography} from '@utils/typography';
@@ -155,19 +156,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    color: '#505050',
+    color: Colors.DARK_LIVER,
     fontFamily: typography.medium,
   },
   value: {
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.medium,
   },
   halfOpacity: {
     opacity: 0.5,
-    backgroundColor: '#d9d9d9',
+    backgroundColor: Colors.LIGHT_SILVER,
   },
   valueHidden: {
-    color: 'black',
+    color: Colors.BLACK,
     fontSize: 10,
     position: 'absolute',
     right: 20,

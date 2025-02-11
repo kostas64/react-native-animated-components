@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {morePath, personPath} from './data';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
@@ -54,18 +55,18 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   label: {
-    color: '#121212',
+    color: Colors.CHINESE_BLACK,
     fontSize: 18,
     fontFamily: typography.semiBold,
   },
   accountType: {
-    color: '#505050',
+    color: Colors.DARK_LIVER,
     fontSize: 12,
     fontFamily: typography.medium,
   },
   bellContainer: {
     padding: 14,
     borderRadius: 32,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.WHITE,
   },
 });

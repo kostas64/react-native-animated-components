@@ -2,6 +2,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {TDrawerContentItem} from './types';
 import {typography} from '@utils/typography';
 
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   drawerItemLabel: {
-    color: 'white',
+    color: Colors.WHITE,
     marginLeft: 15,
     fontSize: 16,
     fontFamily: typography.regular,

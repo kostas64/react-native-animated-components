@@ -1,8 +1,10 @@
 import {StyleSheet} from 'react-native';
 
+import {Colors} from '@utils/colors';
+
 export const shadows = StyleSheet.create({
   shadow: {
-    shadowColor: 'black',
+    shadowColor: Colors.BLACK,
     shadowOpacity: 1,
     shadowRadius: 30,
     shadowOffset: {
@@ -12,7 +14,7 @@ export const shadows = StyleSheet.create({
     elevation: 50,
   },
   lowShadow: {
-    shadowColor: 'black',
+    shadowColor: Colors.BLACK,
     shadowOpacity: 0.3,
     shadowRadius: 8,
     shadowOffset: {
@@ -22,7 +24,7 @@ export const shadows = StyleSheet.create({
     elevation: 12,
   },
   justShadow: {
-    shadowColor: 'black',
+    shadowColor: Colors.BLACK,
     shadowOpacity: 0.2,
     shadowRadius: 5,
     shadowOffset: {
@@ -32,7 +34,7 @@ export const shadows = StyleSheet.create({
     elevation: 10,
   },
   veryJustShadow: {
-    shadowColor: 'black',
+    shadowColor: Colors.BLACK,
     shadowOpacity: 0.1,
     shadowRadius: 4,
     shadowOffset: {

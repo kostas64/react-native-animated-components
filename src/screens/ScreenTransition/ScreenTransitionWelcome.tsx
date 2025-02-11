@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import Button from '@components/screenTransition/Button';
 import StatusBarManager from '@components/StatusBarManager';
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     justifyContent: 'space-between',
   },
   center: {
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: '#b4b4b8',
+    color: Colors.PHILIPPINE_SILVER,
     textAlign: 'center',
     width: WIDTH - 48,
     marginTop: 24,

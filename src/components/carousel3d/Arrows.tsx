@@ -4,6 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {DATA} from './data';
 import {ArrowProps} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {IMAGE_WIDTH, SPACING} from './constants';
 
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
   arrowText: {
     fontSize: 12,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.bold,
   },
   opacityQuarter: {

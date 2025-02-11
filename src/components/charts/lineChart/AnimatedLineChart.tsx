@@ -27,6 +27,7 @@ import {
 } from '@utils/device';
 import {days} from './data';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import ReText from '@components/ReText';
 import {ChartRef, TProps} from './types';
 import {typography} from '@utils/typography';
@@ -353,7 +354,7 @@ export default AnimatedLineChart;
 const styles = StyleSheet.create({
   chartHeaderLabel: {
     lineHeight: 20,
-    color: '#556d36',
+    color: Colors.DARK_OLIVE_GREEN,
     fontFamily: typography.bold,
   },
   lineH19: {
@@ -369,7 +370,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   day: {
-    color: '#333333',
+    color: Colors.DARK_CHARCOAL,
     textAlign: 'center',
     fontSize: 12,
     lineHeight: 14,
@@ -384,14 +385,14 @@ const styles = StyleSheet.create({
   indicator: {
     position: 'absolute',
     width: 2,
-    backgroundColor: '#151515',
+    backgroundColor: Colors.CHINESE_BLACK,
     borderRadius: 10,
   },
   retextContainer: {
     top: -36,
     alignItems: 'center',
     position: 'absolute',
-    backgroundColor: '#e3e5d7',
+    backgroundColor: Colors.WHITE_COFFEE,
     paddingHorizontal: 8,
     paddingLeft: isIOS ? 6 : 0,
     paddingRight: isIOS ? 8 : 2,
@@ -401,21 +402,21 @@ const styles = StyleSheet.create({
   },
   lineChartGestureArea: {
     position: 'absolute',
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
   verticalL: {
     height: 1,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: Colors.LIGHT_GRAY,
   },
   horizontalL: {
     width: 1,
     position: 'absolute',
-    backgroundColor: '#d3d3d3',
+    backgroundColor: Colors.LIGHT_GRAY,
   },
   chartBaseContainer: {
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
     borderWidth: 1,
-    borderColor: '#d3d3d3',
+    borderColor: Colors.LIGHT_GRAY,
     position: 'absolute',
   },
   stepValueContainer: {
@@ -427,7 +428,7 @@ const styles = StyleSheet.create({
     left: -24,
     fontSize: 12,
     lineHeight: 14,
-    color: '#333333',
+    color: Colors.DARK_CHARCOAL,
     fontFamily: typography.light,
   },
   noBorder: {

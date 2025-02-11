@@ -1,5 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import GestureCounter from '@components/gestureCounter/GestureCounter';
 
 const GestureCounterScreen = () => {
@@ -17,6 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2c2c2c',
+    backgroundColor: Colors.CHARLESTON_GREEN,
   },
 });

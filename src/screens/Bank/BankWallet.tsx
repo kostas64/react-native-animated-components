@@ -10,6 +10,7 @@ import {useCallback} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
+import {Colors} from '@utils/colors';
 import WalletHeader from '@components/bank/WalletHeader';
 import WalletCharts from '@components/bank/WalletCharts';
 import CardTransactions from '@components/bank/CardTransactions';
@@ -30,7 +31,7 @@ const BankWallet = () => {
 
   const separatorStyle = useAnimatedStyle(() => ({
     borderBottomWidth: showBorder.value ? 1 : 0,
-    borderBottomColor: '#e3e3e3',
+    borderBottomColor: Colors.PLATINUM,
     paddingBottom: 8,
   }));
 
@@ -65,7 +66,7 @@ export default BankWallet;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.CULTURED,
   },
   spaceTop: {
     marginTop: 20,

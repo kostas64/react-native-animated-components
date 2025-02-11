@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
+import {Colors} from '@utils/colors';
 import {TStackChartGrid} from './types';
 import {typography} from '@utils/typography';
 import {chartHeight, chartWidth} from './constants';
@@ -57,12 +58,12 @@ const styles = StyleSheet.create({
     width: 1,
     bottom: -20,
     position: 'absolute',
-    backgroundColor: '#d3d3d3',
+    backgroundColor: Colors.LIGHT_GRAY,
   },
   value: {
     textAlign: 'right',
     fontSize: 9,
-    color: '#444444',
+    color: Colors.OUTER_SPACE,
     fontFamily: typography.regular,
   },
   moveZero: {

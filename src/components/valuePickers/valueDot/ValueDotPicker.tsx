@@ -9,6 +9,7 @@ import {StyleSheet, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {TValueRangePicker} from './types';
 
 const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   },
   value: {
     marginBottom: 24,
-    color: 'white',
+    color: Colors.WHITE,
     alignSelf: 'center',
     fontSize: 16,
     fontWeight: '600',
@@ -103,19 +104,19 @@ const styles = StyleSheet.create({
   line: {
     width: 2,
     height: 112,
-    backgroundColor: '#464646',
+    backgroundColor: Colors.OUTER_SPACE,
     alignSelf: 'center',
   },
   dot: {
     top: -9,
     position: 'absolute',
     alignSelf: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     height: 18,
     width: 18,
     borderRadius: 9,
     borderWidth: 3,
-    borderColor: '#161616',
+    borderColor: Colors.CHINESE_BLACK,
   },
   gestureTransparentBox: {
     top: -56,
@@ -123,6 +124,6 @@ const styles = StyleSheet.create({
     height: 186,
     alignSelf: 'center',
     position: 'absolute',
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
 });

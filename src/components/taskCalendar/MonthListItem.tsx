@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {TMonthListItem} from './types';
 import {typography} from '@utils/typography';
 import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -44,8 +45,8 @@ export default MonthListItem;
 
 const styles = StyleSheet.create({
   label: {
-    color: 'white',
     fontSize: 22,
+    color: Colors.WHITE,
     lineHeight: isIOS ? 26 : 29,
     fontFamily: typography.semiBold,
   },

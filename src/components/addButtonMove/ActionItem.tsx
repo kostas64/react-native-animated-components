@@ -2,6 +2,7 @@ import Animated from 'react-native-reanimated';
 import {Image, StyleSheet} from 'react-native';
 
 import {CIRCLE_SIZE} from './data';
+import {Colors} from '@utils/colors';
 import {ActionItemProps} from './types';
 
 const ActionItem = ({source, containerStyle}: ActionItemProps) => {
@@ -21,11 +22,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    backgroundColor: '#6f5a85',
+    backgroundColor: Colors.DARK_LAVENDER,
   },
   image: {
     width: 26,
     height: 26,
-    tintColor: '#ada4b6',
+    tintColor: Colors.PASTEL_PURPLE,
   },
 });

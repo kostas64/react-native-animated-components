@@ -4,6 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {data} from './data';
 import {TTab} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -27,7 +28,7 @@ export default Tab;
 
 const styles = StyleSheet.create({
   label: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 84 / data.length,
     textTransform: 'uppercase',
     fontFamily: typography.semiBold,

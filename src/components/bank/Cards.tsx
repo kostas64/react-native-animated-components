@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import Card from './Card';
 import {shadows} from './styles';
 import {cards} from './constants';
 import {StyleProps} from './types';
-import Animated from 'react-native-reanimated';
+import {Colors} from '@utils/colors';
 
 const Cards = ({style, sharedElementTag}: StyleProps) => {
   return (
@@ -39,6 +40,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     position: 'absolute',
     borderRadius: 16,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
 });

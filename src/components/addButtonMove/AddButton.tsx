@@ -4,6 +4,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {shadow} from './styles';
 import {CIRCLE_SIZE} from './data';
+import {Colors} from '@utils/colors';
 import {AddButtonProps} from './types';
 
 const AnimatedIcon = Animated.createAnimatedComponent(Feather);
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     height: CIRCLE_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ff296b',
+    backgroundColor: Colors.RADICAL_RED,
     borderRadius: CIRCLE_SIZE / 2,
     overflow: 'hidden',
     zIndex: 1,

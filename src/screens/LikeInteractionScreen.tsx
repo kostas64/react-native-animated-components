@@ -3,6 +3,7 @@ import {Image, StyleSheet, View} from 'react-native';
 
 import Text from '@components/Text';
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/likeInteraction/ListItem';
@@ -52,7 +53,7 @@ export default LikeInteractionScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   postImg: {
     width: '100%',
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
   },
   line: {
     height: 1,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: Colors.LIGHT_GRAY,
     width: WIDTH - 36,
     alignSelf: 'center',
     marginVertical: 16,

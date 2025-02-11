@@ -3,6 +3,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import Text from '@components/Text';
 import {TMonthPicker} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const MonthPicker = ({month, onPress}: TMonthPicker) => {
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   month: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 30,
     lineHeight: 34,
     marginLeft: 20,

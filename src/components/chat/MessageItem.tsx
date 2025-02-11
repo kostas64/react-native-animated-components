@@ -12,6 +12,7 @@ import {View, Image, StyleSheet, GestureResponderEvent} from 'react-native';
 
 import Text from '@components/Text';
 import {TMessageItem} from './types';
+import {Colors} from '@utils/colors';
 import {DELAY_LONG_PRESS} from './data';
 import {typography} from '@utils/typography';
 import {HAPTIC_CONFIG} from '@utils/haptics';
@@ -199,11 +200,11 @@ const styles = StyleSheet.create({
   },
   messageInnerContainer: {
     flex: 1,
-    borderColor: '#e7e7e7',
+    borderColor: Colors.PLATINUM,
     borderWidth: 1,
     borderRadius: 16,
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   messageHeader: {
     flexDirection: 'row',
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
   },
   messageTime: {
     fontFamily: typography.regular,
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
   },
   messageRecipient: {
     marginRight: 12,
@@ -242,8 +243,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   smallEmojiContainer: {
-    backgroundColor: 'white',
-    borderColor: '#e7e7e7',
+    backgroundColor: Colors.WHITE,
+    borderColor: Colors.PLATINUM,
     borderWidth: 1,
     width: 28,
     height: 28,

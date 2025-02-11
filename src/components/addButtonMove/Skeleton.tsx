@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 
 import {shadow} from './styles';
+import {Colors} from '@utils/colors';
 
 const Skeleton = ({skeletonHeight}: {skeletonHeight: number}) => {
   return (
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#a187b2',
+    backgroundColor: Colors.GLOSSY_GRAPE,
   },
   box: {
     flex: 1,
@@ -38,16 +39,16 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 32,
     borderTopRightRadius: 12,
     borderBottomLeftRadius: 12,
-    backgroundColor: '#714f90',
+    backgroundColor: Colors.DARK_LAVENDER,
   },
   smLine: {
     width: '60%',
     borderRadius: 24,
-    backgroundColor: '#ab99b9',
+    backgroundColor: Colors.GLOSSY_GRAPE,
   },
   xlLine: {
     width: '100%',
     borderRadius: 24,
-    backgroundColor: '#85669f',
+    backgroundColor: Colors.FRENCH_LILAC,
   },
 });

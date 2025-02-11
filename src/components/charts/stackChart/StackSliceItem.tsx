@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import StackSlice from './StackSlice';
 import {TStackSliceItem} from './types';
 import {typography} from '@utils/typography';
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     left: 32,
     top: -12,
     height: 236,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: Colors.LIGHT_GRAY,
   },
   slice1: {
     bottom: -1,

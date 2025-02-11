@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {EVENTS} from '@components/screenTransition/data';
 import SearchBar from '@components/screenTransition/SearchBar';
 import HomeClass from '@components/screenTransition/HomeClass';
@@ -88,7 +89,7 @@ export default ScreenTransitionHome;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   spaceHor: {
     paddingHorizontal: 24,

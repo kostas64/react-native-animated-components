@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 
 const MonthListPickerLines = () => {
   return (
@@ -23,8 +24,8 @@ const styles = StyleSheet.create({
     height: 42,
     width: 200,
     alignSelf: 'center',
-    borderBottomColor: 'rgba(255,255,255,0.2)',
-    borderTopColor: 'rgba(255,255,255,0.2)',
+    borderBottomColor: Colors.TWO_POINT_BLACK,
+    borderTopColor: Colors.TWO_POINT_BLACK,
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderWidth: 2,

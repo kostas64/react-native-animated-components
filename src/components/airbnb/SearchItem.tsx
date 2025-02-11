@@ -3,6 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import Text from '@components/Text';
 import {TSearchItem} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const SearchItem = ({place, date, guests}: TSearchItem) => (
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
   searchClockContainer: {
     padding: 16,
-    backgroundColor: 'rgb(240,240,240)',
+    backgroundColor: Colors.ANTI_FLASH_WHITE,
     borderRadius: 10,
     marginRight: 16,
   },
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 12,
-    color: 'rgb(75,75,75)',
+    color: Colors.QUARTZ,
     fontFamily: typography.regular,
   },
 });

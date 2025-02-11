@@ -7,6 +7,7 @@ import {
   NOTIFICATION_EVENTS_YESTERDAY,
 } from '@components/screenTransition/data';
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import TextBetween from '@components/screenTransition/TextBetween';
 import FadeInTransition from '@components/screenTransition/FadeInTransition';
@@ -85,10 +86,10 @@ export default ScreenTransitionNotifications;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   periodStyle: {
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,
   },
   spaceHor: {

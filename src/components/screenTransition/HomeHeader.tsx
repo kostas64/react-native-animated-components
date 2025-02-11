@@ -3,6 +3,7 @@ import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
@@ -63,13 +64,13 @@ const styles = StyleSheet.create({
   grade: {
     fontFamily: typography.semiBold,
     fontSize: 14,
-    color: '#a3a3a3',
+    color: Colors.QUICK_SILVER,
   },
   bellContainer: {
     padding: 12,
     borderWidth: 1,
     borderRadius: 16,
-    borderColor: '#e5e5e5',
+    borderColor: Colors.PLATINUM,
   },
   gap2: {
     gap: 2,

@@ -2,6 +2,7 @@ import {WIDTH} from '@utils/device';
 import {StyleSheet, View} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 
 const TicketPart = ({
   isFirstCard = false,
@@ -71,26 +72,26 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   cardContainer: {
     width: WIDTH - 48,
     padding: 24,
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    borderColor: '#e1e1e1',
+    borderColor: Colors.CHINESE_WHITE,
   },
   topBorder: {
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     borderTopWidth: 1,
-    borderColor: '#e1e1e1',
+    borderColor: Colors.CHINESE_WHITE,
   },
   bottomBorder: {
     borderBottomRightRadius: 24,
     borderBottomLeftRadius: 24,
     borderBottomWidth: 1,
-    borderColor: '#e1e1e1',
+    borderColor: Colors.CHINESE_WHITE,
   },
   overflow: {
     overflow: 'hidden',
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
   dashedLine: {
     borderStyle: 'dashed',
     borderWidth: 1,
-    borderColor: '#e1e1e1',
+    borderColor: Colors.CHINESE_WHITE,
     margin: -1,
     height: 0,
     marginBottom: 0,
@@ -106,11 +107,11 @@ const styles = StyleSheet.create({
   corner: {
     height: 24,
     width: 24,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderRadius: 12,
     position: 'absolute',
     borderWidth: 1,
-    borderColor: '#e1e1e1',
+    borderColor: Colors.CHINESE_WHITE,
   },
   topLeft: {
     top: -12,

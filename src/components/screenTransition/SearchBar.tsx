@@ -2,6 +2,7 @@ import {View, StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {SearchBarProps} from './types';
 import {typography} from '@utils/typography';
 
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f6f6f6',
+    backgroundColor: Colors.CULTURED,
     borderRadius: 100,
   },
   search: {
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: typography.medium,
     fontSize: 16,
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
   },
 });

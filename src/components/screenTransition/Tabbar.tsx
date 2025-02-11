@@ -10,6 +10,7 @@ import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {ICONS, shadow} from './data';
+import {Colors} from '@utils/colors';
 
 const Tabbar = ({
   state,
@@ -115,14 +116,14 @@ const styles = StyleSheet.create({
     padding: 8,
     gap: 10,
     borderRadius: 28,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   secondInnerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 12,
     paddingHorizontal: 22,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderRadius: 28,
   },
   icon: {
@@ -143,9 +144,9 @@ const styles = StyleSheet.create({
     marginRight: 0,
   },
   black: {
-    backgroundColor: 'black',
+    backgroundColor: Colors.BLACK,
   },
   white: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
 });

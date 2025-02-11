@@ -14,6 +14,7 @@ import {LinearGradient, Rect, Stop, Svg} from 'react-native-svg';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {tabs} from './data';
+import {Colors} from '@utils/colors';
 import CommonGradient from './CommonGradient';
 import {isAndroid, WIDTH} from '@utils/device';
 import {AnimatedSvg} from '@components/AnimatedComponents';
@@ -175,14 +176,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     position: 'absolute',
     width: WIDTH,
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
   absolute: {
     position: 'absolute',
   },
   fadeContainer: {
     position: 'absolute',
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.TRANSPARENT,
   },
   tabbarContainer: {
     width: TABBAR_WIDTH,
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     padding: 18,
     borderRadius: 32,
-    backgroundColor: '#303030',
+    backgroundColor: Colors.DARK_CHARCOAL,
   },
   halfOpacity: {
     opacity: 0.5,
@@ -208,11 +209,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: ICON_CONTAINER_SIZE / 2,
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   icon: {
     width: 20,
     height: 20,
-    tintColor: 'white',
+    tintColor: Colors.WHITE,
   },
 });

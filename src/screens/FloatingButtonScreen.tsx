@@ -2,6 +2,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import StatusBarManager from '@components/StatusBarManager';
 import {FAKE_ARRAY, SPACING} from '@components/floatingButton/data';
 import FloatingContent from '@components/floatingButton/FloatingContent';
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 30,
     position: 'absolute',
-    backgroundColor: 'rgb(30,30,30)',
+    backgroundColor: Colors.EERIE_BLACK,
     padding: 24,
   },
   item: {

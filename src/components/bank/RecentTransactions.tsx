@@ -2,6 +2,7 @@ import {View, Image, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 
 import {USERS} from './data';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import SectionHeader from './SectionHeader';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: (WIDTH - 56 - 46) / 10,
   },
   name: {
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     maxWidth: (WIDTH - 56) / 5,
     fontSize: 12,
     fontFamily: typography.medium,

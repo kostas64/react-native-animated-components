@@ -8,6 +8,7 @@ import {useEffect} from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const DATA = [
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     height: 54,
     borderRadius: 20,
     borderWidth: 3,
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
     position: 'absolute',
   },
 });

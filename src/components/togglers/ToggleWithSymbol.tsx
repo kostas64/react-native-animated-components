@@ -2,6 +2,7 @@ import React from 'react';
 import {Animated, Easing, Pressable, StyleSheet, View} from 'react-native';
 
 import {SIZE} from './constants';
+import {Colors} from '@utils/colors';
 
 const ToggleWithSymbol = () => {
   const animSymbolRef = React.useRef(new Animated.Value(0)).current;
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     width: SIZE / 2,
     height: SIZE / 2,
     borderRadius: SIZE / 2,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   symbolOpen: {
     position: 'absolute',
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     height: SIZE / 4,
     borderRadius: SIZE / 4,
     borderWidth: SIZE / 20,
-    borderColor: 'black',
+    borderColor: Colors.BLACK,
   },
   symbolClose: {
     position: 'absolute',
@@ -95,13 +96,13 @@ const styles = StyleSheet.create({
     height: SIZE / 4,
     borderRadius: SIZE / 4,
     borderWidth: SIZE / 20,
-    borderColor: 'black',
-    backgroundColor: 'black',
+    borderColor: Colors.BLACK,
+    backgroundColor: Colors.BLACK,
   },
   black: {
-    backgroundColor: 'black',
+    backgroundColor: Colors.BLACK,
   },
   lowOpacityBlack: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: Colors.POINT_ONE_BLACK,
   },
 });

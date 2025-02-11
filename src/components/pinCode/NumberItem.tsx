@@ -9,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Text from '@components/Text';
 import {TNumberItem} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
@@ -100,14 +101,14 @@ const styles = StyleSheet.create({
     margin: 8,
     width: 90,
     height: 90,
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
     borderWidth: 1,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
   },
   number: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 36,
     fontFamily: typography.light,
   },

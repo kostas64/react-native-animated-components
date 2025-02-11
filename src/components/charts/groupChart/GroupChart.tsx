@@ -14,6 +14,7 @@ import Prices from './Prices';
 import {TGroupItem} from './types';
 import MovingDot from './MovingDot';
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {GROUP_WIDTH} from './constants';
 import GroupBarItem from './GroupBarItem';
 
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#d3d3d3',
+    borderBottomColor: Colors.LIGHT_GRAY,
   },
   pricesContainer: {
     height: 50,
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
   bottomLine: {
     width: '100%',
     height: 1,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: Colors.LIGHT_GRAY,
   },
   dot: {
     left: 2,

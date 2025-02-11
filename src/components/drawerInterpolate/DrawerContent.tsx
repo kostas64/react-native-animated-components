@@ -4,6 +4,7 @@ import {View, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import DrawerContentItem from './DrawerContentItem';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -44,13 +45,13 @@ const styles = StyleSheet.create({
   },
   hr: {
     height: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     left: 8,
   },
   implementedWith: {
     paddingLeft: 8,
     paddingVertical: 16,
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 18,
     fontFamily: typography.medium,
   },

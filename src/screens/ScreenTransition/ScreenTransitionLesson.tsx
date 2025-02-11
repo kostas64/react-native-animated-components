@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import LessonHeader from '@components/screenTransition/LessonHeader';
 import LessonStudents from '@components/screenTransition/LessonStudents';
 import FadeInTransition from '@components/screenTransition/FadeInTransition';
@@ -46,7 +47,7 @@ export default ScreenTransitionLesson;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   spaceHor: {
     paddingHorizontal: 24,

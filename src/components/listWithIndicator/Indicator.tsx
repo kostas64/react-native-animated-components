@@ -2,6 +2,7 @@ import {Animated, StyleSheet} from 'react-native';
 
 import {data} from './data';
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {TIndicator, TMeasure} from './types';
 
 const Indicator = ({measures, scrollX}: TIndicator) => {
@@ -27,7 +28,7 @@ export default Indicator;
 const styles = StyleSheet.create({
   container: {
     height: 3,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     bottom: -10,
     position: 'absolute',
   },

@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 
 import {shadows} from './styles';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {StocksItemProps} from './types';
 import {typography} from '@utils/typography';
 import {ChartRef} from '@components/charts/lineChart/types';
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     justifyContent: 'space-between',
   },
   gap: {
@@ -79,9 +80,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
   green: {
-    color: '#3ac060',
+    color: Colors.MEDIUM_SEA_GREEN,
   },
   red: {
-    color: '#e8477e',
+    color: Colors.DARK_PINK,
   },
 });

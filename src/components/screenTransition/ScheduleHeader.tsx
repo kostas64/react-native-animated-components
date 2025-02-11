@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const ScheduleHeader = () => {
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderRadius: 16,
-    borderColor: '#e5e5e5',
+    borderColor: Colors.PLATINUM,
   },
 });

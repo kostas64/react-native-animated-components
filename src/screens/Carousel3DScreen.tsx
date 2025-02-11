@@ -14,6 +14,7 @@ import {
   IMAGE_HEIGHT,
   IMAGE_WIDTH,
 } from '@components/carousel3d/constants';
+import {Colors} from '@utils/colors';
 import {isAndroid, WIDTH} from '@utils/device';
 import {DATA} from '@components/carousel3d/data';
 import Arrows from '@components/carousel3d/Arrows';
@@ -107,7 +108,7 @@ const Carousel3DScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#A5F1FA',
+    backgroundColor: Colors.WATERSPOUT,
   },
   safeAreaContainer: {
     flex: 1,

@@ -2,6 +2,7 @@ import {Animated, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {TImplementedWith} from './types';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     fontSize: 22,
     fontFamily: typography.bold,
-    color: 'black',
+    color: Colors.BLACK,
   },
   label: {
     fontSize: 18,
     fontFamily: typography.medium,
-    color: 'black',
+    color: Colors.BLACK,
   },
 });

@@ -11,6 +11,7 @@ import {View, StyleSheet, StatusBar} from 'react-native';
 import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
 
 //My Libs
+import {Colors} from '@utils/colors';
 import Splash from '@components/home/Splash';
 import HomeBody from '@components/home/HomeBody';
 import HomeHeader from '@components/home/HomeHeader';
@@ -63,7 +64,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3f546a',
+    backgroundColor: Colors.POLICE_BLUE,
   },
 });
 

@@ -3,6 +3,7 @@ import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import {TLoading} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const Loading = ({loading, stopLoading}: TLoading) => {
@@ -47,6 +48,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 15,
     fontFamily: typography.medium,
-    color: 'white',
+    color: Colors.WHITE,
   },
 });

@@ -2,6 +2,7 @@ import {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {Colors} from '@utils/colors';
 import MyButton from '@components/charts/MyButton';
 import PieChart from '@components/charts/pieChart/PieChart';
 import StatusBarManager from '@components/StatusBarManager';
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: 24,
-    backgroundColor: '#eeeee2',
+    backgroundColor: Colors.ALABASTER,
     justifyContent: 'space-between',
   },
   chartsContainer: {

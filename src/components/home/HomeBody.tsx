@@ -15,6 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {DATA} from '@assets/homeData';
 import {HomeBodyProps} from './types';
 import {typography} from '@utils/typography';
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
   },
   listLabel: {
     fontSize: 18,
-    color: 'white',
+    color: Colors.WHITE,
     paddingLeft: 8,
     lineHeight: 32,
     fontFamily: typography.semiBold,

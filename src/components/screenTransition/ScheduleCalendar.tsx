@@ -3,6 +3,7 @@ import {useIsFocused} from '@react-navigation/native';
 
 import {DAYS} from './data';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {ScheduleCalendarProps} from './types';
 import FadeInTransition from './FadeInTransition';
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     gap: 24,
     borderRadius: 20,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: Colors.CULTURED,
   },
   rowCenter: {
     flexDirection: 'row',
@@ -70,12 +71,12 @@ const styles = StyleSheet.create({
   },
   selectedDayContainer: {
     borderRadius: 12,
-    backgroundColor: 'black',
+    backgroundColor: Colors.BLACK,
   },
   day: {
     fontSize: 12,
     fontFamily: typography.semiBold,
-    color: '#b1b1b1',
+    color: Colors.PHILIPPINE_SILVER,
   },
   dayNumberContainer: {
     padding: 8,
@@ -85,6 +86,6 @@ const styles = StyleSheet.create({
     fontFamily: typography.medium,
   },
   white: {
-    color: 'white',
+    color: Colors.WHITE,
   },
 });

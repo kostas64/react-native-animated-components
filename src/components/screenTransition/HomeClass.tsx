@@ -3,6 +3,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const HomeClass = () => {
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     padding: 24,
     borderRadius: 24,
     gap: 24,
-    backgroundColor: '#e3e6fd',
+    backgroundColor: Colors.LAVENDER,
   },
   homeworkContainer: {
     top: 12,
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 100,
     position: 'absolute',
-    backgroundColor: '#edf0fd',
+    backgroundColor: Colors.ALICE_BLUE,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     padding: 14,
     borderRadius: 12,
-    backgroundColor: '#edf0fd',
+    backgroundColor: Colors.ALICE_BLUE,
   },
   classTitle: {
     fontSize: 20,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   },
   classDate: {
     fontSize: 16,
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,
   },
   professorContainer: {

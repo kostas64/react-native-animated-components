@@ -9,6 +9,7 @@ import {useCallback, useState} from 'react';
 
 import Symbol from './Symbol';
 import Bubble from './Bubble';
+import {Colors} from '@utils/colors';
 import {lightShadow} from './styles';
 import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
 
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     gap: 4,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    backgroundColor: '#282828',
+    backgroundColor: Colors.CHARLESTON_GREEN,
     borderRadius: 100,
   },
   delete: {

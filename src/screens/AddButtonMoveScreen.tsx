@@ -11,6 +11,7 @@ import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
+import {Colors} from '@utils/colors';
 import Skeleton from '@components/addButtonMove/Skeleton';
 import AddButton from '@components/addButtonMove/AddButton';
 import ActionItem from '@components/addButtonMove/ActionItem';
@@ -135,11 +136,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: 'hidden',
-    backgroundColor: '#2f1248',
+    backgroundColor: Colors.RUSSIAN_VIOLET,
   },
   scrollViewContainer: {
     flexGrow: 1,
-    backgroundColor: '#5e3383',
+    backgroundColor: Colors.REGALIA,
   },
   space: {
     gap: 16,

@@ -13,6 +13,7 @@ import React, {useRef} from 'react';
 import {Keyboard, Pressable, StyleSheet} from 'react-native';
 
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {image, SPACING} from './data';
 import {TFloatingElement} from './types';
 import {AnimatedPressable} from '@components/AnimatedComponents';
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: 'rgb(0,0,0)',
+    backgroundColor: Colors.BLACK,
   },
   imageContainer: {
     top: 17,

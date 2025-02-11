@@ -9,6 +9,7 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {findScheduleForTimes} from './utils';
 import {SCHEDULE_EVENTS, TIMES} from './data';
@@ -127,14 +128,14 @@ const styles = StyleSheet.create({
     width: 72,
     fontSize: 15,
     fontFamily: typography.semiBold,
-    color: '#a0a0a0',
+    color: Colors.CULTURED,
   },
   line: {
     width: WIDTH - 136,
     height: 1,
     borderWidth: 1,
     borderStyle: 'dashed',
-    borderColor: 'rgba(0,0,0, 0.2)',
+    borderColor: Colors.TWO_POINT_BLACK,
   },
   eventAbsolute: {
     position: 'absolute',
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
     fontFamily: typography.semiBold,
   },
   eventTime: {
-    color: '#a3a3b2',
+    color: Colors.METALLIC_SILVER,
     fontFamily: typography.medium,
   },
   eventInnerContainer: {

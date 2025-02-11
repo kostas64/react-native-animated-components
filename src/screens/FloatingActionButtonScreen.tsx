@@ -9,6 +9,7 @@ import {StyleSheet, View} from 'react-native';
 import FloatingActionButton, {
   RefProps,
 } from '@components/floatingActionsButton/FloatingActionButton';
+import {Colors} from '@utils/colors';
 import StatusBarManager from '@components/StatusBarManager';
 import FloatingActionModal from '@components/floatingActionsButton/FloatingActionModal';
 
@@ -61,7 +62,7 @@ export default FloatingActionButtonScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecc1c3',
+    backgroundColor: Colors.BABY_PINK,
   },
   buttonPosition: {
     position: 'absolute',

@@ -9,6 +9,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 
 import {TListItem} from './types';
+import {Colors} from '@utils/colors';
 
 const ListItem = ({item, index, liked}: TListItem) => {
   const animate = useSharedValue(0);
@@ -98,6 +99,6 @@ const styles = StyleSheet.create({
     aspectRatio: 1 / 1,
     borderWidth: 2,
     position: 'absolute',
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
   },
 });

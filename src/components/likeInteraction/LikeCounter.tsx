@@ -12,6 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import Text from '@components/Text';
 import {TLikeCounter} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -61,11 +62,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    backgroundColor: '#e9e9e9',
+    backgroundColor: Colors.BRIGHT_GRAY,
   },
   counter: {
     marginLeft: 10,
-    color: '#666666',
+    color: Colors.GRANITE_GRAY,
     fontFamily: typography.regular,
   },
 });

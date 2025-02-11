@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import Cards from '@components/bank/Cards';
 import Button from '@components/bank/Button';
 import {shadows} from '@components/bank/styles';
@@ -53,6 +54,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 24,
-    backgroundColor: '#141111',
+    backgroundColor: Colors.CHINESE_BLACK,
   },
 });

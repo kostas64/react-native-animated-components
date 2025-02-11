@@ -7,6 +7,7 @@ import {
   TNavigation,
   TCalendarState,
 } from '@components/taskCalendar/types';
+import {Colors} from '@utils/colors';
 import Event from '@components/taskCalendar/Event';
 import Header from '@components/taskCalendar/Header';
 import Loading from '@components/taskCalendar/Loading';
@@ -98,7 +99,7 @@ export default TaskCalendarScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
   },
   contentStyle: {
     flexGrow: 1,

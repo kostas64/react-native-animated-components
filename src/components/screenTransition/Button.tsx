@@ -2,6 +2,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import Text from '@components/Text';
 import {ButtonProps} from './types';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: Colors.BLACK,
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderRadius: 30,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     lineHeight: 20,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.semiBold,
   },
 });

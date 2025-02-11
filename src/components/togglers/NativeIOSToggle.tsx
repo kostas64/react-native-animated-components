@@ -9,6 +9,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {SIZE} from './constants';
+import {Colors} from '@utils/colors';
 
 const AnimatedIcon = Animated.createAnimatedComponent(MaterialIcons);
 
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   dot: {
     width: SIZE / 2 - 4,
     height: SIZE / 2 - 4,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     justifyContent: 'center',
     borderRadius: (SIZE / 2 - 4) / 2,
   },
@@ -95,9 +96,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   green: {
-    backgroundColor: '#4cda63',
+    backgroundColor: Colors.UFO_GREEN,
   },
   lowOpacityBlack: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: Colors.POINT_ONE_BLACK,
   },
 });

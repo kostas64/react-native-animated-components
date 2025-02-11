@@ -3,6 +3,7 @@ import Animated from 'react-native-reanimated';
 
 import {COLORS} from './data';
 import {TMovingDot} from './types';
+import {Colors} from '@utils/colors';
 
 const MovingDot = ({style}: TMovingDot) => {
   return <Animated.View style={[styles.dot, style]} />;
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     borderColor: COLORS.income,
   },
 });

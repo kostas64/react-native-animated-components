@@ -13,6 +13,7 @@ import {
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import SearchItem from './SearchItem';
 import CountryItem from './CountryItem';
 import {typography} from '@utils/typography';
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
   },
   lens2: {
     paddingRight: 20,
-    color: 'black',
+    color: Colors.BLACK,
   },
   marBot24: {
     marginBottom: 24,
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   color100: {
-    color: 'rgb(100,100,100)',
+    color: Colors.GRANITE_GRAY,
     fontFamily: typography.medium,
   },
   padLeft24: {

@@ -11,6 +11,7 @@ import {THeader} from './types';
 import Calendar from './Calendar';
 import MenuIcon from './MenuIcon';
 import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import MonthPicker from './MonthPicker';
 import {ANIMATION_DUR} from './constants';
 import MonthListModal from './MonthListModal';
@@ -76,23 +77,23 @@ export default memo(Header);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
     paddingBottom: 16,
     borderRadius: 32,
     overflow: 'hidden',
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
     borderRadius: 0,
     elevation: 10,
   },
   modalInnerContainer: {
     borderRadius: 0,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.CHINESE_BLACK,
     borderWidth: isIOS ? 0 : 2,
-    borderTopColor: 'white',
-    shadowColor: 'white',
+    borderTopColor: Colors.WHITE,
+    shadowColor: Colors.WHITE,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -102,6 +103,6 @@ const styles = StyleSheet.create({
   },
   linStyle: {
     marginTop: 16,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
 });

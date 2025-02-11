@@ -26,6 +26,7 @@ import {
 } from '@utils/device';
 import {CardProps} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
@@ -136,11 +137,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   whiteBackground: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   cardContainer: {
     borderRadius: 16,
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     overflow: 'hidden',
@@ -160,18 +161,18 @@ const styles = StyleSheet.create({
   },
   offWhiteLabel: {
     fontSize: isIOS ? 14 : 12,
-    color: '#797979',
+    color: Colors.SONIC_SILVER,
     marginRight: 8,
     fontFamily: typography.medium,
   },
   whiteLabel: {
     fontSize: isIOS ? 14 : 12,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.medium,
   },
   cardNumber: {
     fontSize: 18,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.medium,
   },
 });

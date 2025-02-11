@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 
 const ChartHeader = ({iconName, label}: {iconName: string; label: string}) => (
@@ -26,12 +27,12 @@ const styles = StyleSheet.create({
   chartHeaderInnerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#e3e5d7',
+    backgroundColor: Colors.WHITE_COFFEE,
     padding: 10,
     borderRadius: 16,
   },
   chartHeaderIconContainer: {
-    backgroundColor: '#eeeee2',
+    backgroundColor: Colors.ALABASTER,
     marginRight: 10,
     borderRadius: 8,
     paddingVertical: 8,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   },
   chartHeaderLabel: {
     lineHeight: 20,
-    color: '#556d36',
+    color: Colors.DARK_OLIVE_GREEN,
     fontFamily: typography.bold,
   },
 });

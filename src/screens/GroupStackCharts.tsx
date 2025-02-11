@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Easing, useSharedValue, withTiming} from 'react-native-reanimated';
 
+import {Colors} from '@utils/colors';
 import MyButton from '@components/charts/MyButton';
 import StatusBarManager from '@components/StatusBarManager';
 import GroupChart from '@components/charts/groupChart/GroupChart';
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#eeeee2',
+    backgroundColor: Colors.ALABASTER,
     justifyContent: 'center',
   },
   chartsContainer: {

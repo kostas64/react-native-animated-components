@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {isAndroid} from '@utils/device';
 import SettingsItem from './SettingsItem';
 import {typography} from '@utils/typography';
@@ -39,11 +40,11 @@ const styles = StyleSheet.create({
   spaceTop: {
     marginTop: 16,
     borderRadius: 12,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: Colors.CULTURED,
   },
   border: {
     borderWidth: 1,
     borderRadius: 12,
-    borderColor: '#e3e3e3',
+    borderColor: Colors.PLATINUM,
   },
 });

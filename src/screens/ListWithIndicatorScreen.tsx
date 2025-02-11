@@ -2,6 +2,7 @@ import React from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 import {WIDTH} from '@utils/device';
+import {Colors} from '@utils/colors';
 import Tabs from '@components/listWithIndicator/Tabs';
 import {data} from '@components/listWithIndicator/data';
 import {ListItem} from '@components/listWithIndicator/types';
@@ -56,7 +57,7 @@ const ListWithIndiScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.WHITE,
     alignItems: 'center',
     justifyContent: 'center',
   },

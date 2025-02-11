@@ -4,6 +4,7 @@ import {Pressable, StyleSheet} from 'react-native';
 import Text from '@components/Text';
 import {WIDTH} from '@utils/device';
 import {ButtonProps} from './types';
+import {Colors} from '@utils/colors';
 import {BUTTON_HEIGHT} from './constants';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
@@ -48,12 +49,12 @@ const styles = StyleSheet.create({
   svgContainer: {
     borderRadius: 30,
     overflow: 'hidden',
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     position: 'absolute',
   },
   label: {
     fontSize: 18,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.semiBold,
   },
 });

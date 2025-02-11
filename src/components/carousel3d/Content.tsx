@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {SPACING} from './constants';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {ICarouselDataType} from './types';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -34,7 +35,7 @@ export default Content;
 const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 16,
-    color: 'black',
+    color: Colors.BLACK,
     textAlign: 'center',
     fontFamily: typography.bold,
     textTransform: 'uppercase',
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 12,
     opacity: 0.4,
-    color: 'black',
+    color: Colors.BLACK,
     fontFamily: typography.medium,
   },
   priceContainer: {
@@ -50,14 +51,14 @@ const styles = StyleSheet.create({
     marginTop: SPACING,
   },
   price: {
-    color: 'black',
+    color: Colors.BLACK,
     fontSize: 42,
     letterSpacing: 3,
     marginRight: 8,
     fontFamily: typography.bold,
   },
   currency: {
-    color: 'black',
+    color: Colors.BLACK,
     fontSize: 16,
     lineHeight: 36,
     alignSelf: 'flex-end',

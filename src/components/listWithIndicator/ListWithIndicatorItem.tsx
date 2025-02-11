@@ -1,6 +1,7 @@
 import {Image, StyleSheet, View} from 'react-native';
 
 import {ListItem} from './types';
+import {Colors} from '@utils/colors';
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
 
 const ListWithIndicatorItem = ({item}: ListItem) => {
@@ -20,6 +21,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   bg: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: Colors.THREE_POINT_BLACK,
   },
 });

@@ -8,6 +8,7 @@ import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {TNotificationEventProps} from './types';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -36,7 +37,7 @@ const NotificationEvent = ({
       content: <NotificationEventModal event={event} />,
       modalHeight: 300 + bottom,
       lineStyle: {
-        backgroundColor: '#c3c3c3',
+        backgroundColor: Colors.SILVER_SAND,
       },
       lineStyleContainer: {
         backgroundColor: event.backgroundColor,
@@ -90,14 +91,14 @@ const styles = StyleSheet.create({
   iconContainer: {
     padding: 14,
     borderRadius: 16,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   eventTitle: {
     fontFamily: typography.bold,
     fontSize: 14,
   },
   description: {
-    color: '#a1a1a1',
+    color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,
     fontSize: 12,
   },

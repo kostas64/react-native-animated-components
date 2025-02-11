@@ -3,6 +3,7 @@ import {Image, StyleSheet, View} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
+import {Colors} from '@utils/colors';
 import StatusBarManager from '@components/StatusBarManager';
 import {FadeItemProps} from '@components/fadeItemList/types';
 import FadeListItem from '@components/fadeItemList/FadeListItem';
@@ -54,7 +55,7 @@ const ScrollItemListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.WHITE,
   },
 });
 

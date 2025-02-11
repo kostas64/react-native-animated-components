@@ -3,6 +3,7 @@ import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
 
 import {TEvent} from './types';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import EventIndicator from './EventIndicator';
 import {DATA} from '@components/likeInteraction/data';
@@ -34,7 +35,7 @@ export default Event;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     padding: 20,
     borderRadius: 32,
     marginTop: 4,

@@ -8,6 +8,7 @@ import Animated, {
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import {PlaceholderFunction} from './types';
 
 const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
@@ -62,6 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   placeholder: {
-    backgroundColor: '#ffecdb',
+    backgroundColor: Colors.ANTIQUE_WHITE,
   },
 });

@@ -18,6 +18,7 @@ import {
 import {TWhenTrip} from './types';
 import {CALENDAR_PER} from './data';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import PickerItem from './PickerItem';
 import PeriodItem from './PeriodItem';
 import {typography} from '@utils/typography';
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
   },
   monthDay: {
     textAlign: 'center',
-    color: 'rgb(125,125,125)',
+    color: Colors.GRAY,
     width: (WIDTH - 60) / 7,
   },
   padLeft24: {
@@ -340,7 +341,7 @@ const styles = StyleSheet.create({
     width: WIDTH - 78,
     marginTop: 16,
     marginLeft: 24,
-    backgroundColor: 'rgb(225,225,225)',
+    backgroundColor: Colors.CHINESE_WHITE,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 32,
@@ -351,8 +352,8 @@ const styles = StyleSheet.create({
     height: 33,
     borderRadius: 20,
     width: (WIDTH - 90) / 3,
-    backgroundColor: 'white',
-    shadowColor: 'black',
+    backgroundColor: Colors.WHITE,
+    shadowColor: Colors.BLACK,
     shadowOffset: {
       height: 0,
       width: 0,
@@ -388,14 +389,14 @@ const styles = StyleSheet.create({
   },
   borderLine: {
     height: 1,
-    backgroundColor: 'rgb(210,210,210)',
+    backgroundColor: Colors.LIGHT_GRAY,
     width: WIDTH - 32,
   },
   height74: {
     height: 74,
   },
   nextBtn: {
-    backgroundColor: '#222222',
+    backgroundColor: Colors.RAISIN_BLACK,
     alignSelf: 'center',
     paddingHorizontal: 46,
     paddingVertical: 14,
@@ -412,7 +413,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   white: {
-    color: 'white',
+    color: Colors.WHITE,
   },
   fontW500: {
     fontWeight: '500',

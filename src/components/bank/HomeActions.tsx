@@ -4,6 +4,7 @@ import {View, ViewStyle, Pressable, StyleProp, StyleSheet} from 'react-native';
 import {ACTIONS} from './data';
 import {shadows} from './styles';
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 
@@ -47,14 +48,14 @@ const styles = StyleSheet.create({
     gap: 6,
     padding: 6,
     borderRadius: 100,
-    backgroundColor: '#efefef',
+    backgroundColor: Colors.BRIGHT_GRAY,
     flexDirection: 'row',
     alignItems: 'center',
   },
   itemContainer: {
     flex: 1,
     padding: 4,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 24,

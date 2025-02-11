@@ -4,6 +4,7 @@ import {TouchableOpacity, View, Linking, StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {HomeHeaderProps} from './types';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
@@ -98,19 +99,19 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     lineHeight: 24,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.bold,
   },
   profession: {
     fontSize: 16,
     lineHeight: 18,
-    color: '#819cb8',
+    color: Colors.WELDON_BLUE,
     fontFamily: typography.bold,
   },
   linkedIn: {
     padding: 2,
     borderRadius: 4,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
   },
   imgContainer: {
     alignItems: 'center',

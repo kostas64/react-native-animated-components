@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {useAnimatedStyle} from 'react-native-reanimated';
 
 import Text from '@components/Text';
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {TChooseOption, TListItem} from './types';
 import {AnimatedPressable} from '@components/AnimatedComponents';
@@ -37,11 +38,11 @@ const styles = StyleSheet.create({
   optionContainer: {
     minWidth: 92,
     alignItems: 'center',
-    backgroundColor: '#7a54cd',
+    backgroundColor: Colors.SLATE_BLUE,
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: Colors.BLACK,
     shadowOffset: {
       width: 0,
       height: 6,
@@ -50,16 +51,16 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   label: {
-    color: 'white',
+    color: Colors.WHITE,
     fontSize: 16,
     fontFamily: typography.semiBold,
   },
   selectedBorder: {
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: Colors.WHITE,
   },
   unselectedBorder: {
     borderWidth: 2,
-    borderColor: '#7a54cd',
+    borderColor: Colors.SLATE_BLUE,
   },
 });

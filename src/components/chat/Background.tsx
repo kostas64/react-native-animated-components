@@ -9,6 +9,7 @@ import React, {useCallback} from 'react';
 import Haptic from 'react-native-haptic-feedback';
 import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import MessageItem from './MessageItem';
 import {HAPTIC_CONFIG} from '@utils/haptics';
 import {isAndroid, WIDTH} from '@utils/device';
@@ -131,9 +132,9 @@ const styles = StyleSheet.create({
   emojiContainer: {
     zIndex: 100,
     width: WIDTH - 104,
-    borderColor: '#e7e7e7',
+    borderColor: Colors.PLATINUM,
     borderWidth: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE,
     padding: 8,
     alignSelf: 'center',
     borderRadius: 16,

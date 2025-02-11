@@ -1,6 +1,7 @@
 import Animated from 'react-native-reanimated';
 import {Pressable, StyleSheet} from 'react-native';
 
+import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {TFloatingModalItemProps} from './types';
 import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -49,10 +50,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: 'white',
+    color: Colors.WHITE,
     fontFamily: typography.semiBold,
   },
   touch: {
-    backgroundColor: 'rgba(255,255,255,0.25)',
+    backgroundColor: Colors.TWO_POINT_HALF_WHITE,
   },
 });
