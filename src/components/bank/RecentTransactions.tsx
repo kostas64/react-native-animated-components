@@ -1,4 +1,3 @@
-import React from 'react';
 import {View, Image, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 
 import {USERS} from './data';

@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {
@@ -52,7 +51,7 @@ const ItemCounter = ({
           styles.fontW500,
           styles.font16,
           styles.textCenter,
-          {minWidth: value < 10 ? 30 : 36},
+          value < 10 ? styles.minWidth30 : styles.minWidth36,
         ]}>
         {value}
       </Text>
@@ -102,5 +101,11 @@ const styles = StyleSheet.create({
   },
   fontW500: {
     fontFamily: typography.medium,
+  },
+  minWidth30: {
+    minWidth: 30,
+  },
+  minWidth36: {
+    minWidth: 36,
   },
 });

@@ -1,4 +1,3 @@
-import React from 'react';
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {COUNTRIES} from './data';
@@ -23,10 +22,10 @@ const CountryItem = ({
       }}
       style={[
         styles.mapImgContainer,
-        {
-          paddingRight: index === COUNTRIES.length - 1 ? 24 : 16,
-          paddingLeft: index === 0 ? 24 : 0,
-        },
+        index === COUNTRIES.length - 1
+          ? styles.spaceRight24
+          : styles.spaceRight16,
+        index === 0 ? styles.spaceLeft24 : styles.spaceLeft0,
       ]}>
       {/* @ts-ignore */}
       <Image
@@ -68,5 +67,17 @@ const styles = StyleSheet.create({
   borderGreyW1: {
     borderWidth: 1,
     borderColor: '#e3e3e3',
+  },
+  spaceRight24: {
+    paddingRight: 24,
+  },
+  spaceRight16: {
+    paddingRight: 16,
+  },
+  spaceLeft0: {
+    paddingLeft: 0,
+  },
+  spaceLeft24: {
+    paddingLeft: 24,
   },
 });

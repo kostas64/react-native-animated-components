@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Animated from 'react-native-reanimated';
 import {StyleSheet, LayoutChangeEvent} from 'react-native';
 

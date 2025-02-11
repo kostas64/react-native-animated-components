@@ -1,4 +1,3 @@
-import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -16,14 +15,14 @@ const NotificationsHeader = () => {
 
   return (
     <View style={[styles.container, styles.rowCenter]}>
-      <View style={[styles.rowCenter, {gap: 12}]}>
+      <View style={[styles.rowCenter, styles.gap12]}>
         <TouchableOpacity
           onPress={onPress}
           activeOpacity={0.6}
           style={styles.chevronContainer}>
           <Entypo name="chevron-left" size={18} />
         </TouchableOpacity>
-        <View style={[styles.rowCenter, {gap: 8}]}>
+        <View style={[styles.rowCenter, styles.gap8]}>
           <Text style={styles.label}>Notifications</Text>
           <View style={styles.numberContainer}>
             <Text style={styles.number}>7</Text>
@@ -68,5 +67,11 @@ const styles = StyleSheet.create({
     fontFamily: typography.semiBold,
     fontSize: 12,
     paddingHorizontal: 8,
+  },
+  gap12: {
+    gap: 12,
+  },
+  gap8: {
+    gap: 8,
   },
 });

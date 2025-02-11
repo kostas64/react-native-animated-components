@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet} from 'react-native';
-import React, {forwardRef, useImperativeHandle, useRef} from 'react';
+import {forwardRef, useImperativeHandle, useRef} from 'react';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
 import Text from '@components/Text';
@@ -62,6 +62,8 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
     );
   },
 );
+
+ChooseOption.displayName = 'ChooseOption';
 
 export default ChooseOption;
 

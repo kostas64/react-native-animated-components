@@ -26,25 +26,21 @@ const ToggleWithLabel = () => {
       <View
         style={[
           styles.container,
-          {backgroundColor: !togglerActive ? 'white' : 'black'},
+          !togglerActive ? styles.white : styles.black,
         ]}>
         <Animated.View
           style={[
             styles.background,
-            {
-              transform: [{translateX: animRef}],
-              backgroundColor: !togglerActive ? 'black' : 'white',
-            },
+            {transform: [{translateX: animRef}]},
+            !togglerActive ? styles.black : styles.white,
           ]}
         />
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[
             styles.label,
-            {
-              right: !togglerActive ? SIZE / 8 : SIZE / 2 + 4,
-              color: !togglerActive ? 'black' : 'white',
-            },
+            {right: !togglerActive ? SIZE / 8 : SIZE / 2 + 4},
+            !togglerActive ? styles.black : styles.white,
           ]}>{`${togglerActive ? 'ON' : 'OFF'}`}</Text>
       </View>
     </Pressable>
@@ -72,5 +68,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     fontFamily: typography.bold,
     fontSize: SIZE / 7,
+  },
+  white: {
+    backgroundColor: 'white',
+  },
+  black: {
+    backgroundColor: 'black',
   },
 });

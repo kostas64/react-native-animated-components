@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
@@ -47,8 +46,7 @@ const SubjectsHeader = () => {
               onPress={() =>
                 navigation.navigate(tab.screen as keyof TInnerStackList)
               }>
-              <Text
-                style={[styles.tab, stackIndex === index && {color: 'black'}]}>
+              <Text style={[styles.tab, stackIndex === index && styles.black]}>
                 {tab.label}
               </Text>
             </AnimatedPressable>
@@ -79,5 +77,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#a0a0a0',
     fontFamily: typography.semiBold,
+  },
+  black: {
+    color: 'black',
   },
 });

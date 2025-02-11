@@ -15,7 +15,7 @@ const ListItem = ({item, index, liked}: TListItem) => {
   const first = useSharedValue(0);
 
   React.useEffect(() => {
-    const toValue = !!liked ? 0 : 144;
+    const toValue = liked ? 0 : 144;
 
     const duration = first.value === 0 ? 0 : 300;
 

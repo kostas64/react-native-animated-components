@@ -1,4 +1,3 @@
-import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
@@ -14,8 +13,8 @@ const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
   const navigation = useNavigation();
 
   return (
-    <View style={[containerStyle, {gap: 42}]}>
-      <View style={{gap: 14}}>
+    <View style={[containerStyle, styles.gap42]}>
+      <View style={styles.gap14}>
         <FadeInTransition
           direction="top-scale"
           animate={isFocused}
@@ -32,7 +31,7 @@ const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
           </Text>
         </FadeInTransition>
       </View>
-      <View style={{gap: 14}}>
+      <View style={styles.gap14}>
         <FadeInTransition
           direction="top-scale"
           animate={isFocused}
@@ -110,5 +109,11 @@ const styles = StyleSheet.create({
   homeworkButtonContainer: {
     gap: 12,
     marginBottom: 16,
+  },
+  gap42: {
+    gap: 42,
+  },
+  gap14: {
+    gap: 14,
   },
 });

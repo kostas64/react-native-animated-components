@@ -1,4 +1,3 @@
-import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {View, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';

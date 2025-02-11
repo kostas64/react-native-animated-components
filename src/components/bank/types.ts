@@ -109,3 +109,9 @@ export type SettingsContainerProps = {
   data: SettingsItemProps[];
   style?: StyleProp<ViewStyle>;
 };
+
+export type HeaderWithIconProps = {
+  icon: ReactNode;
+  label: string;
+  style?: StyleProp<ViewStyle>;
+};

@@ -10,7 +10,7 @@ import {today} from '@screens/TaskCalendarScreen';
 import {useCalendarDays} from './hooks/useCalendarDays';
 import WeekEmptyDayListItem from './WeekEmptyDayListItem';
 import {TCalendar, TEmptyDay, TCalendarListItem} from './types';
-import {_spacing, ANIMATION_DUR, calendarFirstDayOfWeek} from './constants';
+import {ANIMATION_DUR, calendarFirstDayOfWeek} from './constants';
 
 export const setDayEmitter = mitt<{
   daySelected: CalendarDayMetadata;
@@ -76,5 +76,7 @@ const Calendar = memo(
     );
   },
 );
+
+Calendar.displayName = 'Calendar';
 
 export default Calendar;

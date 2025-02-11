@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import Animated from 'react-native-reanimated';
 import Feather from 'react-native-vector-icons/Feather';
-import React, {forwardRef, useImperativeHandle} from 'react';
+import {forwardRef, useImperativeHandle} from 'react';
 import {Circle, Defs, LinearGradient, Stop, Svg} from 'react-native-svg';
 
 import {CIRCLE_SIZE, ICON_SIZE} from './data';
@@ -54,6 +54,8 @@ const FloatingActionButton = forwardRef<RefProps, TFloatingActionButtonProps>(
     );
   },
 );
+
+FloatingActionButton.displayName = 'FloatingActionButton';
 
 export default FloatingActionButton;
 

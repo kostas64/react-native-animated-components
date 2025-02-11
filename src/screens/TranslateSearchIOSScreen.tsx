@@ -51,7 +51,10 @@ const TranslateSearchIOSScreen = () => {
   );
 
   const cancelContainerStyle = useAnimatedStyle(
-    () => ({right: interpolate(progress.value, [0, 1], [-100, -38])}),
+    () => ({
+      position: 'absolute',
+      right: interpolate(progress.value, [0, 1], [-100, -38]),
+    }),
     [],
   );
 
@@ -97,9 +100,9 @@ const TranslateSearchIOSScreen = () => {
         <AnimatedPressable
           onPress={onPress}
           hitSlop={styles.hitSlop}
-          style={[cancelContainerStyle, {position: 'absolute'}]}>
+          style={cancelContainerStyle}>
           <Text
-            style={{fontSize: 16}}
+            style={styles.cancelLabel}
             maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
             Cancel
           </Text>
@@ -138,5 +141,8 @@ const styles = StyleSheet.create({
     left: 16,
     right: 16,
     bottom: 16,
+  },
+  cancelLabel: {
+    fontSize: 16,
   },
 });

@@ -23,7 +23,7 @@ import StatusBarManager from '@components/StatusBarManager';
 import {AnimatedPressable} from '@components/AnimatedComponents';
 import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
 import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
-import {_MS_PER_DAY, CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
+import {CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
 
 const Airbnb = () => {
   const insets = useSafeAreaInsets();
@@ -314,7 +314,8 @@ const Airbnb = () => {
                 opacityInputStyle,
                 styles.filterContainer,
                 styles.absolute,
-                {right: 24, top: top + 10},
+                styles.right24,
+                {top: top + 10},
               ]}>
               <Feather name="sliders" size={18} style={styles.top1} />
             </Animated.View>
@@ -588,5 +589,8 @@ const styles = StyleSheet.create({
   },
   value: {
     fontFamily: typography.semiBold,
+  },
+  right24: {
+    right: 24,
   },
 });

@@ -1,4 +1,3 @@
-import React from 'react';
 import {WIDTH} from '@utils/device';
 import {StyleSheet, View} from 'react-native';
 

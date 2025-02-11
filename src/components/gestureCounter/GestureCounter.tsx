@@ -5,7 +5,7 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import {StyleSheet, View} from 'react-native';
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 
 import Symbol from './Symbol';
 import Bubble from './Bubble';
@@ -68,7 +68,7 @@ const GestureCounter = () => {
   return (
     <Animated.View style={[styles.container, animatedStyle, lightShadow]}>
       <Symbol onPress={onPress} progress={progress} style={opacity} />
-      <View style={{zIndex: 2}}>
+      <View style={styles.zIndex}>
         <Bubble
           value={counter}
           onPress={onPress}
@@ -100,5 +100,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     transform: [{rotate: '45deg'}],
+  },
+  zIndex: {
+    zIndex: 2,
   },
 });

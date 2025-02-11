@@ -1,4 +1,3 @@
-import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -19,10 +18,8 @@ const Footer = ({onPressClear, animateClose}: TFooter) => {
         styles.padHor24,
         styles.marTop4,
         styles.widthCenter,
-        {
-          paddingBottom: insets.bottom,
-          height: HEIGHT > 800 ? 100 : 48 + (insets.bottom || 24),
-        },
+        HEIGHT > 800 ? styles.height : {height: 48 + (insets.bottom || 24)},
+        {paddingBottom: insets.bottom},
       ]}>
       <Pressable style={styles.padding8} onPress={onPressClear}>
         <Text style={styles.clearAll}>Clear all</Text>
@@ -80,5 +77,8 @@ const styles = StyleSheet.create({
   lens3: {
     paddingRight: 8,
     color: 'white',
+  },
+  height: {
+    height: 100,
   },
 });

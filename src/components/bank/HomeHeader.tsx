@@ -1,4 +1,3 @@
-import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, Image, StyleProp, ViewStyle, StyleSheet} from 'react-native';

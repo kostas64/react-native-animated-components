@@ -21,6 +21,8 @@ const Header = React.memo(() => (
   </View>
 ));
 
+Header.displayName = 'Header';
+
 export default Header;
 
 const styles = StyleSheet.create({

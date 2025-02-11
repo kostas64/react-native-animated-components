@@ -53,11 +53,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
   );
 
   return (
-    <View
-      style={{
-        paddingTop: insets.top + 24,
-        paddingHorizontal: 16,
-      }}>
+    <View style={[styles.spaceHorizontal, {paddingTop: insets.top + 24}]}>
       <View>
         <View style={styles.nameProfRow}>
           <Animated.View style={nameImg}>
@@ -92,6 +88,9 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
 export default HomeHeader;
 
 const styles = StyleSheet.create({
+  spaceHorizontal: {
+    paddingHorizontal: 16,
+  },
   nameProfRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',

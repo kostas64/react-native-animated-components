@@ -3,8 +3,8 @@ import Animated, {
   useSharedValue,
   LinearTransition,
 } from 'react-native-reanimated';
+import {memo, useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
-import React, {memo, useCallback} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {THeader} from './types';
@@ -38,8 +38,8 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
         <View style={styles.modalContainer}>
           <MonthListModal
             month={month}
-            setMonth={month => {
-              onSelecteMonth(month);
+            setMonth={selectedMonth => {
+              onSelecteMonth(selectedMonth);
             }}
           />
         </View>

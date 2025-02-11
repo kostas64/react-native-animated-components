@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
@@ -16,7 +15,7 @@ const LessonHeader = () => {
 
   return (
     <View style={[styles.container, styles.rowCenter]}>
-      <View style={[styles.rowCenter, {gap: 12}]}>
+      <View style={[styles.rowCenter, styles.gap12]}>
         <TouchableOpacity
           onPress={onPress}
           activeOpacity={0.6}
@@ -24,7 +23,7 @@ const LessonHeader = () => {
           <Entypo name="chevron-left" size={18} />
         </TouchableOpacity>
       </View>
-      <View style={{gap: 5}}>
+      <View style={styles.gap5}>
         <Text style={styles.label}>English grammar</Text>
         <View style={styles.rowCenter}>
           <Text style={styles.description}>{'Will start in '}</Text>
@@ -64,5 +63,11 @@ const styles = StyleSheet.create({
   boldDescription: {
     fontSize: 14,
     fontFamily: typography.bold,
+  },
+  gap12: {
+    gap: 12,
+  },
+  gap5: {
+    gap: 5,
   },
 });

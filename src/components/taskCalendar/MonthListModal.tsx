@@ -18,10 +18,10 @@ import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {MONTHS} from './constants';
-import {isIOS, isAndroid} from '@utils/device';
 import {TMonthListModal} from './types';
 import MonthListItem from './MonthListItem';
 import {HAPTIC_CONFIG} from '@utils/haptics';
+import {isIOS, isAndroid} from '@utils/device';
 import MonthListPickerLines from './MonthListPickerLines';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -71,10 +71,10 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
     scrollY.value = event.contentOffset.y;
   });
 
-  const scrollToMonth = useCallback((month: string) => {
+  const scrollToMonth = useCallback((monthToScroll: string) => {
     scrollRef.current?.scrollToOffset({
       animated: true,
-      offset: MONTHS.findIndex(m => m === month) * 46,
+      offset: MONTHS.findIndex(m => m === monthToScroll) * 46,
     });
 
     isAndroid &&
@@ -113,10 +113,7 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[
           styles.alignCenter,
-          {
-            paddingTop: 64,
-            paddingBottom: isIOS ? insets.bottom + 56 : 90,
-          },
+          isIOS ? {paddingBottom: insets.bottom + 56} : styles.spaceBottom,
         ]}
       />
     </View>
@@ -132,5 +129,9 @@ const styles = StyleSheet.create({
   alignCenter: {
     alignItems: 'center',
     flexGrow: 1,
+    paddingTop: 64,
+  },
+  spaceBottom: {
+    paddingBottom: 90,
   },
 });

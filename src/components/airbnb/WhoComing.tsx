@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {TWhoComing} from './types';
@@ -30,7 +29,7 @@ const WhoComing = ({
           styles.padLeft24,
         ]}
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
-        Who's coming?
+        {"Who's coming?"}
       </Text>
       <ItemCounter
         disabledLeft={adults === 1 && (pets > 0 || inflants > 0 || childs > 0)}

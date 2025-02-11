@@ -45,12 +45,12 @@ const Prices = ({income, expenses}: TPrices) => {
       <Animated.Text
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
         style={[styles.price, {color: COLORS.income}, textStyle]}>{`${
-        !!localState.income ? '$' : ''
+        localState.income ? '$' : ''
       }${localState.income ?? ''}`}</Animated.Text>
       <Animated.Text
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
         style={[styles.price, {color: COLORS.expenses}, textStyle]}>{`${
-        !!localState.expenses ? '$' : ''
+        localState.expenses ? '$' : ''
       }${localState.expenses ?? ''}`}</Animated.Text>
     </>
   );

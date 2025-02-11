@@ -11,7 +11,7 @@ import Animated, {
   useAnimatedProps,
 } from 'react-native-reanimated';
 import {Image, StyleSheet, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Svg, Defs, Path, Stop, Polygon, LinearGradient} from 'react-native-svg';
@@ -109,8 +109,8 @@ const LotteryScreen = () => {
             duration: 5000,
             easing: Easing.bezier(0.15, 0.85, 0.5, 1),
           },
-          finished => {
-            if (finished) {
+          finish => {
+            if (finish) {
               runOnJS(pulseIt)();
               runOnJS(calculateWinner)();
             }
@@ -155,8 +155,8 @@ const LotteryScreen = () => {
     });
   };
 
-  const selectOption = (index: number) => {
-    setSelectedO(index);
+  const selectOption = (option: number) => {
+    setSelectedO(option);
   };
 
   useEffect(() => {

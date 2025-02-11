@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
@@ -28,10 +27,9 @@ const ScheduleCalendar = ({index}: ScheduleCalendarProps) => {
                   index === 5 && styles.selectedDayContainer,
                 ]}>
                 <Text
-                  style={[
-                    styles.dayNumber,
-                    index === 5 && {color: 'white'},
-                  ]}>{`${(index + 4) % 10 > 1 ? '0' : ''}${index + 4}`}</Text>
+                  style={[styles.dayNumber, index === 5 && styles.white]}>{`${
+                  (index + 4) % 10 > 1 ? '0' : ''
+                }${index + 4}`}</Text>
               </View>
             </View>
           ))}
@@ -88,5 +86,8 @@ const styles = StyleSheet.create({
   dayNumber: {
     fontSize: 16,
     fontFamily: typography.medium,
+  },
+  white: {
+    color: 'white',
   },
 });

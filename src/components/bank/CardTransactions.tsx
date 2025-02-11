@@ -1,4 +1,3 @@
-import React from 'react';
 import {FlatList, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
 import Transaction from './Transaction';

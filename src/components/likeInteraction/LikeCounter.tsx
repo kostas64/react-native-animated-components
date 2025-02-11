@@ -27,7 +27,7 @@ const LikeCounter = ({counter, liked, onPress}: TLikeCounter) => {
   }));
 
   React.useEffect(() => {
-    const toValue = !!liked ? 144 : 0;
+    const toValue = liked ? 144 : 0;
 
     if (first.current === 0 && !liked) {
       first.current = 1;

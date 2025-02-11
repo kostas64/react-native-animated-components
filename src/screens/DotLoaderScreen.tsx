@@ -1,4 +1,3 @@
-import React from 'react';
 import DotLoader from '../components/DotLoader';
 import StatusBarManager from '../components/StatusBarManager';
 

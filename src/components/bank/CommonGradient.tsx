@@ -1,4 +1,3 @@
-import React from 'react';
 import {LinearGradient, Stop} from 'react-native-svg';
 
 const CommonGradient = ({id}: {id: string}) => {

@@ -7,7 +7,6 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedProps,
 } from 'react-native-reanimated';
-import React from 'react';
 import {Path} from 'react-native-svg';
 import {Pressable, StyleSheet, View} from 'react-native';
 
@@ -126,7 +125,7 @@ const CardDetailRow = ({
             height={16}
             viewBox="2 2 22 22"
             animatedProps={checkStyle}
-            style={{position: 'absolute'}}>
+            style={styles.absolute}>
             <CommonGradient id={'check'} />
             <Path fill="url(#check)" d={checkPath} />
           </AnimatedSvg>
@@ -139,6 +138,9 @@ const CardDetailRow = ({
 export default CardDetailRow;
 
 const styles = StyleSheet.create({
+  absolute: {
+    position: 'absolute',
+  },
   container: {
     padding: 16,
     paddingVertical: 20,

@@ -7,7 +7,7 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React, {useCallback, useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {LinearGradient, Rect, Stop, Svg} from 'react-native-svg';

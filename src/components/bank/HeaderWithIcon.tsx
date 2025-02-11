@@ -1,18 +1,10 @@
-import React, {ReactNode} from 'react';
+import {StyleSheet} from 'react-native';
 import Animated from 'react-native-reanimated';
-import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 
 import SectionHeader from './SectionHeader';
+import {HeaderWithIconProps} from './types';
 
-const HeaderWithIcon = ({
-  icon,
-  style,
-  label,
-}: {
-  icon: ReactNode;
-  label: string;
-  style?: StyleProp<ViewStyle>;
-}) => {
+const HeaderWithIcon = ({icon, style, label}: HeaderWithIconProps) => {
   return (
     <Animated.View
       style={[styles.spacePadHorizontal, styles.headerContainer, style]}>

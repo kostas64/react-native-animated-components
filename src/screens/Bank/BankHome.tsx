@@ -1,4 +1,3 @@
-import React from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {ScrollView, StatusBar, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';

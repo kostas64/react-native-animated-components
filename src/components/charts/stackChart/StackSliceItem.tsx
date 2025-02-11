@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
@@ -35,13 +34,8 @@ const StackSliceItem = ({
         width={(item.payroll / maxQuarter) * (chartWidth - 25)}
         style={[
           opacity,
-          {
-            height: barHeight,
-            bottom: -1,
-            backgroundColor: colors?.['payroll'],
-            borderTopLeftRadius: 6,
-            borderBottomLeftRadius: 6,
-          },
+          styles.slice1,
+          {height: barHeight, backgroundColor: colors?.payroll},
         ]}
       />
       <StackSlice
@@ -53,10 +47,10 @@ const StackSliceItem = ({
         width={(item.operations / maxQuarter) * (chartWidth - 25)}
         style={[
           opacity,
+          styles.slice2,
           {
             height: barHeight,
-            bottom: -1,
-            backgroundColor: colors?.['operations'],
+            backgroundColor: colors?.operations,
           },
         ]}
       />
@@ -69,10 +63,10 @@ const StackSliceItem = ({
         width={(item.electricity / maxQuarter) * (chartWidth - 25)}
         style={[
           opacity,
+          styles.slice2,
           {
             height: barHeight,
-            bottom: -1,
-            backgroundColor: colors?.['electricity'],
+            backgroundColor: colors?.electricity,
           },
         ]}
       />
@@ -85,12 +79,10 @@ const StackSliceItem = ({
         width={(item.travel / maxQuarter) * (chartWidth - 25)}
         style={[
           opacity,
+          styles.lastSlice,
           {
             height: barHeight,
-            bottom: -1,
-            backgroundColor: colors?.['travel'],
-            borderTopRightRadius: 6,
-            borderBottomRightRadius: 6,
+            backgroundColor: colors?.travel,
           },
         ]}
       />
@@ -121,5 +113,18 @@ const styles = StyleSheet.create({
     top: -12,
     height: 236,
     backgroundColor: '#d3d3d3',
+  },
+  slice1: {
+    bottom: -1,
+    borderTopLeftRadius: 6,
+    borderBottomLeftRadius: 6,
+  },
+  slice2: {
+    bottom: -1,
+  },
+  lastSlice: {
+    bottom: -1,
+    borderTopRightRadius: 6,
+    borderBottomRightRadius: 6,
   },
 });

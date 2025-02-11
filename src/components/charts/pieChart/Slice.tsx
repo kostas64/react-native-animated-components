@@ -5,8 +5,6 @@ import {
   useAnimatedProps,
   createAnimatedPropAdapter,
 } from 'react-native-reanimated';
-import React from 'react';
-import {StyleSheet} from 'react-native';
 
 import {TSlice} from './types';
 import {gapSize, total} from './data';
@@ -97,5 +95,3 @@ const Slice = ({
 };
 
 export default Slice;
-
-const styles = StyleSheet.create({});

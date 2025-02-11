@@ -8,7 +8,7 @@ import Animated, {
   useSharedValue,
   useAnimatedProps,
 } from 'react-native-reanimated';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Svg, {LinearGradient, Rect, Stop} from 'react-native-svg';

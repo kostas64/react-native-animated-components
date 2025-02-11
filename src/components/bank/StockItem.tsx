@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import {shadows} from './styles';
 import Text from '@components/Text';
@@ -38,8 +38,7 @@ const StockItem = ({name, values}: StocksItemProps) => {
       ]}>
       <View style={styles.gap}>
         <Text style={styles.label}>{name}</Text>
-        <Text
-          style={[styles.label, {color: hasIncrease ? '#3ac060' : '#e8477e'}]}>
+        <Text style={[styles.label, hasIncrease ? styles.green : styles.red]}>
           {`$${stockData?.[stockData.length - 1]?.toFixed(2)}`}
         </Text>
       </View>
@@ -78,5 +77,11 @@ const styles = StyleSheet.create({
   },
   spaceHorizontal: {
     marginHorizontal: 24,
+  },
+  green: {
+    color: '#3ac060',
+  },
+  red: {
+    color: '#e8477e',
   },
 });

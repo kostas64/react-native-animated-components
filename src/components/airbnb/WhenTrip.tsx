@@ -231,7 +231,7 @@ const WhenTrip = ({
       <Text
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
         style={[styles.boldWhere, styles.padLeft24]}>
-        When's your trip?
+        {"When's your trip?"}
       </Text>
       <View style={styles.pickerContainer}>
         <Animated.View
@@ -284,8 +284,8 @@ const WhenTrip = ({
         horizontal
         data={CALENDAR_PER}
         ref={calendarPerRef}
-        contentContainerStyle={{alignItems: 'center'}}
         renderItem={renderPeriodItem}
+        contentContainerStyle={styles.center}
         showsHorizontalScrollIndicator={false}
       />
       <View style={[styles.borderLine, styles.marTop10]} />
@@ -425,5 +425,8 @@ const styles = StyleSheet.create({
   },
   fontW500: {
     fontWeight: '500',
+  },
+  center: {
+    alignItems: 'center',
   },
 });

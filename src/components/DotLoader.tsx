@@ -4,6 +4,17 @@ import {View, Animated, TextInput, ScrollView, StyleSheet} from 'react-native';
 
 import Text from './Text';
 
+const ImplementedWith = () => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={[styles.implementedWith, {top: insets.top + 16}]}>
+      <Text style={styles.implemented}>Implemented with:</Text>
+      <Text style={styles.implementedLabel}>Animated API</Text>
+    </View>
+  );
+};
+
 const DotLoader = () => {
   const [size, setSize] = React.useState(20);
   const opacityRef1 = React.useRef(new Animated.Value(0.3)).current;
@@ -138,23 +149,6 @@ const DotLoader = () => {
     ).start();
   }, []);
 
-  const ImplementedWith = () => {
-    const insets = useSafeAreaInsets();
-
-    return (
-      <View
-        style={{
-          position: 'absolute',
-          top: insets.top + 16,
-          left: 20,
-          zIndex: 100,
-        }}>
-        <Text style={styles.implemented}>Implemented with:</Text>
-        <Text style={styles.implementedLabel}>Animated API</Text>
-      </View>
-    );
-  };
-
   return (
     <ScrollView
       bounces={false}
@@ -164,8 +158,8 @@ const DotLoader = () => {
       <Text style={styles.label}>Set dot size - Min: 1</Text>
       <TextInput
         keyboardType="numeric"
-        value={`${!!size ? size : 1}`}
-        onChangeText={val => setSize(parseInt(val))}
+        value={`${size ? size : 1}`}
+        onChangeText={val => setSize(parseInt(val, 10))}
         style={styles.textInput}
       />
       <View style={styles.row}>
@@ -229,20 +223,13 @@ const DotLoader = () => {
         <Animated.View
           style={[
             styles.dot,
+            styles.spaceRight0,
             {
               width: size || 1,
               height: size || 1,
               borderRadius: (+size || 1) / 2,
-              marginRight: 0,
               opacity: opacityRef4,
-              transform: [
-                {
-                  scale: scaleRef4,
-                },
-                {
-                  translateY: translateYRef4,
-                },
-              ],
+              transform: [{scale: scaleRef4}, {translateY: translateYRef4}],
             },
           ]}
         />
@@ -297,6 +284,14 @@ const styles = StyleSheet.create({
   dot: {
     marginRight: 8,
     backgroundColor: '#a3a3a3',
+  },
+  spaceRight0: {
+    marginRight: 0,
+  },
+  implementedWith: {
+    position: 'absolute',
+    left: 20,
+    zIndex: 100,
   },
 });
 

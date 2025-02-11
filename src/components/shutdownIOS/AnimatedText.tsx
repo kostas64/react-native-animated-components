@@ -3,7 +3,6 @@ import Animated, {
   interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {StyleSheet} from 'react-native';
 
 import {SLIDER_W} from './data';

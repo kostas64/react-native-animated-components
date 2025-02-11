@@ -21,6 +21,8 @@ const Tab = React.forwardRef(({item, onItemPress}: TTab, ref: any) => {
   );
 });
 
+Tab.displayName = 'Tab';
+
 export default Tab;
 
 const styles = StyleSheet.create({

@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, TextInput, TextInputProps, TextStyle} from 'react-native';
 import Animated, {SharedValue, useAnimatedProps} from 'react-native-reanimated';
 

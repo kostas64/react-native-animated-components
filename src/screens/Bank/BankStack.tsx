@@ -3,7 +3,6 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import React from 'react';
 
 import BankWelcome from './BankWelcome';
 import BankBottomStack from './BankBottomStack';

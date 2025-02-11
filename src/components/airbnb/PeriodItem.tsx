@@ -1,4 +1,3 @@
-import React from 'react';
 import {Pressable, StyleSheet} from 'react-native';
 
 import {CALENDAR_PER} from './data';
@@ -14,10 +13,10 @@ const PeriodItem = ({item, onPress, isSelected, index}: TPeriodItem) => {
       style={[
         styles.periodItemContainer,
         isSelected ? styles.selectedPeriodItem : styles.unselectedPeriodItem,
-        {
-          marginLeft: index === 0 ? 20 : 0,
-          marginRight: index !== CALENDAR_PER.length - 1 ? 10 : 20,
-        },
+        index === 0 ? styles.spaceLeft20 : styles.spaceLeft0,
+        index !== CALENDAR_PER.length - 1
+          ? styles.spaceRight10
+          : styles.spaceRight20,
       ]}>
       <Text
         style={styles.itemLabel}
@@ -48,5 +47,17 @@ const styles = StyleSheet.create({
   },
   itemLabel: {
     fontFamily: typography.medium,
+  },
+  spaceLeft20: {
+    marginLeft: 20,
+  },
+  spaceLeft0: {
+    marginLeft: 0,
+  },
+  spaceRight10: {
+    marginRight: 10,
+  },
+  spaceRight20: {
+    marginRight: 20,
   },
 });

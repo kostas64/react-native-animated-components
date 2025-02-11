@@ -1,4 +1,3 @@
-import React from 'react';
 import {Svg, Text as SVGText} from 'react-native-svg';
 import {View, Pressable, StyleSheet} from 'react-native';
 
@@ -16,7 +15,7 @@ const SectionHeader = ({
 }: SectionHeaderProps) => {
   return (
     <View
-      style={[styles.container, !rightLabel && {paddingVertical: 12}, style]}>
+      style={[styles.container, !rightLabel && styles.spaceVertical, style]}>
       <Text
         style={styles.mainLabel}
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
@@ -72,5 +71,8 @@ const styles = StyleSheet.create({
   },
   halfOpacity: {
     opacity: 0.5,
+  },
+  spaceVertical: {
+    paddingVertical: 12,
   },
 });

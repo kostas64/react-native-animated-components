@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
@@ -31,7 +30,7 @@ const Transaction = ({
 
           <Text
             maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
-            style={[styles.label, {color: beenAdded ? '#3ac060' : '#e8477e'}]}>
+            style={[styles.label, beenAdded ? styles.green : styles.red]}>
             {`$${amount.toFixed(2)}`}
           </Text>
         </View>
@@ -88,5 +87,11 @@ const styles = StyleSheet.create({
   description: {
     color: '#a1a1a1',
     fontFamily: typography.medium,
+  },
+  green: {
+    color: '#3ac060',
+  },
+  red: {
+    color: '#e8477e',
   },
 });

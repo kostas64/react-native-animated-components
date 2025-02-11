@@ -4,7 +4,7 @@ import {
   useAnimatedRef,
   useSharedValue,
 } from 'react-native-reanimated';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import BootSplash from 'react-native-bootsplash';
 import {useIsFocused} from '@react-navigation/native';
 import {View, StyleSheet, StatusBar} from 'react-native';

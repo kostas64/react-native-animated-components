@@ -21,6 +21,8 @@ const ConnectButton = React.memo(({onPress}: TConnectButtonProps) => {
   );
 });
 
+ConnectButton.displayName = 'ConnectButton';
+
 export default ConnectButton;
 
 const styles = StyleSheet.create({

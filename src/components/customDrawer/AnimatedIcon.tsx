@@ -1,4 +1,3 @@
-import React from 'react';
 import {Animated, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';

@@ -5,7 +5,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 
 import {WIDTH} from '@utils/device';
 import {FadeInTransitionProps} from './types';

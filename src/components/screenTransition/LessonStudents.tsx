@@ -4,7 +4,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
 import Text from '@components/Text';
@@ -29,9 +29,9 @@ const LessonStudents = ({
   }, []);
 
   return (
-    <View style={[containerStyle, {gap: 16, paddingBottom: 54}]}>
+    <View style={[containerStyle, styles.container]}>
       <Text style={styles.title}>Students</Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={styles.row}>
         {DATA.map((item, index) => {
           const style = useAnimatedStyle(() => ({
             transform: [
@@ -64,6 +64,13 @@ const LessonStudents = ({
 export default LessonStudents;
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
+  container: {
+    gap: 16,
+    paddingBottom: 54,
+  },
   title: {
     fontSize: 22,
     fontFamily: typography.bold,

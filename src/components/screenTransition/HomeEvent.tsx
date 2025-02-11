@@ -1,4 +1,3 @@
-import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -15,9 +14,9 @@ const HomeEvent = ({
 }: HomeEventProps) => {
   return (
     <View style={[styles.rowCenter, styles.container, containerStyle]}>
-      <View style={[styles.rowCenter, {gap: 16}]}>
+      <View style={[styles.rowCenter, styles.gap16]}>
         <Image source={source} style={styles.eventImg} />
-        <View style={{gap: 8}}>
+        <View style={styles.gap8}>
           <Text
             style={styles.eventTitle}
             maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
@@ -73,5 +72,11 @@ const styles = StyleSheet.create({
   icon: {
     width: 16,
     height: 16,
+  },
+  gap16: {
+    gap: 16,
+  },
+  gap8: {
+    gap: 8,
   },
 });

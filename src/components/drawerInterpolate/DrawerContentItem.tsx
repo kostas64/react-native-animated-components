@@ -1,4 +1,3 @@
-import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 

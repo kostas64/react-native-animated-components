@@ -1,4 +1,3 @@
-import React from 'react';
 import {Animated, Image, StyleSheet, View} from 'react-native';
 
 import {WIDTH} from '@utils/device';

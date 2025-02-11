@@ -1,4 +1,3 @@
-import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
@@ -19,7 +18,7 @@ const Arrows = ({
     <View style={styles.arrowsContainer}>
       <TouchableOpacity
         disabled={disabledLeft}
-        style={{opacity: index === 0 ? 0.25 : 1}}
+        style={index === 0 ? styles.opacityQuarter : styles.fullOpacity}
         onPress={onPressLeft}>
         <View style={styles.arrowContainer}>
           <AntDesign name="swapleft" size={42} color="black" />
@@ -28,7 +27,9 @@ const Arrows = ({
       </TouchableOpacity>
       <TouchableOpacity
         disabled={disabledRight}
-        style={{opacity: index === DATA.length - 1 ? 0.25 : 1}}
+        style={
+          index === DATA.length - 1 ? styles.opacityQuarter : styles.fullOpacity
+        }
         onPress={onPressRight}>
         <View style={styles.arrowContainer}>
           <Text style={styles.arrowText}>NEXT</Text>
@@ -57,5 +58,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'black',
     fontFamily: typography.bold,
+  },
+  opacityQuarter: {
+    opacity: 0.25,
+  },
+  fullOpacity: {
+    opacity: 1,
   },
 });

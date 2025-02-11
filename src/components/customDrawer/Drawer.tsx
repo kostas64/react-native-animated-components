@@ -51,7 +51,7 @@ const Drawer = ({animatedValue, onPress}: DrawerProps) => {
           width={WIDTH}
           height={HEIGHT_SCR}
           viewBox={`0 0 ${WIDTH} ${HEIGHT_SCR}`}
-          style={{backgroundColor: 'transparent'}}>
+          style={styles.transparent}>
           <AnimatedPolygon
             ref={polygonRef}
             points={`0,0 ${fromCoords.x},${fromCoords.y} ${WIDTH}, ${HEIGHT_SCR}  0, ${HEIGHT_SCR}`}
@@ -120,6 +120,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 30,
     zIndex: 100,
+  },
+  transparent: {
+    backgroundColor: 'transparent',
   },
 });
 

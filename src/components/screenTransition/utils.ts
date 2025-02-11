@@ -20,7 +20,7 @@ export const findScheduleForTimes = (
 
     // Find an event that either starts at the current time
     const matchedEvent = scheduleEvents.find(event => {
-      const [start, end] = event.hour.split('-').map(convertToMinutes);
+      const [start, _end] = event.hour.split('-').map(convertToMinutes);
       // Check if the current time matches the start time
       return timeInMinutes === start;
     });

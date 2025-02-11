@@ -1,4 +1,3 @@
-import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,7 +21,7 @@ const HomeHeader = () => {
           source={{uri: 'https://randomuser.me/api/portraits/women/2.jpg'}}
           style={styles.logo}
         />
-        <View style={{gap: 2}}>
+        <View style={styles.gap2}>
           <Text style={styles.name}>Erica Hawkins</Text>
           <Text
             style={styles.grade}
@@ -71,5 +70,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 16,
     borderColor: '#e5e5e5',
+  },
+  gap2: {
+    gap: 2,
   },
 });

@@ -38,7 +38,7 @@ const ToggleWithSymbol = () => {
       <View
         style={[
           styles.container,
-          {backgroundColor: togglerSymbolActive ? 'black' : 'rgba(0,0,0,0.1)'},
+          togglerSymbolActive ? styles.black : styles.lowOpacityBlack,
         ]}>
         <Animated.View
           style={[styles.dot, {transform: [{translateX: animSymbolRef}]}]}
@@ -97,5 +97,11 @@ const styles = StyleSheet.create({
     borderWidth: SIZE / 20,
     borderColor: 'black',
     backgroundColor: 'black',
+  },
+  black: {
+    backgroundColor: 'black',
+  },
+  lowOpacityBlack: {
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
 });

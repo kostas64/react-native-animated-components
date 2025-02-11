@@ -138,6 +138,8 @@ const PieChart = React.forwardRef((_, ref) => {
   );
 });
 
+PieChart.displayName = 'PieChart';
+
 const styles = StyleSheet.create({
   spaceTop: {
     marginTop: 24,

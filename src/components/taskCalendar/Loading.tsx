@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 
 import {TLoading} from './types';
@@ -6,10 +6,6 @@ import Text from '@components/Text';
 import {typography} from '@utils/typography';
 
 const Loading = ({loading, stopLoading}: TLoading) => {
-  if (!loading) {
-    return null;
-  }
-
   let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
 
   useEffect(() => {
@@ -22,8 +18,12 @@ const Loading = ({loading, stopLoading}: TLoading) => {
     };
   }, []);
 
+  if (!loading) {
+    return null;
+  }
+
   return (
-    <View style={{...styles.container, zIndex: 1}}>
+    <View style={styles.container}>
       <ActivityIndicator size={'small'} color={'white'} />
 
       <Text style={styles.label}>Retrieving tasks</Text>
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
+    zIndex: 1,
   },
   label: {
     fontSize: 15,

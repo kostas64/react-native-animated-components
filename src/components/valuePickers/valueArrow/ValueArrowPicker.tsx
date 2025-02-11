@@ -51,7 +51,7 @@ const ValueArrowPicker = ({
         disabled={value === range[0]}
         onPress={() => onPressArrow('up')}
       />
-      <View style={{height: 112}}>
+      <View style={styles.height}>
         <FlatList
           ref={listRef}
           data={values}
@@ -82,5 +82,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  height: {
+    height: 112,
   },
 });

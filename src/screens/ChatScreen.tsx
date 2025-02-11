@@ -37,6 +37,7 @@ import {isAndroid, isIOS, WIDTH} from '@utils/device';
 import MessageItem from '@components/chat/MessageItem';
 import StatusBarManager from '@components/StatusBarManager';
 import SendMessageInput from '@components/chat/SendMessageInput';
+import {commonStyles} from '@utils/commonStyles';
 
 //Ignore in case you run in simulator
 LogBox.ignoreLogs(['RNReactNativeHapticFeedback is not available']);
@@ -209,7 +210,7 @@ const ChatScreen = () => {
           <Header />
         </View>
 
-        <Animated.View style={[translateList, {flex: 1}]}>
+        <Animated.View style={[translateList, commonStyles.flex]}>
           <Wrapper>
             <FlatList
               inverted

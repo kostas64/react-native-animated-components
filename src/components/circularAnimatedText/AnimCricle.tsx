@@ -9,7 +9,6 @@ import Animated, {
   createAnimatedPropAdapter,
 } from 'react-native-reanimated';
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {TextPath, TSpan, Text as SvgText} from 'react-native-svg';
 
 import {
@@ -86,5 +85,3 @@ const AnimCircle = ({_, activeColor, index}: TAnimCircle) => {
 };
 
 export default AnimCircle;
-
-const styles = StyleSheet.create({});

@@ -5,7 +5,6 @@ import {
   interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {G, Path, Rect, Svg} from 'react-native-svg';
 

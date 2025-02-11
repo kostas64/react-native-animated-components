@@ -70,4 +70,6 @@ const Slice = memo(
   },
 );
 
+Slice.displayName = 'Slice';
+
 export default Slice;

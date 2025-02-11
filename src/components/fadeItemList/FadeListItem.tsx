@@ -4,7 +4,6 @@ import Animated, {
   Extrapolation,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 
 import {

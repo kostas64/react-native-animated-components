@@ -1,6 +1,5 @@
-import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import {Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {WIDTH} from '@utils/device';

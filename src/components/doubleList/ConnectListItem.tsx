@@ -11,6 +11,8 @@ const Icon = React.memo(({icon, color}: IIconProps) => {
   return <SimpleLineIcons name={icon} color={color} size={ICON_SIZE} />;
 });
 
+Icon.displayName = 'Icon';
+
 const Item = React.memo(({icon, color, name, showText}: IItemProps | any) => {
   return (
     <View style={styles.itemWrapper}>
@@ -23,6 +25,8 @@ const Item = React.memo(({icon, color, name, showText}: IItemProps | any) => {
     </View>
   );
 });
+
+Item.displayName = 'Item';
 
 export default Item;
 

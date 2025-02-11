@@ -167,6 +167,8 @@ const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
   },
 );
 
+BottomSheet.displayName = 'BottomSheet';
+
 const styles = StyleSheet.create({
   backdrop: {
     position: 'absolute',

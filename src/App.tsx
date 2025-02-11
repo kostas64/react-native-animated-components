@@ -3,7 +3,6 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
@@ -11,6 +10,7 @@ import ChatScreen from './screens/ChatScreen';
 import PinCode from './screens/PinCodeScreen';
 import HomeScreen from './screens/HomeScreen';
 import BankStack from '@screens/Bank/BankStack';
+import {commonStyles} from '@utils/commonStyles';
 import NFCReader from './screens/NFCReaderScreen';
 import AirbnbScreen from './screens/AirbnbScreen';
 import TicketScreen from './screens/TicketScreen';
@@ -89,8 +89,8 @@ const Stack = createNativeStackNavigator<TStackList>();
 
 function App() {
   return (
-    <SafeAreaProvider style={{flex: 1}}>
-      <GestureHandlerRootView style={{flex: 1}}>
+    <SafeAreaProvider style={commonStyles.flex}>
+      <GestureHandlerRootView style={commonStyles.flex}>
         <ModalProvider>
           <NavigationContainer>
             <Stack.Navigator

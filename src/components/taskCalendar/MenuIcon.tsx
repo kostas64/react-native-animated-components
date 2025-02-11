@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import {memo} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -13,6 +13,8 @@ const MenuIcon = memo(() => {
     </View>
   );
 });
+
+MenuIcon.displayName = 'MenuIcon';
 
 export default MenuIcon;
 

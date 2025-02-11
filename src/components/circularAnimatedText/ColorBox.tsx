@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet} from 'react-native';
 import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
@@ -15,7 +14,8 @@ const ColorBox = ({item, isLast, activeColor, onColorTouch}: TColorBox) => {
       style={[
         styles.colorItem,
         borderColor,
-        {backgroundColor: item, marginRight: isLast ? 48 : 24},
+        isLast ? styles.spaceRight48 : styles.spaceRight24,
+        {backgroundColor: item},
       ]}
     />
   );
@@ -29,5 +29,11 @@ const styles = StyleSheet.create({
     height: 48,
     borderWidth: 1,
     borderRadius: 12,
+  },
+  spaceRight48: {
+    marginRight: 48,
+  },
+  spaceRight24: {
+    marginRight: 24,
   },
 });

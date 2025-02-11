@@ -27,6 +27,8 @@ const ListItem = React.memo(({item, index, unit, scrollOffset}: TListItem) => {
   );
 });
 
+ListItem.displayName = 'ListItem';
+
 export default ListItem;
 
 const styles = StyleSheet.create({

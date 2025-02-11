@@ -1,4 +1,3 @@
-import React from 'react';
 import {Rect, Svg} from 'react-native-svg';
 import {Pressable, StyleSheet} from 'react-native';
 

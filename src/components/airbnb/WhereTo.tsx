@@ -136,6 +136,8 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
   },
 );
 
+WhereTo.displayName = 'WhereTo';
+
 export default WhereTo;
 
 const styles = StyleSheet.create({

@@ -23,6 +23,8 @@ const ConnectWithText = React.memo(() => {
   );
 });
 
+ConnectWithText.displayName = 'ConnectWithText';
+
 export default ConnectWithText;
 
 const styles = StyleSheet.create({

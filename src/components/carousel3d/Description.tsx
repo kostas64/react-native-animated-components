@@ -1,4 +1,3 @@
-import React from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 import {DATA} from './data';

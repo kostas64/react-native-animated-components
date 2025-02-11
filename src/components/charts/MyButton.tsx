@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import Text from '@components/Text';

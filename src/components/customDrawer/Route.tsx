@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet} from 'react-native';
 
 import Button from './Button';
@@ -12,10 +11,8 @@ const Route = ({index, route, selectedRoute, onPress}: TRouteProps) => {
       title={route}
       style={[
         styles.button,
-        {
-          textDecorationLine: route === selectedRoute ? 'line-through' : 'none',
-          color: colors[index],
-        },
+        route === selectedRoute ? styles.lineThrough : styles.noLine,
+        {color: colors[index]},
       ]}
       onPress={onPress}
     />
@@ -30,5 +27,11 @@ const styles = StyleSheet.create({
     color: '#fdfdfd',
     lineHeight: 32 * 1.5,
     fontFamily: typography.medium,
+  },
+  lineThrough: {
+    textDecorationLine: 'line-through',
+  },
+  noLine: {
+    textDecorationLine: 'none',
   },
 });

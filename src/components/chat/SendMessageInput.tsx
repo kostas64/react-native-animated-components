@@ -40,6 +40,8 @@ const SendMessageInput = React.memo(
   },
 );
 
+SendMessageInput.displayName = 'SendMessageInput';
+
 export default SendMessageInput;
 
 const styles = StyleSheet.create({

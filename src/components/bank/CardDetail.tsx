@@ -1,5 +1,5 @@
+import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
 
 import {shadows} from './styles';
 import {CardDetailProps} from './types';
@@ -13,7 +13,6 @@ const CardDetail = ({
   expirationDate,
   style,
 }: CardDetailProps) => {
-  let timer: number | null = null;
   const [showData, setShowData] = useState(false);
 
   const onPressShowData = async () => {

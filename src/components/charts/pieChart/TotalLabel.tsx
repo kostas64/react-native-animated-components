@@ -3,7 +3,6 @@ import {
   useDerivedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {TTotalLabel} from './types';
 import {StyleSheet} from 'react-native';
 

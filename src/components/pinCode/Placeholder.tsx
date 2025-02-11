@@ -49,6 +49,8 @@ const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
   },
 );
 
+Placeholder.displayName = 'Placeholder';
+
 export default Placeholder;
 
 const styles = StyleSheet.create({

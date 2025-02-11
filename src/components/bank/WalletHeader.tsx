@@ -1,4 +1,3 @@
-import React from 'react';
 import {G, Path, Svg} from 'react-native-svg';
 import Animated from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';

@@ -4,7 +4,6 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedProps,
 } from 'react-native-reanimated';
-import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 
 import {BarProps} from './types';

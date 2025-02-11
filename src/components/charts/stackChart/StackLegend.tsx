@@ -3,7 +3,6 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import Text from '@components/Text';

@@ -1,9 +1,8 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
-import {typography} from '@utils/typography';
 import Text from '@components/Text';
+import {typography} from '@utils/typography';
 
 const ScheduleHeader = () => {
   return (

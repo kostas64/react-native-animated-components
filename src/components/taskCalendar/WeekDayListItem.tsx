@@ -30,10 +30,10 @@ const WeekDayListItem = ({
   const showDot = isToday(day.date);
 
   const hasLeftSpace =
-    day.isStartOfMonth || (parseInt(day.displayLabel) - 1) % 7 === 0;
+    day.isStartOfMonth || (parseInt(day.displayLabel, 10) - 1) % 7 === 0;
 
   const hasRightSpace =
-    day.isEndOfMonth || parseInt(day.displayLabel) % 7 === 0;
+    day.isEndOfMonth || parseInt(day.displayLabel, 10) % 7 === 0;
 
   const animValue = useDerivedValue(() =>
     withTiming(isSelected ? 1 : 0, {
@@ -102,8 +102,8 @@ const WeekDayListItem = ({
       <View
         style={[
           styles.dot,
-          parseInt(day.displayLabel) % 7 === 1 && styles.dotFirstDayOfWeek,
-          {backgroundColor: showDot ? 'white' : 'transparent'},
+          parseInt(day.displayLabel, 10) % 7 === 1 && styles.dotFirstDayOfWeek,
+          showDot ? styles.white : styles.transparent,
         ]}
       />
     </Pressable>
@@ -145,5 +145,11 @@ const styles = StyleSheet.create({
   },
   dotFirstDayOfWeek: {
     left: (WIDTH - 40 - 6 * _spacing) / 7 - 6,
+  },
+  white: {
+    backgroundColor: 'white',
+  },
+  transparent: {
+    backgroundColor: 'transparent',
   },
 });

@@ -3,7 +3,6 @@ import Animated, {
   Extrapolation,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {GestureResponderEvent, StyleSheet, View} from 'react-native';
 
 import {TStackSlice} from './types';

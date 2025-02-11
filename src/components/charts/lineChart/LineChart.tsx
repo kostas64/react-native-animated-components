@@ -22,6 +22,8 @@ const LineChart = React.forwardRef<ChartRef>((_, ref) => {
   );
 });
 
+LineChart.displayName = 'LineChart';
+
 export default LineChart;
 
 const styles = StyleSheet.create({

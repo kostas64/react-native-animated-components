@@ -1,6 +1,5 @@
-import React from 'react';
+import {TouchableOpacity} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import {TArrow} from './types';
 
@@ -15,5 +14,3 @@ const Arrow = ({direction, onPress = () => {}, disabled = false}: TArrow) => (
 );
 
 export default Arrow;
-
-const styles = StyleSheet.create({});

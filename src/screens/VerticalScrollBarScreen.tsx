@@ -15,7 +15,7 @@ import Animated, {
   useDerivedValue,
   cancelAnimation,
 } from 'react-native-reanimated';
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import Text from '@components/Text';
@@ -29,6 +29,8 @@ import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '../utils/device';
 import {preprocessNames} from '@components/verticalScrollBar/utils';
 import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
 import getAnimatedStyles from '@components/verticalScrollBar/animatedStyles';
+
+const Header = () => <Text style={styles.header}>Contacts</Text>;
 
 const VerticalScrollBarScreen = () => {
   const insets = useSafeAreaInsets();
@@ -218,9 +220,7 @@ const VerticalScrollBarScreen = () => {
           keyExtractor={(_, index) => index.toString()}
           contentContainerStyle={styles.padding}
           style={[styles.bg, {marginTop, marginBottom}]}
-          ListHeaderComponent={() => (
-            <Text style={styles.header}>Contacts</Text>
-          )}
+          ListHeaderComponent={Header}
           showsVerticalScrollIndicator={false}
         />
 

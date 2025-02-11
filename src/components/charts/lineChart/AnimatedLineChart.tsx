@@ -346,6 +346,8 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
   );
 });
 
+AnimatedLineChart.displayName = 'AnimatedLineChart';
+
 export default AnimatedLineChart;
 
 const styles = StyleSheet.create({

@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 
@@ -29,7 +28,7 @@ const ListItem = ({
           restLetterH.value = e.nativeEvent.layout.height;
         }
       }}
-      style={[styles.container, item.isLastOfLetter && {marginBottom: 36}]}>
+      style={[styles.container, item.isLastOfLetter && styles.spaceBottom]}>
       {item.isFirstOfLetter && (
         <View style={styles.letterContainer}>
           <Animated.Text
@@ -39,7 +38,7 @@ const ListItem = ({
           </Animated.Text>
         </View>
       )}
-      <View style={{paddingVertical: 12}}>
+      <View style={styles.spaceVertical}>
         <Text style={styles.name}>{item.name}</Text>
       </View>
     </View>
@@ -67,5 +66,11 @@ const styles = StyleSheet.create({
   container: {
     borderColor: '#495057',
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  spaceVertical: {
+    paddingVertical: 12,
+  },
+  spaceBottom: {
+    marginBottom: 36,
   },
 });

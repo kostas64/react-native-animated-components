@@ -5,7 +5,6 @@ import {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 
@@ -56,10 +55,8 @@ const Event = ({event, eventIndex}: EventProps) => {
       style={[
         style,
         styles.eventInnerContainer,
-        {
-          left: eventIndex % 2 === 0 ? 120 : 86,
-          backgroundColor: event.backgroundColor,
-        },
+        eventIndex % 2 === 0 ? styles.left120 : styles.left86,
+        {backgroundColor: event.backgroundColor},
       ]}>
       <Text
         style={styles.eventName}
@@ -82,7 +79,7 @@ const ScheduleTimeEvents = ({
   const isFocused = useIsFocused();
 
   const events = findScheduleForTimes(TIMES, SCHEDULE_EVENTS).filter(
-    event => !(event.event === 'No event'),
+    eventItem => !(eventItem.event === 'No event'),
   );
 
   return (
@@ -154,5 +151,11 @@ const styles = StyleSheet.create({
     gap: 2,
     padding: 18,
     borderRadius: 20,
+  },
+  left120: {
+    left: 120,
+  },
+  left86: {
+    left: 86,
   },
 });

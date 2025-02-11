@@ -4,7 +4,6 @@ import {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -64,7 +63,7 @@ const NotificationEvent = ({
       <View style={styles.iconContainer}>
         <event.component name={event.iconName} size={20} />
       </View>
-      <View style={{gap: 4}}>
+      <View style={styles.gap4}>
         <Text style={styles.eventTitle}>{event.eventTitle}</Text>
         <Text
           style={styles.description}
@@ -101,5 +100,8 @@ const styles = StyleSheet.create({
     color: '#a1a1a1',
     fontFamily: typography.semiBold,
     fontSize: 12,
+  },
+  gap4: {
+    gap: 4,
   },
 });

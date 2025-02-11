@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import Button from './Button';
@@ -18,7 +17,7 @@ const NotificationEventModal = ({event}: {event: NotificationEventProps}) => {
         <event.component name={event.iconName} size={32} />
       </View>
       <FadeInTransition direction="top" index={0} animate>
-        <View style={{gap: 4}}>
+        <View style={styles.gap4}>
           <Text
             style={styles.eventTitle}
             maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
@@ -60,5 +59,8 @@ const styles = StyleSheet.create({
     color: '#a1a1a1',
     fontFamily: typography.semiBold,
     fontSize: 18,
+  },
+  gap4: {
+    gap: 4,
   },
 });

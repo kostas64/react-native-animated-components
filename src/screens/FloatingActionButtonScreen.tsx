@@ -3,7 +3,7 @@ import {
   useSharedValue,
   cancelAnimation,
 } from 'react-native-reanimated';
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import FloatingActionButton, {

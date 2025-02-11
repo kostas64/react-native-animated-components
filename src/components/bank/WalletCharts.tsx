@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {Svg, Text as SVGText} from 'react-native-svg';
 import {View, FlatList, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 

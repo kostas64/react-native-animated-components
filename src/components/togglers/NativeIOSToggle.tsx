@@ -48,7 +48,7 @@ const NativeIOSToggle = ({withTheme = false}: {withTheme?: boolean}) => {
       <View
         style={[
           styles.container,
-          {backgroundColor: !togglerIOSActive ? 'rgba(0,0,0,0.1)' : '#4cda63'},
+          !togglerIOSActive ? styles.lowOpacityBlack : styles.green,
         ]}>
         <Animated.View style={[styles.dot, container]}>
           {withTheme && (
@@ -93,5 +93,11 @@ const styles = StyleSheet.create({
   absoluteCenter: {
     position: 'absolute',
     alignSelf: 'center',
+  },
+  green: {
+    backgroundColor: '#4cda63',
+  },
+  lowOpacityBlack: {
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
 });

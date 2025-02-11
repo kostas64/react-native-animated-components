@@ -56,7 +56,7 @@ const PinCode = () => {
         </Animated.View>
 
         {loading && (
-          <View style={{position: 'absolute', top: '12%'}}>
+          <View style={styles.loading}>
             <ActivityIndicator size={'small'} color={'white'} />
           </View>
         )}
@@ -94,6 +94,10 @@ const styles = StyleSheet.create({
     margin: 8,
     width: 90,
     height: 90,
+  },
+  loading: {
+    position: 'absolute',
+    top: '12%',
   },
 });
 

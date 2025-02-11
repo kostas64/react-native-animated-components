@@ -7,7 +7,6 @@ import {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';

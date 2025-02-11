@@ -6,7 +6,7 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from 'react-native';
-import React, {useCallback} from 'react';
+import {useCallback} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 

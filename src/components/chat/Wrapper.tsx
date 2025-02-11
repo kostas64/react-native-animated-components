@@ -1,4 +1,3 @@
-import React from 'react';
 import {View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -9,7 +8,7 @@ const Wrapper = ({children}: TWrapperProps) => {
   const insets = useSafeAreaInsets();
 
   if (isAndroid) {
-    return children;
+    return <>{children}</>;
   }
 
   const marginTop = insets.top > 0 ? insets.top : 24;

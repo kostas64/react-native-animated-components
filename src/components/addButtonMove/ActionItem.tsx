@@ -1,4 +1,3 @@
-import React from 'react';
 import Animated from 'react-native-reanimated';
 import {Image, StyleSheet} from 'react-native';
 

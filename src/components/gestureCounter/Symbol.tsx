@@ -1,4 +1,3 @@
-import React from 'react';
 import {Pressable, StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
@@ -28,11 +27,9 @@ const Symbol = ({
         pressed && styles.activeBackground,
         containerStyle,
       ]}>
-      <Animated.View style={[styles.dash, !!style ? style : opacity]} />
+      <Animated.View style={[styles.dash, style ? style : opacity]} />
       {plus && (
-        <Animated.View
-          style={[styles.verticalDash, !!style ? style : opacity]}
-        />
+        <Animated.View style={[styles.verticalDash, style ? style : opacity]} />
       )}
     </Pressable>
   );

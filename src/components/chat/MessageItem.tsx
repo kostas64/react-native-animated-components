@@ -187,6 +187,8 @@ const MessageItem = React.memo(
   },
 );
 
+MessageItem.displayName = 'MessageItem';
+
 export default MessageItem;
 
 const styles = StyleSheet.create({

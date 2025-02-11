@@ -1,4 +1,3 @@
-import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -16,7 +15,7 @@ const HomeClass = () => {
       <View style={styles.iconContainer}>
         <FontAwesome5 name="calculator" size={20} />
       </View>
-      <View style={{gap: 6}}>
+      <View style={styles.gap6}>
         <Text style={styles.classTitle}>{'Basic mathemactics'}</Text>
         <Text style={styles.classDate}>{'Today, 08:15 am'}</Text>
       </View>
@@ -85,5 +84,8 @@ const styles = StyleSheet.create({
   professorName: {
     fontSize: 16,
     fontFamily: typography.semiBold,
+  },
+  gap6: {
+    gap: 6,
   },
 });

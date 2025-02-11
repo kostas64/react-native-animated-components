@@ -3,7 +3,6 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import React from 'react';
 
 import ScreenTransitionLesson from './ScreenTransitionLesson';
 import ScreenTransitionWelcome from './ScreenTransitionWelcome';

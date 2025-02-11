@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {isIOS, WIDTH} from '@utils/device';
+import {isIOS} from '@utils/device';
 import Cards from '@components/bank/Cards';
 import Button from '@components/bank/Button';
 import {shadows} from '@components/bank/styles';

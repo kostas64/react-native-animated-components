@@ -5,7 +5,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
@@ -73,12 +73,11 @@ const Tabbar = ({
               accessibilityLabel={options.tabBarAccessibilityLabel}
               testID={options.tabBarTestID}
               onPress={onPress}
-              style={{
-                borderRadius: 20,
-                padding: 14,
-                marginRight: isLast ? 0 : 4,
-                backgroundColor: isFocused ? 'black' : 'white',
-              }}
+              style={[
+                styles.tabContainer,
+                isLast ? styles.spaceRightZero : styles.spaceRight4,
+                isFocused ? styles.black : styles.white,
+              ]}
               onLongPress={onLongPress}>
               <Image
                 source={icon}
@@ -132,5 +131,21 @@ const styles = StyleSheet.create({
   },
   rotate: {
     transform: [{rotateY: '180deg'}],
+  },
+  tabContainer: {
+    borderRadius: 20,
+    padding: 14,
+  },
+  spaceRight4: {
+    marginRight: 4,
+  },
+  spaceRightZero: {
+    marginRight: 0,
+  },
+  black: {
+    backgroundColor: 'black',
+  },
+  white: {
+    backgroundColor: 'white',
   },
 });

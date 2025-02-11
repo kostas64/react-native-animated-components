@@ -1,4 +1,3 @@
-import React from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {Image, StyleSheet, View} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
@@ -9,6 +8,8 @@ import {FadeItemProps} from '@components/fadeItemList/types';
 import FadeListItem from '@components/fadeItemList/FadeListItem';
 import ImplementedWith from '@components/fadeItemList/ImplementedWith';
 import {BG_IMG, DATA, SPACING} from '@components/fadeItemList/constants';
+
+const Separator = () => <View style={{height: SPACING}} />;
 
 const ScrollItemListScreen = () => {
   const insets = useSafeAreaInsets();
@@ -41,7 +42,7 @@ const ScrollItemListScreen = () => {
             paddingBottom: 2 * SPACING,
           }}
           estimatedItemSize={118}
-          ItemSeparatorComponent={() => <View style={{height: SPACING}} />}
+          ItemSeparatorComponent={Separator}
           keyExtractor={item => item.key}
           renderItem={renderItem}
         />
