@@ -5,17 +5,18 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 import React, {useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
+import {useIsFocused} from '@react-navigation/native';
+import {View, StyleSheet, StatusBar} from 'react-native';
 import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
 
 //My Libs
 import Splash from '@components/home/Splash';
 import HomeBody from '@components/home/HomeBody';
 import HomeHeader from '@components/home/HomeHeader';
-import StatusBarManager from '@components/StatusBarManager';
 
 const HomeScreen = () => {
+  const isFocused = useIsFocused();
   const scrollRef = useAnimatedRef<AnimatedScrollView>();
 
   //Header shared values
@@ -31,6 +32,10 @@ const HomeScreen = () => {
     return await BootSplash.hide({fade: true});
   };
 
+  if (isFocused) {
+    StatusBar.setBarStyle('light-content');
+  }
+
   useEffect(() => {
     hideSplash().then(() => {
       splashProgress.value = withTiming(1, {duration: 500});
@@ -39,8 +44,6 @@ const HomeScreen = () => {
 
   return (
     <>
-      <StatusBarManager barStyle="light" />
-
       <Splash splashProgress={splashProgress} />
 
       <View style={styles.container}>

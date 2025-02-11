@@ -7,15 +7,15 @@ import Animated, {
   useAnimatedProps,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {LinearGradient, Rect, Stop, Svg} from 'react-native-svg';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {tabs} from './data';
-import {WIDTH} from '@utils/device';
 import CommonGradient from './CommonGradient';
+import {isAndroid, WIDTH} from '@utils/device';
 import {AnimatedSvg} from '@components/AnimatedComponents';
 
 const TABS = [
@@ -41,7 +41,7 @@ const TABBAR_HEIGHT = 68;
 const TABBAR_WIDTH = 250;
 const ICON_CONTAINER_SIZE = 56;
 
-const Tabbar = ({navigation}: BottomTabBarProps) => {
+const Tabbar = ({state, navigation}: BottomTabBarProps) => {
   const activeTab = useSharedValue(0);
   const initialPosition = useSharedValue(0);
   const insets = useSafeAreaInsets();
@@ -63,6 +63,8 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
     });
   }, []);
 
+  const activeRoute = state.routes?.[state.index]?.name;
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -74,6 +76,13 @@ const Tabbar = ({navigation}: BottomTabBarProps) => {
       },
     ],
   }));
+
+  useEffect(() => {
+    if (isAndroid) {
+      navigation.navigate(activeRoute);
+      activeTab.value = state?.index;
+    }
+  }, [activeRoute]);
 
   return (
     <Animated.View
