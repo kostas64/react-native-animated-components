@@ -1,7 +1,7 @@
 import {View, Image, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 
 import {USERS} from './data';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import SectionHeader from './SectionHeader';
 import {typography} from '@utils/typography';

@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {SharedValue} from 'react-native-reanimated';
 
 import {TTooltip} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {WIDTH} from '@utils/device';
 import StackLegend from './StackLegend';
 import {generateValueLabels} from './utils';

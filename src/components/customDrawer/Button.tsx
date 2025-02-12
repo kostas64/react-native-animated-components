@@ -1,7 +1,7 @@
 import {TouchableOpacity} from 'react-native';
 
 import {ButtonProps} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 
 const Button = ({title, onPress, style}: ButtonProps) => {
   return (

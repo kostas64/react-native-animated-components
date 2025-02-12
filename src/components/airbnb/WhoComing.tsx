@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 
 import {TWhoComing} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import ItemCounter from './ItemCounter';
 import {typography} from '@utils/typography';

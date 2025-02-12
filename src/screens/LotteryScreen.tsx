@@ -10,8 +10,8 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedProps,
 } from 'react-native-reanimated';
-import {Image, StyleSheet, View} from 'react-native';
 import {useEffect, useRef, useState} from 'react';
+import {Image, StyleSheet, View} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Svg, Defs, Path, Stop, Polygon, LinearGradient} from 'react-native-svg';
@@ -29,12 +29,12 @@ import {
   AnimatedSvg,
   AnimatedPath,
   AnimatedPressable,
-} from '@components/AnimatedComponents';
+} from '@components/common/AnimatedComponents';
 import Slice from '@components/lottery/Slice';
 import {HEIGHT_SCR, isIOS, WIDTH} from '@utils/device';
 import {ListRefProps} from '@components/lottery/types';
-import StatusBarManager from '@components/StatusBarManager';
 import ChooseOption from '@components/lottery/ChooseOption';
+import StatusBarManager from '@components/common/StatusBarManager';
 
 export const WHEEL_OPTIONS = [
   10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,

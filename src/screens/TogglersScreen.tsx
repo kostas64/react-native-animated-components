@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 
-import StatusBarManager from '@components/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import ImplementedWith from '@components/togglers/ImplementedWith';
 import NativeIOSToggle from '@components/togglers/NativeIOSToggle';
 import ToggleWithLabel from '@components/togglers/ToggleWithLabel';

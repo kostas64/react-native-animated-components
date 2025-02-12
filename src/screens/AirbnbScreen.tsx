@@ -10,7 +10,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {SHORT_MONTHS} from '@assets/months';
 import {typography} from '@utils/typography';
@@ -20,11 +20,11 @@ import WhenTrip from '@components/airbnb/WhenTrip';
 import WhoComing from '@components/airbnb/WhoComing';
 import InitialBox from '@components/airbnb/InitialBox';
 import InitialView from '@components/airbnb/InitialView';
-import StatusBarManager from '@components/StatusBarManager';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
 import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
-import {CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const Airbnb = () => {
   const insets = useSafeAreaInsets();

@@ -13,7 +13,7 @@ import Header from '@components/taskCalendar/Header';
 import Loading from '@components/taskCalendar/Loading';
 import {MONTHS} from '@components/taskCalendar/constants';
 import ListEmpty from '@components/taskCalendar/ListEmpty';
-import StatusBarManager from '@components/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {useCalendarEvents} from '@components/taskCalendar/hooks/useCalendarEvents';
 
 export const today = new Date();

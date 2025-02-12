@@ -16,7 +16,7 @@ import {WIDTH} from '@utils/device';
 import {Colors} from '@utils/colors';
 import {image, SPACING} from './data';
 import {TFloatingElement} from './types';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const FloatingElement = ({
   content,

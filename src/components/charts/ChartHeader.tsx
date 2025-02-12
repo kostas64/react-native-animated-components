@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 

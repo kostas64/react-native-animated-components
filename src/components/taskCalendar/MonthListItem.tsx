@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {TMonthListItem} from './types';
 import {typography} from '@utils/typography';

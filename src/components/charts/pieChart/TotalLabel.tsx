@@ -8,7 +8,7 @@ import {StyleSheet} from 'react-native';
 
 import {height} from './data';
 import {Colors} from '@utils/colors';
-import ReText from '@components/ReText';
+import ReText from '@components/common/ReText';
 import {typography} from '@utils/typography';
 import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 

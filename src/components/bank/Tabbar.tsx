@@ -17,7 +17,7 @@ import {tabs} from './data';
 import {Colors} from '@utils/colors';
 import CommonGradient from './CommonGradient';
 import {isAndroid, WIDTH} from '@utils/device';
-import {AnimatedSvg} from '@components/AnimatedComponents';
+import {AnimatedSvg} from '@components/common/AnimatedComponents';
 
 const TABS = [
   {

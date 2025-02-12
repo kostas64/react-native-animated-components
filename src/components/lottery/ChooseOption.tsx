@@ -2,7 +2,7 @@ import {FlatList, StyleSheet} from 'react-native';
 import {forwardRef, useImperativeHandle, useRef} from 'react';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {ListRefProps, TChooseOption} from './types';

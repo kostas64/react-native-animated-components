@@ -2,13 +2,13 @@ import {Image, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import Button from '@components/screenTransition/Button';
-import StatusBarManager from '@components/StatusBarManager';
 import {WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {TWelcomeNavigationProps} from './ScreenTransitionStack';
+import StatusBarManager from '@components/common/StatusBarManager';
 
 const title = "The only study app you'll ever need";
 const description =

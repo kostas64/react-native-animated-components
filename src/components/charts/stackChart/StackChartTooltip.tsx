@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {barHeight, colors} from './constants';

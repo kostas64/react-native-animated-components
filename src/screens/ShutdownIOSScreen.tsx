@@ -13,10 +13,10 @@ import {View, StyleSheet, ImageBackground} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/StatusBarManager';
 import AnimatedText from '@components/shutdownIOS/AnimatedText';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {HEIGHT_SCR, WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
-import {AnimatedRect, AnimatedSvg} from '@components/AnimatedComponents';
+import {AnimatedRect, AnimatedSvg} from '@components/common/AnimatedComponents';
 import {SLIDER_FINAL_W, SLIDER_H, SLIDER_W} from '@components/shutdownIOS/data';
 
 const ShutdownIOS = () => {

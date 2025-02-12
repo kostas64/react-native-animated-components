@@ -1,12 +1,7 @@
+import {Text} from 'react-native';
 import {useState, useEffect, useRef} from 'react';
-import {StyleProp, Text, TextStyle} from 'react-native';
 
-type AnimatedTypingProps = {
-  text: string[];
-  textStyle?: StyleProp<TextStyle>;
-  cursorStyle?: StyleProp<TextStyle>;
-  onComplete?: () => void;
-};
+import {AnimatedTypingProps} from './types';
 
 export default function AnimatedTyping(props: AnimatedTypingProps) {
   const [displayedText, setDisplayedText] = useState('');

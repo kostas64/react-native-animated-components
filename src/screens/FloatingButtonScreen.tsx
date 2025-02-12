@@ -3,7 +3,7 @@ import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {WIDTH} from '@utils/device';
 import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {FAKE_ARRAY, SPACING} from '@components/floatingButton/data';
 import FloatingContent from '@components/floatingButton/FloatingContent';
 import FloatingElement from '@components/floatingButton/FloatingElement';

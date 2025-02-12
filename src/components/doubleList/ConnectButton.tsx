@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {HEIGHT_SCR} from '@utils/device';
 import {TConnectButtonProps} from './types';
 import {typography} from '@utils/typography';

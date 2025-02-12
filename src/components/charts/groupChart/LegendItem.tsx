@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {TLegendItem} from './types';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';

@@ -15,10 +15,10 @@ import {
   MAX_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/StatusBarManager';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import StatusBarManager from '@components/common/StatusBarManager';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const TranslateSearchIOSScreen = () => {
   const progress = useSharedValue(0);

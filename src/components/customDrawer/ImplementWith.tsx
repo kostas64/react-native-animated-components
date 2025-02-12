@@ -1,7 +1,7 @@
 import {Animated, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {TImplementedWith} from './types';
 import {typography} from '@utils/typography';

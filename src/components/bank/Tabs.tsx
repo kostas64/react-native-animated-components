@@ -9,13 +9,13 @@ import {StyleSheet, View} from 'react-native';
 import {G, Path, Rect, Svg} from 'react-native-svg';
 
 import {TabsProps} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import {isIOS, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {chevronDown, chevronUp, SELECTED_TYPE} from './data';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const Tabs = ({selected = SELECTED_TYPE.EARNINGS, onSelectType}: TabsProps) => {
   const progress = useSharedValue(0);

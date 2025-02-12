@@ -5,7 +5,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {StyleSheet, View} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {TStackLegend} from './types';
 import {typography} from '@utils/typography';
 import {colors, EXPENSES_TYPES} from './constants';

@@ -7,30 +7,16 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import React from 'react';
-import {StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 import {Colors} from '@utils/colors';
 import useBackAction from '@hooks/useBackAction';
 import {HEIGHT, HEIGHT_SCR, isIOS} from '@utils/device';
 import {useModalContext} from '@providers/ModalProvider';
+import {BottomSheetProps, BottomSheetRef} from './types';
 
 const MAX_HEIGHT = isIOS ? HEIGHT : HEIGHT_SCR;
-
-export type BottomSheetProps = {
-  children: React.ReactNode;
-  modalHeight: number;
-  onBackPress?: () => void;
-  panEnabled?: boolean;
-  withoutLine?: boolean;
-  lineStyle?: ViewStyle;
-  lineStyleContainer?: ViewStyle;
-  contentContainerStyle?: any;
-};
-
-export type BottomSheetRef = {
-  scrollTo: (destination: number) => void;
-};
 
 const BottomSheet = React.forwardRef<BottomSheetRef, BottomSheetProps>(
   (

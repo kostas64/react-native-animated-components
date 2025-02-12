@@ -5,7 +5,7 @@ import {View, FlatList, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 
 import Bar from './Bar';
 import Tabs from './Tabs';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {BarItemProps} from './types';
 import {MONTHS} from '@assets/months';

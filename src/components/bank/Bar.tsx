@@ -8,11 +8,11 @@ import {Pressable, StyleSheet, View} from 'react-native';
 
 import {BarProps} from './types';
 import {shadows} from './styles';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
-import {AnimatedRect, AnimatedSvg} from '@components/AnimatedComponents';
+import {AnimatedRect, AnimatedSvg} from '@components/common/AnimatedComponents';
 
 const MAX_BAR_HEIGHT = 172;
 

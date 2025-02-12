@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 import {data} from '@components/parallax/data';
-import StatusBarManager from '../components/StatusBarManager';
+import StatusBarManager from '../components/common/StatusBarManager';
 import {ParallaxListItemProps} from '@components/parallax/types';
 import ImplementedWith from '@components/parallax/ImplementedWith';
 import ParallaxListItem from '@components/parallax/ParallaxListItem';

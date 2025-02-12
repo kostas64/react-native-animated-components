@@ -15,8 +15,8 @@ import {Colors} from '@utils/colors';
 import Skeleton from '@components/addButtonMove/Skeleton';
 import AddButton from '@components/addButtonMove/AddButton';
 import ActionItem from '@components/addButtonMove/ActionItem';
-import {AnimatedScrollView} from '@components/AnimatedComponents';
 import {calculateSkeletonHeight} from '@components/addButtonMove/utils';
+import {AnimatedScrollView} from '@components/common/AnimatedComponents';
 import {ACTION_ITEMS, CIRCLE_SIZE} from '@components/addButtonMove/data';
 
 const AddButtonMoveScreen = () => {

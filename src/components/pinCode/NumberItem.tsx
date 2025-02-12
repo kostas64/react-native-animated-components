@@ -7,7 +7,7 @@ import Animated, {
 import {Pressable, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {TNumberItem} from './types';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';

@@ -12,13 +12,13 @@ import {
   SM_FONT_UPSCALE_FACTOR,
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import SearchItem from './SearchItem';
 import CountryItem from './CountryItem';
 import {typography} from '@utils/typography';
 import {COUNTRIES, SEARCH_COUNTRIES} from './data';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 import {TRenderCountryItem, TRenderSearchItem, TWhereTo} from './types';
 
 const WhereTo = forwardRef<TextInput, TWhereTo>(

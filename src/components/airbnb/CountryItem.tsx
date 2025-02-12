@@ -1,7 +1,7 @@
 import {Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {COUNTRIES} from './data';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {TCountryItem} from './types';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';

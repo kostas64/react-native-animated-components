@@ -36,8 +36,8 @@ import {commonStyles} from '@utils/commonStyles';
 import {captureOptions} from '@components/chat/data';
 import Background from '@components/chat/Background';
 import MessageItem from '@components/chat/MessageItem';
-import StatusBarManager from '@components/StatusBarManager';
 import SendMessageInput from '@components/chat/SendMessageInput';
+import StatusBarManager from '@components/common/StatusBarManager';
 
 //Ignore in case you run in simulator
 LogBox.ignoreLogs(['RNReactNativeHapticFeedback is not available']);

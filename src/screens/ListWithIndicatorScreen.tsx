@@ -6,7 +6,7 @@ import {Colors} from '@utils/colors';
 import Tabs from '@components/listWithIndicator/Tabs';
 import {data} from '@components/listWithIndicator/data';
 import {ListItem} from '@components/listWithIndicator/types';
-import StatusBarManager from '../components/StatusBarManager';
+import StatusBarManager from '../components/common/StatusBarManager';
 import ImplementedWith from '@components/listWithIndicator/ImplementedWith';
 import ListWithIndicatorItem from '@components/listWithIndicator/ListWithIndicatorItem';
 

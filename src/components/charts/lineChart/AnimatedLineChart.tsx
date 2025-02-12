@@ -26,12 +26,12 @@ import {
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {days} from './data';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
-import ReText from '@components/ReText';
+import ReText from '@components/common/ReText';
 import {ChartRef, TProps} from './types';
 import {typography} from '@utils/typography';
-import {AnimatedPath} from '@components/AnimatedComponents';
+import {AnimatedPath} from '@components/common/AnimatedComponents';
 
 const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
   const {

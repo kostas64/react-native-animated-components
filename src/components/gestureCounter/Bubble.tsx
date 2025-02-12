@@ -8,7 +8,7 @@ import Animated, {
 import {StyleSheet} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {darkShadow} from './styles';
 import {TBubbleProps} from './types';
 import {Colors} from '@utils/colors';

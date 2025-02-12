@@ -10,7 +10,7 @@ import FloatingActionButton, {
   RefProps,
 } from '@components/floatingActionsButton/FloatingActionButton';
 import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import FloatingActionModal from '@components/floatingActionsButton/FloatingActionModal';
 
 const FloatingActionButtonScreen = () => {

@@ -2,7 +2,7 @@ import {View, Easing, Animated, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 
 import {SIZE} from './constants';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
@@ -27,13 +27,13 @@ const ToggleWithLabel = () => {
       <View
         style={[
           styles.container,
-          !togglerActive ? styles.white : styles.black,
+          !togglerActive ? styles.whiteBg : styles.blackBg,
         ]}>
         <Animated.View
           style={[
             styles.background,
             {transform: [{translateX: animRef}]},
-            !togglerActive ? styles.black : styles.white,
+            !togglerActive ? styles.blackBg : styles.whiteBg,
           ]}
         />
         <Text
@@ -41,7 +41,7 @@ const ToggleWithLabel = () => {
           style={[
             styles.label,
             {right: !togglerActive ? SIZE / 8 : SIZE / 2 + 4},
-            !togglerActive ? styles.black : styles.white,
+            togglerActive ? styles.white : styles.black,
           ]}>{`${togglerActive ? 'ON' : 'OFF'}`}</Text>
       </View>
     </Pressable>
@@ -70,10 +70,16 @@ const styles = StyleSheet.create({
     fontFamily: typography.bold,
     fontSize: SIZE / 7,
   },
-  white: {
+  whiteBg: {
     backgroundColor: Colors.WHITE,
   },
-  black: {
+  blackBg: {
     backgroundColor: Colors.BLACK,
+  },
+  white: {
+    color: Colors.WHITE,
+  },
+  black: {
+    color: Colors.BLACK,
   },
 });

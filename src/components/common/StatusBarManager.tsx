@@ -1,8 +1,6 @@
 import {StatusBar} from 'react-native';
 
-type StatusBarProps = {
-  barStyle?: 'dark' | 'light';
-};
+import {StatusBarProps} from './types';
 
 const StatusBarManager = ({barStyle = 'dark'}: StatusBarProps) => {
   return (

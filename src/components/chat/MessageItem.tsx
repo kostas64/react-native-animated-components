@@ -10,14 +10,14 @@ import React, {useCallback} from 'react';
 import Haptic from 'react-native-haptic-feedback';
 import {View, Image, StyleSheet, GestureResponderEvent} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {TMessageItem} from './types';
 import {Colors} from '@utils/colors';
 import {DELAY_LONG_PRESS} from './data';
 import {typography} from '@utils/typography';
 import {HAPTIC_CONFIG} from '@utils/haptics';
 import {isAndroid, isIOS, WIDTH} from '@utils/device';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const triggerLongPressHaptik = () => {
   if (isAndroid) {

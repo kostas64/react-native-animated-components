@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {shadows} from './styles';
 import StockIcon from './StockIcon';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import WalletIcon from './WalletIcon';
 import {TransactionProps} from './types';

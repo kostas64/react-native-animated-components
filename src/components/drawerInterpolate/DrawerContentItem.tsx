@@ -1,7 +1,7 @@
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {TDrawerContentItem} from './types';
 import {typography} from '@utils/typography';

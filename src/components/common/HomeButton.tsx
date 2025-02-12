@@ -2,19 +2,14 @@ import {Pressable, StyleSheet} from 'react-native';
 
 import Text from './Text';
 import {Colors} from '@utils/colors';
+import {THomeButtonProps} from './types';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
-
-type THomeButtonProps = {
-  label: string;
-  onPress: (props: any) => void;
-  backgroundColor: string;
-};
 
 const HomeButton = ({
   label,
   onPress,
-  backgroundColor = 'rgba(0,0,0,0.2)',
+  backgroundColor = Colors.TWO_POINT_BLACK,
 }: THomeButtonProps) => {
   return (
     <Pressable style={[styles.container, {backgroundColor}]} onPress={onPress}>

@@ -4,9 +4,9 @@ import {Easing, useSharedValue, withTiming} from 'react-native-reanimated';
 
 import {Colors} from '@utils/colors';
 import MyButton from '@components/charts/MyButton';
-import StatusBarManager from '@components/StatusBarManager';
 import GroupChart from '@components/charts/groupChart/GroupChart';
 import StackChart from '@components/charts/stackChart/StackChart';
+import StatusBarManager from '@components/common/StatusBarManager';
 
 const GroupStackCharts = () => {
   const insets = useSafeAreaInsets();

@@ -1,17 +1,13 @@
-import {StyleSheet, TextInput, TextInputProps, TextStyle} from 'react-native';
-import Animated, {SharedValue, useAnimatedProps} from 'react-native-reanimated';
+import {StyleSheet, TextInput, TextInputProps} from 'react-native';
+import Animated, {useAnimatedProps} from 'react-native-reanimated';
 
 import {Colors} from '@utils/colors';
+import {ReTextProps} from './types';
 
 Animated.addWhitelistedNativeProps({text: true});
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-type Props = {
-  text: SharedValue<string>;
-  style?: TextStyle | TextStyle[];
-};
-
-const ReText = (props: Props & TextInputProps) => {
+const ReText = (props: ReTextProps & TextInputProps) => {
   const {text, style} = props;
   const animatedProps = useAnimatedProps(() => ({
     text: text.value,

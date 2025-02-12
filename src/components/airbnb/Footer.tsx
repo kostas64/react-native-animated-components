@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {TFooter} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {HEIGHT, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';

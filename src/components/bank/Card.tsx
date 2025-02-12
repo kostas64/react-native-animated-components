@@ -25,7 +25,7 @@ import {
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {CardProps} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 

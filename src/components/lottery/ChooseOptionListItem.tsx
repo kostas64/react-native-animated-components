@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {useAnimatedStyle} from 'react-native-reanimated';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {TChooseOption, TListItem} from './types';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const ChooseOptionListItem = ({
   item,

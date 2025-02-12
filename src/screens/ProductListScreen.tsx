@@ -9,7 +9,7 @@ import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Animated, FlatList, StyleSheet, View} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {items} from '@components/productList/data';
 import {ProductItem} from '@components/productList/types';

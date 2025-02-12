@@ -14,14 +14,14 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Text from '@components/Text';
 import {Colors} from '@utils/colors';
 import {DATA} from '@assets/homeData';
 import {HomeBodyProps} from './types';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {THomeNavigationProps} from 'src/App';
-import HomeButton from '@components/HomeButton';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import HomeButton from '@components/common/HomeButton';
 
 const HomeBody = ({
   scrollRef,

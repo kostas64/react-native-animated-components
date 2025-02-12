@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {Colors} from '@utils/colors';
 import Progress from '@components/progressLoader/Progress';
-import StatusBarManager from '@components/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import ImplementedWith from '@components/progressLoader/ImplementedWith';
 
 const ProgressLoaderScreen = () => {

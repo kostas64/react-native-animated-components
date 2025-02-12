@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 
 import {SPACING} from './constants';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {ICarouselDataType} from './types';
 import {typography} from '@utils/typography';

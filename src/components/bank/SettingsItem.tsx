@@ -1,7 +1,7 @@
 import {Pressable, StyleSheet, View} from 'react-native';
 
 import Pencil from './Pencil';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {WIDTH} from '@utils/device';
 import {Colors} from '@utils/colors';
 import {SettingsItemProps} from './types';

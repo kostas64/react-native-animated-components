@@ -1,7 +1,7 @@
 import {View, Image, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {HomeEventProps} from './types';
 import {typography} from '@utils/typography';

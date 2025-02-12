@@ -1,6 +1,6 @@
 import {View, StyleSheet} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {TextBetweenProps} from './types';
 import {typography} from '@utils/typography';
 import FadeInTransition from './FadeInTransition';

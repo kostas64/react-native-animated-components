@@ -7,14 +7,14 @@ import {
 import {View, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
 import {TNotificationEventProps} from './types';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 import {useModalContext} from '@providers/ModalProvider';
 import NotificationEventModal from './NotificationEventModal';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const NotificationEvent = ({
   event,

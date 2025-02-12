@@ -3,7 +3,7 @@ import Animated from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {morePath, personPath} from './data';
 import {typography} from '@utils/typography';

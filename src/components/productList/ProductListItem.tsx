@@ -7,7 +7,7 @@ import {
   MED_FONT_UPSCALE_FACTOR,
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {ProductListItemProps} from './types';
 

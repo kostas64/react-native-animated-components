@@ -17,7 +17,7 @@ import {
 } from '@utils/device';
 import {TWhenTrip} from './types';
 import {CALENDAR_PER} from './data';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import PickerItem from './PickerItem';
 import PeriodItem from './PeriodItem';

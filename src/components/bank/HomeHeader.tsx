@@ -4,7 +4,7 @@ import {View, Image, StyleProp, ViewStyle, StyleSheet} from 'react-native';
 
 import Cards from './Cards';
 import {shadows} from './styles';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {isIOS, WIDTH} from '@utils/device';
 import {typography} from '@utils/typography';

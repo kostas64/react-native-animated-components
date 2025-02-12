@@ -13,10 +13,10 @@ import {
   DrawerNavigationHelpers,
 } from '@react-navigation/drawer/lib/typescript/src/types';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {typography} from '@utils/typography';
-import StatusBarManager from '@components/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import DrawerContent from '@components/drawerInterpolate/DrawerContent';
 import {DrawerTypes, TDrawerList} from '@components/drawerInterpolate/types';
 

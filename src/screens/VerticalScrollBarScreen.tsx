@@ -18,15 +18,15 @@ import Animated, {
 import {useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
-import ReText from '@components/ReText';
+import ReText from '@components/common/ReText';
 import {typography} from '@utils/typography';
 import {data} from '@components/verticalScrollBar/data';
-import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/verticalScrollBar/ListItem';
 import {TListItem} from '@components/verticalScrollBar/types';
 import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '../utils/device';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {preprocessNames} from '@components/verticalScrollBar/utils';
 import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
 import getAnimatedStyles from '@components/verticalScrollBar/animatedStyles';

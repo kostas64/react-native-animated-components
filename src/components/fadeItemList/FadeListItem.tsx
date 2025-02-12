@@ -11,7 +11,7 @@ import {
   SM_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {FadeItemProps} from './types';
 import {typography} from '@utils/typography';

@@ -3,8 +3,8 @@ import {View, Animated, StatusBar, StyleSheet} from 'react-native';
 
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import Drawer from '@components/customDrawer/Drawer';
-import StatusBarManager from '@components/StatusBarManager';
 import AnimatedIcon from '@components/customDrawer/AnimatedIcon';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {fromCoords, toCoords} from '@components/customDrawer/data';
 import ImplementedWith from '@components/customDrawer/ImplementWith';
 

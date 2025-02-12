@@ -15,7 +15,7 @@ import {HAPTIC_CONFIG} from '@utils/haptics';
 import {isAndroid, WIDTH} from '@utils/device';
 import {BACKGROUND_BLUR_RADIUS, EMOJI} from './data';
 import {TBackgroundProps, TEmojiItemProps} from './types';
-import {AnimatedPressable} from '@components/AnimatedComponents';
+import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const triggerSelectionHaptik = () => {
   if (isAndroid) {

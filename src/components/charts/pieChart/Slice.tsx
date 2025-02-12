@@ -9,7 +9,7 @@ import {
 import {TSlice} from './types';
 import {gapSize, total} from './data';
 import {createRoundedPieSlicePath} from './utils';
-import {AnimatedPath} from '@components/AnimatedComponents';
+import {AnimatedPath} from '@components/common/AnimatedComponents';
 
 const Slice = ({
   item,

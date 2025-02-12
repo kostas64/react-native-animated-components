@@ -4,9 +4,9 @@ import {useSharedValue} from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/StatusBarManager';
 import {FadeItemProps} from '@components/fadeItemList/types';
 import FadeListItem from '@components/fadeItemList/FadeListItem';
+import StatusBarManager from '@components/common/StatusBarManager';
 import ImplementedWith from '@components/fadeItemList/ImplementedWith';
 import {BG_IMG, DATA, SPACING} from '@components/fadeItemList/constants';
 

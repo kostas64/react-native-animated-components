@@ -1,7 +1,7 @@
 import {Rect, Svg} from 'react-native-svg';
 import {Pressable, StyleSheet} from 'react-native';
 
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {WIDTH} from '@utils/device';
 import {ButtonProps} from './types';
 import {Colors} from '@utils/colors';

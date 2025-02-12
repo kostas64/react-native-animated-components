@@ -6,7 +6,7 @@ import Animated, {
 import {StyleSheet, View} from 'react-native';
 
 import {TLegend} from './types';
-import Text from '@components/Text';
+import Text from '@components/common/Text';
 import {data, total, width} from './data';
 import {typography} from '@utils/typography';
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 
-import Text from '@components/Text';
 import {WIDTH} from '@utils/device';
 import {Colors} from '@utils/colors';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
-import StatusBarManager from '@components/StatusBarManager';
 import ListItem from '@components/likeInteraction/ListItem';
 import LikeCounter from '@components/likeInteraction/LikeCounter';
+import StatusBarManager from '@components/common/StatusBarManager';
 import {DATA, DATA_TO_ADD, FACE} from '@components/likeInteraction/data';
 
 const LikeInteractionScreen = () => {
