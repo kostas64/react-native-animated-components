@@ -8,6 +8,7 @@ import Tabs from './Tabs';
 import Text from '@components/Text';
 import {Colors} from '@utils/colors';
 import {BarItemProps} from './types';
+import {MONTHS} from '@assets/months';
 import {isAndroid} from '@utils/device';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
@@ -26,6 +27,11 @@ const WalletCharts = ({style}: {style?: StyleProp<ViewStyle>}) => {
     (max, obj) => (obj.spendings > max.spendings ? obj : max),
     EARNINGS[0],
   );
+
+  const mainValue =
+    selectedType === SELECTED_TYPE.EARNINGS
+      ? EARNINGS?.[selectedMonth].earnings
+      : EARNINGS?.[selectedMonth].spendings;
 
   const maxValue =
     selectedType === SELECTED_TYPE.EARNINGS
@@ -68,9 +74,12 @@ const WalletCharts = ({style}: {style?: StyleProp<ViewStyle>}) => {
             $
           </SVGText>
         </Svg>
-        <Text style={styles.money}>7,008.14</Text>
+        <Text style={styles.money}>{mainValue}</Text>
       </View>
-      <Text style={styles.earningsLabel}>{'Total Earnings'}</Text>
+      <Text
+        style={
+          styles.earningsLabel
+        }>{`${MONTHS[selectedMonth]} ${selectedType}`}</Text>
 
       <FlatList
         horizontal
