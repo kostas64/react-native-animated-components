@@ -2,9 +2,10 @@ import {StyleSheet, View} from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 
 import {shadows} from './styles';
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import {StocksItemProps} from './types';
+import {isAndroid} from '@utils/device';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {ChartRef} from '@components/charts/lineChart/types';
 import AnimatedLineChart from '@components/charts/lineChart/AnimatedLineChart';
@@ -34,7 +35,7 @@ const StockItem = ({name, values}: StocksItemProps) => {
     <View
       style={[
         styles.container,
-        shadows.veryJustShadow,
+        isAndroid ? styles.border : shadows.veryJustShadow,
         styles.spaceHorizontal,
       ]}>
       <View style={styles.gap}>
@@ -51,8 +52,10 @@ const StockItem = ({name, values}: StocksItemProps) => {
         width={90}
         height={45}
         shouldCancelWhenOutsideGesture={false}
-        strokeBackground={hasIncrease ? '#deeae2' : '#edcdda'}
-        strokeColor={hasIncrease ? '#3ac060' : '#e8477e'}
+        strokeBackground={
+          hasIncrease ? Colors.CHINESE_WHITE : Colors.QUEEN_PINK
+        }
+        strokeColor={hasIncrease ? Colors.MEDIUM_SEA_GREEN : Colors.DARK_PINK}
       />
     </View>
   );
@@ -84,5 +87,10 @@ const styles = StyleSheet.create({
   },
   red: {
     color: Colors.DARK_PINK,
+  },
+  border: {
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: Colors.PLATINUM,
   },
 });

@@ -8,7 +8,6 @@ const Pencil = () => {
       <CommonGradient id={'pencil'} />
       <G
         transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)"
-        fill="#000000"
         stroke="none">
         <Path
           fill={'url(#pencil)'}

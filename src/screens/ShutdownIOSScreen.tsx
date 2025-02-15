@@ -106,9 +106,9 @@ const ShutdownIOS = () => {
               <AnimatedSvg width={SLIDER_W} height={SLIDER_H}>
                 <Defs>
                   <LinearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
-                    <Stop offset="0%" stopColor="#bf3354" />
-                    <Stop offset="50%" stopColor="#f43f46" />
-                    <Stop offset="100%" stopColor="#fe5334" />
+                    <Stop offset="0%" stopColor={Colors.DINGY_DUNGEON} />
+                    <Stop offset="50%" stopColor={Colors.RED_SALSA} />
+                    <Stop offset="100%" stopColor={Colors.PORTLAND_ORANGE} />
                   </LinearGradient>
                 </Defs>
                 <AnimatedRect

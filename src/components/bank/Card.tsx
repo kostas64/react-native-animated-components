@@ -25,8 +25,8 @@ import {
   XSM_FONT_UPSCALE_FACTOR,
 } from '@utils/device';
 import {CardProps} from './types';
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 
 const AnimatedGradient = Animated.createAnimatedComponent(LinearGradient);
@@ -101,9 +101,9 @@ const Card = ({
           fill="url(#gradient)"
         />
         <LinearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <Stop offset="0%" stopColor="#505050" stopOpacity="1" />
-          <Stop offset="50%" stopColor="#141214" stopOpacity="1" />
-          <Stop offset="100%" stopColor="#505050" stopOpacity="1" />
+          <Stop offset="0%" stopColor={Colors.DARK_LIVER} stopOpacity="1" />
+          <Stop offset="50%" stopColor={Colors.CHINESE_BLACK} stopOpacity="1" />
+          <Stop offset="100%" stopColor={Colors.DARK_LIVER} stopOpacity="1" />
         </LinearGradient>
         <View style={[styles.cardFooter, styles.rowCenter]}>
           <Text

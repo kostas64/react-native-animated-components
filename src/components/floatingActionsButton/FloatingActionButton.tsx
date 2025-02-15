@@ -1,9 +1,10 @@
 import {StyleSheet, View} from 'react-native';
 import Animated from 'react-native-reanimated';
-import Feather from 'react-native-vector-icons/Feather';
 import {forwardRef, useImperativeHandle} from 'react';
+import Feather from 'react-native-vector-icons/Feather';
 import {Circle, Defs, LinearGradient, Stop, Svg} from 'react-native-svg';
 
+import {Colors} from '@utils/colors';
 import {CIRCLE_SIZE, ICON_SIZE} from './data';
 import {getAnimatedStyles} from './animatedStyles';
 import {TFloatingActionButtonProps} from './types';
@@ -27,8 +28,8 @@ const FloatingActionButton = forwardRef<RefProps, TFloatingActionButtonProps>(
         <Svg height={`${CIRCLE_SIZE}`} width={`${CIRCLE_SIZE}`}>
           <Defs>
             <LinearGradient id="button" x1="0%" y1="0%" x2="100%" y2="100%">
-              <Stop offset="40%" stopColor="#f45371" />
-              <Stop offset="100%" stopColor="#ed4c94" />
+              <Stop offset="40%" stopColor={Colors.FIERY_ROSE} />
+              <Stop offset="100%" stopColor={Colors.RASBERRY_PINK} />
             </LinearGradient>
           </Defs>
           <Circle

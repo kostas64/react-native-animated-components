@@ -46,7 +46,7 @@ const BankSettings = () => {
   const separatorStyle = useAnimatedStyle(() => ({
     paddingHorizontal: 24,
     borderBottomWidth: showBorder.value ? 1 : 0,
-    borderBottomColor: '#e3e3e3',
+    borderBottomColor: Colors.PLATINUM,
   }));
 
   return (

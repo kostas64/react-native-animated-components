@@ -1,6 +1,7 @@
 import {Path, Text} from 'react-native-svg';
 import React, {memo, useCallback} from 'react';
 
+import {Colors} from '@utils/colors';
 import {TListItem, TSlice} from './types';
 import {typography} from '@utils/typography';
 import {OUTER_BORDER_W, RADIUS} from './constants';
@@ -56,7 +57,7 @@ const Slice = memo(
           x={x + 16}
           y={y + 4}
           fontSize={38}
-          fill="#FFFFFF"
+          fill={Colors.WHITE}
           fontWeight={'700'}
           textAnchor="middle"
           alignmentBaseline="middle"

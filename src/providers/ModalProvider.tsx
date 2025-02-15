@@ -1,7 +1,8 @@
 import React from 'react';
 import {ViewStyle} from 'react-native';
 
-import BottomSheet, {BottomSheetRef} from '@components/common/BottomSheet';
+import {BottomSheetRef} from '@components/common/types';
+import BottomSheet from '@components/common/BottomSheet';
 
 const initialState: TInitialState = {
   content: <></>,

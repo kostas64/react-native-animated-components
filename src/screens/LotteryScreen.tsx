@@ -30,6 +30,7 @@ import {
   AnimatedPath,
   AnimatedPressable,
 } from '@components/common/AnimatedComponents';
+import {Colors} from '@utils/colors';
 import Slice from '@components/lottery/Slice';
 import {HEIGHT_SCR, isIOS, WIDTH} from '@utils/device';
 import {ListRefProps} from '@components/lottery/types';
@@ -195,12 +196,12 @@ const LotteryScreen = () => {
           {/* Gradient for odd slices */}
           <Defs>
             <LinearGradient id="sliceGradint" x1="0%" y1="0%" x2="50%" y2="50%">
-              <Stop offset="0%" stopColor="#c5acff" />
-              <Stop offset="100%" stopColor="#a37cff" />
+              <Stop offset="0%" stopColor={Colors.PALE_VIOLET} />
+              <Stop offset="100%" stopColor={Colors.FLORAL_LAVENDER} />
             </LinearGradient>
             <LinearGradient id="centerCircle" x1="0%" y1="0%" x2="0%" y2="100%">
-              <Stop offset="0%" stopColor="#fecb70" />
-              <Stop offset="100%" stopColor="#f38a36" />
+              <Stop offset="0%" stopColor={Colors.TOPAZ} />
+              <Stop offset="100%" stopColor={Colors.CADMIUM_ORANGE} />
             </LinearGradient>
           </Defs>
 
@@ -269,8 +270,8 @@ const LotteryScreen = () => {
         <Svg width={38} height={48} style={styles.pointerContainer}>
           <Defs>
             <LinearGradient id="centerCircle" x1="0%" y1="0%" x2="0%" y2="100%">
-              <Stop offset="0%" stopColor="#fecb70" />
-              <Stop offset="100%" stopColor="#f38a36" />
+              <Stop offset="0%" stopColor={Colors.TOPAZ} />
+              <Stop offset="100%" stopColor={Colors.CADMIUM_ORANGE} />
             </LinearGradient>
           </Defs>
           {/* Shape of pointer */}

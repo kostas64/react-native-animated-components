@@ -41,7 +41,7 @@ const BankStocks = () => {
 
   const separatorStyle = useAnimatedStyle(() => ({
     borderBottomWidth: showBorder.value ? 1 : 0,
-    borderBottomColor: '#e3e3e3',
+    borderBottomColor: Colors.PLATINUM,
   }));
 
   const renderItem = ({
