@@ -81,8 +81,9 @@ const Tabbar = ({state, navigation}: BottomTabBarProps) => {
   useEffect(() => {
     if (isAndroid) {
       navigation.navigate(activeRoute);
-      activeTab.value = state?.index;
     }
+
+    activeTab.value = state?.index;
   }, [activeRoute]);
 
   return (

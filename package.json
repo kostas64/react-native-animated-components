@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@marceloterreiro/flash-calendar": "^1.0.0",
+    "@react-native-clipboard/clipboard": "^1.16.1",
     "@react-native-masked-view/masked-view": "^0.2.9",
+    "@react-native-menu/menu": "^1.2.2",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.6",
@@ -34,7 +36,7 @@
     "react-native-view-shot": "^3.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@react-native-community/eslint-config": "^3.2.0",

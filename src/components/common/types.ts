@@ -1,3 +1,5 @@
+import {ReactNode} from 'react';
+import {MenuAction} from '@react-native-menu/menu';
 import {SharedValue} from 'react-native-reanimated';
 import {StyleProp, TextStyle, ViewStyle} from 'react-native';
 
@@ -36,4 +38,10 @@ export type ReTextProps = {
 
 export type StatusBarProps = {
   barStyle?: 'dark' | 'light';
+};
+
+export type ConteMenuProps = {
+  children: ReactNode;
+  items: MenuAction[];
+  onPress: (nativeEvent: {event: string}) => void;
 };

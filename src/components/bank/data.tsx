@@ -1,16 +1,18 @@
+import {Linking} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+import Email from './Email';
+import Support from './Support';
+import {isIOS} from '@utils/device';
+import {Colors} from '@utils/colors';
 import {generateStockData} from './utils';
 import {TransactionItemProps} from './types';
 import BankHome from '@screens/Bank/BankHome';
 import BankStocks from '@screens/Bank/BankStocks';
 import BankWallet from '@screens/Bank/BankWallet';
 import BankSettings from '@screens/Bank/BankSettings';
-import Email from './Email';
-import Support from './Support';
-import {Linking} from 'react-native';
 
 export const tabs = [
   {
@@ -187,3 +189,49 @@ export const SUPPORT = [
 ];
 
 export const STOCKS_DATA = generateStockData();
+
+export const CARD_MENU_ITEMS = ({
+  isLight,
+  isFavourite,
+}: {
+  isLight?: boolean;
+  isFavourite?: boolean;
+}) => [
+  {
+    id: 'shareIban',
+    title: 'Share IBAN',
+    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+    image: isIOS ? 'square.and.arrow.up' : undefined,
+    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+  },
+  {
+    id: 'copyIban',
+    title: 'Copy IBAN',
+    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+    image: isIOS ? 'doc.on.doc' : undefined,
+    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+  },
+  {
+    id: 'addToFavorits',
+    title: isFavourite ? 'Remove from favorites' : 'Add to favorites',
+    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+    image: isIOS ? (isFavourite ? 'heart.fill' : 'heart') : undefined,
+    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+    image: isIOS ? 'gear' : undefined,
+    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+  },
+
+  {
+    id: 'remove',
+    title: 'Remove card',
+    attributes: {
+      destructive: true,
+    },
+    image: isIOS ? 'trash' : undefined,
+  },
+];
