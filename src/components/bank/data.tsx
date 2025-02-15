@@ -96,16 +96,16 @@ export const chevronUp =
 export const EARNINGS = [
   {month: 'Jan', earnings: 1850, spendings: 784},
   {month: 'Feb', earnings: 2110, spendings: 1376},
-  {month: 'Mar', earnings: 1550, spendings: 145},
+  {month: 'Mar', earnings: 1550, spendings: 845},
   {month: 'Apr', earnings: 3600, spendings: 1200},
   {month: 'May', earnings: 2860, spendings: 890},
   {month: 'Jun', earnings: 2456, spendings: 2100},
   {month: 'Jul', earnings: 4111, spendings: 5600},
-  {month: 'Aug', earnings: 1400, spendings: 250},
-  {month: 'Sep', earnings: 2650, spendings: 124},
+  {month: 'Aug', earnings: 1400, spendings: 1250},
+  {month: 'Sep', earnings: 2650, spendings: 524},
   {month: 'Oct', earnings: 2670, spendings: 6368},
   {month: 'Nov', earnings: 1850, spendings: 1784},
-  {month: 'Dec', earnings: 3850, spendings: 284},
+  {month: 'Dec', earnings: 3850, spendings: 2284},
 ];
 
 export const SELECTED_TYPE = {

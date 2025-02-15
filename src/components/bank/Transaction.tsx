@@ -1,13 +1,17 @@
 import {StyleSheet, View} from 'react-native';
 
+import {
+  isAndroid,
+  SM_FONT_UPSCALE_FACTOR,
+  MED_FONT_UPSCALE_FACTOR,
+} from '@utils/device';
 import {shadows} from './styles';
 import StockIcon from './StockIcon';
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
 import WalletIcon from './WalletIcon';
 import {TransactionProps} from './types';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
-import {MED_FONT_UPSCALE_FACTOR, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const Transaction = ({
   date,
@@ -17,7 +21,11 @@ const Transaction = ({
   description,
 }: TransactionProps) => {
   return (
-    <View style={[styles.container, shadows.veryJustShadow]}>
+    <View
+      style={[
+        styles.container,
+        isAndroid ? styles.border : shadows.veryJustShadow,
+      ]}>
       <View style={styles.iconContainer}>
         {description === 'Income' ? <WalletIcon /> : <StockIcon />}
       </View>
@@ -94,5 +102,9 @@ const styles = StyleSheet.create({
   },
   red: {
     color: Colors.DARK_PINK,
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: Colors.PLATINUM,
   },
 });

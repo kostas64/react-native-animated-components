@@ -3,8 +3,9 @@ import {View, ViewStyle, Pressable, StyleProp, StyleSheet} from 'react-native';
 
 import {ACTIONS} from './data';
 import {shadows} from './styles';
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
+import {isAndroid} from '@utils/device';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 
@@ -15,7 +16,7 @@ const HomeActions = ({style}: {style?: StyleProp<ViewStyle>}) => {
         <Pressable
           key={index}
           style={({pressed}) => [
-            shadows.justShadow,
+            isAndroid ? styles.border : shadows.justShadow,
             styles.itemContainer,
             pressed && styles.halfOpacity,
           ]}>
@@ -74,5 +75,9 @@ const styles = StyleSheet.create({
   },
   halfOpacity: {
     opacity: 0.5,
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: Colors.PLATINUM,
   },
 });

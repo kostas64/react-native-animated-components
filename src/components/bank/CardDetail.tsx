@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {shadows} from './styles';
 import {Colors} from '@utils/colors';
 import {CardDetailProps} from './types';
+import {isAndroid} from '@utils/device';
 import {validateBiometrics} from './utils';
 import SectionHeader from './SectionHeader';
 import CardDetailRow from './CardDetailRow';
@@ -39,7 +40,11 @@ const CardDetail = ({
           onPress={onPressShowData}
         />
 
-        <View style={[styles.boxContainer, shadows.veryJustShadow]}>
+        <View
+          style={[
+            styles.boxContainer,
+            isAndroid ? styles.border : shadows.veryJustShadow,
+          ]}>
           <CardDetailRow
             hidden={!showData}
             label={'Holder Name'}
@@ -78,5 +83,9 @@ const styles = StyleSheet.create({
   pressedLast: {
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: Colors.PLATINUM,
   },
 });
