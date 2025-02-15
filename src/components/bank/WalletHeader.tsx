@@ -34,7 +34,7 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
       await Share.share({message: 'NL23INGB4746672490'});
     } else if (event === 'copyIban') {
       Clipboard.setString('NL23INGB4746672490');
-    } else if (event === 'addToFavorits') {
+    } else if (event === 'addToFavorites') {
       setIsFavorite(old => !old);
     } else if (event === 'settings') {
       navigation.navigate('BankSettings');

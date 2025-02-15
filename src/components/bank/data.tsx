@@ -196,42 +196,62 @@ export const CARD_MENU_ITEMS = ({
 }: {
   isLight?: boolean;
   isFavourite?: boolean;
-}) => [
-  {
-    id: 'shareIban',
-    title: 'Share IBAN',
-    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
-    image: isIOS ? 'square.and.arrow.up' : undefined,
-    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
-  },
-  {
-    id: 'copyIban',
-    title: 'Copy IBAN',
-    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
-    image: isIOS ? 'doc.on.doc' : undefined,
-    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
-  },
-  {
-    id: 'addToFavorits',
-    title: isFavourite ? 'Remove from favorites' : 'Add to favorites',
-    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
-    image: isIOS ? (isFavourite ? 'heart.fill' : 'heart') : undefined,
-    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
-  },
-  {
-    id: 'settings',
-    title: 'Settings',
-    titleColor: isLight ? Colors.BLACK : Colors.WHITE,
-    image: isIOS ? 'gear' : undefined,
-    imageColor: isLight ? Colors.BLACK : Colors.WHITE,
-  },
+}) => {
+  const baseItems = [
+    {
+      id: 'shareIban',
+      title: 'Share IBAN',
+      titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+      image: isIOS ? 'square.and.arrow.up' : undefined,
+      imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+    },
+    {
+      id: 'copyIban',
+      title: 'Copy IBAN',
+      titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+      image: isIOS ? 'doc.on.doc' : undefined,
+      imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+    },
+  ];
 
-  {
+  const favoriteAndSettings = [
+    {
+      id: 'addToFavorites',
+      title: isFavourite ? 'Remove from favorites' : 'Add to favorites',
+      titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+      image: isIOS ? (isFavourite ? 'heart.fill' : 'heart') : undefined,
+      imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+    },
+    {
+      id: 'settings',
+      title: 'Settings',
+      titleColor: isLight ? Colors.BLACK : Colors.WHITE,
+      image: isIOS ? 'gear' : undefined,
+      imageColor: isLight ? Colors.BLACK : Colors.WHITE,
+    },
+  ];
+
+  const removeItem = {
     id: 'remove',
     title: 'Remove card',
     attributes: {
       destructive: true,
     },
     image: isIOS ? 'trash' : undefined,
-  },
-];
+  };
+
+  if (isIOS) {
+    return [
+      ...baseItems,
+      {
+        id: 'divider1',
+        title: '',
+        displayInline: true,
+        subactions: favoriteAndSettings,
+      },
+      removeItem,
+    ];
+  }
+
+  return [...baseItems, ...favoriteAndSettings, removeItem];
+};
