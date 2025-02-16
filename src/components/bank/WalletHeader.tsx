@@ -18,10 +18,12 @@ import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import CommonGradient from './CommonGradient';
 import ContextMenu from '@components/common/ContextMenu';
+import {useToastContext} from '@providers/ToastProvider';
 import {CARD_MENU_ITEMS, morePath, personPath} from './data';
 import {TBankSettingsNavigationProps} from '@screens/Bank/BankBottomStack';
 
 const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
+  const {showToast} = useToastContext();
   const isLight = useColorScheme() === 'light';
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<TBankSettingsNavigationProps>();
@@ -34,7 +36,12 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
       await Share.share({message: 'NL23INGB4746672490'});
     } else if (event === 'copyIban') {
       Clipboard.setString('NL23INGB4746672490');
+      showToast('✓  IBAN copied to clipboard');
     } else if (event === 'addToFavorites') {
+      showToast(
+        `Card ${isFavourite ? 'removed from favorites' : 'added to favorites'}`,
+      );
+
       setIsFavorite(old => !old);
     } else if (event === 'settings') {
       navigation.navigate('BankSettings');

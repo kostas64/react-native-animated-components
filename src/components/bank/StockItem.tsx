@@ -1,3 +1,10 @@
+import Animated, {
+  withDelay,
+  withTiming,
+  useSharedValue,
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import {StyleSheet, View} from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 
@@ -13,16 +20,38 @@ import AnimatedLineChart from '@components/charts/lineChart/AnimatedLineChart';
 const StockItem = ({name, values}: StocksItemProps) => {
   const chartRef = useRef<ChartRef>(null);
 
+  const shouldHighlight = useSharedValue(0);
   const [stockData, setStockData] = useState(values);
   const hasIncrease = stockData?.[stockData?.length - 1] > values?.[0];
+
+  const animatedBackground = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      shouldHighlight.value,
+      [0, 1],
+      [Colors.WHITE, Colors.SIZZLING_SUNRISE],
+    ),
+  }));
 
   useEffect(() => {
     chartRef.current?.animate();
 
     const interval = setInterval(() => {
+      const newValue = parseFloat((Math.random() * 1000 + 50).toFixed(2));
+
+      if (newValue < values?.[0]) {
+        shouldHighlight.value = withTiming(1, {duration: 1500}, finished => {
+          if (finished) {
+            shouldHighlight.value = withDelay(
+              500,
+              withTiming(0, {duration: 150}),
+            );
+          }
+        });
+      }
+
       setStockData(old => [
         ...(old?.length > 0 ? old.slice(1) : old),
-        parseFloat((Math.random() * 1000 + 50).toFixed(2)),
+        newValue,
       ]);
     }, 5000);
 
@@ -32,9 +61,10 @@ const StockItem = ({name, values}: StocksItemProps) => {
   }, []);
 
   return (
-    <View
+    <Animated.View
       style={[
         styles.container,
+        animatedBackground,
         isAndroid ? styles.border : shadows.veryJustShadow,
         styles.spaceHorizontal,
       ]}>
@@ -57,7 +87,7 @@ const StockItem = ({name, values}: StocksItemProps) => {
         }
         strokeColor={hasIncrease ? Colors.MEDIUM_SEA_GREEN : Colors.DARK_PINK}
       />
-    </View>
+    </Animated.View>
   );
 };
 
@@ -69,7 +99,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.WHITE,
     justifyContent: 'space-between',
   },
   gap: {

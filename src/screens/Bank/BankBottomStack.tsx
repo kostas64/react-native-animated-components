@@ -9,6 +9,7 @@ import {
 
 import {tabs} from '@components/bank/data';
 import Tabbar from '@components/bank/Tabbar';
+import {ToastProvider} from '@providers/ToastProvider';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,11 +30,17 @@ export type TBankSettingsScreenProps = NativeStackScreenProps<
 
 const BankBottomStack = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}} tabBar={MyTabbar}>
-      {tabs.map(tab => (
-        <Tab.Screen key={tab.name} name={tab.name} component={tab.component} />
-      ))}
-    </Tab.Navigator>
+    <ToastProvider>
+      <Tab.Navigator screenOptions={{headerShown: false}} tabBar={MyTabbar}>
+        {tabs.map(tab => (
+          <Tab.Screen
+            key={tab.name}
+            name={tab.name}
+            component={tab.component}
+          />
+        ))}
+      </Tab.Navigator>
+    </ToastProvider>
   );
 };
 
