@@ -39,7 +39,9 @@ const WalletHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
       showToast('✓  IBAN copied to clipboard');
     } else if (event === 'addToFavorites') {
       showToast(
-        `Card ${isFavourite ? 'removed from favorites' : 'added to favorites'}`,
+        `✓  Card ${
+          isFavourite ? 'removed from favorites' : 'added to favorites'
+        }`,
       );
 
       setIsFavorite(old => !old);
