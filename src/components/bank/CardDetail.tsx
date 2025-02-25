@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 import {shadows} from './styles';
 import {Colors} from '@utils/colors';
@@ -8,6 +9,7 @@ import {isAndroid} from '@utils/device';
 import {validateBiometrics} from './utils';
 import SectionHeader from './SectionHeader';
 import CardDetailRow from './CardDetailRow';
+import {useToastContext} from '@providers/ToastProvider';
 
 const CardDetail = ({
   cardNumber,
@@ -15,6 +17,8 @@ const CardDetail = ({
   expirationDate,
   style,
 }: CardDetailProps) => {
+  const {showToast} = useToastContext();
+
   const [showData, setShowData] = useState(false);
 
   const onPressShowData = async () => {
@@ -29,6 +33,11 @@ const CardDetail = ({
         }
       })
       .catch(e => console.log('No biometrics ', e));
+  };
+
+  const onPressCopy = ({field, value}: {field: string; value: string}) => {
+    Clipboard.setString(value);
+    showToast(`✓  ${field} copied to clipboard`);
   };
 
   return (
@@ -49,17 +58,20 @@ const CardDetail = ({
             hidden={!showData}
             label={'Holder Name'}
             value={cardholderName}
+            onPress={onPressCopy}
             pressedStyle={styles.pressedFirst}
           />
           <CardDetailRow
             hidden={!showData}
             label={'Card Number'}
             value={cardNumber}
+            onPress={onPressCopy}
           />
           <CardDetailRow
             hidden={!showData}
             label={'Exp. Date'}
             value={expirationDate}
+            onPress={onPressCopy}
             pressedStyle={styles.pressedLast}
           />
         </View>

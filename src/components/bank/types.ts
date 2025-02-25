@@ -44,6 +44,7 @@ export type CardDetailRowProps = {
   value: string;
   hidden: boolean;
   pressedStyle?: StyleProp<ViewStyle>;
+  onPress: ({field, value}: {field: string; value: string}) => void;
 };
 
 export type BarProps = {

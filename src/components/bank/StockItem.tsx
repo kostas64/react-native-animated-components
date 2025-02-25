@@ -82,9 +82,7 @@ const StockItem = ({name, values}: StocksItemProps) => {
         width={90}
         height={45}
         shouldCancelWhenOutsideGesture={false}
-        strokeBackground={
-          hasIncrease ? Colors.CHINESE_WHITE : Colors.QUEEN_PINK
-        }
+        strokeBackground={hasIncrease ? Colors.TEA_GREEN : Colors.QUEEN_PINK}
         strokeColor={hasIncrease ? Colors.MEDIUM_SEA_GREEN : Colors.DARK_PINK}
       />
     </Animated.View>

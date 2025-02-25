@@ -24,12 +24,15 @@ const CardDetailRow = ({
   value,
   hidden,
   pressedStyle,
+  onPress,
 }: CardDetailRowProps) => {
   const progress = useSharedValue(0);
   const progressShow = useSharedValue(90);
 
   const onPressAnimate = () => {
     if (progress.value === 0) {
+      onPress({field: label, value});
+
       progress.value = withTiming(1, {}, finished => {
         if (finished) {
           progress.value = withDelay(2500, withTiming(0, {duration: 150}));
