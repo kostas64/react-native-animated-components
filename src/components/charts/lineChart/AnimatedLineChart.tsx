@@ -337,7 +337,11 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
           strokeBackground ? {backgroundColor: strokeBackground} : {},
           retextPosStyle,
         ]}>
-        <ReText text={formattedText} style={retextStyle} />
+        <ReText
+          text={formattedText}
+          style={retextStyle}
+          maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
+        />
       </Animated.View>
 
       <GestureDetector gesture={panGesture}>
