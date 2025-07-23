@@ -11,9 +11,9 @@ const Description = ({scrollX}: DescriptionProps) => {
     <View style={styles.container}>
       {DATA.map((item, index) => {
         const inputRange = [
-          (index - 0.2) * WIDTH,
+          (index - 1) * WIDTH,
           index * WIDTH,
-          (index + 0.2) * WIDTH,
+          (index + 1) * WIDTH,
         ];
 
         const opacity = scrollX.interpolate({
@@ -21,17 +21,19 @@ const Description = ({scrollX}: DescriptionProps) => {
           outputRange: [0, 1, 0],
         });
 
-        const rotateY = scrollX.interpolate({
+        const translateX = scrollX.interpolate({
           inputRange,
-          outputRange: ['45deg', '0deg', '45deg'],
+          outputRange: [50, 0, 20],
         });
-
         return (
           <Animated.View
             key={item.key}
             style={[
               styles.itemContainer,
-              {opacity, transform: [{perspective: IMAGE_WIDTH * 4}, {rotateY}]},
+              {
+                opacity,
+                transform: [{perspective: IMAGE_WIDTH * 4}, {translateX}],
+              },
             ]}>
             <Content {...item} />
           </Animated.View>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: SPACING * 2,
     marginLeft: SPACING * 2,
-    zIndex: 100,
+    zIndex: 1,
   },
   itemContainer: {
     position: 'absolute',

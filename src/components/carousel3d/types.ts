@@ -14,10 +14,6 @@ export type ICarousel3DProps = {
   scrollX: Animated.AnimatedValue;
 };
 
-export type BackgroundProps = {
-  progress: Animated.AnimatedModulo<string | number>;
-};
-
 export type ArrowProps = {
   index: number;
   disabledLeft: boolean;

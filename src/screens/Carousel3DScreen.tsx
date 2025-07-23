@@ -20,8 +20,8 @@ import {DATA} from '@components/carousel3d/data';
 import Arrows from '@components/carousel3d/Arrows';
 import Background from '@components/carousel3d/Background';
 import Description from '@components/carousel3d/Description';
-import StatusBarManager from '../components/common/StatusBarManager';
 import {ICarouselDataType} from '@components/carousel3d/types';
+import StatusBarManager from '../components/common/StatusBarManager';
 import ImplementedWith from '@components/carousel3d/ImplementedWith';
 import Carousel3dListItem from '../components/carousel3d/Carousel3dListItem';
 
@@ -32,7 +32,6 @@ const Carousel3DScreen = () => {
   const scrollX = React.useRef<Animated.AnimatedValue>(
     new Animated.Value(0),
   ).current;
-  const progress = Animated.modulo(Animated.divide(scrollX, WIDTH), WIDTH);
 
   const onScroll = Animated.event(
     [{nativeEvent: {contentOffset: {x: scrollX}}}],
@@ -90,7 +89,7 @@ const Carousel3DScreen = () => {
               }
             />
             <Description scrollX={scrollX} />
-            <Background progress={progress} />
+            <Background />
           </View>
           <Arrows
             index={index}

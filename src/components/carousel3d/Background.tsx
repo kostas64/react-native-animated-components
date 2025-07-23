@@ -2,28 +2,10 @@ import {Animated, StyleSheet} from 'react-native';
 
 import {WIDTH} from '@utils/device';
 import {Colors} from '@utils/colors';
-import {BackgroundProps} from './types';
 import {IMAGE_WIDTH, SPACING} from './constants';
 
-const Background = ({progress}: BackgroundProps) => {
-  return (
-    <Animated.View
-      style={[
-        styles.card,
-        {
-          transform: [
-            {perspective: IMAGE_WIDTH * 4},
-            {
-              rotateY: progress.interpolate({
-                inputRange: [0, 0.5, 1],
-                outputRange: ['0deg', '90deg', '180deg'],
-              }),
-            },
-          ],
-        },
-      ]}
-    />
-  );
+const Background = () => {
+  return <Animated.View style={styles.card} />;
 };
 
 export default Background;
@@ -44,6 +26,5 @@ const styles = StyleSheet.create({
       width: 0,
       height: 0,
     },
-    backfaceVisibility: 'visible',
   },
 });
