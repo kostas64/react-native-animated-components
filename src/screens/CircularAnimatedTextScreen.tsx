@@ -10,6 +10,7 @@ import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {
+  SCALE,
   brush,
   COLOURS,
   BOX_SIZE,
@@ -79,7 +80,7 @@ const CircularAnimatedTextScreen = () => {
         <Svg
           height={`${BOX_SIZE}`}
           width={`${BOX_SIZE}`}
-          viewBox={`0 0 ${BOX_SIZE + 100} ${BOX_SIZE + 100}`}>
+          viewBox={`0 0 ${BOX_SIZE * SCALE} ${BOX_SIZE * SCALE}`}>
           <G id="circle">
             <Circle
               fill="none"

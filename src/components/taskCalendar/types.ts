@@ -9,8 +9,6 @@ export type TNavigation = {
 
 export type TCalendar = {
   month: string;
-  fadeFinished: SharedValue<boolean>;
-  executeChild: (cb: () => void) => void;
   selectedDate: (date: Date) => void;
 };
 
@@ -34,6 +32,7 @@ export type THeader = {
 
 export type TWeekDayListItem = {
   day: CalendarDayMetadata;
+  onLayout?: () => void;
   selectedDate: (date: Date) => void;
   globalSelectedDate: React.MutableRefObject<Date>;
 };

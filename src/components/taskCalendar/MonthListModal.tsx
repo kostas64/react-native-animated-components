@@ -14,6 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import React, {useCallback} from 'react';
 import Haptic from 'react-native-haptic-feedback';
+import {useDebouncedCallback} from 'use-debounce';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
@@ -46,13 +47,24 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
 
   const onMomentumScrollEnd = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const yPosition = event.nativeEvent.contentOffset.y;
+      const y = event.nativeEvent.contentOffset.y;
+      calculateNewIndex(y);
+    },
+    [],
+  );
+
+  const calculateNewIndex = useDebouncedCallback(
+    (y: number) => {
       const step = 46;
-      const newIndex = Math.round(yPosition / step);
+      const newIndex = Math.round(y / step);
 
       setMonth(newIndex);
     },
-    [],
+    200,
+    {
+      leading: false,
+      trailing: true,
+    },
   );
 
   const renderItem = useCallback(
@@ -101,7 +113,6 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
         data={MONTHS}
         ref={scrollRef}
         renderItem={renderItem}
-        pagingEnabled
         onScroll={onScroll}
         decelerationRate={'fast'}
         keyExtractor={(_, index) => index.toString()}

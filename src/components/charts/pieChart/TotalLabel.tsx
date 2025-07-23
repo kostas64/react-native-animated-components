@@ -8,9 +8,9 @@ import {StyleSheet} from 'react-native';
 
 import {height} from './data';
 import {Colors} from '@utils/colors';
-import ReText from '@components/common/ReText';
+import {isIOS} from '@utils/device';
 import {typography} from '@utils/typography';
-import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
+import ReText from '@components/common/ReText';
 
 const TotalLabel = ({animatedText, progress}: TTotalLabel) => {
   const formattedText = useDerivedValue(
@@ -25,7 +25,8 @@ const TotalLabel = ({animatedText, progress}: TTotalLabel) => {
   return (
     <ReText
       text={formattedText}
-      maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
+      allowFontScaling={false}
+      numberOfLines={1}
       style={[styles.retext, animatedStyle]}
     />
   );
@@ -35,7 +36,8 @@ export default TotalLabel;
 const styles = StyleSheet.create({
   retext: {
     right: 2,
-    fontSize: 24,
+    fontSize: 20,
+    minWidth: 30,
     alignSelf: 'center',
     alignItems: 'center',
     fontFamily: typography.bold,

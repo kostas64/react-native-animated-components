@@ -10,6 +10,12 @@ const Loading = ({loading, stopLoading}: TLoading) => {
   let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
 
   useEffect(() => {
+    if (!loading) {
+      return;
+    }
+
+    clearTimeout(timeout);
+
     timeout = setTimeout(() => {
       !!stopLoading && stopLoading();
     }, 600);
@@ -17,7 +23,7 @@ const Loading = ({loading, stopLoading}: TLoading) => {
     return () => {
       !!timeout && clearTimeout(timeout);
     };
-  }, []);
+  }, [loading]);
 
   if (!loading) {
     return null;

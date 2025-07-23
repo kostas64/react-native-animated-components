@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
   },
   listDataContainer: {
     position: 'absolute',
-    transform: [{translateX: 172}],
+    left: 172,
   },
 });

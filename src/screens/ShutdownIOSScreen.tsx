@@ -111,14 +111,6 @@ const ShutdownIOS = () => {
                     <Stop offset="100%" stopColor={Colors.PORTLAND_ORANGE} />
                   </LinearGradient>
                 </Defs>
-                <AnimatedRect
-                  x="0"
-                  y="0"
-                  rx="40"
-                  fill="url(#grad)"
-                  height={SLIDER_H}
-                  animatedProps={animProps}
-                />
                 <View style={styles.textContainer}>
                   {chars.map((char, index) => (
                     <AnimatedText
@@ -132,6 +124,14 @@ const ShutdownIOS = () => {
                     />
                   ))}
                 </View>
+                <AnimatedRect
+                  x="0"
+                  y="0"
+                  rx="40"
+                  fill="url(#grad)"
+                  height={SLIDER_H}
+                  animatedProps={animProps}
+                />
               </AnimatedSvg>
             </View>
             <Animated.View style={[powerBtn, styles.powerBtn]}>

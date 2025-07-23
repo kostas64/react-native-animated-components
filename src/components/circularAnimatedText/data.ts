@@ -4,7 +4,7 @@ export const NUM_LETTER_CIRCLES = 3;
 export const CIRCLES_SPACING = 30;
 export const LETTER_SPACING = 2;
 export const ROT_DEG = 360;
-export const SCALE = 1.3;
+export const SCALE = 2.4;
 export const TEXT =
   'ホヤュホサめゃほさけホヤュホサめゃほさけホヤュホサめゃほさけホけホ';
 

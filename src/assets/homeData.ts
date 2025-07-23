@@ -255,7 +255,7 @@ export const DATA: TDATA = [
     iconSize: 18,
     items: [
       {
-        label: 'Button to Modal',
+        label: 'Floating Button',
         backgroundColor: '#0ad2ff',
         screen: 'Floating',
       },
@@ -268,11 +268,6 @@ export const DATA: TDATA = [
         label: 'Plus Button Move Screen',
         backgroundColor: '#9500ff',
         screen: 'AddButtonMove',
-      },
-      {
-        label: 'Floating Button',
-        backgroundColor: '#ff0059',
-        screen: 'Floating',
       },
     ],
   },

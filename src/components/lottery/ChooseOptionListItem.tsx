@@ -1,34 +1,30 @@
-import {StyleSheet} from 'react-native';
-import {useAnimatedStyle} from 'react-native-reanimated';
+import {Pressable, StyleSheet} from 'react-native';
 
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
-import {TChooseOption, TListItem} from './types';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
 
 const ChooseOptionListItem = ({
   item,
   index,
-  spinning,
   selectedO,
   selectOption,
-}: TChooseOption & TListItem) => {
-  const animStyle = useAnimatedStyle(() => ({
-    elevation: spinning.value ? 0 : 5,
-  }));
-
+}: {
+  item: number;
+  index: number;
+  selectedO: number;
+  selectOption: (index: number) => void;
+}) => {
   return (
-    <AnimatedPressable
+    <Pressable
       onPress={() => selectOption(index)}
       style={({pressed}) => [
         styles.optionContainer,
         selectedO === index ? styles.selectedBorder : styles.unselectedBorder,
         pressed && {opacity: 0.6},
-        animStyle,
       ]}>
       <Text style={styles.label}>{item}</Text>
-    </AnimatedPressable>
+    </Pressable>
   );
 };
 
@@ -36,7 +32,7 @@ export default ChooseOptionListItem;
 
 const styles = StyleSheet.create({
   optionContainer: {
-    minWidth: 92,
+    minWidth: 96,
     alignItems: 'center',
     backgroundColor: Colors.SLATE_BLUE,
     paddingVertical: 12,

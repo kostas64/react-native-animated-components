@@ -59,9 +59,9 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
   const iterateH = new Array(7).fill(0);
 
   const step = width / data.length;
-  const formattedText = useDerivedValue(
-    () => ` ${animatedText.value ? animatedText.value : ''}`,
-  );
+  const formattedText = useDerivedValue(() => {
+    return ` ${animatedText.value ? animatedText.value : ''}`;
+  });
 
   const retextStyle = [
     styles.chartHeaderLabel,
@@ -207,6 +207,12 @@ const AnimatedLineChart = React.forwardRef<ChartRef, TProps>((props, ref) => {
   const panGesture = Gesture.Pan()
     .shouldCancelWhenOutside(shouldCancelWhenOutsideGesture)
     .onBegin(e => {
+      if (e.x >= 0 && e.x <= width && e.y >= 0 && e.y <= height) {
+        indicatorPos.value = e.x - 1;
+        animatedText.value = `${data[Math.floor(e.x / step)]}`;
+      }
+    })
+    .onStart(e => {
       if (e.x >= 0 && e.x <= width && e.y >= 0 && e.y <= height) {
         indicatorPos.value = e.x - 1;
         animatedText.value = `${data[Math.floor(e.x / step)]}`;

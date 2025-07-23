@@ -1,10 +1,10 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
-import Text from '@components/common/Text';
 import {TChartButton} from './types';
 import {Colors} from '@utils/colors';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
-import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const MyButton = ({title, style, onPress}: TChartButton) => {
   return (
@@ -13,8 +13,9 @@ const MyButton = ({title, style, onPress}: TChartButton) => {
       activeOpacity={0.7}
       style={[styles.btnContainer, style]}>
       <Text
-        style={styles.btnLabel}
-        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+        style={[styles.btnLabel, isIOS && styles.lineHeight]}
+        numberOfLines={1}
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
         {title}
       </Text>
     </TouchableOpacity>
@@ -31,11 +32,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
-    minWidth: 140,
+    minWidth: 150,
   },
   btnLabel: {
     color: Colors.WHITE,
-    lineHeight: 22,
     fontFamily: typography.semiBold,
+  },
+  lineHeight: {
+    lineHeight: 24,
   },
 });

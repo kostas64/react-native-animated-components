@@ -1,3 +1,12 @@
+import {
+  G,
+  Svg,
+  Defs,
+  Path,
+  Stop,
+  Polygon,
+  LinearGradient,
+} from 'react-native-svg';
 import Animated, {
   Easing,
   runOnJS,
@@ -14,7 +23,6 @@ import {useEffect, useRef, useState} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Svg, Defs, Path, Stop, Polygon, LinearGradient} from 'react-native-svg';
 
 import {
   SVG_H,
@@ -41,6 +49,8 @@ export const WHEEL_OPTIONS = [
   10, 90, 150, 40, 80, 60, 30, 100, 70, 20, 200, 50,
 ];
 
+const AnimatedG = Animated.createAnimatedComponent(G);
+
 const LotteryScreen = () => {
   const listRef = useRef<ListRefProps>(null);
   const randD = useSharedValue(0);
@@ -64,10 +74,19 @@ const LotteryScreen = () => {
   }));
 
   const animPropsInnerCircle = useAnimatedProps(() => ({
+    x: -8 + (SVG_W - 2 * CENTER_I_W) / 2,
+    y: -18 + (SVG_W - 2 * CENTER_I_W + 20) / 2,
     transform: [
       {scale: interpolate(pulse.value, [0, 0.5, 1], [1, 1.1, 1])},
       {translateX: interpolate(pulse.value, [0, 0.5, 1], [0, -3, 0])},
       {translateY: interpolate(pulse.value, [0, 0.5, 1], [0, -3, 0])},
+    ],
+  }));
+
+  const moveInnerCirlce = useAnimatedProps(() => ({
+    transform: [
+      {translateX: -8 + (SVG_W - 2 * CENTER_I_W) / 2},
+      {translateY: -18 + (SVG_W - 2 * CENTER_I_W + 20) / 2},
     ],
   }));
 
@@ -76,6 +95,13 @@ const LotteryScreen = () => {
       {scale: interpolate(pulse.value, [0, 0.5, 1], [1, 1.1, 1])},
       {translateX: interpolate(pulse.value, [0, 0.5, 1], [0, -4, 0])},
       {translateY: interpolate(pulse.value, [0, 0.5, 1], [0, -4, 0])},
+    ],
+  }));
+
+  const moveOuterCirlce = useAnimatedProps(() => ({
+    transform: [
+      {translateX: -8 + (SVG_W - 2 * CENTER_O_W) / 2},
+      {translateY: -8 + (SVG_W - 2 * CENTER_O_W) / 2},
     ],
   }));
 
@@ -231,39 +257,35 @@ const LotteryScreen = () => {
           ))}
 
           {/* Center Outer circle */}
-          <AnimatedPath
-            d={`M ${CENTER_O_W},${0} 
+          <AnimatedG animatedProps={moveOuterCirlce}>
+            <AnimatedPath
+              d={`M ${CENTER_O_W},${0} 
                   A ${CENTER_O_W},${CENTER_O_W} 0 1,1 ${CENTER_O_W},${
-              CENTER_O_W * 2
-            }
+                CENTER_O_W * 2
+              }
                   A ${CENTER_O_W},${CENTER_O_W} 0 1,1 ${CENTER_O_W},${0}
                 `}
-            fill="url(#centerCircle)"
-            stroke="white"
-            strokeWidth={2}
-            onPress={spinIt}
-            x={-8 + (SVG_W - 2 * CENTER_O_W) / 2}
-            y={-8 + (SVG_W - 2 * CENTER_O_W) / 2}
-            animatedProps={animPropsOuterCircle}
-          />
+              fill="url(#centerCircle)"
+              stroke="white"
+              strokeWidth={2}
+              onPress={spinIt}
+              animatedProps={animPropsOuterCircle}
+            />
+          </AnimatedG>
 
           {/* Center Inner circle */}
-          <AnimatedPath
-            d={`
-                  M ${CENTER_I_W},${0} 
-                  A ${CENTER_I_W},${CENTER_I_W} 0 1,1 ${CENTER_I_W},${
-              CENTER_I_W * 2
-            }
-                  A ${CENTER_I_W},${CENTER_I_W} 0 1,1 ${CENTER_I_W},${0}
-                `}
-            fill="url(#centerCircle)"
-            stroke="white"
-            strokeWidth={3}
-            onPress={spinIt}
-            x={-8 + (SVG_W - 2 * CENTER_I_W) / 2}
-            y={-18 + (SVG_W - 2 * CENTER_I_W + 20) / 2}
-            animatedProps={animPropsInnerCircle}
-          />
+          <AnimatedG animatedProps={moveInnerCirlce}>
+            <AnimatedPath
+              d={`M ${CENTER_I_W},${0} A ${CENTER_I_W},${CENTER_I_W} 0 1,1 ${CENTER_I_W},${
+                CENTER_I_W * 2
+              }A ${CENTER_I_W},${CENTER_I_W} 0 1,1 ${CENTER_I_W},${0}`}
+              fill="url(#centerCircle)"
+              stroke="white"
+              strokeWidth={3}
+              onPress={spinIt}
+              animatedProps={animPropsInnerCircle}
+            />
+          </AnimatedG>
         </AnimatedSvg>
 
         {/* Pointer Container */}

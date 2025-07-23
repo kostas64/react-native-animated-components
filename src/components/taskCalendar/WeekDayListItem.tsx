@@ -20,6 +20,7 @@ import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 const WeekDayListItem = ({
   day,
   globalSelectedDate,
+  onLayout,
   selectedDate,
 }: TWeekDayListItem) => {
   const [isSelected, setIsSelected] = React.useState(
@@ -81,7 +82,7 @@ const WeekDayListItem = ({
   }, []);
 
   return (
-    <Pressable onPress={onPress} disabled={isSelected}>
+    <Pressable onPress={onPress} disabled={isSelected} onLayout={onLayout}>
       <Animated.View
         style={[
           styles.dayNameNumber,

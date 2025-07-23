@@ -10,7 +10,12 @@ import {isIOS, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
 const SendMessageInput = React.memo(
   ({input, setInput, inputRef, onPressSend}: TSearchMessageInput) => {
     const insets = useSafeAreaInsets();
-    const bottomStyle = insets.bottom > 0 ? insets.bottom - 20 : 16;
+    const bottomStyle =
+      insets.bottom > 34
+        ? insets.bottom - 20
+        : insets.bottom > 0
+        ? insets.bottom + 8
+        : 16;
 
     return (
       <Pressable

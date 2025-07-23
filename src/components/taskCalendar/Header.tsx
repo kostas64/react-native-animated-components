@@ -1,11 +1,7 @@
-import Animated, {
-  FadeInDown,
-  useSharedValue,
-  LinearTransition,
-} from 'react-native-reanimated';
 import {memo, useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Animated, {FadeInDown, LinearTransition} from 'react-native-reanimated';
 
 import {THeader} from './types';
 import Calendar from './Calendar';
@@ -21,17 +17,9 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
   const insets = useSafeAreaInsets();
   const {setModalInfo} = useModalContext();
 
-  const fadeFinished = useSharedValue(false);
-
   const paddingTop = insets.top > 32 ? insets.top : 32;
 
-  const entering = FadeInDown.delay(isIOS ? 50 : 100)
-    .duration(ANIMATION_DUR)
-    .withCallback(finished => {
-      if (finished) {
-        fadeFinished.value = true;
-      }
-    });
+  const entering = FadeInDown.delay(isIOS ? 50 : 100).duration(ANIMATION_DUR);
 
   const onPressMonthPicker = useCallback(() => {
     setModalInfo({
@@ -51,10 +39,6 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
     });
   }, [month]);
 
-  const executeChild = (cb: () => void) => {
-    !!cb && cb();
-  };
-
   return (
     <Animated.View
       layout={LinearTransition}
@@ -62,12 +46,7 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
       <Animated.View entering={entering}>
         <MenuIcon />
         <MonthPicker month={month} onPress={onPressMonthPicker} />
-        <Calendar
-          month={month}
-          fadeFinished={fadeFinished}
-          executeChild={executeChild}
-          selectedDate={selectedDate}
-        />
+        <Calendar month={month} selectedDate={selectedDate} />
       </Animated.View>
     </Animated.View>
   );

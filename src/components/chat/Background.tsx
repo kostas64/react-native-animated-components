@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   emojiContainer: {
     zIndex: 100,
     width: WIDTH - 104,
+    height: 58,
     borderColor: Colors.PLATINUM,
     borderWidth: 1,
     backgroundColor: Colors.WHITE,

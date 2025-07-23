@@ -2,11 +2,9 @@ import Animated, {
   withRepeat,
   withTiming,
   interpolate,
-  processColor,
   useSharedValue,
   useAnimatedProps,
   useAnimatedStyle,
-  createAnimatedPropAdapter,
 } from 'react-native-reanimated';
 import React from 'react';
 import {TextPath, TSpan, Text as SvgText} from 'react-native-svg';
@@ -54,18 +52,7 @@ const AnimCircle = ({_, activeColor, index}: TAnimCircle) => {
     };
   });
 
-  const animProps = useAnimatedProps(
-    () => ({fill: activeColor.value}),
-    [],
-    createAnimatedPropAdapter(
-      props => {
-        if (Object.keys(props).includes('fill')) {
-          props.fill = {type: 0, payload: processColor(props.fill)};
-        }
-      },
-      ['fill', 'stroke'],
-    ),
-  );
+  const animProps = useAnimatedProps(() => ({fill: activeColor.value}), []);
 
   return (
     <AnimText

@@ -17,7 +17,6 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
       <ChooseOptionListItem
         item={item}
         index={index}
-        spinning={spinning}
         selectedO={selectedO}
         selectOption={selectOption}
       />
