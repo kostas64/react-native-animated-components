@@ -21,19 +21,19 @@ import {AnimatedSvg} from '@components/common/AnimatedComponents';
 
 const TABS = [
   {
-    ImageSource: require('../../assets/img/bank/home.png'),
+    ImageSource: require('@assets/img/bank/home.png'),
     screen: 'BankHome',
   },
   {
-    ImageSource: require('../../assets/img/bank/stocks.png'),
+    ImageSource: require('@assets/img/bank/stocks.png'),
     screen: 'BankStocks',
   },
   {
-    ImageSource: require('../../assets/img/bank/wallet.png'),
+    ImageSource: require('@assets/img/bank/wallet.png'),
     screen: 'BankWallet',
   },
   {
-    ImageSource: require('../../assets/img/bank/app.png'),
+    ImageSource: require('@assets/img/bank/app.png'),
     screen: 'BankSettings',
   },
 ];

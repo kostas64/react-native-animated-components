@@ -3,7 +3,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 
-import Tabbar from '../../components/screenTransition/Tabbar';
+import Tabbar from '@components/screenTransition/Tabbar';
 import ScreenTransitionHome from './ScreenTransitionHome';
 import ScreenTransitionSchedule from './ScreenTransitionSchedule';
 import ScreenTransitionScheduleStack from './ScreenTransitionScheduleStack';

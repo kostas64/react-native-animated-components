@@ -10,7 +10,7 @@ const Splash = ({splashProgress}: SplashProps) => {
   return (
     <Animated.View style={[containerAnimStyle, styles.bootsplashContainer]}>
       <Animated.Image
-        source={require('../../assets/img/appIcon.png')}
+        source={require('@assets/img/appIcon.png')}
         style={imageStyle}
       />
     </Animated.View>

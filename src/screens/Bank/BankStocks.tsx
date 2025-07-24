@@ -60,7 +60,7 @@ const BankStocks = () => {
         icon={
           <Image
             style={styles.icon}
-            source={require('../../assets/img/bank/stocks.png')}
+            source={require('@assets/img/bank/stocks.png')}
           />
         }
         style={separatorStyle}

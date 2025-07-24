@@ -21,9 +21,9 @@ import Arrows from '@components/carousel3d/Arrows';
 import Background from '@components/carousel3d/Background';
 import Description from '@components/carousel3d/Description';
 import {ICarouselDataType} from '@components/carousel3d/types';
-import StatusBarManager from '../components/common/StatusBarManager';
+import StatusBarManager from '@components/common/StatusBarManager';
 import ImplementedWith from '@components/carousel3d/ImplementedWith';
-import Carousel3dListItem from '../components/carousel3d/Carousel3dListItem';
+import Carousel3dListItem from '@components/carousel3d/Carousel3dListItem';
 
 const Carousel3DScreen = () => {
   const [index, setIndex] = React.useState(0);

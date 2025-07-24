@@ -78,7 +78,7 @@ const HomeHeader = ({progress}: HomeHeaderProps) => {
       </View>
       <Animated.View style={[styles.imgContainer, heightStyle]}>
         <Animated.Image
-          source={require('../../assets/img/software-engineer.png')}
+          source={require('@assets/img/software-engineer.png')}
           style={animImg}
         />
       </Animated.View>

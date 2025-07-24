@@ -195,12 +195,12 @@ const LotteryScreen = () => {
       <StatusBarManager barStyle="light" />
       <Image
         style={styles.background}
-        source={require('../assets/img/lottery-bg.png')}
+        source={require('@assets/img/lottery-bg.png')}
       />
 
       <Animated.Image
         style={[styles.bingo, animBingo]}
-        source={require('../assets/img/bingo.png')}
+        source={require('@assets/img/bingo.png')}
       />
 
       <View style={styles.container}>

@@ -1,5 +1,5 @@
-import DotLoader from '../components/common/DotLoader';
-import StatusBarManager from '../components/common/StatusBarManager';
+import DotLoader from '@components/common/DotLoader';
+import StatusBarManager from '@components/common/StatusBarManager';
 
 const DotLoaderScreen = () => {
   return (

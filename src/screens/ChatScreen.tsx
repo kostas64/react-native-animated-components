@@ -109,7 +109,7 @@ const ChatScreen = () => {
       setMessages(oldMessages => [
         {
           id: `${new Date()}-${Math.random()}`,
-          image: require('../assets/img/guy.jpg'),
+          image: require('@assets/img/guy.jpg'),
           name: 'Mark 💻',
           message,
           time: '11:25 AM',
