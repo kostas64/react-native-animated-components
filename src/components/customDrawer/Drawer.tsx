@@ -14,10 +14,14 @@ import {fromCoords, links, routes} from './data';
 
 const AnimatedPolygon = Animated.createAnimatedComponent(Polygon);
 
-const Drawer = ({animatedValue, onPress}: DrawerProps) => {
+const Drawer = ({
+  animatedValue,
+  selectedRoute,
+  setSelectedRoute,
+  onPress,
+}: DrawerProps) => {
   const polygonRef = React.useRef<Polygon>(null);
   const insets = useSafeAreaInsets();
-  const [selectedRoute, setSelectedRoute] = React.useState(routes[0]);
 
   React.useEffect(() => {
     const listener = animatedValue.addListener(v => {
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     flex: 1,
-    backgroundColor: Colors.RAISIN_BLACK,
+    backgroundColor: Colors.EERIE_BLACK,
     paddingTop: 80,
     paddingHorizontal: 20,
     paddingBottom: 20,

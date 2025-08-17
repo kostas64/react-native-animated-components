@@ -3,11 +3,10 @@ import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {View, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
 import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
 
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import DrawerContentItem from './DrawerContentItem';
-import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
 const DrawerContent = ({navigation}: {navigation: DrawerNavigationHelpers}) => {
   return (
@@ -27,11 +26,10 @@ const DrawerContent = ({navigation}: {navigation: DrawerNavigationHelpers}) => {
         <DrawerContentItem label="Notifications" icon="bells" />
         <DrawerContentItem label="Favourite" icon="hearto" />
         <View style={styles.hr} />
-        <Text
-          style={styles.implementedWith}
-          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
-          {'Implemented with:\nReanimated'}
-        </Text>
+        <View style={styles.footerContainer}>
+          <Text style={styles.footer}>Support</Text>
+          <Text style={styles.footer}>v1.0.0</Text>
+        </View>
       </View>
     </DrawerContentScrollView>
   );
@@ -44,16 +42,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   hr: {
-    height: 1,
+    height: StyleSheet.hairlineWidth,
     backgroundColor: Colors.WHITE,
     left: 8,
-  },
-  implementedWith: {
-    paddingLeft: 8,
-    paddingVertical: 16,
-    color: Colors.WHITE,
-    fontSize: 18,
-    fontFamily: typography.medium,
   },
   marginBottom: {
     marginBottom: 32,
@@ -61,5 +52,15 @@ const styles = StyleSheet.create({
   drawerScroll: {
     flex: 1,
     paddingHorizontal: 20,
+  },
+  footerContainer: {
+    padding: 8,
+    paddingVertical: 16,
+    gap: 8,
+  },
+  footer: {
+    fontSize: 12,
+    color: Colors.WHITE,
+    fontFamily: typography.medium,
   },
 });

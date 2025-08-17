@@ -1,14 +1,7 @@
+import {Colors} from '@utils/colors';
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
 
-export const routes = [
-  'Get started',
-  'Features',
-  'Tools',
-  'Services',
-  'Portfolio',
-  'Careers',
-  'Contact',
-];
+export const routes = ['Home', 'Services', 'Pricing', 'About Us', 'Contact'];
 
 export const links = ['Follow us', 'Quota', 'Awesome link'];
 
@@ -18,15 +11,10 @@ export const colors = [
   '#e0e4cc',
   '#f38630',
   '#fa6900',
-  '#fe4365',
-  '#fc9d9a',
-  '#f9cdad',
-  '#c8c8a9',
-  '#83af9b',
-  '#ecd078',
-  '#d95b43',
-  '#c02942',
-  '#53777a',
+  Colors.GLOSSY_GRAPE,
+  Colors.GLOSSY_GRAPE,
+  Colors.GLOSSY_GRAPE,
+  Colors.GLOSSY_GRAPE,
 ];
 
 export const fromCoords = {x: 0, y: HEIGHT_SCR};

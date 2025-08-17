@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontFamily: typography.medium,
   },
   lineThrough: {
-    textDecorationLine: 'line-through',
+    textDecorationLine: 'underline',
   },
   noLine: {
     textDecorationLine: 'none',

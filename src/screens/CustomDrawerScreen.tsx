@@ -1,15 +1,19 @@
 import React from 'react';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {View, Animated, StatusBar, StyleSheet} from 'react-native';
 
+import {typography} from '@utils/typography';
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import Drawer from '@components/customDrawer/Drawer';
 import AnimatedIcon from '@components/customDrawer/AnimatedIcon';
 import StatusBarManager from '@components/common/StatusBarManager';
-import {fromCoords, toCoords} from '@components/customDrawer/data';
-import ImplementedWith from '@components/customDrawer/ImplementWith';
+import {fromCoords, routes, toCoords} from '@components/customDrawer/data';
 
 const CustomDrawerScreen = () => {
+  const insets = useSafeAreaInsets();
+
   const animatedValue = React.useRef(new Animated.ValueXY(fromCoords)).current;
+  const [selectedRoute, setSelectedRoute] = React.useState(routes[0]);
 
   const translateX = animatedValue.y.interpolate({
     inputRange: [0, HEIGHT_SCR * 0.25],
@@ -42,8 +46,18 @@ const CustomDrawerScreen = () => {
   return (
     <View style={styles.maskedContainer}>
       <StatusBarManager barStyle="dark" />
-      <Drawer onPress={onCloseDrawer} animatedValue={animatedValue} />
-      <ImplementedWith opacity={opacity} />
+      <Drawer
+        selectedRoute={selectedRoute}
+        setSelectedRoute={setSelectedRoute}
+        onPress={onCloseDrawer}
+        animatedValue={animatedValue}
+      />
+
+      <Animated.Text
+        style={{...styles.screenName, top: insets.top + 16, opacity}}>
+        {selectedRoute}
+      </Animated.Text>
+
       <AnimatedIcon
         opacity={opacity}
         translateX={translateX}
@@ -56,6 +70,13 @@ const CustomDrawerScreen = () => {
 const styles = StyleSheet.create({
   maskedContainer: {
     flex: 1,
+  },
+  screenName: {
+    left: 24,
+    fontSize: 26,
+    lineHeight: 32,
+    fontFamily: typography.semiBold,
+    position: 'absolute',
   },
 });
 

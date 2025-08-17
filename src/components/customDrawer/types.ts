@@ -14,6 +14,8 @@ export type ButtonProps = {
 export type DrawerProps = {
   animatedValue: Animated.AnimatedValueXY;
   onPress: () => void;
+  selectedRoute: string;
+  setSelectedRoute: (route: string) => void;
 };
 
 export type TImplementedWith = {

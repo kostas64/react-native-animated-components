@@ -12,6 +12,11 @@ const Tabs = ({data, scrollX, onItemPress}: TTabs) => {
 
   React.useEffect(() => {
     const m: TMeasure[] = [];
+
+    if (measures.length > 0) {
+      return;
+    }
+
     data.forEach(item => {
       item.ref.current.measureLayout(
         containerRef.current,

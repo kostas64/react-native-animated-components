@@ -57,8 +57,8 @@ const ParallaxScreen = () => {
           pagingEnabled
           onScroll={onScroll}
           renderItem={renderItem}
-          keyExtractor={item => item.key}
           showsHorizontalScrollIndicator={false}
+          keyExtractor={(item: {key: string}) => item.key}
         />
       </View>
     </>

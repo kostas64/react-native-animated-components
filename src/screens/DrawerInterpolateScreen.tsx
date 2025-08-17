@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   navigatorContainer: {
     flex: 1,
-    backgroundColor: Colors.TOMATO,
+    backgroundColor: Colors.RICH_ELECTRIC_BLUE,
   },
   menuContainer: {
     flexDirection: 'row',
