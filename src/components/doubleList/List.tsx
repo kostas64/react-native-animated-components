@@ -9,7 +9,7 @@ import {IItemProps, TListProps} from './types';
 
 const List = React.forwardRef(
   (
-    {color, showText, style, onScroll, onItemIndexChanged}: TListProps,
+    {color, showText, style, onScroll, onMomentumScrollEnd}: TListProps,
     ref: any,
   ) => {
     const renderItem = React.useCallback(
@@ -41,8 +41,8 @@ const List = React.forwardRef(
         keyExtractor={item => `${item.name}-${item.icon}`}
         renderItem={renderItem}
         onMomentumScrollEnd={e =>
-          !!onItemIndexChanged &&
-          onItemIndexChanged(
+          onMomentumScrollEnd &&
+          onMomentumScrollEnd(
             Math.round(e.nativeEvent.contentOffset.y / ITEM_HEIGHT),
           )
         }

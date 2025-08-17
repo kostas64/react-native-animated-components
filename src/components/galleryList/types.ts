@@ -1,6 +1,6 @@
 import {Animated} from 'react-native';
 
-export type ICarouselDataType = {
+export type IGalleryDataType = {
   key: string;
   image: string;
   title: string;
@@ -8,8 +8,8 @@ export type ICarouselDataType = {
   price: string;
 };
 
-export type ICarousel3DProps = {
-  item: ICarouselDataType;
+export type IGalleryListProps = {
+  item: IGalleryDataType;
   index: number;
   scrollX: Animated.AnimatedValue;
 };

@@ -4,7 +4,6 @@ import {StyleSheet, View} from 'react-native';
 import {Colors} from '@utils/colors';
 import Progress from '@components/progressLoader/Progress';
 import StatusBarManager from '@components/common/StatusBarManager';
-import ImplementedWith from '@components/progressLoader/ImplementedWith';
 
 const ProgressLoaderScreen = () => {
   const [index, setIndex] = React.useState(0);
@@ -24,7 +23,6 @@ const ProgressLoaderScreen = () => {
       <StatusBarManager barStyle="dark" />
 
       <View style={styles.container}>
-        <ImplementedWith />
         <Progress step={index} steps={10} height={25} />
       </View>
     </>

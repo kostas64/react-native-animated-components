@@ -13,19 +13,18 @@ import {
   SPACING,
   IMAGE_HEIGHT,
   IMAGE_WIDTH,
-} from '@components/carousel3d/constants';
+} from '@components/galleryList/constants';
 import {Colors} from '@utils/colors';
 import {isAndroid, WIDTH} from '@utils/device';
-import {DATA} from '@components/carousel3d/data';
-import Arrows from '@components/carousel3d/Arrows';
-import Background from '@components/carousel3d/Background';
-import Description from '@components/carousel3d/Description';
-import {ICarouselDataType} from '@components/carousel3d/types';
+import {DATA} from '@components/galleryList/data';
+import Arrows from '@components/galleryList/Arrows';
+import Background from '@components/galleryList/Background';
+import Description from '@components/galleryList/Description';
+import {IGalleryDataType} from '@components/galleryList/types';
 import StatusBarManager from '@components/common/StatusBarManager';
-import ImplementedWith from '@components/carousel3d/ImplementedWith';
-import Carousel3dListItem from '@components/carousel3d/Carousel3dListItem';
+import GalleryListItem from '@components/galleryList/GalleryListItem';
 
-const Carousel3DScreen = () => {
+const GalleryListScreen = () => {
   const [index, setIndex] = React.useState(0);
 
   const listRef = React.useRef<FlatList>(null);
@@ -59,10 +58,10 @@ const Carousel3DScreen = () => {
   ) => setIndex(Math.round(e.nativeEvent.contentOffset.x / WIDTH));
 
   const renderListItem = (
-    item: ICarouselDataType,
+    item: IGalleryDataType,
     index: number,
     scrollX: Animated.AnimatedValue,
-  ) => <Carousel3dListItem item={item} index={index} scrollX={scrollX} />;
+  ) => <GalleryListItem item={item} index={index} scrollX={scrollX} />;
 
   return (
     <>
@@ -70,7 +69,6 @@ const Carousel3DScreen = () => {
 
       <View style={styles.container}>
         <SafeAreaView style={styles.safeAreaContainer}>
-          <ImplementedWith />
           <View style={styles.listContainer}>
             <Animated.FlatList
               ref={listRef}
@@ -107,7 +105,7 @@ const Carousel3DScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.WATERSPOUT,
+    backgroundColor: Colors.PASTEL_PURPLE,
   },
   safeAreaContainer: {
     flex: 1,
@@ -128,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Carousel3DScreen;
+export default GalleryListScreen;

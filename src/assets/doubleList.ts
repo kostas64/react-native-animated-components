@@ -1,82 +1,31 @@
 export default [
   {
-    icon: 'social-tumblr',
-    name: 'tumblr',
+    icon: 'currency-bitcoin',
+    name: 'bitcoin',
+  },
+
+  {
+    icon: 'currency-lira',
+    name: 'Lira',
   },
   {
-    icon: 'social-twitter',
-    name: 'twitter',
+    icon: 'currency-pound',
+    name: 'Pound',
   },
   {
-    icon: 'social-facebook',
-    name: 'facebook',
+    icon: 'currency-ruble',
+    name: 'Ruble',
   },
   {
-    icon: 'social-instagram',
-    name: 'instagram',
+    icon: 'currency-rupee',
+    name: 'Rupee',
   },
   {
-    icon: 'social-linkedin',
-    name: 'linkedin',
+    icon: 'currency-yen',
+    name: 'yen',
   },
   {
-    icon: 'social-pinterest',
-    name: 'pinterest',
-  },
-  {
-    icon: 'social-github',
-    name: 'github',
-  },
-  {
-    icon: 'social-google',
-    name: 'google',
-  },
-  {
-    icon: 'social-reddit',
-    name: 'reddit',
-  },
-  {
-    icon: 'social-skype',
-    name: 'skype',
-  },
-  {
-    icon: 'social-dribbble',
-    name: 'dribbble',
-  },
-  {
-    icon: 'social-behance',
-    name: 'behance',
-  },
-  {
-    icon: 'social-foursqare',
-    name: 'foursqare',
-  },
-  {
-    icon: 'social-soundcloud',
-    name: 'soundcloud',
-  },
-  {
-    icon: 'social-spotify',
-    name: 'spotify',
-  },
-  {
-    icon: 'social-stumbleupon',
-    name: 'stumbleupon',
-  },
-  {
-    icon: 'social-youtube',
-    name: 'youtube',
-  },
-  {
-    icon: 'social-dropbox',
-    name: 'dropbox',
-  },
-  {
-    icon: 'social-vkontakte',
-    name: 'vkontakte',
-  },
-  {
-    icon: 'social-steam',
-    name: 'steam',
+    icon: 'currency-yuan',
+    name: 'Yuan',
   },
 ];

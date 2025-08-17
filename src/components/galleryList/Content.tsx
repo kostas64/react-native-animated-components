@@ -1,23 +1,25 @@
 import {StyleSheet, View} from 'react-native';
 
 import {SPACING} from './constants';
-import Text from '@components/common/Text';
 import {Colors} from '@utils/colors';
-import {ICarouselDataType} from './types';
+import {IGalleryDataType} from './types';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {SM_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
-const Content = (item: ICarouselDataType) => {
+const Content = (item: IGalleryDataType) => {
   return (
-    <>
-      <Text style={styles.itemTitle} numberOfLines={1} adjustsFontSizeToFit>
-        {item.title}
-      </Text>
-      <Text
-        style={styles.subtitle}
-        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
-        {item.subtitle}
-      </Text>
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.itemTitle} numberOfLines={1} adjustsFontSizeToFit>
+          {item.title}
+        </Text>
+        <Text
+          style={styles.subtitle}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          {item.subtitle}
+        </Text>
+      </View>
       <View style={styles.priceContainer}>
         <Text
           style={styles.price}
@@ -26,13 +28,17 @@ const Content = (item: ICarouselDataType) => {
         </Text>
         <Text style={styles.currency}>USD</Text>
       </View>
-    </>
+    </View>
   );
 };
 
 export default Content;
 
 const styles = StyleSheet.create({
+  container: {
+    height: SPACING * 6,
+    justifyContent: 'space-between',
+  },
   itemTitle: {
     fontSize: 16,
     color: Colors.BLACK,
@@ -48,7 +54,6 @@ const styles = StyleSheet.create({
   },
   priceContainer: {
     flexDirection: 'row',
-    marginTop: SPACING,
   },
   price: {
     color: Colors.BLACK,

@@ -1,4 +1,4 @@
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {DATA} from './data';
@@ -22,7 +22,7 @@ const Arrows = ({
         style={index === 0 ? styles.opacityQuarter : styles.fullOpacity}
         onPress={onPressLeft}>
         <View style={styles.arrowContainer}>
-          <AntDesign name="swapleft" size={42} color="black" />
+          <Feather name="arrow-left-circle" size={28} color="black" />
           <Text style={styles.arrowText}>PREV</Text>
         </View>
       </TouchableOpacity>
@@ -34,7 +34,7 @@ const Arrows = ({
         onPress={onPressRight}>
         <View style={styles.arrowContainer}>
           <Text style={styles.arrowText}>NEXT</Text>
-          <AntDesign name="swapright" size={42} color="black" />
+          <Feather name="arrow-right-circle" size={28} color="black" />
         </View>
       </TouchableOpacity>
     </View>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   arrowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 4,
   },
   arrowText: {
     fontSize: 12,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
@@ -8,7 +8,7 @@ import {IIconProps, IItemProps} from './types';
 import {ICON_SIZE, ITEM_HEIGHT} from './constants';
 
 const Icon = React.memo(({icon, color}: IIconProps) => {
-  return <SimpleLineIcons name={icon} color={color} size={ICON_SIZE} />;
+  return <MaterialIcons name={icon} color={color} size={ICON_SIZE} />;
 });
 
 Icon.displayName = 'Icon';

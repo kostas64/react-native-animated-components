@@ -1,10 +1,10 @@
 import {Animated, Image, StyleSheet} from 'react-native';
 
 import {WIDTH} from '@utils/device';
-import {ICarousel3DProps} from './types';
+import {IGalleryListProps} from './types';
 import {IMAGE_HEIGHT, IMAGE_WIDTH, SPACING} from './constants';
 
-const Carousel3dListItem = ({item, index, scrollX}: ICarousel3DProps) => {
+const GalleryListItem = ({item, index, scrollX}: IGalleryListProps) => {
   const inputRange = [(index - 1) * WIDTH, index * WIDTH, (index + 1) * WIDTH];
 
   const opacity = scrollX.interpolate({
@@ -25,7 +25,7 @@ const Carousel3dListItem = ({item, index, scrollX}: ICarousel3DProps) => {
   );
 };
 
-export default Carousel3dListItem;
+export default GalleryListItem;
 
 const styles = StyleSheet.create({
   container: {

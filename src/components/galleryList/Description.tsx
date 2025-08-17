@@ -35,7 +35,7 @@ const Description = ({scrollX}: DescriptionProps) => {
                 transform: [{perspective: IMAGE_WIDTH * 4}, {translateX}],
               },
             ]}>
-            <Content {...item} />
+            <Content {...item} key={String(index)} />
           </Animated.View>
         );
       })}

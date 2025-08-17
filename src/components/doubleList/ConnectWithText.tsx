@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
+import {colors} from './constants';
 import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
@@ -8,16 +9,11 @@ import {HEIGHT_SCR, WIDTH} from '@utils/device';
 const ICON_SIZE = 42;
 const ITEM_HEIGHT = ICON_SIZE * 2;
 
-const colors = {
-  yellow: '#FFE8A3',
-  dark: '#2D2D2D',
-};
-
 const ConnectWithText = React.memo(() => {
   return (
     <View style={styles.connectWithTextContainer}>
       <Text style={styles.connectWithText} allowFontScaling={false}>
-        Connect with...
+        Pay with...
       </Text>
     </View>
   );

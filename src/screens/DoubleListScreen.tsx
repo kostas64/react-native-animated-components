@@ -6,36 +6,31 @@ import {
   StatusBar,
   StyleSheet,
 } from 'react-native';
-import React from 'react';
+import {useEffect, useRef} from 'react';
 
 import data from '@assets/doubleList';
 import List from '@components/doubleList/List';
 import {HEIGHT_SCR, WIDTH} from '@utils/device';
 import Item from '@components/doubleList/ConnectListItem';
-import ConnectButton from '@components/doubleList/ConnectButton';
 import StatusBarManager from '@components/common/StatusBarManager';
-import ImplementedWith from '@components/doubleList/ImplementedWith';
 import ConnectWithText from '@components/doubleList/ConnectWithText';
 import {colors, ITEM_HEIGHT} from '@components/doubleList/constants';
 
 const DoubleListScreen = () => {
-  const [index, setIndex] = React.useState(0);
+  const yellowRef = useRef();
+  const darkRef = useRef<FlatList>();
+  const scrollY = useRef(new Animated.Value(0)).current;
 
-  const yellowRef = React.useRef();
-  const darkRef = React.useRef<FlatList>();
-  const scrollY = React.useRef(new Animated.Value(0)).current;
-
-  const onConnectPress = React.useCallback(() => {
-    Alert.alert('Connect with:', data?.[index]?.name?.toUpperCase());
-  }, [index]);
+  const onMomentumScrollEnd = (index: number) => {
+    Alert.alert('Pay with:', data?.[index]?.name?.toUpperCase());
+  };
 
   const onScroll = Animated.event(
     [{nativeEvent: {contentOffset: {y: scrollY}}}],
     {useNativeDriver: true},
   );
-  const onItemIndexChanged = React.useCallback(setIndex, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     scrollY.addListener(v => {
       if (darkRef?.current) {
         darkRef.current.scrollToOffset({
@@ -44,6 +39,10 @@ const DoubleListScreen = () => {
         });
       }
     });
+
+    return () => {
+      scrollY.removeAllListeners();
+    };
   }, []);
 
   return (
@@ -51,13 +50,12 @@ const DoubleListScreen = () => {
       <StatusBarManager barStyle="light" />
 
       <View style={styles.container}>
-        <ImplementedWith />
         <ConnectWithText />
         <List
           color={colors.yellow}
           ref={yellowRef}
           onScroll={onScroll}
-          onItemIndexChanged={onItemIndexChanged}
+          onMomentumScrollEnd={onMomentumScrollEnd}
           style={StyleSheet.absoluteFillObject}
         />
         <List
@@ -66,7 +64,6 @@ const DoubleListScreen = () => {
           ref={darkRef}
           style={styles.list}
         />
-        <ConnectButton onPress={onConnectPress} />
         <Item />
       </View>
     </>

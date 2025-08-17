@@ -13,12 +13,15 @@ export default Background;
 const styles = StyleSheet.create({
   card: {
     width: IMAGE_WIDTH + SPACING * 2,
+    height: '75%',
     position: 'absolute',
     backgroundColor: Colors.WHITE,
     zIndex: -1,
-    top: SPACING * 2,
+    top: SPACING * 3.5,
     left: (WIDTH - (IMAGE_WIDTH + SPACING * 2)) / 2,
     bottom: 0,
+    borderBottomLeftRadius: SPACING,
+    borderBottomRightRadius: SPACING,
     shadowColor: Colors.BLACK,
     shadowOpacity: 0.2,
     shadowRadius: 24,

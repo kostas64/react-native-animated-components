@@ -23,7 +23,7 @@ import DotLoaderScreen from './screens/DotLoaderScreen';
 import {ModalProvider} from './providers/ModalProvider';
 import GroupStackCharts from './screens/GroupStackCharts';
 import DoubleListScreen from './screens/DoubleListScreen';
-import Carousel3DScreen from './screens/Carousel3DScreen';
+import GalleryListScreen from './screens/GalleryListScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import FloatingButton from './screens/FloatingButtonScreen';
 import {NavigationContainer} from '@react-navigation/native';
@@ -48,7 +48,7 @@ export type TStackList = {
   Parallax: undefined;
   ListWithIndicator: undefined;
   DoubleList: undefined;
-  Carousel3D: undefined;
+  GalleryList: undefined;
   Progress: undefined;
   DotLoader: undefined;
   Togglers: undefined;
@@ -105,7 +105,7 @@ function App() {
                 component={ListWithIndicatorScreen}
               />
               <Stack.Screen name="DoubleList" component={DoubleListScreen} />
-              <Stack.Screen name="Carousel3D" component={Carousel3DScreen} />
+              <Stack.Screen name="GalleryList" component={GalleryListScreen} />
               <Stack.Screen name="Progress" component={ProgressLoaderScreen} />
               <Stack.Screen name="DotLoader" component={DotLoaderScreen} />
               <Stack.Screen name="Togglers" component={TogglersScreen} />

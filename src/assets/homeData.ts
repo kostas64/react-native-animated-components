@@ -15,7 +15,7 @@ type TDATA = {
     screen:
       | 'Parallax'
       | 'DoubleList'
-      | 'Carousel3D'
+      | 'GalleryList'
       | 'FadeItem'
       | 'ListWithIndicator'
       | 'CustomDrawer'
@@ -108,9 +108,9 @@ export const DATA: TDATA = [
         screen: 'DoubleList',
       },
       {
-        label: '3D Carousel',
+        label: 'Gallery List',
         backgroundColor: '#9500ff',
-        screen: 'Carousel3D',
+        screen: 'GalleryList',
       },
       {
         label: 'Fade Item Out',

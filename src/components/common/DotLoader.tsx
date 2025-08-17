@@ -1,23 +1,10 @@
 import React from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {View, Animated, TextInput, ScrollView, StyleSheet} from 'react-native';
+import {View, Animated, ScrollView, StyleSheet} from 'react-native';
 
-import Text from './Text';
 import {Colors} from '@utils/colors';
 
-const ImplementedWith = () => {
-  const insets = useSafeAreaInsets();
-
-  return (
-    <View style={[styles.implementedWith, {top: insets.top + 16}]}>
-      <Text style={styles.implemented}>Implemented with:</Text>
-      <Text style={styles.implementedLabel}>Animated API</Text>
-    </View>
-  );
-};
-
 const DotLoader = () => {
-  const [size, setSize] = React.useState(20);
+  const size = 24;
   const opacityRef1 = React.useRef(new Animated.Value(0.3)).current;
   const opacityRef2 = React.useRef(new Animated.Value(0.3)).current;
   const opacityRef3 = React.useRef(new Animated.Value(0.3)).current;
@@ -155,14 +142,6 @@ const DotLoader = () => {
       bounces={false}
       contentContainerStyle={styles.container}
       keyboardShouldPersistTaps="handled">
-      <ImplementedWith />
-      <Text style={styles.label}>Set dot size - Min: 1</Text>
-      <TextInput
-        keyboardType="numeric"
-        value={`${size ? size : 1}`}
-        onChangeText={val => setSize(parseInt(val, 10))}
-        style={styles.textInput}
-      />
       <View style={styles.row}>
         <Animated.View
           style={[
@@ -249,50 +228,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.WHITE,
   },
-  implemented: {
-    fontSize: 22,
-    fontWeight: '900',
-    color: Colors.BLACK,
-  },
-  implementedLabel: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: Colors.BLACK,
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: '700',
-    marginBottom: 16,
-    color: Colors.BLACK,
-  },
-  textInput: {
-    fontSize: 18,
-    width: 80,
-    height: 40,
-    padding: 8,
-    marginBottom: 32,
-    borderRadius: 8,
-    shadowColor: Colors.BLACK,
-    backgroundColor: Colors.WHITE,
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    elevation: 3,
-  },
   dot: {
     marginRight: 8,
     backgroundColor: Colors.QUICK_SILVER,
   },
   spaceRight0: {
     marginRight: 0,
-  },
-  implementedWith: {
-    position: 'absolute',
-    left: 20,
-    zIndex: 100,
   },
 });
 

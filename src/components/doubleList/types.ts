@@ -21,4 +21,5 @@ export type TListProps = {
   style: ViewStyle;
   onScroll?: (...args: any[]) => void;
   onItemIndexChanged?: Dispatch<SetStateAction<number>>;
+  onMomentumScrollEnd?: (index: number) => void;
 };

@@ -29,7 +29,7 @@ const AddToBagButton = ({index}: {index: number}) => {
         <Text
           style={styles.label}
           maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
-          $299.99
+          $109.99
         </Text>
       </View>
     </View>
