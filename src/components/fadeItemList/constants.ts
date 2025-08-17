@@ -1,5 +1,5 @@
 export const BG_IMG =
-  'https://images.pexels.com/photos/1231265/pexels-photo-1231265.jpeg';
+  'https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg?_gl=1*4zggw6*_ga*NTI1MzY3NjI1LjE3NTUxNzQyMTI.*_ga_8JE65Q40S6*czE3NTU0MzE4OTkkbzIkZzEkdDE3NTU0MzE5MjUkajM0JGwwJGgw';
 export const SPACING = 20;
 export const AVATAR_SIZE = 70;
 export const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
@@ -7,21 +7,21 @@ export const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
 export const DATA = [
   {
     email: 'Michaela.Cole@yahoo.com',
-    image: 'https://randomuser.me/api/portraits/men/44.jpg',
+    image: 'https://randomuser.me/api/portraits/men/34.jpg',
     jobTitle: 'Product Assurance Agent',
     key: 'c407a7bd-7930-43bc-8241-2aafd058ed39',
     name: 'Seth',
   },
   {
     email: 'Katarina.Reynolds19@gmail.com',
-    image: 'https://randomuser.me/api/portraits/men/50.jpg',
+    image: 'https://randomuser.me/api/portraits/men/10.jpg',
     jobTitle: 'Lead Division Orchestrator',
     key: '2c59a27d-6194-481a-89cc-089e55815461',
     name: 'Rozella',
   },
   {
     email: 'Loy_Lesch@hotmail.com',
-    image: 'https://randomuser.me/api/portraits/women/9.jpg',
+    image: 'https://randomuser.me/api/portraits/women/59.jpg',
     jobTitle: 'Corporate Communications Coordinator',
     key: 'cdd54c94-def5-472e-a412-dd2a69f6f579',
     name: 'Demetris',
@@ -35,7 +35,7 @@ export const DATA = [
   },
   {
     email: 'Lemuel71@yahoo.com',
-    image: 'https://randomuser.me/api/portraits/women/5.jpg',
+    image: 'https://randomuser.me/api/portraits/women/25.jpg',
     jobTitle: 'Internal Brand Director',
     key: '80045308-a967-4b42-96fd-5f77f1755d87',
     name: 'Ruby',

@@ -1,4 +1,3 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -7,7 +6,7 @@ import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
 
-const Header = React.memo(() => (
+const Header = () => (
   <View style={styles.innerHeaderContainer}>
     <Text
       style={styles.chatLabel}
@@ -19,7 +18,7 @@ const Header = React.memo(() => (
       <Feather size={20} name={'phone'} />
     </View>
   </View>
-));
+);
 
 Header.displayName = 'Header';
 

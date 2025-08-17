@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: SPACING,
     borderRadius: 16,
-    backgroundColor: Colors.WHITE,
+    backgroundColor: Colors.THREE_POINT_BLACK,
     shadowColor: Colors.BLACK,
     alignItems: 'center',
     shadowOpacity: 0.3,
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 22,
-    color: Colors.BLACK,
+    color: Colors.WHITE,
     fontFamily: typography.semiBold,
   },
   job: {
     fontSize: 16,
     opacity: 0.7,
-    color: Colors.BLACK,
+    color: Colors.WHITE,
     fontFamily: typography.regular,
   },
   email: {

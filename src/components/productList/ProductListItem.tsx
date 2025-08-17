@@ -34,14 +34,14 @@ const ProductListItem = ({
         <Animated.Image
           resizeMode={'contain'}
           source={item.image}
-          style={[styles.img, {opacity, top: insets.top}]}
+          style={[styles.img, {opacity, top: insets.top + WIDTH / 6}]}
         />
       </View>
       <View style={[styles.labelContainer, {top: insets.top + 76}]}>
         <Text
           style={[styles.label, {color: item.fontColor}]}
           maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
-          BEATS
+          Nike
         </Text>
       </View>
     </>
@@ -62,8 +62,9 @@ const styles = StyleSheet.create({
   },
   img: {
     position: 'absolute',
-    left: 86,
-    height: HEIGHT_SCR * 0.5,
+    height: WIDTH / 1.25,
+    width: WIDTH / 1.25,
+    right: -WIDTH / 6,
   },
   labelContainer: {
     position: 'absolute',

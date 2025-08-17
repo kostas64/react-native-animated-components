@@ -7,7 +7,6 @@ import {Colors} from '@utils/colors';
 import {FadeItemProps} from '@components/fadeItemList/types';
 import FadeListItem from '@components/fadeItemList/FadeListItem';
 import StatusBarManager from '@components/common/StatusBarManager';
-import ImplementedWith from '@components/fadeItemList/ImplementedWith';
 import {BG_IMG, DATA, SPACING} from '@components/fadeItemList/constants';
 
 const Separator = () => <View style={{height: SPACING}} />;
@@ -25,7 +24,6 @@ const ScrollItemListScreen = () => {
       <StatusBarManager barStyle="dark" />
 
       <View style={styles.container}>
-        <ImplementedWith />
         <Image
           blurRadius={50}
           source={{uri: BG_IMG}}
@@ -38,7 +36,7 @@ const ScrollItemListScreen = () => {
           }}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            paddingTop: insets.top + 100,
+            paddingTop: insets.top + 24,
             paddingHorizontal: SPACING,
             paddingBottom: 2 * SPACING,
           }}

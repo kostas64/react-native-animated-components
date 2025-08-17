@@ -12,31 +12,31 @@ const ItemDescription = ({index}: {index: number}) => {
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[styles.text, {color: items[index]?.halfFontColor}]}>
-          Form Factor
+          Color
         </Text>
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[styles.value, {color: items[index]?.fontColor}]}>
-          {items[index]?.formFactor}
+          {items[index]?.color}
         </Text>
       </View>
       <View style={styles.spaceBottom}>
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[styles.text, {color: items[index]?.halfFontColor}]}>
-          Connection
+          Sport
         </Text>
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[styles.value, {color: items[index]?.fontColor}]}>
-          {items[index]?.connection}
+          {items[index]?.type}
         </Text>
       </View>
       <View>
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[styles.text, {color: items[index]?.halfFontColor}]}>
-          Power source
+          Size (EU)
         </Text>
         <Text
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}

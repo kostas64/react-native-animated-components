@@ -6,8 +6,8 @@ export type ListItem = {
   backgroundColor: string;
   fontColor: string;
   halfFontColor: string;
-  formFactor: string;
-  connection: string;
+  color: string;
+  type: string;
   power: string;
 };
 

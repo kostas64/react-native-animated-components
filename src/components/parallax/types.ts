@@ -1,6 +1,7 @@
+import {ImageSourcePropType} from 'react-native';
+
 export type ParallaxItemProps = {
-  photo: string;
-  avatar_url: string;
+  photo: ImageSourcePropType;
 };
 
 export type ParallaxListItemProps = {

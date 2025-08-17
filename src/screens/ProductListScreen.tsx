@@ -6,21 +6,17 @@ import {
   FlingGestureHandlerEventPayload,
 } from 'react-native-gesture-handler';
 import React from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Animated, FlatList, StyleSheet, View} from 'react-native';
 
-import Text from '@components/common/Text';
-import {typography} from '@utils/typography';
+import {WIDTH} from '@utils/device';
 import {items} from '@components/productList/data';
 import {ProductItem} from '@components/productList/types';
-import {WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
 import AddToBagButton from '@components/productList/AddToBagButton';
 import ItemDescription from '@components/productList/ItemDescription';
 import ProductListItem from '@components/productList/ProductListItem';
 
 const ProductListScreen = () => {
   const [index, setIndex] = React.useState(0);
-  const insets = useSafeAreaInsets();
   const listRef = React.useRef<FlatList>(null);
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const animateIndex = React.useRef(new Animated.Value(0)).current;
@@ -97,14 +93,6 @@ const ProductListScreen = () => {
               renderItem={renderItem}
             />
             <ItemDescription index={index} />
-            <Text
-              maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
-              style={[
-                styles.implementedWith,
-                {bottom: insets.bottom + 92, color: items[index].halfFontColor},
-              ]}>
-              {`Implemented with:\nAnimated API + RN Gesture Handler`}
-            </Text>
             <AddToBagButton index={index} />
           </View>
         </FlingGestureHandler>
@@ -114,12 +102,3 @@ const ProductListScreen = () => {
 };
 
 export default ProductListScreen;
-
-const styles = StyleSheet.create({
-  implementedWith: {
-    fontSize: 16,
-    fontFamily: typography.medium,
-    position: 'absolute',
-    left: 24,
-  },
-});

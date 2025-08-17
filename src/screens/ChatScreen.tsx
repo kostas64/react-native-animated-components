@@ -97,7 +97,7 @@ const ChatScreen = () => {
     return {
       top: -keyb.height.value,
     };
-  }, [keyb.height.value]);
+  });
 
   const clonedItemToPass = {
     ...(messages?.find(item => item?.id === clonedItem?.id) ?? messages[0]),
