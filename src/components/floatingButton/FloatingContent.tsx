@@ -12,17 +12,17 @@ const FloatingContent = () => {
 
   return (
     <>
-      <Text style={styles.title}>Black Friday</Text>
+      <Text style={styles.title}>Its your lucky day</Text>
       <Text
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
         style={
           styles.paragraph
-        }>{`Yo, Black Friday is here, check our sales starting at 40% 🎉\n\nUse BF23BF code`}</Text>
+        }>{`Check our sales starting at 40% 🎉 \nUse SALES40 promo code to get a 40% discount`}</Text>
       <TextInput
         value={promoCode}
         onChangeText={setPromoCode}
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
-        placeholder="Paste promo to save over 50%"
+        placeholder="Paste promo to save over 40%"
         placeholderTextColor={'#625d60'}
         style={styles.promoInput}
       />

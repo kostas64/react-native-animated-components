@@ -1,7 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 
 import StatusBarManager from '@components/common/StatusBarManager';
-import ImplementedWith from '@components/togglers/ImplementedWith';
 import NativeIOSToggle from '@components/togglers/NativeIOSToggle';
 import ToggleWithLabel from '@components/togglers/ToggleWithLabel';
 import ToggleWithSymbol from '@components/togglers/ToggleWithSymbol';
@@ -12,7 +11,6 @@ const TogglersScreen = () => {
       <StatusBarManager barStyle="dark" />
 
       <View style={styles.container}>
-        <ImplementedWith />
         <NativeIOSToggle />
         <View style={styles.space} />
         <NativeIOSToggle withTheme />

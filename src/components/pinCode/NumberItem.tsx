@@ -7,9 +7,9 @@ import Animated, {
 import {Pressable, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Text from '@components/common/Text';
 import {TNumberItem} from './types';
 import {Colors} from '@utils/colors';
+import Text from '@components/common/Text';
 import {typography} from '@utils/typography';
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
@@ -79,7 +79,7 @@ const NumberItem = ({
     if (typeof value === 'number') {
       return <Text style={styles.number}>{value}</Text>;
     } else {
-      return <Ionicons name="backspace-outline" size={36} color={'white'} />;
+      return <Ionicons name={value as string} size={36} color={'white'} />;
     }
   };
 

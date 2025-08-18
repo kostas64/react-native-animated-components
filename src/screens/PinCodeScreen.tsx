@@ -24,12 +24,18 @@ const PinCode = () => {
   ];
 
   const renderItem = ({item, index}: {item: number; index: number}) => {
-    if (index === 9) return <View style={styles.empty} />;
-
     return (
       <NumberItem
         inputsRef={inputsRef}
-        value={index === 10 ? 0 : index === 11 ? 'icon' : item}
+        value={
+          index === 9
+            ? 'finger-print-outline'
+            : index === 10
+            ? 0
+            : index === 11
+            ? 'backspace-outline'
+            : item
+        }
         input={input}
         setInput={setInput}
         disabled={loading}
@@ -90,11 +96,6 @@ const styles = StyleSheet.create({
     marginBottom: 48,
     alignItems: 'center',
     justifyContent: 'flex-end',
-  },
-  empty: {
-    margin: 8,
-    width: 90,
-    height: 90,
   },
   loading: {
     position: 'absolute',

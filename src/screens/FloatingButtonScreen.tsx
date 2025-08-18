@@ -31,7 +31,7 @@ const FloatingButton = () => {
   return (
     <>
       <StatusBarManager />
-      <View style={[styles.positionItems, {paddingTop: insets.top}]}>
+      <View style={[styles.positionItems, {paddingTop: insets.top + 8}]}>
         <FlatList
           numColumns={2}
           data={FAKE_ARRAY}
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     width: (WIDTH - SPACING * 3) / 2,
     height: (WIDTH - SPACING * 3) / 2,
     marginBottom: SPACING,
+    borderRadius: 16,
   },
   positionItems: {
     alignItems: 'center',

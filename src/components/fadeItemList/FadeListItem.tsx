@@ -108,12 +108,11 @@ const styles = StyleSheet.create({
   job: {
     fontSize: 16,
     opacity: 0.7,
-    color: Colors.WHITE,
+    color: Colors.WHITE_COFFEE,
     fontFamily: typography.regular,
   },
   email: {
-    opacity: 0.8,
-    color: Colors.RICH_ELECTRIC_BLUE,
-    fontFamily: typography.regular,
+    color: Colors.WHITE,
+    fontFamily: typography.medium,
   },
 });
