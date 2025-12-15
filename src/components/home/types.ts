@@ -1,18 +1,26 @@
-import {AnimatedRef, SharedValue} from 'react-native-reanimated';
-import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
-
-export type HomeHeaderProps = {
-  progress: SharedValue<number>;
-};
-
-export type HomeBodyProps = {
-  progress: SharedValue<number>;
-  isScrolling: SharedValue<boolean>;
-  isAnimating: SharedValue<boolean>;
-  lastContentOffset: SharedValue<number>;
-  scrollRef: AnimatedRef<AnimatedScrollView>;
-};
+import {Animated} from 'react-native';
+import {SharedValue} from 'react-native-reanimated';
 
 export type SplashProps = {
   splashProgress: SharedValue<number>;
+};
+
+export type HomeListItemType = {
+  id: number;
+  name: string;
+  description: string;
+  image: any;
+  screen: string;
+  isDark?: boolean;
+};
+
+export type HomeListItemsProps = {
+  item: HomeListItemType;
+  index: number;
+  scrollX: Animated.Value;
+};
+
+export type HomeBackgroundRef = {
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
 };

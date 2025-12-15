@@ -1,30 +1,33 @@
 //Native Libs
 import {
-  withTiming,
-  useAnimatedRef,
-  useSharedValue,
-} from 'react-native-reanimated';
-import {useEffect} from 'react';
+  View,
+  StatusBar,
+  StyleSheet,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  Animated as RNAnimated,
+} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import {useIsFocused} from '@react-navigation/native';
-import {View, StyleSheet, StatusBar} from 'react-native';
-import {AnimatedScrollView} from 'react-native-reanimated/lib/typescript/component/ScrollView';
+import {useRef, useEffect, useCallback} from 'react';
+import {withTiming, useSharedValue} from 'react-native-reanimated';
 
-//My Libs
+import {isIOS} from '@utils/device';
 import {Colors} from '@utils/colors';
+import {HOME_LIST} from '@assets/homeList';
 import Splash from '@components/home/Splash';
-import HomeBody from '@components/home/HomeBody';
-import HomeHeader from '@components/home/HomeHeader';
+import {HEIGHT, isAndroid} from '@utils/device';
+import HomeListItem from '@components/home/HomeListItem';
+import HomeBackground from '@components/home/HomeBackground';
+import {HomeListItemType, HomeBackgroundRef} from '@components/home/types';
+
+const ITEM_WIDTH = HEIGHT * 0.6 * 0.48;
 
 const HomeScreen = () => {
   const isFocused = useIsFocused();
-  const scrollRef = useAnimatedRef<AnimatedScrollView>();
 
-  //Header shared values
-  const progress = useSharedValue(0);
-  const isScrolling = useSharedValue(false);
-  const isAnimating = useSharedValue(false);
-  const lastContentOffset = useSharedValue(1);
+  const scrollX = useRef(new RNAnimated.Value(0)).current;
+  const backgroundRef = useRef<HomeBackgroundRef>(null);
 
   //Splash shared values
   const splashProgress = useSharedValue(0);
@@ -37,6 +40,37 @@ const HomeScreen = () => {
     StatusBar.setBarStyle('light-content');
   }
 
+  const onMomentumScrollEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const x = e.nativeEvent.contentOffset.x;
+    const nextIndex = Math.round(x / ITEM_WIDTH);
+
+    if (nextIndex === backgroundRef?.current?.selectedIndex) {
+      return;
+    }
+
+    backgroundRef?.current?.setSelectedIndex(
+      Math.max(0, Math.min(nextIndex, HOME_LIST.length - 1)),
+    );
+  };
+
+  const onScroll = RNAnimated.event(
+    [{nativeEvent: {contentOffset: {x: scrollX}}}],
+    {useNativeDriver: true},
+  );
+
+  const renderItem = useCallback(
+    ({item, index}: {item: HomeListItemType; index: number}) => (
+      <HomeListItem item={item} index={index} scrollX={scrollX} />
+    ),
+    [],
+  );
+
+  const getItemLayout = (_: any, index: number) => ({
+    length: ITEM_WIDTH,
+    offset: ITEM_WIDTH * index,
+    index,
+  });
+
   useEffect(() => {
     hideSplash().then(() => {
       splashProgress.value = withTiming(1, {duration: 500});
@@ -48,13 +82,25 @@ const HomeScreen = () => {
       <Splash splashProgress={splashProgress} />
 
       <View style={styles.container}>
-        <HomeHeader progress={progress} />
-        <HomeBody
-          progress={progress}
-          scrollRef={scrollRef}
-          isScrolling={isScrolling}
-          isAnimating={isAnimating}
-          lastContentOffset={lastContentOffset}
+        <HomeBackground ref={backgroundRef} />
+
+        <RNAnimated.FlatList
+          onScroll={onScroll}
+          horizontal
+          data={HOME_LIST}
+          windowSize={21}
+          initialNumToRender={3}
+          snapToAlignment="start"
+          scrollEventThrottle={16}
+          getItemLayout={getItemLayout}
+          renderToHardwareTextureAndroid
+          onMomentumScrollEnd={onMomentumScrollEnd}
+          contentContainerStyle={{paddingRight: ITEM_WIDTH / 2 + 24}}
+          showsHorizontalScrollIndicator={false}
+          decelerationRate={isIOS ? 0 : 0.875}
+          keyExtractor={item => item.id.toString()}
+          renderItem={renderItem}
+          snapToInterval={ITEM_WIDTH - (isAndroid ? 0.25 : 0)}
         />
       </View>
     </>
