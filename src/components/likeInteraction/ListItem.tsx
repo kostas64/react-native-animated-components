@@ -4,14 +4,14 @@ import Animated, {
   interpolate,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React from 'react';
-import {StyleSheet} from 'react-native';
+} from "react-native-reanimated";
+import React from "react";
+import { StyleSheet } from "react-native";
 
-import {TListItem} from './types';
-import {Colors} from '@utils/colors';
+import { TListItem } from "./types";
+import { Colors } from "@utils/colors";
 
-const ListItem = ({item, index, liked}: TListItem) => {
+const ListItem = ({ item, index, liked }: TListItem) => {
   const animate = useSharedValue(0);
   const first = useSharedValue(0);
 
@@ -23,29 +23,29 @@ const ListItem = ({item, index, liked}: TListItem) => {
     if (toValue === 0) {
       animate.value =
         first.value === 0
-          ? withTiming(toValue, {duration})
-          : withDelay((4 - index) * 50, withTiming(toValue, {duration}));
+          ? withTiming(toValue, { duration })
+          : withDelay((4 - index) * 50, withTiming(toValue, { duration }));
       first.value = 1;
     } else if (toValue === 144) {
       animate.value =
         first.value === 0
-          ? withTiming(toValue, {duration})
-          : withDelay(index * 50, withTiming(toValue, {duration}));
+          ? withTiming(toValue, { duration })
+          : withDelay(index * 50, withTiming(toValue, { duration }));
       first.value = 1;
     }
-  }, [liked]);
+  }, [liked, animate, index, first]);
 
   const style = useAnimatedStyle(() => {
     if (index === 0) {
       return {
         opacity: interpolate(animate.value, [0, 144], [0, 1]),
         transform: [
-          {scale: interpolate(animate.value, [0, 144], [0, 1])},
+          { scale: interpolate(animate.value, [0, 144], [0, 1]) },
           {
             translateX: interpolate(
               animate.value,
               [0, 144],
-              [(index - 1) * -26, index * -26],
+              [(index - 1) * -26, index * -26]
             ),
           },
         ],
@@ -56,12 +56,12 @@ const ListItem = ({item, index, liked}: TListItem) => {
       return {
         opacity: interpolate(animate.value, [0, 144], [1, 0]),
         transform: [
-          {scale: interpolate(animate.value, [0, 144], [1, 0.75])},
+          { scale: interpolate(animate.value, [0, 144], [1, 0.75]) },
           {
             translateX: interpolate(
               animate.value,
               [0, 144],
-              [(index - 1) * -26, (index - 1) * -36],
+              [(index - 1) * -26, (index - 1) * -36]
             ),
           },
         ],
@@ -75,7 +75,7 @@ const ListItem = ({item, index, liked}: TListItem) => {
           translateX: interpolate(
             animate.value,
             [0, 144],
-            [(index - 1) * -26, index * -26],
+            [(index - 1) * -26, index * -26]
           ),
         },
       ],
@@ -85,7 +85,7 @@ const ListItem = ({item, index, liked}: TListItem) => {
   return (
     <Animated.Image
       borderRadius={18}
-      source={{uri: item.image}}
+      source={{ uri: item.image }}
       style={[style, styles.img]}
     />
   );
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     width: 36,
     aspectRatio: 1 / 1,
     borderWidth: 2,
-    position: 'absolute',
+    position: "absolute",
     borderColor: Colors.WHITE,
   },
 });

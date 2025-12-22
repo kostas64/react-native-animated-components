@@ -1,7 +1,7 @@
-import React from 'react';
-import {BackHandler} from 'react-native';
+import React from "react";
+import { BackHandler } from "react-native";
 
-import {isIOS} from '@utils/device';
+import { isIOS } from "@utils/device";
 
 const useBackAction = (callback: () => boolean | null | undefined) => {
   React.useEffect(() => {
@@ -10,8 +10,8 @@ const useBackAction = (callback: () => boolean | null | undefined) => {
     }
 
     const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      callback,
+      "hardwareBackPress",
+      callback
     );
 
     return () => backHandler.remove();

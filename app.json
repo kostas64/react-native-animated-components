@@ -1,4 +1,56 @@
 {
-  "name": "animatedComponents",
-  "displayName": "animatedComponents"
+  "expo": {
+    "name": "Animated",
+    "slug": "animated",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/img/appIconFull.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "backgroundColor": "#ffffff",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kostas-64.react-native-expo-animated-components"
+    },
+    "android": {
+      "icon": "./src/assets/img/appIcon.png",
+      "backgroundColor": "#ebeeff",
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.kostas64.reactnativeexpoanimatedcomponents"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "ios": {
+            "image": "./assets/bootsplash/logo@4x.png",
+            "backgroundColor": "#FFF",
+            "dark": {
+              "image": "./assets/bootsplash/logo@4x.png",
+              "backgroundColor": "#FFF",
+              "resizeMode": "contain"
+            },
+            "imageWidth": 160
+          },
+          "android": {
+            "image": "./assets/bootsplash/logo@4x.png",
+            "backgroundColor": "#FFF",
+            "dark": {
+              "image": "./assets/bootsplash/logo@4x.png",
+              "backgroundColor": "#FFF"
+            },
+            "imageWidth": 160
+          }
+        }
+      ],
+      "expo-font"
+    ],
+    "androidNavigationBar": {
+      "enforceContrast": false
+    }
+  }
 }

@@ -1,20 +1,20 @@
-import {StyleSheet} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
-import Animated, {LinearTransition} from 'react-native-reanimated';
+import { StyleSheet } from "react-native";
+import React, { useCallback, useEffect } from "react";
+import Animated, { LinearTransition } from "react-native-reanimated";
 
 import {
   TEvent,
   TNavigation,
   TCalendarState,
-} from '@components/taskCalendar/types';
-import {Colors} from '@utils/colors';
-import Event from '@components/taskCalendar/Event';
-import Header from '@components/taskCalendar/Header';
-import Loading from '@components/taskCalendar/Loading';
-import {MONTHS} from '@components/taskCalendar/constants';
-import ListEmpty from '@components/taskCalendar/ListEmpty';
-import StatusBarManager from '@components/common/StatusBarManager';
-import {useCalendarEvents} from '@components/taskCalendar/hooks/useCalendarEvents';
+} from "@components/taskCalendar/types";
+import { Colors } from "@utils/colors";
+import Event from "@components/taskCalendar/Event";
+import Header from "@components/taskCalendar/Header";
+import Loading from "@components/taskCalendar/Loading";
+import { MONTHS } from "@components/taskCalendar/constants";
+import ListEmpty from "@components/taskCalendar/ListEmpty";
+import StatusBarManager from "@components/common/StatusBarManager";
+import { useCalendarEvents } from "@components/taskCalendar/hooks/useCalendarEvents";
 
 export const today = new Date();
 
@@ -25,7 +25,7 @@ const initialState = {
   selectedDate: today,
 };
 
-const TaskCalendarScreen = ({navigation}: TNavigation) => {
+const TaskCalendarScreen = ({ navigation }: TNavigation) => {
   const [state, setState] = React.useState<TCalendarState>(initialState);
 
   const filteredEvents = useCalendarEvents(state);
@@ -33,7 +33,7 @@ const TaskCalendarScreen = ({navigation}: TNavigation) => {
   const events = state.loading ? [] : filteredEvents;
 
   const onSelecteMonth = useCallback((month: number) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       month: MONTHS[month],
       loading: true,
@@ -41,31 +41,31 @@ const TaskCalendarScreen = ({navigation}: TNavigation) => {
   }, []);
 
   const renderItem = useCallback(
-    ({item, index}: {item: TEvent; index: number}) => {
+    ({ item, index }: { item: TEvent; index: number }) => {
       return <Event {...item} key={index} />;
     },
-    [state.month],
+    []
   );
 
   const selectDate = useCallback((date: Date) => {
-    setState(prev => ({...prev, selectedDate: date, loading: true}));
+    setState((prev) => ({ ...prev, selectedDate: date, loading: true }));
   }, []);
 
   const stopLoading = useCallback(() => {
-    setState(prev => ({...prev, loading: false}));
+    setState((prev) => ({ ...prev, loading: false }));
   }, []);
 
   useEffect(() => {
-    const listener = navigation.addListener('transitionEnd', () => {
-      setState(prev => ({...prev, transitionEnd: true}));
+    const listener = navigation.addListener("transitionEnd", () => {
+      setState((prev) => ({ ...prev, transitionEnd: true }));
     });
 
     return listener;
-  }, []);
+  }, [navigation]);
 
   return (
     <Animated.View style={styles.container}>
-      <StatusBarManager barStyle={'light'} />
+      <StatusBarManager barStyle={"light"} />
       <Loading loading={state.loading} stopLoading={stopLoading} />
       {state.transitionEnd && (
         <>

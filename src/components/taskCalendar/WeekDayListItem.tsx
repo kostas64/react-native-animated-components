@@ -4,18 +4,17 @@ import Animated, {
   useDerivedValue,
   interpolateColor,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React, {useEffect} from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+} from "react-native-reanimated";
+import React, { useEffect } from "react";
+import { Pressable, StyleSheet, View } from "react-native";
 
-import {_spacing} from './constants';
-import {Colors} from '@utils/colors';
-import {TWeekDayListItem} from './types';
-import {setDayEmitter} from './Calendar';
-import {typography} from '@utils/typography';
-import {triggerHaptik} from './MonthListModal';
-import {formatDate, isSameDay, isToday} from './utils';
-import {MAX_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
+import { _spacing } from "./constants";
+import { Colors } from "@utils/colors";
+import { TWeekDayListItem } from "./types";
+import { typography } from "@utils/typography";
+import { triggerHaptik } from "./MonthListModal";
+import { MAX_FONT_UPSCALE_FACTOR, WIDTH } from "@utils/device";
+import { formatDate, isSameDay, isToday, setDayEmitter } from "./utils";
 
 const WeekDayListItem = ({
   day,
@@ -24,7 +23,7 @@ const WeekDayListItem = ({
   selectedDate,
 }: TWeekDayListItem) => {
   const [isSelected, setIsSelected] = React.useState(
-    isSameDay(globalSelectedDate.current, day.date),
+    isSameDay(globalSelectedDate.current, day.date)
   );
 
   const date = new Date(day.date);
@@ -41,28 +40,28 @@ const WeekDayListItem = ({
     withTiming(isSelected ? 1 : 0, {
       duration: 125,
       easing: Easing.ease,
-    }),
+    })
   );
 
   const _containerStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(
       animValue.value,
       [0, 1],
-      ['transparent', 'white'],
+      ["transparent", "white"]
     ),
   }));
 
   const _dayStyle = useAnimatedStyle(() => ({
-    color: interpolateColor(animValue.value, [0, 1], ['white', '#121212']),
+    color: interpolateColor(animValue.value, [0, 1], ["white", "#121212"]),
   }));
 
   const onPress = () => {
-    setDayEmitter.emit('daySelected', day);
+    setDayEmitter.emit("daySelected", day);
     selectedDate(day.date);
   };
 
   useEffect(() => {
-    setDayEmitter.on('daySelected', selectedDay => {
+    setDayEmitter.on("daySelected", (selectedDay) => {
       const isSameDate = isSameDay(selectedDay.date, day.date);
 
       if (isSameDate && !isSelected) {
@@ -73,13 +72,13 @@ const WeekDayListItem = ({
         setIsSelected(false);
       }
     });
-  }, [isSelected]);
+  }, [isSelected, day.date, globalSelectedDate]);
 
   useEffect(() => {
     if (new Date(globalSelectedDate.current).getDate() === day.date.getDate()) {
       setIsSelected(true);
     }
-  }, []);
+  }, [globalSelectedDate, day.date]);
 
   return (
     <Pressable onPress={onPress} disabled={isSelected} onLayout={onLayout}>
@@ -89,15 +88,18 @@ const WeekDayListItem = ({
           hasLeftSpace && styles.spaceLeft,
           hasRightSpace && styles.spaceRight,
           _containerStyle,
-        ]}>
+        ]}
+      >
         <Animated.Text
           style={[styles.dayName, _dayStyle]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+        >
           {dayName}
         </Animated.Text>
         <Animated.Text
           style={[styles.dayNumber, _dayStyle]}
-          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}>
+          maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
+        >
           {day.displayLabel}
         </Animated.Text>
       </Animated.View>
@@ -129,13 +131,13 @@ const styles = StyleSheet.create({
   },
   dayName: {
     fontSize: 10,
-    textAlign: 'center',
+    textAlign: "center",
     fontFamily: typography.medium,
   },
   dayNumber: {
     marginTop: 16,
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
     fontFamily: typography.bold,
   },
   dot: {

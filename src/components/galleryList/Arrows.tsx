@@ -1,12 +1,12 @@
-import Feather from 'react-native-vector-icons/Feather';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import Feather from "@expo/vector-icons/Feather";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import {DATA} from './data';
-import {ArrowProps} from './types';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {IMAGE_WIDTH, SPACING} from './constants';
+import { DATA } from "./data";
+import { ArrowProps } from "./types";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { IMAGE_WIDTH, SPACING } from "./constants";
 
 const Arrows = ({
   index,
@@ -20,7 +20,8 @@ const Arrows = ({
       <TouchableOpacity
         disabled={disabledLeft}
         style={index === 0 ? styles.opacityQuarter : styles.fullOpacity}
-        onPress={onPressLeft}>
+        onPress={onPressLeft}
+      >
         <View style={styles.arrowContainer}>
           <Feather name="arrow-left-circle" size={28} color="black" />
           <Text style={styles.arrowText}>PREV</Text>
@@ -31,7 +32,8 @@ const Arrows = ({
         style={
           index === DATA.length - 1 ? styles.opacityQuarter : styles.fullOpacity
         }
-        onPress={onPressRight}>
+        onPress={onPressRight}
+      >
         <View style={styles.arrowContainer}>
           <Text style={styles.arrowText}>NEXT</Text>
           <Feather name="arrow-right-circle" size={28} color="black" />
@@ -45,15 +47,15 @@ export default Arrows;
 
 const styles = StyleSheet.create({
   arrowsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     width: IMAGE_WIDTH + SPACING * 4,
     paddingHorizontal: SPACING,
     paddingVertical: SPACING,
   },
   arrowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 4,
   },
   arrowText: {

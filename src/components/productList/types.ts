@@ -1,8 +1,8 @@
-import {Animated} from 'react-native';
+import { Animated, ImageSourcePropType } from "react-native";
 
 export type ListItem = {
   name: string;
-  image: any;
+  image: ImageSourcePropType;
   backgroundColor: string;
   fontColor: string;
   halfFontColor: string;

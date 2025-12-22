@@ -1,35 +1,35 @@
-import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import React from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 
-import {SPACING} from './data';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {SM_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import { SPACING } from "./data";
+import Text from "@components/common/Text";
+import { Colors } from "@utils/colors";
+import { typography } from "@utils/typography";
+import { SM_FONT_UPSCALE_FACTOR, MED_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const FloatingContent = () => {
-  const [promoCode, setPromoCode] = React.useState('');
+  const [promoCode, setPromoCode] = React.useState("");
 
   return (
     <>
       <Text style={styles.title}>Its your lucky day</Text>
       <Text
         maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
-        style={
-          styles.paragraph
-        }>{`Check our sales starting at 40% 🎉 \nUse SALES40 promo code to get a 40% discount`}</Text>
+        style={styles.paragraph}
+      >{`Check our sales starting at 40% 🎉 \nUse SALES40 promo code to get a 40% discount`}</Text>
       <TextInput
         value={promoCode}
         onChangeText={setPromoCode}
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
         placeholder="Paste promo to save over 40%"
-        placeholderTextColor={'#625d60'}
+        placeholderTextColor={"#625d60"}
         style={styles.promoInput}
       />
       <View style={styles.checkoutButton}>
         <Text
           style={styles.checkoutLabel}
-          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+        >
           Checkout
         </Text>
       </View>
@@ -49,10 +49,12 @@ const styles = StyleSheet.create({
     marginVertical: SPACING,
     color: Colors.WHITE,
     fontFamily: typography.regular,
+    letterSpacing: 0.2,
+    lineHeight: 18,
     height: 86,
   },
   promoInput: {
-    fontSize: 16,
+    fontSize: 14,
     paddingLeft: 14,
     color: Colors.WHITE,
     fontFamily: typography.medium,
@@ -62,10 +64,10 @@ const styles = StyleSheet.create({
     marginBottom: SPACING / 2,
   },
   checkoutButton: {
-    width: '100%',
+    width: "100%",
     height: 54,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: SPACING,
     backgroundColor: Colors.SIZZLING_SUNRISE,
   },

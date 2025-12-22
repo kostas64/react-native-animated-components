@@ -1,7 +1,7 @@
 export const createSlicePath = (
   startAngle: number,
   endAngle: number,
-  radius: number,
+  radius: number
 ) => {
   const startX = radius + radius * Math.cos((startAngle * Math.PI) / 180);
   const startY = radius - radius * Math.sin((startAngle * Math.PI) / 180);
@@ -22,11 +22,11 @@ export const createSlicePath = (
 export const calculateTextPosition = (
   startAngle: number,
   endAngle: number,
-  radius: number,
+  radius: number
 ) => {
   const angle = (startAngle + endAngle) / 2;
   const textRadius = radius * 0.7;
   const x = radius + textRadius * Math.cos((angle * Math.PI) / 180);
   const y = radius - textRadius * Math.sin((angle * Math.PI) / 180);
-  return {x, y, angle: -angle + 180};
+  return { x, y, angle: -angle + 180 };
 };

@@ -1,11 +1,11 @@
-import Animated from 'react-native-reanimated';
-import {Pressable, StyleSheet} from 'react-native';
+import Animated from "react-native-reanimated";
+import { Pressable, StyleSheet } from "react-native";
 
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {TFloatingModalItemProps} from './types';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
-import {getAnimatedItemStyles} from './animatedStyles';
+import { Colors } from "@utils/colors";
+import { typography } from "@utils/typography";
+import { TFloatingModalItemProps } from "./types";
+import { MAX_FONT_UPSCALE_FACTOR } from "@utils/device";
+import { useAnimatedItemStyles } from "./animatedStyles";
 
 const FloatingActionModalItem = ({
   item,
@@ -14,7 +14,7 @@ const FloatingActionModalItem = ({
 }: TFloatingModalItemProps) => {
   const Icon = Animated.createAnimatedComponent(item.component);
 
-  const {animatedIcon, animatedText} = getAnimatedItemStyles({progress});
+  const { animatedIcon, animatedText } = useAnimatedItemStyles({ progress });
 
   return (
     <Pressable
@@ -25,15 +25,17 @@ const FloatingActionModalItem = ({
 
         //On item press action
       }}
-      style={({pressed}) => [
+      style={({ pressed }) => [
         pressed && progress.value !== 0 && styles.touch,
         styles.itemContainer,
         style,
-      ]}>
-      <Icon name={item.name} color={'white'} size={24} style={animatedIcon} />
+      ]}
+    >
+      <Icon name={item.name} color={"white"} size={24} style={animatedIcon} />
       <Animated.Text
         maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-        style={[styles.label, animatedText]}>
+        style={[styles.label, animatedText]}
+      >
         {item.label}
       </Animated.Text>
     </Pressable>
@@ -44,8 +46,8 @@ export default FloatingActionModalItem;
 
 const styles = StyleSheet.create({
   itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
   },
   label: {

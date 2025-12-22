@@ -4,11 +4,11 @@ import {
   Extrapolation,
   useAnimatedStyle,
   interpolateColor,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import {HEIGHT, WIDTH} from '@utils/device';
+import { HEIGHT, WIDTH } from "@utils/device";
 
-export const getAnimatedStyles = (
+export const useAnimatedStyles = (
   progress: SharedValue<number>,
   progresWhen: SharedValue<number>,
   progressWhereTo: SharedValue<number>,
@@ -20,11 +20,11 @@ export const getAnimatedStyles = (
   bottom: number,
   bottomHeight: number,
   extraHeight: number,
-  insets: {bottom: number},
+  insets: { bottom: number }
 ) => {
   const opacityStyle = useAnimatedStyle(
-    () => ({opacity: interpolate(progress.value, [0, 0.8], [0, 1])}),
-    [],
+    () => ({ opacity: interpolate(progress.value, [0, 0.8], [0, 1]) }),
+    []
   );
 
   const opacityInputStyle = useAnimatedStyle(() => {
@@ -34,7 +34,7 @@ export const getAnimatedStyles = (
           openCloseWho.value,
           [0.75, 1],
           [0, 1],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     }
@@ -45,7 +45,7 @@ export const getAnimatedStyles = (
           closeWhen.value,
           [0.75, 1],
           [0, 1],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     }
@@ -55,7 +55,7 @@ export const getAnimatedStyles = (
         progress.value,
         [0, 0.1, 0.5, 0.8],
         [1, 1, 0, 0],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     };
   }, []);
@@ -64,7 +64,7 @@ export const getAnimatedStyles = (
     () => ({
       opacity: interpolate(progress.value, [0, 0.25, 0.8], [0, 0, 1]),
     }),
-    [],
+    []
   );
 
   const opacityWhereToBold = useAnimatedStyle(() => {
@@ -78,7 +78,7 @@ export const getAnimatedStyles = (
           openWho.value,
           [0, 0.5],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     }
@@ -89,7 +89,7 @@ export const getAnimatedStyles = (
           progresWhen.value,
           [0, 0.5],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     }
@@ -99,7 +99,7 @@ export const getAnimatedStyles = (
         progressWhereTo.value,
         [0, 0.5],
         [1, 0],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     };
   }, []);
@@ -110,16 +110,16 @@ export const getAnimatedStyles = (
       height: interpolate(
         progresWhen.value,
         [0, 1],
-        [67, HEIGHT - bottom - 186],
+        [67, HEIGHT - bottom - 186]
       ),
       width: interpolate(progresWhen.value, [0, 1], [WIDTH - 30, WIDTH - 20]),
       borderRadius: interpolate(progresWhen.value, [0, 1], [16, 32]),
       marginBottom: interpolate(progresWhen.value, [0, 1], [0, 64]),
       transform: [
-        {translateX: interpolate(progresWhen.value, [0, 1], [0, -4])},
+        { translateX: interpolate(progresWhen.value, [0, 1], [0, -4]) },
       ],
     }),
-    [],
+    []
   );
 
   const arrowAnimStyle = useAnimatedStyle(
@@ -128,7 +128,7 @@ export const getAnimatedStyles = (
         progressWhereTo.value,
         [0.1, 0.25],
         [0, 1],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       transform: [
         {
@@ -136,7 +136,7 @@ export const getAnimatedStyles = (
             progressWhereTo.value,
             [0, 0.1],
             [-100, 0],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
         {
@@ -144,12 +144,12 @@ export const getAnimatedStyles = (
             progressWhereTo.value,
             [0, 0.1],
             [0, 24],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
     }),
-    [],
+    []
   );
 
   const opacityWhenClose = useAnimatedStyle(() => {
@@ -169,7 +169,7 @@ export const getAnimatedStyles = (
           closeWhen.value,
           [0, 0.15],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     } else {
@@ -184,13 +184,13 @@ export const getAnimatedStyles = (
         openWho.value,
         [0, 0.8],
         [67, HEIGHT + extraHeight - top - bottomHeight - 230],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       width: interpolate(
         openWho.value,
         [0, 0.8],
         [WIDTH - 30, WIDTH - 20],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       transform: [
         {
@@ -198,7 +198,7 @@ export const getAnimatedStyles = (
             openWho.value,
             [0, 0.8],
             [0, -4],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
@@ -206,10 +206,10 @@ export const getAnimatedStyles = (
         openWho.value,
         [0, 0.8],
         [16, 32],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     }),
-    [],
+    []
   );
 
   const opacityWhen = useAnimatedStyle(
@@ -218,10 +218,10 @@ export const getAnimatedStyles = (
         progresWhen.value,
         [0, 0.25],
         [1, 0],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     }),
-    [],
+    []
   );
 
   const opacityWhenRevStyle = useAnimatedStyle(
@@ -230,10 +230,10 @@ export const getAnimatedStyles = (
         progresWhen.value,
         [0.5, 1],
         [0, 1],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     }),
-    [],
+    []
   );
 
   const opacityOpenWhoStyle = useAnimatedStyle(() => {
@@ -271,7 +271,7 @@ export const getAnimatedStyles = (
           openCloseWho.value,
           [0, 0.25],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     }
@@ -281,7 +281,7 @@ export const getAnimatedStyles = (
         openWho.value,
         [0.5, 1],
         [0, 1],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     };
   }, []);
@@ -303,7 +303,7 @@ export const getAnimatedStyles = (
       openCloseWho.value,
       [0, 0.25],
       [0, 1],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
   }));
 
@@ -314,7 +314,7 @@ export const getAnimatedStyles = (
           openCloseWho.value,
           [0, 0.15],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       };
     }
@@ -330,12 +330,12 @@ export const getAnimatedStyles = (
             progress.value,
             [0, 0.75],
             [0, 24],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
     }),
-    [],
+    []
   );
 
   const translateCloseWhen = useAnimatedStyle(() => {
@@ -345,7 +345,7 @@ export const getAnimatedStyles = (
           progressWhereTo.value,
           [0, 0.3],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         transform: [
           {
@@ -353,7 +353,7 @@ export const getAnimatedStyles = (
               progressWhereTo.value,
               [0.31, 0.32],
               [0, -100],
-              Extrapolation.CLAMP,
+              Extrapolation.CLAMP
             ),
           },
           {
@@ -361,7 +361,7 @@ export const getAnimatedStyles = (
               progressWhereTo.value,
               [0.32, 0.33],
               [24, 0],
-              Extrapolation.CLAMP,
+              Extrapolation.CLAMP
             ),
           },
         ],
@@ -374,10 +374,10 @@ export const getAnimatedStyles = (
           openCloseWho.value,
           [0, 0.8],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         transform: [
-          {translateY: interpolate(openCloseWho.value, [0, 0.8], [24, 0])},
+          { translateY: interpolate(openCloseWho.value, [0, 0.8], [24, 0]) },
         ],
       };
     }
@@ -388,10 +388,10 @@ export const getAnimatedStyles = (
           closeWhen.value,
           [0, 1],
           [1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         transform: [
-          {translateY: interpolate(closeWhen.value, [0, 1], [24, 0])},
+          { translateY: interpolate(closeWhen.value, [0, 1], [24, 0]) },
         ],
       };
     }
@@ -407,7 +407,7 @@ export const getAnimatedStyles = (
             translateX: interpolate(
               openCloseWho.value,
               [0.15, 0.16],
-              [0, -WIDTH],
+              [0, -WIDTH]
             ),
           },
         ],
@@ -417,7 +417,9 @@ export const getAnimatedStyles = (
     if (closeWhen.value > 0) {
       return {
         transform: [
-          {translateX: interpolate(closeWhen.value, [0.15, 0.16], [0, -WIDTH])},
+          {
+            translateX: interpolate(closeWhen.value, [0.15, 0.16], [0, -WIDTH]),
+          },
         ],
       };
     } else {
@@ -432,14 +434,14 @@ export const getAnimatedStyles = (
         height: interpolate(
           closeWhen.value,
           [0, 1],
-          [HEIGHT - insets.bottom - 186, 60],
+          [HEIGHT - insets.bottom - 186, 60]
         ),
         borderRadius: 32,
         width: interpolate(closeWhen.value, [0, 1], [WIDTH - 20, WIDTH - 100]),
         marginTop: interpolate(closeWhen.value, [0, 1], [60, 0]),
         top: interpolate(closeWhen.value, [0, 1], [0, -67]),
         transform: [
-          {translateX: interpolate(closeWhen.value, [0, 1], [-4, 10])},
+          { translateX: interpolate(closeWhen.value, [0, 1], [-4, 10]) },
         ],
       };
     } else {
@@ -453,13 +455,13 @@ export const getAnimatedStyles = (
         openCloseWho.value,
         [0, 0.8],
         [HEIGHT + extraHeight - top - bottomHeight - 230, 60],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       width: interpolate(
         openCloseWho.value,
         [0, 0.8],
         [WIDTH - 24, WIDTH - 100],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       borderRadius: 32,
       transform: [
@@ -468,7 +470,7 @@ export const getAnimatedStyles = (
             openCloseWho.value,
             [0, 0.8],
             [-4, 10],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
         {
@@ -476,12 +478,12 @@ export const getAnimatedStyles = (
             openCloseWho.value,
             [0, 0.8],
             [0, -206],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
     }),
-    [],
+    []
   );
 
   const listOpacityTranslate = useAnimatedStyle(
@@ -490,7 +492,7 @@ export const getAnimatedStyles = (
         progressWhereTo.value,
         [0, 0.25],
         [1, 0],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       transform: [
         {
@@ -498,12 +500,12 @@ export const getAnimatedStyles = (
             progressWhereTo.value,
             [0.25, 0.251],
             [0, -WIDTH],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
     }),
-    [],
+    []
   );
 
   const listSearchStyle = useAnimatedStyle(
@@ -512,7 +514,7 @@ export const getAnimatedStyles = (
         progressWhereTo.value,
         [0, 0.25],
         [0, 1],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       transform: [
         {
@@ -520,12 +522,12 @@ export const getAnimatedStyles = (
             progressWhereTo.value,
             [0, 0.01],
             [-WIDTH, 0],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
     }),
-    [],
+    []
   );
 
   const inputStyle = useAnimatedStyle(() => {
@@ -534,7 +536,7 @@ export const getAnimatedStyles = (
         height: 67,
         width: WIDTH - 30,
         borderRadius: 16,
-        transform: [{translateX: -10}, {translateY: 48}],
+        transform: [{ translateX: -10 }, { translateY: 48 }],
       };
     }
 
@@ -544,19 +546,19 @@ export const getAnimatedStyles = (
           openWho.value,
           [0, 0.8],
           [330, 67],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         width: interpolate(
           openWho.value,
           [0, 0.8],
           [WIDTH - 20, WIDTH - 30],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         borderRadius: interpolate(
           openWho.value,
           [0, 0.8],
           [32, 16],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         transform: [
           {
@@ -564,10 +566,10 @@ export const getAnimatedStyles = (
               openWho.value,
               [0, 0.8],
               [-14, -10],
-              Extrapolation.CLAMP,
+              Extrapolation.CLAMP
             ),
           },
-          {translateY: 48},
+          { translateY: 48 },
         ],
       };
     }
@@ -578,19 +580,19 @@ export const getAnimatedStyles = (
           progresWhen.value,
           [0, 0.8],
           [330, 67],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         width: interpolate(
           progresWhen.value,
           [0, 0.8],
           [WIDTH - 20, WIDTH - 30],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         borderRadius: interpolate(
           progresWhen.value,
           [0, 0.8],
           [32, 16],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
         transform: [
           {
@@ -598,10 +600,10 @@ export const getAnimatedStyles = (
               progresWhen.value,
               [0, 0.8],
               [-14, -10],
-              Extrapolation.CLAMP,
+              Extrapolation.CLAMP
             ),
           },
-          {translateY: 48},
+          { translateY: 48 },
         ],
       };
     }
@@ -611,13 +613,13 @@ export const getAnimatedStyles = (
         progress.value,
         [0, 0.8],
         [60, 330],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       width: interpolate(
         progress.value,
         [0, 0.8],
         [WIDTH - 100, WIDTH - 20],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       transform: [
         {
@@ -625,7 +627,7 @@ export const getAnimatedStyles = (
             progress.value,
             [0, 0.8],
             [0, -14],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
         {
@@ -633,7 +635,7 @@ export const getAnimatedStyles = (
             progress.value,
             [0, 0.8],
             [0, 48],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
@@ -649,13 +651,13 @@ export const getAnimatedStyles = (
       height: interpolate(progressWhereTo.value, [0, 1], [330, HEIGHT]),
       width: interpolate(progressWhereTo.value, [0, 1], [WIDTH - 20, WIDTH]),
       transform: [
-        {translateX: interpolate(progressWhereTo.value, [0, 1], [-14, -24])},
+        { translateX: interpolate(progressWhereTo.value, [0, 1], [-14, -24]) },
         {
           translateY: interpolate(
             progress.value,
             [0, 0.8],
             [0, 48],
-            Extrapolation.CLAMP,
+            Extrapolation.CLAMP
           ),
         },
       ],
@@ -666,16 +668,16 @@ export const getAnimatedStyles = (
     borderColor: interpolateColor(
       progressWhereTo.value,
       [0, 1],
-      ['rgb(161,161,161)', 'rgb(247,247,247)'],
+      ["rgb(161,161,161)", "rgb(247,247,247)"]
     ),
     backgroundColor: interpolateColor(
       progressWhereTo.value,
       [0, 1],
-      ['rgb(255,255,255)', 'rgb(247,247,247)'],
+      ["rgb(255,255,255)", "rgb(247,247,247)"]
     ),
     width: interpolate(progressWhereTo.value, [0, 1], [WIDTH - 72, WIDTH - 48]),
     transform: [
-      {translateY: interpolate(progressWhereTo.value, [0, 1], [0, -60])},
+      { translateY: interpolate(progressWhereTo.value, [0, 1], [0, -60]) },
     ],
   }));
 
@@ -683,7 +685,7 @@ export const getAnimatedStyles = (
     () => ({
       bottom: interpolate(progress.value, [0, 1], [-bottomHeight, 0]),
     }),
-    [],
+    []
   );
 
   const bottomStyleWhereFocused = useAnimatedStyle(() => {
@@ -692,7 +694,7 @@ export const getAnimatedStyles = (
         bottom: interpolate(
           openCloseWho.value,
           [0, 1],
-          [0, -bottomHeight - 10],
+          [0, -bottomHeight - 10]
         ),
       };
     }
@@ -720,7 +722,7 @@ export const getAnimatedStyles = (
         bottom: interpolate(
           progressWhereTo.value,
           [0, 1],
-          [0, -bottomHeight - 10],
+          [0, -bottomHeight - 10]
         ),
       };
     }
@@ -735,12 +737,12 @@ export const getAnimatedStyles = (
           translateX: interpolate(
             translatePicker.value,
             [0, 1, 2],
-            [0, (WIDTH - 90) / 3, 2 * ((WIDTH - 90) / 3)],
+            [0, (WIDTH - 90) / 3, 2 * ((WIDTH - 90) / 3)]
           ),
         },
       ],
     }),
-    [],
+    []
   );
 
   return {

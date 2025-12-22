@@ -1,5 +1,5 @@
-import {Animated} from 'react-native';
-import {SharedValue} from 'react-native-reanimated';
+import { SharedValue } from "react-native-reanimated";
+import { Animated, ImageSourcePropType } from "react-native";
 
 export type SplashProps = {
   splashProgress: SharedValue<number>;
@@ -9,7 +9,7 @@ export type HomeListItemType = {
   id: number;
   name: string;
   description: string;
-  image: any;
+  image: ImageSourcePropType;
   screen: string;
   isDark?: boolean;
 };

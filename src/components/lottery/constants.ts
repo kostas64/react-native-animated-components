@@ -1,4 +1,4 @@
-import {WIDTH} from '@utils/device';
+import { WIDTH } from "@utils/device";
 
 export const RADIUS = WIDTH / 1.5;
 export const BORDER_WIDTH = 3;

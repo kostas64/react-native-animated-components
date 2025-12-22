@@ -2,12 +2,12 @@ import Animated, {
   interpolate,
   interpolateColor,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {StyleSheet} from 'react-native';
+} from "react-native-reanimated";
+import { StyleSheet } from "react-native";
 
-import {SLIDER_W} from './data';
-import {TAnimatedText} from './types';
-import {typography} from '@utils/typography';
+import { SLIDER_W } from "./data";
+import { TAnimatedText } from "./types";
+import { typography } from "@utils/typography";
 
 const AnimatedText = ({
   index,
@@ -34,14 +34,14 @@ const AnimatedText = ({
           0.2 + (index + 3) * interval,
         ],
         [
-          '#a10000',
-          '#ff6161',
-          '#ffad9c',
-          '#ffffff',
-          '#ffad9c',
-          '#ff6161',
-          '#a10000',
-        ],
+          "#a10000",
+          "#ff6161",
+          "#ffad9c",
+          "#ffffff",
+          "#ffad9c",
+          "#ff6161",
+          "#a10000",
+        ]
       ),
     };
   });
@@ -50,7 +50,8 @@ const AnimatedText = ({
     <Animated.Text
       maxFontSizeMultiplier={maxFontSizeMultiplier}
       key={`index-${index}`}
-      style={[textColor, styles.text]}>
+      style={[textColor, styles.text]}
+    >
       {char}
     </Animated.Text>
   );

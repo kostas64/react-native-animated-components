@@ -1,30 +1,33 @@
+import mitt from "mitt";
+import { CalendarDayMetadata } from "@marceloterreiro/flash-calendar";
+
 export const generateEventsForDays = (numDays: number) => {
   const today = new Date().getDate();
 
   const events = [];
   const titles = [
-    'One-to-one',
-    'Team Meeting',
-    'Project Review',
-    'Client Call',
-    'Workshop',
+    "One-to-one",
+    "Team Meeting",
+    "Project Review",
+    "Client Call",
+    "Workshop",
   ];
   const descriptions = [
-    'Repeats every two weeks',
-    'Weekly meeting',
-    'Monthly review',
-    'Bi-weekly sync',
-    'Daily standup',
+    "Repeats every two weeks",
+    "Weekly meeting",
+    "Monthly review",
+    "Bi-weekly sync",
+    "Daily standup",
   ];
   const times = [
-    '9:00-10:00 AM',
-    '11:00-12:00 PM',
-    '12:00-1:00 PM',
-    '2:00-3:00 PM',
-    '4:00-5:00 PM',
+    "9:00-10:00 AM",
+    "11:00-12:00 PM",
+    "12:00-1:00 PM",
+    "2:00-3:00 PM",
+    "4:00-5:00 PM",
   ];
 
-  const durations = ['30 min', '45 min', '1 h', '1.5 h', '2 h'];
+  const durations = ["30 min", "45 min", "1 h", "1.5 h", "2 h"];
 
   for (let day = 1; day <= numDays; day++) {
     const random = Math.random();
@@ -74,6 +77,10 @@ export const isToday = (date: Date) => {
 };
 
 export const formatDate = (date: Date) => {
-  const options = {weekday: 'short' as 'short' | 'long' | 'narrow'};
-  return date.toLocaleDateString('en-US', options);
+  const options = { weekday: "short" as "short" | "long" | "narrow" };
+  return date.toLocaleDateString("en-US", options);
 };
+
+export const setDayEmitter = mitt<{
+  daySelected: CalendarDayMetadata;
+}>();

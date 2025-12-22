@@ -1,29 +1,30 @@
-import {useEffect} from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import { useEffect, useRef } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-import {TLoading} from './types';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { TLoading } from "./types";
+import { Colors } from "@utils/colors";
+import { Timeout } from "src/types/common";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
-const Loading = ({loading, stopLoading}: TLoading) => {
-  let timeout: ReturnType<typeof setTimeout> = setTimeout(() => {});
+const Loading = ({ loading, stopLoading }: TLoading) => {
+  let timeout = useRef<Timeout>(null);
 
   useEffect(() => {
     if (!loading) {
       return;
     }
 
-    clearTimeout(timeout);
+    !!timeout.current && clearTimeout(timeout.current);
 
-    timeout = setTimeout(() => {
+    timeout.current = setTimeout(() => {
       !!stopLoading && stopLoading();
     }, 600);
 
     return () => {
-      !!timeout && clearTimeout(timeout);
+      !!timeout.current && clearTimeout(timeout.current);
     };
-  }, [loading]);
+  }, [loading, stopLoading]);
 
   if (!loading) {
     return null;
@@ -31,7 +32,7 @@ const Loading = ({loading, stopLoading}: TLoading) => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={'small'} color={'white'} />
+      <ActivityIndicator size={"small"} color={"white"} />
 
       <Text style={styles.label}>Retrieving tasks</Text>
     </View>
@@ -42,12 +43,12 @@ export default Loading;
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: "absolute",
     top: 400,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     gap: 8,
     zIndex: 1,
   },

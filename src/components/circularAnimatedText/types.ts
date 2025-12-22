@@ -1,7 +1,6 @@
-import {SharedValue} from 'react-native-reanimated';
+import { SharedValue } from "react-native-reanimated";
 
 export type TAnimCircle = {
-  _?: any;
   activeColor: SharedValue<string>;
   index: number;
 };

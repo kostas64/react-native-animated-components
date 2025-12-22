@@ -1,7 +1,7 @@
-import {SharedValue} from 'react-native-reanimated';
+import { SharedValue } from "react-native-reanimated";
 
 export type TArrow = {
-  direction: 'up' | 'down';
+  direction: "up" | "down";
   disabled: boolean;
   onPress: () => void;
 };
@@ -14,7 +14,7 @@ export type TListItem = {
 };
 
 export type TViewableItems = {
-  viewableItems: [{item: number}];
+  viewableItems: [{ item: number }];
 };
 
 export type TValueRangePicker = {

@@ -1,10 +1,10 @@
-import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import {useAnimatedRef, useScrollViewOffset} from 'react-native-reanimated';
+import React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { useAnimatedRef, useScrollOffset } from "react-native-reanimated";
 
-import Arrow from './Arrow';
-import ListItem from './ListItem';
-import {TValueRangePicker, TViewableItems} from './types';
+import Arrow from "./Arrow";
+import ListItem from "./ListItem";
+import { TValueRangePicker, TViewableItems } from "./types";
 
 const ValueArrowPicker = ({
   range,
@@ -13,13 +13,13 @@ const ValueArrowPicker = ({
   setValue,
 }: TValueRangePicker) => {
   const listRef = useAnimatedRef<FlatList>(); //@ts-ignore
-  const scrollOffset = useScrollViewOffset(listRef);
+  const scrollOffset = useScrollOffset(listRef);
 
   const values = new Array(range[1] - range[0] + 1)
     .fill(0)
     .map((_, i) => i + range[0]);
 
-  const renderItem = ({item, index}: {item: number; index: number}) => (
+  const renderItem = ({ item, index }: { item: number; index: number }) => (
     <ListItem
       item={item}
       index={index}
@@ -29,27 +29,27 @@ const ValueArrowPicker = ({
     />
   );
 
-  const onPressArrow = (direction: 'up' | 'down') => {
+  const onPressArrow = (direction: "up" | "down") => {
     const index = values.indexOf(value);
     listRef.current?.scrollToIndex({
-      index: direction === 'down' ? index + 1 : index - 1,
+      index: direction === "down" ? index + 1 : index - 1,
     });
   };
 
-  const onViewableItemsChanged = ({viewableItems}: TViewableItems) => {
+  const onViewableItemsChanged = ({ viewableItems }: TViewableItems) => {
     setValue(viewableItems?.[0]?.item);
   };
 
   const viewabilityConfigCallbackPairs = React.useRef([
-    {onViewableItemsChanged},
+    { onViewableItemsChanged },
   ]);
 
   return (
     <View style={styles.itemsCenter}>
       <Arrow
-        direction={'up'}
+        direction={"up"}
         disabled={value === range[0]}
-        onPress={() => onPressArrow('up')}
+        onPress={() => onPressArrow("up")}
       />
       <View style={styles.height}>
         <FlatList
@@ -67,9 +67,9 @@ const ValueArrowPicker = ({
         />
       </View>
       <Arrow
-        direction={'down'}
+        direction={"down"}
         disabled={value === range[1]}
-        onPress={() => onPressArrow('down')}
+        onPress={() => onPressArrow("down")}
       />
     </View>
   );
@@ -80,8 +80,8 @@ export default React.memo(ValueArrowPicker);
 const styles = StyleSheet.create({
   itemsCenter: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   height: {
     height: 112,

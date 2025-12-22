@@ -1,12 +1,12 @@
-import {StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Easing, useSharedValue, withTiming} from 'react-native-reanimated';
+import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Easing, useSharedValue, withTiming } from "react-native-reanimated";
 
-import {Colors} from '@utils/colors';
-import MyButton from '@components/charts/MyButton';
-import GroupChart from '@components/charts/groupChart/GroupChart';
-import StackChart from '@components/charts/stackChart/StackChart';
-import StatusBarManager from '@components/common/StatusBarManager';
+import { Colors } from "@utils/colors";
+import MyButton from "@components/charts/MyButton";
+import GroupChart from "@components/charts/groupChart/GroupChart";
+import StackChart from "@components/charts/stackChart/StackChart";
+import StatusBarManager from "@components/common/StatusBarManager";
 
 const GroupStackCharts = () => {
   const insets = useSafeAreaInsets();
@@ -17,13 +17,19 @@ const GroupStackCharts = () => {
 
   const animateIt = (forward = true) => {
     const toValue = forward ? 1 : 0;
-    animate.value = withTiming(toValue, {duration: 1000, easing: Easing.ease});
+
+    animate.set(
+      withTiming(toValue, {
+        duration: 1000,
+        easing: Easing.ease,
+      })
+    );
   };
 
   return (
     <>
       <StatusBarManager />
-      <View style={[styles.container, {paddingTop, paddingBottom}]}>
+      <View style={[styles.container, { paddingTop, paddingBottom }]}>
         <View style={styles.chartsContainer}>
           <GroupChart animate={animate} />
           <StackChart animate={animate} />
@@ -43,19 +49,19 @@ export default GroupStackCharts;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: Colors.ALABASTER,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   chartsContainer: {
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
   },
   btnsContainer: {
-    justifyContent: 'space-around',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "space-around",
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
     height: 52,
     marginTop: 16,
   },

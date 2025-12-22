@@ -6,17 +6,17 @@ import {
   StyleSheet,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
-import {useCallback} from 'react';
-import {useIsFocused} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
+} from "react-native";
+import { useCallback } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
-import {Colors} from '@utils/colors';
-import {STOCKS_DATA} from '@components/bank/data';
-import StockItem from '@components/bank/StockItem';
-import {StocksItemProps} from '@components/bank/types';
-import HeaderWithIcon from '@components/bank/HeaderWithIcon';
+import { Colors } from "@utils/colors";
+import { STOCKS_DATA } from "@components/bank/data";
+import StockItem from "@components/bank/StockItem";
+import { StocksItemProps } from "@components/bank/types";
+import HeaderWithIcon from "@components/bank/HeaderWithIcon";
 
 const BankStocks = () => {
   const isFocused = useIsFocused();
@@ -26,18 +26,21 @@ const BankStocks = () => {
   const paddingTop = insets.top > 0 ? insets.top + 4 : 24;
 
   if (isFocused) {
-    StatusBar.setBarStyle('dark-content');
+    StatusBar.setBarStyle("dark-content");
   }
 
-  const onScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const contentOffset = e.nativeEvent.contentOffset;
+  const onScroll = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const contentOffset = e.nativeEvent.contentOffset;
 
-    if (contentOffset.y > 0 && !showBorder.value) {
-      showBorder.value = true;
-    } else if (contentOffset.y === 0 && showBorder.value) {
-      showBorder.value = false;
-    }
-  }, []);
+      if (contentOffset.y > 0 && !showBorder.value) {
+        showBorder.value = true;
+      } else if (contentOffset.y === 0 && showBorder.value) {
+        showBorder.value = false;
+      }
+    },
+    [showBorder]
+  );
 
   const separatorStyle = useAnimatedStyle(() => ({
     borderBottomWidth: showBorder.value ? 1 : 0,
@@ -54,13 +57,13 @@ const BankStocks = () => {
     return <StockItem {...item} key={index} />;
   };
   return (
-    <View style={[styles.container, {paddingTop}]}>
+    <View style={[styles.container, { paddingTop }]}>
       <HeaderWithIcon
         label="Stocks"
         icon={
           <Image
             style={styles.icon}
-            source={require('@assets/img/bank/stocks.png')}
+            source={require("@assets/img/bank/stocks.png")}
           />
         }
         style={separatorStyle}
@@ -83,14 +86,14 @@ export default BankStocks;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: 'visible',
+    overflow: "visible",
     backgroundColor: Colors.CULTURED,
   },
   contentContainer: {
     gap: 16,
     paddingTop: 24,
     paddingBottom: 150,
-    overflow: 'visible',
+    overflow: "visible",
   },
   icon: {
     width: 26,

@@ -2,24 +2,24 @@ import {
   interpolate,
   useDerivedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {TTotalLabel} from './types';
-import {StyleSheet} from 'react-native';
+} from "react-native-reanimated";
+import { TTotalLabel } from "./types";
+import { StyleSheet } from "react-native";
 
-import {height} from './data';
-import {Colors} from '@utils/colors';
-import {isIOS} from '@utils/device';
-import {typography} from '@utils/typography';
-import ReText from '@components/common/ReText';
+import { height } from "./data";
+import { Colors } from "@utils/colors";
+import { isIOS } from "@utils/device";
+import { typography } from "@utils/typography";
+import ReText from "@components/common/ReText";
 
-const TotalLabel = ({animatedText, progress}: TTotalLabel) => {
+const TotalLabel = ({ animatedText, progress }: TTotalLabel) => {
   const formattedText = useDerivedValue(
-    () => ` ${animatedText.value ? animatedText.value : ''}`,
+    () => ` ${animatedText.value ? animatedText.value : ""}`
   );
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: interpolate(progress.value, [0, 1], [0, 1]),
-    transform: [{translateX: interpolate(progress.value, [0, 1], [8, 0])}],
+    transform: [{ translateX: interpolate(progress.value, [0, 1], [8, 0]) }],
   }));
 
   return (
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     right: 2,
     fontSize: 20,
     minWidth: 30,
-    alignSelf: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    alignItems: "center",
     fontFamily: typography.bold,
     color: Colors.DARK_OLIVE_GREEN,
     top: height / 2 - (isIOS ? 14 : 24),

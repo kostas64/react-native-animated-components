@@ -1,14 +1,19 @@
-import {Animated, GestureResponderEvent} from 'react-native';
+import {
+  View,
+  Animated,
+  ImageSourcePropType,
+  GestureResponderEvent,
+} from "react-native";
 
-type TData = {
-  image: any;
+export type TData = {
+  image: ImageSourcePropType;
   key: string;
-  ref: any;
+  ref: React.RefObject<View | null>;
   title: string;
 };
 
 export type ListItem = {
-  item: {image: string};
+  item: { image: string };
 };
 
 export type TMeasure = {
@@ -20,7 +25,7 @@ export type TMeasure = {
 
 export type TIndicator = {
   measures: TMeasure[];
-  scrollX: any;
+  scrollX: Animated.Value;
 };
 
 export type TTab = {

@@ -1,27 +1,31 @@
+import {
+  impactAsync,
+  AndroidHaptics,
+  ImpactFeedbackStyle,
+  performAndroidHapticsAsync,
+} from "expo-haptics";
 import Animated, {
   withTiming,
   interpolate,
   SlideInDown,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React, {useCallback} from 'react';
-import Haptic from 'react-native-haptic-feedback';
-import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
+} from "react-native-reanimated";
+import React from "react";
+import { Image, ImageSourcePropType, StyleSheet } from "react-native";
 
-import {Colors} from '@utils/colors';
-import MessageItem from './MessageItem';
-import {HAPTIC_CONFIG} from '@utils/haptics';
-import {isAndroid, WIDTH} from '@utils/device';
-import {BACKGROUND_BLUR_RADIUS, EMOJI} from './data';
-import {TBackgroundProps, TEmojiItemProps} from './types';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
+import { Colors } from "@utils/colors";
+import MessageItem from "./MessageItem";
+import { isAndroid, WIDTH } from "@utils/device";
+import { BACKGROUND_BLUR_RADIUS, EMOJI } from "./data";
+import { TBackgroundProps, TEmojiItemProps } from "./types";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
 
 const triggerSelectionHaptik = () => {
   if (isAndroid) {
-    Haptic.trigger('effectClick', HAPTIC_CONFIG);
+    performAndroidHapticsAsync(AndroidHaptics.Context_Click);
   } else {
-    Haptic.trigger('selection', HAPTIC_CONFIG);
+    impactAsync(ImpactFeedbackStyle.Light);
   }
 };
 
@@ -36,46 +40,45 @@ const Background = ({
 
   const emojiStyle = useAnimatedStyle(() => ({
     opacity: interpolate(animateDismiss.value, [0, 1], [0, 1]),
-    transform: [{scale: interpolate(animateDismiss.value, [0, 1], [0.5, 1])}],
+    transform: [{ scale: interpolate(animateDismiss.value, [0, 1], [0.5, 1]) }],
   }));
 
-  const onDismiss = useCallback(
-    (id?: string, emoji?: ImageSourcePropType, vibrate = false) => {
-      animateDismiss.value = withTiming(0, {duration: 50});
-      onPressOut(id, emoji === clonedItemToPass.emoji ? undefined : emoji);
-      vibrate && triggerSelectionHaptik();
-    },
-    [clonedItemToPass],
-  );
+  const onDismiss = (
+    id?: string,
+    emoji?: ImageSourcePropType,
+    vibrate = false
+  ) => {
+    animateDismiss.value = withTiming(0, { duration: 50 });
+    onPressOut(id, emoji === clonedItemToPass.emoji ? undefined : emoji);
+    vibrate && triggerSelectionHaptik();
+  };
 
-  const renderItem = useCallback(
-    ({item, index}: TEmojiItemProps) => {
-      const backgroundColor =
-        clonedItemToPass.emoji === item ? '#d3d3d3' : 'transparent';
+  const renderItem = ({ item, index }: TEmojiItemProps) => {
+    const backgroundColor =
+      clonedItemToPass.emoji === item ? "#d3d3d3" : "transparent";
 
-      return (
-        <AnimatedPressable
-          key={`emoji-${index}`}
-          entering={SlideInDown.delay(index * 50)}
-          onPress={() => onDismiss(clonedItemToPass.id, item, true)}
-          style={[{backgroundColor}, styles.emojiSelectedContainer]}>
-          <Image source={item} style={styles.emoji} />
-        </AnimatedPressable>
-      );
-    },
-    [clonedItemToPass],
-  );
+    return (
+      <AnimatedPressable
+        key={`emoji-${index}`}
+        entering={SlideInDown.delay(index * 50)}
+        onPress={() => onDismiss(clonedItemToPass.id, item, true)}
+        style={[{ backgroundColor }, styles.emojiSelectedContainer]}
+      >
+        <Image source={item} style={styles.emoji} />
+      </AnimatedPressable>
+    );
+  };
 
   React.useEffect(() => {
     if (captureUri) {
       animateDismiss.value = withTiming(1);
     }
-  }, [captureUri]);
+  }, [captureUri, animateDismiss]);
 
   if (
     !captureUri ||
-    typeof clonedItem?.id !== 'string' ||
-    typeof clonedItem?.top !== 'number'
+    typeof clonedItem?.id !== "string" ||
+    typeof clonedItem?.top !== "number"
   ) {
     return null;
   }
@@ -84,16 +87,17 @@ const Background = ({
     <>
       <AnimatedPressable style={styles.blurBg} onPress={() => onDismiss()}>
         <Animated.Image
-          source={{uri: captureUri}}
+          source={{ uri: captureUri }}
           blurRadius={BACKGROUND_BLUR_RADIUS}
           style={[opacity, styles.capturedImg]}
         />
       </AnimatedPressable>
       <Animated.View
-        style={[opacity, styles.clonedMessage, {top: clonedItem?.top}]}>
-        <MessageItem item={{...clonedItemToPass, emoji: undefined}} />
+        style={[opacity, styles.clonedMessage, { top: clonedItem?.top }]}
+      >
+        <MessageItem item={{ ...clonedItemToPass, emoji: undefined }} />
         <Animated.View style={[emojiStyle, styles.emojiContainer]}>
-          {EMOJI.map((item, index) => renderItem({item, index}))}
+          {EMOJI.map((item, index) => renderItem({ item, index }))}
         </Animated.View>
       </Animated.View>
     </>
@@ -104,15 +108,15 @@ export default Background;
 
 const styles = StyleSheet.create({
   blurBg: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
+    width: "100%",
+    height: "100%",
+    position: "absolute",
     top: 0,
     zIndex: 100,
   },
   capturedImg: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     zIndex: 100,
   },
   emojiSelectedContainer: {
@@ -124,10 +128,10 @@ const styles = StyleSheet.create({
     height: 32,
   },
   clonedMessage: {
-    position: 'absolute',
-    width: '100%',
+    position: "absolute",
+    width: "100%",
     zIndex: 201,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   emojiContainer: {
     zIndex: 100,
@@ -137,10 +141,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: Colors.WHITE,
     padding: 8,
-    alignSelf: 'center',
+    alignSelf: "center",
     borderRadius: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 10,
   },
 });

@@ -1,13 +1,9 @@
-import {
-  Easing,
-  runOnJS,
-  withTiming,
-  useSharedValue,
-} from 'react-native-reanimated';
-import {Svg} from 'react-native-svg';
-import {StyleSheet, View} from 'react-native';
-import React, {useImperativeHandle} from 'react';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import { Svg } from "react-native-svg";
+import { StyleSheet, View } from "react-native";
+import React, { useImperativeHandle } from "react";
+import { scheduleOnRN } from "react-native-worklets";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { Easing, withTiming, useSharedValue } from "react-native-reanimated";
 
 import {
   data,
@@ -17,11 +13,11 @@ import {
   centerX,
   centerY,
   borderRadius,
-} from './data';
-import Slice from './Slice';
-import Legend from './Legend';
-import TotalLabel from './TotalLabel';
-import ChartHeader from '../ChartHeader';
+} from "./data";
+import Slice from "./Slice";
+import Legend from "./Legend";
+import TotalLabel from "./TotalLabel";
+import ChartHeader from "../ChartHeader";
 
 const PieChart = React.forwardRef((_, ref) => {
   const progress = useSharedValue(0);
@@ -33,7 +29,7 @@ const PieChart = React.forwardRef((_, ref) => {
 
   const animate = (forward = true) => {
     if (animatedText.value !== 0) {
-      progressValue.value = withTiming(0, {duration: 75}, () => {
+      progressValue.value = withTiming(0, { duration: 75 }, () => {
         animatedText.value = 0;
       });
     }
@@ -54,13 +50,13 @@ const PieChart = React.forwardRef((_, ref) => {
       const sliceAngle = (data[i].value / total) * 2 * Math.PI;
       if (angle >= cumulativeAngle && angle < cumulativeAngle + sliceAngle) {
         if (animatedText.value === data[i].value) {
-          progressValue.value = withTiming(0, {duration: 150});
+          progressValue.value = withTiming(0, { duration: 150 });
           animatedText.value = 0;
           return;
         }
 
         if (animatedText.value !== 0) {
-          progressValue.value = withTiming(0, {duration: 150}, finished => {
+          progressValue.value = withTiming(0, { duration: 150 }, (finished) => {
             if (finished) {
               animatedText.value = data[i].value;
               progressValue.value = withTiming(1);
@@ -78,7 +74,7 @@ const PieChart = React.forwardRef((_, ref) => {
     }
   };
 
-  const gesture = Gesture.Tap().onStart(event => {
+  const gesture = Gesture.Tap().onStart((event) => {
     const touchX = event.x - centerX;
     const touchY = event.y - centerY;
     const distance = Math.sqrt(touchX * touchX + touchY * touchY);
@@ -96,10 +92,10 @@ const PieChart = React.forwardRef((_, ref) => {
         return;
       }
 
-      runOnJS(onTap)(normalizedAngle);
+      scheduleOnRN(onTap, normalizedAngle);
     } else {
       if (animatedText.value !== 0) {
-        progressValue.value = withTiming(0, {duration: 50}, () => {
+        progressValue.value = withTiming(0, { duration: 50 }, () => {
           animatedText.value = 0;
         });
 
@@ -111,7 +107,7 @@ const PieChart = React.forwardRef((_, ref) => {
   return (
     <View style={[styles.spaceBottom, styles.spaceTop]}>
       <View style={styles.spaceBottom4}>
-        <ChartHeader iconName="piechart" label={'Pie Chart'} />
+        <ChartHeader iconName="pie-chart" label={"Pie Chart"} />
       </View>
 
       <GestureDetector gesture={gesture}>
@@ -138,7 +134,7 @@ const PieChart = React.forwardRef((_, ref) => {
   );
 });
 
-PieChart.displayName = 'PieChart';
+PieChart.displayName = "PieChart";
 
 const styles = StyleSheet.create({
   spaceTop: {

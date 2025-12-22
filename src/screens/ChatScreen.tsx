@@ -1,6 +1,11 @@
 import {
+  impactAsync,
+  AndroidHaptics,
+  ImpactFeedbackStyle,
+  performAndroidHapticsAsync,
+} from "expo-haptics";
+import {
   View,
-  LogBox,
   FlatList,
   Keyboard,
   TextInput,
@@ -8,9 +13,8 @@ import {
   NativeScrollEvent,
   ImageSourcePropType,
   NativeSyntheticEvent,
-} from 'react-native';
+} from "react-native";
 import Animated, {
-  runOnJS,
   withDelay,
   withTiming,
   interpolate,
@@ -18,41 +22,37 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedKeyboard,
-} from 'react-native-reanimated';
-import React, {useState} from 'react';
-import Haptic from 'react-native-haptic-feedback';
-import {captureScreen} from 'react-native-view-shot';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from "react-native-reanimated";
+import React, { useState } from "react";
+import { scheduleOnRN } from "react-native-worklets";
+import { captureScreen } from "react-native-view-shot";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {Colors} from '@utils/colors';
-import {MESSAGES} from '@assets/messages';
-import {HAPTIC_CONFIG} from '@utils/haptics';
-import Header from '@components/chat/Header';
-import Wrapper from '@components/chat/Wrapper';
-import {useKeyboard} from '@hooks/useKeyboard';
-import {isAndroid, isIOS} from '@utils/device';
-import {TMessage} from '@components/chat/types';
-import {commonStyles} from '@utils/commonStyles';
-import {captureOptions} from '@components/chat/data';
-import Background from '@components/chat/Background';
-import MessageItem from '@components/chat/MessageItem';
-import SendMessageInput from '@components/chat/SendMessageInput';
-import StatusBarManager from '@components/common/StatusBarManager';
-
-//Ignore in case you run in simulator
-LogBox.ignoreLogs(['RNReactNativeHapticFeedback is not available']);
+import { Colors } from "@utils/colors";
+import { MESSAGES } from "@assets/messages";
+import Header from "@components/chat/Header";
+import Wrapper from "@components/chat/Wrapper";
+import { useKeyboard } from "@hooks/useKeyboard";
+import { isAndroid, isIOS } from "@utils/device";
+import { TMessage } from "@components/chat/types";
+import { commonStyles } from "@utils/commonStyles";
+import { captureOptions } from "@components/chat/data";
+import Background from "@components/chat/Background";
+import MessageItem from "@components/chat/MessageItem";
+import SendMessageInput from "@components/chat/SendMessageInput";
+import StatusBarManager from "@components/common/StatusBarManager";
 
 export const triggerLongPressHaptik = () => {
   if (isAndroid) {
-    Haptic.trigger('longPress', HAPTIC_CONFIG);
+    performAndroidHapticsAsync(AndroidHaptics.Long_Press);
   } else {
-    Haptic.trigger('impactMedium', HAPTIC_CONFIG);
+    impactAsync(ImpactFeedbackStyle.Medium);
   }
 };
 
 const ChatScreen = () => {
   const insets = useSafeAreaInsets();
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const keyboardH = useKeyboard(true);
   const keyb = useAnimatedKeyboard({
     isStatusBarTranslucentAndroid: true,
@@ -70,7 +70,7 @@ const ChatScreen = () => {
   const [clonedItem, setClonedItem] = useState<{
     id: string;
     top: number | null;
-  }>({id: '0', top: null});
+  }>({ id: "0", top: null });
 
   const marginTop = insets.top > 0 ? insets.top : 24;
   const paddingBottom = keyboardH > 0 ? keyboardH : 16;
@@ -81,10 +81,10 @@ const ChatScreen = () => {
         longPress.value,
         [isIOS ? 0 : 0.25, 1],
         [isIOS ? 0 : 0.5, 1],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
     }),
-    [],
+    []
   );
 
   const translateList = useAnimatedStyle(() => {
@@ -100,76 +100,70 @@ const ChatScreen = () => {
   });
 
   const clonedItemToPass = {
-    ...(messages?.find(item => item?.id === clonedItem?.id) ?? messages[0]),
+    ...(messages?.find((item) => item?.id === clonedItem?.id) ?? messages[0]),
     animate: false,
   };
 
-  const onPressSend = React.useCallback((message: string) => {
+  const onPressSend = (message: string) => {
     if (message.length > 0) {
-      setMessages(oldMessages => [
+      setMessages((oldMessages) => [
         {
           id: `${new Date()}-${Math.random()}`,
-          image: require('@assets/img/guy.jpg'),
-          name: 'Mark 💻',
+          image: require("@assets/img/guy.jpg"),
+          name: "Mark 💻",
           message,
-          time: '11:25 AM',
+          time: "11:25 AM",
           animate: true,
         },
         ...oldMessages,
       ]);
-      setInput('');
+      setInput("");
     }
-  }, []);
+  };
 
-  const scrollToFirstItem = React.useCallback(() => {
-    listRef.current?.scrollToIndex({index: 0, animated: true});
-  }, []);
+  const scrollToFirstItem = () => {
+    listRef.current?.scrollToIndex({ index: 0, animated: true });
+  };
 
-  const onScroll = React.useCallback(
-    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-      scrollY.value = e.nativeEvent.contentOffset.y;
-    },
-    [],
-  );
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    scrollY.value = e.nativeEvent.contentOffset.y;
+  };
 
-  const capture = React.useCallback((id: string, top: number) => {
-    captureScreen(captureOptions).then(uri => {
+  const capture = (id: string, top: number) => {
+    captureScreen(captureOptions).then((uri) => {
       isAndroid && triggerLongPressHaptik();
-      longPress.value = withTiming(1, {duration: isIOS ? 200 : 1});
-      setClonedItem({id, top});
+      longPress.value = withTiming(1, { duration: isIOS ? 200 : 1 });
+      setClonedItem({ id, top });
       setCaptureUri(uri);
     });
-  }, []);
+  };
 
-  const onPressOut = React.useCallback(
-    (id?: string, emoji?: ImageSourcePropType) => {
-      longPress.value = withTiming(0, {duration: 100}, finished => {
-        if (finished) {
-          runOnJS(setCaptureUri)(null);
-          runOnJS(setClonedItem)({id: '', top: null});
+  const onPressOut = (id?: string, emoji?: ImageSourcePropType) => {
+    longPress.value = withTiming(0, { duration: 100 }, (finished) => {
+      if (finished) {
+        scheduleOnRN(setCaptureUri, null);
+        scheduleOnRN(setClonedItem, { id: "", top: null });
 
-          if (id) {
-            runOnJS(onEmojiSelection)(id, emoji);
-          }
+        if (id) {
+          scheduleOnRN(onEmojiSelection, id, emoji);
         }
-      });
-
-      if (lockedHeight.value > 0) {
-        inputRef.current?.focus();
-        lockedHeight.value = withDelay(500, withTiming(0, {duration: 50}));
       }
-    },
-    [],
-  );
+    });
 
-  const handleKeyboard = React.useCallback(() => {
+    if (lockedHeight.value > 0) {
+      inputRef.current?.focus();
+      lockedHeight.value = withDelay(500, withTiming(0, { duration: 50 }));
+    }
+  };
+
+  const handleKeyboard = () => {
     if (keyb.height.value > 0) {
       lockedHeight.value = keyb.height.value;
       Keyboard.dismiss();
     }
-  }, []);
+  };
 
-  const renderItem = ({item}: {item: TMessage}) => (
+  const renderItem = ({ item }: { item: TMessage }) => (
     <MessageItem
       item={item}
       scrollY={scrollY}
@@ -181,13 +175,13 @@ const ChatScreen = () => {
 
   const onEmojiSelection = React.useCallback(
     (messageId: string, emojiSelection?: ImageSourcePropType) => {
-      setMessages(oldMessages =>
-        oldMessages.map(item =>
-          item.id === messageId ? {...item, emoji: emojiSelection} : item,
-        ),
+      setMessages((oldMessages) =>
+        oldMessages.map((item) =>
+          item.id === messageId ? { ...item, emoji: emojiSelection } : item
+        )
       );
     },
-    [],
+    []
   );
 
   React.useEffect(() => {
@@ -206,7 +200,7 @@ const ChatScreen = () => {
       />
 
       <View style={styles.container}>
-        <View style={[styles.headerContainer, {paddingTop: marginTop}]}>
+        <View style={[styles.headerContainer, { paddingTop: marginTop }]}>
           <Header />
         </View>
 
@@ -219,8 +213,8 @@ const ChatScreen = () => {
               onScroll={onScroll}
               renderItem={renderItem}
               keyboardShouldPersistTaps="handled"
-              contentContainerStyle={{paddingBottom}}
-              keyExtractor={item => `message-${item.id}`}
+              contentContainerStyle={{ paddingBottom }}
+              keyExtractor={(item) => `message-${item.id}`}
             />
           </Wrapper>
 

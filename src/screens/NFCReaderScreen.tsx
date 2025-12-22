@@ -6,21 +6,21 @@ import Animated, {
   withSequence,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React from 'react';
-import {InteractionManager, StyleSheet, View} from 'react-native';
+} from "react-native-reanimated";
+import React from "react";
+import { InteractionManager, StyleSheet, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
 
 const NFCReader = () => {
   const progress = useSharedValue(0);
 
   const phone = useAnimatedStyle(() => ({
     transform: [
-      {perspective: 400},
-      {rotateX: `${interpolate(progress.value, [0, 1], [0, 40])}deg`},
-      {translateY: interpolate(progress.value, [0, 1], [0, 4])},
+      { perspective: 400 },
+      { rotateX: `${interpolate(progress.value, [0, 1], [0, 40])}deg` },
+      { translateY: interpolate(progress.value, [0, 1], [0, 4]) },
     ],
   }));
 
@@ -33,27 +33,29 @@ const NFCReader = () => {
           rotate: `${interpolate(
             progress.value,
             [0, 0.01, 1],
-            [0, -35, -65],
+            [0, -35, -65]
           )}deg`,
         },
-        {translateY: interpolate(progress.value, [0, 0.01, 1], [0, -24, -24])},
-        {translateX: interpolate(progress.value, [0, 1], [0, -32])},
+        {
+          translateY: interpolate(progress.value, [0, 0.01, 1], [0, -24, -24]),
+        },
+        { translateX: interpolate(progress.value, [0, 1], [0, -32]) },
       ],
     }),
-    [],
+    []
   );
 
   React.useEffect(() => {
     InteractionManager.runAfterInteractions(() => {
       progress.value = withRepeat(
         withSequence(
-          withDelay(350, withTiming(1, {duration: 750})),
-          withDelay(250, withTiming(0, {duration: 750})),
+          withDelay(350, withTiming(1, { duration: 750 })),
+          withDelay(250, withTiming(0, { duration: 750 }))
         ),
-        -1,
+        -1
       );
     });
-  }, []);
+  }, [progress]);
 
   return (
     <View style={styles.container}>
@@ -73,8 +75,8 @@ export default NFCReader;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.BLACK,
   },
   circle: {
@@ -82,10 +84,10 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     width: 70,
     height: 70,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    alignItems: "center",
+    justifyContent: "flex-end",
     borderRadius: 1000,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   phoneContainer: {
     top: 20,
@@ -95,10 +97,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DARK_CERULEAN,
     borderColor: Colors.AZURE,
     borderWidth: 2,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   phoneShadow: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: Colors.PRUSSIAN_BLUE,
   },
   notch: {
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
     height: 2,
     borderRadius: 8,
     backgroundColor: Colors.AZURE,
-    alignSelf: 'center',
+    alignSelf: "center",
     top: 3,
   },
   label: {

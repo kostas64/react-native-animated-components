@@ -1,10 +1,10 @@
-import {StyleSheet, View} from 'react-native';
-import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
-import {forwardRef, memo, useImperativeHandle, useState} from 'react';
+import { StyleSheet, View } from "react-native";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { forwardRef, memo, useImperativeHandle, useState } from "react";
 
-import {Colors} from '@utils/colors';
-import {HOME_LIST} from '@assets/homeList';
-import {HEIGHT, isIOS, WIDTH} from '@utils/device';
+import { Colors } from "@utils/colors";
+import { HOME_LIST } from "@assets/homeList";
+import { HEIGHT_SCR, isIOS, WIDTH } from "@utils/device";
 
 const MemoizedBackground = forwardRef((_, ref) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -29,15 +29,17 @@ const MemoizedBackground = forwardRef((_, ref) => {
   );
 });
 
+MemoizedBackground.displayName = "HomeBackground";
+
 const HomeBackground = memo(MemoizedBackground);
 
 export default HomeBackground;
 
 const styles = StyleSheet.create({
   img: {
-    position: 'absolute',
+    position: "absolute",
     width: WIDTH,
-    height: HEIGHT,
+    height: HEIGHT_SCR,
   },
   overlay: {
     backgroundColor: Colors.HALF_BLACK,

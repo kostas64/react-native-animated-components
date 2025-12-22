@@ -1,15 +1,15 @@
-import {StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
 const ImplementedWith = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.container, {top: insets.top + 16}]}>
+    <View style={[styles.container, { top: insets.top + 16 }]}>
       <Text style={styles.implemented}>Implemented with:</Text>
       <Text style={styles.label}>Animated API</Text>
     </View>
@@ -20,7 +20,7 @@ export default ImplementedWith;
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: "absolute",
     left: 20,
   },
   implemented: {

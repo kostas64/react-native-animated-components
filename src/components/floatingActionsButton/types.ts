@@ -1,6 +1,8 @@
-import {ViewStyle} from 'react-native';
-import {SharedValue} from 'react-native-reanimated';
-import Feather from 'react-native-vector-icons/Feather';
+import { ViewStyle } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import { SharedValue } from "react-native-reanimated";
+
+import { FeatherName } from "src/types/common";
 
 export type TFloatingActionButtonProps = {
   progress: SharedValue<number>;
@@ -20,7 +22,7 @@ export type TFloatingModalDimensions = {
 export type TFloatingModalItemProps = {
   style?: ViewStyle | ViewStyle[];
   item: {
-    name: string;
+    name: FeatherName;
     label: string;
     component: typeof Feather;
   };

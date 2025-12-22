@@ -2,10 +2,10 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
   createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+} from "@react-navigation/native-stack";
 
-import BankWelcome from './BankWelcome';
-import BankBottomStack from './BankBottomStack';
+import BankWelcome from "./BankWelcome";
+import BankBottomStack from "./BankBottomStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,11 +16,11 @@ export type TBankInnerStackList = {
 
 export type TBankNavigationProps = NativeStackNavigationProp<
   TBankInnerStackList,
-  'BankWelcome'
+  "BankWelcome"
 >;
 export type TBankScreenProps = NativeStackScreenProps<
   TBankInnerStackList,
-  'BankWelcome'
+  "BankWelcome"
 >;
 
 const BankStack = () => {
@@ -28,7 +28,8 @@ const BankStack = () => {
     <>
       <Stack.Navigator
         initialRouteName="BankWelcome"
-        screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
+        screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      >
         <Stack.Screen name="BankWelcome" component={BankWelcome} />
         <Stack.Screen name="BankBottomStack" component={BankBottomStack} />
       </Stack.Navigator>

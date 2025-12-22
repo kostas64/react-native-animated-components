@@ -3,14 +3,14 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   interpolateColor,
-} from 'react-native-reanimated';
-import {Pressable, StyleSheet} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+} from "react-native-reanimated";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Pressable, StyleSheet } from "react-native";
 
-import {TNumberItem} from './types';
-import {Colors} from '@utils/colors';
-import Text from '@components/common/Text';
-import {typography} from '@utils/typography';
+import { TNumberItem } from "./types";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
 const AnimPress = Animated.createAnimatedComponent(Pressable);
 
@@ -28,30 +28,30 @@ const NumberItem = ({
     backgroundColor: interpolateColor(
       progress.value,
       [0, 1],
-      ['#141416', '#fee3d6'],
+      ["#141416", "#fee3d6"]
     ),
   }));
 
   const onPressIn = () => {
     const indexToAnimate = input.length;
 
-    if (typeof value === 'number') {
-      setInput(old => `${old}${value}`);
+    if (typeof value === "number") {
+      setInput((old) => `${old}${value}`);
 
       inputsRef?.[indexToAnimate]?.current?.animatePlaceholder();
 
       if (indexToAnimate === 3) {
         setTimeout(() => {
           setLoading(true);
-          setInput('');
+          setInput("");
         }, 300);
 
         setTimeout(() => {
           setLoading(false);
-          translateX.value = withTiming(-8, {duration: 100}, () => {
-            translateX.value = withTiming(8, {duration: 50}, () => {
-              translateX.value = withTiming(-4, {duration: 50}, () => {
-                translateX.value = withTiming(0, {duration: 100});
+          translateX.value = withTiming(-8, { duration: 100 }, () => {
+            translateX.value = withTiming(8, { duration: 50 }, () => {
+              translateX.value = withTiming(-4, { duration: 50 }, () => {
+                translateX.value = withTiming(0, { duration: 100 });
               });
             });
           });
@@ -64,8 +64,8 @@ const NumberItem = ({
           }, 300);
         }, 2000);
       }
-    } else if (typeof value === 'string') {
-      setInput(old => old.slice(0, -1));
+    } else if (typeof value === "string") {
+      setInput((old) => old.slice(0, -1));
       inputsRef?.[indexToAnimate - 1]?.current?.animateRemove();
     }
     progress.value = withTiming(1 - progress.value);
@@ -76,10 +76,10 @@ const NumberItem = ({
   };
 
   const getValue = () => {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return <Text style={styles.number}>{value}</Text>;
     } else {
-      return <Ionicons name={value as string} size={36} color={'white'} />;
+      return <Ionicons name={value} size={36} color={"white"} />;
     }
   };
 
@@ -88,7 +88,8 @@ const NumberItem = ({
       disabled={disabled}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
-      style={[animStyle, styles.numberContainer]}>
+      style={[animStyle, styles.numberContainer]}
+    >
       {getValue()}
     </AnimPress>
   );
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
     borderColor: Colors.WHITE,
     borderWidth: 1,
     borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   number: {
     color: Colors.WHITE,

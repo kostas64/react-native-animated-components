@@ -1,17 +1,17 @@
-import {View, Easing, Animated, Pressable, StyleSheet} from 'react-native';
-import React from 'react';
+import { View, Easing, Animated, Pressable, StyleSheet } from "react-native";
+import React from "react";
 
-import {SIZE} from './constants';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
+import { SIZE } from "./constants";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { SM_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const ToggleWithLabel = () => {
   const animRef = React.useRef(new Animated.Value(0)).current;
   const [togglerActive, setTogglerActive] = React.useState(false);
 
-  const animate = () => setTogglerActive(cur => !cur);
+  const animate = () => setTogglerActive((cur) => !cur);
 
   React.useEffect(() => {
     Animated.timing(animRef, {
@@ -20,7 +20,7 @@ const ToggleWithLabel = () => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }, [togglerActive]);
+  }, [animRef, togglerActive]);
 
   return (
     <Pressable onPress={animate}>
@@ -28,11 +28,12 @@ const ToggleWithLabel = () => {
         style={[
           styles.container,
           !togglerActive ? styles.whiteBg : styles.blackBg,
-        ]}>
+        ]}
+      >
         <Animated.View
           style={[
             styles.background,
-            {transform: [{translateX: animRef}]},
+            { transform: [{ translateX: animRef }] },
             !togglerActive ? styles.blackBg : styles.whiteBg,
           ]}
         />
@@ -40,9 +41,10 @@ const ToggleWithLabel = () => {
           maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           style={[
             styles.label,
-            {right: !togglerActive ? SIZE / 8 : SIZE / 2 + 4},
+            { right: !togglerActive ? SIZE / 8 : SIZE / 2 + 4 },
             togglerActive ? styles.white : styles.black,
-          ]}>{`${togglerActive ? 'ON' : 'OFF'}`}</Text>
+          ]}
+        >{`${togglerActive ? "ON" : "OFF"}`}</Text>
       </View>
     </Pressable>
   );
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     width: SIZE,
     height: SIZE / 2,
     borderRadius: SIZE / 4,
-    justifyContent: 'center',
+    justifyContent: "center",
     borderColor: Colors.BLACK,
     borderWidth: 2,
     paddingHorizontal: SIZE / 24,
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: (SIZE / 2 - 10) / 2,
   },
   label: {
-    position: 'absolute',
+    position: "absolute",
     fontFamily: typography.bold,
     fontSize: SIZE / 7,
   },

@@ -1,16 +1,16 @@
-import {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {isIOS} from '@utils/device';
-import {Colors} from '@utils/colors';
-import Cards from '@components/bank/Cards';
-import Button from '@components/bank/Button';
-import {shadows} from '@components/bank/styles';
-import {TBankNavigationProps} from './BankStack';
-import {CARD_HEIGHT} from '@components/bank/constants';
-import BankWelcomeText from '@components/bank/BankWelcomeText';
+import { isIOS } from "@utils/device";
+import { Colors } from "@utils/colors";
+import Cards from "@components/bank/Cards";
+import Button from "@components/bank/Button";
+import { shadows } from "@components/bank/styles";
+import { TBankNavigationProps } from "./BankStack";
+import { CARD_HEIGHT } from "@components/bank/constants";
+import BankWelcomeText from "@components/bank/BankWelcomeText";
 
 const BankWelcome = () => {
   const navigation = useNavigation<TBankNavigationProps>();
@@ -26,24 +26,24 @@ const BankWelcome = () => {
       setChangeShadow(true);
 
       requestAnimationFrame(() => {
-        navigation.replace('BankBottomStack');
+        navigation.replace("BankBottomStack");
       });
     } else {
-      navigation.replace('BankBottomStack');
+      navigation.replace("BankBottomStack");
     }
   };
 
   return (
     <View style={styles.container}>
-      <BankWelcomeText style={{top}} />
+      <BankWelcomeText style={{ top }} />
       <Cards
-        sharedElementTag={isIOS ? 'cards' : 'cardAndroid'}
-        style={_ => [
-          {top: insets.top + 210},
+        // sharedElementTag={isIOS ? "cards" : "cardAndroid"}
+        style={(_) => [
+          { top: insets.top + 210 },
           changeShadow && shadows.lowShadow,
         ]}
       />
-      <Button label="Join Bankify now" style={{bottom}} onPress={onPress} />
+      <Button label="Join Bankify now" style={{ bottom }} onPress={onPress} />
     </View>
   );
 };

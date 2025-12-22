@@ -1,12 +1,12 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import Svg, {Defs, LinearGradient, Stop, Rect} from 'react-native-svg';
+import React, { JSX } from "react";
+import { StyleSheet, View } from "react-native";
+import Svg, { Defs, LinearGradient, Stop, Rect } from "react-native-svg";
 
-import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/common/StatusBarManager';
-import ValueDotPicker from '@components/valuePickers/valueDot/ValueDotPicker';
-import ValueListPicker from '@components/valuePickers/valueList/ValueListPicker';
-import ValueArrowPicker from '@components/valuePickers/valueArrow/ValueArrowPicker';
+import { Colors } from "@utils/colors";
+import StatusBarManager from "@components/common/StatusBarManager";
+import ValueDotPicker from "@components/valuePickers/valueDot/ValueDotPicker";
+import ValueListPicker from "@components/valuePickers/valueList/ValueListPicker";
+import ValueArrowPicker from "@components/valuePickers/valueArrow/ValueArrowPicker";
 
 export type TValueRangePicker = {
   range: [number, number];
@@ -19,7 +19,7 @@ type TPickerContainer = {
   children: JSX.Element | JSX.Element[];
 };
 
-const PickerContainer = ({children}: TPickerContainer) => {
+const PickerContainer = ({ children }: TPickerContainer) => {
   return <View style={styles.pickerWrapper}>{children}</View>;
 };
 
@@ -31,7 +31,7 @@ const ValuePickersScreen = () => {
   return (
     <>
       <StatusBarManager />
-      <Svg width={'100%'} height={'100%'}>
+      <Svg width={"100%"} height={"100%"}>
         <Defs>
           <LinearGradient id="grad" x1="0" y1="1" x2="0" y2="0">
             <Stop offset="0%" stopColor="#c4e4e1" />
@@ -39,7 +39,7 @@ const ValuePickersScreen = () => {
             <Stop offset="100%" stopColor="#c4e4e1" />
           </LinearGradient>
         </Defs>
-        <Rect x="0" y="0" height={'100%'} width={'100%'} fill="url(#grad)" />
+        <Rect x="0" y="0" height={"100%"} width={"100%"} fill="url(#grad)" />
       </Svg>
       <View style={styles.pickersContainer}>
         <View style={styles.rowAround}>
@@ -77,15 +77,15 @@ export default ValuePickersScreen;
 
 const styles = StyleSheet.create({
   pickersContainer: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
   },
   rowAround: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   pickerWrapper: {
     width: 64,

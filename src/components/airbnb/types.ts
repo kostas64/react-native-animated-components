@@ -3,11 +3,11 @@ import {
   ViewStyle,
   ImageStyle,
   ImageSourcePropType,
-} from 'react-native';
+} from "react-native";
 
-import {Dispatch, SetStateAction} from 'react';
-import {AnimatedStyle, SharedValue} from 'react-native-reanimated';
-import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
+import { Dispatch, SetStateAction } from "react";
+import { AnimatedStyle, SharedValue } from "react-native-reanimated";
+import { CalendarActiveDateRange } from "@marceloterreiro/flash-calendar";
 
 export type TSearchItem = {
   place: string;
@@ -38,12 +38,12 @@ export type TItemCounter = {
 };
 
 export type TRenderCountryItem = {
-  item: {img: ImageSourcePropType; label: string};
+  item: { img: ImageSourcePropType; label: string };
   index: number;
 };
 
 export type TRenderSearchItem = {
-  item: {place: string; guests: number; date: string};
+  item: { place: string; guests: number; date: string };
   index: number;
 };
 
@@ -92,7 +92,7 @@ export type TWhenTrip = {
 export type TCountryItem = {
   index: number;
   isSelected: boolean;
-  item: {label: string; img: any};
+  item: { label: string; img: ImageSourcePropType };
   animateWhen: () => void;
   setCountry: Dispatch<SetStateAction<string>>;
 };

@@ -1,9 +1,9 @@
-import {Animated, StyleSheet, View} from 'react-native';
+import { Animated, StyleSheet, View } from "react-native";
 
-import {WIDTH} from '@utils/device';
-import {Colors} from '@utils/colors';
-import {ParallaxListItemProps} from './types';
-import {shadow} from '@components/addButtonMove/styles';
+import { WIDTH } from "@utils/device";
+import { Colors } from "@utils/colors";
+import { ParallaxListItemProps } from "./types";
+import { shadow } from "@components/addButtonMove/styles";
 
 const ITEM_WIDTH = WIDTH * 0.76;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.47;
@@ -28,7 +28,7 @@ const ParallaxListItem = ({
         <View style={styles.mainImgContainer}>
           <Animated.Image
             source={item.photo}
-            style={[styles.mainImg, {transform: [{translateX}]}]}
+            style={[styles.mainImg, { transform: [{ translateX }] }]}
           />
         </View>
       </View>
@@ -41,8 +41,8 @@ export default ParallaxListItem;
 const styles = StyleSheet.create({
   container: {
     width: WIDTH,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   innerContainer: {
     elevation: 50,
@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
   mainImgContainer: {
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
-    overflow: 'hidden',
+    overflow: "hidden",
     borderRadius: 36,
   },
   mainImg: {
     width: ITEM_WIDTH * 1.4,
     height: ITEM_HEIGHT,
-    resizeMode: 'cover',
-    alignSelf: 'center',
+    resizeMode: "cover",
+    alignSelf: "center",
   },
 });

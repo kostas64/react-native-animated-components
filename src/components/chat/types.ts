@@ -1,6 +1,6 @@
-import {Dispatch, SetStateAction} from 'react';
-import {ImageSourcePropType, TextInput} from 'react-native';
-import {AnimatedStyle, SharedValue} from 'react-native-reanimated';
+import { Dispatch, SetStateAction } from "react";
+import { ImageSourcePropType, TextInput } from "react-native";
+import { AnimatedStyle, SharedValue } from "react-native-reanimated";
 
 export type TMessage = {
   id: string;
@@ -29,7 +29,7 @@ export type TBackgroundProps = {
   captureUri: string | null;
   opacity: AnimatedStyle;
   clonedItemToPass: TMessage;
-  clonedItem: {id: string; top: number | null};
+  clonedItem: { id: string; top: number | null };
   onPressOut: (id?: string, emoji?: ImageSourcePropType) => void;
 };
 
@@ -41,6 +41,6 @@ export type TEmojiItemProps = {
 export type TSearchMessageInput = {
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
-  inputRef: React.RefObject<TextInput>;
+  inputRef: React.RefObject<TextInput | null>;
   onPressSend: (input: string) => void;
 };

@@ -3,55 +3,46 @@ import {
   StyleSheet,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
+} from "react-native";
 import Animated, {
-  runOnJS,
   useAnimatedRef,
   useSharedValue,
   useDerivedValue,
-  useScrollViewOffset,
+  useScrollOffset,
   useAnimatedScrollHandler,
-} from 'react-native-reanimated';
-import React, {useCallback} from 'react';
-import Haptic from 'react-native-haptic-feedback';
-import {useDebouncedCallback} from 'use-debounce';
-import {FlatList} from 'react-native-gesture-handler';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from "react-native-reanimated";
+import React, { useCallback } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import { scheduleOnRN } from "react-native-worklets";
+import { FlatList } from "react-native-gesture-handler";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {MONTHS} from './constants';
-import {TMonthListModal} from './types';
-import MonthListItem from './MonthListItem';
-import {HAPTIC_CONFIG} from '@utils/haptics';
-import {isIOS, isAndroid} from '@utils/device';
-import MonthListPickerLines from './MonthListPickerLines';
+import { MONTHS } from "./constants";
+import { TMonthListModal } from "./types";
+import MonthListItem from "./MonthListItem";
+import { isIOS, isAndroid } from "@utils/device";
+import MonthListPickerLines from "./MonthListPickerLines";
+import { impactAsync, ImpactFeedbackStyle } from "expo-haptics";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 export const triggerHaptik = () => {
-  Haptic.trigger('impactLight', HAPTIC_CONFIG);
+  impactAsync(ImpactFeedbackStyle.Light);
 };
 
-const MonthListModal = ({month, setMonth}: TMonthListModal) => {
+const MonthListModal = ({ month, setMonth }: TMonthListModal) => {
   const scrollY = useSharedValue(0);
-  const scrollRef = useAnimatedRef<FlatList>(); //@ts-ignore
-  const scrollOffset = useScrollViewOffset(scrollRef);
+  const scrollRef = useAnimatedRef<FlatList>();
+  const scrollOffset = useScrollOffset(scrollRef);
   const insets = useSafeAreaInsets();
 
-  const initialScrollIndex = MONTHS.findIndex(m => m === month);
+  const initialScrollIndex = MONTHS.findIndex((m) => m === month);
 
-  const getItemLayout = (_: any, index: number) => ({
+  const getItemLayout = (_: unknown, index: number) => ({
     index,
     length: 46,
     offset: 46 * index,
   });
-
-  const onMomentumScrollEnd = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const y = event.nativeEvent.contentOffset.y;
-      calculateNewIndex(y);
-    },
-    [],
-  );
 
   const calculateNewIndex = useDebouncedCallback(
     (y: number) => {
@@ -64,11 +55,42 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
     {
       leading: false,
       trailing: true,
+    }
+  );
+
+  const onMomentumScrollEnd = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const y = event.nativeEvent.contentOffset.y;
+      calculateNewIndex(y);
     },
+    [calculateNewIndex]
+  );
+
+  const scrollToMonth = useCallback(
+    (monthToScroll: string) => {
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: MONTHS.findIndex((m) => m === monthToScroll) * 46,
+      });
+
+      isAndroid &&
+        setTimeout(() => {
+          onMomentumScrollEnd({
+            //@ts-ignore
+            nativeEvent: {
+              contentOffset: {
+                x: 0,
+                y: MONTHS.findIndex((m) => m === month) * 46,
+              },
+            },
+          });
+        }, 15);
+    },
+    [month, scrollRef, onMomentumScrollEnd]
   );
 
   const renderItem = useCallback(
-    ({item, index}: {item: unknown; index: number}) => (
+    ({ item, index }: { item: unknown; index: number }) => (
       <MonthListItem
         index={index}
         item={item as string}
@@ -76,33 +98,16 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
         scrollToMonth={scrollToMonth}
       />
     ),
-    [],
+    [scrollOffset, scrollToMonth]
   );
 
-  const onScroll = useAnimatedScrollHandler(event => {
+  const onScroll = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
   });
 
-  const scrollToMonth = useCallback((monthToScroll: string) => {
-    scrollRef.current?.scrollToOffset({
-      animated: true,
-      offset: MONTHS.findIndex(m => m === monthToScroll) * 46,
-    });
-
-    isAndroid &&
-      setTimeout(() => {
-        onMomentumScrollEnd({
-          //@ts-ignore
-          nativeEvent: {
-            contentOffset: {x: 0, y: MONTHS.findIndex(m => m === month) * 46},
-          },
-        });
-      }, 15);
-  }, []);
-
   useDerivedValue(() => {
     if (Number.isInteger(scrollY.value / 46)) {
-      runOnJS(triggerHaptik)();
+      scheduleOnRN(triggerHaptik);
     }
   });
 
@@ -114,7 +119,7 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
         ref={scrollRef}
         renderItem={renderItem}
         onScroll={onScroll}
-        decelerationRate={'fast'}
+        decelerationRate={"fast"}
         keyExtractor={(_, index) => index.toString()}
         getItemLayout={getItemLayout}
         scrollEventThrottle={16}
@@ -124,7 +129,7 @@ const MonthListModal = ({month, setMonth}: TMonthListModal) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[
           styles.alignCenter,
-          isIOS ? {paddingBottom: insets.bottom + 56} : styles.spaceBottom,
+          isIOS ? { paddingBottom: insets.bottom + 56 } : styles.spaceBottom,
         ]}
       />
     </View>
@@ -138,7 +143,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   alignCenter: {
-    alignItems: 'center',
+    alignItems: "center",
     flexGrow: 1,
     paddingTop: 64,
   },

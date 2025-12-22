@@ -1,15 +1,15 @@
-import {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
+import { useState } from "react";
+import * as Clipboard from "expo-clipboard";
+import { StyleSheet, View } from "react-native";
 
-import {shadows} from './styles';
-import {Colors} from '@utils/colors';
-import {CardDetailProps} from './types';
-import {isAndroid} from '@utils/device';
-import {validateBiometrics} from './utils';
-import SectionHeader from './SectionHeader';
-import CardDetailRow from './CardDetailRow';
-import {useToastContext} from '@providers/ToastProvider';
+import { shadows } from "./styles";
+import { Colors } from "@utils/colors";
+import { CardDetailProps } from "./types";
+import { isAndroid } from "@utils/device";
+import SectionHeader from "./SectionHeader";
+import CardDetailRow from "./CardDetailRow";
+import { validateBiometrics } from "./utils";
+import { useToastContext } from "@providers/ToastProvider";
 
 const CardDetail = ({
   cardNumber,
@@ -17,7 +17,7 @@ const CardDetail = ({
   expirationDate,
   style,
 }: CardDetailProps) => {
-  const {showToast} = useToastContext();
+  const { showToast } = useToastContext();
 
   const [showData, setShowData] = useState(false);
 
@@ -27,16 +27,22 @@ const CardDetail = ({
     }
 
     validateBiometrics()
-      .then(resultObject => {
+      .then((resultObject) => {
         if (resultObject?.success) {
           setShowData(true);
         }
       })
-      .catch(e => console.log('No biometrics ', e));
+      .catch((e) => console.log("No biometrics ", e));
   };
 
-  const onPressCopy = ({field, value}: {field: string; value: string}) => {
-    Clipboard.setString(value);
+  const onPressCopy = async ({
+    field,
+    value,
+  }: {
+    field: string;
+    value: string;
+  }) => {
+    await Clipboard.setStringAsync(value);
     showToast(`✓  ${field} copied to clipboard`);
   };
 
@@ -53,23 +59,24 @@ const CardDetail = ({
           style={[
             styles.boxContainer,
             isAndroid ? styles.border : shadows.veryJustShadow,
-          ]}>
+          ]}
+        >
           <CardDetailRow
             hidden={!showData}
-            label={'Holder Name'}
+            label={"Holder Name"}
             value={cardholderName}
             onPress={onPressCopy}
             pressedStyle={styles.pressedFirst}
           />
           <CardDetailRow
             hidden={!showData}
-            label={'Card Number'}
+            label={"Card Number"}
             value={cardNumber}
             onPress={onPressCopy}
           />
           <CardDetailRow
             hidden={!showData}
-            label={'Exp. Date'}
+            label={"Exp. Date"}
             value={expirationDate}
             onPress={onPressCopy}
             pressedStyle={styles.pressedLast}

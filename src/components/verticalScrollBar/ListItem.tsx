@@ -1,11 +1,11 @@
-import {StyleSheet, View} from 'react-native';
-import Animated, {useAnimatedStyle} from 'react-native-reanimated';
+import { StyleSheet, View } from "react-native";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {ListItemProps} from './types';
-import {typography} from '@utils/typography';
-import {MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
+import { Colors } from "@utils/colors";
+import { ListItemProps } from "./types";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { MAX_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const ListItem = ({
   item,
@@ -15,26 +15,28 @@ const ListItem = ({
   formattedText,
 }: ListItemProps) => {
   const firstLetterStyle = useAnimatedStyle(() => ({
-    color: item.letter === formattedText.value ? '#01e395' : '#6c757d',
+    color: item.letter === formattedText.value ? "#01e395" : "#6c757d",
   }));
 
   return (
     <View
-      onLayout={e => {
+      onLayout={(e) => {
         if (item.isFirstOfLetter) {
-          firstLetterH.value = e.nativeEvent.layout.height;
+          firstLetterH.set(e.nativeEvent.layout.height);
         } else if (item.isLastOfLetter) {
-          lastLetterH.value = e.nativeEvent.layout.height + 36;
+          lastLetterH.set(e.nativeEvent.layout.height + 36);
         } else {
-          restLetterH.value = e.nativeEvent.layout.height;
+          restLetterH.set(e.nativeEvent.layout.height);
         }
       }}
-      style={[styles.container, item.isLastOfLetter && styles.spaceBottom]}>
+      style={[styles.container, item.isLastOfLetter && styles.spaceBottom]}
+    >
       {item.isFirstOfLetter && (
         <View style={styles.letterContainer}>
           <Animated.Text
             maxFontSizeMultiplier={MAX_FONT_UPSCALE_FACTOR}
-            style={[styles.letter, firstLetterStyle]}>
+            style={[styles.letter, firstLetterStyle]}
+          >
             {item.letter}
           </Animated.Text>
         </View>

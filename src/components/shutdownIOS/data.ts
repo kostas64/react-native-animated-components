@@ -1,4 +1,4 @@
-import {isIOS} from '@utils/device';
+import { isIOS } from "@utils/device";
 
 export const SLIDER_W = 268;
 export const SLIDER_FINAL_W = 76;

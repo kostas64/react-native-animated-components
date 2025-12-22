@@ -5,29 +5,32 @@ import {
   StyleSheet,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
-import {useCallback} from 'react';
-import {useIsFocused} from '@react-navigation/native';
-import {useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
+} from "react-native";
+import { useCallback } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
 
-import {Colors} from '@utils/colors';
-import WalletHeader from '@components/bank/WalletHeader';
-import WalletCharts from '@components/bank/WalletCharts';
-import CardTransactions from '@components/bank/CardTransactions';
+import { Colors } from "@utils/colors";
+import WalletHeader from "@components/bank/WalletHeader";
+import WalletCharts from "@components/bank/WalletCharts";
+import CardTransactions from "@components/bank/CardTransactions";
 
 const BankWallet = () => {
   const isFocused = useIsFocused();
   const showBorder = useSharedValue(false);
 
-  const onScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const contentOffset = e.nativeEvent.contentOffset;
+  const onScroll = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const contentOffset = e.nativeEvent.contentOffset;
 
-    if (contentOffset.y > 0 && !showBorder.value) {
-      showBorder.value = true;
-    } else if (contentOffset.y === 0 && showBorder.value) {
-      showBorder.value = false;
-    }
-  }, []);
+      if (contentOffset.y > 0 && !showBorder.value) {
+        showBorder.value = true;
+      } else if (contentOffset.y === 0 && showBorder.value) {
+        showBorder.value = false;
+      }
+    },
+    [showBorder]
+  );
 
   const separatorStyle = useAnimatedStyle(() => ({
     borderBottomWidth: showBorder.value ? 1 : 0,
@@ -36,7 +39,7 @@ const BankWallet = () => {
   }));
 
   if (isFocused) {
-    StatusBar.setBarStyle('dark-content');
+    StatusBar.setBarStyle("dark-content");
   }
 
   return (

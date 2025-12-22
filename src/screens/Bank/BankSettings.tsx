@@ -6,21 +6,20 @@ import {
   StyleSheet,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
-import {useCallback} from 'react';
-import {useIsFocused} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useSharedValue, useAnimatedStyle} from 'react-native-reanimated';
+} from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSharedValue, useAnimatedStyle } from "react-native-reanimated";
 
-import {Colors} from '@utils/colors';
-import {MONTHS} from '@assets/months';
-import {isAndroid} from '@utils/device';
-import Frozen from '@components/bank/Frozen';
-import {shadows} from '@components/bank/styles';
-import SettingsItem from '@components/bank/SettingsItem';
-import HeaderWithIcon from '@components/bank/HeaderWithIcon';
-import {PERSONAL_DETAILS, SUPPORT} from '@components/bank/data';
-import SettingsContainer from '@components/bank/SettingsContainer';
+import { Colors } from "@utils/colors";
+import { MONTHS } from "@assets/months";
+import { isAndroid } from "@utils/device";
+import Frozen from "@components/bank/Frozen";
+import { shadows } from "@components/bank/styles";
+import SettingsItem from "@components/bank/SettingsItem";
+import HeaderWithIcon from "@components/bank/HeaderWithIcon";
+import { PERSONAL_DETAILS, SUPPORT } from "@components/bank/data";
+import SettingsContainer from "@components/bank/SettingsContainer";
 
 const BankSettings = () => {
   const isFocused = useIsFocused();
@@ -30,10 +29,10 @@ const BankSettings = () => {
   const paddingTop = insets.top > 0 ? insets.top + 4 : 24;
 
   if (isFocused) {
-    StatusBar.setBarStyle('dark-content');
+    StatusBar.setBarStyle("dark-content");
   }
 
-  const onScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffset = e.nativeEvent.contentOffset;
 
     if (contentOffset.y > 0 && !showBorder.value) {
@@ -41,7 +40,7 @@ const BankSettings = () => {
     } else if (contentOffset.y === 0 && showBorder.value) {
       showBorder.value = false;
     }
-  }, []);
+  };
 
   const separatorStyle = useAnimatedStyle(() => ({
     paddingHorizontal: 24,
@@ -50,12 +49,12 @@ const BankSettings = () => {
   }));
 
   return (
-    <View style={[styles.container, {paddingTop}]}>
+    <View style={[styles.container, { paddingTop }]}>
       <HeaderWithIcon
-        label={'Settings'}
+        label={"Settings"}
         icon={
           <Image
-            source={require('@assets/img/bank/settings.png')}
+            source={require("@assets/img/bank/settings.png")}
             style={styles.icon}
           />
         }
@@ -64,7 +63,8 @@ const BankSettings = () => {
 
       <ScrollView
         onScroll={onScroll}
-        contentContainerStyle={styles.contentContainer}>
+        contentContainerStyle={styles.contentContainer}
+      >
         <SettingsItem
           isFirst
           isLast
@@ -91,7 +91,7 @@ const BankSettings = () => {
         />
 
         <SettingsContainer
-          title={'Personal Details'}
+          title={"Personal Details"}
           data={PERSONAL_DETAILS}
           style={styles.spaceTop}
         />
@@ -108,7 +108,7 @@ const BankSettings = () => {
         />
 
         <SettingsContainer
-          title={'Support'}
+          title={"Support"}
           data={SUPPORT}
           style={styles.spaceTop}
         />

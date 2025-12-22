@@ -1,18 +1,23 @@
 import Animated, {
-  runOnJS,
   withSpring,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+} from "react-native-reanimated";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { scheduleOnRN } from "react-native-worklets";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {TValueRangePicker} from './types';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { TValueRangePicker } from "./types";
 
-const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
+const ValueDotPicker = ({
+  range,
+  unit,
+  value,
+  setValue,
+}: TValueRangePicker) => {
   const ctxY = useSharedValue(0);
   const translateY = useSharedValue(0);
   const [dotValue, setDotValue] = React.useState(value);
@@ -25,7 +30,7 @@ const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
     .onBegin(() => {
       ctxY.value = translateY.value;
     })
-    .onChange(e => {
+    .onChange((e) => {
       if (
         ctxY.value + e.translationY > -2 &&
         ctxY.value + e.translationY < 114
@@ -34,29 +39,32 @@ const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
         const index = Math.floor(
           (ctxY.value + e.translationY) / step <= 0
             ? 0
-            : (ctxY.value + e.translationY) / step,
+            : (ctxY.value + e.translationY) / step
         );
 
         if (values[index] !== value) {
-          runOnJS(setDotValue)(values[index]);
+          scheduleOnRN(setDotValue, values[index]);
         }
 
         translateY.value = withSpring(ctxY.value + e.translationY, {
           damping: 17,
+          stiffness: 100,
+          mass: 0.8,
+          energyThreshold: 1e-7,
         });
       }
     })
     .onEnd(() => {
-      runOnJS(setValue)(dotValue);
+      scheduleOnRN(setValue, dotValue);
     });
 
   const pressGest = Gesture.Tap()
-    .onStart(e => {
+    .onStart((e) => {
       if (e.y > 54 && e.y < 174) {
         const step = 120 / values.length;
         const index = Math.floor((e.y - 54) / step);
 
-        runOnJS(setDotValue)(values[index]);
+        scheduleOnRN(setDotValue, values[index]);
 
         translateY.value = withSpring(step * index, {
           damping: 17,
@@ -64,11 +72,11 @@ const ValueDotPicker = ({range, unit, value, setValue}: TValueRangePicker) => {
       }
     })
     .onEnd(() => {
-      runOnJS(setValue)(dotValue);
+      scheduleOnRN(setValue, dotValue);
     });
 
   const dotPickerStyle = useAnimatedStyle(() => ({
-    transform: [{translateY: translateY.value}],
+    transform: [{ translateY: translateY.value }],
   }));
 
   const composedGestures = Gesture.Simultaneous(panGest, pressGest);
@@ -92,25 +100,25 @@ export default React.memo(ValueDotPicker);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   value: {
     marginBottom: 24,
     color: Colors.WHITE,
-    alignSelf: 'center',
+    alignSelf: "center",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   line: {
     width: 2,
     height: 112,
     backgroundColor: Colors.OUTER_SPACE,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   dot: {
     top: -9,
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     backgroundColor: Colors.WHITE,
     height: 18,
     width: 18,
@@ -122,8 +130,8 @@ const styles = StyleSheet.create({
     top: -56,
     width: 40,
     height: 186,
-    alignSelf: 'center',
-    position: 'absolute',
+    alignSelf: "center",
+    position: "absolute",
     backgroundColor: Colors.TRANSPARENT,
   },
 });

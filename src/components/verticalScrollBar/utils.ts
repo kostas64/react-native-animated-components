@@ -1,10 +1,10 @@
-import {TListItem} from './types';
+import { TListItem } from "./types";
 
 export const preprocessNames = (names: string[]): TListItem[] => {
   const processedNames: TListItem[] = [];
   const letterGroups: Record<string, string[]> = {};
 
-  names.forEach(name => {
+  names.forEach((name) => {
     const firstLetter = name[0].toUpperCase();
     if (!letterGroups[firstLetter]) {
       letterGroups[firstLetter] = [];

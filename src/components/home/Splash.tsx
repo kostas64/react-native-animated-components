@@ -1,16 +1,16 @@
-import {StyleSheet} from 'react-native';
-import Animated from 'react-native-reanimated';
+import { StyleSheet } from "react-native";
+import Animated from "react-native-reanimated";
 
-import {SplashProps} from './types';
-import {getAnimatedStyles} from './animatedStyles';
+import { SplashProps } from "./types";
+import { useAnimatedStyles } from "./animatedStyles";
 
-const Splash = ({splashProgress}: SplashProps) => {
-  const {imageStyle, containerAnimStyle} = getAnimatedStyles(splashProgress);
+const Splash = ({ splashProgress }: SplashProps) => {
+  const { imageStyle, containerAnimStyle } = useAnimatedStyles(splashProgress);
 
   return (
     <Animated.View style={[containerAnimStyle, styles.bootsplashContainer]}>
       <Animated.Image
-        source={require('@assets/img/appIcon.png')}
+        source={require("@assets/img/appIconFull.png")}
         style={imageStyle}
       />
     </Animated.View>
@@ -21,10 +21,10 @@ export default Splash;
 
 const styles = StyleSheet.create({
   bootsplashContainer: {
-    position: 'absolute',
-    alignItems: 'center',
-    alignSelf: 'center',
-    justifyContent: 'center',
+    position: "absolute",
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
     borderRadius: 1000000,
   },
 });

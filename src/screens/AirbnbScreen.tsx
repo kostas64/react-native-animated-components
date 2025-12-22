@@ -1,30 +1,27 @@
-import Animated, {
-  runOnJS,
-  withTiming,
-  useSharedValue,
-} from 'react-native-reanimated';
-import React from 'react';
-import Feather from 'react-native-vector-icons/Feather';
-import {View, TextInput, StyleSheet} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {CalendarActiveDateRange} from '@marceloterreiro/flash-calendar';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useCallback } from "react";
+import Feather from "@expo/vector-icons/Feather";
+import { scheduleOnRN } from "react-native-worklets";
+import { View, TextInput, StyleSheet } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { CalendarActiveDateRange } from "@marceloterreiro/flash-calendar";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Animated, { withTiming, useSharedValue } from "react-native-reanimated";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {SHORT_MONTHS} from '@assets/months';
-import {typography} from '@utils/typography';
-import Footer from '@components/airbnb/Footer';
-import WhereTo from '@components/airbnb/WhereTo';
-import WhenTrip from '@components/airbnb/WhenTrip';
-import WhoComing from '@components/airbnb/WhoComing';
-import InitialBox from '@components/airbnb/InitialBox';
-import InitialView from '@components/airbnb/InitialView';
-import {CALENDAR_PER, COUNTRIES} from '@components/airbnb/data';
-import StatusBarManager from '@components/common/StatusBarManager';
-import {getAnimatedStyles} from '@components/airbnb/animatedStyles';
-import {HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { SHORT_MONTHS } from "@assets/months";
+import { typography } from "@utils/typography";
+import Footer from "@components/airbnb/Footer";
+import WhereTo from "@components/airbnb/WhereTo";
+import WhenTrip from "@components/airbnb/WhenTrip";
+import WhoComing from "@components/airbnb/WhoComing";
+import InitialBox from "@components/airbnb/InitialBox";
+import InitialView from "@components/airbnb/InitialView";
+import { CALENDAR_PER, COUNTRIES } from "@components/airbnb/data";
+import StatusBarManager from "@components/common/StatusBarManager";
+import { useAnimatedStyles } from "@components/airbnb/animatedStyles";
+import { HEIGHT, MED_FONT_UPSCALE_FACTOR, WIDTH } from "@utils/device";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
 
 const Airbnb = () => {
   const insets = useSafeAreaInsets();
@@ -41,7 +38,7 @@ const Airbnb = () => {
   const [showModal, setShowModal] = React.useState(true);
   const [country, setCountry] = React.useState(COUNTRIES[0].label);
   const [period, setPeriod] = React.useState(CALENDAR_PER[0]);
-  const [anyWeek, setAnyWeek] = React.useState('Any week');
+  const [anyWeek, setAnyWeek] = React.useState("Any week");
   const [adults, setAdults] = React.useState(0);
   const [childs, setChilds] = React.useState(0);
   const [inflants, setInflants] = React.useState(0);
@@ -58,15 +55,15 @@ const Airbnb = () => {
     numOfGuests === 1
       ? `${numOfGuests} guest`
       : numOfGuests > 1
-      ? `${numOfGuests} guests`
-      : ''
+        ? `${numOfGuests} guests`
+        : ""
   }${
     inflants === 1
       ? `, ${inflants} inflant`
       : inflants > 1
-      ? `, ${inflants} inflants`
-      : ''
-  }${pets === 1 ? `, ${pets} pet` : pets > 1 ? `, ${pets} pets` : ''}`;
+        ? `, ${inflants} inflants`
+        : ""
+  }${pets === 1 ? `, ${pets} pet` : pets > 1 ? `, ${pets} pets` : ""}`;
 
   const {
     opacityStyle,
@@ -99,7 +96,7 @@ const Airbnb = () => {
     bottomStyle,
     bottomStyleWhereFocused,
     translatePickerStyle,
-  } = getAnimatedStyles(
+  } = useAnimatedStyles(
     progress,
     progresWhen,
     progressWhereTo,
@@ -111,34 +108,34 @@ const Airbnb = () => {
     bottom,
     bottomHeight,
     extraHeight,
-    insets,
+    insets
   );
 
   const animateOpen = React.useCallback(() => {
-    progress.value = withTiming(1, {duration: 450});
-  }, [showModal]);
+    progress.value = withTiming(1, { duration: 450 });
+  }, [progress]);
 
   const animateClose = React.useCallback(() => {
     if (progress.value && openWho.value) {
-      openCloseWho.value = withTiming(1, {duration: 450}, finished => {
+      openCloseWho.value = withTiming(1, { duration: 450 }, (finished) => {
         if (finished) {
-          runOnJS(setShowModal)(false);
+          scheduleOnRN(setShowModal, false);
         }
       });
     } else if (progress.value && progresWhen.value) {
-      closeWhen.value = withTiming(1, {duration: 450}, finished => {
+      closeWhen.value = withTiming(1, { duration: 450 }, (finished) => {
         if (finished) {
-          runOnJS(setShowModal)(false);
+          scheduleOnRN(setShowModal, false);
         }
       });
     } else {
-      progress.value = withTiming(0, {duration: 450}, finished => {
+      progress.value = withTiming(0, { duration: 450 }, (finished) => {
         if (finished) {
-          runOnJS(setShowModal)(false);
+          scheduleOnRN(setShowModal, false);
         }
       });
     }
-  }, [showModal]);
+  }, [closeWhen, openCloseWho, openWho, progress, progresWhen]);
 
   const animateWhereToInput = () => {
     inputRef.current?.focus();
@@ -151,58 +148,74 @@ const Airbnb = () => {
   };
 
   const animateOpenWho = React.useCallback(() => {
-    openWho.value = withTiming(1, {duration: 450});
-  }, []);
+    openWho.value = withTiming(1, { duration: 450 });
+  }, [openWho]);
 
   const animateWhen = React.useCallback(() => {
     const toValue = progresWhen.value === 1 ? 0 : 1;
-    progresWhen.value = withTiming(toValue, {duration: 450});
+    progresWhen.value = withTiming(toValue, { duration: 450 });
 
     if (openWho.value === 1) {
-      openWho.value = withTiming(0, {duration: 450});
+      openWho.value = withTiming(0, { duration: 450 });
     } else if (progresWhen.value === 1) {
-      openWho.value = withTiming(1, {duration: 450});
+      openWho.value = withTiming(1, { duration: 450 });
     }
-  }, [progresWhen]);
+  }, [progresWhen, openWho]);
 
   const onPressWhereTo = React.useCallback(() => {
     animateOpen();
     progresWhen.value = withTiming(0);
     progressWhereTo.value = withTiming(0);
     openWho.value = withTiming(0);
-  }, []);
+  }, [animateOpen, openWho, progresWhen, progressWhereTo]);
 
-  const onPressClear = React.useCallback(() => {
-    onPressWhereTo();
-    resetValues();
-  }, [country, anyWeek, adults, childs, inflants, pets, period]);
-
-  const resetValues = () => {
+  const resetValues = useCallback(() => {
     country !== "I'm flexible" && setCountry("I'm flexible");
-    anyWeek !== 'Any week' && setAnyWeek('Any week');
+    anyWeek !== "Any week" && setAnyWeek("Any week");
     period !== CALENDAR_PER[0] && setPeriod(CALENDAR_PER[0]);
     setPeriodo({});
     adults !== 0 && setAdults(0);
     childs !== 0 && setChilds(0);
     inflants !== 0 && setInflants(0);
     pets !== 0 && setPets(0);
-  };
+  }, [
+    adults,
+    anyWeek,
+    childs,
+    inflants,
+    pets,
+    period,
+    country,
+    setAdults,
+    setAnyWeek,
+    setChilds,
+    setCountry,
+    setInflants,
+    setPets,
+    setPeriod,
+    setPeriodo,
+  ]);
+
+  const onPressClear = React.useCallback(() => {
+    onPressWhereTo();
+    resetValues();
+  }, [onPressWhereTo, resetValues]);
 
   const onPressSkipReset = React.useCallback(
     (shouldReset = false) => {
       if (shouldReset) {
         setPeriodo({});
-        setAnyWeek('Any week');
+        setAnyWeek("Any week");
       } else {
         animateWhen();
       }
     },
-    [periodo],
+    [animateWhen]
   );
 
   const onPressNext = React.useCallback(() => {
     if (!!periodo.startId || !!periodo.endId) {
-      let week = '';
+      let week = "";
       if (
         !!periodo.startId &&
         !!periodo.endId &&
@@ -219,23 +232,23 @@ const Airbnb = () => {
         week =
           isSameMonth && isSameYear
             ? `${new Date(periodo.startId).getDate()}-${new Date(
-                periodo.endId,
+                periodo.endId
               ).getDate()} ${
                 SHORT_MONTHS[new Date(periodo.startId).getMonth()]
               }`
             : isSameYear
-            ? `${new Date(periodo.startId).getDate()} ${
-                SHORT_MONTHS[new Date(periodo.startId).getMonth()]
-              } - ${new Date(periodo.endId).getDate()} ${
-                SHORT_MONTHS[new Date(periodo.endId).getMonth()]
-              }`
-            : `${new Date(periodo.startId).getDate()} ${
-                SHORT_MONTHS[new Date(periodo.startId).getMonth()]
-              } ${new Date(periodo.startId).getFullYear()} - ${new Date(
-                periodo.endId,
-              ).getDate()} ${
-                SHORT_MONTHS[new Date(periodo.endId).getMonth()]
-              } ${new Date(periodo.endId).getFullYear()}`;
+              ? `${new Date(periodo.startId).getDate()} ${
+                  SHORT_MONTHS[new Date(periodo.startId).getMonth()]
+                } - ${new Date(periodo.endId).getDate()} ${
+                  SHORT_MONTHS[new Date(periodo.endId).getMonth()]
+                }`
+              : `${new Date(periodo.startId).getDate()} ${
+                  SHORT_MONTHS[new Date(periodo.startId).getMonth()]
+                } ${new Date(periodo.startId).getFullYear()} - ${new Date(
+                  periodo.endId
+                ).getDate()} ${
+                  SHORT_MONTHS[new Date(periodo.endId).getMonth()]
+                } ${new Date(periodo.endId).getFullYear()}`;
       } else if (periodo.startId) {
         week = `${new Date(periodo.startId).getDate()} ${
           SHORT_MONTHS[new Date(periodo.startId).getMonth()]
@@ -246,7 +259,7 @@ const Airbnb = () => {
     }
 
     animateWhen();
-  }, [periodo]);
+  }, [periodo, animateWhen]);
 
   React.useEffect(() => {
     if (!showModal) {
@@ -263,7 +276,17 @@ const Airbnb = () => {
         setShowModal(true);
       }, 1);
     }
-  }, [showModal]);
+  }, [
+    showModal,
+    closeWhen,
+    openCloseWho,
+    openWho,
+    progress,
+    progresWhen,
+    progressWhereTo,
+    translatePicker,
+    resetValues,
+  ]);
 
   return (
     <>
@@ -271,7 +294,7 @@ const Airbnb = () => {
       {!showModal && <InitialView />}
       {showModal && (
         <>
-          <View style={[styles.padHor24, styles.flex, {paddingTop: top}]}>
+          <View style={[styles.padHor24, styles.flex, { paddingTop: top }]}>
             <View style={styles.container}>
               <AnimatedPressable
                 onPress={onPressWhereTo}
@@ -283,14 +306,16 @@ const Airbnb = () => {
                   opacityOpenWhoCloseRev,
                   inputWhereToFocused,
                   translateCloseWhere,
-                ]}>
+                ]}
+              >
                 <Animated.View
                   style={[
                     styles.row,
                     styles.absolute,
                     styles.padTop12Left16,
                     opacityInputStyle,
-                  ]}>
+                  ]}
+                >
                   <InitialBox />
                 </Animated.View>
 
@@ -316,8 +341,9 @@ const Airbnb = () => {
                 styles.filterContainer,
                 styles.absolute,
                 styles.right24,
-                {top: top + 10},
-              ]}>
+                { top: top + 10 },
+              ]}
+            >
               <Feather name="sliders" size={18} style={styles.top1} />
             </Animated.View>
             <Animated.View
@@ -327,7 +353,8 @@ const Airbnb = () => {
                 opacityWhenToStyle,
                 opacityOpenWhoCloseRev,
                 transformCloseWhen,
-              ]}>
+              ]}
+            >
               <AnimatedPressable
                 onPress={animateWhen}
                 style={[
@@ -337,15 +364,18 @@ const Airbnb = () => {
                   styles.absolute,
                   styles.alignCenter,
                   styles.whenAnyWeek,
-                ]}>
+                ]}
+              >
                 <Text
                   style={[styles.fontW500, styles.color100]}
-                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+                >
                   When
                 </Text>
                 <Text
                   style={[styles.fontW500, styles.value]}
-                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+                >
                   {anyWeek}
                 </Text>
               </AnimatedPressable>
@@ -355,7 +385,8 @@ const Airbnb = () => {
                   styles.padTop24,
                   opacityWhenRevStyle,
                   opacityWhenClose,
-                ]}>
+                ]}
+              >
                 <WhenTrip
                   onPressNext={onPressNext}
                   onPressSkipReset={onPressSkipReset}
@@ -372,7 +403,8 @@ const Airbnb = () => {
                   styles.absolute,
                   styles.padTop12Left16,
                   opacityCloseWhenInput,
-                ]}>
+                ]}
+              >
                 <InitialBox />
               </Animated.View>
             </Animated.View>
@@ -384,7 +416,8 @@ const Airbnb = () => {
                 opacityWhoToStyle,
                 opacityClose,
                 transformOpenWhoClose,
-              ]}>
+              ]}
+            >
               <AnimatedPressable
                 onPress={animateOpenWho}
                 style={[
@@ -394,16 +427,19 @@ const Airbnb = () => {
                   styles.alignCenter,
                   styles.whenAnyWeek,
                   opacityOpenWhoRevStyle,
-                ]}>
+                ]}
+              >
                 <Text
                   style={[styles.fontW500, styles.color100]}
-                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+                >
                   Who
                 </Text>
                 <Text
                   style={[styles.fontW500, styles.value]}
-                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
-                  {guestsToShow ? guestsToShow : 'Add guests'}
+                  maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+                >
+                  {guestsToShow ? guestsToShow : "Add guests"}
                 </Text>
               </AnimatedPressable>
               <Animated.View
@@ -412,7 +448,8 @@ const Airbnb = () => {
                   styles.absolute,
                   styles.padTop12Left16,
                   opacityOpenWhoClose,
-                ]}>
+                ]}
+              >
                 <InitialBox />
               </Animated.View>
               <Animated.View
@@ -420,7 +457,8 @@ const Airbnb = () => {
                   styles.absolute,
                   styles.padTop24,
                   opacityOpenWhoNormalStyle,
-                ]}>
+                ]}
+              >
                 <WhoComing
                   pets={pets}
                   adults={adults}
@@ -440,7 +478,8 @@ const Airbnb = () => {
                 styles.bottomContainer,
                 bottomStyle,
                 bottomStyleWhereFocused,
-              ]}>
+              ]}
+            >
               <Footer animateClose={animateClose} onPressClear={onPressClear} />
             </Animated.View>
           </View>
@@ -448,28 +487,30 @@ const Airbnb = () => {
           <AnimatedPressable
             style={[
               styles.absolute,
-              {top: top - 24},
+              { top: top - 24 },
               styles.closeContainer,
               arrowAnimStyle,
               translateClose,
               styles.marLeft24,
             ]}
-            onPress={animateWhereToInputClose}>
-            <MaterialCommunityIcons name={'arrow-left'} size={16} />
+            onPress={animateWhereToInputClose}
+          >
+            <MaterialCommunityIcons name={"arrow-left"} size={16} />
           </AnimatedPressable>
           {/* Close button */}
           <AnimatedPressable
             style={[
               styles.absolute,
-              {top: top - 24},
+              { top: top - 24 },
               styles.closeContainer,
               opacityStyle,
               translateClose,
               translateCloseWhen,
               styles.marLeft24,
             ]}
-            onPress={animateClose}>
-            <MaterialCommunityIcons name={'close'} size={16} />
+            onPress={animateClose}
+          >
+            <MaterialCommunityIcons name={"close"} size={16} />
           </AnimatedPressable>
         </>
       )}
@@ -484,24 +525,24 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   justifyBtn: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   alignCenter: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   overflow: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   absolute: {
-    position: 'absolute',
+    position: "absolute",
   },
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   leftInput: {
     backgroundColor: Colors.WHITE,
@@ -516,17 +557,17 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     height: 40,
     width: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   closeContainer: {
     width: 32,
     height: 32,
     borderWidth: 1,
     borderRadius: 100,
-    alignItems: 'center',
+    alignItems: "center",
     borderColor: Colors.PLATINUM,
-    justifyContent: 'center',
+    justifyContent: "center",
     backgroundColor: Colors.WHITE,
   },
   padHor24: {
@@ -549,7 +590,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   fontW500: {
-    fontWeight: '500',
+    fontWeight: "500",
   },
   otherBox: {
     borderWidth: 1,
@@ -573,11 +614,11 @@ const styles = StyleSheet.create({
   },
   top1: {
     top: 1,
-    transform: [{rotate: '90deg'}],
+    transform: [{ rotate: "90deg" }],
   },
   whenAnyWeek: {
-    width: '100%',
-    alignSelf: 'center',
+    width: "100%",
+    alignSelf: "center",
     height: 64,
     zIndex: 1000,
   },

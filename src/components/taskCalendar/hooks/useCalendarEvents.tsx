@@ -1,8 +1,8 @@
-import {useMemo} from 'react';
+import { useMemo } from "react";
 
-import {MONTHS} from '@components/taskCalendar/constants';
-import {TCalendarState} from '@components/taskCalendar/types';
-import {generateEventsForDays} from '@components/taskCalendar/utils';
+import { MONTHS } from "@components/taskCalendar/constants";
+import { TCalendarState } from "@components/taskCalendar/types";
+import { generateEventsForDays } from "@components/taskCalendar/utils";
 
 export const useCalendarEvents = (state: TCalendarState) => {
   const numOfDays = useMemo(
@@ -10,22 +10,22 @@ export const useCalendarEvents = (state: TCalendarState) => {
       new Date(
         new Date().getFullYear(),
         MONTHS.indexOf(state.month) + 1,
-        0,
+        0
       ).getDate(),
-    [state.month],
+    [state.month]
   );
 
   const monthEvents = useMemo(
     () => generateEventsForDays(numOfDays),
-    [state.month],
+    [numOfDays]
   );
 
   const filteredEvents = useMemo(
     () =>
       monthEvents?.filter(
-        event => event.day === state?.selectedDate?.getDate(),
+        (event) => event.day === state?.selectedDate?.getDate()
       ),
-    [monthEvents, state?.selectedDate],
+    [monthEvents, state?.selectedDate]
   );
 
   return filteredEvents;

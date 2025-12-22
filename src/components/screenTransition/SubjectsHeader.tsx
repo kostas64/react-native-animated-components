@@ -1,59 +1,55 @@
-import {StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useNavigation, useIsFocused} from '@react-navigation/native';
+import { StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   TInnerStackList,
   TScheduleNavigationProps,
-} from '@screens/ScreenTransition/ScreenTransitionScheduleStack';
-import {isIOS} from '@utils/device';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import FadeInTransition from './FadeInTransition';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
+} from "@screens/ScreenTransition/ScreenTransitionScheduleStack";
+import { isIOS } from "@utils/device";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
 
 const TABS = [
   {
-    label: 'Subjects',
-    screen: 'ScreenTransitionSchedule',
+    label: "Subjects",
+    screen: "ScreenTransitionSchedule",
   },
   {
-    label: 'Homework',
-    screen: 'ScreenTransitionHomework',
+    label: "Homework",
+    screen: "ScreenTransitionHomework",
   },
 ];
 
 const SubjectsHeader = () => {
-  const isFocused = useIsFocused();
   const navigation = useNavigation<TScheduleNavigationProps>();
   const insets = useSafeAreaInsets();
 
   const navState = navigation.getState();
-  const state = navState?.routes?.[navState.index].state;
-  const stackIndex = state?.index || 0;
+  const name = navState?.routes?.[navState.index].name;
 
   const paddingTop =
     insets.top > 24 ? (isIOS ? insets.top : insets.top + 12) : 32;
 
   return (
     <View style={styles.whiteBg}>
-      <FadeInTransition index={0} direction="left" animate={isFocused}>
-        <View style={[styles.container, {paddingTop}]}>
-          {TABS.map((tab, index) => (
-            <AnimatedPressable
-              key={`tab-${index}`}
-              style={styles.tabContainer}
-              onPress={() =>
-                navigation.navigate(tab.screen as keyof TInnerStackList)
-              }>
-              <Text style={[styles.tab, stackIndex === index && styles.black]}>
-                {tab.label}
-              </Text>
-            </AnimatedPressable>
-          ))}
-        </View>
-      </FadeInTransition>
+      <View style={[styles.container, { paddingTop }]}>
+        {TABS.map((tab, index) => (
+          <AnimatedPressable
+            key={`tab-${index}`}
+            style={styles.tabContainer}
+            onPress={() =>
+              navigation.replace(tab.screen as keyof TInnerStackList)
+            }
+          >
+            <Text style={[styles.tab, tab.screen === name && styles.black]}>
+              {tab.label}
+            </Text>
+          </AnimatedPressable>
+        ))}
+      </View>
     </View>
   );
 };
@@ -65,16 +61,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   container: {
-    width: '100%',
-    flexDirection: 'row',
+    width: "100%",
+    flexDirection: "row",
     backgroundColor: Colors.WHITE,
   },
   tabContainer: {
-    width: '50%',
+    width: "50%",
   },
   tab: {
     paddingVertical: 4,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20,
     color: Colors.QUICK_SILVER,
     fontFamily: typography.semiBold,

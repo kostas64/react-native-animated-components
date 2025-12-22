@@ -4,20 +4,20 @@ import Animated, {
   useSharedValue,
   interpolateColor,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+} from "react-native-reanimated";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import {Colors} from '@utils/colors';
-import {PlaceholderFunction} from './types';
+import { Colors } from "@utils/colors";
+import { PlaceholderFunction } from "./types";
 
 const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
-  ({}, ref) => {
+  (_, ref) => {
     const progress = useSharedValue(0);
 
     const animStyle = useAnimatedStyle(() => ({
       transform: [
-        {translateY: interpolate(progress.value, [0, 0.45, 1], [0, 0, -16])},
+        { translateY: interpolate(progress.value, [0, 0.45, 1], [0, 0, -16]) },
       ],
       height: interpolate(progress.value, [0, 0.45, 1], [1, 1, 16]),
       width: interpolate(progress.value, [0, 0.45, 1], [16, 1, 16]),
@@ -25,7 +25,7 @@ const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
       backgroundColor: interpolateColor(
         progress.value,
         [0, 0.45, 0.85, 1],
-        ['#ffecdb', '#ffecdb', '#ffecdb', '#e3a68f'],
+        ["#ffecdb", "#ffecdb", "#ffecdb", "#e3a68f"]
       ),
     }));
 
@@ -35,11 +35,11 @@ const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
     }));
 
     const animatePlaceholder = () => {
-      progress.value = withTiming(1, {duration: 400});
+      progress.value = withTiming(1, { duration: 400 });
     };
 
     const animateRemove = () => {
-      progress.value = withTiming(0, {duration: 400});
+      progress.value = withTiming(0, { duration: 400 });
     };
 
     return (
@@ -47,10 +47,10 @@ const Placeholder = React.forwardRef<PlaceholderFunction | undefined>(
         <Animated.View style={[animStyle, styles.placeholder]} />
       </View>
     );
-  },
+  }
 );
 
-Placeholder.displayName = 'Placeholder';
+Placeholder.displayName = "Placeholder";
 
 export default Placeholder;
 
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     height: 44,
     width: 48,
     paddingBottom: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   placeholder: {
     backgroundColor: Colors.ANTIQUE_WHITE,

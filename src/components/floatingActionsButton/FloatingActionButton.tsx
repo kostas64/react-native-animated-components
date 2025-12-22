@@ -1,13 +1,13 @@
-import {StyleSheet, View} from 'react-native';
-import Animated from 'react-native-reanimated';
-import {forwardRef, useImperativeHandle} from 'react';
-import Feather from 'react-native-vector-icons/Feather';
-import {Circle, Defs, LinearGradient, Stop, Svg} from 'react-native-svg';
+import Animated from "react-native-reanimated";
+import { StyleSheet, View } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import { forwardRef, useImperativeHandle } from "react";
+import { Circle, Defs, LinearGradient, Stop, Svg } from "react-native-svg";
 
-import {Colors} from '@utils/colors';
-import {CIRCLE_SIZE, ICON_SIZE} from './data';
-import {getAnimatedStyles} from './animatedStyles';
-import {TFloatingActionButtonProps} from './types';
+import { Colors } from "@utils/colors";
+import { CIRCLE_SIZE, ICON_SIZE } from "./data";
+import { useAnimatedStyles } from "./animatedStyles";
+import { TFloatingActionButtonProps } from "./types";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Feather);
 
@@ -16,8 +16,8 @@ export type RefProps = {
 };
 
 const FloatingActionButton = forwardRef<RefProps, TFloatingActionButtonProps>(
-  ({progress, onPress}, ref) => {
-    const {send, close} = getAnimatedStyles(progress);
+  ({ progress, onPress }, ref) => {
+    const { send, close } = useAnimatedStyles(progress);
 
     useImperativeHandle(ref, () => ({
       close: onPress,
@@ -40,40 +40,40 @@ const FloatingActionButton = forwardRef<RefProps, TFloatingActionButtonProps>(
           />
         </Svg>
         <AnimatedIcon
-          name={'send'}
+          name={"send"}
           size={ICON_SIZE}
-          color={'white'}
+          color={"white"}
           style={[send, styles.sendIcon]}
         />
         <AnimatedIcon
-          name={'x'}
+          name={"x"}
           size={ICON_SIZE}
-          color={'white'}
+          color={"white"}
           style={[close, styles.closeIcon]}
         />
       </View>
     );
-  },
+  }
 );
 
-FloatingActionButton.displayName = 'FloatingActionButton';
+FloatingActionButton.displayName = "FloatingActionButton";
 
 export default FloatingActionButton;
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: CIRCLE_SIZE / 2,
-    overflow: 'hidden',
+    overflow: "hidden",
     zIndex: 1,
   },
   sendIcon: {
     right: (CIRCLE_SIZE - ICON_SIZE) / 2 + 1,
     top: (CIRCLE_SIZE - ICON_SIZE) / 2 + 2,
-    position: 'absolute',
+    position: "absolute",
   },
   closeIcon: {
     right: (CIRCLE_SIZE - ICON_SIZE) / 2,
     top: (CIRCLE_SIZE - ICON_SIZE) / 2,
-    position: 'absolute',
+    position: "absolute",
   },
 });

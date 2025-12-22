@@ -3,38 +3,38 @@ import {
   Animated,
   FlatList,
   StyleSheet,
-  SafeAreaView,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
-import React from 'react';
+} from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
   SPACING,
   IMAGE_HEIGHT,
   IMAGE_WIDTH,
-} from '@components/galleryList/constants';
-import {Colors} from '@utils/colors';
-import {isAndroid, WIDTH} from '@utils/device';
-import {DATA} from '@components/galleryList/data';
-import Arrows from '@components/galleryList/Arrows';
-import Background from '@components/galleryList/Background';
-import Description from '@components/galleryList/Description';
-import {IGalleryDataType} from '@components/galleryList/types';
-import StatusBarManager from '@components/common/StatusBarManager';
-import GalleryListItem from '@components/galleryList/GalleryListItem';
+} from "@components/galleryList/constants";
+import { Colors } from "@utils/colors";
+import { isAndroid, WIDTH } from "@utils/device";
+import { DATA } from "@components/galleryList/data";
+import Arrows from "@components/galleryList/Arrows";
+import Background from "@components/galleryList/Background";
+import Description from "@components/galleryList/Description";
+import { IGalleryDataType } from "@components/galleryList/types";
+import StatusBarManager from "@components/common/StatusBarManager";
+import GalleryListItem from "@components/galleryList/GalleryListItem";
 
 const GalleryListScreen = () => {
   const [index, setIndex] = React.useState(0);
 
   const listRef = React.useRef<FlatList>(null);
   const scrollX = React.useRef<Animated.AnimatedValue>(
-    new Animated.Value(0),
+    new Animated.Value(0)
   ).current;
 
   const onScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {x: scrollX}}}],
-    {useNativeDriver: true},
+    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+    { useNativeDriver: true }
   );
 
   const onPressLeft = () => {
@@ -42,7 +42,7 @@ const GalleryListScreen = () => {
       offset: (index - 1) * WIDTH,
       animated: true,
     });
-    isAndroid && setIndex(curIndex => curIndex - 1);
+    isAndroid && setIndex((curIndex) => curIndex - 1);
   };
 
   const onPressRight = () => {
@@ -50,17 +50,17 @@ const GalleryListScreen = () => {
       offset: (index + 1) * WIDTH,
       animated: true,
     });
-    isAndroid && setIndex(curIndex => curIndex + 1);
+    isAndroid && setIndex((curIndex) => curIndex + 1);
   };
 
   const onMomentumScrollEndEvent = (
-    e: NativeSyntheticEvent<NativeScrollEvent>,
+    e: NativeSyntheticEvent<NativeScrollEvent>
   ) => setIndex(Math.round(e.nativeEvent.contentOffset.x / WIDTH));
 
   const renderListItem = (
     item: IGalleryDataType,
     index: number,
-    scrollX: Animated.AnimatedValue,
+    scrollX: Animated.AnimatedValue
   ) => <GalleryListItem item={item} index={index} scrollX={scrollX} />;
 
   return (
@@ -73,7 +73,7 @@ const GalleryListScreen = () => {
             <Animated.FlatList
               ref={listRef}
               data={DATA}
-              keyExtractor={item => item.key}
+              keyExtractor={(item) => item.key}
               horizontal
               pagingEnabled
               bounces={false}
@@ -82,7 +82,7 @@ const GalleryListScreen = () => {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.listContentContainer}
               onMomentumScrollEnd={onMomentumScrollEndEvent}
-              renderItem={({item, index}) =>
+              renderItem={({ item, index }) =>
                 renderListItem(item, index, scrollX)
               }
             />
@@ -109,12 +109,12 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   listContainer: {
     height: IMAGE_HEIGHT * 2.1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   listContentContainer: {
     height: IMAGE_HEIGHT + SPACING * 2,

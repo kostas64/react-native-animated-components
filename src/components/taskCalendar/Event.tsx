@@ -1,20 +1,21 @@
-import {StyleSheet, View} from 'react-native';
-import Animated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import { StyleSheet, View } from "react-native";
+import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 
-import {TEvent} from './types';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import EventIndicator from './EventIndicator';
-import {DATA} from '@components/likeInteraction/data';
-import ListItem from '@components/likeInteraction/ListItem';
+import { TEvent } from "./types";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import EventIndicator from "./EventIndicator";
+import { DATA } from "@components/likeInteraction/data";
+import ListItem from "@components/likeInteraction/ListItem";
 
-const Event = ({time, title, description, duration}: TEvent) => {
+const Event = ({ time, title, description, duration }: TEvent) => {
   return (
     <Animated.View
       entering={FadeInDown}
       exiting={FadeOutDown.duration(25)}
-      style={styles.container}>
+      style={styles.container}
+    >
       <View style={styles.users}>
         {DATA.reverse().map((item, index) => (
           <ListItem key={index} item={item} index={index} liked={false} />
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     marginTop: 4,
     minHeight: 210,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   time: {
     fontSize: 12,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     fontFamily: typography.medium,
   },
   users: {
-    position: 'absolute',
+    position: "absolute",
     right: 52,
     top: 16,
   },

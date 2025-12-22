@@ -1,16 +1,16 @@
-import React from 'react';
-import {Animated, StyleSheet, View} from 'react-native';
+import React from "react";
+import { Animated, StyleSheet, View } from "react-native";
 
-import {WIDTH} from '@utils/device';
-import {Colors} from '@utils/colors';
-import Tabs from '@components/listWithIndicator/Tabs';
-import {data} from '@components/listWithIndicator/data';
-import {ListItem} from '@components/listWithIndicator/types';
-import StatusBarManager from '@components/common/StatusBarManager';
-import ListWithIndicatorItem from '@components/listWithIndicator/ListWithIndicatorItem';
+import { WIDTH } from "@utils/device";
+import { Colors } from "@utils/colors";
+import Tabs from "@components/listWithIndicator/Tabs";
+import { data } from "@components/listWithIndicator/data";
+import { ListItem } from "@components/listWithIndicator/types";
+import StatusBarManager from "@components/common/StatusBarManager";
+import ListWithIndicatorItem from "@components/listWithIndicator/ListWithIndicatorItem";
 
 const ListWithIndiScreen = () => {
-  const flatRef = React.useRef<any>();
+  const flatRef = React.useRef<Animated.FlatList>(null);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
   const onItemPress = React.useCallback((itemIndex: number) => {
@@ -21,13 +21,13 @@ const ListWithIndiScreen = () => {
   }, []);
 
   const renderItem = React.useCallback(
-    ({item}: ListItem) => <ListWithIndicatorItem item={item} />,
-    [],
+    ({ item }: ListItem) => <ListWithIndicatorItem item={item} />,
+    []
   );
 
   const onScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {x: scrollX}}}],
-    {useNativeDriver: false},
+    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+    { useNativeDriver: false }
   );
 
   return (
@@ -37,13 +37,14 @@ const ListWithIndiScreen = () => {
       <View style={styles.container}>
         <Animated.FlatList
           ref={flatRef}
+          // @ts-ignore
           data={data}
           horizontal
           bounces={false}
           pagingEnabled
           onScroll={onScroll}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item.key}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={renderItem}
         />
         <Tabs scrollX={scrollX} data={data} onItemPress={onItemPress} />
@@ -56,8 +57,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

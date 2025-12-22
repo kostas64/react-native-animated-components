@@ -1,16 +1,16 @@
-import Octicons from 'react-native-vector-icons/Octicons';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {View, Image, StyleProp, ViewStyle, StyleSheet} from 'react-native';
+import Octicons from "@expo/vector-icons/Octicons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, Image, StyleProp, ViewStyle, StyleSheet } from "react-native";
 
-import Cards from './Cards';
-import {shadows} from './styles';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {isIOS, WIDTH} from '@utils/device';
-import {typography} from '@utils/typography';
-import {CARD_BODY_HEIGHT, CARD_FOOTER_HEIGHT, CARD_WIDTH} from './constants';
+import Cards from "./Cards";
+import { shadows } from "./styles";
+import { WIDTH } from "@utils/device";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { CARD_BODY_HEIGHT, CARD_FOOTER_HEIGHT, CARD_WIDTH } from "./constants";
 
-const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
+const HomeHeader = ({ style }: { style?: StyleProp<ViewStyle> }) => {
   const insets = useSafeAreaInsets();
   const paddingTop = insets.top > 0 ? insets.top + 4 : 24;
 
@@ -20,7 +20,7 @@ const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
         <View style={styles.avatarLabelContainer}>
           <View style={styles.avatarContainer}>
             <Image
-              source={require('@assets/img/bank/avatar.png')}
+              source={require("@assets/img/bank/avatar.png")}
               style={styles.avatar}
             />
           </View>
@@ -30,18 +30,18 @@ const HomeHeader = ({style}: {style?: StyleProp<ViewStyle>}) => {
           </View>
         </View>
         <View style={styles.bellContainer}>
-          <Octicons name="bell-fill" size={20} color={'white'} />
+          <Octicons name="bell-fill" size={20} color={"white"} />
         </View>
       </View>
       <Cards
-        sharedElementTag={isIOS ? 'cards' : undefined}
-        style={index => ({
+        // sharedElementTag={isIOS ? "cards" : undefined}
+        style={(index) => ({
           ...shadows.lowShadow,
           top: paddingTop + 76,
           transform: [
-            {translateX: (WIDTH - CARD_WIDTH) / 2},
-            {translateY: index * 26},
-            {scale: 0.85 + index * 0.1},
+            { translateX: (WIDTH - CARD_WIDTH) / 2 },
+            { translateY: index * 26 },
+            { scale: 0.85 + index * 0.1 },
           ],
         })}
       />
@@ -57,15 +57,15 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 32,
     paddingHorizontal: 16,
     paddingBottom: (CARD_FOOTER_HEIGHT || 0) + (CARD_BODY_HEIGHT || 0) + 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: Colors.CHINESE_BLACK,
   },
   avatarLabelContainer: {
     gap: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   avatarContainer: {
     padding: 16,

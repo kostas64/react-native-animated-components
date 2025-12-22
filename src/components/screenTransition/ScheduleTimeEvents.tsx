@@ -1,23 +1,22 @@
 import {
-  runOnJS,
   withTiming,
   interpolate,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {View, ScrollView, StyleSheet} from 'react-native';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+} from "react-native-reanimated";
+import { View, ScrollView, StyleSheet } from "react-native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {findScheduleForTimes} from './utils';
-import {SCHEDULE_EVENTS, TIMES} from './data';
-import {ScheduleTimeEventsProps} from './types';
-import FadeInTransition from './FadeInTransition';
-import {SM_FONT_UPSCALE_FACTOR, WIDTH} from '@utils/device';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
-import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
+import Text from "@components/common/Text";
+import { Colors } from "@utils/colors";
+import { typography } from "@utils/typography";
+import { findScheduleForTimes } from "./utils";
+import { SCHEDULE_EVENTS, TIMES } from "./data";
+import { ScheduleTimeEventsProps } from "./types";
+import FadeInTransition from "./FadeInTransition";
+import { SM_FONT_UPSCALE_FACTOR, WIDTH } from "@utils/device";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
+import { TWelcomeNavigationProps } from "@screens/ScreenTransition/ScreenTransitionStack";
 
 type EventProps = {
   event: {
@@ -28,45 +27,54 @@ type EventProps = {
   eventIndex: number;
 };
 
-const Event = ({event, eventIndex}: EventProps) => {
+const Event = ({ event, eventIndex }: EventProps) => {
   const navigation = useNavigation<TWelcomeNavigationProps>();
   const progress = useSharedValue(0);
 
   const style = useAnimatedStyle(() => ({
     opacity: interpolate(progress.value, [0, 0.5], [1, 0.6]),
-    transform: [{scale: interpolate(progress.value, [0, 0.5], [1, 0.93])}],
+    transform: [{ scale: interpolate(progress.value, [0, 0.5], [1, 0.93]) }],
   }));
 
   const onPressIn = () => {
-    progress.value = withTiming(0.5, {duration: 75}, () =>
-      //@ts-ignore
-      runOnJS(navigation.navigate)('Lesson'),
-    );
+    "worklet";
+
+    progress.value = withTiming(0.5, { duration: 75 });
+  };
+
+  const onPress = () => {
+    navigation.navigate("Lesson");
   };
 
   const onPressOut = () => {
-    progress.value = withTiming(0, {duration: 150});
+    "worklet";
+
+    progress.value = withTiming(0, { duration: 150 });
   };
 
   return (
     <AnimatedPressable
       unstable_pressDelay={100}
       onPressIn={onPressIn}
+      onPress={onPress}
       onPressOut={onPressOut}
       style={[
         style,
         styles.eventInnerContainer,
         eventIndex % 2 === 0 ? styles.left120 : styles.left86,
-        {backgroundColor: event.backgroundColor},
-      ]}>
+        { backgroundColor: event.backgroundColor },
+      ]}
+    >
       <Text
         style={styles.eventName}
-        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
+      >
         {event.event}
       </Text>
       <Text
         style={styles.eventTime}
-        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+        maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
+      >
         {event.time}
       </Text>
     </AnimatedPressable>
@@ -80,18 +88,19 @@ const ScheduleTimeEvents = ({
   const isFocused = useIsFocused();
 
   const events = findScheduleForTimes(TIMES, SCHEDULE_EVENTS).filter(
-    eventItem => !(eventItem.event === 'No event'),
+    (eventItem) => !(eventItem.event === "No event")
   );
 
   return (
     <ScrollView
       style={containerStyle}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={contentContainerStyle}>
+      contentContainerStyle={contentContainerStyle}
+    >
       {TIMES.map((time, index) => {
-        const event = events.find(event => event.time.startsWith(time));
-        const eventIndex = events.findIndex(event =>
-          event.time.startsWith(time),
+        const event = events.find((event) => event.time.startsWith(time));
+        const eventIndex = events.findIndex((event) =>
+          event.time.startsWith(time)
         );
 
         return (
@@ -105,7 +114,8 @@ const ScheduleTimeEvents = ({
                 index={index}
                 direction="left"
                 animate={isFocused}
-                containerStyle={styles.eventAbsolute}>
+                containerStyle={styles.eventAbsolute}
+              >
                 <Event event={event} eventIndex={eventIndex} />
               </FadeInTransition>
             )}
@@ -121,24 +131,24 @@ export default ScheduleTimeEvents;
 const styles = StyleSheet.create({
   eventContainer: {
     paddingVertical: 32,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   time: {
     width: 72,
     fontSize: 15,
     fontFamily: typography.semiBold,
-    color: Colors.CULTURED,
+    color: Colors.GRANITE_GRAY,
   },
   line: {
     width: WIDTH - 136,
     height: 1,
     borderWidth: 1,
-    borderStyle: 'dashed',
+    borderStyle: "dashed",
     borderColor: Colors.TWO_POINT_BLACK,
   },
   eventAbsolute: {
-    position: 'absolute',
+    position: "absolute",
   },
   eventName: {
     fontSize: 16,

@@ -1,14 +1,14 @@
-import Entypo from 'react-native-vector-icons/Entypo';
-import {Pressable, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Entypo from "@expo/vector-icons/Entypo";
+import { Pressable, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {TFooter} from './types';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {HEIGHT, WIDTH} from '@utils/device';
-import {typography} from '@utils/typography';
+import { TFooter } from "./types";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { HEIGHT, WIDTH } from "@utils/device";
+import { typography } from "@utils/typography";
 
-const Footer = ({onPressClear, animateClose}: TFooter) => {
+const Footer = ({ onPressClear, animateClose }: TFooter) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -19,15 +19,17 @@ const Footer = ({onPressClear, animateClose}: TFooter) => {
         styles.padHor24,
         styles.marTop4,
         styles.widthCenter,
-        HEIGHT > 800 ? styles.height : {height: 48 + (insets.bottom || 24)},
-        {paddingBottom: insets.bottom},
-      ]}>
+        HEIGHT > 800 ? styles.height : { height: 48 + (insets.bottom || 24) },
+        { paddingBottom: insets.bottom },
+      ]}
+    >
       <Pressable style={styles.padding8} onPress={onPressClear}>
         <Text style={styles.clearAll}>Clear all</Text>
       </Pressable>
       <Pressable
         onPress={animateClose}
-        style={[styles.row, styles.searchBtn, styles.alignCenter]}>
+        style={[styles.row, styles.searchBtn, styles.alignCenter]}
+      >
         <Entypo size={20} style={styles.lens3} name="magnifying-glass" />
         <Text style={styles.search}>Search</Text>
       </Pressable>
@@ -39,13 +41,13 @@ export default Footer;
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   justifyBtn: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   alignCenter: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   padHor24: {
     paddingHorizontal: 24,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   },
   widthCenter: {
     width: WIDTH,
-    alignItems: 'center',
+    alignItems: "center",
   },
   padding8: {
     padding: 8,
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
   clearAll: {
     fontSize: 16,
     fontFamily: typography.semiBold,
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
   lens3: {
     paddingRight: 8,

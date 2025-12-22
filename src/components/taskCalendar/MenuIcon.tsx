@@ -1,31 +1,31 @@
-import {memo} from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
+import { memo } from "react";
+import Feather from "@expo/vector-icons/Feather";
+import { Image, StyleSheet, View } from "react-native";
 
-import {Colors} from '@utils/colors';
+import { Colors } from "@utils/colors";
 
 const MenuIcon = memo(() => {
   return (
     <View style={styles.container}>
       <Feather name="menu" size={24} color="white" />
       <Image
-        source={{uri: 'https://randomuser.me/api/portraits/men/44.jpg'}}
+        source={{ uri: "https://randomuser.me/api/portraits/men/44.jpg" }}
         style={styles.img}
       />
     </View>
   );
 });
 
-MenuIcon.displayName = 'MenuIcon';
+MenuIcon.displayName = "MenuIcon";
 
 export default MenuIcon;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginHorizontal: 20,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   img: {
     width: 40,

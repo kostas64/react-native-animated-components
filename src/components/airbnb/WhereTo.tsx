@@ -1,9 +1,9 @@
-import React, {forwardRef} from 'react';
-import Animated from 'react-native-reanimated';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {FlatList} from 'react-native-gesture-handler';
-import {Keyboard, StyleSheet, TextInput} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import React, { forwardRef } from "react";
+import Animated from "react-native-reanimated";
+import Entypo from "@expo/vector-icons/Entypo";
+import { FlatList } from "react-native-gesture-handler";
+import { Keyboard, StyleSheet, TextInput } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   isIOS,
@@ -11,15 +11,15 @@ import {
   HEIGHT,
   SM_FONT_UPSCALE_FACTOR,
   XSM_FONT_UPSCALE_FACTOR,
-} from '@utils/device';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import SearchItem from './SearchItem';
-import CountryItem from './CountryItem';
-import {typography} from '@utils/typography';
-import {COUNTRIES, SEARCH_COUNTRIES} from './data';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
-import {TRenderCountryItem, TRenderSearchItem, TWhereTo} from './types';
+} from "@utils/device";
+import { Colors } from "@utils/colors";
+import SearchItem from "./SearchItem";
+import CountryItem from "./CountryItem";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { COUNTRIES, SEARCH_COUNTRIES } from "./data";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
+import { TRenderCountryItem, TRenderSearchItem, TWhereTo } from "./types";
 
 const WhereTo = forwardRef<TextInput, TWhereTo>(
   (
@@ -34,7 +34,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
       listSearchStyle,
       listOpacityTranslate,
     },
-    ref,
+    ref
   ) => {
     const insets = useSafeAreaInsets();
 
@@ -42,7 +42,7 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
     const bottom = insets.bottom;
 
     const renderItem = React.useCallback(
-      ({item, index}: TRenderCountryItem) => {
+      ({ item, index }: TRenderCountryItem) => {
         const isSelected = item.label === country;
 
         return (
@@ -55,11 +55,11 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
           />
         );
       },
-      [country],
+      [country, animateWhen, setCountry]
     );
 
     const renderSearchItem = React.useCallback(
-      ({item, index}: TRenderSearchItem) => (
+      ({ item, index }: TRenderSearchItem) => (
         <SearchItem
           key={`searchItem-${index}`}
           date={item.date}
@@ -67,14 +67,15 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
           place={item.place}
         />
       ),
-      [],
+      []
     );
 
     return (
       <>
         <Animated.Text
           maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
-          style={[styles.boldWhere, styles.padLeft24, opacityWhereToBold]}>
+          style={[styles.boldWhere, styles.padLeft24, opacityWhereToBold]}
+        >
           Where to?
         </Animated.Text>
         <Animated.View
@@ -84,7 +85,8 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             styles.justifyBtn,
             styles.widthPadTop12,
             opacityOpenWhoStyle,
-          ]}>
+          ]}
+        >
           <Text style={[styles.fontW500, styles.color100, styles.padLeft24]}>
             Where
           </Text>
@@ -97,14 +99,15 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             styles.inputContainer,
             styles.marLeft24,
             innerInputWhereToFocused,
-          ]}>
+          ]}
+        >
           <Entypo size={20} style={styles.lens2} name="magnifying-glass" />
           <TextInput
             ref={ref}
             style={styles.fontW500}
             onFocus={animateWhereToInput}
             placeholder="Search destinations"
-            placeholderTextColor={'rgb(100,100,100)'}
+            placeholderTextColor={"rgb(100,100,100)"}
             maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
           />
         </AnimatedPressable>
@@ -120,8 +123,9 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
             styles.marLeft24,
             styles.searchListContainer,
             listSearchStyle,
-            {height: HEIGHT - top - bottom - 156},
-          ]}>
+            { height: HEIGHT - top - bottom - 156 },
+          ]}
+        >
           <Text style={[styles.marBot24, styles.fontW500, styles.font16]}>
             Recent searches
           </Text>
@@ -134,19 +138,19 @@ const WhereTo = forwardRef<TextInput, TWhereTo>(
         </Animated.View>
       </>
     );
-  },
+  }
 );
 
-WhereTo.displayName = 'WhereTo';
+WhereTo.displayName = "WhereTo";
 
 export default WhereTo;
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   absolute: {
-    position: 'absolute',
+    position: "absolute",
   },
   boldWhere: {
     fontSize: 28,
@@ -156,7 +160,7 @@ const styles = StyleSheet.create({
     marginLeft: 24,
   },
   searchListContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 104,
     width: WIDTH,
   },
@@ -168,11 +172,11 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   fontW500: {
-    fontWeight: '500',
+    fontWeight: "500",
   },
   inputContainer: {
     marginTop: 24,
-    alignItems: 'center',
+    alignItems: "center",
     borderWidth: 1,
     borderRadius: 12,
     paddingVertical: isIOS ? 20 : 6,
@@ -180,7 +184,7 @@ const styles = StyleSheet.create({
     width: WIDTH - 72,
   },
   justifyBtn: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   widthPadTop12: {
     width: WIDTH - 56,

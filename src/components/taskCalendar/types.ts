@@ -1,7 +1,7 @@
-import {SharedValue} from 'react-native-reanimated';
-import {CalendarDayMetadata} from '@marceloterreiro/flash-calendar';
+import { SharedValue } from "react-native-reanimated";
+import { CalendarDayMetadata } from "@marceloterreiro/flash-calendar";
 
-import {THomeNavigationProps} from 'src/App';
+import { THomeNavigationProps } from "src/App";
 
 export type TNavigation = {
   navigation: THomeNavigationProps;
@@ -44,8 +44,8 @@ export type TEmptyDay = {
 
 export type TEvent = {
   time: string;
-  title: String;
-  description: String;
+  title: string;
+  description: string;
   duration: string;
 };
 

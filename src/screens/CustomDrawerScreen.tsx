@@ -1,13 +1,13 @@
-import React from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {View, Animated, StatusBar, StyleSheet} from 'react-native';
+import React, { useCallback } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, Animated, StatusBar, StyleSheet } from "react-native";
 
-import {typography} from '@utils/typography';
-import {HEIGHT_SCR, WIDTH} from '@utils/device';
-import Drawer from '@components/customDrawer/Drawer';
-import AnimatedIcon from '@components/customDrawer/AnimatedIcon';
-import StatusBarManager from '@components/common/StatusBarManager';
-import {fromCoords, routes, toCoords} from '@components/customDrawer/data';
+import { typography } from "@utils/typography";
+import { HEIGHT_SCR, WIDTH } from "@utils/device";
+import Drawer from "@components/customDrawer/Drawer";
+import AnimatedIcon from "@components/customDrawer/AnimatedIcon";
+import StatusBarManager from "@components/common/StatusBarManager";
+import { fromCoords, routes, toCoords } from "@components/customDrawer/data";
 
 const CustomDrawerScreen = () => {
   const insets = useSafeAreaInsets();
@@ -18,7 +18,7 @@ const CustomDrawerScreen = () => {
   const translateX = animatedValue.y.interpolate({
     inputRange: [0, HEIGHT_SCR * 0.25],
     outputRange: [100, 0],
-    extrapolate: 'clamp',
+    extrapolate: "clamp",
   });
 
   const opacity = animatedValue.x.interpolate({
@@ -26,22 +26,26 @@ const CustomDrawerScreen = () => {
     outputRange: [1, 0],
   });
 
-  const animate = (toValue: number) => {
-    return Animated.timing(animatedValue, {
-      toValue: toValue === 1 ? toCoords : fromCoords,
-      duration: 400,
-      useNativeDriver: true,
-    });
-  };
+  const animate = useCallback(
+    (toValue: number) => {
+      return Animated.timing(animatedValue, {
+        toValue: toValue === 1 ? toCoords : fromCoords,
+        duration: 400,
+        useNativeDriver: true,
+      });
+    },
+    [animatedValue]
+  );
 
   const onCloseDrawer = React.useCallback(() => {
-    StatusBar.setBarStyle('dark-content');
+    StatusBar.setBarStyle("dark-content");
     animate(0).start();
-  }, []);
+  }, [animate]);
+
   const onOpenDrawer = React.useCallback(() => {
-    StatusBar.setBarStyle('light-content');
+    StatusBar.setBarStyle("light-content");
     animate(1).start();
-  }, []);
+  }, [animate]);
 
   return (
     <View style={styles.maskedContainer}>
@@ -54,7 +58,8 @@ const CustomDrawerScreen = () => {
       />
 
       <Animated.Text
-        style={{...styles.screenName, top: insets.top + 16, opacity}}>
+        style={{ ...styles.screenName, top: insets.top + 16, opacity }}
+      >
         {selectedRoute}
       </Animated.Text>
 
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     lineHeight: 32,
     fontFamily: typography.semiBold,
-    position: 'absolute',
+    position: "absolute",
   },
 });
 

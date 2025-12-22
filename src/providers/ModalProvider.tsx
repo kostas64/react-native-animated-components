@@ -1,8 +1,8 @@
-import React from 'react';
-import {ViewStyle} from 'react-native';
+import React from "react";
+import { StyleProp, ViewStyle } from "react-native";
 
-import {BottomSheetRef} from '@components/common/types';
-import BottomSheet from '@components/common/BottomSheet';
+import BottomSheet from "@components/common/BottomSheet";
+import { BottomSheetRef } from "@components/common/types";
 
 const initialState: TInitialState = {
   content: <></>,
@@ -23,7 +23,7 @@ type TInitialState = {
   withoutLine?: boolean;
   lineStyle?: ViewStyle;
   lineStyleContainer?: ViewStyle;
-  contentContainerStyle?: any;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
 interface ModalContextType {
@@ -33,26 +33,26 @@ interface ModalContextType {
   closeModal: () => void;
 }
 
-const ModalContext = React.createContext<ModalContextType>({
+export const ModalContext = React.createContext<ModalContextType>({
   modalInfo: initialState,
   setModalInfo: () => {},
   resetModal: () => {},
   closeModal: () => {},
 });
 
-export const ModalProvider = ({children}: {children: React.ReactNode}) => {
+export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const bottomSheetRef = React.useRef<BottomSheetRef>(null);
 
   const [modalInfo, setModalInfo] = React.useState(initialState);
 
   //** ----- FUNCTIONS -----
-  const closeModal = React.useCallback(() => {
+  const closeModal = () => {
     bottomSheetRef?.current?.scrollTo(0);
-  }, []);
+  };
 
-  const resetModal = React.useCallback(() => {
+  const resetModal = () => {
     setModalInfo(initialState);
-  }, []);
+  };
 
   //** ----- EFFECTS -----
   React.useEffect(() => {
@@ -63,17 +63,20 @@ export const ModalProvider = ({children}: {children: React.ReactNode}) => {
 
   return (
     <ModalContext.Provider
-      value={{modalInfo, setModalInfo, resetModal, closeModal}}>
+      value={{ modalInfo, setModalInfo, resetModal, closeModal }}
+    >
       {children}
       <BottomSheet
         ref={bottomSheetRef}
         withoutLine={modalInfo.withoutLine}
         panEnabled={modalInfo.panEnabled}
         onBackPress={modalInfo.onBackPress}
+        resetModal={resetModal}
         modalHeight={modalInfo.modalHeight || 0}
         lineStyle={modalInfo.lineStyle}
         lineStyleContainer={modalInfo.lineStyleContainer}
-        contentContainerStyle={modalInfo.contentContainerStyle}>
+        contentContainerStyle={modalInfo.contentContainerStyle}
+      >
         {modalInfo.content}
       </BottomSheet>
     </ModalContext.Provider>

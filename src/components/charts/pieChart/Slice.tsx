@@ -2,12 +2,12 @@ import {
   interpolate,
   interpolateColor,
   useAnimatedProps,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import {TSlice} from './types';
-import {gapSize, total} from './data';
-import {createRoundedPieSlicePath} from './utils';
-import {AnimatedPath} from '@components/common/AnimatedComponents';
+import { TSlice } from "./types";
+import { gapSize, total } from "./data";
+import { createRoundedPieSlicePath } from "./utils";
+import { AnimatedPath } from "@components/common/AnimatedComponents";
 
 const Slice = ({
   item,
@@ -39,14 +39,14 @@ const Slice = ({
       [
         data.length === 1 ? 0 : startAngleLocal.reduce((a, b) => a + b, 0),
         data.length === 1 ? 2 * Math.PI : endAngle,
-      ],
+      ]
     );
 
     const path = createRoundedPieSlicePath(
       data.length === 1 ? 0 : startAngleLocal.reduce((a, b) => a + b, 0),
       endShared,
       innerRadius,
-      outerRadius,
+      outerRadius
     );
 
     const isSelected =
@@ -58,12 +58,12 @@ const Slice = ({
         ? interpolateColor(
             progressValue.value,
             [0, 1],
-            ['transparent', 'black'],
+            ["transparent", "black"]
           )
         : interpolateColor(
             progressValue.value,
             [0, 1],
-            ['black', 'transparent'],
+            ["black", "transparent"]
           ),
       strokeWidth: isSelected
         ? interpolate(progressValue.value, [0, 1], [0, 2])
@@ -74,6 +74,7 @@ const Slice = ({
   return (
     <AnimatedPath
       fill={item.color}
+      pointerEvents={"none"}
       onResponderStart={() => {}}
       animatedProps={animatedProps}
     />

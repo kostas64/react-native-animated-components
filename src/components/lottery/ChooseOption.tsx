@@ -1,19 +1,22 @@
-import {FlatList, StyleSheet} from 'react-native';
-import {forwardRef, useImperativeHandle, useRef} from 'react';
-import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
+import Animated, {
+  withTiming,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { FlatList, StyleSheet } from "react-native";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {ListRefProps, TChooseOption} from './types';
-import {WHEEL_OPTIONS} from '@screens/LotteryScreen';
-import ChooseOptionListItem from './ChooseOptionListItem';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { ListRefProps, TChooseOption } from "./types";
+import ChooseOptionListItem from "./ChooseOptionListItem";
+import { WHEEL_OPTIONS } from "@screens/Lottery/constants";
 
 const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
-  ({style, selectedO, spinning, selectOption}, ref) => {
-    const listRef = useRef<FlatList>(null);
+  ({ style, selectedO, spinning, selectOption }, ref) => {
+    const listRef = useRef<FlatList<number>>(null);
 
-    const renderItem = ({item, index}: {item: number; index: number}) => (
+    const renderItem = ({ item, index }: { item: number; index: number }) => (
       <ChooseOptionListItem
         item={item}
         index={index}
@@ -24,9 +27,9 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
 
     const disabledStyle = useAnimatedStyle(() => ({
       opacity: spinning.value
-        ? withTiming(0.6, {duration: 250})
-        : withTiming(1, {duration: 125}),
-      pointerEvents: spinning.value ? 'none' : 'auto',
+        ? withTiming(0.6, { duration: 250 })
+        : withTiming(1, { duration: 125 }),
+      pointerEvents: spinning.value ? "none" : "auto",
     }));
 
     useImperativeHandle(ref, () => ({
@@ -39,7 +42,7 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
       },
     }));
 
-    const getItemLayout = (_: any, index: number) => ({
+    const getItemLayout = (_: unknown, index: number) => ({
       index,
       length: 86,
       offset: 86 * index,
@@ -60,10 +63,10 @@ const ChooseOption = forwardRef<ListRefProps, TChooseOption>(
         />
       </Animated.View>
     );
-  },
+  }
 );
 
-ChooseOption.displayName = 'ChooseOption';
+ChooseOption.displayName = "ChooseOption";
 
 export default ChooseOption;
 
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: Colors.WHITE,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20,
     fontFamily: typography.semiBold,
   },

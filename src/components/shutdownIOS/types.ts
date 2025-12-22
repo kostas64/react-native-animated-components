@@ -1,4 +1,4 @@
-import {SharedValue} from 'react-native-reanimated';
+import { SharedValue } from "react-native-reanimated";
 
 export type TAnimatedText = {
   index: number;

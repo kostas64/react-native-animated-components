@@ -1,9 +1,9 @@
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from "react-native";
 
-import Text from '@components/common/Text';
-import {TextBetweenProps} from './types';
-import {typography} from '@utils/typography';
-import FadeInTransition from './FadeInTransition';
+import Text from "@components/common/Text";
+import { TextBetweenProps } from "./types";
+import { typography } from "@utils/typography";
+import FadeInTransition from "./FadeInTransition";
 
 const TextBetween = ({
   index = 0,
@@ -31,9 +31,9 @@ export default TextBetween;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   title: {
     fontFamily: typography.bold,

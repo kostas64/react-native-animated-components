@@ -1,9 +1,9 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import {Colors} from '@utils/colors';
-import Progress from '@components/progressLoader/Progress';
-import StatusBarManager from '@components/common/StatusBarManager';
+import { Colors } from "@utils/colors";
+import Progress from "@components/progressLoader/Progress";
+import StatusBarManager from "@components/common/StatusBarManager";
 
 const ProgressLoaderScreen = () => {
   const [index, setIndex] = React.useState(0);
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: Colors.WHITE,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });

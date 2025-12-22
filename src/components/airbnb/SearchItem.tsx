@@ -1,17 +1,18 @@
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {TSearchItem} from './types';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import Text from "@components/common/Text";
+import { TSearchItem } from "./types";
+import { Colors } from "@utils/colors";
+import { typography } from "@utils/typography";
 
-const SearchItem = ({place, date, guests}: TSearchItem) => (
+const SearchItem = ({ place, date, guests }: TSearchItem) => (
   <TouchableOpacity
     activeOpacity={0.65}
-    style={[styles.row, styles.alignCenter, styles.marBot24]}>
+    style={[styles.row, styles.alignCenter, styles.marBot24]}
+  >
     <View style={styles.searchClockContainer}>
-      <AntDesign name="clockcircleo" size={25} color={'black'} />
+      <AntDesign name="clock-circle" size={25} color={"black"} />
     </View>
     <View>
       <View style={styles.row}>
@@ -30,10 +31,10 @@ export default SearchItem;
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   alignCenter: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   marTop4: {
     marginTop: 4,

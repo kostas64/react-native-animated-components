@@ -1,21 +1,21 @@
-import {FlashList} from '@shopify/flash-list';
-import {Image, StyleSheet, View} from 'react-native';
-import {useSharedValue} from 'react-native-reanimated';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { FlashList } from "@shopify/flash-list";
+import { Image, StyleSheet, View } from "react-native";
+import { useSharedValue } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {Colors} from '@utils/colors';
-import {FadeItemProps} from '@components/fadeItemList/types';
-import FadeListItem from '@components/fadeItemList/FadeListItem';
-import StatusBarManager from '@components/common/StatusBarManager';
-import {BG_IMG, DATA, SPACING} from '@components/fadeItemList/constants';
+import { Colors } from "@utils/colors";
+import { FadeItemProps } from "@components/fadeItemList/types";
+import FadeListItem from "@components/fadeItemList/FadeListItem";
+import StatusBarManager from "@components/common/StatusBarManager";
+import { BG_IMG, DATA, SPACING } from "@components/fadeItemList/constants";
 
-const Separator = () => <View style={{height: SPACING}} />;
+const Separator = () => <View style={{ height: SPACING }} />;
 
 const ScrollItemListScreen = () => {
   const insets = useSafeAreaInsets();
   const scrollY = useSharedValue(0);
 
-  const renderItem = ({item, index}: FadeItemProps) => (
+  const renderItem = ({ item, index }: FadeItemProps) => (
     <FadeListItem item={item} index={index} scrollY={scrollY} />
   );
 
@@ -26,12 +26,12 @@ const ScrollItemListScreen = () => {
       <View style={styles.container}>
         <Image
           blurRadius={50}
-          source={{uri: BG_IMG}}
+          source={{ uri: BG_IMG }}
           style={StyleSheet.absoluteFillObject}
         />
         <FlashList
           data={DATA}
-          onScroll={e => {
+          onScroll={(e) => {
             scrollY.value = e.nativeEvent.contentOffset.y;
           }}
           showsVerticalScrollIndicator={false}
@@ -40,9 +40,8 @@ const ScrollItemListScreen = () => {
             paddingHorizontal: SPACING,
             paddingBottom: 2 * SPACING,
           }}
-          estimatedItemSize={118}
           ItemSeparatorComponent={Separator}
-          keyExtractor={item => item.key}
+          keyExtractor={(item) => item.key}
           renderItem={renderItem}
         />
       </View>

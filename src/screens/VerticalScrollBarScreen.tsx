@@ -5,31 +5,31 @@ import {
   PanResponder,
   NativeScrollEvent,
   NativeSyntheticEvent,
-} from 'react-native';
+} from "react-native";
 import Animated, {
-  runOnJS,
   withDelay,
   withTiming,
   withSpring,
   useSharedValue,
   useDerivedValue,
   cancelAnimation,
-} from 'react-native-reanimated';
-import {useRef} from 'react';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from "react-native-reanimated";
+import { useRef } from "react";
+import { scheduleOnRN } from "react-native-worklets";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {Colors} from '@utils/colors';
-import Text from '@components/common/Text';
-import {typography} from '@utils/typography';
-import ReText from '@components/common/ReText';
-import {data} from '@components/verticalScrollBar/data';
-import {isIOS, MAX_FONT_UPSCALE_FACTOR} from '@utils/device';
-import ListItem from '@components/verticalScrollBar/ListItem';
-import {TListItem} from '@components/verticalScrollBar/types';
-import StatusBarManager from '@components/common/StatusBarManager';
-import {preprocessNames} from '@components/verticalScrollBar/utils';
-import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
-import getAnimatedStyles from '@components/verticalScrollBar/animatedStyles';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import ReText from "@components/common/ReText";
+import { data } from "@components/verticalScrollBar/data";
+import { isIOS, MAX_FONT_UPSCALE_FACTOR } from "@utils/device";
+import ListItem from "@components/verticalScrollBar/ListItem";
+import { TListItem } from "@components/verticalScrollBar/types";
+import StatusBarManager from "@components/common/StatusBarManager";
+import { preprocessNames } from "@components/verticalScrollBar/utils";
+import { triggerHaptik } from "@components/taskCalendar/MonthListModal";
+import useAnimatedStyle from "@components/verticalScrollBar/animatedStyles";
 
 const Header = () => <Text style={styles.header}>Contacts</Text>;
 
@@ -45,7 +45,7 @@ const VerticalScrollBarScreen = () => {
   const indicatorOpacity = useSharedValue(0);
   const translateY = useSharedValue(0);
   const isTouching = useSharedValue(false);
-  const currentLetter = useSharedValue('A');
+  const currentLetter = useSharedValue("A");
   const progressIndicator = useSharedValue(0);
 
   const listRef = useRef<FlatList>(null);
@@ -84,21 +84,21 @@ const VerticalScrollBarScreen = () => {
               marginTop -
               marginBottom -
               (isIOS ? 72 : 84))) *
-            (contentH.value - initialLayoutH.value),
+            (contentH.value - initialLayoutH.value)
         );
       },
-    }),
+    })
   ).current;
 
   const showIndicator = () => {
-    indicatorOpacity.value = withTiming(1, {duration: 150});
+    indicatorOpacity.value = withTiming(1, { duration: 150 });
   };
 
   const hideIndicator = () => {
-    indicatorOpacity.value = withDelay(1000, withTiming(0, {duration: 200}));
+    indicatorOpacity.value = withDelay(1000, withTiming(0, { duration: 200 }));
   };
 
-  const renderItem = ({item}: {item: TListItem}) => (
+  const renderItem = ({ item }: { item: TListItem }) => (
     <ListItem
       item={item}
       formattedText={formattedText}
@@ -108,7 +108,7 @@ const VerticalScrollBarScreen = () => {
     />
   );
 
-  const {indicator} = getAnimatedStyles({
+  const { indicator } = useAnimatedStyle({
     translateY,
     scrollOffset,
     indicatorOpacity,
@@ -135,17 +135,17 @@ const VerticalScrollBarScreen = () => {
           item.isFirstOfLetter && item.isLastOfLetter
             ? firstLetterH.value + 36
             : item.isFirstOfLetter
-            ? firstLetterH.value
-            : item.isLastOfLetter
-            ? lastLetterH.value
-            : restLetterH.value;
+              ? firstLetterH.value
+              : item.isLastOfLetter
+                ? lastLetterH.value
+                : restLetterH.value;
 
         cumulativeOffset += itemHeight;
 
         if (scrollPosition + translateY.value - 12 < cumulativeOffset) {
           if (currentLetter.value !== item.letter && scrollOffset.value !== 0) {
             currentLetter.value = item.letter;
-            runOnJS(triggerHaptik)();
+            scheduleOnRN(triggerHaptik);
           }
 
           return item.letter;
@@ -164,7 +164,7 @@ const VerticalScrollBarScreen = () => {
       return listItems[0].letter;
     }
 
-    return '';
+    return "";
   });
 
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -216,11 +216,11 @@ const VerticalScrollBarScreen = () => {
           onScrollBeginDrag={showIndicator}
           onMomentumScrollBegin={showIndicator}
           renderItem={renderItem}
-          onLayout={e => (initialLayoutH.value = e.nativeEvent.layout.height)}
+          onLayout={(e) => (initialLayoutH.value = e.nativeEvent.layout.height)}
           onContentSizeChange={(_, height) => (contentH.value = height)}
           keyExtractor={(_, index) => index.toString()}
           contentContainerStyle={styles.padding}
-          style={[styles.bg, {marginTop, marginBottom}]}
+          style={[styles.bg, { marginTop, marginBottom }]}
           ListHeaderComponent={Header}
           showsVerticalScrollIndicator={false}
         />
@@ -232,9 +232,10 @@ const VerticalScrollBarScreen = () => {
           {...panResponder.panHandlers}
           style={[
             indicator,
-            {marginTop: marginTop},
+            { marginTop: marginTop },
             styles.indicatorContainer,
-          ]}>
+          ]}
+        >
           <ReText
             text={formattedText}
             pointerEvents="none"
@@ -268,9 +269,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   indicatorContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
     width: 112,
     right: -76,
     borderRadius: 23,

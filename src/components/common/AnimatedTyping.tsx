@@ -1,43 +1,49 @@
-import {Text} from 'react-native';
-import {useState, useEffect, useRef} from 'react';
+import { Text } from "react-native";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-import {AnimatedTypingProps} from './types';
+import { Timeout } from "src/types/common";
+import { AnimatedTypingProps } from "./types";
 
-export default function AnimatedTyping(props: AnimatedTypingProps) {
-  const [displayedText, setDisplayedText] = useState('');
+export default function AnimatedTyping({
+  text,
+  textStyle,
+  cursorStyle,
+  onComplete,
+}: AnimatedTypingProps) {
+  const [displayedText, setDisplayedText] = useState("");
   const [isCursorVisible, setIsCursorVisible] = useState(true);
-  const progress = useRef({messageIndex: 0, charIndex: 0});
-  const typingTimeout = useRef<number | null>(null);
-  const cursorInterval = useRef<number | null>(null);
+  const progress = useRef({ messageIndex: 0, charIndex: 0 });
+  const typingTimeout = useRef<Timeout | null>(null);
+  const cursorInterval = useRef<Timeout | null>(null);
 
-  const startTyping = () => {
-    const {messageIndex, charIndex} = progress.current;
+  const startTyping = useCallback(() => {
+    const { messageIndex, charIndex } = progress.current;
 
-    if (messageIndex < props.text.length) {
-      const currentMessage = props.text[messageIndex];
+    if (messageIndex < text.length) {
+      const currentMessage = text[messageIndex];
 
       if (charIndex < currentMessage.length) {
         // Append the next character
-        setDisplayedText(prev => prev + currentMessage[charIndex]);
+        setDisplayedText((prev) => prev + currentMessage[charIndex]);
         progress.current.charIndex += 1;
 
         typingTimeout.current = setTimeout(startTyping, 50);
-      } else if (messageIndex + 1 < props.text.length) {
+      } else if (messageIndex + 1 < text.length) {
         // Add a newline and move to the next message if there's another message
         progress.current.messageIndex += 1;
         progress.current.charIndex = 0;
 
-        setDisplayedText(prev => prev + '\n');
+        setDisplayedText((prev) => prev + "\n");
         typingTimeout.current = setTimeout(startTyping, 500);
       } else {
         // Typing complete
         stopCursorAnimation();
-        if (props.onComplete) {
-          props.onComplete();
+        if (onComplete) {
+          onComplete();
         }
       }
     }
-  };
+  }, [text, onComplete]);
 
   const stopCursorAnimation = () => {
     !!cursorInterval.current && clearInterval(cursorInterval.current);
@@ -47,7 +53,7 @@ export default function AnimatedTyping(props: AnimatedTypingProps) {
   useEffect(() => {
     // Start cursor animation
     cursorInterval.current = setInterval(() => {
-      setIsCursorVisible(visible => !visible);
+      setIsCursorVisible((visible) => !visible);
     }, 500);
 
     // Start typing animation
@@ -57,12 +63,12 @@ export default function AnimatedTyping(props: AnimatedTypingProps) {
       !!typingTimeout.current && clearTimeout(typingTimeout.current);
       !!cursorInterval.current && clearInterval(cursorInterval.current);
     };
-  }, []);
+  }, [typingTimeout, cursorInterval, startTyping]);
 
   return (
-    <Text style={props.textStyle}>
+    <Text style={textStyle}>
       {displayedText}
-      {isCursorVisible && <Text style={props.cursorStyle}>|</Text>}
+      {isCursorVisible && <Text style={cursorStyle}>|</Text>}
     </Text>
   );
 }

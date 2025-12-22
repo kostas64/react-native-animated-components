@@ -1,12 +1,12 @@
-import {useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useRef } from "react";
+import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {Colors} from '@utils/colors';
-import MyButton from '@components/charts/MyButton';
-import PieChart from '@components/charts/pieChart/PieChart';
-import LineChart from '@components/charts/lineChart/LineChart';
-import StatusBarManager from '@components/common/StatusBarManager';
+import { Colors } from "@utils/colors";
+import MyButton from "@components/charts/MyButton";
+import PieChart from "@components/charts/pieChart/PieChart";
+import LineChart from "@components/charts/lineChart/LineChart";
+import StatusBarManager from "@components/common/StatusBarManager";
 
 type ChartRef = {
   animate: (forward?: boolean) => void;
@@ -32,7 +32,7 @@ const LineChartScreen = () => {
   return (
     <>
       <StatusBarManager />
-      <View style={[styles.container, {paddingTop, paddingBottom}]}>
+      <View style={[styles.container, { paddingTop, paddingBottom }]}>
         <View style={styles.chartsContainer}>
           <LineChart ref={lineChartRef} />
           <PieChart ref={pieChartRef} />
@@ -52,20 +52,20 @@ export default LineChartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     paddingHorizontal: 24,
     backgroundColor: Colors.ALABASTER,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   chartsContainer: {
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
   },
   btnsContainer: {
-    justifyContent: 'space-around',
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "space-around",
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
     height: 52,
     marginTop: 16,
   },

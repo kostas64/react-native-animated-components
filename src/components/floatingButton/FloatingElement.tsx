@@ -1,5 +1,4 @@
 import Animated, {
-  runOnJS,
   withDelay,
   withSpring,
   withTiming,
@@ -8,15 +7,16 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedKeyboard,
   useAnimatedReaction,
-} from 'react-native-reanimated';
-import React, {useRef} from 'react';
-import {Keyboard, Pressable, StyleSheet} from 'react-native';
+} from "react-native-reanimated";
+import React, { useRef } from "react";
+import { scheduleOnRN } from "react-native-worklets";
+import { Keyboard, Pressable, StyleSheet } from "react-native";
 
-import {WIDTH} from '@utils/device';
-import {Colors} from '@utils/colors';
-import {image, SPACING} from './data';
-import {TFloatingElement} from './types';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
+import { WIDTH } from "@utils/device";
+import { Colors } from "@utils/colors";
+import { image, SPACING } from "./data";
+import { TFloatingElement } from "./types";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
 
 const FloatingElement = ({
   content,
@@ -38,14 +38,14 @@ const FloatingElement = ({
 
   //Animated values
   const isOpen = useSharedValue(0);
-  const keyboard = useAnimatedKeyboard({isStatusBarTranslucentAndroid: true});
+  const keyboard = useAnimatedKeyboard({ isStatusBarTranslucentAndroid: true });
   const contentOpacity = useSharedValue(0);
   const heightFloating = useSharedValue(60);
   const widthFloating = useSharedValue(60);
   const backOpacity = useSharedValue(0);
   const imageRotate = useSharedValue(1);
   const translateCircle = useSharedValue(
-    (WIDTH - 30 - (WIDTH - (WIDTH - 4 * SPACING)) / 2) / 2,
+    (WIDTH - 30 - (WIDTH - (WIDTH - 4 * SPACING)) / 2) / 2
   );
 
   //Checks
@@ -56,10 +56,10 @@ const FloatingElement = ({
   const buttonHitslop = hasCustomOpenHitslop
     ? hitSlopWithFabOpen
     : hasCustomClosedHitslop
-    ? hitSlopWithFabClosed
-    : !showBack
-    ? {top: 16, left: 16, right: 16, bottom: 16}
-    : {top: 8, left: 8, right: 8, bottom: 8};
+      ? hitSlopWithFabClosed
+      : !showBack
+        ? { top: 16, left: 16, right: 16, bottom: 16 }
+        : { top: 8, left: 8, right: 8, bottom: 8 };
 
   // Update state to show/hide background
   // Triggered when background opacity change
@@ -67,21 +67,21 @@ const FloatingElement = ({
     () => {
       return backOpacity.value > 0;
     },
-    shouldHide => {
-      'worklet';
+    (shouldHide) => {
+      "worklet";
       if (!shouldHide) {
-        runOnJS(setShowBack)(false);
+        scheduleOnRN(setShowBack, false);
       } else {
-        runOnJS(setShowBack)(true);
+        scheduleOnRN(setShowBack, true);
       }
-    },
+    }
   );
 
-  const closeAnimation = React.useCallback(() => {
+  const closeAnimation = () => {
     const contDur = fadeOutDuration || 10;
     const finalWidth = snapWidth || WIDTH - 4 * SPACING;
 
-    contentOpacity.value = withTiming(0, {duration: contDur});
+    contentOpacity.value = withTiming(0, { duration: contDur });
     backOpacity.value = withTiming(0);
     widthFloating.value = withTiming(60);
     heightFloating.value = withTiming(60);
@@ -89,11 +89,11 @@ const FloatingElement = ({
     translateCircle.value = withTiming(
       (WIDTH - 30 - (WIDTH - finalWidth) / 2) / 2,
       {},
-      finished => {
+      (finished) => {
         if (finished) {
           isOpen.value = 0;
         }
-      },
+      }
     );
 
     if (keyboard.height.value > 0) {
@@ -101,15 +101,18 @@ const FloatingElement = ({
         Keyboard.dismiss();
       }, 100);
     }
-  }, []);
+  };
 
-  const openAnimation = React.useCallback(() => {
+  const openAnimation = () => {
     const contDur = fadeInDuration || 150;
     const backDropOpacity = backdropOpacity || 0.5;
     const finalWidth = snapWidth || WIDTH - 4 * SPACING;
 
     if (isOpen.value === 0) {
-      contentOpacity.value = withDelay(150, withTiming(1, {duration: contDur}));
+      contentOpacity.value = withDelay(
+        150,
+        withTiming(1, { duration: contDur })
+      );
       backOpacity.value = withTiming(backDropOpacity);
       widthFloating.value = withTiming(finalWidth);
       heightFloating.value = withTiming(snapHeight);
@@ -117,14 +120,14 @@ const FloatingElement = ({
       translateCircle.value = withTiming(
         (WIDTH - finalWidth) / 2,
         {},
-        finished => {
+        (finished) => {
           if (finished) {
             isOpen.value = 1;
           }
-        },
+        }
       );
     }
-  }, []);
+  };
 
   const translateStyle = useAnimatedStyle(() => {
     return {
@@ -135,6 +138,9 @@ const FloatingElement = ({
         {
           translateY: withSpring(-keyboard.height.value, {
             damping: 15,
+            stiffness: 150,
+            mass: 0.8,
+            energyThreshold: 1e-7,
           }),
         },
       ],
@@ -151,7 +157,7 @@ const FloatingElement = ({
 
   const closeStyle = useAnimatedStyle(() => ({
     transform: [
-      {rotate: `${interpolate(imageRotate.value, [0, 1], [0, 45])}deg`},
+      { rotate: `${interpolate(imageRotate.value, [0, 1], [0, 45])}deg` },
     ],
   }));
 
@@ -171,14 +177,15 @@ const FloatingElement = ({
           style={[
             backStyle,
             styles.background,
-            !!backdropColor && {backgroundColor: backdropColor},
+            !!backdropColor && { backgroundColor: backdropColor },
           ]}
         />
       )}
       {/* Container */}
       <AnimatedPressable
         onPress={openAnimation}
-        style={[translateStyle, containerStyle]}>
+        style={[translateStyle, containerStyle]}
+      >
         {/* Content */}
         <Animated.View style={contentAnimStyle}>{content}</Animated.View>
 
@@ -187,10 +194,11 @@ const FloatingElement = ({
           <Pressable
             style={styles.imageContainer}
             hitSlop={buttonHitslop}
-            onPress={showBack ? closeAnimation : openAnimation}>
+            onPress={showBack ? closeAnimation : openAnimation}
+          >
             <Animated.Image
               source={image}
-              style={[closeStyle, styles.image, {tintColor: iconTintColor}]}
+              style={[closeStyle, styles.image, { tintColor: iconTintColor }]}
             />
           </Pressable>
         )}
@@ -203,9 +211,9 @@ export default FloatingElement;
 
 const styles = StyleSheet.create({
   background: {
-    width: '150%',
-    height: '150%',
-    position: 'absolute',
+    width: "150%",
+    height: "150%",
+    position: "absolute",
     top: 0,
     left: 0,
     bottom: 0,
@@ -215,7 +223,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     top: 17,
     right: 18,
-    position: 'absolute',
+    position: "absolute",
   },
   image: {
     height: 24,

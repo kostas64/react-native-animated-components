@@ -1,22 +1,26 @@
-import React from 'react';
-import {Animated} from 'react-native';
+import React from "react";
+import { Animated } from "react-native";
 
-import Item from './ConnectListItem';
-import data from '@assets/doubleList';
-import {ITEM_HEIGHT} from './constants';
-import {HEIGHT_SCR} from '@utils/device';
-import {IItemProps, TListProps} from './types';
+import Item from "./ConnectListItem";
+import data from "@assets/doubleList";
+import { ITEM_HEIGHT } from "./constants";
+import { HEIGHT_SCR } from "@utils/device";
+import { IItemProps, TListProps } from "./types";
 
-const List = React.forwardRef(
+const List = React.forwardRef<Animated.FlatList, TListProps>(
   (
-    {color, showText, style, onScroll, onMomentumScrollEnd}: TListProps,
-    ref: any,
+    {
+      color,
+      showText,
+      style,
+      onScroll,
+      onScrollBeginDrag,
+      onMomentumScrollEnd,
+    },
+    ref
   ) => {
-    const renderItem = React.useCallback(
-      ({item}: {item: IItemProps | any}) => (
-        <Item {...item} color={color} showText={showText} />
-      ),
-      [],
+    const renderItem = ({ item }: { item: IItemProps }) => (
+      <Item {...item} color={color} showText={showText} />
     );
 
     const listStyle = {
@@ -35,22 +39,23 @@ const List = React.forwardRef(
         onScroll={onScroll}
         scrollEventThrottle={16}
         scrollEnabled={!showText}
-        decelerationRate={'normal'}
+        decelerationRate={"normal"}
         snapToInterval={ITEM_HEIGHT}
         contentContainerStyle={listStyle}
-        keyExtractor={item => `${item.name}-${item.icon}`}
+        onScrollBeginDrag={onScrollBeginDrag}
+        keyExtractor={(item) => `${item.name}-${item.icon}`}
         renderItem={renderItem}
-        onMomentumScrollEnd={e =>
+        onMomentumScrollEnd={(e) =>
           onMomentumScrollEnd &&
           onMomentumScrollEnd(
-            Math.round(e.nativeEvent.contentOffset.y / ITEM_HEIGHT),
+            Math.round(e.nativeEvent.contentOffset.y / ITEM_HEIGHT)
           )
         }
       />
     );
-  },
+  }
 );
 
-List.displayName = 'List';
+List.displayName = "List";
 
 export default List;

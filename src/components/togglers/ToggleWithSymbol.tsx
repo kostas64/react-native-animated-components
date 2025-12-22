@@ -1,8 +1,8 @@
-import React from 'react';
-import {Animated, Easing, Pressable, StyleSheet, View} from 'react-native';
+import React from "react";
+import { Animated, Easing, Pressable, StyleSheet, View } from "react-native";
 
-import {SIZE} from './constants';
-import {Colors} from '@utils/colors';
+import { SIZE } from "./constants";
+import { Colors } from "@utils/colors";
 
 const ToggleWithSymbol = () => {
   const animSymbolRef = React.useRef(new Animated.Value(0)).current;
@@ -11,7 +11,7 @@ const ToggleWithSymbol = () => {
 
   const [togglerSymbolActive, setTogglerSymbolActive] = React.useState(false);
 
-  const animateSymbol = () => setTogglerSymbolActive(cur => !cur);
+  const animateSymbol = () => setTogglerSymbolActive((cur) => !cur);
 
   React.useEffect(() => {
     Animated.timing(animSymbolRef, {
@@ -32,7 +32,7 @@ const ToggleWithSymbol = () => {
       easing: Easing.linear,
       useNativeDriver: true,
     }).start();
-  }, [togglerSymbolActive]);
+  }, [togglerSymbolActive, animSymbolRef, opacityClose, opacityOpen]);
 
   return (
     <Pressable onPress={animateSymbol}>
@@ -40,20 +40,27 @@ const ToggleWithSymbol = () => {
         style={[
           styles.container,
           togglerSymbolActive ? styles.black : styles.lowOpacityBlack,
-        ]}>
+        ]}
+      >
         <Animated.View
-          style={[styles.dot, {transform: [{translateX: animSymbolRef}]}]}
+          style={[styles.dot, { transform: [{ translateX: animSymbolRef }] }]}
         />
         <Animated.View
           style={[
             styles.symbolOpen,
-            {opacity: opacityOpen, transform: [{translateX: animSymbolRef}]},
+            {
+              opacity: opacityOpen,
+              transform: [{ translateX: animSymbolRef }],
+            },
           ]}
         />
         <Animated.View
           style={[
             styles.symbolClose,
-            {opacity: opacityClose, transform: [{translateX: animSymbolRef}]},
+            {
+              opacity: opacityClose,
+              transform: [{ translateX: animSymbolRef }],
+            },
           ]}
         />
       </View>
@@ -70,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZE / 4,
   },
   dot: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: -(SIZE / 12),
     width: SIZE / 2,
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   symbolOpen: {
-    position: 'absolute',
+    position: "absolute",
     top: (SIZE / 3 - SIZE / 4) / 2,
     left: (SIZE - SIZE / 2) / 4,
     width: SIZE / 4,
@@ -89,7 +96,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.BLACK,
   },
   symbolClose: {
-    position: 'absolute',
+    position: "absolute",
     top: (SIZE / 3 - SIZE / 4) / 2,
     left: SIZE / 5,
     width: SIZE / 20,

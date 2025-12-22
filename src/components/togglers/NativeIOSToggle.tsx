@@ -3,26 +3,26 @@ import Animated, {
   withTiming,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+} from "react-native-reanimated";
+import React from "react";
+import { Pressable, StyleSheet, View } from "react-native";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-import {SIZE} from './constants';
-import {Colors} from '@utils/colors';
+import { SIZE } from "./constants";
+import { Colors } from "@utils/colors";
 
 const AnimatedIcon = Animated.createAnimatedComponent(MaterialIcons);
 
-const NativeIOSToggle = ({withTheme = false}: {withTheme?: boolean}) => {
+const NativeIOSToggle = ({ withTheme = false }: { withTheme?: boolean }) => {
   const [togglerIOSActive, setTogglerIOSActive] = React.useState(false);
 
-  const animateIOS = () => setTogglerIOSActive(cur => !cur);
+  const animateIOS = () => setTogglerIOSActive((cur) => !cur);
 
   const animIOSRef = useSharedValue(0);
   const animIOSDisabledRef = useSharedValue(1);
 
   const container = useAnimatedStyle(() => ({
-    transform: [{translateX: animIOSRef.value}],
+    transform: [{ translateX: animIOSRef.value }],
   }));
 
   const opacityLightMode = useAnimatedStyle(() => ({
@@ -42,7 +42,7 @@ const NativeIOSToggle = ({withTheme = false}: {withTheme?: boolean}) => {
       duration: 200,
       easing: Easing.linear,
     });
-  }, [togglerIOSActive]);
+  }, [togglerIOSActive, animIOSDisabledRef, animIOSRef]);
 
   return (
     <Pressable onPress={animateIOS}>
@@ -50,18 +50,19 @@ const NativeIOSToggle = ({withTheme = false}: {withTheme?: boolean}) => {
         style={[
           styles.container,
           !togglerIOSActive ? styles.lowOpacityBlack : styles.green,
-        ]}>
+        ]}
+      >
         <Animated.View style={[styles.dot, container]}>
           {withTheme && (
             <>
               <AnimatedIcon
-                color={'#4cda63'}
+                color={"#4cda63"}
                 name="light-mode"
                 size={24}
                 style={[opacityLightMode, styles.absoluteCenter]}
               />
               <AnimatedIcon
-                color={'#d1d1d1'}
+                color={"#d1d1d1"}
                 name="dark-mode"
                 size={24}
                 style={[opacityDarkMode, styles.absoluteCenter]}
@@ -81,19 +82,19 @@ const styles = StyleSheet.create({
     width: SIZE,
     height: SIZE / 2,
     borderRadius: SIZE / 4,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingHorizontal: SIZE / 30,
   },
   dot: {
     width: SIZE / 2 - 4,
     height: SIZE / 2 - 4,
     backgroundColor: Colors.WHITE,
-    justifyContent: 'center',
+    justifyContent: "center",
     borderRadius: (SIZE / 2 - 4) / 2,
   },
   absoluteCenter: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
   },
   green: {
     backgroundColor: Colors.UFO_GREEN,

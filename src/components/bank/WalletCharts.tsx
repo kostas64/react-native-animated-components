@@ -1,31 +1,30 @@
-/* eslint-disable react-native/no-raw-text */
-import {useCallback, useState} from 'react';
-import {Svg, Text as SVGText} from 'react-native-svg';
-import {View, FlatList, ViewStyle, StyleProp, StyleSheet} from 'react-native';
+import { useCallback, useState } from "react";
+import { Svg, Text as SVGText } from "react-native-svg";
+import { View, FlatList, ViewStyle, StyleProp, StyleSheet } from "react-native";
 
-import Bar from './Bar';
-import Tabs from './Tabs';
-import {BarItemProps} from './types';
-import {Colors} from '@utils/colors';
-import {MONTHS} from '@assets/months';
-import {isAndroid} from '@utils/device';
-import Text from '@components/common/Text';
-import {typography} from '@utils/typography';
-import CommonGradient from './CommonGradient';
-import {EARNINGS, SELECTED_TYPE} from './data';
+import Bar from "./Bar";
+import Tabs from "./Tabs";
+import { BarItemProps } from "./types";
+import { Colors } from "@utils/colors";
+import { MONTHS } from "@assets/months";
+import { isAndroid } from "@utils/device";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import CommonGradient from "./CommonGradient";
+import { EARNINGS, SELECTED_TYPE } from "./data";
 
-const WalletCharts = ({style}: {style?: StyleProp<ViewStyle>}) => {
+const WalletCharts = ({ style }: { style?: StyleProp<ViewStyle> }) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedType, setSelectedType] = useState(SELECTED_TYPE.EARNINGS);
 
   const maxBarEarnings = EARNINGS.reduce(
     (max, obj) => (obj.earnings > max.earnings ? obj : max),
-    EARNINGS[0],
+    EARNINGS[0]
   );
 
   const maxBarSpendings = EARNINGS.reduce(
     (max, obj) => (obj.spendings > max.spendings ? obj : max),
-    EARNINGS[0],
+    EARNINGS[0]
   );
 
   const mainValue =
@@ -46,40 +45,40 @@ const WalletCharts = ({style}: {style?: StyleProp<ViewStyle>}) => {
     setSelectedType(value);
   }, []);
 
-  const renderItem = useCallback(
-    ({item, index}: {item: BarItemProps; index: number}) => (
-      <Bar
-        key={index}
-        index={index}
-        month={item.month}
-        maxValue={maxValue}
-        isSelected={index === selectedMonth}
-        onSelect={onSelect}
-        value={
-          selectedType === SELECTED_TYPE.EARNINGS
-            ? item.earnings
-            : item.spendings
-        }
-      />
-    ),
-    [selectedMonth, selectedType],
+  const renderItem = ({
+    item,
+    index,
+  }: {
+    item: BarItemProps;
+    index: number;
+  }) => (
+    <Bar
+      key={index}
+      index={index}
+      month={item.month}
+      maxValue={maxValue}
+      isSelected={index === selectedMonth}
+      onSelect={onSelect}
+      value={
+        selectedType === SELECTED_TYPE.EARNINGS ? item.earnings : item.spendings
+      }
+    />
   );
 
   return (
     <View style={[styles.container, style]}>
       <View style={styles.rowCenter}>
         <Svg width={22} height={38} viewBox="0 0 4 2.5" style={styles.currency}>
-          <CommonGradient id={'currency'} />
-          <SVGText y={4} fontSize={6} fontWeight={'bold'} fill="url(#currency)">
+          <CommonGradient id={"currency"} />
+          <SVGText y={4} fontSize={6} fontWeight={"bold"} fill="url(#currency)">
             $
           </SVGText>
         </Svg>
         <Text style={styles.money}>{mainValue}</Text>
       </View>
       <Text
-        style={
-          styles.earningsLabel
-        }>{`${MONTHS[selectedMonth]} ${selectedType}`}</Text>
+        style={styles.earningsLabel}
+      >{`${MONTHS[selectedMonth]} ${selectedType}`}</Text>
 
       <FlatList
         horizontal
@@ -112,8 +111,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   rowCenter: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
   money: {
     color: Colors.CHINESE_BLACK,
@@ -121,13 +120,13 @@ const styles = StyleSheet.create({
     fontFamily: typography.semiBold,
   },
   earningsLabel: {
-    alignSelf: 'center',
+    alignSelf: "center",
     color: Colors.DARK_LIVER,
     fontFamily: typography.medium,
     fontSize: 12,
     marginTop: 4,
   },
   currency: {
-    transform: [{translateY: isAndroid ? 3 : 0}],
+    transform: [{ translateY: isAndroid ? 3 : 0 }],
   },
 });

@@ -3,26 +3,26 @@ import {
   SharedValue,
   Extrapolation,
   useAnimatedStyle,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import {CIRCLE_SIZE} from './data';
-import {TFloatingModalDimensions} from './types';
+import { CIRCLE_SIZE } from "./data";
+import { TFloatingModalDimensions } from "./types";
 
-export const getAnimatedStyles = (progress: SharedValue<number>) => {
+export const useAnimatedStyles = (progress: SharedValue<number>) => {
   const send = useAnimatedStyle(() => ({
     transform: [
       {
         translateX: interpolate(
           progress.value,
           [0, 0.5, 0.50001, 1],
-          [0, 42, -42, 0],
+          [0, 42, -42, 0]
         ),
       },
       {
         translateY: interpolate(
           progress.value,
           [0, 0.5, 0.50001, 1],
-          [0, -42, 42, 0],
+          [0, -42, 42, 0]
         ),
       },
     ],
@@ -35,7 +35,7 @@ export const getAnimatedStyles = (progress: SharedValue<number>) => {
           progress.value,
           [0, 0.35, 0.5, 1],
           [0, 1, 1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
       {
@@ -43,7 +43,7 @@ export const getAnimatedStyles = (progress: SharedValue<number>) => {
           progress.value,
           [0, 0.35, 0.5, 1],
           [0, 360, 360, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         )}deg`,
       },
     ],
@@ -55,7 +55,7 @@ export const getAnimatedStyles = (progress: SharedValue<number>) => {
   };
 };
 
-export const getAnimatedContainerStyles = ({
+export const useAnimatedContainerStyles = ({
   dimensions,
   progress,
 }: {
@@ -71,32 +71,27 @@ export const getAnimatedContainerStyles = ({
       borderRadius: interpolate(
         progress.value,
         [0, 0.35, 0.5, 1],
-        [CIRCLE_SIZE / 2, 24, 24, CIRCLE_SIZE / 2],
+        [CIRCLE_SIZE / 2, 24, 24, CIRCLE_SIZE / 2]
       ),
       width: interpolate(
         progress.value,
         [0, 0.35, 0.5, 1],
-        [CIRCLE_SIZE, dimensions.width, dimensions.width, CIRCLE_SIZE],
+        [CIRCLE_SIZE, dimensions.width, dimensions.width, CIRCLE_SIZE]
       ),
       height: interpolate(
         progress.value,
         [0, 0.35, 0.5, 1],
-        [CIRCLE_SIZE, dimensions.height, dimensions.height, CIRCLE_SIZE],
+        [CIRCLE_SIZE, dimensions.height, dimensions.height, CIRCLE_SIZE]
       ),
       top: interpolate(
         progress.value,
         [0, 0.35, 0.5, 1],
-        [0, -dimensions.height - 16, -dimensions.height - 16, 0],
+        [0, -dimensions.height - 16, -dimensions.height - 16, 0]
       ),
       left: interpolate(
         progress.value,
         [0, 0.35, 0.5, 1],
-        [
-          0,
-          -dimensions.width + CIRCLE_SIZE,
-          -dimensions.width + CIRCLE_SIZE,
-          0,
-        ],
+        [0, -dimensions.width + CIRCLE_SIZE, -dimensions.width + CIRCLE_SIZE, 0]
       ),
     };
   });
@@ -106,7 +101,7 @@ export const getAnimatedContainerStyles = ({
   };
 };
 
-export const getAnimatedItemStyles = ({
+export const useAnimatedItemStyles = ({
   progress,
 }: {
   progress: SharedValue<number>;
@@ -116,7 +111,7 @@ export const getAnimatedItemStyles = ({
       progress.value,
       [0.35, 0.5, 0.55],
       [0, 1, 0],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
     transform: [
       {
@@ -124,7 +119,7 @@ export const getAnimatedItemStyles = ({
           progress.value,
           [0.35, 0.5, 0.55],
           [16, 0, 16],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
     ],
@@ -135,7 +130,7 @@ export const getAnimatedItemStyles = ({
       progress.value,
       [0.35, 0.5, 0.55],
       [0, 1, 0],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
     transform: [
       {
@@ -143,11 +138,11 @@ export const getAnimatedItemStyles = ({
           progress.value,
           [0.35, 0.5, 0.55],
           [-16, 0, -16],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
     ],
   }));
 
-  return {animatedText, animatedIcon};
+  return { animatedText, animatedIcon };
 };

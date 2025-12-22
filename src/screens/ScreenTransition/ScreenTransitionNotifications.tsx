@@ -1,18 +1,18 @@
-import {useIsFocused} from '@react-navigation/native';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useIsFocused } from "@react-navigation/native";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   NOTIFICATION_EVENTS_TODAY,
   NOTIFICATION_EVENTS_YESTERDAY,
-} from '@components/screenTransition/data';
-import {isIOS} from '@utils/device';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import TextBetween from '@components/screenTransition/TextBetween';
-import FadeInTransition from '@components/screenTransition/FadeInTransition';
-import NotificationEvent from '@components/screenTransition/NotificationEvent';
-import NotificationsHeader from '@components/screenTransition/NotificationsHeader';
+} from "@components/screenTransition/data";
+import { isIOS } from "@utils/device";
+import { Colors } from "@utils/colors";
+import { typography } from "@utils/typography";
+import TextBetween from "@components/screenTransition/TextBetween";
+import FadeInTransition from "@components/screenTransition/FadeInTransition";
+import NotificationEvent from "@components/screenTransition/NotificationEvent";
+import NotificationsHeader from "@components/screenTransition/NotificationsHeader";
 
 const ScreenTransitionNotifications = () => {
   const isFocused = useIsFocused();
@@ -23,15 +23,16 @@ const ScreenTransitionNotifications = () => {
   const paddingBottom = insets.top <= 52 ? 30 : insets.bottom + 8;
 
   return (
-    <View style={[styles.container, {paddingTop}]}>
+    <View style={[styles.container, { paddingTop }]}>
       <FadeInTransition
         index={0}
         direction="left"
         animate={isFocused}
-        containerStyle={styles.spaceHor}>
+        containerStyle={styles.spaceHor}
+      >
         <NotificationsHeader />
       </FadeInTransition>
-      <ScrollView contentContainerStyle={{paddingBottom}}>
+      <ScrollView contentContainerStyle={{ paddingBottom }}>
         <TextBetween
           index={1}
           title="Today"
@@ -45,7 +46,8 @@ const ScreenTransitionNotifications = () => {
             animate={isFocused}
             key={`notification-event-${index}`}
             index={2 + (index + 0.25)}
-            containerStyle={styles.smSpaceHor}>
+            containerStyle={styles.smSpaceHor}
+          >
             <NotificationEvent
               event={event}
               containerStyle={
@@ -67,7 +69,8 @@ const ScreenTransitionNotifications = () => {
             animate={isFocused}
             key={`notification-event-${index}`}
             index={4 + NOTIFICATION_EVENTS_TODAY.length * 0.25 + (index + 0.25)}
-            containerStyle={styles.smSpaceHor}>
+            containerStyle={styles.smSpaceHor}
+          >
             <NotificationEvent
               event={event}
               containerStyle={

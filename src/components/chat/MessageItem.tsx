@@ -1,3 +1,9 @@
+import {
+  impactAsync,
+  AndroidHaptics,
+  ImpactFeedbackStyle,
+  performAndroidHapticsAsync,
+} from "expo-haptics";
 import Animated, {
   withTiming,
   interpolate,
@@ -5,196 +11,193 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedReaction,
-} from 'react-native-reanimated';
-import React, {useCallback} from 'react';
-import Haptic from 'react-native-haptic-feedback';
-import {View, Image, StyleSheet, GestureResponderEvent} from 'react-native';
+} from "react-native-reanimated";
+import React from "react";
+import { View, Image, StyleSheet, GestureResponderEvent } from "react-native";
 
-import Text from '@components/common/Text';
-import {TMessageItem} from './types';
-import {Colors} from '@utils/colors';
-import {DELAY_LONG_PRESS} from './data';
-import {typography} from '@utils/typography';
-import {HAPTIC_CONFIG} from '@utils/haptics';
-import {isAndroid, isIOS, WIDTH} from '@utils/device';
-import {AnimatedPressable} from '@components/common/AnimatedComponents';
+import { TMessageItem } from "./types";
+import { Colors } from "@utils/colors";
+import { DELAY_LONG_PRESS } from "./data";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { isAndroid, isIOS, WIDTH } from "@utils/device";
+import { AnimatedPressable } from "@components/common/AnimatedComponents";
 
 const triggerLongPressHaptik = () => {
   if (isAndroid) {
-    Haptic.trigger('longPress', HAPTIC_CONFIG);
+    performAndroidHapticsAsync(AndroidHaptics.Long_Press);
   } else {
-    Haptic.trigger('impactMedium', HAPTIC_CONFIG);
+    impactAsync(ImpactFeedbackStyle.Medium);
   }
 };
 
-const MessageItem = React.memo(
-  ({
-    item,
-    scrollY,
-    capture,
-    handleKeyboard,
-    scrollToFirstItem,
-  }: TMessageItem) => {
-    const scale = useSharedValue(item?.animate ? 0 : 1);
+const MessageItem = ({
+  item,
+  scrollY,
+  capture,
+  handleKeyboard,
+  scrollToFirstItem,
+}: TMessageItem) => {
+  const scale = useSharedValue(item?.animate ? 0 : 1);
 
-    //Handle animation finish when scrolling to top
-    useAnimatedReaction(
-      () => {
-        return scrollY?.value ?? 0;
-      },
-      (newScroll, oldScroll) => {
-        if (newScroll === 0 && oldScroll === 0) {
-          return null;
-        } else if (newScroll === 0 && oldScroll !== 0) {
-          scale.value = withTiming(1);
-        }
-      },
-    );
-
-    const animStyle = useAnimatedStyle(() => {
-      if (!item?.animate) {
-        return {};
+  //Handle animation finish when scrolling to top
+  useAnimatedReaction(
+    () => {
+      return scrollY?.value ?? 0;
+    },
+    (newScroll, oldScroll) => {
+      if (newScroll === 0 && oldScroll === 0) {
+        return null;
+      } else if (newScroll === 0 && oldScroll !== 0) {
+        scale.value = withTiming(1);
       }
+    }
+  );
 
-      return {
-        transform: [
-          {
-            scale: interpolate(
-              scale.value,
-              [0.15, 1],
-              [0, 1],
-              Extrapolation.CLAMP,
-            ),
-          },
-        ],
-        left: interpolate(scale.value, [0.15, 1], [-(WIDTH - 48) / 2, 0]),
-        top: interpolate(scale.value, [0.15, 1], [-40, 0]),
-      };
-    }, []);
+  const animStyle = useAnimatedStyle(() => {
+    if (!item?.animate) {
+      return {};
+    }
 
-    const animImgStyle = useAnimatedStyle(() => ({
-      transform: [{scale: !item?.animate ? 1 : scale.value}],
-    }));
+    return {
+      transform: [
+        {
+          scale: interpolate(
+            scale.value,
+            [0.15, 1],
+            [0, 1],
+            Extrapolation.CLAMP
+          ),
+        },
+      ],
+      left: interpolate(scale.value, [0.15, 1], [-(WIDTH - 48) / 2, 0]),
+      top: interpolate(scale.value, [0.15, 1], [-40, 0]),
+    };
+  }, []);
 
-    const customEntering = useCallback(() => {
-      'worklet';
-      let animations = {
-        opacity: withTiming(1),
-        transform: [{scale: withTiming(1)}],
-      };
-      let initialValues = {
-        opacity: 0,
-        transform: [{scale: 0}],
-      };
+  const animImgStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: !item?.animate ? 1 : scale.value }],
+  }));
 
-      return {
-        initialValues,
-        animations,
-      };
-    }, []);
+  const customEntering = () => {
+    "worklet";
 
-    const customExiting = useCallback(() => {
-      'worklet';
-      const animations = {
-        opacity: withTiming(0),
-        transform: [{scale: withTiming(0)}],
-      };
-      const initialValues = {
-        opacity: 1,
-        transform: [{scale: 1}],
-      };
-      return {
-        initialValues,
-        animations,
-      };
-    }, []);
+    let animations = {
+      opacity: withTiming(1),
+      transform: [{ scale: withTiming(1) }],
+    };
 
-    const onLongPress = React.useCallback(
-      (e: GestureResponderEvent) => {
-        isIOS && triggerLongPressHaptik();
+    let initialValues = {
+      opacity: 0,
+      transform: [{ scale: 0 }],
+    };
 
-        !!handleKeyboard && handleKeyboard();
+    return {
+      initialValues,
+      animations,
+    };
+  };
 
-        !!capture &&
-          capture(item.id, e.nativeEvent.pageY - e.nativeEvent.locationY);
-      },
-      [handleKeyboard, triggerLongPressHaptik],
-    );
+  const customExiting = () => {
+    "worklet";
 
-    React.useEffect(() => {
-      if (item?.animate) {
-        !!scrollToFirstItem && scrollToFirstItem();
+    const animations = {
+      opacity: withTiming(0),
+      transform: [{ scale: withTiming(0) }],
+    };
 
-        //Trigger animation if scroll position is at top
-        if (scrollY?.value === 0) {
-          scale.value = withTiming(1);
-        }
+    const initialValues = {
+      opacity: 1,
+      transform: [{ scale: 1 }],
+    };
+    return {
+      initialValues,
+      animations,
+    };
+  };
+
+  const onLongPress = (e: GestureResponderEvent) => {
+    isIOS && triggerLongPressHaptik();
+
+    !!handleKeyboard && handleKeyboard();
+
+    !!capture &&
+      capture(item.id, e.nativeEvent.pageY - e.nativeEvent.locationY);
+  };
+
+  React.useEffect(() => {
+    if (item?.animate) {
+      !!scrollToFirstItem && scrollToFirstItem();
+
+      //Trigger animation if scroll position is at top
+      if (scrollY?.value === 0) {
+        scale.value = withTiming(1);
       }
-    }, []);
+    }
+  }, [scale, scrollY, scrollToFirstItem, item?.animate]);
 
-    return (
-      <>
-        <View style={styles.messageContainer}>
-          {!item?.isOwnerOfChat && (
-            <Animated.Image
-              source={item?.image}
-              style={[
-                animImgStyle,
-                styles.avatar,
-                styles.messageRecipient,
-                styles.messageSenderBorder,
-              ]}
-            />
-          )}
-          <AnimatedPressable
-            pointerEvents={'box-only'}
-            onLongPress={onLongPress}
-            delayLongPress={DELAY_LONG_PRESS}
+  return (
+    <>
+      <View style={styles.messageContainer}>
+        {!item?.isOwnerOfChat && (
+          <Animated.Image
+            source={item?.image}
             style={[
-              animStyle,
-              styles.messageInnerContainer,
-              item?.isOwnerOfChat
-                ? styles.messageSenderBorder
-                : styles.messageRecipientBorder,
-            ]}>
-            <View style={styles.messageHeader}>
-              <Text style={styles.messageName}>{item?.name}</Text>
-              <Text style={styles.messageTime}>{item?.time}</Text>
-            </View>
-            <Text style={styles.message}>{item?.message}</Text>
-            {item.emoji && (
-              <Animated.View
-                exiting={customExiting}
-                entering={customEntering}
-                style={styles.smallEmojiContainer}>
-                <Image source={item.emoji} style={styles.smallEmoji} />
-              </Animated.View>
-            )}
-          </AnimatedPressable>
-          {item?.isOwnerOfChat && (
-            <Animated.Image
-              source={item.image}
-              style={[
-                animImgStyle,
-                styles.avatar,
-                styles.messageSender,
-                styles.messageRecipientBorder,
-              ]}
-            />
+              animImgStyle,
+              styles.avatar,
+              styles.messageRecipient,
+              styles.messageSenderBorder,
+            ]}
+          />
+        )}
+        <AnimatedPressable
+          pointerEvents={"box-only"}
+          onLongPress={onLongPress}
+          delayLongPress={DELAY_LONG_PRESS}
+          style={[
+            animStyle,
+            styles.messageInnerContainer,
+            item?.isOwnerOfChat
+              ? styles.messageSenderBorder
+              : styles.messageRecipientBorder,
+          ]}
+        >
+          <View style={styles.messageHeader}>
+            <Text style={styles.messageName}>{item?.name}</Text>
+            <Text style={styles.messageTime}>{item?.time}</Text>
+          </View>
+          <Text style={styles.message}>{item?.message}</Text>
+          {item.emoji && (
+            <Animated.View
+              exiting={customExiting}
+              entering={customEntering}
+              style={styles.smallEmojiContainer}
+            >
+              <Image source={item.emoji} style={styles.smallEmoji} />
+            </Animated.View>
           )}
-        </View>
-      </>
-    );
-  },
-);
-
-MessageItem.displayName = 'MessageItem';
+        </AnimatedPressable>
+        {item?.isOwnerOfChat && (
+          <Animated.Image
+            source={item.image}
+            style={[
+              animImgStyle,
+              styles.avatar,
+              styles.messageSender,
+              styles.messageRecipientBorder,
+            ]}
+          />
+        )}
+      </View>
+    </>
+  );
+};
 
 export default MessageItem;
 
 const styles = StyleSheet.create({
   messageContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginHorizontal: 24,
     marginBottom: 16,
   },
@@ -207,8 +210,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   messageHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 8,
   },
   messageName: {
@@ -248,12 +251,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 28,
     height: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 14,
     right: 12,
     bottom: -14,
-    position: 'absolute',
+    position: "absolute",
   },
   smallEmoji: {
     width: 16,

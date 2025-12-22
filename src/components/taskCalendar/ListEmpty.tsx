@@ -1,13 +1,13 @@
-import {StyleSheet} from 'react-native';
-import Animated, {FadeInDown} from 'react-native-reanimated';
+import { StyleSheet } from "react-native";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
-import {TLoading} from './types';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { TLoading } from "./types";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
-const ListEmpty = ({loading, selectedDate}: TLoading) => {
-  const label = !selectedDate ? 'Pick a day' : 'No events';
+const ListEmpty = ({ loading, selectedDate }: TLoading) => {
+  const label = !selectedDate ? "Pick a day" : "No events";
 
   if (loading) {
     return null;
@@ -25,7 +25,7 @@ export default ListEmpty;
 const styles = StyleSheet.create({
   container: {
     marginTop: 64,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   label: {
     fontSize: 18,

@@ -2,31 +2,31 @@ import {
   Calendar,
   toDateId,
   useDateRange,
-} from '@marceloterreiro/flash-calendar';
-import React, {useEffect, useMemo} from 'react';
-import {FlatList} from 'react-native-gesture-handler';
-import {Pressable, StyleSheet, View} from 'react-native';
-import Animated, {withTiming} from 'react-native-reanimated';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from "@marceloterreiro/flash-calendar";
+import React, { useEffect, useMemo } from "react";
+import { FlatList } from "react-native-gesture-handler";
+import { Pressable, StyleSheet, View } from "react-native";
+import Animated, { withTiming } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   WIDTH,
   HEIGHT,
   SM_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
-} from '@utils/device';
-import {TWhenTrip} from './types';
-import {CALENDAR_PER} from './data';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import PickerItem from './PickerItem';
-import PeriodItem from './PeriodItem';
-import {typography} from '@utils/typography';
+} from "@utils/device";
+import { TWhenTrip } from "./types";
+import { CALENDAR_PER } from "./data";
+import PickerItem from "./PickerItem";
+import PeriodItem from "./PeriodItem";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
 const now = new Date();
 const today = toDateId(now);
 const maxDate = toDateId(
-  new Date(`${now.getFullYear() + 1}-${now.getMonth() + 1}-${now.getDate()}`),
+  new Date(`${now.getFullYear() + 1}-${now.getMonth() + 1}-${now.getDate()}`)
 );
 
 const WhenTrip = ({
@@ -43,7 +43,7 @@ const WhenTrip = ({
   const top = insets.top > 52 ? insets.top : 36;
 
   const renderPeriodItem = React.useCallback(
-    ({item, index}: {item: string; index: number}) => {
+    ({ item, index }: { item: string; index: number }) => {
       const isSelected = period === item;
 
       const onPress = () => {
@@ -68,7 +68,7 @@ const WhenTrip = ({
         />
       );
     },
-    [period],
+    [period, calendarPerRef, setPeriod]
   );
 
   const theme = useMemo(
@@ -77,18 +77,18 @@ const WhenTrip = ({
         activeDayFiller: {
           width: 36,
           right: -18,
-          backgroundColor: 'rgb(225,225,225)',
+          backgroundColor: "rgb(225,225,225)",
         },
       },
       rowMonth: {
         content: {
-          color: '#000000',
-          textAlign: 'left' as
-            | 'auto'
-            | 'center'
-            | 'left'
-            | 'right'
-            | 'justify'
+          color: "#000000",
+          textAlign: "left" as
+            | "auto"
+            | "center"
+            | "left"
+            | "right"
+            | "justify"
             | undefined,
           fontSize: 18,
           fontFamily: typography.semiBold,
@@ -112,11 +112,11 @@ const WhenTrip = ({
             left: 4,
           },
           content: {
-            textDecorationLine: 'line-through' as
-              | 'none'
-              | 'underline'
-              | 'line-through'
-              | 'underline line-through'
+            textDecorationLine: "line-through" as
+              | "none"
+              | "underline"
+              | "line-through"
+              | "underline line-through"
               | undefined,
             fontFamily: typography.medium,
           },
@@ -125,11 +125,11 @@ const WhenTrip = ({
           container: {
             width: 39,
             left: 4,
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
           },
           content: {
             fontFamily: typography.medium,
-            color: '#000000',
+            color: "#000000",
           },
         }),
         today: ({
@@ -143,11 +143,11 @@ const WhenTrip = ({
             width: 39,
             left: 4,
             borderWidth: 0,
-            backgroundColor: 'transparent',
+            backgroundColor: "transparent",
           },
           content: {
             fontFamily: typography.medium,
-            color: isStartOfRange || isEndOfRange ? '#ffffff' : '#000000',
+            color: isStartOfRange || isEndOfRange ? "#ffffff" : "#000000",
           },
         }),
         active: ({
@@ -171,37 +171,37 @@ const WhenTrip = ({
               isRangeValid && !isEndOfRange && !isStartOfRange && !isEndOfWeek
                 ? 0
                 : isRangeValid && !isEndOfRange && !isStartOfRange
-                ? 10
-                : 20,
+                  ? 10
+                  : 20,
             borderBottomRightRadius:
               isRangeValid && !isEndOfRange && !isStartOfRange && !isEndOfWeek
                 ? 0
                 : isRangeValid && !isEndOfRange && !isStartOfRange
-                ? 10
-                : 20,
+                  ? 10
+                  : 20,
             borderTopLeftRadius:
               isRangeValid && !isEndOfRange && !isStartOfRange && !isStartOfWeek
                 ? 0
                 : isRangeValid && !isEndOfRange && !isStartOfRange
-                ? 10
-                : 20,
+                  ? 10
+                  : 20,
             borderBottomLeftRadius:
               isRangeValid && !isEndOfRange && !isStartOfRange && !isStartOfWeek
                 ? 0
                 : isRangeValid && !isEndOfRange && !isStartOfRange
-                ? 10
-                : 20,
+                  ? 10
+                  : 20,
             backgroundColor:
-              isStartOfRange || isEndOfRange ? '#222222' : 'rgb(225,225,225)',
+              isStartOfRange || isEndOfRange ? "#222222" : "rgb(225,225,225)",
           },
           content: {
             fontFamily: typography.medium,
-            color: isStartOfRange || isEndOfRange ? '#ffffff' : '#000000',
+            color: isStartOfRange || isEndOfRange ? "#ffffff" : "#000000",
           },
         }),
       },
     }),
-    [],
+    []
   );
 
   const {
@@ -213,7 +213,7 @@ const WhenTrip = ({
 
   useEffect(() => {
     setPeriodo(dateRange);
-  }, [dateRange]);
+  }, [dateRange, setPeriodo]);
 
   const atLeastOneDaySelected =
     !!calendarActiveDateRanges?.[0]?.endId ||
@@ -231,7 +231,8 @@ const WhenTrip = ({
     <>
       <Text
         maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
-        style={[styles.boldWhere, styles.padLeft24]}>
+        style={[styles.boldWhere, styles.padLeft24]}
+      >
         {"When's your trip?"}
       </Text>
       <View style={styles.pickerContainer}>
@@ -239,31 +240,32 @@ const WhenTrip = ({
           style={[styles.absolute, translatePickerStyle, styles.pickerPose]}
         />
         <PickerItem
-          label={'Dates'}
+          label={"Dates"}
           style={styles.marLeft6}
-          onPress={() => (translatePicker.value = withTiming(0))}
+          onPress={() => translatePicker.set(withTiming(0))}
         />
         <PickerItem
-          label={'Months'}
-          onPress={() => (translatePicker.value = withTiming(1))}
+          label={"Months"}
+          onPress={() => translatePicker.set(withTiming(1))}
         />
         <PickerItem
-          label={'Flexible'}
-          onPress={() => (translatePicker.value = withTiming(2))}
+          label={"Flexible"}
+          onPress={() => translatePicker.set(withTiming)}
         />
       </View>
       <View style={[styles.row, styles.justifyBtn, styles.daysContainer]}>
-        {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((item, key) => (
+        {["M", "T", "W", "T", "F", "S", "S"].map((item, key) => (
           <Text
             key={`day-${key}`}
             style={styles.monthDay}
-            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+          >
             {item}
           </Text>
         ))}
       </View>
 
-      <View style={[{height: HEIGHT - top - 464}, styles.calendarContainer]}>
+      <View style={[{ height: HEIGHT - top - 464 }, styles.calendarContainer]}>
         <Calendar.List
           calendarFirstDayOfWeek="monday"
           calendarMonthHeaderHeight={36}
@@ -275,8 +277,7 @@ const WhenTrip = ({
           calendarMinDateId={today}
           calendarMaxDateId={maxDate}
           theme={theme}
-          decelerationRate={'fast'}
-          estimatedItemSize={1000}
+          decelerationRate={"fast"}
           onCalendarDayPress={onCalendarDayPress}
         />
       </View>
@@ -297,10 +298,11 @@ const WhenTrip = ({
           styles.justifyBtn,
           styles.padHor24,
           styles.height74,
-        ]}>
+        ]}
+      >
         <Pressable onPress={onPressSkipOrReset} style={styles.skipResetBtn}>
           <Text style={[styles.font16, styles.fontW500, styles.underline]}>
-            {atLeastOneDaySelected ? 'Reset' : 'Skip'}
+            {atLeastOneDaySelected ? "Reset" : "Skip"}
           </Text>
         </Pressable>
         <Pressable style={styles.nextBtn} onPress={onPressNext}>
@@ -318,18 +320,18 @@ export default WhenTrip;
 const styles = StyleSheet.create({
   calendarContainer: {
     width: WIDTH - 60,
-    alignSelf: 'center',
+    alignSelf: "center",
     left: 6,
     flex: 1,
   },
   daysContainer: {
-    alignSelf: 'center',
+    alignSelf: "center",
     marginVertical: 16,
     width: WIDTH - 60,
     left: 6,
   },
   monthDay: {
-    textAlign: 'center',
+    textAlign: "center",
     color: Colors.GRAY,
     width: (WIDTH - 60) / 7,
   },
@@ -342,8 +344,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginLeft: 24,
     backgroundColor: Colors.CHINESE_WHITE,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderRadius: 32,
   },
   pickerPose: {
@@ -363,13 +365,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   absolute: {
-    position: 'absolute',
+    position: "absolute",
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   justifyBtn: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   boldWhere: {
     fontSize: 28,
@@ -397,28 +399,28 @@ const styles = StyleSheet.create({
   },
   nextBtn: {
     backgroundColor: Colors.RAISIN_BLACK,
-    alignSelf: 'center',
+    alignSelf: "center",
     paddingHorizontal: 46,
     paddingVertical: 14,
     borderRadius: 8,
   },
   skipResetBtn: {
-    alignSelf: 'center',
+    alignSelf: "center",
     padding: 10,
   },
   font16: {
     fontSize: 16,
   },
   underline: {
-    textDecorationLine: 'underline',
+    textDecorationLine: "underline",
   },
   white: {
     color: Colors.WHITE,
   },
   fontW500: {
-    fontWeight: '500',
+    fontWeight: "500",
   },
   center: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 });

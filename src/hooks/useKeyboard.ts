@@ -1,6 +1,6 @@
-import React from 'react';
-import {isAndroid} from '@utils/device';
-import {Keyboard, KeyboardEvent} from 'react-native';
+import React from "react";
+import { isAndroid } from "@utils/device";
+import { Keyboard, KeyboardEvent } from "react-native";
 
 export const useKeyboard = (considerAndroid = false) => {
   const [keyboardHeight, setKeyboardHeight] = React.useState(0);
@@ -20,13 +20,13 @@ export const useKeyboard = (considerAndroid = false) => {
     }
 
     const showSubscription = Keyboard.addListener(
-      isAndroid ? 'keyboardDidShow' : 'keyboardWillShow',
-      onKeyboardShow,
+      isAndroid ? "keyboardDidShow" : "keyboardWillShow",
+      onKeyboardShow
     );
 
     const hideSubscription = Keyboard.addListener(
-      isAndroid ? 'keyboardDidHide' : 'keyboardWillHide',
-      onKeyboardHide,
+      isAndroid ? "keyboardDidHide" : "keyboardWillHide",
+      onKeyboardHide
     );
 
     return () => {

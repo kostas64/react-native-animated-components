@@ -1,5 +1,7 @@
-import {SharedValue} from 'react-native-reanimated';
-import {Dispatch, MutableRefObject, SetStateAction} from 'react';
+import { SharedValue } from "react-native-reanimated";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
+
+import { IoniconName } from "src/types/common";
 
 export type PlaceholderFunction = {
   animatePlaceholder: () => void;
@@ -8,10 +10,10 @@ export type PlaceholderFunction = {
 
 export type TNumberItem = {
   translateX: SharedValue<number>;
-  value: number | React.ReactNode;
+  value: number | IoniconName;
   input: string;
   disabled: boolean;
   setInput: Dispatch<SetStateAction<string>>;
-  inputsRef: MutableRefObject<PlaceholderFunction | undefined>[];
+  inputsRef: MutableRefObject<PlaceholderFunction | null>[];
   setLoading: Dispatch<SetStateAction<boolean>>;
 };

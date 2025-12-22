@@ -1,35 +1,36 @@
-import {StyleSheet, View} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, View } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-import Text from '@components/common/Text';
-import {typography} from '@utils/typography';
-import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { MED_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const Header = () => (
   <View style={styles.innerHeaderContainer}>
     <Text
       style={styles.chatLabel}
-      maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+      maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+    >
       Chat
     </Text>
     <View style={styles.iconsContainer}>
-      <Ionicons name={'videocam-outline'} size={24} />
-      <Feather size={20} name={'phone'} />
+      <Ionicons name={"videocam-outline"} size={24} />
+      <Feather size={20} name={"phone"} />
     </View>
   </View>
 );
 
-Header.displayName = 'Header';
+Header.displayName = "Header";
 
 export default Header;
 
 const styles = StyleSheet.create({
   innerHeaderContainer: {
     marginBottom: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   chatLabel: {
     fontSize: 28,
@@ -38,8 +39,8 @@ const styles = StyleSheet.create({
   },
   iconsContainer: {
     width: 100,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 });

@@ -1,7 +1,7 @@
-import {ReactNode} from 'react';
-import {MenuAction} from '@react-native-menu/menu';
-import {SharedValue} from 'react-native-reanimated';
-import {StyleProp, TextStyle, ViewStyle} from 'react-native';
+import { ReactNode } from "react";
+import { MenuAction } from "@react-native-menu/menu";
+import { SharedValue } from "react-native-reanimated";
+import { StyleProp, TextStyle, ViewStyle } from "react-native";
 
 export type AnimatedTypingProps = {
   text: string[];
@@ -14,21 +14,16 @@ export type BottomSheetProps = {
   children: React.ReactNode;
   modalHeight: number;
   onBackPress?: () => void;
+  resetModal?: () => void;
   panEnabled?: boolean;
   withoutLine?: boolean;
   lineStyle?: ViewStyle;
   lineStyleContainer?: ViewStyle;
-  contentContainerStyle?: any;
+  contentContainerStyle?: StyleProp<ViewStyle>;
 };
 
 export type BottomSheetRef = {
   scrollTo: (destination: number) => void;
-};
-
-export type THomeButtonProps = {
-  label: string;
-  onPress: (props: any) => void;
-  backgroundColor: string;
 };
 
 export type ReTextProps = {
@@ -37,11 +32,11 @@ export type ReTextProps = {
 };
 
 export type StatusBarProps = {
-  barStyle?: 'dark' | 'light';
+  barStyle?: "dark" | "light";
 };
 
 export type ConteMenuProps = {
   children: ReactNode;
   items: MenuAction[];
-  onPress: (nativeEvent: {event: string}) => void;
+  onPress: (nativeEvent: { event: string }) => void;
 };

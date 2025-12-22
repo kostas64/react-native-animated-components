@@ -1,14 +1,14 @@
-import {StyleSheet, View} from 'react-native';
-import {useIsFocused} from '@react-navigation/native';
+import { StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 
-import {DAYS} from './data';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {ScheduleCalendarProps} from './types';
-import FadeInTransition from './FadeInTransition';
+import { DAYS } from "./data";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { ScheduleCalendarProps } from "./types";
+import FadeInTransition from "./FadeInTransition";
 
-const ScheduleCalendar = ({index}: ScheduleCalendarProps) => {
+const ScheduleCalendar = ({ index }: ScheduleCalendarProps) => {
   const isFocused = useIsFocused();
 
   return (
@@ -26,11 +26,11 @@ const ScheduleCalendar = ({index}: ScheduleCalendarProps) => {
                 style={[
                   styles.dayNumberContainer,
                   index === 5 && styles.selectedDayContainer,
-                ]}>
+                ]}
+              >
                 <Text
-                  style={[styles.dayNumber, index === 5 && styles.white]}>{`${
-                  (index + 4) % 10 > 1 ? '0' : ''
-                }${index + 4}`}</Text>
+                  style={[styles.dayNumber, index === 5 && styles.white]}
+                >{`${(index + 4) % 10 > 1 ? "0" : ""}${index + 4}`}</Text>
               </View>
             </View>
           ))}
@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.CULTURED,
   },
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   between: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   thisWeek: {
     fontSize: 20,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   daysContainer: {
     gap: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   selectedDayContainer: {
     borderRadius: 12,

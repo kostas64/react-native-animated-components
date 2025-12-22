@@ -1,9 +1,9 @@
-import {StyleSheet, View} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
+import { StyleSheet, View } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
 const ScheduleHeader = () => {
   return (
@@ -20,9 +20,9 @@ export default ScheduleHeader;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   label: {
     fontFamily: typography.bold,

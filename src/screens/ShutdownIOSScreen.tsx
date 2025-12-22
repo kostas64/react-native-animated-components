@@ -5,19 +5,26 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedProps,
-} from 'react-native-reanimated';
-import React from 'react';
-import Feather from 'react-native-vector-icons/Feather';
-import {Defs, LinearGradient, Stop} from 'react-native-svg';
-import {View, StyleSheet, ImageBackground} from 'react-native';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+} from "react-native-reanimated";
+import React from "react";
+import Feather from "@expo/vector-icons/Feather";
+import { Defs, LinearGradient, Stop } from "react-native-svg";
+import { View, StyleSheet, ImageBackground } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
-import {Colors} from '@utils/colors';
-import AnimatedText from '@components/shutdownIOS/AnimatedText';
-import StatusBarManager from '@components/common/StatusBarManager';
-import {HEIGHT_SCR, WIDTH, XSM_FONT_UPSCALE_FACTOR} from '@utils/device';
-import {AnimatedRect, AnimatedSvg} from '@components/common/AnimatedComponents';
-import {SLIDER_FINAL_W, SLIDER_H, SLIDER_W} from '@components/shutdownIOS/data';
+import {
+  SLIDER_H,
+  SLIDER_W,
+  SLIDER_FINAL_W,
+} from "@components/shutdownIOS/data";
+import {
+  AnimatedSvg,
+  AnimatedRect,
+} from "@components/common/AnimatedComponents";
+import { Colors } from "@utils/colors";
+import AnimatedText from "@components/shutdownIOS/AnimatedText";
+import StatusBarManager from "@components/common/StatusBarManager";
+import { HEIGHT_SCR, WIDTH, XSM_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const ShutdownIOS = () => {
   const sliderWidth = useSharedValue(SLIDER_W);
@@ -25,7 +32,7 @@ const ShutdownIOS = () => {
   const reachEnd = useSharedValue(false);
   const finishProgress = useSharedValue(0);
 
-  const chars = 'slide to power off'.split('');
+  const chars = "slide to power off".split("");
   const totalCharsLength = chars.length;
 
   // Animated background opacity for slider
@@ -34,30 +41,30 @@ const ShutdownIOS = () => {
       opacity: interpolate(
         sliderWidth.value,
         [SLIDER_W, SLIDER_FINAL_W],
-        [0.75, 1],
+        [0.75, 1]
       ),
     }),
-    [],
+    []
   );
 
   const animProps = useAnimatedProps(() => ({
     width: sliderWidth.value,
     opacity: interpolate(sliderWidth.value, [SLIDER_W, 75], [1, 0]),
-    transform: [{translateX: SLIDER_W - sliderWidth.value}],
+    transform: [{ translateX: SLIDER_W - sliderWidth.value }],
   }));
 
   // Power button animation
   const powerBtn = useAnimatedStyle(() => ({
     opacity: interpolate(finishProgress.value, [0, 1], [1, 0]),
     transform: [
-      {scale: interpolate(finishProgress.value, [0, 0.2, 1], [1, 1.14, 0])},
+      { scale: interpolate(finishProgress.value, [0, 0.2, 1], [1, 1.14, 0]) },
     ],
     left: interpolate(sliderWidth.value, [SLIDER_W, SLIDER_FINAL_W], [3, 195]),
   }));
 
   // Pan gesture for sliding the slider
   const gesture = Gesture.Pan()
-    .onChange(e => {
+    .onChange((e) => {
       if (e.translationX < 0) {
         // Reset when swiping left
         sliderWidth.value = SLIDER_W;
@@ -74,7 +81,7 @@ const ShutdownIOS = () => {
     })
     .onFinalize(() => {
       if (reachEnd.value) {
-        finishProgress.value = withTiming(1, {duration: 500}, finished => {
+        finishProgress.value = withTiming(1, { duration: 500 }, (finished) => {
           if (finished) {
             // Reset slider
             sliderWidth.value = withTiming(SLIDER_W);
@@ -89,15 +96,16 @@ const ShutdownIOS = () => {
     });
 
   React.useEffect(() => {
-    coloring.value = withRepeat(withTiming(1, {duration: 2250}), 0);
-  }, []);
+    coloring.value = withRepeat(withTiming(1, { duration: 2250 }), 0);
+  }, [coloring]);
 
   return (
     <>
       <StatusBarManager barStyle="light" />
       <ImageBackground
-        source={require('@assets/img/ios_wallpaper.png')}
-        style={{width: WIDTH, height: HEIGHT_SCR}}>
+        source={require("@assets/img/ios_wallpaper.png")}
+        style={{ width: WIDTH, height: HEIGHT_SCR }}
+      >
         <Animated.View style={[styles.filterBackground, background]} />
 
         <GestureDetector gesture={gesture}>
@@ -135,7 +143,7 @@ const ShutdownIOS = () => {
               </AnimatedSvg>
             </View>
             <Animated.View style={[powerBtn, styles.powerBtn]}>
-              <Feather name="power" size={36} color={'#da0b13'} />
+              <Feather name="power" size={36} color={"#da0b13"} />
             </Animated.View>
           </Animated.View>
         </GestureDetector>
@@ -153,27 +161,27 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BLACK,
   },
   sliderContainer: {
-    position: 'absolute',
-    flexDirection: 'row',
+    position: "absolute",
+    flexDirection: "row",
     left: (WIDTH - SLIDER_W) / 2,
     marginTop: 150,
     height: SLIDER_H,
-    overflow: 'hidden',
+    overflow: "hidden",
     borderRadius: 60,
   },
   sliderInnerContainer: {
     width: SLIDER_W,
   },
   powerBtn: {
-    position: 'absolute',
+    position: "absolute",
     padding: 16,
     backgroundColor: Colors.WHITE,
     borderRadius: 100,
     top: 4,
   },
   textContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     top: 28,
     left: 68,

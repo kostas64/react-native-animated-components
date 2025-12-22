@@ -1,12 +1,12 @@
-import React from 'react';
-import {View, Animated, StyleSheet, LayoutChangeEvent} from 'react-native';
+import React from "react";
+import { View, Animated, StyleSheet, LayoutChangeEvent } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {TProgressProps} from './types';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import { TProgressProps } from "./types";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
-const Progress = ({step, steps, height}: TProgressProps) => {
+const Progress = ({ step, steps, height }: TProgressProps) => {
   const [width, setWidth] = React.useState(0);
   const animValue = React.useRef(new Animated.Value(-1000)).current;
   const reactive = React.useRef(new Animated.Value(-1000)).current;
@@ -22,25 +22,26 @@ const Progress = ({step, steps, height}: TProgressProps) => {
       duration: 500,
       useNativeDriver: true,
     }).start();
-  }, []);
+  }, [animValue, reactive]);
 
   React.useEffect(() => {
     reactive.setValue(-width + (width * step) / steps);
-  }, [width, step]);
+  }, [width, step, reactive, steps]);
 
   return (
     <>
       <Text style={styles.stepsLabel}>{`${step}/${steps}`}</Text>
       <View
         onLayout={onLayout}
-        style={[styles.loaderContainer, {height, borderRadius: height}]}>
+        style={[styles.loaderContainer, { height, borderRadius: height }]}
+      >
         <Animated.View
           style={[
             styles.innerLoader,
             {
               height,
               borderRadius: height,
-              transform: [{translateX: animValue}],
+              transform: [{ translateX: animValue }],
             },
           ]}
         />
@@ -60,12 +61,12 @@ const styles = StyleSheet.create({
   },
   loaderContainer: {
     backgroundColor: Colors.POINT_ONE_BLACK,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   innerLoader: {
-    width: '100%',
+    width: "100%",
     backgroundColor: Colors.HALF_BLACK,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
   },

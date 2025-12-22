@@ -3,9 +3,9 @@ import {
   TextStyle,
   ViewStyle,
   ImageSourcePropType,
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+} from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 export type TextBetweenProps = {
   index?: number;
@@ -51,7 +51,7 @@ export type FadeInTransitionProps = {
   index?: number;
   children: React.ReactNode;
   animate: boolean;
-  direction?: 'left' | 'top' | 'top-right' | 'top-left' | 'top-scale';
+  direction?: "left" | "top" | "top-right" | "top-left" | "top-scale";
   containerStyle?: StyleProp<ViewStyle>;
 };
 

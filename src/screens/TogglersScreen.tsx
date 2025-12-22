@@ -1,9 +1,9 @@
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from "react-native";
 
-import StatusBarManager from '@components/common/StatusBarManager';
-import NativeIOSToggle from '@components/togglers/NativeIOSToggle';
-import ToggleWithLabel from '@components/togglers/ToggleWithLabel';
-import ToggleWithSymbol from '@components/togglers/ToggleWithSymbol';
+import StatusBarManager from "@components/common/StatusBarManager";
+import NativeIOSToggle from "@components/togglers/NativeIOSToggle";
+import ToggleWithLabel from "@components/togglers/ToggleWithLabel";
+import ToggleWithSymbol from "@components/togglers/ToggleWithSymbol";
 
 const TogglersScreen = () => {
   return (
@@ -26,8 +26,8 @@ const TogglersScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   space: {
     paddingVertical: 8,

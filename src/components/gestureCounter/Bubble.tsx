@@ -1,19 +1,19 @@
 import Animated, {
-  runOnJS,
   withSpring,
   interpolate,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {StyleSheet} from 'react-native';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+} from "react-native-reanimated";
+import { StyleSheet } from "react-native";
+import { scheduleOnRN } from "react-native-worklets";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
-import Text from '@components/common/Text';
-import {darkShadow} from './styles';
-import {TBubbleProps} from './types';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {SM_FONT_UPSCALE_FACTOR} from '@utils/device';
+import { darkShadow } from "./styles";
+import { TBubbleProps } from "./types";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { SM_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const Bubble = ({
   value = 0,
@@ -22,16 +22,16 @@ const Bubble = ({
   onPress,
   onPanDown,
 }: TBubbleProps) => {
-  const direction = useSharedValue<'horizontal' | 'vertical' | null>(null);
+  const direction = useSharedValue<"horizontal" | "vertical" | null>(null);
 
   const pan = Gesture.Pan()
-    .onChange(e => {
+    .onChange((e) => {
       if (
         ((e.translationX > 6 && e.translationX <= 62) ||
           (e.translationX < -6 && e.translationX >= -62)) &&
-        direction.value !== 'vertical'
+        direction.value !== "vertical"
       ) {
-        direction.value = 'horizontal';
+        direction.value = "horizontal";
         progress.value =
           (e.translationX > 0 ? e.translationX - 6 : e.translationX + 6) / 56;
       }
@@ -39,34 +39,46 @@ const Bubble = ({
       if (
         e.translationY > 6 &&
         e.translationY <= 56 &&
-        direction.value !== 'horizontal'
+        direction.value !== "horizontal"
       ) {
-        direction.value = 'vertical';
+        direction.value = "vertical";
         progressDelete.value = (e.translationY - 6) / 45;
       }
     })
-    .onEnd(e => {
+    .onEnd((e) => {
       if (e.translationX < -15) {
         //minus
-        runOnJS(onPress)();
+        scheduleOnRN(onPress);
       } else if (e.translationX > 15) {
         //add
-        runOnJS(onPress)(true);
+        scheduleOnRN(onPress, true);
       }
 
-      if (direction.value === 'vertical') {
-        !!onPanDown && runOnJS(onPanDown)();
+      if (direction.value === "vertical") {
+        if (onPanDown) {
+          scheduleOnRN(onPanDown);
+        }
       }
 
       direction.value = null;
-      progress.value = withSpring(0, {damping: 11, stiffness: 200});
-      progressDelete.value = withSpring(0, {damping: 11, stiffness: 200});
+      progress.value = withSpring(0, {
+        damping: 11,
+        stiffness: 200,
+        mass: 0.8,
+        energyThreshold: 1e-7,
+      });
+      progressDelete.value = withSpring(0, {
+        damping: 11,
+        stiffness: 200,
+        mass: 0.8,
+        energyThreshold: 1e-7,
+      });
     });
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      {translateX: interpolate(progress.value, [0, 1], [0, 56])},
-      {translateY: interpolate(progressDelete.value, [0, 1], [0, 36])},
+      { translateX: interpolate(progress.value, [0, 1], [0, 56]) },
+      { translateY: interpolate(progressDelete.value, [0, 1], [0, 36]) },
     ],
   }));
 
@@ -75,7 +87,8 @@ const Bubble = ({
       <Animated.View style={[styles.container, animatedStyle, darkShadow]}>
         <Text
           style={styles.label}
-          maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
+          maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}
+        >
           {value}
         </Text>
       </Animated.View>
@@ -91,8 +104,8 @@ const styles = StyleSheet.create({
     height: 46,
     borderRadius: 23,
     zIndex: 10000,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.BLACK_OLIVE,
   },
   label: {

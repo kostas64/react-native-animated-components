@@ -1,15 +1,21 @@
-import {StyleSheet, View} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { StyleSheet, View } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { AntDesignName } from "src/types/common";
 
-const ChartHeader = ({iconName, label}: {iconName: string; label: string}) => (
+type ChatHeaderProps = {
+  iconName: AntDesignName;
+  label: string;
+};
+
+const ChartHeader = ({ iconName, label }: ChatHeaderProps) => (
   <View style={styles.chartHeaderContainer}>
     <View style={styles.chartHeaderInnerContainer}>
       <View style={styles.chartHeaderIconContainer}>
-        <AntDesign name={iconName} size={20} color={'#556d36'} />
+        <AntDesign name={iconName} size={20} color={"#556d36"} />
       </View>
       <Text style={styles.chartHeaderLabel}>{label}</Text>
     </View>
@@ -20,13 +26,13 @@ export default ChartHeader;
 
 const styles = StyleSheet.create({
   chartHeaderContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 16,
   },
   chartHeaderInnerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: Colors.WHITE_COFFEE,
     padding: 10,
     borderRadius: 16,

@@ -1,48 +1,69 @@
 import Animated, {
   withTiming,
   interpolate,
+  SharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {StyleSheet, View} from 'react-native';
+} from "react-native-reanimated";
+import { StyleSheet, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {TStackLegend} from './types';
-import {typography} from '@utils/typography';
-import {colors, EXPENSES_TYPES} from './constants';
-import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import Text from "@components/common/Text";
+import { TStackLegend } from "./types";
+import { typography } from "@utils/typography";
+import { colors, EXPENSES_TYPES } from "./constants";
+import { MED_FONT_UPSCALE_FACTOR } from "@utils/device";
 
-const StackLegend = ({animate, selectedIndex}: TStackLegend) => {
+type StackLegendItemProps = {
+  item: string;
+  index: number;
+  selectedIndex: number | null;
+  animate: SharedValue<number>;
+};
+
+const StackLegendItem = ({
+  item,
+  index,
+  selectedIndex,
+  animate,
+}: StackLegendItemProps) => {
+  const style = useAnimatedStyle(() => ({
+    opacity:
+      selectedIndex === null
+        ? interpolate(animate.value, [index * 0.25, (index + 1) * 0.25], [0, 1])
+        : withTiming(selectedIndex === index ? 1 : 0.25),
+    flexDirection: "row",
+    alignItems: "center",
+  }));
+
+  return (
+    <Animated.View style={style}>
+      <View
+        style={{
+          ...styles.dot,
+          backgroundColor: colors?.[item?.toLowerCase() as keyof typeof colors],
+        }}
+      />
+      <Text
+        style={styles.label}
+        maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+      >
+        {item}
+      </Text>
+    </Animated.View>
+  );
+};
+
+const StackLegend = ({ animate, selectedIndex }: TStackLegend) => {
   return (
     <View style={styles.container}>
       {EXPENSES_TYPES.map((item, index) => {
-        const style = useAnimatedStyle(() => ({
-          opacity:
-            selectedIndex === null
-              ? interpolate(
-                  animate.value,
-                  [index * 0.25, (index + 1) * 0.25],
-                  [0, 1],
-                )
-              : withTiming(selectedIndex === index ? 1 : 0.25),
-          flexDirection: 'row',
-          alignItems: 'center',
-        }));
-
         return (
-          <Animated.View key={index} style={style}>
-            <View
-              style={{
-                ...styles.dot,
-                backgroundColor:
-                  colors?.[item?.toLowerCase() as keyof typeof colors],
-              }}
-            />
-            <Text
-              style={styles.label}
-              maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
-              {item}
-            </Text>
-          </Animated.View>
+          <StackLegendItem
+            key={index}
+            item={item}
+            index={index}
+            animate={animate}
+            selectedIndex={selectedIndex}
+          />
         );
       })}
     </View>
@@ -53,8 +74,8 @@ export default StackLegend;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 20,
   },
   dot: {

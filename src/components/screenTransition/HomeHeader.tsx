@@ -1,32 +1,33 @@
-import {useNavigation} from '@react-navigation/native';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from "@react-navigation/native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
-import {TWelcomeNavigationProps} from '@screens/ScreenTransition/ScreenTransitionStack';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { MED_FONT_UPSCALE_FACTOR } from "@utils/device";
+import { TWelcomeNavigationProps } from "@screens/ScreenTransition/ScreenTransitionStack";
 
 const HomeHeader = () => {
   const navigation = useNavigation<TWelcomeNavigationProps>();
 
   const onPress = () => {
-    navigation.navigate('Notifications');
+    navigation.navigate("Notifications");
   };
 
   return (
     <View style={[styles.container, styles.rowCenter]}>
       <View style={styles.rowCenter}>
         <Image
-          source={{uri: 'https://randomuser.me/api/portraits/women/2.jpg'}}
+          source={{ uri: "https://randomuser.me/api/portraits/women/2.jpg" }}
           style={styles.logo}
         />
         <View style={styles.gap2}>
           <Text style={styles.name}>Erica Hawkins</Text>
           <Text
             style={styles.grade}
-            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+          >
             6th grade
           </Text>
         </View>
@@ -34,7 +35,8 @@ const HomeHeader = () => {
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={onPress}
-        style={styles.bellContainer}>
+        style={styles.bellContainer}
+      >
         <MaterialCommunityIcons name="bell" size={20} />
       </TouchableOpacity>
     </View>
@@ -45,11 +47,11 @@ export default HomeHeader;
 
 const styles = StyleSheet.create({
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   logo: {
     marginRight: 12,

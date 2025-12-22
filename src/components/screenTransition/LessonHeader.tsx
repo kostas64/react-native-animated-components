@@ -1,11 +1,10 @@
-import {StyleSheet, View} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {useNavigation} from '@react-navigation/native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import Entypo from "@expo/vector-icons/Entypo";
+import { useNavigation } from "@react-navigation/native";
+import { Pressable, StyleSheet, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
 const LessonHeader = () => {
   const navigation = useNavigation();
@@ -17,17 +16,20 @@ const LessonHeader = () => {
   return (
     <View style={[styles.container, styles.rowCenter]}>
       <View style={[styles.rowCenter, styles.gap12]}>
-        <TouchableOpacity
+        <Pressable
           onPress={onPress}
-          activeOpacity={0.6}
-          style={styles.chevronContainer}>
+          style={({ pressed }) => [
+            { opacity: pressed ? 0.5 : 1 },
+            styles.chevronContainer,
+          ]}
+        >
           <Entypo name="chevron-left" size={18} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <View style={styles.gap5}>
         <Text style={styles.label}>English grammar</Text>
         <View style={styles.rowCenter}>
-          <Text style={styles.description}>{'Will start in '}</Text>
+          <Text style={styles.description}>{"Will start in "}</Text>
           <Text style={styles.boldDescription}>1:20 min</Text>
         </View>
       </View>
@@ -39,8 +41,8 @@ export default LessonHeader;
 
 const styles = StyleSheet.create({
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
     gap: 12,

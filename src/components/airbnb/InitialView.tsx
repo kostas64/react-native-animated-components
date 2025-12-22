@@ -1,17 +1,17 @@
-import Feather from 'react-native-vector-icons/Feather';
-import {Pressable, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Feather from "@expo/vector-icons/Feather";
+import { Pressable, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {WIDTH} from '@utils/device';
-import {Colors} from '@utils/colors';
-import InitialBox from './InitialBox';
+import { WIDTH } from "@utils/device";
+import InitialBox from "./InitialBox";
+import { Colors } from "@utils/colors";
 
 const InitialView = () => {
   const insets = useSafeAreaInsets();
   const top = insets.top > 40 ? insets.top : 30;
 
   return (
-    <View style={[styles.padHor24, {paddingTop: top}]}>
+    <View style={[styles.padHor24, { paddingTop: top }]}>
       <View style={styles.container}>
         <Pressable
           style={[
@@ -19,7 +19,8 @@ const InitialView = () => {
             styles.row,
             styles.initialDim,
             styles.padHor16,
-          ]}>
+          ]}
+        >
           <InitialBox />
         </Pressable>
         <View style={styles.filterContainer}>
@@ -34,12 +35,12 @@ export default InitialView;
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   initialDim: {
     height: 60,
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   top1: {
     top: 1,
-    transform: [{rotate: '90deg'}],
+    transform: [{ rotate: "90deg" }],
   },
   padHor16: {
     paddingHorizontal: 16,
@@ -61,8 +62,8 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     height: 40,
     width: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   leftInput: {
     backgroundColor: Colors.WHITE,

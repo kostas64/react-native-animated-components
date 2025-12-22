@@ -5,33 +5,43 @@ import {
   FlatList,
   StatusBar,
   StyleSheet,
-} from 'react-native';
-import {useEffect, useRef} from 'react';
+} from "react-native";
+import { useEffect, useRef } from "react";
 
-import data from '@assets/doubleList';
-import List from '@components/doubleList/List';
-import {HEIGHT_SCR, WIDTH} from '@utils/device';
-import Item from '@components/doubleList/ConnectListItem';
-import StatusBarManager from '@components/common/StatusBarManager';
-import ConnectWithText from '@components/doubleList/ConnectWithText';
-import {colors, ITEM_HEIGHT} from '@components/doubleList/constants';
+import data from "@assets/doubleList";
+import List from "@components/doubleList/List";
+import { HEIGHT_SCR, WIDTH } from "@utils/device";
+import StatusBarManager from "@components/common/StatusBarManager";
+import ConnectWithText from "@components/doubleList/ConnectWithText";
+import { colors, ITEM_HEIGHT } from "@components/doubleList/constants";
 
 const DoubleListScreen = () => {
-  const yellowRef = useRef();
-  const darkRef = useRef<FlatList>();
+  const yellowRef = useRef(null);
+  const darkRef = useRef<FlatList>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
+  const userInteracted = useRef(false);
 
   const onMomentumScrollEnd = (index: number) => {
-    Alert.alert('Pay with:', data?.[index]?.name?.toUpperCase());
+    if (!userInteracted.current) {
+      return;
+    }
+
+    userInteracted.current = false;
+
+    Alert.alert("Pay with:", data?.[index]?.name?.toUpperCase());
   };
 
   const onScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {y: scrollY}}}],
-    {useNativeDriver: true},
+    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    { useNativeDriver: true }
   );
 
+  const onScrollBeginDrag = () => {
+    userInteracted.current = true;
+  };
+
   useEffect(() => {
-    scrollY.addListener(v => {
+    const sub = scrollY.addListener((v) => {
       if (darkRef?.current) {
         darkRef.current.scrollToOffset({
           offset: v.value,
@@ -41,9 +51,10 @@ const DoubleListScreen = () => {
     });
 
     return () => {
-      scrollY.removeAllListeners();
+      scrollY.removeListener(sub);
+      scrollY.stopAnimation();
     };
-  }, []);
+  }, [scrollY]);
 
   return (
     <>
@@ -55,6 +66,7 @@ const DoubleListScreen = () => {
           color={colors.yellow}
           ref={yellowRef}
           onScroll={onScroll}
+          onScrollBeginDrag={onScrollBeginDrag}
           onMomentumScrollEnd={onMomentumScrollEnd}
           style={StyleSheet.absoluteFillObject}
         />
@@ -64,7 +76,6 @@ const DoubleListScreen = () => {
           ref={darkRef}
           style={styles.list}
         />
-        <Item />
       </View>
     </>
   );
@@ -73,12 +84,12 @@ const DoubleListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingTop: StatusBar.currentHeight,
     backgroundColor: colors.dark,
   },
   list: {
-    position: 'absolute',
+    position: "absolute",
     backgroundColor: colors.yellow,
     width: WIDTH,
     height: ITEM_HEIGHT,

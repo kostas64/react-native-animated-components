@@ -4,29 +4,29 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   Animated as RNAnimated,
-} from 'react-native';
-import React, {useState} from 'react';
-import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
+} from "react-native";
+import React, { useState } from "react";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
-import {HEIGHT, WIDTH} from '@utils/device';
-import {data} from '@components/parallax/data';
-import {ParallaxListItemProps} from '@components/parallax/types';
-import StatusBarManager from '@components/common/StatusBarManager';
-import ParallaxListItem from '@components/parallax/ParallaxListItem';
+import { data } from "@components/parallax/data";
+import { HEIGHT_SCR, WIDTH } from "@utils/device";
+import { ParallaxListItemProps } from "@components/parallax/types";
+import StatusBarManager from "@components/common/StatusBarManager";
+import ParallaxListItem from "@components/parallax/ParallaxListItem";
 
 const ParallaxScreen = () => {
   const scrollX = React.useRef(new RNAnimated.Value(0)).current;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const renderItem = React.useCallback(
-    ({item, index}: ParallaxListItemProps) => (
+    ({ item, index }: ParallaxListItemProps) => (
       <ParallaxListItem item={item} index={index} scrollX={scrollX} />
     ),
-    [],
+    [scrollX]
   );
 
   const onScroll = RNAnimated.event(
-    [{nativeEvent: {contentOffset: {x: scrollX}}}],
+    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
     {
       useNativeDriver: true,
       listener: (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -34,12 +34,12 @@ const ParallaxScreen = () => {
         const nextIndex = Math.round(x / WIDTH);
         setSelectedIndex(Math.max(0, Math.min(nextIndex, data.length - 1)));
       },
-    },
+    }
   );
 
   return (
     <>
-      <StatusBarManager barStyle="dark" />
+      <StatusBarManager barStyle="light" />
 
       <View style={styles.container}>
         <Animated.Image
@@ -58,7 +58,7 @@ const ParallaxScreen = () => {
           onScroll={onScroll}
           renderItem={renderItem}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={(item: {key: string}) => item.key}
+          keyExtractor={(item: { key: string }) => item.key}
         />
       </View>
     </>
@@ -70,12 +70,12 @@ export default ParallaxScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   img: {
-    position: 'absolute',
+    position: "absolute",
     width: WIDTH,
-    height: HEIGHT,
+    height: HEIGHT_SCR,
   },
 });

@@ -1,14 +1,17 @@
-import {useState} from 'react';
-import Animated from 'react-native-reanimated';
-import {StyleSheet, LayoutChangeEvent} from 'react-native';
+import { useState } from "react";
+import Animated from "react-native-reanimated";
+import { StyleSheet, LayoutChangeEvent } from "react-native";
 
-import {Colors} from '@utils/colors';
-import {ACTIONS, INITIAL_DIMENSIONS} from './data';
-import {getAnimatedContainerStyles} from './animatedStyles';
-import FloatingActionModalItem from './FloatingActionModalItem';
-import {TFloatingActionModalProps, TFloatingModalDimensions} from './types';
+import { Colors } from "@utils/colors";
+import { ACTIONS, INITIAL_DIMENSIONS } from "./data";
+import { useAnimatedContainerStyles } from "./animatedStyles";
+import FloatingActionModalItem from "./FloatingActionModalItem";
+import { TFloatingActionModalProps, TFloatingModalDimensions } from "./types";
 
-const FloatingActionModal = ({progress, style}: TFloatingActionModalProps) => {
+const FloatingActionModal = ({
+  progress,
+  style,
+}: TFloatingActionModalProps) => {
   const [dimensions, setDimensions] =
     useState<TFloatingModalDimensions>(INITIAL_DIMENSIONS);
 
@@ -21,7 +24,7 @@ const FloatingActionModal = ({progress, style}: TFloatingActionModalProps) => {
     }
   };
 
-  const {animatedContainer} = getAnimatedContainerStyles({
+  const { animatedContainer } = useAnimatedContainerStyles({
     dimensions,
     progress,
   });
@@ -29,7 +32,8 @@ const FloatingActionModal = ({progress, style}: TFloatingActionModalProps) => {
   return (
     <Animated.View
       onLayout={onLayout}
-      style={[styles.container, animatedContainer, style]}>
+      style={[styles.container, animatedContainer, style]}
+    >
       {ACTIONS.map((action, key) => (
         <FloatingActionModalItem
           key={`action-${key}`}
@@ -40,8 +44,8 @@ const FloatingActionModal = ({progress, style}: TFloatingActionModalProps) => {
             key === 0
               ? styles.firstItem
               : key === ACTIONS.length - 1
-              ? styles.lastItem
-              : {},
+                ? styles.lastItem
+                : {},
           ]}
         />
       ))}

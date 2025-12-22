@@ -1,12 +1,12 @@
-import {StyleSheet} from 'react-native';
-import {interpolate, useAnimatedStyle} from 'react-native-reanimated';
+import { StyleSheet } from "react-native";
+import { interpolate, useAnimatedStyle } from "react-native-reanimated";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {TMonthListItem} from './types';
-import {typography} from '@utils/typography';
-import {isIOS, SM_FONT_UPSCALE_FACTOR} from '@utils/device';
-import {AnimatedPressable} from '../common/AnimatedComponents';
+import { Colors } from "@utils/colors";
+import { TMonthListItem } from "./types";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { isIOS, SM_FONT_UPSCALE_FACTOR } from "@utils/device";
+import { AnimatedPressable } from "../common/AnimatedComponents";
 
 const MonthListItem = ({
   item,
@@ -26,7 +26,7 @@ const MonthListItem = ({
           (index + 1) * 46,
           (index + 2) * 46,
         ],
-        [0.1, 0.25, 1, 0.25, 0.1],
+        [0.1, 0.25, 1, 0.25, 0.1]
       ),
     };
   });
@@ -34,7 +34,8 @@ const MonthListItem = ({
   return (
     <AnimatedPressable
       style={animStyle}
-      onPress={() => !!scrollToMonth && scrollToMonth(item)}>
+      onPress={() => !!scrollToMonth && scrollToMonth(item)}
+    >
       <Text style={styles.label} maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
         {item}
       </Text>

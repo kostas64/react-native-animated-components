@@ -1,16 +1,16 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import {ChartRef} from './types';
-import ChartHeader from '../ChartHeader';
-import AnimatedLineChart from './AnimatedLineChart';
-import {chartHeight, chartWidth, data} from './data';
+import { ChartRef } from "./types";
+import ChartHeader from "../ChartHeader";
+import AnimatedLineChart from "./AnimatedLineChart";
+import { chartHeight, chartWidth, data } from "./data";
 
 const LineChart = React.forwardRef<ChartRef>((_, ref) => {
   return (
     <View>
       <View style={styles.spaceBottom}>
-        <ChartHeader iconName="linechart" label={'Line Chart'} />
+        <ChartHeader iconName="line-chart" label={"Line Chart"} />
       </View>
       <AnimatedLineChart
         ref={ref}
@@ -22,7 +22,7 @@ const LineChart = React.forwardRef<ChartRef>((_, ref) => {
   );
 });
 
-LineChart.displayName = 'LineChart';
+LineChart.displayName = "LineChart";
 
 export default LineChart;
 

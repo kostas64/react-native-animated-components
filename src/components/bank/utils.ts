@@ -1,50 +1,50 @@
-import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
+import ReactNativeBiometrics, { BiometryTypes } from "react-native-biometrics";
 
 const rnBiometrics = new ReactNativeBiometrics({
   allowDeviceCredentials: true,
 });
 
 const STOCK_NAMES = [
-  'AAPL',
-  'GOOGL',
-  'AMZN',
-  'MSFT',
-  'TSLA',
-  'NFLX',
-  'NVDA',
-  'META',
-  'IBM',
-  'INTC',
-  'AMD',
-  'BABA',
-  'ORCL',
-  'ADBE',
-  'PYPL',
-  'CSCO',
-  'PEP',
-  'KO',
-  'DIS',
-  'V',
+  "AAPL",
+  "GOOGL",
+  "AMZN",
+  "MSFT",
+  "TSLA",
+  "NFLX",
+  "NVDA",
+  "META",
+  "IBM",
+  "INTC",
+  "AMD",
+  "BABA",
+  "ORCL",
+  "ADBE",
+  "PYPL",
+  "CSCO",
+  "PEP",
+  "KO",
+  "DIS",
+  "V",
 ];
 
 export const generateStockData = () => {
-  const stocks: any = [];
+  const stocks: { name: string; values: number[] }[] = [];
 
-  STOCK_NAMES.forEach(name => {
+  STOCK_NAMES.forEach((name) => {
     const values = [];
 
     for (let i = 0; i < 24; i++) {
       values.push(parseFloat((Math.random() * 1000 + 50).toFixed(2)));
     }
 
-    stocks.push({name, values});
+    stocks.push({ name, values });
   });
 
   return stocks;
 };
 
 export const validateBiometrics = async () => {
-  const {biometryType} = await rnBiometrics?.isSensorAvailable();
+  const { biometryType } = await rnBiometrics?.isSensorAvailable();
 
   if (
     biometryType === BiometryTypes.Biometrics ||
@@ -52,7 +52,7 @@ export const validateBiometrics = async () => {
     biometryType === BiometryTypes.TouchID
   ) {
     return rnBiometrics
-      .simplePrompt({promptMessage: "Verify it's you"})
+      .simplePrompt({ promptMessage: "Verify it's you" })
       .catch(() => {
         Promise.reject();
       });
@@ -64,5 +64,5 @@ export const validateBiometrics = async () => {
 export const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;
-  return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  return `${minutes}:${secs.toString().padStart(2, "0")}`;
 };

@@ -1,10 +1,10 @@
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
-const EventIndicator = ({label}: {label: string}) => {
+const EventIndicator = ({ label }: { label: string }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingHorizontal: 20,
     backgroundColor: Colors.BRIGHT_GRAY,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     borderRadius: 32,
   },
   label: {

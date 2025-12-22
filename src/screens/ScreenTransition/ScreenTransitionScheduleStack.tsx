@@ -2,11 +2,11 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
   createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+} from "@react-navigation/native-stack";
 
-import ScreenTransitionHomework from './ScreenTransitionHomework';
-import ScreenTransitionSubjects from './ScreenTransitionSubjects';
-import SubjectsHeader from '@components/screenTransition/SubjectsHeader';
+import ScreenTransitionHomework from "./ScreenTransitionHomework";
+import ScreenTransitionSubjects from "./ScreenTransitionSubjects";
+import SubjectsHeader from "@components/screenTransition/SubjectsHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,18 +17,24 @@ export type TInnerStackList = {
 
 export type TScheduleNavigationProps = NativeStackNavigationProp<
   TInnerStackList,
-  'ScreenTransitionSchedule'
+  "ScreenTransitionSchedule"
 >;
 export type TScheduleScreenProps = NativeStackScreenProps<
   TInnerStackList,
-  'ScreenTransitionSchedule'
+  "ScreenTransitionSchedule"
 >;
 
 const ScreenTransitionScheduleStack = () => {
   return (
     <>
-      <SubjectsHeader />
-      <Stack.Navigator screenOptions={{headerShown: false, animation: 'fade'}}>
+      <Stack.Navigator
+        initialRouteName="ScreenTransitionSchedule"
+        screenOptions={{
+          headerShown: true,
+          animation: "fade",
+          header: () => <SubjectsHeader />,
+        }}
+      >
         <Stack.Screen
           name="ScreenTransitionSchedule"
           component={ScreenTransitionSubjects}

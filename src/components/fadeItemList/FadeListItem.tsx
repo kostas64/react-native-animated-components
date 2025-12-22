@@ -3,19 +3,19 @@ import Animated, {
   SharedValue,
   Extrapolation,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {Image, StyleSheet, View} from 'react-native';
+} from "react-native-reanimated";
+import { Image, StyleSheet, View } from "react-native";
 
 import {
   WIDTH,
   SM_FONT_UPSCALE_FACTOR,
   MED_FONT_UPSCALE_FACTOR,
-} from '@utils/device';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {FadeItemProps} from './types';
-import {typography} from '@utils/typography';
-import {AVATAR_SIZE, ITEM_SIZE, SPACING} from './constants';
+} from "@utils/device";
+import Text from "@components/common/Text";
+import { Colors } from "@utils/colors";
+import { FadeItemProps } from "./types";
+import { typography } from "@utils/typography";
+import { AVATAR_SIZE, ITEM_SIZE, SPACING } from "./constants";
 
 const FadeListItem = ({
   item,
@@ -46,7 +46,7 @@ const FadeListItem = ({
           scrollY.value,
           inputRange,
           [1, 1, 1, 0],
-          Extrapolation.CLAMP,
+          Extrapolation.CLAMP
         ),
       },
     ],
@@ -54,11 +54,12 @@ const FadeListItem = ({
 
   return (
     <Animated.View style={[styles.parentViewItem, animatedStyle]}>
-      <Image source={{uri: item.image}} style={styles.image} />
+      <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.textContainer}>
         <Text
           style={styles.name}
-          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+        >
           {item.name}
         </Text>
         <Text style={styles.job} maxFontSizeMultiplier={SM_FONT_UPSCALE_FACTOR}>
@@ -77,19 +78,18 @@ export default FadeListItem;
 const styles = StyleSheet.create({
   parentViewItem: {
     height: 118,
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: SPACING,
     borderRadius: 16,
     backgroundColor: Colors.THREE_POINT_BLACK,
     shadowColor: Colors.BLACK,
-    alignItems: 'center',
+    alignItems: "center",
     shadowOpacity: 0.3,
     shadowRadius: 20,
     shadowOffset: {
       width: 0,
       height: 10,
     },
-    elevation: 3,
   },
   image: {
     width: AVATAR_SIZE,

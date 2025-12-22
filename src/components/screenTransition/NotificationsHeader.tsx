@@ -1,11 +1,11 @@
-import Entypo from 'react-native-vector-icons/Entypo';
-import {useNavigation} from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import Entypo from "@expo/vector-icons/Entypo";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
 
 const NotificationsHeader = () => {
   const navigation = useNavigation();
@@ -20,7 +20,8 @@ const NotificationsHeader = () => {
         <TouchableOpacity
           onPress={onPress}
           activeOpacity={0.6}
-          style={styles.chevronContainer}>
+          style={styles.chevronContainer}
+        >
           <Entypo name="chevron-left" size={18} />
         </TouchableOpacity>
         <View style={[styles.rowCenter, styles.gap8]}>
@@ -39,11 +40,11 @@ export default NotificationsHeader;
 
 const styles = StyleSheet.create({
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingBottom: 12,
   },
   chevronContainer: {
@@ -60,8 +61,8 @@ const styles = StyleSheet.create({
     height: 27,
     minWidth: 27,
     borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.CULTURED,
   },
   number: {

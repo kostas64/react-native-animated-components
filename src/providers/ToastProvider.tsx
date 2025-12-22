@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Toast from '@components/toast/Toast';
+import Toast from "@components/toast/Toast";
 
 const initialState: TInitialState = {
   message: null,
@@ -17,7 +17,7 @@ const ToastContext = React.createContext<TInitialState>({
   showToast: (_: string) => {},
 });
 
-export const ToastProvider = ({children}: {children: React.ReactNode}) => {
+export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [message, setMessage] = React.useState(initialState.message);
 
   const showToast = (message: string) => {
@@ -25,7 +25,7 @@ export const ToastProvider = ({children}: {children: React.ReactNode}) => {
   };
 
   return (
-    <ToastContext.Provider value={{message, showToast}}>
+    <ToastContext.Provider value={{ message, showToast }}>
       {message && <Toast message={message} setMessage={setMessage} />}
       {children}
     </ToastContext.Provider>

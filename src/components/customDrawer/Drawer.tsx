@@ -1,16 +1,16 @@
-import React from 'react';
-import {Polygon, Svg} from 'react-native-svg';
-import {Animated, StyleSheet, View} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaskedView from '@react-native-masked-view/masked-view';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import React from "react";
+import { Polygon, Svg } from "react-native-svg";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Animated, StyleSheet, View } from "react-native";
+import MaskedView from "@react-native-masked-view/masked-view";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import Link from './Link';
-import Route from './Route';
-import {DrawerProps} from './types';
-import {Colors} from '@utils/colors';
-import {HEIGHT_SCR, WIDTH} from '@utils/device';
-import {fromCoords, links, routes} from './data';
+import Link from "./Link";
+import Route from "./Route";
+import { DrawerProps } from "./types";
+import { Colors } from "@utils/colors";
+import { HEIGHT_SCR, WIDTH } from "@utils/device";
+import { fromCoords, links, routes } from "./data";
 
 const AnimatedPolygon = Animated.createAnimatedComponent(Polygon);
 
@@ -24,7 +24,7 @@ const Drawer = ({
   const insets = useSafeAreaInsets();
 
   React.useEffect(() => {
-    const listener = animatedValue.addListener(v => {
+    const listener = animatedValue.addListener((v) => {
       if (polygonRef?.current) {
         polygonRef.current.setNativeProps({
           points: `0,0 ${v.x}, ${v.y} ${WIDTH}, ${HEIGHT_SCR} 0, ${HEIGHT_SCR}`,
@@ -35,7 +35,7 @@ const Drawer = ({
     return () => {
       animatedValue.removeListener(listener);
     };
-  }, []);
+  }, [animatedValue]);
 
   const opacity = animatedValue.x.interpolate({
     inputRange: [0, WIDTH],
@@ -56,23 +56,26 @@ const Drawer = ({
           width={WIDTH}
           height={HEIGHT_SCR}
           viewBox={`0 0 ${WIDTH} ${HEIGHT_SCR}`}
-          style={styles.transparent}>
+          style={styles.transparent}
+        >
           <AnimatedPolygon
             ref={polygonRef}
             points={`0,0 ${fromCoords.x},${fromCoords.y} ${WIDTH}, ${HEIGHT_SCR}  0, ${HEIGHT_SCR}`}
           />
         </Svg>
-      }>
+      }
+    >
       <View style={styles.menuContainer}>
         <AntDesign
           size={32}
           name="close"
           color="white"
           onPress={onPress}
-          style={[styles.closeIcon, {top: insets.top + 16}]}
+          style={[styles.closeIcon, { top: insets.top + 16 }]}
         />
         <Animated.View
-          style={[styles.menu, {opacity, transform: [{translateX}]}]}>
+          style={[styles.menu, { opacity, transform: [{ translateX }] }]}
+        >
           <View>
             {routes.map((route, index) => (
               <Route
@@ -118,11 +121,11 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: "flex-start",
+    justifyContent: "space-between",
   },
   closeIcon: {
-    position: 'absolute',
+    position: "absolute",
     right: 30,
     zIndex: 100,
   },

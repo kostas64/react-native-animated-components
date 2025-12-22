@@ -3,23 +3,22 @@ import {
   SharedValue,
   Extrapolation,
   useAnimatedStyle,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import {HEIGHT_SCR} from '@utils/device';
+import { HEIGHT_SCR } from "@utils/device";
 
-export const getAnimatedStyles = (splashProgress: SharedValue<number>) => {
+export const useAnimatedStyles = (splashProgress: SharedValue<number>) => {
   const imageStyle = useAnimatedStyle(() => {
     return {
       borderRadius: 10000,
       opacity: interpolate(
         splashProgress.value,
-        [0, 0.1],
+        [0, 0.25],
         [1, 0],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       ),
       width: 160,
       height: 160,
-      backgroundColor: `rgb(235,238,255)`,
     };
   });
 
@@ -27,11 +26,11 @@ export const getAnimatedStyles = (splashProgress: SharedValue<number>) => {
     top: -160,
     borderWidth: (HEIGHT_SCR + 160) / 2,
     transform: [
-      {scale: interpolate(splashProgress.value, [0, 0.25, 1], [1, 0.8, 8])},
+      { scale: interpolate(splashProgress.value, [0, 0.25, 1], [1, 0.75, 8]) },
     ],
     borderColor: `white`,
     zIndex: splashProgress.value < 1 ? 1 : 0,
   }));
 
-  return {imageStyle, containerAnimStyle};
+  return { imageStyle, containerAnimStyle };
 };

@@ -1,7 +1,7 @@
-import React from 'react';
-import {View, Animated, ScrollView, StyleSheet} from 'react-native';
+import React from "react";
+import { View, Animated, ScrollView, StyleSheet } from "react-native";
 
-import {Colors} from '@utils/colors';
+import { Colors } from "@utils/colors";
 
 const DotLoader = () => {
   const size = 24;
@@ -133,15 +133,25 @@ const DotLoader = () => {
             }),
           ]),
         ]),
-      ]),
+      ])
     ).start();
-  }, []);
+  }, [
+    translateYRef1,
+    translateYRef2,
+    translateYRef3,
+    translateYRef4,
+    opacityRef1,
+    opacityRef2,
+    opacityRef3,
+    opacityRef4,
+  ]);
 
   return (
     <ScrollView
       bounces={false}
       contentContainerStyle={styles.container}
-      keyboardShouldPersistTaps="handled">
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={styles.row}>
         <Animated.View
           style={[
@@ -151,14 +161,7 @@ const DotLoader = () => {
               height: size || 1,
               borderRadius: (+size || 1) / 2,
               opacity: opacityRef1,
-              transform: [
-                {
-                  scale: scaleRef1,
-                },
-                {
-                  translateY: translateYRef1,
-                },
-              ],
+              transform: [{ scale: scaleRef1 }, { translateY: translateYRef1 }],
             },
           ]}
         />
@@ -170,14 +173,7 @@ const DotLoader = () => {
               height: size || 1,
               borderRadius: (+size || 1) / 2,
               opacity: opacityRef2,
-              transform: [
-                {
-                  scale: scaleRef2,
-                },
-                {
-                  translateY: translateYRef2,
-                },
-              ],
+              transform: [{ scale: scaleRef2 }, { translateY: translateYRef2 }],
             },
           ]}
         />
@@ -189,14 +185,7 @@ const DotLoader = () => {
               height: size || 1,
               borderRadius: (+size || 1) / 2,
               opacity: opacityRef3,
-              transform: [
-                {
-                  scale: scaleRef3,
-                },
-                {
-                  translateY: translateYRef3,
-                },
-              ],
+              transform: [{ scale: scaleRef3 }, { translateY: translateYRef3 }],
             },
           ]}
         />
@@ -209,7 +198,7 @@ const DotLoader = () => {
               height: size || 1,
               borderRadius: (+size || 1) / 2,
               opacity: opacityRef4,
-              transform: [{scale: scaleRef4}, {translateY: translateYRef4}],
+              transform: [{ scale: scaleRef4 }, { translateY: translateYRef4 }],
             },
           ]}
         />
@@ -220,12 +209,12 @@ const DotLoader = () => {
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: Colors.WHITE,
   },
   dot: {

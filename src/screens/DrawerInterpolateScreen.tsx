@@ -1,24 +1,27 @@
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 import {
   useDrawerStatus,
   useDrawerProgress,
   createDrawerNavigator,
-} from '@react-navigation/drawer';
-import {useEffect} from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {View, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
-import Animated, {interpolate, useAnimatedStyle} from 'react-native-reanimated';
+} from "@react-navigation/drawer";
 import {
-  DrawerContentComponentProps,
   DrawerNavigationHelpers,
-} from '@react-navigation/drawer/lib/typescript/src/types';
+  DrawerContentComponentProps,
+} from "node_modules/@react-navigation/drawer/lib/typescript/src/types";
+import { useEffect } from "react";
+import Entypo from "@expo/vector-icons/Entypo";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View, StatusBar, StyleSheet, TouchableOpacity } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import StatusBarManager from '@components/common/StatusBarManager';
-import DrawerContent from '@components/drawerInterpolate/DrawerContent';
-import {DrawerTypes, TDrawerList} from '@components/drawerInterpolate/types';
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import StatusBarManager from "@components/common/StatusBarManager";
+import DrawerContent from "@components/drawerInterpolate/DrawerContent";
+import { DrawerTypes, TDrawerList } from "@components/drawerInterpolate/types";
 
 const Drawer = createDrawerNavigator<TDrawerList>();
 
@@ -29,8 +32,8 @@ const DrawerContentCustom = (props: DrawerContentComponentProps) => (
 const DrawerInterpolateScreen = () => {
   const screenOptions = {
     headerShown: false,
-    drawerType: 'slide' as DrawerTypes,
-    overlayColor: 'transparent',
+    drawerType: "slide" as DrawerTypes,
+    overlayColor: "transparent",
     sceneContainerStyle: styles.sceneContainerStyle,
     drawerStyle: styles.drawerStyle,
   };
@@ -39,9 +42,19 @@ const DrawerInterpolateScreen = () => {
     <View style={styles.navigatorContainer}>
       <Drawer.Navigator
         screenOptions={screenOptions}
-        drawerContent={DrawerContentCustom}>
-        <Drawer.Screen name="DrawerInterpolateNested">
-          {(props: any) => <DrawerInterpolate {...props} />}
+        drawerContent={DrawerContentCustom}
+      >
+        <Drawer.Screen
+          name="DrawerInterpolateNested"
+          options={{
+            sceneStyle: {
+              backgroundColor: Colors.RICH_ELECTRIC_BLUE,
+            },
+          }}
+        >
+          {(props: { navigation: DrawerNavigationHelpers }) => (
+            <DrawerInterpolate {...props} />
+          )}
         </Drawer.Screen>
       </Drawer.Navigator>
     </View>
@@ -64,15 +77,15 @@ const DrawerInterpolate = ({
 
     return {
       borderRadius,
-      transform: [{scale}],
+      transform: [{ scale }],
     };
   });
 
   useEffect(() => {
-    if (drawerStatus === 'open') {
-      StatusBar.setBarStyle('light-content');
-    } else if (drawerStatus === 'closed') {
-      StatusBar.setBarStyle('dark-content');
+    if (drawerStatus === "open") {
+      StatusBar.setBarStyle("light-content");
+    } else if (drawerStatus === "closed") {
+      StatusBar.setBarStyle("dark-content");
     }
   }, [drawerStatus]);
 
@@ -82,13 +95,14 @@ const DrawerInterpolate = ({
       <Animated.View style={[styles.container, animatedStyles]}>
         <TouchableOpacity
           onPress={() => {
-            StatusBar.setBarStyle('light-content');
+            StatusBar.setBarStyle("light-content");
             navigation.openDrawer();
           }}
           style={[
             styles.menuContainer,
-            insets.top > 0 ? {paddingTop: insets.top + 8} : styles.spaceTop,
-          ]}>
+            insets.top > 0 ? { paddingTop: insets.top + 8 } : styles.spaceTop,
+          ]}
+        >
           <Entypo name="menu" size={26} />
           <Text style={styles.label}>Menu</Text>
         </TouchableOpacity>
@@ -107,8 +121,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.RICH_ELECTRIC_BLUE,
   },
   menuContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingLeft: 24,
   },
   label: {
@@ -121,7 +135,7 @@ const styles = StyleSheet.create({
   },
   drawerStyle: {
     flex: 1,
-    width: '65%',
+    width: "65%",
     paddingRight: 20,
     backgroundColor: Colors.TRANSPARENT,
   },

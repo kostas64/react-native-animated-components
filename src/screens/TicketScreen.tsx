@@ -1,8 +1,9 @@
-import {WIDTH} from '@utils/device';
-import {StyleSheet, View} from 'react-native';
+import { JSX } from "react";
+import { StyleSheet, View } from "react-native";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
+import { WIDTH } from "@utils/device";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
 
 const TicketPart = ({
   isFirstCard = false,
@@ -29,7 +30,8 @@ const TicketPart = ({
           styles.cardContainer,
           isFirstCard && styles.topBorder,
           isLastCard && styles.bottomBorder,
-        ]}>
+        ]}
+      >
         {children}
       </View>
       {hasBottomDash && (
@@ -70,8 +72,8 @@ export default TicketScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.WHITE,
   },
   cardContainer: {
@@ -94,10 +96,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.CHINESE_WHITE,
   },
   overflow: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   dashedLine: {
-    borderStyle: 'dashed',
+    borderStyle: "dashed",
     borderWidth: 1,
     borderColor: Colors.CHINESE_WHITE,
     margin: -1,
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     width: 24,
     backgroundColor: Colors.WHITE,
     borderRadius: 12,
-    position: 'absolute',
+    position: "absolute",
     borderWidth: 1,
     borderColor: Colors.CHINESE_WHITE,
   },

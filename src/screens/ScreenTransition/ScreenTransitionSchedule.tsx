@@ -1,13 +1,13 @@
-import {StyleSheet, View} from 'react-native';
-import {useIsFocused} from '@react-navigation/native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { StyleSheet, View } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {isIOS} from '@utils/device';
-import {Colors} from '@utils/colors';
-import ScheduleHeader from '@components/screenTransition/ScheduleHeader';
-import FadeInTransition from '@components/screenTransition/FadeInTransition';
-import ScheduleCalendar from '@components/screenTransition/ScheduleCalendar';
-import ScheduleTimeEvents from '@components/screenTransition/ScheduleTimeEvents';
+import { isIOS } from "@utils/device";
+import { Colors } from "@utils/colors";
+import ScheduleHeader from "@components/screenTransition/ScheduleHeader";
+import FadeInTransition from "@components/screenTransition/FadeInTransition";
+import ScheduleCalendar from "@components/screenTransition/ScheduleCalendar";
+import ScheduleTimeEvents from "@components/screenTransition/ScheduleTimeEvents";
 
 const ScreenTransitionSchedule = () => {
   const isFocused = useIsFocused();
@@ -19,26 +19,29 @@ const ScreenTransitionSchedule = () => {
   const paddingBottom = 312 + bottom;
 
   return (
-    <View style={[styles.container, {paddingTop}]}>
+    <View style={[styles.container, { paddingTop }]}>
       <FadeInTransition
         index={0}
         direction="left"
         animate={isFocused}
-        containerStyle={styles.spaceHor}>
+        containerStyle={styles.spaceHor}
+      >
         <ScheduleHeader />
       </FadeInTransition>
       <FadeInTransition
         index={1}
         direction="top"
         animate={isFocused}
-        containerStyle={[styles.spaceTop, styles.smSpaceHor]}>
+        containerStyle={[styles.spaceTop, styles.smSpaceHor]}
+      >
         <ScheduleCalendar index={1.1} />
       </FadeInTransition>
       <FadeInTransition
         index={2}
         animate={isFocused}
-        containerStyle={[styles.spaceTop, styles.spaceHor]}>
-        <ScheduleTimeEvents contentContainerStyle={{paddingBottom}} />
+        containerStyle={[styles.spaceTop, styles.spaceHor]}
+      >
+        <ScheduleTimeEvents contentContainerStyle={{ paddingBottom }} />
       </FadeInTransition>
     </View>
   );

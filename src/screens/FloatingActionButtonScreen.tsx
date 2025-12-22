@@ -2,16 +2,16 @@ import {
   withTiming,
   useSharedValue,
   cancelAnimation,
-} from 'react-native-reanimated';
-import {useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
+} from "react-native-reanimated";
+import { useRef } from "react";
+import { StyleSheet, View } from "react-native";
 
 import FloatingActionButton, {
   RefProps,
-} from '@components/floatingActionsButton/FloatingActionButton';
-import {Colors} from '@utils/colors';
-import StatusBarManager from '@components/common/StatusBarManager';
-import FloatingActionModal from '@components/floatingActionsButton/FloatingActionModal';
+} from "@components/floatingActionsButton/FloatingActionButton";
+import { Colors } from "@utils/colors";
+import StatusBarManager from "@components/common/StatusBarManager";
+import FloatingActionModal from "@components/floatingActionsButton/FloatingActionModal";
 
 const FloatingActionButtonScreen = () => {
   const floatingRef = useRef<RefProps>(null);
@@ -19,16 +19,16 @@ const FloatingActionButtonScreen = () => {
 
   const animate = () => {
     if (progress.value === 0) {
-      progress.value = withTiming(0.5, {duration: 750});
+      progress.value = withTiming(0.5, { duration: 750 });
     } else if (progress.value === 0.5) {
-      progress.value = withTiming(1, {duration: 500}, finished => {
+      progress.value = withTiming(1, { duration: 500 }, (finished) => {
         if (finished) {
           progress.value = 0;
         }
       });
     } else {
       cancelAnimation(progress);
-      progress.value = withTiming(0, {duration: 500});
+      progress.value = withTiming(0, { duration: 500 });
     }
   };
 
@@ -65,18 +65,18 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BABY_PINK,
   },
   buttonPosition: {
-    position: 'absolute',
+    position: "absolute",
     flex: 1,
-    width: '100%',
+    width: "100%",
     bottom: 36,
     right: 24,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   buttonContainer: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   absolute: {
-    position: 'absolute',
+    position: "absolute",
   },
 });

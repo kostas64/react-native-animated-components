@@ -1,21 +1,24 @@
-import {memo, useCallback} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Animated, {FadeInDown, LinearTransition} from 'react-native-reanimated';
+import Animated, {
+  FadeInDown,
+  LinearTransition,
+} from "react-native-reanimated";
+import { memo, useCallback } from "react";
+import { StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import {THeader} from './types';
-import Calendar from './Calendar';
-import MenuIcon from './MenuIcon';
-import {isIOS} from '@utils/device';
-import {Colors} from '@utils/colors';
-import MonthPicker from './MonthPicker';
-import {ANIMATION_DUR} from './constants';
-import MonthListModal from './MonthListModal';
-import {useModalContext} from '@providers/ModalProvider';
+import { THeader } from "./types";
+import Calendar from "./Calendar";
+import MenuIcon from "./MenuIcon";
+import { isIOS } from "@utils/device";
+import { Colors } from "@utils/colors";
+import MonthPicker from "./MonthPicker";
+import { ANIMATION_DUR } from "./constants";
+import MonthListModal from "./MonthListModal";
+import { useModalContext } from "@providers/ModalProvider";
 
-const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
+const Header = ({ month, selectedDate, onSelecteMonth }: THeader) => {
   const insets = useSafeAreaInsets();
-  const {setModalInfo} = useModalContext();
+  const { setModalInfo } = useModalContext();
 
   const paddingTop = insets.top > 32 ? insets.top : 32;
 
@@ -27,7 +30,7 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
         <View style={styles.modalContainer}>
           <MonthListModal
             month={month}
-            setMonth={selectedMonth => {
+            setMonth={(selectedMonth) => {
               onSelecteMonth(selectedMonth);
             }}
           />
@@ -37,12 +40,13 @@ const Header = ({month, selectedDate, onSelecteMonth}: THeader) => {
       lineStyle: styles.linStyle,
       contentContainerStyle: styles.modalInnerContainer,
     });
-  }, [month]);
+  }, [month, onSelecteMonth, setModalInfo]);
 
   return (
     <Animated.View
       layout={LinearTransition}
-      style={[styles.container, {paddingTop}]}>
+      style={[styles.container, { paddingTop }]}
+    >
       <Animated.View entering={entering}>
         <MenuIcon />
         <MonthPicker month={month} onPress={onPressMonthPicker} />
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.CHINESE_BLACK,
     paddingBottom: 16,
     borderRadius: 32,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   modalContainer: {
     flex: 1,

@@ -1,15 +1,15 @@
-import {Animated, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { Animated, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   WIDTH,
   HEIGHT_SCR,
   MED_FONT_UPSCALE_FACTOR,
   XSM_FONT_UPSCALE_FACTOR,
-} from '@utils/device';
-import Text from '@components/common/Text';
-import {typography} from '@utils/typography';
-import {ProductListItemProps} from './types';
+} from "@utils/device";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { ProductListItemProps } from "./types";
 
 const ProductListItem = ({
   item,
@@ -25,22 +25,24 @@ const ProductListItem = ({
 
   return (
     <>
-      <View style={[styles.nameImgContainer, {paddingTop: insets.top + 48}]}>
+      <View style={[styles.nameImgContainer, { paddingTop: insets.top + 48 }]}>
         <Text
-          style={[styles.name, {color: item.fontColor}]}
-          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+          style={[styles.name, { color: item.fontColor }]}
+          maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+        >
           {item.name}
         </Text>
         <Animated.Image
-          resizeMode={'contain'}
+          resizeMode={"contain"}
           source={item.image}
-          style={[styles.img, {opacity, top: insets.top + WIDTH / 6}]}
+          style={[styles.img, { opacity, top: insets.top + WIDTH / 6 }]}
         />
       </View>
-      <View style={[styles.labelContainer, {top: insets.top + 76}]}>
+      <View style={[styles.labelContainer, { top: insets.top + 76 }]}>
         <Text
-          style={[styles.label, {color: item.fontColor}]}
-          maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}>
+          style={[styles.label, { color: item.fontColor }]}
+          maxFontSizeMultiplier={XSM_FONT_UPSCALE_FACTOR}
+        >
           Nike
         </Text>
       </View>
@@ -61,17 +63,17 @@ const styles = StyleSheet.create({
     fontFamily: typography.bold,
   },
   img: {
-    position: 'absolute',
+    position: "absolute",
     height: WIDTH / 1.25,
     width: WIDTH / 1.25,
     right: -WIDTH / 6,
   },
   labelContainer: {
-    position: 'absolute',
+    position: "absolute",
     left: 24,
   },
   label: {
     fontSize: 64,
-    fontWeight: '900',
+    fontWeight: "900",
   },
 });

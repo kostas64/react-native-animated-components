@@ -1,11 +1,11 @@
-import {View, Image, StyleSheet} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Image, StyleSheet } from "react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {HomeEventProps} from './types';
-import {typography} from '@utils/typography';
-import {MED_FONT_UPSCALE_FACTOR} from '@utils/device';
+import { Colors } from "@utils/colors";
+import { HomeEventProps } from "./types";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { MED_FONT_UPSCALE_FACTOR } from "@utils/device";
 
 const HomeEvent = ({
   source,
@@ -20,12 +20,14 @@ const HomeEvent = ({
         <View style={styles.gap8}>
           <Text
             style={styles.eventTitle}
-            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+          >
             {eventTitle}
           </Text>
           <Text
             style={styles.eventDate}
-            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}>
+            maxFontSizeMultiplier={MED_FONT_UPSCALE_FACTOR}
+          >
             {eventDate}
           </Text>
         </View>
@@ -41,13 +43,13 @@ export default HomeEvent;
 
 const styles = StyleSheet.create({
   rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   container: {
     padding: 5,
     borderRadius: 24,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   eventImg: {
     width: 80,

@@ -1,4 +1,4 @@
-import {ImageSourcePropType} from 'react-native';
+import { ImageSourcePropType } from "react-native";
 
 export type ParallaxItemProps = {
   photo: ImageSourcePropType;

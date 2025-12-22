@@ -1,5 +1,5 @@
-import {StyleProp, ViewStyle} from 'react-native';
-import {SharedValue} from 'react-native-reanimated';
+import { StyleProp, ViewStyle } from "react-native";
+import { SharedValue } from "react-native-reanimated";
 
 export type TListItem = {
   item: number;

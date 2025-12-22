@@ -4,16 +4,16 @@ import {
   FlingGestureHandler,
   HandlerStateChangeEvent,
   FlingGestureHandlerEventPayload,
-} from 'react-native-gesture-handler';
-import React from 'react';
-import {Animated, FlatList, StyleSheet, View} from 'react-native';
+} from "react-native-gesture-handler";
+import React from "react";
+import { Animated, FlatList, StyleSheet, View } from "react-native";
 
-import {WIDTH} from '@utils/device';
-import {items} from '@components/productList/data';
-import {ProductItem} from '@components/productList/types';
-import AddToBagButton from '@components/productList/AddToBagButton';
-import ItemDescription from '@components/productList/ItemDescription';
-import ProductListItem from '@components/productList/ProductListItem';
+import { WIDTH } from "@utils/device";
+import { items } from "@components/productList/data";
+import { ProductItem } from "@components/productList/types";
+import AddToBagButton from "@components/productList/AddToBagButton";
+import ItemDescription from "@components/productList/ItemDescription";
+import ProductListItem from "@components/productList/ProductListItem";
 
 const ProductListScreen = () => {
   const [index, setIndex] = React.useState(0);
@@ -23,7 +23,7 @@ const ProductListScreen = () => {
 
   const backgroundColor = scrollX.interpolate({
     inputRange: items?.map((_, i) => i * WIDTH),
-    outputRange: items?.map(item => item.backgroundColor),
+    outputRange: items?.map((item) => item.backgroundColor),
   });
 
   React.useEffect(() => {
@@ -32,9 +32,9 @@ const ProductListScreen = () => {
       duration: 200,
       useNativeDriver: true,
     }).start();
-  }, [index]);
+  }, [index, animateIndex]);
 
-  const renderItem = ({item, index: localIndex}: ProductItem) => (
+  const renderItem = ({ item, index: localIndex }: ProductItem) => (
     <ProductListItem
       animateIndex={animateIndex}
       localIndex={localIndex}
@@ -43,44 +43,46 @@ const ProductListScreen = () => {
   );
 
   const onFlingLeft = (
-    e: HandlerStateChangeEvent<FlingGestureHandlerEventPayload>,
+    e: HandlerStateChangeEvent<FlingGestureHandlerEventPayload>
   ) => {
     if (e.nativeEvent.state === State.END) {
       if (index === items.length - 1) return;
 
-      listRef.current?.scrollToIndex({animated: true, index: index + 1});
-      setIndex(oldInd => oldInd + 1);
+      listRef.current?.scrollToIndex({ animated: true, index: index + 1 });
+      setIndex((oldInd) => oldInd + 1);
     }
   };
 
   const onFlingRight = (
-    ev: HandlerStateChangeEvent<FlingGestureHandlerEventPayload>,
+    ev: HandlerStateChangeEvent<FlingGestureHandlerEventPayload>
   ) => {
     if (ev.nativeEvent.state === State.END) {
       if (index === 0) {
         return;
       }
-      listRef.current?.scrollToIndex({animated: true, index: index - 1});
+      listRef.current?.scrollToIndex({ animated: true, index: index - 1 });
       setIndex(index - 1);
     }
   };
 
   const onScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {x: scrollX}}}],
-    {useNativeDriver: false},
+    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+    { useNativeDriver: false }
   );
 
   return (
     <>
       <Animated.View
-        style={[StyleSheet.absoluteFillObject, {backgroundColor}]}
+        style={[StyleSheet.absoluteFillObject, { backgroundColor }]}
       />
       <FlingGestureHandler
         direction={Directions.LEFT}
-        onHandlerStateChange={onFlingLeft}>
+        onHandlerStateChange={onFlingLeft}
+      >
         <FlingGestureHandler
           direction={Directions.RIGHT}
-          onHandlerStateChange={onFlingRight}>
+          onHandlerStateChange={onFlingRight}
+        >
           <View>
             <Animated.FlatList
               ref={listRef}

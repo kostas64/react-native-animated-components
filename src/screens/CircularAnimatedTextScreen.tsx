@@ -4,10 +4,10 @@ import Animated, {
   SharedValue,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {G, Svg, Circle} from 'react-native-svg';
-import {Image, Pressable, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from "react-native-reanimated";
+import { G, Svg, Circle } from "react-native-svg";
+import { Image, Pressable, StyleSheet, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
   SCALE,
@@ -15,11 +15,11 @@ import {
   COLOURS,
   BOX_SIZE,
   NUM_LETTER_CIRCLES,
-} from '@components/circularAnimatedText/data';
-import {Colors} from '@utils/colors';
-import ColorBox from '@components/circularAnimatedText/ColorBox';
-import StatusBarManager from '@components/common/StatusBarManager';
-import AnimCircle from '@components/circularAnimatedText/AnimCricle';
+} from "@components/circularAnimatedText/data";
+import { Colors } from "@utils/colors";
+import ColorBox from "@components/circularAnimatedText/ColorBox";
+import StatusBarManager from "@components/common/StatusBarManager";
+import AnimCircle from "@components/circularAnimatedText/AnimCricle";
 
 const CircularAnimatedTextScreen = () => {
   const insets = useSafeAreaInsets();
@@ -72,7 +72,8 @@ const CircularAnimatedTextScreen = () => {
       <StatusBarManager />
       <Pressable
         onPress={onPressBrush}
-        style={[styles.imgContainer, {marginTop}]}>
+        style={[styles.imgContainer, { marginTop }]}
+      >
         <Image source={brush} style={styles.img} />
       </Pressable>
 
@@ -80,7 +81,8 @@ const CircularAnimatedTextScreen = () => {
         <Svg
           height={`${BOX_SIZE}`}
           width={`${BOX_SIZE}`}
-          viewBox={`0 0 ${BOX_SIZE * SCALE} ${BOX_SIZE * SCALE}`}>
+          viewBox={`0 0 ${BOX_SIZE * SCALE} ${BOX_SIZE * SCALE}`}
+        >
           <G id="circle">
             <Circle
               fill="none"
@@ -104,8 +106,8 @@ const CircularAnimatedTextScreen = () => {
       <Animated.FlatList
         horizontal
         data={COLOURS}
-        renderItem={({item, index}) =>
-          renderItem({item, index, activeColor, onColorTouch})
+        renderItem={({ item, index }) =>
+          renderItem({ item, index, activeColor, onColorTouch })
         }
         style={[styles.listContainer, listStyle]}
         showsHorizontalScrollIndicator={false}
@@ -120,16 +122,16 @@ export default CircularAnimatedTextScreen;
 const styles = StyleSheet.create({
   svgContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: Colors.WHITE,
   },
   listContainer: {
-    position: 'absolute',
+    position: "absolute",
     paddingHorizontal: 24,
   },
   imgContainer: {
-    position: 'absolute',
+    position: "absolute",
     right: 24,
     zIndex: 1,
   },

@@ -1,12 +1,11 @@
-import {ReactNode} from 'react';
-import {ColorValue, StyleProp, ViewStyle} from 'react-native';
+import { ReactNode } from "react";
+import { ColorValue, StyleProp, ViewStyle } from "react-native";
 
 export type WelcomeStyleProps = {
   style?: StyleProp<ViewStyle>;
 };
 
 export type StyleProps = {
-  sharedElementTag?: string;
   style?: (index: number) => StyleProp<ViewStyle>;
 };
 
@@ -44,7 +43,7 @@ export type CardDetailRowProps = {
   value: string;
   hidden: boolean;
   pressedStyle?: StyleProp<ViewStyle>;
-  onPress: ({field, value}: {field: string; value: string}) => void;
+  onPress: ({ field, value }: { field: string; value: string }) => void;
 };
 
 export type BarProps = {
@@ -75,7 +74,7 @@ export type TransactionProps = {
   beenAdded?: boolean;
 };
 
-export type TransactionType = 'Income' | 'Stock';
+export type TransactionType = "Income" | "Stock";
 
 export type TransactionItemProps = {
   type: TransactionType;

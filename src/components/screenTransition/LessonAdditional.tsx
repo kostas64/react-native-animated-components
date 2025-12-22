@@ -1,15 +1,15 @@
-import {View, Image, StyleSheet} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { View, Image, StyleSheet } from "react-native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
-import Button from './Button';
-import Text from '@components/common/Text';
-import {Colors} from '@utils/colors';
-import {typography} from '@utils/typography';
-import {LessonAdditionalProps} from './types';
-import FadeInTransition from './FadeInTransition';
+import Button from "./Button";
+import { Colors } from "@utils/colors";
+import Text from "@components/common/Text";
+import { typography } from "@utils/typography";
+import { LessonAdditionalProps } from "./types";
+import FadeInTransition from "./FadeInTransition";
 
-const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
+const LessonAdditional = ({ index, containerStyle }: LessonAdditionalProps) => {
   const isFocused = useIsFocused();
   const navigation = useNavigation();
 
@@ -19,13 +19,15 @@ const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
         <FadeInTransition
           direction="top-scale"
           animate={isFocused}
-          index={index}>
+          index={index}
+        >
           <Text style={styles.title}>Lessons theme</Text>
         </FadeInTransition>
         <FadeInTransition
           direction="top"
           animate={isFocused}
-          index={index + 0.5}>
+          index={index + 0.5}
+        >
           <Text style={styles.description}>
             Review and extend your knowledge of the present simple, present
             perfect and present continuous tenses.
@@ -36,21 +38,23 @@ const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
         <FadeInTransition
           direction="top-scale"
           animate={isFocused}
-          index={index + 1}>
+          index={index + 1}
+        >
           <Text style={styles.title}>Additional materials</Text>
         </FadeInTransition>
         <FadeInTransition
           direction="top-scale"
           animate={isFocused}
-          index={index + 1.5}>
+          index={index + 1.5}
+        >
           <View style={styles.booksContainer}>
             <Image
               style={styles.book}
-              source={require('@assets/img/screenTransition/grammar1.png')}
+              source={require("@assets/img/screenTransition/grammar1.png")}
             />
             <Image
               style={styles.book}
-              source={require('@assets/img/screenTransition/grammar2.png')}
+              source={require("@assets/img/screenTransition/grammar2.png")}
             />
           </View>
         </FadeInTransition>
@@ -58,7 +62,8 @@ const LessonAdditional = ({index, containerStyle}: LessonAdditionalProps) => {
       <FadeInTransition
         direction="top-scale"
         animate={isFocused}
-        index={index + 2}>
+        index={index + 2}
+      >
         <View style={styles.homeworkButtonContainer}>
           <Text style={styles.title}>Homework</Text>
           <View style={styles.homeworkContainer}>
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
   },
   booksContainer: {
     gap: 4,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   book: {
     width: 116,
@@ -98,9 +103,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 100,
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
     backgroundColor: Colors.ALICE_BLUE,
   },
   homeworkLabel: {

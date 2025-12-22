@@ -2,12 +2,12 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp,
   createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+} from "@react-navigation/native-stack";
 
-import ScreenTransitionLesson from './ScreenTransitionLesson';
-import ScreenTransitionWelcome from './ScreenTransitionWelcome';
-import ScreenTransitionBottomStack from './ScreenTransitionBottomStack';
-import ScreenTransitionNotifications from './ScreenTransitionNotifications';
+import ScreenTransitionLesson from "./ScreenTransitionLesson";
+import ScreenTransitionWelcome from "./ScreenTransitionWelcome";
+import ScreenTransitionBottomStack from "./ScreenTransitionBottomStack";
+import ScreenTransitionNotifications from "./ScreenTransitionNotifications";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,20 +20,21 @@ export type TStackList = {
 
 export type TWelcomeNavigationProps = NativeStackNavigationProp<
   TStackList,
-  'Welcome'
+  "Welcome"
 >;
-export type TWelcomeScreenProps = NativeStackScreenProps<TStackList, 'Welcome'>;
+export type TWelcomeScreenProps = NativeStackScreenProps<TStackList, "Welcome">;
 
 const ScreenTransitionStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        animation: 'fade',
+        animation: "fade",
         contentStyle: {
-          backgroundColor: 'white',
+          backgroundColor: "white",
         },
-      }}>
+      }}
+    >
       <Stack.Screen name="Welcome" component={ScreenTransitionWelcome} />
       <Stack.Screen
         name="Notifications"
