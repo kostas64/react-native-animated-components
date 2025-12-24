@@ -224,6 +224,13 @@ export const HOME_LIST = [
     screen: "LikeInteraction",
     image: require("@assets/screenshots/31.png"),
   },
+  {
+    id: 32,
+    name: "Entering Text",
+    description: "Animated Text Word by Word",
+    screen: "AnimatedWordText",
+    image: require("@assets/screenshots/32.png"),
+  },
 ];
 
 export type HomeListItem = {

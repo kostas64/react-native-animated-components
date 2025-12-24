@@ -42,6 +42,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import GestureCounterScreen from "@screens/GestureCounterScreen";
 import ProgressLoaderScreen from "./screens/ProgressLoaderScreen";
 import LikeInteractionScreen from "./screens/LikeInteractionScreen";
+import AnimatedWordTextScreen from "@screens/AnimatedWordTextScreen";
 import VerticalScrollBarScreen from "@screens/VerticalScrollBarScreen";
 import ListWithIndicatorScreen from "./screens/ListWithIndicatorScreen";
 import DrawerInterpolateScreen from "./screens/DrawerInterpolateScreen";
@@ -85,6 +86,7 @@ export type TStackList = {
   FloatingActions: undefined;
   AddButtonMove: undefined;
   BankStack: undefined;
+  AnimatedWordText: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -230,6 +232,10 @@ function App() {
                   component={AddButtonMoveScreen}
                 />
                 <Stack.Screen name="BankStack" component={BankStack} />
+                <Stack.Screen
+                  name="AnimatedWordText"
+                  component={AnimatedWordTextScreen}
+                />
               </Stack.Navigator>
             </NavigationContainer>
           </ModalProvider>
