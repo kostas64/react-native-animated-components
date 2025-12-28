@@ -168,7 +168,10 @@ const SlideButton = ({
         customAnimatedProps={customAnimatedProps}
       />
 
-      <Animated.Text style={[styles.btnLabel, labelStyle]}>
+      <Animated.Text
+        allowFontScaling={false}
+        style={[styles.btnLabel, labelStyle]}
+      >
         Slide to Confirm
       </Animated.Text>
     </Animated.View>
