@@ -79,4 +79,5 @@ export const Colors = {
   RED_SALSA: "#F43F46",
   PORTLAND_ORANGE: "#FE5334",
   TEA_GREEN: "#C1EBCC",
+  HARMONY_GREEN: "#7FE69E",
 };

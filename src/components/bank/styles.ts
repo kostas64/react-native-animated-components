@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
-import {Colors} from '@utils/colors';
+import { Colors } from "@utils/colors";
 
 export const shadows = StyleSheet.create({
   shadow: {
@@ -22,6 +22,16 @@ export const shadows = StyleSheet.create({
       height: 12,
     },
     elevation: 12,
+  },
+  justLowShadow: {
+    shadowColor: Colors.BLACK,
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: {
+      width: 8,
+      height: 16,
+    },
+    elevation: 6,
   },
   justShadow: {
     shadowColor: Colors.BLACK,

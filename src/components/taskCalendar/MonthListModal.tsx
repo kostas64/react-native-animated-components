@@ -22,13 +22,9 @@ import { TMonthListModal } from "./types";
 import MonthListItem from "./MonthListItem";
 import { isIOS, isAndroid } from "@utils/device";
 import MonthListPickerLines from "./MonthListPickerLines";
-import { impactAsync, ImpactFeedbackStyle } from "expo-haptics";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-
-export const triggerHaptik = () => {
-  impactAsync(ImpactFeedbackStyle.Light);
-};
 
 const MonthListModal = ({ month, setMonth }: TMonthListModal) => {
   const scrollY = useSharedValue(0);
@@ -107,7 +103,7 @@ const MonthListModal = ({ month, setMonth }: TMonthListModal) => {
 
   useDerivedValue(() => {
     if (Number.isInteger(scrollY.value / 46)) {
-      scheduleOnRN(triggerHaptik);
+      scheduleOnRN(triggerHaptic, HAPTIC_TYPE.SOFT);
     }
   });
 

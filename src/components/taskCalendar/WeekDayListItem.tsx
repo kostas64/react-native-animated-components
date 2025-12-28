@@ -12,7 +12,7 @@ import { _spacing } from "./constants";
 import { Colors } from "@utils/colors";
 import { TWeekDayListItem } from "./types";
 import { typography } from "@utils/typography";
-import { triggerHaptik } from "./MonthListModal";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 import { MAX_FONT_UPSCALE_FACTOR, WIDTH } from "@utils/device";
 import { formatDate, isSameDay, isToday, setDayEmitter } from "./utils";
 
@@ -67,7 +67,7 @@ const WeekDayListItem = ({
       if (isSameDate && !isSelected) {
         setIsSelected(true);
         globalSelectedDate.current = new Date(selectedDay.date);
-        triggerHaptik();
+        triggerHaptic(HAPTIC_TYPE.SOFT);
       } else if (!isSameDate && isSelected) {
         setIsSelected(false);
       }

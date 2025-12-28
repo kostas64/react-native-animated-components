@@ -1,9 +1,3 @@
-import {
-  impactAsync,
-  AndroidHaptics,
-  ImpactFeedbackStyle,
-  performAndroidHapticsAsync,
-} from "expo-haptics";
 import Animated, {
   withTiming,
   interpolate,
@@ -19,17 +13,10 @@ import { TMessageItem } from "./types";
 import { Colors } from "@utils/colors";
 import { DELAY_LONG_PRESS } from "./data";
 import Text from "@components/common/Text";
+import { isIOS, WIDTH } from "@utils/device";
 import { typography } from "@utils/typography";
-import { isAndroid, isIOS, WIDTH } from "@utils/device";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 import { AnimatedPressable } from "@components/common/AnimatedComponents";
-
-const triggerLongPressHaptik = () => {
-  if (isAndroid) {
-    performAndroidHapticsAsync(AndroidHaptics.Long_Press);
-  } else {
-    impactAsync(ImpactFeedbackStyle.Medium);
-  }
-};
 
 const MessageItem = ({
   item,
@@ -117,7 +104,7 @@ const MessageItem = ({
   };
 
   const onLongPress = (e: GestureResponderEvent) => {
-    isIOS && triggerLongPressHaptik();
+    isIOS && triggerHaptic(HAPTIC_TYPE.LONG_PRESS);
 
     !!handleKeyboard && handleKeyboard();
 

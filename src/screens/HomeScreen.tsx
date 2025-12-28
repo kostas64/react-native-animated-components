@@ -78,7 +78,7 @@ const HomeScreen = () => {
         contentContainerStyle={{ paddingRight: ITEM_WIDTH / 2 + 24 }}
         showsHorizontalScrollIndicator={false}
         decelerationRate={isIOS ? 0 : 0.875}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(_, index) => index.toString()}
         renderItem={renderItem}
         snapToInterval={ITEM_WIDTH - (isAndroid ? 0.25 : 0)}
       />

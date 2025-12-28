@@ -50,6 +50,7 @@ import AddButtonMoveScreen from "@screens/AddButton/AddButtonMoveScreen";
 import TranslateSearchIOSScreen from "./screens/TranslateSearchIOSScreen";
 import FloatingActionButtonScreen from "@screens/FloatingActionButtonScreen";
 import CircularAnimatedTextScreen from "./screens/CircularAnimatedTextScreen";
+import SlideToConfirmScreen from "@screens/SlideToConfirm/SlideToConfirmScreen";
 import ScreenTransitionStack from "@screens/ScreenTransition/ScreenTransitionStack";
 
 export type TStackList = {
@@ -87,6 +88,7 @@ export type TStackList = {
   AddButtonMove: undefined;
   BankStack: undefined;
   AnimatedWordText: undefined;
+  SlideToConfirm: undefined;
 };
 
 export type THomeNavigationProps = NativeStackNavigationProp<
@@ -235,6 +237,10 @@ function App() {
                 <Stack.Screen
                   name="AnimatedWordText"
                   component={AnimatedWordTextScreen}
+                />
+                <Stack.Screen
+                  name="SlideToConfirm"
+                  component={SlideToConfirmScreen}
                 />
               </Stack.Navigator>
             </NavigationContainer>

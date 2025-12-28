@@ -3,15 +3,15 @@ import Animated, {
   Extrapolation,
   useSharedValue,
   useAnimatedStyle,
-} from 'react-native-reanimated';
-import {StyleSheet, View} from 'react-native';
-import {useCallback, useState} from 'react';
+} from "react-native-reanimated";
+import { useCallback, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
-import Symbol from './Symbol';
-import Bubble from './Bubble';
-import {Colors} from '@utils/colors';
-import {lightShadow} from './styles';
-import {triggerHaptik} from '@components/taskCalendar/MonthListModal';
+import Symbol from "./Symbol";
+import Bubble from "./Bubble";
+import { Colors } from "@utils/colors";
+import { lightShadow } from "./styles";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 
 const GestureCounter = () => {
   const [counter, setCounter] = useState(0);
@@ -20,20 +20,21 @@ const GestureCounter = () => {
   const progressDelete = useSharedValue(0);
 
   const onPress = useCallback((plus = false) => {
-    setCounter(old => {
+    setCounter((old) => {
       if (!plus && old === 0) {
         return old;
       }
 
-      triggerHaptik();
+      triggerHaptic(HAPTIC_TYPE.SOFT);
       return plus ? old + 1 : old - 1;
     });
   }, []);
 
   const onDelete = useCallback(() => {
-    setCounter(old => {
+    setCounter((old) => {
       if (old !== 0) {
-        triggerHaptik();
+        triggerHaptic(HAPTIC_TYPE.SOFT);
+
         return 0;
       }
 
@@ -43,8 +44,8 @@ const GestureCounter = () => {
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
-      {translateX: interpolate(progress.value, [-1, 1], [-12, 12])},
-      {translateY: interpolate(progressDelete.value, [0, 1], [0, 16])},
+      { translateX: interpolate(progress.value, [-1, 1], [-12, 12]) },
+      { translateY: interpolate(progressDelete.value, [0, 1], [0, 16]) },
     ],
   }));
 
@@ -53,7 +54,7 @@ const GestureCounter = () => {
       progressDelete.value,
       [0, 0.5],
       [1, 0],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
   }));
 
@@ -62,7 +63,7 @@ const GestureCounter = () => {
       progressDelete.value,
       [0, 0.01],
       [0, 1],
-      Extrapolation.CLAMP,
+      Extrapolation.CLAMP
     ),
   }));
 
@@ -91,16 +92,16 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
     gap: 4,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: "row",
+    justifyContent: "space-evenly",
     backgroundColor: Colors.CHARLESTON_GREEN,
     borderRadius: 100,
   },
   delete: {
     zIndex: 1,
-    position: 'absolute',
-    alignSelf: 'center',
-    transform: [{rotate: '45deg'}],
+    position: "absolute",
+    alignSelf: "center",
+    transform: [{ rotate: "45deg" }],
   },
   zIndex: {
     zIndex: 2,

@@ -1,10 +1,4 @@
 import {
-  impactAsync,
-  AndroidHaptics,
-  ImpactFeedbackStyle,
-  performAndroidHapticsAsync,
-} from "expo-haptics";
-import {
   View,
   FlatList,
   Keyboard,
@@ -36,19 +30,12 @@ import { useKeyboard } from "@hooks/useKeyboard";
 import { isAndroid, isIOS } from "@utils/device";
 import { TMessage } from "@components/chat/types";
 import { commonStyles } from "@utils/commonStyles";
-import { captureOptions } from "@components/chat/data";
 import Background from "@components/chat/Background";
+import { captureOptions } from "@components/chat/data";
 import MessageItem from "@components/chat/MessageItem";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 import SendMessageInput from "@components/chat/SendMessageInput";
 import StatusBarManager from "@components/common/StatusBarManager";
-
-export const triggerLongPressHaptik = () => {
-  if (isAndroid) {
-    performAndroidHapticsAsync(AndroidHaptics.Long_Press);
-  } else {
-    impactAsync(ImpactFeedbackStyle.Medium);
-  }
-};
 
 const ChatScreen = () => {
   const insets = useSafeAreaInsets();
@@ -131,7 +118,7 @@ const ChatScreen = () => {
 
   const capture = (id: string, top: number) => {
     captureScreen(captureOptions).then((uri) => {
-      isAndroid && triggerLongPressHaptik();
+      isAndroid && triggerHaptic(HAPTIC_TYPE.LONG_PRESS);
       longPress.value = withTiming(1, { duration: isIOS ? 200 : 1 });
       setClonedItem({ id, top });
       setCaptureUri(uri);

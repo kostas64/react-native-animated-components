@@ -23,12 +23,12 @@ import Text from "@components/common/Text";
 import { typography } from "@utils/typography";
 import ReText from "@components/common/ReText";
 import { data } from "@components/verticalScrollBar/data";
-import { isIOS, MAX_FONT_UPSCALE_FACTOR } from "@utils/device";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 import ListItem from "@components/verticalScrollBar/ListItem";
+import { isIOS, MAX_FONT_UPSCALE_FACTOR } from "@utils/device";
 import { TListItem } from "@components/verticalScrollBar/types";
 import StatusBarManager from "@components/common/StatusBarManager";
 import { preprocessNames } from "@components/verticalScrollBar/utils";
-import { triggerHaptik } from "@components/taskCalendar/MonthListModal";
 import useAnimatedStyle from "@components/verticalScrollBar/animatedStyles";
 
 const Header = () => <Text style={styles.header}>Contacts</Text>;
@@ -145,7 +145,7 @@ const VerticalScrollBarScreen = () => {
         if (scrollPosition + translateY.value - 12 < cumulativeOffset) {
           if (currentLetter.value !== item.letter && scrollOffset.value !== 0) {
             currentLetter.value = item.letter;
-            scheduleOnRN(triggerHaptik);
+            scheduleOnRN(triggerHaptic, HAPTIC_TYPE.SOFT);
           }
 
           return item.letter;

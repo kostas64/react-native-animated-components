@@ -6,7 +6,6 @@ export type SplashProps = {
 };
 
 export type HomeListItemType = {
-  id: number;
   name: string;
   description: string;
   image: ImageSourcePropType;

@@ -1,9 +1,3 @@
-import {
-  impactAsync,
-  AndroidHaptics,
-  ImpactFeedbackStyle,
-  performAndroidHapticsAsync,
-} from "expo-haptics";
 import Animated, {
   withTiming,
   interpolate,
@@ -16,18 +10,11 @@ import { Image, ImageSourcePropType, StyleSheet } from "react-native";
 
 import { Colors } from "@utils/colors";
 import MessageItem from "./MessageItem";
-import { isAndroid, WIDTH } from "@utils/device";
+import { WIDTH } from "@utils/device";
 import { BACKGROUND_BLUR_RADIUS, EMOJI } from "./data";
 import { TBackgroundProps, TEmojiItemProps } from "./types";
+import { HAPTIC_TYPE, triggerHaptic } from "@utils/haptics";
 import { AnimatedPressable } from "@components/common/AnimatedComponents";
-
-const triggerSelectionHaptik = () => {
-  if (isAndroid) {
-    performAndroidHapticsAsync(AndroidHaptics.Context_Click);
-  } else {
-    impactAsync(ImpactFeedbackStyle.Light);
-  }
-};
 
 const Background = ({
   opacity,
@@ -50,7 +37,7 @@ const Background = ({
   ) => {
     animateDismiss.value = withTiming(0, { duration: 50 });
     onPressOut(id, emoji === clonedItemToPass.emoji ? undefined : emoji);
-    vibrate && triggerSelectionHaptik();
+    vibrate && triggerHaptic(HAPTIC_TYPE.SELECT);
   };
 
   const renderItem = ({ item, index }: TEmojiItemProps) => {
